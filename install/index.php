@@ -10,7 +10,7 @@
  * @version 1
  * @copyright 2008 By e-Zobar for XNova
  * Based on first Chlorel's code
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);

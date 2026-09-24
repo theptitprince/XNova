@@ -10,7 +10,7 @@
  * @version 1
  * @copyright 2008 By Chlorel for XNova
  * @Copyright, bot de mapomme (Britania) modifié et adapté pour XNova by Bono ;)
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 define('INSIDE' , true);

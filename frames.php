@@ -10,7 +10,7 @@
  * frame.php
  * @version 1.0
  * @copyright 2008 by e-Zobar for XNova
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);

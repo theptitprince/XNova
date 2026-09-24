@@ -9,7 +9,7 @@
  * Travail original :
  * @version $Id$
  * @copyright 2008
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 function ResetThisFuckingCheater ( $UserID ) {

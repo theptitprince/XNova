@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.0
  * @copyright 2008 by Tom1991 for XNova
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 

@@ -10,7 +10,7 @@
  * ainfo.php
  * @version 0.5
  * @copyright 2008 by Tom1991 for XNova
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);

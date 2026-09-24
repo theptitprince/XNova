@@ -7,7 +7,7 @@
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original : Calculadora de Puntos, oriol clariana (voir mentions d'origine ci-dessous)
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 /*

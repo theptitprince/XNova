@@ -10,7 +10,7 @@
  * CancelBuildingFromQueue
  * @version 1
  * @copyright 2008 by Chlorel for XNova
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 function CancelBuildingFromQueue ( &$CurrentPlanet, &$CurrentUser ) {
