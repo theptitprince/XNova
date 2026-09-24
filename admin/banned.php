@@ -29,12 +29,12 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$parse     = $lang;
 		if ($mode == 'banit') {
-			$name              = $_POST['name'];
-			$reas              = $_POST['why'];
-			$days              = $_POST['days'];
-			$hour              = $_POST['hour'];
-			$mins              = $_POST['mins'];
-			$secs              = $_POST['secs'];
+			$name              = SqlEscape($_POST['name']);
+			$reas              = SqlEscape($_POST['why']);
+			$days              = intval($_POST['days']);
+			$hour              = intval($_POST['hour']);
+			$mins              = intval($_POST['mins']);
+			$secs              = intval($_POST['secs']);
 
 			$admin             = $user['username'];
 			$mail              = $user['email'];

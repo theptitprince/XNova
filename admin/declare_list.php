@@ -24,10 +24,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if ($user['authlevel'] >= 2) {
 		includeLang('admin');
 		if ($_GET['cmd'] == 'dele') {
-			DeleteSelectedUser ( $_GET['user'] );
+			DeleteSelectedUser ( intval($_GET['user']) );
 		}
 		if ($_GET['cmd'] == 'sort') {
-			$TypeSort = $_GET['type'];
+			$TypeSort = preg_replace('/[^a-z_]/', '', $_GET['type']); // nom de colonne uniquement
 		} else {
 			$TypeSort = "id";
 		}

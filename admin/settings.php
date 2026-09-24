@@ -176,59 +176,59 @@ $game_config['banner_source_post'] = $_POST['banner_source_post'];
 			}
 
 			// Activation du jeu
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['game_disable']           ."' WHERE `config_name` = 'game_disable';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['close_reason']           ."' WHERE `config_name` = 'close_reason';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['game_disable'])           ."' WHERE `config_name` = 'game_disable';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['close_reason'])           ."' WHERE `config_name` = 'close_reason';", 'config');
 
 		//Stats
 			
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['stat_settings']              ."' WHERE `config_name` = 'stat_settings';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['stat_settings'])              ."' WHERE `config_name` = 'stat_settings';", 'config');
 			
 			
 				// Configuration du Jeu
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['forum_url']              ."' WHERE `config_name` = 'forum_url';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['game_speed']             ."' WHERE `config_name` = 'game_speed';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['fleet_speed']            ."' WHERE `config_name` = 'fleet_speed';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['resource_multiplier']    ."' WHERE `config_name` = 'resource_multiplier';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['forum_url'])              ."' WHERE `config_name` = 'forum_url';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['game_speed'])             ."' WHERE `config_name` = 'game_speed';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['fleet_speed'])            ."' WHERE `config_name` = 'fleet_speed';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['resource_multiplier'])    ."' WHERE `config_name` = 'resource_multiplier';", 'config');
 
 			// Page Generale 
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['OverviewNewsFrame']       ."' WHERE `config_name` = 'OverviewNewsFrame';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['OverviewNewsText']        ."' WHERE `config_name` = 'OverviewNewsText';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['OverviewExternChat']      ."' WHERE `config_name` = 'OverviewExternChat';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['OverviewExternChatCmd']   ."' WHERE `config_name` = 'OverviewExternChatCmd';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['OverviewBanner']          ."' WHERE `config_name` = 'OverviewBanner';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['OverviewClickBanner']     ."' WHERE `config_name` = 'OverviewClickBanner';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['ForumBannerFrame']       ."' WHERE `config_name` = 'ForumBannerFrame';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['OverviewNewsFrame'])       ."' WHERE `config_name` = 'OverviewNewsFrame';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['OverviewNewsText'])        ."' WHERE `config_name` = 'OverviewNewsText';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['OverviewExternChat'])      ."' WHERE `config_name` = 'OverviewExternChat';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['OverviewExternChatCmd'])   ."' WHERE `config_name` = 'OverviewExternChatCmd';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['OverviewBanner'])          ."' WHERE `config_name` = 'OverviewBanner';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['OverviewClickBanner'])     ."' WHERE `config_name` = 'OverviewClickBanner';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['ForumBannerFrame'])       ."' WHERE `config_name` = 'ForumBannerFrame';", 'config');
 			
 			//Bannière
-						doquery("UPDATE {{table}} SET `config_value` = '". $game_config['banner_source_post']       ."' WHERE `config_name` = 'banner_source_post';", 'config');
+						doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['banner_source_post'])       ."' WHERE `config_name` = 'banner_source_post';", 'config');
 
 			// Lien supplémentaire dans le menu
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['link_enable']         ."' WHERE `config_name` = 'link_enable';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['link_name']         ."' WHERE `config_name` = 'link_name';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['link_url']         ."' WHERE `config_name` = 'link_url';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['link_enable'])         ."' WHERE `config_name` = 'link_enable';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['link_name'])         ."' WHERE `config_name` = 'link_name';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['link_url'])         ."' WHERE `config_name` = 'link_url';", 'config');
 			
 			// Options Planete
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['initial_fields']         ."' WHERE `config_name` = 'initial_fields';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['metal_basic_income']     ."' WHERE `config_name` = 'metal_basic_income';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['crystal_basic_income']   ."' WHERE `config_name` = 'crystal_basic_income';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['deuterium_basic_income'] ."' WHERE `config_name` = 'deuterium_basic_income';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['energy_basic_income']    ."' WHERE `config_name` = 'energy_basic_income';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['initial_fields'])         ."' WHERE `config_name` = 'initial_fields';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['metal_basic_income'])     ."' WHERE `config_name` = 'metal_basic_income';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['crystal_basic_income'])   ."' WHERE `config_name` = 'crystal_basic_income';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['deuterium_basic_income']) ."' WHERE `config_name` = 'deuterium_basic_income';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['energy_basic_income'])    ."' WHERE `config_name` = 'energy_basic_income';", 'config');
  
 			//Bot antimulti 
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['bot_name']    ."' WHERE `config_name` = 'bot_name';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['bot_adress']    ."' WHERE `config_name` = 'bot_adress';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['ban_duration']    ."' WHERE `config_name` = 'ban_duration';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['enable_bot']    ."' WHERE `config_name` = 'enable_bot';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['bot_name'])    ."' WHERE `config_name` = 'bot_name';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['bot_adress'])    ."' WHERE `config_name` = 'bot_adress';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['ban_duration'])    ."' WHERE `config_name` = 'ban_duration';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['enable_bot'])    ."' WHERE `config_name` = 'enable_bot';", 'config');
 			
 			
 			//Réglage du BBCode
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['enable_bbcode']    ."' WHERE `config_name` = 'enable_bbcode';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['enable_bbcode'])    ."' WHERE `config_name` = 'enable_bbcode';", 'config');
 			
 			
 			//Controle des pages
- 			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['enable_announces']    ."' WHERE `config_name` = 'enable_announces';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['enable_marchand']    ."' WHERE `config_name` = 'enable_marchand';", 'config');
-			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['enable_notes']    ."' WHERE `config_name` = 'enable_notes';", 'config');
+ 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['enable_announces'])    ."' WHERE `config_name` = 'enable_announces';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['enable_marchand'])    ."' WHERE `config_name` = 'enable_marchand';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['enable_notes'])    ."' WHERE `config_name` = 'enable_notes';", 'config');
 			
 			// Mode Debug
 			doquery("UPDATE {{table}} SET `config_value` = '" .$game_config['debug']                  ."' WHERE `config_name` ='debug'", 'config');

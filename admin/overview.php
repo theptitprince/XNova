@@ -24,7 +24,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		includeLang('admin');
 
 		if ($_GET['cmd'] == 'sort') {
-			$TypeSort = $_GET['type'];
+			$TypeSort = preg_replace('/[^a-z_]/', '', $_GET['type']); // nom de colonne uniquement
 		} else {
 			$TypeSort = "id";
 		}

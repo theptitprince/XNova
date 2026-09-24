@@ -32,7 +32,8 @@ function CenterTextBanner($z,$y,$zone) {
 	return $e;
 }
 
-extract($_GET);
+// extract($_GET) remplace par une lecture explicite : il permettait d'ecraser la configuration du jeu (page publique)
+$id = isset($_GET['id']) ? intval($_GET['id']) : null;
 if (isset($id)) {
 	// Parameters
 	header ("Content-type: image/png");

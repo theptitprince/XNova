@@ -30,10 +30,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse     = $lang;
 
 		if ($mode == 'addit') {
-			$id          = $_POST['id'];
-			$metal       = $_POST['metal'];
-			$cristal     = $_POST['cristal'];
-			$deut        = $_POST['deut'];
+			$id          = intval($_POST['id']);
+			$metal       = intval($_POST['metal']);
+			$cristal     = intval($_POST['cristal']);
+			$deut        = intval($_POST['deut']);
 
 			$QryUpdatePlanet  = "UPDATE {{table}} SET ";
 			$QryUpdatePlanet .= "`metal` = `metal` + '". $metal ."', ";
