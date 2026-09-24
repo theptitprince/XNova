@@ -1,7 +1,9 @@
 <div id='leftmenu'>
 <script language="JavaScript">
-function f(target_url,win_name) {
-  var new_win = window.open(target_url,win_name,'resizable=yes,scrollbars=yes,menubar=no,toolbar=no,width=550,height=280,top=0,left=0');
+function f(target_url,win_name,win_w,win_h) {
+  win_w = win_w || 550;
+  win_h = win_h || 280;
+  var new_win = window.open(target_url,win_name,'resizable=yes,scrollbars=yes,menubar=no,toolbar=no,width='+win_w+',height='+win_h+',top=0,left=0');
   new_win.focus();
 }
 </script>
@@ -67,7 +69,7 @@ function f(target_url,win_name) {
 	</tr><tr>
 	<td colspan="2"><div><a href="buddy.php" accesskey="c" target="{mf}">{Buddylist}</a></div></td>
 </tr></tr>{notes_link}<tr><tr>
-	<td colspan="2"><div><a href="chat.php" accesskey="a" target="{mf}">{Chat}</a></div></td>
+	<td colspan="2"><div><a href="chat.php" accesskey="a" onClick="f('chat.php', 'Chat', 700, 550); return false;">{Chat}</a></div></td>
 </tr><tr>
 	<td colspan="2"><div><a href="{forum_url}" accesskey="1" target="{mf}">{Board}</a></div></td>
 </tr><tr>

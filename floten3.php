@@ -23,6 +23,16 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	includeLang('fleet');
 
+	// PHP 8 : un champ vide ("") ne peut plus entrer dans un calcul ; tous les champs numeriques deviennent des entiers
+	$NumericFields = array('mission', 'galaxy', 'system', 'planet', 'planettype', 'thisgalaxy', 'thissystem', 'thisplanet',
+	                       'thisplanettype', 'resource1', 'resource2', 'resource3', 'holdingtime', 'expeditiontime',
+	                       'speed', 'speedfactor', 'speedallsmin', 'maxepedition', 'curepedition');
+	foreach ($_POST as $Field => $Value) {
+		if (in_array($Field, $NumericFields) || preg_match('/^ship[0-9]+$/', $Field)) {
+			$_POST[$Field] = intval($Value);
+		}
+	}
+
 	$CurrentPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '". $user['current_planet'] ."'", 'planets', true);
 	$TargetPlanet  = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '". $_POST['galaxy'] ."' AND `system` = '". $_POST['system'] ."' AND `planet` = '". $_POST['planet'] ."' AND `planet_type` = '". $_POST['planettype'] ."';", 'planets', true);
 	$MyDBRec       = doquery("SELECT * FROM {{table}} WHERE `id` = '". $user['id']."';", 'users', true);

@@ -80,7 +80,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	if ($game_config['enable_notes'] == 1) {
 		$parse['notes_link']  = "
 		<tr>
-			<td colspan=\"2\"><div><a href=\"notes.php\" accesskey=\"n\" target=\"Hauptframe\">Notes</a></div></td>
+			<td colspan=\"2\"><div><a href=\"notes.php\" accesskey=\"n\" onClick=\"f('notes.php', 'Notes', 600, 500); return false;\">Notes</a></div></td>
 		</tr>";
 	} else {
 		$parse['notes_link']  = "";

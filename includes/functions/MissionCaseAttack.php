@@ -289,7 +289,7 @@ function MissionCaseAttack ($FleetRow)
             }
             switch ($FleetResult) {
                 case "a":
-                    $Pillage = sprintf ($lang['sys_stealed_ressources'], pretty_number ($Mining['metal']), $lang['metal'], pretty_number ($Mining['crystal']), $lang['crystal'], pretty_number ($Mining['deuter']), $lang['Deuterium']);
+                    $Pillage = sprintf ($lang['sys_stealed_ressources'], pretty_number ($Mining['metal']), $lang['Metal'], pretty_number ($Mining['crystal']), $lang['Crystal'], pretty_number ($Mining['deuter']), $lang['Deuterium']);
                     $raport .= $lang['sys_attacker_won'] . "<br />" . $Pillage . "<br />";
                     $raport .= $DebrisField . "<br />";
                     $raport .= $ChanceMoon . "<br />";
