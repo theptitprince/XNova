@@ -65,7 +65,7 @@ function f(target_url,win_name) {
 
 	<td colspan="2" background="{dpath}img/bg1.gif"><center>{commun}</center></td>
 	</tr><tr>
-	<td colspan="2"><div><a href="#" onClick="f('buddy.php', '');" accesskey="c">{Buddylist}</a></div></td>
+	<td colspan="2"><div><a href="buddy.php" accesskey="c" target="{mf}">{Buddylist}</a></div></td>
 </tr></tr>{notes_link}<tr><tr>
 	<td colspan="2"><div><a href="chat.php" accesskey="a" target="{mf}">{Chat}</a></div></td>
 </tr><tr>
