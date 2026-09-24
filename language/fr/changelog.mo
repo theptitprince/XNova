@@ -16,7 +16,7 @@ $lang['changelog']   = array(
 - FIX : Production des mines au prorata de l\'&eacute;nergie disponible, production naturelle compt&eacute;e une seule fois
 - FIX : 32 textes qui s\'affichaient vides, pseudo modifiable sans contr&ocirc;le, options qui effa&ccedil;aient les couleurs
 - FIX : Statistiques des alliances, d&eacute;bannissement automatique (requ&ecirc;te erron&eacute;e)
-- MOD : Tout le code en UTF-8 (74 fichiers convertis) et fins de ligne unifi&eacute;es : textes espagnols, allemands, italiens et 'Erreur n&deg;' enfin lisibles
+- MOD : Tout le code en UTF-8 (74 fichiers convertis) et fins de ligne unifi&eacute;es : textes espagnols, allemands, italiens et \'Erreur n&deg;\' enfin lisibles
 - FIX : Rapport de combat et calculateur d&eacute;claraient un encodage ISO ; nom des raccourcis de flotte ; pourcentage de production sans centrale (page Ressources)',
 
 '0.9d Renaissance' => 'Passage &agrave; PHP 8 (theptitprince)
