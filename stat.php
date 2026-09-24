@@ -31,7 +31,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$type  = 1;
 	}
 	$range = (isset($_POST['range'])) ? $_POST['range'] : $_GET['range'];
-	if (!isset($range)) {
+	// PHP 8 : le rang peut etre vide (joueur pas encore classe), division impossible sur une chaine
+	$range = intval($range);
+	if ($range < 1) {
 		$range = 1;
 	}
 
