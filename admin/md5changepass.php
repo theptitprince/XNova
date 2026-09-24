@@ -28,7 +28,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		if ($_POST['md5q'] != "") {
 
-			doquery ("UPDATE {{table}} SET `password` = '" . md5 ($_POST['md5q']) . "' WHERE `username` = '".$_POST['user']."';", 'users');
+			doquery ("UPDATE {{table}} SET `password` = '" . SqlEscape(PasswordHash($_POST['md5q'])) . "' WHERE `username` = '". SqlEscape($_POST['user']) ."';", 'users');
 			//$QueryUpdatePass = "UPDATE {{table}} SET ";
 			//$QueryUpdatePass .= "`password` = '" . md5 ($_POST['md5q']) . "', ";
 			//$QueryUpdatePass = "WHERE ";

@@ -21,7 +21,7 @@ include($xnova_root_path . 'common.'.$phpEx);
 
 	includeLang('logout');
 
-	setcookie($game_config['COOKIE_NAME'], "", time()-100000, "/", "", 0);
+	SetAuthCookie("", time()-100000);
 
 	message ( $lang['see_you'], $lang['session_closed'], "login.".$phpEx );
 

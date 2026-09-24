@@ -61,7 +61,7 @@ function BuildRessourcePage ( $CurrentUser, $CurrentPlanet ) {
 		$post_porcent = 0;
 	} elseif ($CurrentPlanet['energy_max'] >  0 &&
 		($CurrentPlanet['energy_used'] + $CurrentPlanet['energy_max']) < 0 ) {
-		$post_porcent = floor(($CurrentPlanet['energy_max']) / $CurrentPlanet['energy_used'] * 100);
+		$post_porcent = floor(($CurrentPlanet['energy_max']) / abs($CurrentPlanet['energy_used']) * 100);
 	} else {
 		$post_porcent = 100;
 	}
@@ -140,7 +140,7 @@ function BuildRessourcePage ( $CurrentUser, $CurrentPlanet ) {
 		$parse['production_level'] = 0;
 	} elseif ($CurrentPlanet['energy_max']  > 0 &&
 		abs($CurrentPlanet['energy_used']) > $CurrentPlanet['energy_max']) {
-		$parse['production_level'] = floor(($CurrentPlanet['energy_max']) / $CurrentPlanet['energy_used'] * 100);
+		$parse['production_level'] = floor(($CurrentPlanet['energy_max']) / abs($CurrentPlanet['energy_used']) * 100);
 	} elseif ($CurrentPlanet['energy_max'] == 0 &&
 		abs($CurrentPlanet['energy_used']) > $CurrentPlanet['energy_max']) {
 		$parse['production_level'] = 0;

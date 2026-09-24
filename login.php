@@ -28,7 +28,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$login = doquery("SELECT * FROM {{table}} WHERE `username` = '" . SqlEscape($_POST['username']) . "' LIMIT 1", "users", true);
 
 		if ($login) {
-			if ($login['password'] == md5($_POST['password'])) {
+			if (PasswordCheck($_POST['password'], $login)) {
 				if (isset($_POST["rememberme"])) {
 					$expiretime = time() + 31536000;
 					$rememberme = 1;
@@ -37,11 +37,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 					$rememberme = 0;
 				}
 
-				@include('config.php');
-				$cookie = $login["id"] . "/%/" . $login["username"] . "/%/" . md5($login["password"] . "--" . $dbsettings["secretword"]) . "/%/" . $rememberme;
-				setcookie($game_config['COOKIE_NAME'], $cookie, $expiretime, "/", "", 0);
-
-				unset($dbsettings);
+				$cookie = $login["id"] . "/%/" . $login["username"] . "/%/" . AuthCookieToken($login) . "/%/" . $rememberme;
+				SetAuthCookie($cookie, $expiretime);
 				header("Location: ./frames.php");
 				exit;
 			} else {

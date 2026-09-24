@@ -13,8 +13,8 @@
  */
 // TheCookie[0] = `id`
 // TheCookie[1] = `username`
-// TheCookie[2] = Password + Hashcode
-// TheCookie[3] = 1rst Connexion time + 365 J
+// TheCookie[2] = jeton HMAC (id + hash du mot de passe, signe avec le mot secret de config.php)
+// TheCookie[3] = se souvenir de moi (1 = 365 jours)
 
 function CheckCookies ( $IsUserChecked ) {
 	global $lang, $game_config, $xnova_root_path, $phpEx;
@@ -23,26 +23,34 @@ function CheckCookies ( $IsUserChecked ) {
 
 	$UserRow = array();
 
-	include($xnova_root_path . 'config.' . $phpEx);
-
 	if (isset($_COOKIE[$game_config['COOKIE_NAME']])) {
 		$TheCookie  = explode("/%/", $_COOKIE[$game_config['COOKIE_NAME']]);
-		$UserResult = doquery("SELECT * FROM {{table}} WHERE `username` = '". $TheCookie[1]. "';", 'users');
 
-		// On verifie s'il y a qu'un seul enregistrement pour ce nom
+		// Cookie mal forme (ou ancien format md5 d'avant la 0.9e) : on l'efface, il faudra se reconnecter
+		if (count($TheCookie) != 4) {
+			SetAuthCookie('', time() - 100000);
+			message( $lang['cookies']['Error3'] );
+		}
+
+		// Recherche par id (entier) : plus d'injection SQL possible par le cookie
+		$UserResult = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($TheCookie[0]) ."';", 'users');
+
 		if (mysqli_num_rows($UserResult) != 1) {
+			SetAuthCookie('', time() - 100000);
 			message( $lang['cookies']['Error1'] );
 		}
 
 		$UserRow    = mysqli_fetch_array($UserResult);
 
-		// On teste si on a bien le bon UserID
-		if ($UserRow["id"] != $TheCookie[0]) {
+		// On teste si le cookie correspond bien a ce joueur
+		if ($UserRow["username"] !== $TheCookie[1]) {
+			SetAuthCookie('', time() - 100000);
 			message( $lang['cookies']['Error2'] );
 		}
 
-		// On teste si le mot de passe est correct !
-		if (md5($UserRow["password"] . "--" . $dbsettings["secretword"]) !== $TheCookie[2]) {
+		// On teste la signature (comparaison a temps constant)
+		if (!hash_equals(AuthCookieToken($UserRow), (string) $TheCookie[2])) {
+			SetAuthCookie('', time() - 100000);
 			message( $lang['cookies']['Error3'] );
 		}
 
@@ -57,30 +65,19 @@ function CheckCookies ( $IsUserChecked ) {
 		}
 
 		if ($IsUserChecked == false) {
-			setcookie ($game_config['COOKIE_NAME'], $NextCookie, $ExpireTime, "/", "", 0);
-			$QryUpdateUser  = "UPDATE {{table}} SET ";
-			$QryUpdateUser .= "`onlinetime` = '". time() ."', ";
-			$QryUpdateUser .= "`current_page` = '". addslashes($_SERVER['REQUEST_URI']) ."', ";
-			$QryUpdateUser .= "`user_lastip` = '". $_SERVER['REMOTE_ADDR'] ."', ";
-			$QryUpdateUser .= "`user_agent` = '". addslashes($_SERVER['HTTP_USER_AGENT']) ."' ";
-			$QryUpdateUser .= "WHERE ";
-			$QryUpdateUser .= "`id` = '". $TheCookie[0] ."' LIMIT 1;";
-			doquery( $QryUpdateUser, 'users');
-			$IsUserChecked = true;
-		} else {
-			$QryUpdateUser  = "UPDATE {{table}} SET ";
-			$QryUpdateUser .= "`onlinetime` = '". time() ."', ";
-			$QryUpdateUser .= "`current_page` = '". $_SERVER['REQUEST_URI'] ."', ";
-			$QryUpdateUser .= "`user_lastip` = '". $_SERVER['REMOTE_ADDR'] ."', ";
-			$QryUpdateUser .= "`user_agent` = '". $_SERVER['HTTP_USER_AGENT'] ."' ";
-			$QryUpdateUser .= "WHERE ";
-			$QryUpdateUser .= "`id` = '". $TheCookie[0] ."' LIMIT 1;";
-			doquery( $QryUpdateUser, 'users');
-			$IsUserChecked = true;
+			SetAuthCookie($NextCookie, $ExpireTime);
 		}
+		// Informations de connexion : toutes echappees (l'adresse de la page et le navigateur viennent du visiteur)
+		$QryUpdateUser  = "UPDATE {{table}} SET ";
+		$QryUpdateUser .= "`onlinetime` = '". time() ."', ";
+		$QryUpdateUser .= "`current_page` = '". SqlEscape($_SERVER['REQUEST_URI']) ."', ";
+		$QryUpdateUser .= "`user_lastip` = '". SqlEscape($_SERVER['REMOTE_ADDR']) ."', ";
+		$QryUpdateUser .= "`user_agent` = '". SqlEscape(isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '') ."' ";
+		$QryUpdateUser .= "WHERE ";
+		$QryUpdateUser .= "`id` = '". intval($UserRow['id']) ."' LIMIT 1;";
+		doquery( $QryUpdateUser, 'users');
+		$IsUserChecked = true;
 	}
-
-	unset($dbsettings);
 
 	$Return['state']  = $IsUserChecked;
 	$Return['record'] = $UserRow;

@@ -47,7 +47,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	} else {
 		$parse['ADMIN_LINK']  = "";
 	}
-	//Lien supplï¿½mentaire dï¿½terminï¿½ dans le panel admin
+	//Lien supplémentaire déterminé dans le panel admin
 	if ($game_config['link_enable'] == 1) {
 		$parse['added_link']  = "
 		<tr>
@@ -57,7 +57,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 		$parse['added_link']  = "";
 	}
 	
-	//Maintenant on vï¿½rifie si les annonces sont activï¿½es ou non
+	//Maintenant on vérifie si les annonces sont activées ou non
 	if ($game_config['enable_announces'] == 1) {
 		$parse['announce_link']  = "
 		<tr>

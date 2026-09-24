@@ -52,7 +52,7 @@
 
     //Email envoyé, maintenant place au changement dans la BDD
 
-    $NewPassSql = md5($NewPass);
+    $NewPassSql = PasswordHash($NewPass);
 
     $QryPassChange = "UPDATE {{table}} SET ";
     $QryPassChange .= "`password` ='". $NewPassSql ."' ";

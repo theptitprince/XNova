@@ -66,19 +66,18 @@ function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Sim
 	$ProductionTime               = ($UpdateTime - $CurrentPlanet['last_update']);
 	$CurrentPlanet['last_update'] = $UpdateTime;
 
-	if ($CurrentPlanet['energy_max'] == 0) {
-		// Ah ha ... l'energie max est 0 ...
-		// Soit pas de production d'energie ... Soit mode vacance
-		$CurrentPlanet['metal_perhour']     = $game_config['metal_basic_income'];
-		$CurrentPlanet['crystal_perhour']   = $game_config['crystal_basic_income'];
-		$CurrentPlanet['deuterium_perhour'] = $game_config['deuterium_basic_income'];
-		$production_level            = 100;
-	} elseif ($CurrentPlanet["energy_max"] >= $CurrentPlanet["energy_used"]) {
-		// Cas normal (Y a assez d'energie toutes les mines tournent a plein rendement)
+	// XNova Renaissance : production des mines au prorata de l'energie disponible.
+	// energy_used est negatif (consommation des mines), energy_max positif (production des centrales).
+	// Le code d'origine comparait production et consommation sans tenir compte du signe : les mines
+	// tournaient a 100 % des qu'une centrale existait, quel que soit le deficit, et sans aucune centrale
+	// la production naturelle etait comptee deux fois. Elle est desormais ajoutee une seule fois (plus bas).
+	$EnergyNeeded = abs($CurrentPlanet['energy_used']);
+	if ($EnergyNeeded == 0 || $CurrentPlanet['energy_max'] >= $EnergyNeeded) {
+		// Pas de consommation, ou assez d'energie : toutes les mines tournent a plein rendement
 		$production_level            = 100;
 	} else {
-		// Cas ou il manque de l'energie ... On calcule un pourcentage de production
-		$production_level            = floor(($CurrentPlanet['energy_max'] / $CurrentPlanet['energy_used']) * 100);
+		// Il manque de l'energie (ou il n'y en a pas du tout) : production au prorata
+		$production_level            = floor(($CurrentPlanet['energy_max'] / $EnergyNeeded) * 100);
 	}
 	// Mise a l'echele des valeurs
 	if       ($production_level > 100) {

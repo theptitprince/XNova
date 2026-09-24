@@ -37,7 +37,7 @@ $lang['error_rgt']         = 'Debe aceptar las condiciones de utilización.<<br /
 $lang['error_userexist']   = '¡Este nombre de jugador ya existe!<br />';
 $lang['error_emailexist']  = '¡Ya se utiliza este correo electrónico!<br />';
 $lang['error_sex']         = '¡Error en el sexo!<br />';
-$lang['error_mailsend']    = '¡Un error se produjo en el envío del courriel! Su contraseña es:';
+$lang['error_mailsend']    = 'Se produjo un error al enviar el correo. Conectese con la contrasena que eligio.';
 $lang['reg_welldone']      = 'Inscripción terminada';
 
 // Created by Perberos. All rights reversed (C) 2006

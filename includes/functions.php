@@ -42,6 +42,55 @@ function check_urlaubmodus_time () {
 }
 
 // ----------------------------------------------------------------------------------------------------------------
+// XNova Renaissance : mots de passe et cookie de connexion
+//
+// Hachage moderne (bcrypt / Argon2 selon PHP), remplace le md5 d'origine
+function PasswordHash ( $Password ) {
+	return password_hash($Password, PASSWORD_DEFAULT);
+}
+
+// Verifie le mot de passe d'un joueur. Les anciens hash md5 (XNova 0.8e / 0.9d) sont convertis
+// automatiquement a la premiere connexion reussie. $UserRow['password'] est mis a jour si besoin.
+function PasswordCheck ( $Password, &$UserRow ) {
+	$Stored = $UserRow['password'];
+	if (preg_match('/^[a-f0-9]{32}$/i', $Stored)) {
+		if (!hash_equals(strtolower($Stored), md5($Password))) {
+			return false;
+		}
+		$NeedUpdate = true;
+	} else {
+		if (!password_verify($Password, $Stored)) {
+			return false;
+		}
+		$NeedUpdate = password_needs_rehash($Stored, PASSWORD_DEFAULT);
+	}
+	if ($NeedUpdate) {
+		$UserRow['password'] = PasswordHash($Password);
+		doquery("UPDATE {{table}} SET `password` = '". SqlEscape($UserRow['password']) ."' WHERE `id` = '". intval($UserRow['id']) ."' LIMIT 1;", 'users');
+	}
+	return true;
+}
+
+// Jeton du cookie : signature HMAC de l'id et du hash du mot de passe (change si le mot de passe change)
+function AuthCookieToken ( $UserRow ) {
+	global $xnova_root_path;
+	include($xnova_root_path . 'config.php');
+	return hash_hmac('sha256', intval($UserRow['id']) .'|'. $UserRow['password'], $dbsettings['secretword']);
+}
+
+// Pose (ou efface avec $Value = '') le cookie de connexion : inaccessible au JavaScript, envoye seulement par ce site
+function SetAuthCookie ( $Value, $Expire ) {
+	global $game_config;
+	setcookie($game_config['COOKIE_NAME'], $Value, array(
+		'expires'  => $Expire,
+		'path'     => '/',
+		'secure'   => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off',
+		'httponly' => true,
+		'samesite' => 'Lax',
+	));
+}
+
+// ----------------------------------------------------------------------------------------------------------------
 // XNova Renaissance : convertit en entiers les champs numeriques recus (GET et POST).
 // $Fields : liste des noms de champs ; $Pattern : expression reguliere optionnelle (ex. '/^ship[0-9]+$/')
 function SanitizeNumericInput ( $Fields, $Pattern = '' ) {
