@@ -10,7 +10,7 @@
  * overview.php
  * @version 1.0
  * @copyright 2008 by XNova Team (auteur non identifié) for XNova
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);

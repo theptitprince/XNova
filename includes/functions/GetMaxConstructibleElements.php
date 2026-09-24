@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.2
  * @copyright 2008 By Chlorel for XNova
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 // Retourne un entier du nombre maximum d'elements constructible
 // par rapport aux ressources disponibles

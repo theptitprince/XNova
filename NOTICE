@@ -1,0 +1,24 @@
+XNova 0.9 Renaissance
+Copyright (C) 2026 theptitprince — reprise, modernisation et maintenance
+Travail original : XNova Team (Raito, Chlorel, e-Zobar, Flousedid et contributeurs), 2007-2008,
+d'après UGamela (Perberos).
+
+Ce programme est distribué sous licence GNU Affero General Public License, version 3 ou
+(à votre choix) toute version ultérieure. Voir le fichier LICENSE.
+
+Conditions additionnelles (section 7(b) de l'AGPL-3.0) : attribution
+---------------------------------------------------------------------
+Toute copie, modification ou version dérivée de ce programme doit conserver, de façon intacte :
+  1. les mentions d'auteur présentes dans l'en-tête de chaque fichier source
+     (« XNova 0.9 Renaissance / Reprise et modernisation : theptitprince » et la mention
+     « Travail original » qui cite les auteurs d'origine) ;
+  2. dans la page de crédits du jeu (credit.php), visible par les joueurs, la mention de l'équipe
+     XNova d'origine et la mention « XNova Renaissance — theptitprince ».
+Les versions modifiées peuvent ajouter leurs propres crédits, mais pas retirer ceux-ci.
+
+Exception : fichier sous une autre licence
+------------------------------------------
+includes/ataki.php (moteur de combat), par jacekowski :
+Creative Commons Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 2.5
+(CC BY-NC-SA 2.5) — http://creativecommons.org/licenses/by-nc-sa/2.5/
+Ce fichier interdit tout usage commercial.

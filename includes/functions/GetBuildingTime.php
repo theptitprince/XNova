@@ -10,7 +10,7 @@
  * GetBuildingTime
  * @version 1.0
  * @copyright 2008 By Chlorel for XNova
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 // Calcul du temps de construction d'un Element (Batiment / Recherche / Defense / Vaisseau )

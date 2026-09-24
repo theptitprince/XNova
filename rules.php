@@ -7,7 +7,7 @@
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original : XNova Team, d'après UGamela
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 /**

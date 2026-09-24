@@ -7,7 +7,7 @@
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original : Perberos (UGamela), voir mention en fin de fichier
- * @license GNU GPL v2
+ * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
 // Connexion MySQL (mysqli) ouverte a la demande et partagee via $link
