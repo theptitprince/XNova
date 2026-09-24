@@ -29,7 +29,7 @@ function ShowBuildingQueue ( $CurrentPlanet, $CurrentUser ) {
 
 	$CurrentQueue  = $CurrentPlanet['b_building_id'];
 	$QueueID       = 0;
-	if ($CurrentQueue != 0) {
+	if (!empty($CurrentQueue)) {
 		// Queue de fabrication documentée ... Y a au moins 1 element a construire !
 		$QueueArray    = explode ( ";", $CurrentQueue );
 		// Compte le nombre d'elements

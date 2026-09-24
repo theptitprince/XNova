@@ -61,7 +61,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	if ($game_config['enable_announces'] == 1) {
 		$parse['announce_link']  = "
 		<tr>
-			<td colspan=\"2\"><div><a href=\"annonces.php\" target=\"{mf}\">Annonces</a></div></td>
+			<td colspan=\"2\"><div><a href=\"annonce.php\" target=\"Hauptframe\">Annonces</a></div></td>
 		</tr>";
 	} else {
 		$parse['announce_link']  = "";
@@ -71,7 +71,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	if ($game_config['enable_marchand'] == 1) {
 		$parse['marchand_link']  = "
 		<tr>
-			<td colspan=\"2\"><div><a href=\"marchand.php\" target=\"{mf}\">Marchand</a></div></td>
+			<td colspan=\"2\"><div><a href=\"marchand.php\" target=\"Hauptframe\">Marchand</a></div></td>
 		</tr>";
 	} else {
 		$parse['marchand_link']  = "";

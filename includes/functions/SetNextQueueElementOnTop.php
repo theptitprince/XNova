@@ -18,7 +18,7 @@ function SetNextQueueElementOnTop ( &$CurrentPlanet, $CurrentUser ) {
 	// Garde fou ... Si le temps de construction n'est pas 0 on ne fait rien !!!
 	if ($CurrentPlanet['b_building'] == 0) {
 		$CurrentQueue  = $CurrentPlanet['b_building_id'];
-		if ($CurrentQueue != 0) {
+		if (!empty($CurrentQueue)) {
 			$QueueArray = explode ( ";", $CurrentQueue );
 			$Loop       = true;
 			while ($Loop == true) {

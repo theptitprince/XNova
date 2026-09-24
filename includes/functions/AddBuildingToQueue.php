@@ -24,11 +24,11 @@ function AddBuildingToQueue ( &$CurrentPlanet, $CurrentUser, $Element, $AddMode 
 	global $lang, $resource;
 
 	$CurrentQueue  = $CurrentPlanet['b_building_id'];
-	if ($CurrentQueue != 0) {
+	if (!empty($CurrentQueue)) {
 		$QueueArray    = explode ( ";", $CurrentQueue );
 		$ActualCount   = count ( $QueueArray );
 	} else {
-		$QueueArray    = "";
+		$QueueArray    = array();
 		$ActualCount   = 0;
 	}
 
