@@ -33,9 +33,9 @@ if(isset($_GET['mode'])){
 		//Pegamos el texto :P
 		if($_POST["n"] == ""){$_POST["n"] = "Unbenannt";}
 
-		$r = strip_tags($_POST[n]).",".intval($_POST[g]).",".intval($_POST[s]).",".intval($_POST[p]).",".intval($_POST[t])."\r\n";
+		$r = strip_tags($_POST['n']).",".intval($_POST['g']).",".intval($_POST['s']).",".intval($_POST['p']).",".intval($_POST['t'])."\r\n";
 		$user['fleet_shortcut'] .= $r;
-		doquery("UPDATE {{table}} SET fleet_shortcut='{$user[fleet_shortcut]}' WHERE id={$user[id]}","users");
+		doquery("UPDATE {{table}} SET fleet_shortcut='{$user['fleet_shortcut']}' WHERE id={$user['id']}","users");
 		message("Le raccourcis a &eacute;t&eacute; enregistr&eacute; !","Enregistrment","fleetshortcut.php");
 	}
 	$page = "<form method=POST><table border=0 cellpadding=0 cellspacing=1 width=519>
@@ -64,7 +64,7 @@ elseif(isset($_GET['a'])){
 		if($_POST["delete"]){
 			unset($scarray[$a]);
 			$user['fleet_shortcut'] =  implode("\r\n",$scarray);
-			doquery("UPDATE {{table}} SET fleet_shortcut='{$user[fleet_shortcut]}' WHERE id={$user[id]}","users");
+			doquery("UPDATE {{table}} SET fleet_shortcut='{$user['fleet_shortcut']}' WHERE id={$user['id']}","users");
 			message("Shortcut wurde gel&ouml;scht","Gel&ouml;scht","fleetshortcut.php");
 		}
 		else{
@@ -76,7 +76,7 @@ elseif(isset($_GET['a'])){
 			$r[4] = intval($_POST['t']);
 			$scarray[$a] = implode(",",$r);
 			$user['fleet_shortcut'] =  implode("\r\n",$scarray);
-			doquery("UPDATE {{table}} SET fleet_shortcut='{$user[fleet_shortcut]}' WHERE id={$user[id]}","users");
+			doquery("UPDATE {{table}} SET fleet_shortcut='{$user['fleet_shortcut']}' WHERE id={$user['id']}","users");
 			message("Le raccourcis a &eacute;t&eacute; &eacute;dit&eacute; !.","Editer","fleetshortcut.php");
 		}
 	}

@@ -157,7 +157,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	  Here must show the fleet movings of owner player.
 	*/
 
-	$fq = doquery("SELECT * FROM {{table}} WHERE fleet_owner={$user[id]}", 'fleets');
+	$fq = doquery("SELECT * FROM {{table}} WHERE fleet_owner={$user['id']}", 'fleets');
 
 	$i = 0;
 	while ($f = mysqli_fetch_array($fq)) {
@@ -165,7 +165,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$page .= "<tr height=20><th>$i</th><th>";
 
-		$page .= "<a title=\"\">{$missiontype[$f[fleet_mission]]}</a>";
+		$page .= "<a title=\"\">{$missiontype[$f['fleet_mission']]}</a>";
 		if (($f['fleet_start_time'] + 1) == $f['fleet_end_time'])
 			$page .= " <a title=\"R&uuml;ckweg\">(F)</a>";
 		$page .= "</th><th><a title=\"";
@@ -184,11 +184,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 				}
 			}
 		}
-		$page .= "\">" . pretty_number($f[fleet_amount]) . "</a></th>";
+		$page .= "\">" . pretty_number($f['fleet_amount']) . "</a></th>";
 		// $page .= "<th>".gmdate("d. M Y H:i:s",$f['fleet_start_time'])."</th>";
-		$page .= "<th>[{$f[fleet_start_galaxy]}:{$f[fleet_start_system]}:{$f[fleet_start_planet]}]</th>";
+		$page .= "<th>[{$f['fleet_start_galaxy']}:{$f['fleet_start_system']}:{$f['fleet_start_planet']}]</th>";
 		$page .= "<th>" . gmdate("d. M Y H:i:s", $f['fleet_start_time']) . "</th>";
-		$page .= "<th>[{$f[fleet_end_galaxy]}:{$f[fleet_end_system]}:{$f[fleet_end_planet]}]</th>";
+		$page .= "<th>[{$f['fleet_end_galaxy']}:{$f['fleet_end_system']}:{$f['fleet_end_planet']}]</th>";
 		$page .= "<th>" . gmdate("d. M Y H:i:s", $f['fleet_end_time']) . "</th>";
 		$page .= " </form>";
 
