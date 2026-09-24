@@ -47,7 +47,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	} else {
 		$parse['ADMIN_LINK']  = "";
 	}
-	//Lien supplémentaire déterminé dans le panel admin
+	//Lien supplï¿½mentaire dï¿½terminï¿½ dans le panel admin
 	if ($game_config['link_enable'] == 1) {
 		$parse['added_link']  = "
 		<tr>
@@ -57,7 +57,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 		$parse['added_link']  = "";
 	}
 	
-	//Maintenant on vérifie si les annonces sont activées ou non
+	//Maintenant on vï¿½rifie si les annonces sont activï¿½es ou non
 	if ($game_config['enable_announces'] == 1) {
 		$parse['announce_link']  = "
 		<tr>
@@ -80,7 +80,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	if ($game_config['enable_notes'] == 1) {
 		$parse['notes_link']  = "
 		<tr>
-			<td colspan=\"2\"><div><a href=\"#\" onClick=\"f(\'notes.php\', \'Report\');\" accesskey=\"n\">Notes</a></div></td>
+			<td colspan=\"2\"><div><a href=\"notes.php\" accesskey=\"n\" target=\"Hauptframe\">Notes</a></div></td>
 		</tr>";
 	} else {
 		$parse['notes_link']  = "";

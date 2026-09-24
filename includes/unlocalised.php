@@ -58,6 +58,10 @@ function GetGameSpeedFactor () {
 function GetFleetMaxSpeed ($FleetArray, $Fleet, $Player) {
 	global $reslist, $pricelist;
 
+	// PHP 7.1+ : "" n'est plus converti automatiquement en tableau
+	if (!is_array($FleetArray)) {
+		$FleetArray = array();
+	}
 	if ($Fleet != 0) {
 		$FleetArray[$Fleet] =  1;
 	}
