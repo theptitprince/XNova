@@ -199,7 +199,7 @@
           if ($_POST["newpass1"] == $_POST["newpass2"]) {
              $newpass = md5($_POST["newpass1"]);
              doquery("UPDATE {{table}} SET `password` = '{$newpass}' WHERE `id` = '{$user['id']}' LIMIT 1", "users");
-             setcookie(COOKIE_NAME, "", time()-100000, "/", "", 0); //le da el expire
+             setcookie($game_config['COOKIE_NAME'], "", time()-100000, "/", "", 0); //le da el expire
              message($lang['succeful_changepass'], $lang['changue_pass'],"login.php",1);
           }
        }
@@ -207,7 +207,7 @@
           $query = doquery("SELECT id FROM {{table}} WHERE username='{$_POST["db_character"]}'", 'users', true);
           if (!$query) {
              doquery("UPDATE {{table}} SET username='{$username}' WHERE id='{$user['id']}' LIMIT 1", "users");
-             setcookie(COOKIE_NAME, "", time()-100000, "/", "", 0); //le da el expire
+             setcookie($game_config['COOKIE_NAME'], "", time()-100000, "/", "", 0); //le da el expire
              message($lang['succeful_changename'], $lang['changue_name'],"login.php",1);
           }
        }

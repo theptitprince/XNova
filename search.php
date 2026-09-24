@@ -61,7 +61,7 @@ switch($type){
 */
 if(isset($searchtext) && isset($type)){
 
-	while($r = mysqli_fetch_array($search, MYSQL_BOTH)){
+	while($r = mysqli_fetch_array($search, MYSQLI_BOTH)){
 
 		if($type=='playername'||$type=='planetname'){
 			$s=$r;

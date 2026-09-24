@@ -99,7 +99,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "</tr>";
 
 	// Gestion des flottes du joueur actif
-	$fq = doquery("SELECT * FROM {{table}} WHERE fleet_owner={$user[id]}", "fleets");
+	$fq = doquery("SELECT * FROM {{table}} WHERE fleet_owner={$user['id']}", "fleets");
 	$i  = 0;
 
 
@@ -110,7 +110,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$page .= "<th>".$i."</th>";
 		// (02) Fleet Mission
 		$page .= "<th>";
-		$page .= "<a>". $missiontype[$f[fleet_mission]] ."</a>";
+		$page .= "<a>". $missiontype[$f['fleet_mission']] ."</a>";
 		if (($f['fleet_start_time'] + 1) == $f['fleet_end_time']) {
 			$page .= "<br><a title=\"".$lang['fl_back_to_ttl']."\">".$lang['fl_back_to']."</a>";
 		} else {
@@ -132,13 +132,13 @@ include($xnova_root_path . 'common.' . $phpEx);
 				}
 			}
 		}
-		$page .= "\">". pretty_number($f[fleet_amount]) ."</a></th>";
+		$page .= "\">". pretty_number($f['fleet_amount']) ."</a></th>";
 		// (04) Fleet From (Planete d'origine)
-		$page .= "<th>[".$f[fleet_start_galaxy].":".$f[fleet_start_system].":".$f[fleet_start_planet]."]</th>";
+		$page .= "<th>[".$f['fleet_start_galaxy'].":".$f['fleet_start_system'].":".$f['fleet_start_planet']."]</th>";
 		// (05) Fleet Start Time
 		$page .= "<th>". gmdate("d. M Y H:i:s", $f['fleet_start_time']) ."</th>";
 		// (06) Fleet Target (Planete de destination)
-		$page .= "<th>[".$f[fleet_end_galaxy].":".$f[fleet_end_system].":".$f[fleet_end_planet]."]</th>";
+		$page .= "<th>[".$f['fleet_end_galaxy'].":".$f['fleet_end_system'].":".$f['fleet_end_planet']."]</th>";
 		// (07) Fleet Target Time
 		$page .= "<th>". gmdate("d. M Y H:i:s", $f['fleet_end_time']) ."</th>";
 		// (08) Fleet Back Time
@@ -152,7 +152,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 				$page .= "<input name=\"fleetid\" value=\"". $f['fleet_id'] ."\" type=\"hidden\">";
 				$page .= "<input value=\" ".$lang['fl_back_to_ttl']." \" type=\"submit\" name=\"send\">";
 				$page .= "</form>";
-			if ($f[fleet_mission] == 1) {
+			if ($f['fleet_mission'] == 1) {
 				$page .= "<form action=\"verband.php\" method=\"post\">";
 				$page .= "<input name=\"fleetid\" value=\"". $f['fleet_id'] ."\" type=\"hidden\">";
 				$page .= "<input value=\" ".$lang['fl_associate']." \" type=\"submit\">";
