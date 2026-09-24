@@ -24,10 +24,13 @@ includeLang('changelog');
 $template = gettemplate('changelog_table');
 
 
+$IsLatest = true;
 foreach($lang['changelog'] as $a => $b)
 {
 
-	$parse['version_number'] = $a;
+	// Seule la version la plus recente (la premiere de la liste) est en vert
+	$parse['version_number'] = ($IsLatest) ? '<font color="lime">'. $a .'</font>' : $a;
+	$IsLatest = false;
 	$parse['description'] = nl2br($b);
 
 	$body .= parsetemplate($template, $parse);
