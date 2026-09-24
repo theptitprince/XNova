@@ -1,5 +1,5 @@
 <?php
-//é à ó ú ñ
+//Ã© Ã  Ã³ Ãº Ã±
 
 $lang['alliance'] = 'Alianzas';
 $lang['your_alliance'] = 'Su alianza';
@@ -15,8 +15,8 @@ $lang['have_not_name'] = 'La allianza no tiene nombre';
 $lang['always_exist'] = '%s ya existe;';
 $lang['ally_maked'] = '%s crear';
 $lang['ally_notexist'] = 'La alianza no existe ya';
-$lang['Send_circular_mail'] = 'Enviar un correo electrónico colectivo';
-$lang['Text_mail'] = 'Enviar un correo electrónico colectivo';
+$lang['Send_circular_mail'] = 'Enviar un correo electrÃ³nico colectivo';
+$lang['Text_mail'] = 'Enviar un correo electrÃ³nico colectivo';
 $lang['Members_list'] = 'Lista de los miembros';
 $lang['Alliance_admin'] = 'Administrar la alianza';
 $lang['Range'] = 'Su fila';
@@ -25,7 +25,7 @@ $lang['Name'] = 'Nombre';
 $lang['Tag'] = 'TAG';
 $lang['Circular_message'] = 'Mail colectivo';
 $lang['Inner_section'] = 'Texto interno';
-$lang['Main_Page'] = 'Página inicial';
+$lang['Main_Page'] = 'PÃ¡gina inicial';
 
 $lang['alliance_tag'] = 'TAG de la allianza';
 $lang['allyance_name'] = 'Nombre de la allianza';
@@ -35,14 +35,14 @@ $lang['Novate'] = 'Principiante';
 
 $lang['Founder'] = 'Fundador';
 
-$lang['Circular_sended'] = 'Los jugadores siguientes recibieron el correo electrónico';
+$lang['Circular_sended'] = 'Los jugadores siguientes recibieron el correo electrÃ³nico';
 
 //Solicitud
 $lang['it_is_not_posible_to_apply'] = "Imposible de esta manera";
 $lang['write_apply'] = "Depositar la candidatura";
 $lang['your_apply'] = 'Su candidatura';
-$lang['apply_registered'] = 'Su candidatura fue salvaguardar. Recibirá un mensaje si se aceptan;.<br><br><a href=alliance.php>Vuelta</a>';
-$lang['apply_cantbeadded'] = '¡La demanda no tuvo éxito, quiere reiniciar!';
+$lang['apply_registered'] = 'Su candidatura fue salvaguardar. RecibirÃ¡ un mensaje si se aceptan;.<br><br><a href=alliance.php>Vuelta</a>';
+$lang['apply_cantbeadded'] = 'Â¡La demanda no tuvo Ã©xito, quiere reiniciar!';
 
 $lang['Exit_of_this_alliance'] = "Salir de esta alianza";
 $lang['Continue'] = "seguir";
@@ -54,25 +54,25 @@ $lang['Ok'] = 'Si';
 $lang['Reload'] = 'Ejemplo';
 $lang['Clear'] = 'borrar';
 $lang['Back'] = 'Vuelta';
-$lang['Help'] = 'Pequeña ayuda';
+$lang['Help'] = 'PequeÃ±a ayuda';
 $lang['Message'] = 'Mensaje';
 $lang['characters'] = 'caracteros';
 $lang['Destiny'] = 'Destinatario';
 
 $lang['Write_to_alliance'] = 'Enviar una candidatura a la alianza [%s]';
 
-$lang['There_is_no_a_text_apply'] = 'La dirección de la alianza no ha creado modelo';
-$lang['Waiting_a_request_text'] = 'Vous avez déposée  votre candidature à l alliance [%s]. Debe esperar de obtener una respuesta o retirar su candidatura.';
-$lang['Canceled_a_request_text'] = 'La allianza [%s] no aceptó su candidatura, Ahora puede escribir una nueva demanda o crear su propia alianza.';
+$lang['There_is_no_a_text_apply'] = 'La direcciÃ³n de la alianza no ha creado modelo';
+$lang['Waiting_a_request_text'] = 'Vous avez dÃ©posÃ©e  votre candidature Ã  l alliance [%s]. Debe esperar de obtener una respuesta o retirar su candidatura.';
+$lang['Canceled_a_request_text'] = 'La allianza [%s] no aceptÃ³ su candidatura, Ahora puede escribir una nueva demanda o crear su propia alianza.';
 
 $lang['Online'] = 'Online';
-$lang['Ammount'] = 'Número';
+$lang['Ammount'] = 'NÃºmero';
 $lang['Name'] = 'Nombre';
 $lang['Number'] = 'Nr.';
 $lang['Position'] = 'Statut';
 $lang['Points'] = 'Puntos';
 $lang['Coordinated'] = 'Coord';
-$lang['Member_from'] = 'Adhesión';
+$lang['Member_from'] = 'AdhesiÃ³n';
 $lang['Function'] = 'Online';
 $lang['Write_a_message'] = '&Escribir un mensaje';
 $lang['On'] = 'Conectado';
@@ -81,7 +81,7 @@ $lang['Off'] = 'Desconectado';
 
 //Admin
 $lang['Transfer_alliance'] = 'Ceder/reanudar esta alianza';
-$lang['Texts'] = 'Administración del texto';
+$lang['Texts'] = 'AdministraciÃ³n del texto';
 $lang['External_text'] = 'Texto externo';
 $lang['Internal_text'] = 'Texto interno';
 $lang['Request_text'] = 'Texto de candidatura';
@@ -90,7 +90,7 @@ $lang['Show_of_request_text'] = 'Texto de candidatura';
 $lang['Law_settings'] = 'Configurar los derechos';
 $lang['Members_administrate'] = 'Administrar los miembros';
 
-$lang['Return_to_overview'] = 'Vuelta a la página de alianza';
+$lang['Return_to_overview'] = 'Vuelta a la pÃ¡gina de alianza';
 $lang['Configure_laws'] = 'Configurar los derechos';
 $lang['Range_name'] = 'Nombre de la fila';
 $lang['Range_make'] = 'Crear una nueva fila';
@@ -102,8 +102,8 @@ $lang['Expel_users'] = 'Despedir a un jugador';
 $lang['See_the_requests'] = 'Ver candidaturas';
 $lang['See_the_list_members'] = 'Ver lista de los miembros';
 $lang['Check_the_requests'] = 'Administrar candidaturas';
-$lang['See_the_online_list_member'] = 'Ver estatuto en línea en la lista de los miembros';
-$lang['Make_a_circular_message'] = 'Enviar correo electrónico colectivo';
+$lang['See_the_online_list_member'] = 'Ver estatuto en lÃ­nea en la lista de los miembros';
+$lang['Make_a_circular_message'] = 'Enviar correo electrÃ³nico colectivo';
 $lang['Left_hand_text'] = "'Mano derecha' (Necesario para transmitir el estatuto de fundador)";
 $lang['Save'] = 'Salvaguardar';
 $lang['There_is_not_range'] = 'No hay fila';
@@ -120,19 +120,19 @@ $lang['Founder_name'] = 'Nombre del Fundator';
 $lang['Reset'] = "Reinicializar";
 
 
-$lang['Apply_ally_overview'] = "Reseña de candidatura";
+$lang['Apply_ally_overview'] = "ReseÃ±a de candidatura";
 $lang['Candidate'] = "Nombre";
 
 $lang['Date_of_the_request'] = "Fecha de la candidatura";
 $lang['Search'] = "Buscar";
-$lang['Request_responde'] = 'Reacción a esta demanda';
+$lang['Request_responde'] = 'ReacciÃ³n a esta demanda';
 $lang['Motive_optional'] = 'Razones (facultativo)';
-$lang['Go_out_welldone'] = '¿Quieren de verdad sacar de esta alianza?';
-$lang['Want_go_out'] = '¿Quieren de verdad sacar de esta alianza?';
+$lang['Go_out_welldone'] = 'Â¿Quieren de verdad sacar de esta alianza?';
+$lang['Want_go_out'] = 'Â¿Quieren de verdad sacar de esta alianza?';
 
 
 
-$lang['Denied_access'] = '¡No dispone de los derechos necesarios!';
+$lang['Denied_access'] = 'Â¡No dispone de los derechos necesarios!';
 
 // Created by Ichigo. All rights reversed (C) 2006 
 // Traduction By Katsumi.All rights reversed (C) 2008

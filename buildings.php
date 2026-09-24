@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.3
  * @copyright 2008 by Chlorel for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);
@@ -50,6 +50,6 @@ include($xnova_root_path . 'common.' . $phpEx);
 // -----------------------------------------------------------------------------------------------------------
 // History version
 // 1.0 - Nettoyage modularisation
-// 1.1 - Mise au point, mise en fonction pour linéarisation du fonctionnement
+// 1.1 - Mise au point, mise en fonction pour linÃ©arisation du fonctionnement
 // 1.2 - Liste de construction batiments
 ?>

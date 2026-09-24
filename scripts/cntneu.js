@@ -6,7 +6,7 @@
                 s=ss-Math.round((n.getTime()-v.getTime())/1000.);
                 m=0;h=0;
                 if(s<0){
-                  bxx.innerHTML="UkoÒczono<br>"+"<a href=b_building.php?session="+ps+"&cp="+pl+">Dalej</a>";
+                  bxx.innerHTML="Uko√±czono<br>"+"<a href=b_building.php?session="+ps+"&cp="+pl+">Dalej</a>";
 		  document.location.href="b_building.php?session="+ps+"&cp="+pl;
                 }else{
                   if(s>59){

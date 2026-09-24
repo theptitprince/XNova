@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.0
  * @copyright 2008 by Tom1991 for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 
@@ -50,7 +50,7 @@
 
     mail($mail,$Title,$Body);
 
-    //Email envoyé, maintenant place au changement dans la BDD
+    //Email envoyÃ©, maintenant place au changement dans la BDD
 
     $NewPassSql = PasswordHash($NewPass);
 

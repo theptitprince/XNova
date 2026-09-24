@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.0
  * @copyright 2008 by Chlorel for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);
@@ -84,7 +84,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 						$FleetType = false;
 					}
 
-					// Masquage des ressources transportées
+					// Masquage des ressources transportÃ©es
 					$FleetRow['fleet_resource_metal']     = 0;
 					$FleetRow['fleet_resource_crystal']   = 0;
 					$FleetRow['fleet_resource_deuterium'] = 0;

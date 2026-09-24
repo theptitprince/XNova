@@ -1,5 +1,5 @@
 <?php
-//é à ó ú ñ
+//Ã© Ã  Ã³ Ãº Ã±
 
 /*******************************************************************************************************
 *
@@ -12,6 +12,6 @@
 
 
 $lang['see_you'] = 'Esperando volverle a ver muy pronto. El Staff';
-$lang['session_closed'] = "Sesión terminada";
+$lang['session_closed'] = "SesiÃ³n terminada";
 
 ?>

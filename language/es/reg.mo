@@ -1,44 +1,44 @@
 <?php
-//é à ó ú ñ
+//Ã© Ã  Ã³ Ãº Ã±
 
 if (!defined('INSIDE')) {
 	die("attemp hacking");
 }
 
 // Registration form
-$lang['registry']          = 'Inscripción';
+$lang['registry']          = 'InscripciÃ³n';
 $lang['form']              = 'Formulario';
-$lang['Register']          = 'XNova Inscripción';
+$lang['Register']          = 'XNova InscripciÃ³n';
 $lang['Undefined']         = '- indefinido -';
 $lang['Male']              = 'Hombre';
 $lang['Female']            = 'Mujer';
 $lang['Multiverse']        = 'XNova';
-$lang['E-Mail']            = 'Dirección correo electrónico';
+$lang['E-Mail']            = 'DirecciÃ³n correo electrÃ³nico';
 $lang['MainPlanet']        = 'Nombre de su planeta principal';
 $lang['GameName']          = 'Identifiente';
 $lang['Sex']               = 'Sexo';
 $lang['accept']            = 'Yo acepte el Reglamento';
 $lang['signup']            = 'Registrarse ';
-$lang['neededpass']        = 'Contraseña';
+$lang['neededpass']        = 'ContraseÃ±a';
 
 // Send
-$lang['mail_welcome']      = 'Muchas gracias de su inscripción a nuestro juego ({gameurl}) \nSu contraseña es : {password}\n\n¡Buena diversión!\n{gameurl}';
+$lang['mail_welcome']      = 'Muchas gracias de su inscripciÃ³n a nuestro juego ({gameurl}) \nSu contraseÃ±a es : {password}\n\nÂ¡Buena diversiÃ³n!\n{gameurl}';
 $lang['mail_title']        = 'Registro';
-$lang['thanksforregistry'] = '¡Gracias de inscribésele! Va a recibir un correo electrónico con su contraseña.';
+$lang['thanksforregistry'] = 'Â¡Gracias de inscribÃ©sele! Va a recibir un correo electrÃ³nico con su contraseÃ±a.';
 
 // Errors
-$lang['error_mail']        = 'Correo electrónico inválido!<br />';
+$lang['error_mail']        = 'Correo electrÃ³nico invÃ¡lido!<br />';
 $lang['error_planet']      = 'Error en el nombre de planeta.<br />';
-$lang['error_hplanetnum']  = '¡Debe utilizar caracteres alfanumérico para su nombre de planeta!<br />';
-$lang['error_character']   = '¡Error en el nombre del jugador!<br />';
-$lang['error_charalpha']   = '¡El pseudo debe componerse de carácter alfanumérico!<br />';
-$lang['error_password']    = '¡La contraseña debe hacer 4 caracteres como mínimo!<br />';
-$lang['error_rgt']         = 'Debe aceptar las condiciones de utilización.<<br />';
-$lang['error_userexist']   = '¡Este nombre de jugador ya existe!<br />';
-$lang['error_emailexist']  = '¡Ya se utiliza este correo electrónico!<br />';
-$lang['error_sex']         = '¡Error en el sexo!<br />';
+$lang['error_hplanetnum']  = 'Â¡Debe utilizar caracteres alfanumÃ©rico para su nombre de planeta!<br />';
+$lang['error_character']   = 'Â¡Error en el nombre del jugador!<br />';
+$lang['error_charalpha']   = 'Â¡El pseudo debe componerse de carÃ¡cter alfanumÃ©rico!<br />';
+$lang['error_password']    = 'Â¡La contraseÃ±a debe hacer 4 caracteres como mÃ­nimo!<br />';
+$lang['error_rgt']         = 'Debe aceptar las condiciones de utilizaciÃ³n.<<br />';
+$lang['error_userexist']   = 'Â¡Este nombre de jugador ya existe!<br />';
+$lang['error_emailexist']  = 'Â¡Ya se utiliza este correo electrÃ³nico!<br />';
+$lang['error_sex']         = 'Â¡Error en el sexo!<br />';
 $lang['error_mailsend']    = 'Se produjo un error al enviar el correo. Conectese con la contrasena que eligio.';
-$lang['reg_welldone']      = 'Inscripción terminada';
+$lang['reg_welldone']      = 'InscripciÃ³n terminada';
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008

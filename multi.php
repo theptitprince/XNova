@@ -7,7 +7,7 @@
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original : XNova Team, d'apres UGamela
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 define('INSIDE' , true);
@@ -46,7 +46,7 @@ if ($mode == 'add') {
     message($lang['sys_request_ok'],$lang['sys_ok']);
 
 }
-// Déclaration des multi compte
+// DÃ©claration des multi compte
 // Par Tom pour XNova
 ?>
 

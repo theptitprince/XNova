@@ -56,14 +56,12 @@ function BuildRessourcePage ( $CurrentUser, $CurrentPlanet ) {
 	$parse  = $lang;
 
 	$parse['production_level'] = 100;
-	if       ($CurrentPlanet['energy_max'] == 0 &&
-		$CurrentPlanet['energy_used'] > 0) {
-		$post_porcent = 0;
-	} elseif ($CurrentPlanet['energy_max'] >  0 &&
-		($CurrentPlanet['energy_used'] + $CurrentPlanet['energy_max']) < 0 ) {
-		$post_porcent = floor(($CurrentPlanet['energy_max']) / abs($CurrentPlanet['energy_used']) * 100);
-	} else {
+	// Meme regle que dans PlanetResourceUpdate : production au prorata de l'energie disponible
+	$EnergyNeeded = abs($CurrentPlanet['energy_used']);
+	if ($EnergyNeeded == 0 || $CurrentPlanet['energy_max'] >= $EnergyNeeded) {
 		$post_porcent = 100;
+	} else {
+		$post_porcent = floor($CurrentPlanet['energy_max'] / $EnergyNeeded * 100);
 	}
 	if ($post_porcent > 100) {
 		$post_porcent = 100;

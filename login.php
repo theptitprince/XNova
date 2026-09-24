@@ -8,8 +8,8 @@
  *
  * Travail original :
  * @version 1.0
- * @copyright 2008 by XNova Team (auteur non identifié) for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @copyright 2008 by XNova Team (auteur non identifiÃ©) for XNova
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);
@@ -61,7 +61,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$page = parsetemplate(gettemplate('login_body'), $parse);
 
-		// Test pour prendre le nombre total de joueur et le nombre de joueurs connectés
+		// Test pour prendre le nombre total de joueur et le nombre de joueurs connectÃ©s
 		if ($_GET['ucount'] == 1) {
 			$page = $PlayersOnline['onlinenow']."/".$Count['players'];
 			die ( $page );

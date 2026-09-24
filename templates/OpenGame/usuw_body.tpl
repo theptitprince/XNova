@@ -11,8 +11,8 @@
   </tr>
 <tr><th colspan=5>
 <font color=black><b><center>
-Je¶li Chcesz Usun±æ Konto Kliknij W Ten Przycisk A Pu¼niej Naci¶nij <font color=red>Usuñ Konto!</font><br>
-Po Wykonaniu Tych Czynno¶ci Zostaniesz Przeniesiony Do Ustawieñ.<br>Musisz Jeszcze Raz Nacisn±æ <font color=red>Usuñ! By Potwierdziæ Kasowanie!</font>
+JeÂ¶li Chcesz UsunÂ±Ã¦ Konto Kliknij W Ten Przycisk A PuÂ¼niej NaciÂ¶nij <font color=red>UsuÃ± Konto!</font><br>
+Po Wykonaniu Tych CzynnoÂ¶ci Zostaniesz Przeniesiony Do UstawieÃ±.<br>Musisz Jeszcze Raz NacisnÂ±Ã¦ <font color=red>UsuÃ±! By PotwierdziÃ¦ Kasowanie!</font>
 </font></b></center>
 	</th>
 </tr>
@@ -20,7 +20,7 @@ Po Wykonaniu Tych Czynno¶ci Zostaniesz Przeniesiony Do Ustawieñ.<br>Musisz Jeszc
    <th><font color=black><b><center><input name="db_deaktjava"{user_db_deaktjava} type="checkbox" /></font></b></center></th>
    </tr>
    <tr>
-      <th colspan="2"><center><input value="Usuñ Konto" type="submit"></center></th>
+      <th colspan="2"><center><input value="UsuÃ± Konto" type="submit"></center></th>
 </tr>
      </table>
 

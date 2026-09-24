@@ -15,7 +15,9 @@ $lang['changelog']   = array(
 - NEW : Installeur : mode Mise &agrave; jour (&agrave; partir de la 0.9d), mode Transf&egrave;re revu, config.php &eacute;crit de fa&ccedil;on s&ucirc;re
 - FIX : Production des mines au prorata de l\'&eacute;nergie disponible, production naturelle compt&eacute;e une seule fois
 - FIX : 32 textes qui s\'affichaient vides, pseudo modifiable sans contr&ocirc;le, options qui effa&ccedil;aient les couleurs
-- FIX : Statistiques des alliances, d&eacute;bannissement automatique (requ&ecirc;te erron&eacute;e)',
+- FIX : Statistiques des alliances, d&eacute;bannissement automatique (requ&ecirc;te erron&eacute;e)
+- MOD : Tout le code en UTF-8 (74 fichiers convertis) et fins de ligne unifi&eacute;es : textes espagnols, allemands, italiens et 'Erreur n&deg;' enfin lisibles
+- FIX : Rapport de combat et calculateur d&eacute;claraient un encodage ISO ; nom des raccourcis de flotte ; pourcentage de production sans centrale (page Ressources)',
 
 '0.9d Renaissance' => 'Passage &agrave; PHP 8 (theptitprince)
 - NEW : XNova 0.9d Renaissance, suite directe de XNova 0.8e (apr&egrave;s les versions communautaires 0.9a &agrave; 0.9c)

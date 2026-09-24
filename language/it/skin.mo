@@ -1,9 +1,9 @@
 <?php
 {
-$lang['Skin'] = "Wybór skina";
+$lang['Skin'] = "WybÃ³r skina";
 $lang['Aktualny'] = "Aktualny skin";
 $lang['Ustaw'] = "Ustaw";
-$lang['Ok'] = "Skin zosta³ zmieniony";
+$lang['Ok'] = "Skin zostaÂ³ zmieniony";
 
 $lang['Skin1'] = "Evolution";
 $lang['Skin1url'] = "http://80.237.203.201/download/use/evolution/";

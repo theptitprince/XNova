@@ -8,8 +8,8 @@
  *
  * Travail original :
  * @version 1.0
- * @copyright 2008 by XNova Team (auteur non identifié) for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @copyright 2008 by XNova Team (auteur non identifiÃ©) for XNova
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);
@@ -47,7 +47,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 				while ($u = mysqli_fetch_array($sq)) {
 					SendSimpleMessage ( $u['id'], $user['id'], $Time, 97, $From, $Subject, $Message);
 				}
-				message("<font color=\"lime\">Wys³a³e¶ wiadomo¶æ do wszystkich graczy</font>", "Complete", "../overview." . $phpEx, 3);
+				message("<font color=\"lime\">Message envoy&eacute; &agrave; tous les joueurs</font>", "Termin&eacute;", "../overview." . $phpEx, 3);
 			}
 		} else {
 			$parse = $game_config;

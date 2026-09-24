@@ -3,14 +3,14 @@
 $lang['cred_link']    = 'Link';
 $lang['cred_site']    = 'Lugar';
 $lang['cred_forum']   = 'Foro';
-$lang['cred_credit']  = 'Crédito';
+$lang['cred_credit']  = 'CrÃ©dito';
 $lang['cred_creat']   = 'Fundador';
 $lang['cred_prog']    = 'Programador';
 $lang['cred_master']  = 'Jefe';
-$lang['cred_design']  = 'Diseñador';
+$lang['cred_design']  = 'DiseÃ±ador';
 $lang['cred_web']     = 'Webmaster';
 $lang['cred_thx']     = 'Gracias';
-$lang['cred_based']   = 'Quién sirvió de base para XNova';
+$lang['cred_based']   = 'QuiÃ©n sirviÃ³ de base para XNova';
 $lang['cred_start']   = 'Para haber acogido a XNova a sus principios';
 
 ?>

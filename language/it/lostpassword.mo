@@ -1,10 +1,10 @@
 <?php
 
-$lang['ResetPass'] = "Odzyskiwanie has³a";
-$lang['TextPass1'] = "Prubójesz odzyskaæ has³o do konta w grze";
-$lang['TextPass2'] = "Jak otrzemasz has³o prosimy o natychmiastow¹ zmiane na jakieœ inne.";
+$lang['ResetPass'] = "Odzyskiwanie hasÂ³a";
+$lang['TextPass1'] = "PrubÃ³jesz odzyskaÃ¦ hasÂ³o do konta w grze";
+$lang['TextPass2'] = "Jak otrzemasz hasÂ³o prosimy o natychmiastowÂ¹ zmiane na jakieÅ“ inne.";
 $lang['email']    = "E-Mail";
-$lang['ButtonSendPass'] = "Wy¶lij";
-$lang['PassForm'] = "Formularz odzyskiwania has³a";
+$lang['ButtonSendPass'] = "WyÂ¶lij";
+$lang['PassForm'] = "Formularz odzyskiwania hasÂ³a";
 
 ?>

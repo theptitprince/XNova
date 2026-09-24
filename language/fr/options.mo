@@ -29,7 +29,7 @@ $lang['opt_lst_ord1'] = "Coordonnees";
 $lang['opt_lst_ord2'] = "Ordre alphabetique";
 $lang['opt_lst_cla']  = "Ordre de classement :";
 $lang['opt_lst_cla0'] = "croissant";
-$lang['opt_lst_cla1'] = "décroissant";
+$lang['opt_lst_cla1'] = "dÃ©croissant";
 $lang['opt_chk_skin'] = "Utiliser le skin";
 
 // Admin Options

@@ -22,7 +22,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 // Champs numeriques convertis en entiers (securite + PHP 8)
 SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettype', 'planet_type', 'thisgalaxy', 'thissystem', 'thisplanet',
 	                           'thisplanettype', 'resource1', 'resource2', 'resource3', 'holdingtime', 'expeditiontime',
-	                           'speed', 'speedfactor', 'speedallsmin', 'maxepedition', 'curepedition', 'target_mission', 'fleetid'), '/^ship[0-9]+$/', '/^ship[0-9]+$/' );
+	                           'speed', 'speedfactor', 'speedallsmin', 'maxepedition', 'curepedition', 'target_mission', 'fleetid'), '/^ship[0-9]+$/' );
 
 	includeLang('galaxy');
 	includeLang('fleet');

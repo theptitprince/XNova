@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.1
  * @copyright 2008 by Chlorel for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 
@@ -64,5 +64,5 @@ function MissionCaseStay ( $FleetRow ) {
 // -----------------------------------------------------------------------------------------------------------
 // History version
 // 1.0 Mise en module initiale
-// 1.1 FIX permet un retour de flotte cohérant
+// 1.1 FIX permet un retour de flotte cohÃ©rant
 ?>

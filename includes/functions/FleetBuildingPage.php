@@ -23,13 +23,13 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 
 	if (isset($_POST['fmenge'])) {
 		// On vient de Cliquer ' Construire '
-		// Et y a une liste de doléances
+		// Et y a une liste de dolÃ©ances
 		$AddedInQueue                     = false;
 		// Ici, on sait precisement ce qu'on aimerait bien construire ...
 		foreach($_POST['fmenge'] as $Element => $Count) {
-			// Construction d'Element recuperés sur la page de Flotte ...
+			// Construction d'Element recuperÃ©s sur la page de Flotte ...
 			// ATTENTION ! La file d'attente Flotte est Commune a celle des Defenses
-			// Dans fmenge, on devrait trouver un tableau des elements constructibles et du nombre d'elements souhaités
+			// Dans fmenge, on devrait trouver un tableau des elements constructibles et du nombre d'elements souhaitÃ©s
 
 			$Element = intval($Element);
 			$Count   = max(0, intval($Count)); // pas de quantite negative (sinon remboursement de ressources)

@@ -10,7 +10,7 @@
  * ainfo.php
  * @version 0.5
  * @copyright 2008 by Tom1991 for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);
@@ -45,7 +45,7 @@ echo $AntiMipRestant;
 if ($MipRestant <= 0) {
     doquery("UPDATE {{table}} SET `interplanetary_misil`='0' WHERE `id`='" . $Attaquant . "'", "planets");
     doquery("UPDATE {{table}} SET `interceptor_misil`='" . $AntiMipRestant . "' WHERE `id`='" . $PlaneteAdverse['id_owner'] . "'", "planets");
-    // Message à l'attaquant
+    // Message Ã  l'attaquant
     $Owner    = $user['id'];
     $Sender   = "0";
     $Time     = time();
@@ -55,7 +55,7 @@ if ($MipRestant <= 0) {
     $Message  = "Malheureusement tout vos missiles interplan&eacute;taire ont &eacute;t&eacute; d&eacute;truits par le syst&egrave;me de d&eacute;fense adverse.";
     SendSimpleMessage($Owner, $Sender, $Time, $Type, $From, $Subject, $Message);
 
-    // Message a l'attaqué
+    // Message a l'attaquÃ©
     $Owner2   = $PlaneteAdverse['id_owner'];
     $Message2 = "Vous avez d&eacute;truit " . $NbreMip . " Missiles Interplan&eacute;taire adverse. <br>Il vous reste " . $AntiMipRestant . " Missiles d'interception";
     SendSimpleMessage($Owner2, $Sender, $Time, $Type, $From, $Subject, $Message2);

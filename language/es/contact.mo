@@ -1,9 +1,9 @@
 <?php
-//á ó
+//Ã¡ Ã³
 $lang['ctc_title'] = "Contacto";
-$lang['ctc_intro'] = "Aquí encontrará las direcciones para contactar los operadores";
+$lang['ctc_intro'] = "AquÃ­ encontrarÃ¡ las direcciones para contactar los operadores";
 $lang['ctc_name']  = "Nombre";
 $lang['ctc_rank']  = "Fila";
-$lang['ctc_mail']  = "Correo Electrónico";
+$lang['ctc_mail']  = "Correo ElectrÃ³nico";
 
 ?>

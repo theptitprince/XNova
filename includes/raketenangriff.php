@@ -128,8 +128,8 @@ function raketenangriff($verteidiger_panzerung, $angreifer_waffen, $iraks, $def,
 
 	$return = array();
 
-	$return['verbleibt'] = $verblieben; // Übrige Def
-	$return['zerstoert'] = $kaputt; // Zerstörte Def
+	$return['verbleibt'] = $verblieben; // Ãœbrige Def
+	$return['zerstoert'] = $kaputt; // ZerstÃ¶rte Def
 	$return['verluste_metall'] = $metall; // Gesamtverluste Metall
 	$return['verluste_kristall'] = $kristall; // Gesamtverluste Kristall
 	$return['verluste_deuterium'] = $deut; // Gesamtverluste Deuterium

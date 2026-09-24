@@ -7,11 +7,11 @@
 * Reprise et modernisation : theptitprince (2026)
 *
 * Travail original :
-* Commencé Par Tom
-* Terminé par juju67 et Moa666
+* CommencÃ© Par Tom
+* TerminÃ© par juju67 et Moa666
 * @version 1
 * @copyright 2008
-* @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+* @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
 */
 
 function MissionCaseDestruction($FleetRow) {
@@ -181,7 +181,7 @@ function MissionCaseDestruction($FleetRow) {
 
          $CurrentSet   = $walka["atakujacy"];
 
-         // Ce qu'il reste de l'attaqué
+         // Ce qu'il reste de l'attaquÃ©
 
          $TargetSet    = $walka["wrog"];
 
@@ -189,11 +189,11 @@ function MissionCaseDestruction($FleetRow) {
 
          $FleetResult  = $walka["wygrana"];
 
-         // Rapport long (rapport de bataille detaillé)
+         // Rapport long (rapport de bataille detaillÃ©)
 
          $dane_do_rw   = $walka["dane_do_rw"];
 
-         // Rapport court (cdr + unitées perdues)
+         // Rapport court (cdr + unitÃ©es perdues)
 
          $zlom         = $walka["zlom"];
 
@@ -369,7 +369,7 @@ function MissionCaseDestruction($FleetRow) {
 
          $introdestruc       = sprintf ($lang['sys_destruc_mess'], $DepName , $FleetRow['fleet_start_galaxy'], $FleetRow['fleet_start_system'], $FleetRow['fleet_start_planet'], $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet']);
 
-         // Mise a jour de l'enregistrement de la planete attaquée
+         // Mise a jour de l'enregistrement de la planete attaquÃ©e
 
          $QryUpdateTarget  = "UPDATE {{table}} SET ";
 
@@ -397,7 +397,7 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
-         // Mise a jour du champ de ruine devant la planete attaquée
+         // Mise a jour du champ de ruine devant la planete attaquÃ©e
 
          $QryUpdateGalaxy  = "UPDATE {{table}} SET ";
 
@@ -419,7 +419,7 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
-         // Là on va discuter le bout de gras pour voir s'il y a moyen d'avoir une Lune !
+         // LÃ  on va discuter le bout de gras pour voir s'il y a moyen d'avoir une Lune !
 
          $FleetDebris      = $zlom['metal'] + $zlom['crystal'];
 
@@ -718,7 +718,7 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
-         // Colorisation du résumé de rapport pour l'attaquant
+         // Colorisation du rÃ©sumÃ© de rapport pour l'attaquant
 
             $raport  = "<a href # OnClick=\"f( 'rw.php?raport=". $rid ."', '');\" >";
 
@@ -768,7 +768,7 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
-         // Colorisation du résumé de rapport pour le defenseur
+         // Colorisation du rÃ©sumÃ© de rapport pour le defenseur
 
          $raport2  = "<a href # OnClick=\"f( 'rw.php?raport=". $rid ."', '');\" >";
 

@@ -74,7 +74,7 @@ tt_offX = 0, tt_offY = 0,
 xlim = 0, ylim = 0,        // right and bottom borders of visible client area
 tt_sup = false,            // true if T_ABOVE cmd
 tt_sticky = false,         // tt_obj sticky?
-tt_wirklich_sticky = false, // für den Mouseover-Effekt benötigt
+tt_wirklich_sticky = false, // fÃ¼r den Mouseover-Effekt benÃ¶tigt
 tt_wait = false,
 tt_act = false,            // tooltip visibility flag
 tt_sub = false,            // true while tooltip below mousepointer

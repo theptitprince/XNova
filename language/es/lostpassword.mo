@@ -1,9 +1,9 @@
 <?php
 
-$lang['ResetPass'] = "Restitución de contraseña";
-$lang['TextPass1'] = "Debe poner la dirección correo electrónico de su cuenta";
-$lang['TextPass2'] = "tal como se informa en sus Opciones. Es también la que utilizó para la inscripción. Si apoya en “Enviar”, una nueva contraseña será creada lo recibiría entonces por correo electrónico a la dirección indicada.";
-$lang['email']    = "correo electrónico";
+$lang['ResetPass'] = "RestituciÃ³n de contraseÃ±a";
+$lang['TextPass1'] = "Debe poner la direcciÃ³n correo electrÃ³nico de su cuenta";
+$lang['TextPass2'] = "tal como se informa en sus Opciones. Es tambiÃ©n la que utilizÃ³ para la inscripciÃ³n. Si apoya en â€œEnviarâ€, una nueva contraseÃ±a serÃ¡ creada lo recibirÃ­a entonces por correo electrÃ³nico a la direcciÃ³n indicada.";
+$lang['email']    = "correo electrÃ³nico";
 $lang['ButtonSendPass'] = "Enviar";
 $lang['PassForm'] = "Formulario";
 

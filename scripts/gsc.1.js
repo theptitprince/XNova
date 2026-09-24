@@ -40,7 +40,7 @@ s=s.replace(/#6/g,'</th>');
 s=s.replace(/#7/g,'<th>');
 s=s.replace(/#a/g,'</th><th></th>');
 document.write(s);
-document.write('<tr><td class=c colspan=3>( '+b+' Planeten besiedelt )</th></tr></table> (*) Flottenbewegung oder Aktivit‰t auf Planet &nbsp;&nbsp;&nbsp;(g) User gesperrt<br>(i) Spieler 2 Wochen inaktiv&nbsp;&nbsp;&nbsp;    (I) Spieler 4 Wochen inaktiv<br><font color=#ffa0a0>starker Spieler<font color=#ffffff> &nbsp;&nbsp;&nbsp; <font color=#a0ffa0>schwacher Spieler<font color=#ffffff>&nbsp;&nbsp;&nbsp <font color=#0000ff>Urlaubsmodus<font color=#ffffff>');
+document.write('<tr><td class=c colspan=3>( '+b+' Planeten besiedelt )</th></tr></table> (*) Flottenbewegung oder Aktivit√§t auf Planet &nbsp;&nbsp;&nbsp;(g) User gesperrt<br>(i) Spieler 2 Wochen inaktiv&nbsp;&nbsp;&nbsp;    (I) Spieler 4 Wochen inaktiv<br><font color=#ffa0a0>starker Spieler<font color=#ffffff> &nbsp;&nbsp;&nbsp; <font color=#a0ffa0>schwacher Spieler<font color=#ffffff>&nbsp;&nbsp;&nbsp <font color=#0000ff>Urlaubsmodus<font color=#ffffff>');
 document.write('</center> </body> </html>');
 
 }

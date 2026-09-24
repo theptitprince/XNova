@@ -16,8 +16,8 @@
     #  Project: prethOgame
     #  Description: RPG web based game
     #
-    #  Copyright © 2008 Aleksandar Spasojevic <spalekg@gmail.com>
-    #  Copyright © 2005 - 2008 KGsystem
+    #  Copyright Â© 2008 Aleksandar Spasojevic <spalekg@gmail.com>
+    #  Copyright Â© 2005 - 2008 KGsystem
     #############################################################################
     */
     function IsVacationMode($CurrentUser){

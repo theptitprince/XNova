@@ -12,11 +12,11 @@ $lang['mod_ma_typer'] = "Llamar a un negociante que compra el";
 $lang['mod_ma_rates'] = "El tipo de intercambio es de 2/1/0.5";
 $lang['mod_ma_buton'] = "Llamar el Negociante";
 $lang['mod_ma_noten'] = "No tiene bastante de";
-$lang['mod_ma_done']  = "¡El intercambio se desarrolló con éxito!";
+$lang['mod_ma_done']  = "Â¡El intercambio se desarrollÃ³ con Ã©xito!";
 $lang['mod_ma_error'] = "Error";
 $lang['mod_ma_donet'] = "Intercambio Ok";
 $lang['mod_ma_excha'] = "Intercambiar";
 $lang['mod_ma_cours'] = "Cuota de intercambio";
-$lang['mod_ma_nbre']  = "¡Un número!!!";
+$lang['mod_ma_nbre']  = "Â¡Un nÃºmero!!!";
 
 ?>

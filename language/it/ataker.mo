@@ -6,11 +6,11 @@ if (!defined('INSIDE')) {
 
 // Registration form
 $lang['ataker']         = 'Ataker';
-$lang['przez']          = 'Zosta³e¶ zabity przez';
-$lang['and']            = 'i straci³e¶';
-$lang['golde']          = 'Z³ota.';
-$lang['go']             = 'Do³±cz Do Gry!';
-$lang['atakerend']      = 'Jeste¶ Zabity I Le¿ysz Na Cmentarzu.';
+$lang['przez']          = 'ZostaÂ³eÂ¶ zabity przez';
+$lang['and']            = 'i straciÂ³eÂ¶';
+$lang['golde']          = 'ZÂ³ota.';
+$lang['go']             = 'DoÂ³Â±cz Do Gry!';
+$lang['atakerend']      = 'JesteÂ¶ Zabity I LeÂ¿ysz Na Cmentarzu.';
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008

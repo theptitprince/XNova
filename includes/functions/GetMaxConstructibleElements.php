@@ -57,6 +57,6 @@ function GetMaxConstructibleElements ($Element, $Ressources) {
 }
 // Verion History
 // - 1.0 Version initiale (creation)
-// - 1.1 Correction bug ressources négatives ...
-// - 1.2 Correction bug quand pas de métal
+// - 1.1 Correction bug ressources nÃ©gatives ...
+// - 1.2 Correction bug quand pas de mÃ©tal
 ?>
