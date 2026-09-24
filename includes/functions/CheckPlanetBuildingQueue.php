@@ -27,9 +27,9 @@ function CheckPlanetBuildingQueue ( &$CurrentPlanet, &$CurrentUser ) {
 	$XPBuildings  = array(  1,  2,  3, 22, 23, 24);
 
 	$RetValue     = false;
-	if ($CurrentPlanet['b_building_id'] != 0) {
+	if (!empty($CurrentPlanet['b_building_id'])) {
 		$CurrentQueue  = $CurrentPlanet['b_building_id'];
-		if ($CurrentQueue != 0) {
+		if (!empty($CurrentQueue)) {
 			$QueueArray    = explode ( ";", $CurrentQueue );
 			$ActualCount   = count ( $QueueArray );
 		}

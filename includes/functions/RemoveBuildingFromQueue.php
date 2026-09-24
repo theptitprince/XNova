@@ -16,7 +16,7 @@ function RemoveBuildingFromQueue ( &$CurrentPlanet, $CurrentUser, $QueueID ) {
 
 	if ($QueueID > 1) {
 		$CurrentQueue  = $CurrentPlanet['b_building_id'];
-		if ($CurrentQueue != 0) {
+		if (!empty($CurrentQueue)) {
 			$QueueArray    = explode ( ";", $CurrentQueue );
 			$ActualCount   = count ( $QueueArray );
 			$ListIDArray   = explode ( ",", $QueueArray[$QueueID - 2] );

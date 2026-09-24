@@ -16,7 +16,7 @@
 function CancelBuildingFromQueue ( &$CurrentPlanet, &$CurrentUser ) {
 
 	$CurrentQueue  = $CurrentPlanet['b_building_id'];
-	if ($CurrentQueue != 0) {
+	if (!empty($CurrentQueue)) {
 		// Creation du tableau de la liste de construction
 		$QueueArray          = explode ( ";", $CurrentQueue );
 		// Comptage du nombre d'elements dans la liste

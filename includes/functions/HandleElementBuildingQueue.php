@@ -15,7 +15,7 @@
 function HandleElementBuildingQueue ( $CurrentUser, &$CurrentPlanet, $ProductionTime ) {
 	global $resource;
 	// Pendant qu'on y est, si on verifiait ce qui se passe dans la queue de construction du chantier ?
-	if ($CurrentPlanet['b_hangar_id'] != 0) {
+	if (!empty($CurrentPlanet['b_hangar_id'])) {
 		$Builded                    = array ();
 		$CurrentPlanet['b_hangar'] += $ProductionTime;
 
