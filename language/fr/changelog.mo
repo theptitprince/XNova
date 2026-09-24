@@ -4,11 +4,18 @@ $lang['Description'] = 'D&eacute;scription';
 $lang['changelog']   = array(
 
 
-'0.9 Renaissance' => 'Reprise de la branche originale (theptitprince)
+'0.9 Renaissance' => 'Passage &agrave; PHP 8 (theptitprince)
 - NEW : XNova 0.9 Renaissance, suite directe de XNova 0.8e
 - NEW : Nom de version affich&eacute; &agrave; c&ocirc;t&eacute; du num&eacute;ro (0.9 Renaissance)
 - NEW : Cr&eacute;dits de la reprise ajout&eacute;s (les cr&eacute;dits d\'origine sont conserv&eacute;s)
-',
+- MOD : Compatible PHP 8.4 et MariaDB / MySQL r&eacute;cents (mysqli, fonctions supprim&eacute;es remplac&eacute;es)
+- MOD : Seule la derni&egrave;re version est affich&eacute;e en vert dans le changelog
+- MOD : Liste d\'amis dans le cadre principal, Notes et Chat dans une fen&ecirc;tre s&eacute;par&eacute;e
+- FIX : Liens Marchand et Annonces qui s\'ouvraient hors du cadre, lien Annonces mort, lien Notes cass&eacute;
+- FIX : Bouton de d&eacute;connexion des options (mauvais nom de cookie)
+- FIX : Robot anti-multicompte (nom de table cod&eacute; en dur)
+- FIX : Nom des ressources pill&eacute;es absent du rapport de combat
+- FIX : Evolution du classement dans les statistiques',
 
 '0.8e' => '- ADD : Fonction SecureArray() pour les variables POST et GET (Bono)
 - ADD : Les administrateurs choisissent desormais le fond de la baniere... (Bono)
