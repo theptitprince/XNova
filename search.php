@@ -19,7 +19,7 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.'.$phpEx);
 
-$searchtext = mysql_escape_string($_POST['searchtext']);
+$searchtext = SqlEscape($_POST['searchtext']);
 $type = $_POST['type'];
 
 $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
@@ -27,7 +27,7 @@ $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 includeLang('search');
 $i = 0;
 //creamos la query
-$searchtext = mysql_escape_string($_POST["searchtext"]);
+$searchtext = SqlEscape($_POST["searchtext"]);
 switch($type){
 	case "playername":
 		$table = gettemplate('search_user_table');
@@ -61,7 +61,7 @@ switch($type){
 */
 if(isset($searchtext) && isset($type)){
 
-	while($r = mysql_fetch_array($search, MYSQL_BOTH)){
+	while($r = mysqli_fetch_array($search, MYSQL_BOTH)){
 
 		if($type=='playername'||$type=='planetname'){
 			$s=$r;
@@ -69,7 +69,7 @@ if(isset($searchtext) && isset($type)){
 			if ($type == "planetname")
 			{
 			$pquery = doquery("SELECT * FROM {{table}} WHERE id = {$s['id_owner']}","users",true);
-/*			$farray = mysql_fetch_array($pquery);*/
+/*			$farray = mysqli_fetch_array($pquery);*/
 			$s['planet_name'] = $s['name'];
 			$s['username'] = $pquery['username'];
 			$s['ally_name'] = ($pquery['ally_name']!='')?"<a href=\"alliance.php?mode=ainfo&tag={$pquery['ally_name']}\">{$pquery['ally_name']}</a>":'';

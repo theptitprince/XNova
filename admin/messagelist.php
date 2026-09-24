@@ -110,7 +110,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$StartRec           = 1 + (($ViewPage - 1) * 25);
 		$Messages           = doquery("SELECT * FROM {{table}} WHERE `message_type` = '". $Selected ."' ORDER BY `message_time` DESC LIMIT ". $StartRec .",25;", 'messages');
-		while ($row = mysql_fetch_assoc($Messages)) {
+		while ($row = mysqli_fetch_assoc($Messages)) {
 			$OwnerData = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '". $row['message_owner'] ."';", 'users',true);
 			$bloc['mlst_id']      = $row['message_id'];
 			$bloc['mlst_from']    = $row['message_from'];

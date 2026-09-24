@@ -243,14 +243,15 @@ $pass       = $_POST['passwort'];
 $prefix     = $_POST['prefix'];
 $db         = $_POST['db'];
 
-$connection = @mysql_connect($host, $user, $pass);
+mysqli_report(MYSQLI_REPORT_OFF);
+				$connection = @mysqli_connect($host, $user, $pass);
 
 if (!$connection) {
     header("Location: ?step=2&error=1");
     exit();
 }
 
-$dbselect   = @mysql_select_db($db);
+$dbselect   = @mysqli_select_db($connection, $db);
 
 if (!$dbselect) {
     header("Location: ?step=2&error=2");
@@ -281,8 +282,9 @@ if(!defined(\"INSIDE\")){ die(\"attemp hacking\");}
 fclose($dz);
 
 function doquery($query, $p) {
+    global $connection;
     $query = str_replace("{{prefix}}", $p, $query);
-    $return = mysql_query($query) or die("MySQL Fehler: <b>".mysql_error()."</b>");
+    $return = mysqli_query($connection, $query) or die("MySQL Fehler: <b>".mysqli_error($connection)."</b>");
 
     return $return;
 }

@@ -37,7 +37,7 @@ if (file_exists($xnova_root_path . "includes/raketenangriff.php")) {
 if (isset($resource) && !empty($resource[401])) {
 	$iraks = doquery("SELECT * FROM {{table}} WHERE zeit <= '" . time() . "'", 'iraks');
 
-	while ($selected_row = mysql_fetch_array($iraks)) {
+	while ($selected_row = mysqli_fetch_array($iraks)) {
 		if ($selected_row['zeit'] != '' && $selected_row['galaxy'] != '' && $selected_row['system'] != '' && $selected_row['planet'] != '' && is_numeric($selected_row['owner']) && is_numeric($selected_row['zielid']) && is_numeric($selected_row['anzahl']) && !empty($selected_row['anzahl'])) {
 			$planetrow = doquery("SELECT * FROM {{table}} WHERE
 								galaxy = '" . $selected_row['galaxy'] . "' AND
@@ -50,12 +50,12 @@ if (isset($resource) && !empty($resource[401])) {
 			$select_owner = doquery("SELECT military_tech FROM {{table}} WHERE
 								id = '" . $selected_row['owner'] . "'", 'users');
 
-			if (mysql_num_rows($planetrow) != 1 OR mysql_num_rows($select_ziel) != 1) {
+			if (mysqli_num_rows($planetrow) != 1 OR mysqli_num_rows($select_ziel) != 1) {
 				doquery("DELETE FROM {{table}} WHERE id = '" . $selected_row['id'] . "'", 'iraks');
 			} else {
-				$verteidiger = mysql_fetch_array($select_ziel);
-				$angreifer = mysql_fetch_array($select_owner);
-				$planet = mysql_fetch_array($planetrow);
+				$verteidiger = mysqli_fetch_array($select_ziel);
+				$angreifer = mysqli_fetch_array($select_owner);
+				$planet = mysqli_fetch_array($planetrow);
 
 				$ids = array(0 => 401,
 					1 => 402,
@@ -133,8 +133,8 @@ if (isset($resource) && !empty($resource[401])) {
 								system = '" . $selected_row['system_angreifer'] . "' AND
 								planet = '" . $selected_row['planet_angreifer'] . "'", 'planets');
 
-				if (mysql_num_rows($planet_) == 1) {
-					$array = mysql_fetch_array($planet_);
+				if (mysqli_num_rows($planet_) == 1) {
+					$array = mysqli_fetch_array($planet_);
 
 					$name = $array['name'];
 				}
@@ -144,8 +144,8 @@ if (isset($resource) && !empty($resource[401])) {
 								system = '" . $selected_row['system'] . "' AND
 								planet = '" . $selected_row['planet'] . "'", 'planets');
 
-				if (mysql_num_rows($planet_2) == 1) {
-					$array = mysql_fetch_array($planet_2);
+				if (mysqli_num_rows($planet_2) == 1) {
+					$array = mysqli_fetch_array($planet_2);
 
 					$name_deffer = $array['name'];
 				}

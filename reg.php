@@ -98,13 +98,13 @@ if ($_POST) {
         $errors++;
     }
     // Le meilleur moyen de voir si un nom d'utilisateur est pris c'est d'essayer de l'appeler !!
-    $ExistUser = doquery("SELECT `username` FROM {{table}} WHERE `username` = '" . mysql_escape_string($_POST['character']) . "' LIMIT 1;", 'users', true);
+    $ExistUser = doquery("SELECT `username` FROM {{table}} WHERE `username` = '" . SqlEscape($_POST['character']) . "' LIMIT 1;", 'users', true);
     if ($ExistUser) {
         $errorlist .= $lang['error_userexist'];
         $errors++;
     }
     // Si l'on verifiait que l'adresse email n'existe pas encore ???
-    $ExistMail = doquery("SELECT `email` FROM {{table}} WHERE `email` = '" . mysql_escape_string($_POST['email']) . "' LIMIT 1;", 'users', true);
+    $ExistMail = doquery("SELECT `email` FROM {{table}} WHERE `email` = '" . SqlEscape($_POST['email']) . "' LIMIT 1;", 'users', true);
     if ($ExistMail) {
         $errorlist .= $lang['error_emailexist'];
         $errors++;
@@ -126,17 +126,17 @@ if ($_POST) {
         $md5newpass = md5($newpass);
         // Creation de l'utilisateur
         $QryInsertUser = "INSERT INTO {{table}} SET ";
-        $QryInsertUser .= "`username` = '" . mysql_escape_string(strip_tags($UserName)) . "', ";
-        $QryInsertUser .= "`email` = '" . mysql_escape_string($UserEmail) . "', ";
-        $QryInsertUser .= "`email_2` = '" . mysql_escape_string($UserEmail) . "', ";
-        $QryInsertUser .= "`sex` = '" . mysql_escape_string($_POST['sex']) . "', ";
+        $QryInsertUser .= "`username` = '" . SqlEscape(strip_tags($UserName)) . "', ";
+        $QryInsertUser .= "`email` = '" . SqlEscape($UserEmail) . "', ";
+        $QryInsertUser .= "`email_2` = '" . SqlEscape($UserEmail) . "', ";
+        $QryInsertUser .= "`sex` = '" . SqlEscape($_POST['sex']) . "', ";
 		$QryInsertUser .= "`ip_at_reg` = '" . $_SERVER["REMOTE_ADDR"] . "', ";
         $QryInsertUser .= "`id_planet` = '0', ";
         $QryInsertUser .= "`register_time` = '" . time() . "', ";
         $QryInsertUser .= "`password`='" . $md5newpass . "';";
         doquery($QryInsertUser, 'users');
         // On cherche le numero d'enregistrement de l'utilisateur fraichement créé
-        $NewUser = doquery("SELECT `id` FROM {{table}} WHERE `username` = '" . mysql_escape_string($_POST['character']) . "' LIMIT 1;", 'users', true);
+        $NewUser = doquery("SELECT `id` FROM {{table}} WHERE `username` = '" . SqlEscape($_POST['character']) . "' LIMIT 1;", 'users', true);
         $iduser = $NewUser['id'];
         // Recherche d'une place libre !
         $LastSettedGalaxyPos = $game_config['LastSettedGalaxyPos'];

@@ -31,7 +31,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$UsedPlanet = false;
 	$select       = doquery("SELECT * FROM {{table}}", "planets");
 
-	while ($row = mysql_fetch_array($select)) {
+	while ($row = mysqli_fetch_array($select)) {
 		if ($galaxy     == $row['galaxy'] &&
 			$system     == $row['system'] &&
 			$planet     == $row['planet'] &&

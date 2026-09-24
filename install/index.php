@@ -59,13 +59,14 @@ $nextpage = $Page + 1;
 				$prefix = $_POST['prefix'];
 				$db     = $_POST['db'];
 
-				$connection = @mysql_connect($host, $user, $pass);
+				mysqli_report(MYSQLI_REPORT_OFF);
+				$connection = @mysqli_connect($host, $user, $pass);
 					if (!$connection) {
 					header("Location: ?mode=ins&page=1&error=1");
 					exit();
 					}
 
-				$dbselect = @mysql_select_db($db);
+				$dbselect = @mysqli_select_db($connection, $db);
 					if (!$dbselect) {
 					header("Location: ?mode=ins&page=1&error=1");
 					exit();
@@ -91,10 +92,10 @@ $nextpage = $Page + 1;
 				fclose($dz);
 
 				function doquery ($InQry, $TblName) {
-					global $prefix;
+					global $prefix, $connection;
 					$Table  = $prefix.$TblName;
 					$DoQry  = str_replace("{{table}}", $Table, $InQry);
-					$return = mysql_query($DoQry) or die("MySQL Error: <b>".mysql_error()."</b>");
+					$return = mysqli_query($connection, $DoQry) or die("MySQL Error: <b>".mysqli_error($connection)."</b>");
 				return $return;
 				}
 
@@ -165,23 +166,24 @@ $nextpage = $Page + 1;
 				$db_prefix = $dbsettings['prefix'];
 				$db_db     = $dbsettings['name'];
 
-				$connection = @mysql_connect($db_host, $db_user, $db_pass);
+				mysqli_report(MYSQLI_REPORT_OFF);
+				$connection = @mysqli_connect($db_host, $db_user, $db_pass);
 					if (!$connection) {
 					header("Location: ?mode=ins&page=1&error=1");
 					exit();
 					}
 
-				$dbselect = @mysql_select_db($db_db);
+				$dbselect = @mysqli_select_db($connection, $db_db);
 					if (!$dbselect) {
 					header("Location: ?mode=ins&page=1&error=1");
 					exit();
 					}
 
 				function doquery ($InQry, $TblName) {
-					global $db_prefix;
+					global $db_prefix, $connection;
 					$Table  = $db_prefix.$TblName;
 					$DoQry  = str_replace("{{table}}", $Table, $InQry);
-					$return = mysql_query($DoQry) or die("MySQL Error: <b>".mysql_error()."</b>");
+					$return = mysqli_query($connection, $DoQry) or die("MySQL Error: <b>".mysqli_error($connection)."</b>");
 				return $return;
 				}
 
@@ -267,13 +269,14 @@ $nextpage = $Page + 1;
 				$prefix = $_POST['prefix'];
 				$db     = $_POST['db'];
 
-				$connection = @mysql_connect($host, $user, $pass);
+				mysqli_report(MYSQLI_REPORT_OFF);
+				$connection = @mysqli_connect($host, $user, $pass);
 					if (!$connection) {
 					header("Location: ?mode=goto&page=2&error=1");
 					exit();
 					}
 
-				$dbselect = @mysql_select_db($db);
+				$dbselect = @mysqli_select_db($connection, $db);
 					if (!$dbselect) {
 					header("Location: ?mode=goto&page=2&error=1");
 					exit();
@@ -299,8 +302,9 @@ $nextpage = $Page + 1;
 				fclose($dz);
 
 				function doquery($query, $p) {
+					global $connection;
 					$query = str_replace("{{prefix}}", $p, $query);
-					$return = mysql_query($query) or die("MySQL Error: <b>".mysql_error()."</b>");
+					$return = mysqli_query($connection, $query) or die("MySQL Error: <b>".mysqli_error($connection)."</b>");
 				return $return;
 				}
 				foreach ($QryMigrate as $query) {

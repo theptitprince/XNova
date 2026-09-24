@@ -68,8 +68,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 			$FleetToTarget  = doquery( $QryLookFleets, 'fleets' );
 
-			if (mysql_num_rows($FleetToTarget) <> 0 ) {
-				while ($FleetRow = mysql_fetch_array($FleetToTarget)) {
+			if (mysqli_num_rows($FleetToTarget) <> 0 ) {
+				while ($FleetRow = mysqli_fetch_array($FleetToTarget)) {
 					$Record++;
 
 					// Discrimination de l'heure

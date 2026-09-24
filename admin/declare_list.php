@@ -41,7 +41,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse['adm_ul_table'] = "";
 		$i                     = 0;
 		$Color                 = "lime";
-		while ($u = mysql_fetch_assoc ($query) ) {
+		while ($u = mysqli_fetch_assoc($query) ) {
 			if ($PrevIP != "") {
 				if ($PrevIP == $u['declarator']) {
 					$Color = "red";
