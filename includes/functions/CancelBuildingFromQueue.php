@@ -1,10 +1,16 @@
 <?php
 
 /**
- * CancelBuildingFromQueue
+ * CancelBuildingFromQueue.php
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original :
+ * CancelBuildingFromQueue
  * @version 1
  * @copyright 2008 by Chlorel for XNova
+ * @license GNU GPL v2
  */
 
 function CancelBuildingFromQueue ( &$CurrentPlanet, &$CurrentUser ) {

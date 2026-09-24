@@ -1,6 +1,16 @@
 <?php
 
 /**
+ * rak.php
+ *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original : German UGamela (voir mentions d'origine ci-dessous)
+ * @license GNU GPL v2
+ */
+
+/**
  * german UGamela
  *       OpenSource aslong as you don't remove this Copyright
  *       http://ugamela-forum.pheelgood.net

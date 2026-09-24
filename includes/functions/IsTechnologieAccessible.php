@@ -3,8 +3,13 @@
 /**
  * IsTechnologieAccessible.php
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original :
  * @version 1.0
  * @copyright 2008 By Chlorel for XNova
+ * @license GNU GPL v2
  */
 
 // Verification si l'on a le droit ou non a un element

@@ -1,10 +1,16 @@
 <?php
 
 /**
- * GetBuildingTime
+ * GetBuildingTime.php
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original :
+ * GetBuildingTime
  * @version 1.0
  * @copyright 2008 By Chlorel for XNova
+ * @license GNU GPL v2
  */
 
 // Calcul du temps de construction d'un Element (Batiment / Recherche / Defense / Vaisseau )

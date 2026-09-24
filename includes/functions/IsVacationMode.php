@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * includes/functions/IsVacationMode.php
+ *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original : Aleksandar Spasojevic / KGsystem, prethOgame (voir mentions d'origine ci-dessous)
+ * @license GNU GPL v2
+ */
     /*
     #############################################################################
     #  Filename: IsVacationMode.php

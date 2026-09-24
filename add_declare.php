@@ -3,6 +3,16 @@
 /**
  * add_declare.php
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original : XNova Team, d'après UGamela
+ * @license GNU GPL v2
+ */
+
+/**
+ * add_declare.php
+ *
  * @version 1.1
  Base SQL requise :
  
