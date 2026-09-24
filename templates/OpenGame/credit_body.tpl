@@ -13,6 +13,11 @@
 	<th width="278">Raito<br>Chlorel<br>e-Zobar<br>Flousedid<br>
 	<th width="279">{cred_creat} / {cred_prog}<br>{cred_master} {cred_prog}<br>{cred_design} / {cred_prog}<br>{cred_web}
 </tr><tr>
+	<td colspan="2" class="c"><b>XNova 0.9 Renaissance</b></td>
+</tr><tr>
+	<th width="278">theptitprince</th>
+	<th width="279">Reprise du projet (suite de XNova 0.8e)</th>
+</tr><tr>
 	<td colspan="2" class="c"><b>{cred_thx}</b></td>
 </tr><tr>
 	<th width="278">UGamela<br >Britania </th>
