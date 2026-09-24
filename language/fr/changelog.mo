@@ -4,6 +4,15 @@ $lang['Description'] = 'D&eacute;scription';
 $lang['changelog']   = array(
 
 
+'0.9f Renaissance' => 'Formulaires et contact (theptitprince)
+- FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)
+- FIX : Protection XSS : noms de plan&egrave;te et d\'alliance, messages, textes d\'alliance, notes, recherches... ne peuvent plus contenir de code
+- FIX : Site et image d\'alliance, avatar, skin : adresses http(s) uniquement ; liens du BBCode s&eacute;curis&eacute;s
+- NEW : Formulaire de contact : plus aucune adresse e-mail affich&eacute;e, messages lus dans l\'administration (lu / non lu, suppression)
+- NEW : Anti-spam du formulaire de contact (champ pi&egrave;ge, d&eacute;lai minimal, 3 messages par heure)
+- NEW : Mise &agrave; jour possible depuis la XNova 0.8e d\'origine ; textes des anciennes bases nettoy&eacute;s
+- FIX : Chat : les caract&egrave;res + et &amp; cassaient l\'envoi ; lien automatique vers l\'ancien site xnova.fr retir&eacute;',
+
 '0.9e Renaissance' => 'S&eacute;curit&eacute; (theptitprince)
 - FIX : Injections SQL dans les pages du jeu et de l\'administration (mot de passe oubli&eacute;, cookie, alliance, messages...)
 - FIX : Suppression des extract($_GET) (dont la banni&egrave;re publique, qui permettait d\'&eacute;craser la configuration)
