@@ -3,9 +3,14 @@
 /**
  * index.php (Installeur)
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original :
  * @version 1
  * @copyright 2008 By e-Zobar for XNova
  * Based on first Chlorel's code
+ * @license GNU GPL v2
  */
 
 define('INSIDE'  , true);

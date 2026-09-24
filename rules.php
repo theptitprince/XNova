@@ -2,6 +2,16 @@
 
 /**
  * rules.php
+ *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original : XNova Team, d'après UGamela
+ * @license GNU GPL v2
+ */
+
+/**
+ * rules.php
  * @version 1.0
  * @copyright 2008 by XxmangaxX for XNova
 **/

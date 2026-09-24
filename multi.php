@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * multi.php
+ *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original : XNova Team, d'apres UGamela
+ * @license GNU GPL v2
+ */
+
 define('INSIDE' , true);
 define('INSTALL' , false);
 

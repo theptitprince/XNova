@@ -1,10 +1,16 @@
 <?php
 
 /**
- * CheckPlanetBuildingQueue
+ * CheckPlanetBuildingQueue.php
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original :
+ * CheckPlanetBuildingQueue
  * @version 1
  * @copyright 2008 by Chlorel for XNova
+ * @license GNU GPL v2
  */
 
 // Gestion de la queue de construction des batiments

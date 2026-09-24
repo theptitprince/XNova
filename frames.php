@@ -1,10 +1,16 @@
 <?php
 
 /**
- * frame.php
+ * frames.php
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original :
+ * frame.php
  * @version 1.0
  * @copyright 2008 by e-Zobar for XNova
+ * @license GNU GPL v2
  */
 
 define('INSIDE'  , true);

@@ -1,10 +1,16 @@
 <?php
 
 /**
- * SpyTarget
+ * SpyTarget.php
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original :
+ * SpyTarget
  * @version 1
  * @copyright 2008
+ * @license GNU GPL v2
  */
 
 // ----------------------------------------------------------------------------------------------------------------

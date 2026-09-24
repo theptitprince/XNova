@@ -3,8 +3,13 @@
 /**
  * migrateinfo.php
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original :
  * @version 1.0
  * @copyright 2008 By e-Zobar for XNova
+ * @license GNU GPL v2
  */
 
 $QryMigrate = array(

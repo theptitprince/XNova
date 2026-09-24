@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * includes/aks.php
+ *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original : MoF (voir mentions d'origine ci-dessous)
+ * @license GNU GPL v2
+ */
+
 set_time_limit(360);
 
 /*

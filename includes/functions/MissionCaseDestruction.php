@@ -2,10 +2,16 @@
 
 /**
 * MissionCaseDestruction.php
+*
+* XNova 0.9 Renaissance
+* Reprise et modernisation : theptitprince (2026)
+*
+* Travail original :
 * Commencé Par Tom
 * Terminé par juju67 et Moa666
 * @version 1
 * @copyright 2008
+* @license GNU GPL v2
 */
 
 function MissionCaseDestruction($FleetRow) {

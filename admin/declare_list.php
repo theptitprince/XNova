@@ -1,10 +1,16 @@
 <?php
 
 /**
- * userlist.php
+ * declare_list.php
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original :
+ * userlist.php
  * @version 1.0
  * @copyright 2008 by Chlorel for XNova
+ * @license GNU GPL v2
  */
 
 define('INSIDE'  , true);

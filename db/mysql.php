@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * db/mysql.php
+ *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original : XNova Team, d'après UGamela
+ * @license GNU GPL v2
+ */
+
 function doquery($query, $table, $fetch = false){
   global $link, $debug, $xnova_root_path;
 //    echo $query."<br />";

@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * includes/functions/BBcodeFunction.php
+ *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original : XNova Team, d'après UGamela
+ * @license GNU GPL v2
+ */
+
 function bbcode($string) {
     $pattern = array(
         '/\\n/',

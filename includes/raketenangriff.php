@@ -1,4 +1,14 @@
 <?php
+
+/**
+ * includes/raketenangriff.php
+ *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original : -= MoF =- pour le Deutsches UGamela Forum (voir mentions d'origine ci-dessous)
+ * @license GNU GPL v2
+ */
 // Copyright (c) 2007 by -= MoF =- for Deutsches UGamela Forum
 // Date N/A
 // Open Source

@@ -3,8 +3,13 @@
 /**
  * ResetThisFuckingCheater.php
  *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original :
  * @version $Id$
  * @copyright 2008
+ * @license GNU GPL v2
  */
 
 function ResetThisFuckingCheater ( $UserID ) {

@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * install/ug2xn.php
+ *
+ * XNova 0.9 Renaissance
+ * Reprise et modernisation : theptitprince (2026)
+ *
+ * Travail original : e-Zobar for XNova (voir mentions d'origine ci-dessous)
+ * @license GNU GPL v2
+ */
+
 // UGAMELA 2 XNOVA - DATABASE MODIFICATOR
 // Version: 0.5
 // Created by e-Zobar
