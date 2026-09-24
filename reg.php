@@ -73,7 +73,7 @@ if ($_POST) {
         $errors++;
     }
 
-    if (preg_match("/[^A-z0-9_\-]/", $_POST['hplanet']) == 1) {
+    if (preg_match("/[^A-Za-z0-9_\-]/", $_POST['hplanet']) == 1) {
         $errorlist .= $lang['error_planetnum'];
         $errors++;
     }
@@ -88,7 +88,7 @@ if ($_POST) {
         $errors++;
     }
 
-    if (preg_match("/[^A-z0-9_\-]/", $_POST['character']) == 1) {
+    if (preg_match("/[^A-Za-z0-9_\-]/", $_POST['character']) == 1) {
         $errorlist .= $lang['error_charalpha'];
         $errors++;
     }

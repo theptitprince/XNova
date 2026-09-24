@@ -20,14 +20,14 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 // Recup des variables
-$Attaquant = $_GET['current'];
-$NbreMip   = $_POST['SendMI'];
+$Attaquant = intval($_GET['current']);
+$NbreMip   = max(0, intval($_POST['SendMI']));
 
-$Galaxy    = $_GET['galaxy'];
-$System    = $_GET['system'];
-$Planet    = $_GET['planet'];
+$Galaxy    = intval($_GET['galaxy']);
+$System    = intval($_GET['system']);
+$Planet    = intval($_GET['planet']);
 
-$PlaneteAttaquant = doquery("SELECT * FROM {{table}} WHERE `id`='" . $Attaquant . "'", "planets", true);
+$PlaneteAttaquant = doquery("SELECT * FROM {{table}} WHERE `id`='" . $Attaquant . "' AND `id_owner`='" . intval($user['id']) . "'", "planets", true);
 $PlaneteAdverse   = doquery("SELECT * FROM {{table}} WHERE galaxy = " . $Galaxy . " AND system = " . $System . " AND planet = " . $Planet . "", "planets", true);
 
 $MipAttaquant = $PlaneteAttaquant['interplanetary_misil'];

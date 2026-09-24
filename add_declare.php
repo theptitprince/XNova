@@ -47,10 +47,10 @@ include( $ugamela_root_path . 'common.' . $phpEx );
 		if ($mode == 'addit') {
 			$declarator              = $user['id'];
 			$declarator_name  = addslashes(htmlspecialchars($user['username']));
-			$decl1        	   		  = addslashes(htmlspecialchars($_POST['dec1']));
-			$decl2       		       = addslashes(htmlspecialchars($_POST['dec2']));
-			$decl3        		      = addslashes(htmlspecialchars($_POST['dec3']));
-			$reason1        	  	 = addslashes(htmlspecialchars($_POST['reason']));
+			$decl1        	   		  = SqlEscape(htmlspecialchars($_POST['dec1']));
+			$decl2       		       = SqlEscape(htmlspecialchars($_POST['dec2']));
+			$decl3        		      = SqlEscape(htmlspecialchars($_POST['dec3']));
+			$reason1        	  	 = SqlEscape(htmlspecialchars($_POST['reason']));
 
 			$QryDeclare  = "INSERT INTO {{table}} SET ";
 			$QryDeclare .= "`declarator` = '". $declarator ."', ";

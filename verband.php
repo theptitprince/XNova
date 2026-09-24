@@ -21,7 +21,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	includeLang('fleet');
 
-	$fleetid = $_POST['fleetid'];
+	$fleetid = intval($_POST['fleetid']);
 
 	if (!is_numeric($fleetid) || empty($fleetid)) {
 		header("Location: overview.php");

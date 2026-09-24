@@ -21,7 +21,7 @@ include($xnova_root_path . 'common.'.$phpEx);
 
 
 $mode = $_GET['mode'];
-$a = $_GET['a'];
+$a = intval($_GET['a']);
 /*
   Este script es original xD
   La funcion de este script es administrar una variable del $user
@@ -33,9 +33,10 @@ if(isset($_GET['mode'])){
 		//Pegamos el texto :P
 		if($_POST["n"] == ""){$_POST["n"] = "Unbenannt";}
 
-		$r = strip_tags($_POST['n']).",".intval($_POST['g']).",".intval($_POST['s']).",".intval($_POST['p']).",".intval($_POST['t'])."\r\n";
+		$r = str_replace(array(',', "", "
+"), ' ', strip_tags($_POST['n'])).",".intval($_POST['g']).",".intval($_POST['s']).",".intval($_POST['p']).",".intval($_POST['t'])."\r\n";
 		$user['fleet_shortcut'] .= $r;
-		doquery("UPDATE {{table}} SET fleet_shortcut='{$user['fleet_shortcut']}' WHERE id={$user['id']}","users");
+		doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'","users");
 		message("Le raccourcis a &eacute;t&eacute; enregistr&eacute; !","Enregistrment","fleetshortcut.php");
 	}
 	$page = "<form method=POST><table border=0 cellpadding=0 cellspacing=1 width=519>
@@ -64,19 +65,20 @@ elseif(isset($_GET['a'])){
 		if($_POST["delete"]){
 			unset($scarray[$a]);
 			$user['fleet_shortcut'] =  implode("\r\n",$scarray);
-			doquery("UPDATE {{table}} SET fleet_shortcut='{$user['fleet_shortcut']}' WHERE id={$user['id']}","users");
+			doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'","users");
 			message("Shortcut wurde gel&ouml;scht","Gel&ouml;scht","fleetshortcut.php");
 		}
 		else{
 			$r = explode(",",$scarray[$a]);
-			$r[0] = strip_tags($_POST['n']);
+			$r[0] = str_replace(array(',', "", "
+"), ' ', strip_tags($_POST['n']));
 			$r[1] = intval($_POST['g']);
 			$r[2] = intval($_POST['s']);
 			$r[3] = intval($_POST['p']);
 			$r[4] = intval($_POST['t']);
 			$scarray[$a] = implode(",",$r);
 			$user['fleet_shortcut'] =  implode("\r\n",$scarray);
-			doquery("UPDATE {{table}} SET fleet_shortcut='{$user['fleet_shortcut']}' WHERE id={$user['id']}","users");
+			doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'","users");
 			message("Le raccourcis a &eacute;t&eacute; &eacute;dit&eacute; !.","Editer","fleetshortcut.php");
 		}
 	}

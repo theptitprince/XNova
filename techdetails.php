@@ -20,7 +20,7 @@ include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
 
-$Id                  = $_GET['techid'];
+$Id                  = intval($_GET['techid']);
 $PageTPL             = gettemplate('techtree_details');
 $RowsTPL             = gettemplate('techtree_details_rows');
 

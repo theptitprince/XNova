@@ -19,6 +19,9 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
+// Coordonnees recues converties en entiers (securite + PHP 8)
+SanitizeNumericInput ( array('galaxy', 'system', 'planet', 'planettype', 'current') );
+
 	includeLang('galaxy');
 
 	$CurrentPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '". $user['current_planet'] ."';", 'planets', true);

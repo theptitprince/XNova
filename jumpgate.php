@@ -31,7 +31,7 @@ function DoFleetJump ( $CurrentUser, $CurrentPlanet ) {
 		// Dit monsieur, j'ai le droit de sauter ???
 		if ( $NextJumpTime == 0 ) {
 			// Dit monsieur, ou je veux aller ca existe ???
-			$TargetPlanet = $_POST['jmpto'];
+			$TargetPlanet = intval($_POST['jmpto']);
 			$TargetGate   = doquery ( "SELECT `id`, `sprungtor`, `last_jump_time` FROM {{table}} WHERE `id` = '". $TargetPlanet ."';", 'planets', true);
 			// Dit monsieur, ou je veux aller y a une porte de saut ???
 			if ($TargetGate['sprungtor'] > 0) {
@@ -45,6 +45,8 @@ function DoFleetJump ( $CurrentUser, $CurrentPlanet ) {
 					$SubQueryDes = "";
 					for ( $Ship = 200; $Ship < 300; $Ship++ ) {
 						$ShipLabel = "c". $Ship;
+						// Quantites entieres et positives uniquement (pas de vaisseaux crees par une valeur negative)
+						$_POST[ $ShipLabel ] = isset($_POST[ $ShipLabel ]) ? max(0, intval($_POST[ $ShipLabel ])) : 0;
 						if ( $_POST[ $ShipLabel ] > $CurrentPlanet[ $resource[ $Ship ] ] ) {
 							$ShipArray[ $Ship ] = $CurrentPlanet[ $resource[ $Ship ] ];
 						} else {

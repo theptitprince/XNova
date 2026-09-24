@@ -49,7 +49,7 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 			// Dans fmenge, on devrait trouver un tableau des elements constructibles etdu nombre d'elements souhaités
 
 			$Element = intval($Element);
-			$Count   = intval($Count);
+			$Count   = max(0, intval($Count)); // pas de quantite negative (sinon remboursement de ressources)
 			if ($Count > MAX_FLEET_OR_DEFS_PER_ROW) {
 				$Count = MAX_FLEET_OR_DEFS_PER_ROW;
 			}

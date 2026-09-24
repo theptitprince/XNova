@@ -21,16 +21,16 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 $users   = doquery("SELECT * FROM {{table}} WHERE id='".$user['id']."';", 'users');
 $annonce = doquery("SELECT * FROM {{table}} ", 'annonce');
-$action  = $_GET['action'];
+$action  = intval($_GET['action']);
 
 if ($action == 5) {
-	$metalvendre = $_POST['metalvendre'];
-	$cristalvendre = $_POST['cristalvendre'];
-	$deutvendre = $_POST['deutvendre'];
+	$metalvendre = max(0, intval($_POST['metalvendre']));
+	$cristalvendre = max(0, intval($_POST['cristalvendre']));
+	$deutvendre = max(0, intval($_POST['deutvendre']));
 
-	$metalsouhait = $_POST['metalsouhait'];
-	$cristalsouhait = $_POST['cristalsouhait'];
-	$deutsouhait = $_POST['deutsouhait'];
+	$metalsouhait = max(0, intval($_POST['metalsouhait']));
+	$cristalsouhait = max(0, intval($_POST['cristalsouhait']));
+	$deutsouhait = max(0, intval($_POST['deutsouhait']));
 
 	while ($v_annonce = mysqli_fetch_array($users)) {
 		$user = $v_annonce['username'];
@@ -39,7 +39,7 @@ if ($action == 5) {
 	}
 
 	doquery("INSERT INTO {{table}} SET
-user='{$user}',
+user='". SqlEscape($user) ."',
 galaxie='{$galaxie}',
 systeme='{$systeme}',
 metala='{$metalvendre}',
