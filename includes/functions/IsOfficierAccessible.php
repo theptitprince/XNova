@@ -9,14 +9,14 @@
  * Travail original :
  * @version 1.0
  * @copyright 2008 By Chlorel for XNova
- * @license GNU AGPL v3 ou ultÈrieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ult√©rieure (voir NOTICE)
  */
 
 // Verification si l'on a le droit ou non a un officier
 // Retour:
 //  0 => pas les Officiers necessaires
-//  1 => Tout va tres bien on peut le faire celui l‡
-// -1 => On pouvait le faire, mais on est dÈja au level max
+//  1 => Tout va tres bien on peut le faire celui l√†
+// -1 => On pouvait le faire, mais on est d√©ja au level max
 function IsOfficierAccessible ($CurrentUser, $Officier) {
 	global $requeriments, $resource, $pricelist;
 

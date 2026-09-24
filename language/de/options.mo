@@ -28,7 +28,7 @@ $lang['showskin'] 							= 'Skin anzeigen';
 $lang['untoggleip'] 							= 'IP-Check deaktivieren';
 $lang['untoggleip_tip'] 						= 'IP-Check bedeutet, dass automatisch ein Sicherheitslogout erfolgt, wenn die IP gewechselt wird oder zwei Leute gleichzeitig unter verschiedenen IPs in einem Account eingeloggt sind. 
 Den IP-Check zu deaktivieren kann ein Sicherheitsrisiko darstellen!';
-//Opciones de visión de Galaxia
+//Opciones de visiÃ³n de Galaxia
 $lang['galaxyvision_options'] 					= 'Galaxieansicht Einstellungen';
 $lang['spy_cant'] 							= 'Spionagesonden Anzahl';
 $lang['spy_cant_tip'] 							= 'Anzahl der Spionagesonden, die bei jedem Scan aus dem Galaxiemen&uuml; direkt verschickt wird.';

@@ -8,8 +8,8 @@
  *
  * Travail original :
  * @version 1.0
- * @copyright 2008 by XNova Team (auteur non identifié) for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @copyright 2008 by XNova Team (auteur non identifiÃ©) for XNova
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);
@@ -37,7 +37,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$daten = mysqli_fetch_array($query);
 
 	if ($daten['fleet_start_time'] <= time() || $daten['fleet_end_time'] < time() || $daten['fleet_mess'] == 1) {
-		message('Votre flotte est déjà sur le chemin du retour!', 'Erreur');
+		message('Votre flotte est dÃ©jÃ  sur le chemin du retour!', 'Erreur');
 	}
 
 	if (!isset($_POST['send'])) {
@@ -150,7 +150,7 @@ include($xnova_root_path . 'common.' . $phpEx);
         <th>Arriv&eacute;e (cible)</th>
         <th>Objectif</th>
         <th>Arriv&eacute;e (retour)</th>
-        <th>Retour à</th>
+        <th>Retour Ã </th>
         <th>Ordre</th>
       </tr>';
 	/*
@@ -235,7 +235,7 @@ include($xnova_root_path . 'common.' . $phpEx);
     <th>
      <table width="100%" border="0" cellpadding="0" cellspacing="1">
       <tr height="20">
-       <td class="c">Invités participants</td>
+       <td class="c">InvitÃ©s participants</td>
        <td class="c">Inviter des participants</td>
       </tr>
       <tr>
@@ -265,7 +265,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		<form action="floten1.php" method="post">
 		<table width="519" border="0" cellpadding="0" cellspacing="1">
 		  <tr height="20">
-			<td colspan="4" class="c">Nouveau marché: Choix de la flotte</td>
+			<td colspan="4" class="c">Nouveau marchÃ©: Choix de la flotte</td>
 		  </tr>
 		  <tr height="20">
 			<th>Nom du vaisseau</th>

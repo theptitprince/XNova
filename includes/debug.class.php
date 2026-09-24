@@ -67,9 +67,9 @@ class debug
 				
 
 			if (!function_exists('message'))
-				echo "Erreur, merci de contacter l'admin. Erreur n°: <b>".$q['rows']."</b>";
+				echo "Erreur, merci de contacter l'admin. Erreur nÂ°: <b>".$q['rows']."</b>";
 			else
-				message("Erreur, merci de contacter l'admin. Erreur n°: <b>".$q['rows']."</b>", "Erreur");
+				message("Erreur, merci de contacter l'admin. Erreur nÂ°: <b>".$q['rows']."</b>", "Erreur");
 		//}
 		
 		die();

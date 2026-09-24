@@ -116,7 +116,7 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 | **0.9d** | Compatibilité PHP 8.4 / MariaDB, en-têtes et crédits, corrections de bugs d'origine | ✅ Terminée |
 | **0.9e** | Sécurité critique (injections SQL, mots de passe `password_hash`, cookies, privilèges), bug de production d'énergie, installeur « Mise à jour » | ✅ Terminée |
 | **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration | ⏳ Prochaine |
-| **0.9g** | Nettoyage : UTF-8, conventions de nommage, retouches visuelles | 🔜 |
+| **0.9g** | Nettoyage : conventions de nommage, retouches visuelles, traductions | 🔜 |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 
 Au-delà de la 1.0, on pourra envisager l'abandon des *frames* au profit d'une interface moderne.

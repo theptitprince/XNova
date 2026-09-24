@@ -1,5 +1,5 @@
 <?php
-//Tweaks vue générale
+//Tweaks vue gÃ©nÃ©rale
 $lang['usr_email']               = "Email";
 $lang['xp_raid']               = "&Eacute;xp&eacute;rience Raids";
 $lang['xp_min']               = "&Eacute;xp&eacute;rience Minage";

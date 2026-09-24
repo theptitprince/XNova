@@ -9,27 +9,27 @@
  * Travail original :
  * @version 1.0
  * @copyright 2008 By Chlorel for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 /*
 
-Attaque Groupée
-24/01 8:22:15 	Une de tes flottes venant de la planète Guernica [9:486:5] atteint la planète RIQUET [9:480:4]. Elle avait pour mission: Attaquer
-Une de tes flottes venant de la planète Guernica [9:486:5] atteint la planète RIQUET [9:480:4]. Elle avait pour mission: Attaque groupée
+Attaque GroupÃ©e
+24/01 8:22:15 	Une de tes flottes venant de la planÃ¨te Guernica [9:486:5] atteint la planÃ¨te RIQUET [9:480:4]. Elle avait pour mission: Attaquer
+Une de tes flottes venant de la planÃ¨te Guernica [9:486:5] atteint la planÃ¨te RIQUET [9:480:4]. Elle avait pour mission: Attaque groupÃ©e
 
-24/01 9:43:19 	Une de tes flottes rentre de la planète RIQUET [9:480:4] à la planète Guernica [9:486:5]. Elle avait pour mission: Attaque groupée
-24/01 17:54:29 	Une de tes flottes rentre de la planète RIQUET [9:480:4] à la planète Guernica [9:486:5]. Elle avait pour mission: Attaquer
+24/01 9:43:19 	Une de tes flottes rentre de la planÃ¨te RIQUET [9:480:4] Ã  la planÃ¨te Guernica [9:486:5]. Elle avait pour mission: Attaque groupÃ©e
+24/01 17:54:29 	Une de tes flottes rentre de la planÃ¨te RIQUET [9:480:4] Ã  la planÃ¨te Guernica [9:486:5]. Elle avait pour mission: Attaquer
 
-retour de l'attaque (degroupé)
-22:53:56 	Une de tes flottes rentre de la planète RIQUET [9:480:4] à la planète Guernica [9:486:5]. Elle avait pour mission: Attaque groupée
-22:55:27 	Une de tes flottes rentre de la planète RIQUET [9:480:4] à la planète Guernica [9:486:5]. Elle avait pour mission: Attaquer
+retour de l'attaque (degroupÃ©)
+22:53:56 	Une de tes flottes rentre de la planÃ¨te RIQUET [9:480:4] Ã  la planÃ¨te Guernica [9:486:5]. Elle avait pour mission: Attaque groupÃ©e
+22:55:27 	Une de tes flottes rentre de la planÃ¨te RIQUET [9:480:4] Ã  la planÃ¨te Guernica [9:486:5]. Elle avait pour mission: Attaquer
 
 // Missiles
 aucun popup
 uniquement le decompteur de temps de vol
 0:01:01
-2:37:27 	Attaque de missiles (10) de Guernica [9:486:5] à Prison Break [9:487:4] cible primaire Lanceur de plasma.
+2:37:27 	Attaque de missiles (10) de Guernica [9:486:5] Ã  Prison Break [9:487:4] cible primaire Lanceur de plasma.
 
 */
 

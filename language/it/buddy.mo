@@ -2,7 +2,7 @@
 
 $lang['Request_sent'] = 'Richiesta inviata.';
 $lang['Buddy_request'] = 'Richiesta di amicizia';
-$lang['A_request_exists_already_for_this_user'] = 'Una richiesta di amicizia Ë stata gi‡ inviata.';
+$lang['A_request_exists_already_for_this_user'] = 'Una richiesta di amicizia √® stata gi√† inviata.';
 $lang['You_cannot_ask_yourself_for_a_request'] = 'Non potete inviare una richiesta a voi stessi...';
 $lang['Buddy_list'] = 'Lista di amici';
 $lang['There_is_no_request'] = 'Nessuna richiesta';

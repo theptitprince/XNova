@@ -8,8 +8,8 @@
  *
  * Travail original :
  * @version 1.0
- * @copyright 2008 by XNova Team (auteur non identifié) for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @copyright 2008 by XNova Team (auteur non identifiÃ©) for XNova
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);
@@ -25,6 +25,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		if ($_GET['cmd'] == 'sort') {
 			$TypeSort = preg_replace('/[^a-z_]/', '', $_GET['type']); // nom de colonne uniquement
+			if ($TypeSort == '') { $TypeSort = 'id'; }
 		} else {
 			$TypeSort = "id";
 		}
@@ -67,7 +68,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Bloc['adm_ov_data_pict']    = "m.gif";
 			$PrevIP                      = $TheUser['user_lastip'];
 			
-			//Tweaks vue générale 
+			//Tweaks vue gÃ©nÃ©rale 
 						$Bloc['usr_email']    = $TheUser['email'];
 									$Bloc['usr_xp_raid']    = $TheUser['xpraid'];
 									$Bloc['usr_xp_min']    = $TheUser['xpminier'];

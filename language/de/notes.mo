@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
 
 	notes.php Words...

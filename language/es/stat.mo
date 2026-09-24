@@ -1,10 +1,10 @@
 <?php
-//é à ó ú ñ
+//Ã© Ã  Ã³ Ãº Ã±
 
 // Language file for Statistic module
-$lang['stat_title']    = "Estadísticas";
-$lang['stat_show']     = "Clasificación de";
-$lang['stat_by']       = "según";
+$lang['stat_title']    = "EstadÃ­sticas";
+$lang['stat_show']     = "ClasificaciÃ³n de";
+$lang['stat_by']       = "segÃºn";
 $lang['stat_range']    = "Place";
 
 $lang['stat_player']   = "jugador";

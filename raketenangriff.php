@@ -8,8 +8,8 @@
  *
  * Travail original :
  * @version 1.0
- * @copyright 2008 by XNova Team (auteur non identifié) for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @copyright 2008 by XNova Team (auteur non identifiÃ©) for XNova
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);
@@ -98,13 +98,13 @@ $select = doquery("SELECT * FROM {{table}} WHERE id = ".$ziel_id, 'users', true)
  $def =
 		array(
 			0 => $planet['misil_launcher'], // Raketenwerfer
-			1 => $planet['small_laser'], // Leichtes Lasergeschütz
-			2 => $planet['big_laser'], // Schweres Lasergeschütz
-			3 => $planet['gauss_canyon'], // Gaußkanone
-			4 => $planet['ionic_canyon'], // Ionengeschütz
+			1 => $planet['small_laser'], // Leichtes LasergeschÃ¼tz
+			2 => $planet['big_laser'], // Schweres LasergeschÃ¼tz
+			3 => $planet['gauss_canyon'], // GauÃŸkanone
+			4 => $planet['ionic_canyon'], // IonengeschÃ¼tz
 			5 => $planet['buster_canyon'], // Plasmawerfer
 			6 => $planet['small_protection_shield'], // Kleine Schildkuppel
-			7 => $planet['big_protection_shield'], // Große Schildkuppel
+			7 => $planet['big_protection_shield'], // GroÃŸe Schildkuppel
 			8 => $planet['interplanetary_misil'], // Interplanetarrakete
 			9 => $planet['interceptor_misil'], // Abfangrakete
 

@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1
  * @copyright 2008 By Chlorel for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -22,7 +22,7 @@
 	
 function check_urlaubmodus ($user) {
 	if ($user['urlaubs_modus'] == 1) {
-		message("Vous êtes en mode vacances!", $title = $user['username'], $dest = "", $time = "3");
+		message("Vous Ãªtes en mode vacances!", $title = $user['username'], $dest = "", $time = "3");
 	}
 }
 
@@ -36,7 +36,7 @@ function check_urlaubmodus_time () {
 		if ($user['urlaubs_modus'] == 1 && $urlaub_modus_time_soll > $time_jetzt) {
 			$soll_datum = date("d.m.Y", $urlaub_modus_time_soll);
 			$soll_uhrzeit = date("H:i:s", $urlaub_modus_time_soll);
-			message("Vous êtes en mode vacances!<br>Le mode vacance dure jusque $soll_datum $soll_uhrzeit<br>	Ce n'est qu'après cette période que vous pouvez changer vos options.", "Mode vacance");
+			message("Vous Ãªtes en mode vacances!<br>Le mode vacance dure jusque $soll_datum $soll_uhrzeit<br>	Ce n'est qu'aprÃ¨s cette pÃ©riode que vous pouvez changer vos options.", "Mode vacance");
 		}
 	}
 }
@@ -105,7 +105,7 @@ function SanitizeNumericInput ( $Fields, $Pattern = '' ) {
 
 // ----------------------------------------------------------------------------------------------------------------
 //
-// Routine Test de validité d'une adresse email
+// Routine Test de validitÃ© d'une adresse email
 //
 function is_email($email) {
 	return(preg_match("/^[-_.[:alnum:]]+@((([[:alnum:]]|[[:alnum:]][[:alnum:]-]*[[:alnum:]])\.)+(ad|ae|aero|af|ag|ai|al|am|an|ao|aq|ar|arpa|as|at|au|aw|az|ba|bb|bd|be|bf|bg|bh|bi|biz|bj|bm|bn|bo|br|bs|bt|bv|bw|by|bz|ca|cc|cd|cf|cg|ch|ci|ck|cl|cm|cn|co|com|coop|cr|cs|cu|cv|cx|cy|cz|de|dj|dk|dm|do|dz|ec|edu|ee|eg|eh|er|es|et|eu|fi|fj|fk|fm|fo|fr|ga|gb|gd|ge|gf|gh|gi|gl|gm|gn|gov|gp|gq|gr|gs|gt|gu|gw|gy|hk|hm|hn|hr|ht|hu|id|ie|il|in|info|int|io|iq|ir|is|it|jm|jo|jp|ke|kg|kh|ki|km|kn|kp|kr|kw|ky|kz|la|lb|lc|li|lk|lr|ls|lt|lu|lv|ly|ma|mc|md|mg|mh|mil|mk|ml|mm|mn|mo|mp|mq|mr|ms|mt|mu|museum|mv|mw|mx|my|mz|na|name|nc|ne|net|nf|ng|ni|nl|no|np|nr|nt|nu|nz|om|org|pa|pe|pf|pg|ph|pk|pl|pm|pn|pr|pro|ps|pt|pw|py|qa|re|ro|ru|rw|sa|sb|sc|sd|se|sg|sh|si|sj|sk|sl|sm|sn|so|sr|st|su|sv|sy|sz|tc|td|tf|tg|th|tj|tk|tm|tn|to|tp|tr|tt|tv|tw|tz|ua|ug|uk|um|us|uy|uz|va|vc|ve|vg|vi|vn|vu|wf|ws|ye|yt|yu|za|zm|zw)$|(([0-9][0-9]?|[0-1][0-9][0-9]|[2][0-4][0-9]|[2][5][0-5])\.){3}([0-9][0-9]?|[0-1][0-9][0-9]|[2][0-4][0-9]|[2][5][0-5]))$/i", $email));
@@ -113,7 +113,7 @@ function is_email($email) {
 
 // ----------------------------------------------------------------------------------------------------------------
 //
-// Routine Affichage d'un message administrateur avec saut vers une autre page si souhaité
+// Routine Affichage d'un message administrateur avec saut vers une autre page si souhaitÃ©
 //
 function AdminMessage ($mes, $title = 'Error', $dest = "", $time = "3") {
 	$parse['color'] = $color;
@@ -127,7 +127,7 @@ function AdminMessage ($mes, $title = 'Error', $dest = "", $time = "3") {
 
 // ----------------------------------------------------------------------------------------------------------------
 //
-// Routine Affichage d'un message avec saut vers une autre page si souhaité
+// Routine Affichage d'un message avec saut vers une autre page si souhaitÃ©
 //
 function message ($mes, $title = 'Error', $dest = "", $time = "3") {
 	$parse['color'] = $color;
@@ -141,7 +141,7 @@ function message ($mes, $title = 'Error', $dest = "", $time = "3") {
 
 // ----------------------------------------------------------------------------------------------------------------
 //
-// Routine d'affichage d'une page dans un cadre donné
+// Routine d'affichage d'une page dans un cadre donnÃ©
 //
 // $page      -> la page
 // $title     -> le titre de la page

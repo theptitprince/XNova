@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.1
  * @copyright 2008 By Chlorel for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Simul = false ) {
@@ -25,7 +25,7 @@ function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Sim
 	$MaxCristalStorage              = $CurrentPlanet['crystal_max']   * MAX_OVERFLOW;
 	$MaxDeuteriumStorage            = $CurrentPlanet['deuterium_max'] * MAX_OVERFLOW;
 
-	// Calcul de production linéaire des divers types
+	// Calcul de production linÃ©aire des divers types
 	$Caps             = array();
 	$BuildTemp        = $CurrentPlanet[ 'temp_max' ];
 

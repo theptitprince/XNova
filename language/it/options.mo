@@ -14,15 +14,15 @@ $lang['lastpassword'] = 'Vecchia password';
 $lang['newpassword'] = 'Nuova password (min. 8 Caratteri)';
 $lang['newpasswordagain'] = 'Nuova password (Ripetere)';
 $lang['emaildir'] = 'Indirizzo e-mail';
-$lang['emaildir_tip'] = 'Questo indirizzo lo potete cambiare quando volete. L\'indirizzo sarà permanente fra 7 giorni.';
+$lang['emaildir_tip'] = 'Questo indirizzo lo potete cambiare quando volete. L\'indirizzo sarÃ  permanente fra 7 giorni.';
 $lang['permanentemaildir'] = 'Indirizzo e-mail permanente';
-$lang['Languese'] = 'Jêzyk';
+$lang['Languese'] = 'JÃªzyk';
 $lang['pl'] = 'Polski';
 $lang['fr'] = 'Francuski';
-$lang['es'] = 'Hiszpañski';
+$lang['es'] = 'HiszpaÃ±ski';
 $lang['de'] = 'Niemiecki';
 $lang['en'] = 'Angielski';
-$lang['it'] = 'W³oski';
+$lang['it'] = 'WÂ³oski';
 
 $lang['opt_lst_ord']  = "Classer les planetes dans l'ordre suivant :";
 $lang['opt_lst_ord0'] = "Date de colonisation";
@@ -30,7 +30,7 @@ $lang['opt_lst_ord1'] = "Coordonnees";
 $lang['opt_lst_ord2'] = "Ordre alphabetique";
 $lang['opt_lst_cla']  = "Ordre de classement :";
 $lang['opt_lst_cla0'] = "croissant";
-$lang['opt_lst_cla1'] = "décroissant";
+$lang['opt_lst_cla1'] = "dÃ©croissant";
 $lang['opt_chk_skin'] = "Utiliser le skin";
 
 // Admin Options
@@ -67,9 +67,9 @@ $lang['show_report'] = 'Visualizzare i report';
 //Modo vacanza
 $lang['delete_vacations'] = 'Modo vacanza / Cancellare account';
 $lang['mode_vacations'] = 'Attivare la vacanza';
-$lang['vacations_tip'] = 'La vacanza mette in pausa i pianeti e nessuno vi può attaccare.';
+$lang['vacations_tip'] = 'La vacanza mette in pausa i pianeti e nessuno vi puÃ² attaccare.';
 $lang['deleteaccount'] = 'Cancellare l\'account';
-$lang['deleteaccount_tip'] = 'La cancellazione sarà effettuata fra 7 giorni.';
+$lang['deleteaccount_tip'] = 'La cancellazione sarÃ  effettuata fra 7 giorni.';
 $lang['save_settings'] = 'Salvare i cambiamenti';
 
 

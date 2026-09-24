@@ -28,6 +28,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		}
 		if ($_GET['cmd'] == 'sort') {
 			$TypeSort = preg_replace('/[^a-z_]/', '', $_GET['type']); // nom de colonne uniquement
+			if ($TypeSort == '') { $TypeSort = 'id'; }
 		} else {
 			$TypeSort = "id";
 		}

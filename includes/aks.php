@@ -646,7 +646,7 @@ function aks($angreifer_daten, $verteidiger_daten, $angreifer_schiffe, $verteidi
 	$ausgabe = '<html>
 <HEAD>
 <LINK rel="stylesheet" type="text/css" href="http://mysqldb2.my.funpic.de/formate.css">
-  <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
   <TITLE>Notizen</TITLE>
 </HEAD>
 <BODY>

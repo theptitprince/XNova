@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.0
  * @copyright 2008 By Chlorel for XNova
- * @license GNU AGPL v3 ou ultÈrieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ult√©rieure (voir NOTICE)
  */
 
 function PlanetSizeRandomiser ($Position, $HomeWorld = false) {
@@ -50,7 +50,7 @@ function CreateOnePlanetRecord($Galaxy, $System, $Position, $PlanetOwnerID, $Pla
 	$QrySelectPlanet .= "`planet` = '". $Position ."';";
 	$PlanetExist = doquery( $QrySelectPlanet, 'planets', true);
 
-	// Si $PlanetExist est autre chose que false ... c'est qu'il y a quelque chose l‡ bas ...
+	// Si $PlanetExist est autre chose que false ... c'est qu'il y a quelque chose l√† bas ...
 	// C'est donc aussi que je ne peux pas m'y poser !!
 	if (!$PlanetExist) {
 		$planet                      = PlanetSizeRandomiser ($Position, $HomeWorld);
@@ -145,7 +145,7 @@ function CreateOnePlanetRecord($Galaxy, $System, $Position, $PlanetOwnerID, $Pla
 		$QryInsertPlanet .= "`deuterium_max` = '".     $planet['deuterium_max']     ."';";
 		doquery( $QryInsertPlanet, 'planets');
 
-		// On recupere l'id de planete nouvellement crÈÈ
+		// On recupere l'id de planete nouvellement cr√©√©
 		$QrySelectPlanet  = "SELECT `id` ";
 		$QrySelectPlanet .= "FROM {{table}} ";
 		$QrySelectPlanet .= "WHERE ";
@@ -165,7 +165,7 @@ function CreateOnePlanetRecord($Galaxy, $System, $Position, $PlanetOwnerID, $Pla
 		$GetGalaxyID      = doquery( $QrySelectGalaxy, 'galaxy', true);
 
 		if ($GetGalaxyID) {
-			// Ah ... Ce secteur de ce vaste monde a deja ete occupÈ
+			// Ah ... Ce secteur de ce vaste monde a deja ete occup√©
 			$QryUpdateGalaxy  = "UPDATE {{table}} SET ";
 			$QryUpdateGalaxy .= "`id_planet` = '". $GetPlanetID['id'] ."' ";
 			$QryUpdateGalaxy .= "WHERE ";

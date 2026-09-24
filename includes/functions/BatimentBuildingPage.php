@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.1
  * @copyright 2008 by Chlorel for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
@@ -77,9 +77,9 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 
 	$Queue = ShowBuildingQueue ( $CurrentPlanet, $CurrentUser );
 
-	// On enregistre ce que l'on a modifié dans planet !
+	// On enregistre ce que l'on a modifiÃ© dans planet !
 	BuildingSavePlanetRecord ( $CurrentPlanet );
-	// On enregistre ce que l'on a eventuellement modifié dans users
+	// On enregistre ce que l'on a eventuellement modifiÃ© dans users
 	BuildingSaveUserRecord ( $CurrentUser );
 
 	if ($Queue['lenght'] < MAX_BUILDING_QUEUE_SIZE) {
@@ -116,7 +116,7 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 				$NextBuildLevel        = $CurrentPlanet[$resource[$Element]] + 1;
 
 				if ($Element == 31) {
-					// Spécial Laboratoire
+					// SpÃ©cial Laboratoire
 					if ($CurrentUser["b_tech_planet"] != 0 &&     // Si pas 0 y a une recherche en cours
 						$game_config['BuildLabWhileRun'] != 1) {  // Variable qui contient le parametre
 						// On verifie si on a le droit d'evoluer pendant les recherches (Setting dans config)

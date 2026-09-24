@@ -14,15 +14,15 @@ $lang['signup']            = ' Aktywacja ';
 
 // Send
 $lang['mail_welcome']      = 'Dziekujemy za Aktywacja w naszej grze!!!
-Aby siê zalogowaæ wejd¼ tu: ({gameurl})';
+Aby siÃª zalogowaÃ¦ wejdÂ¼ tu: ({gameurl})';
 
 $lang['mail_title']        = 'Aktywacja';
-$lang['thanksforregistry'] = 'Dziêkujemy za Aktywacja!! Na podany mail zosta³y podes³ane informacje :) Pozdro.';
+$lang['thanksforregistry'] = 'DziÃªkujemy za Aktywacja!! Na podany mail zostaÂ³y podesÂ³ane informacje :) Pozdro.';
 
 // Errors
 $lang['error_mail']        = 'Niepoprawny E-mail!<br />';
-$lang['error_mailsend']    = 'Mail nie zosta³ wys³any!!';
-$lang['reg_welldone']      = 'Aktywacja zakoñczona poprawnie!!!';
+$lang['error_mailsend']    = 'Mail nie zostaÂ³ wysÂ³any!!';
+$lang['reg_welldone']      = 'Aktywacja zakoÃ±czona poprawnie!!!';
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008

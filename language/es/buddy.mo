@@ -1,17 +1,17 @@
 <?php
-//é à ó ú ñ
+//Ã© Ã  Ã³ Ãº Ã±
 
-$lang['Request_sent'] = 'Petición enviada';
-$lang['Buddy_request'] = 'Petición de amigo';
-$lang['A_request_exists_already_for_this_user'] = 'Una petición de amigo ya existe para este usuario.';
-$lang['You_cannot_ask_yourself_for_a_request'] = 'No puede ustedes envía invitación...';
+$lang['Request_sent'] = 'PeticiÃ³n enviada';
+$lang['Buddy_request'] = 'PeticiÃ³n de amigo';
+$lang['A_request_exists_already_for_this_user'] = 'Una peticiÃ³n de amigo ya existe para este usuario.';
+$lang['You_cannot_ask_yourself_for_a_request'] = 'No puede ustedes envÃ­a invitaciÃ³n...';
 $lang['Buddy_list'] = 'Lista de amigos';
 $lang['There_is_no_request'] = 'No hay peticiones';
-$lang['Request_text'] = 'Texto de la petición';
-$lang['characters'] = 'carácter';
-$lang['Back'] = 'Volver de nuevo detrás';
+$lang['Request_text'] = 'Texto de la peticiÃ³n';
+$lang['characters'] = 'carÃ¡cter';
+$lang['Back'] = 'Volver de nuevo detrÃ¡s';
 $lang['Send'] = 'Enviar';
-$lang['Delete_request'] = 'Suprimir la petición';
+$lang['Delete_request'] = 'Suprimir la peticiÃ³n';
 $lang['Ok'] = 'Aceptar';
 $lang['Reject'] = 'Rechazar';
 $lang['Delete'] = 'Suprimir';
@@ -24,7 +24,7 @@ $lang['Name'] = 'Nombre';
 $lang['User'] = 'Usuario';
 $lang['Alliance'] = 'Allianza';
 $lang['Coordinates'] = 'Coordonnees';
-$lang['Position'] = 'Posición';
+$lang['Position'] = 'PosiciÃ³n';
 $lang['Text'] = 'Texto';
 $lang['Requests'] = 'Peticiones';
 $lang['My_requests'] = 'Mis peticiones';

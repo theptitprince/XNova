@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.2
  * @copyright 2008 by Chlorel for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 define('INSIDE'  , true);
@@ -140,5 +140,5 @@ function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 // History version
 // 1.0 - Version originelle (Tom1991)
 // 1.1 - Version 2.0 de Tom1991 ajout java
-// 1.2 - Réécriture Chlorel passage aux template, optimisation des appels et des requetes SQL
+// 1.2 - RÃ©Ã©criture Chlorel passage aux template, optimisation des appels et des requetes SQL
 ?>

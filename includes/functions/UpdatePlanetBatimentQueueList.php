@@ -9,7 +9,7 @@
  * Travail original :
  * @version 1.1
  * @copyright 2008 By Chlorel for XNova
- * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
+ * @license GNU AGPL v3 ou ultÃ©rieure (voir NOTICE)
  */
 
 function UpdatePlanetBatimentQueueList ( &$CurrentPlanet, &$CurrentUser ) {
@@ -33,7 +33,7 @@ function UpdatePlanetBatimentQueueList ( &$CurrentPlanet, &$CurrentUser ) {
 
 // Revision History
 // - 1.0 Mise en module initiale
-// - 1.1 Mise a jour des ressources sur la planete verifiée (pour prendre en compte les ressources produites
+// - 1.1 Mise a jour des ressources sur la planete verifiÃ©e (pour prendre en compte les ressources produites
 //       pendant la construction et avant l'evolution evantuel d'une mine ou d'en batiment
 
 ?>

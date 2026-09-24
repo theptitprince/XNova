@@ -29,7 +29,7 @@ include($xnova_root_path . 'common.'.$phpEx);
 		$Page  = "<html>";
 		$Page .= "<head>";
 		$Page .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$dpath."/formate.css\">";
-		$Page .= "<meta http-equiv=\"content-type\" content=\"text/html; charset=iso-8859-2\" />";
+		$Page .= "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />";
 		$Page .= "</head>";
 		$Page .= "<body>";
 		$Page .= "<center>";

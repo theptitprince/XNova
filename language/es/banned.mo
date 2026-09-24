@@ -1,8 +1,8 @@
 <?php
-// ó
+// Ã³
 $lang['ban_title']    = "Lista de jugadores rechazados";
 $lang['ban_name']     = "Nombre";
-$lang['ban_reason']   = "Razón de la sanción";
+$lang['ban_reason']   = "RazÃ³n de la sanciÃ³n";
 $lang['ban_from']     = "Desde el";
 $lang['ban_to']       = "Hasta el";
 $lang['ban_by']       = "Por";
