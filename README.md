@@ -1,10 +1,10 @@
 <div align="center">
 
-# XNova — 0.9e Renaissance
+# XNova — 0.9f Renaissance
 
 **Le jeu de stratégie spatiale XNova, repris là où l'équipe d'origine s'était arrêtée.**
 
-![Version](https://img.shields.io/badge/version-0.9e%20Renaissance-2ea44f)
+![Version](https://img.shields.io/badge/version-0.9f%20Renaissance-2ea44f)
 ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-10.6%2B-003545?logo=mariadb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8%2B-4479A1?logo=mysql&logoColor=white)
@@ -17,10 +17,10 @@
 
 ---
 
-> [!WARNING]
-> **Sécurisation en cours.** La 0.9e corrige les failles critiques du code de 2008 (injections SQL, mots de passe,
-> cookies, privilèges). Les protections contre l'injection de code dans les pages (XSS) et les formulaires piégés (CSRF)
-> arrivent en 0.9f : **attendez cette version avant d'ouvrir un serveur au public.**
+> [!NOTE]
+> **Sécurisée, mais encore en développement.** Depuis la 0.9f, les failles connues du code de 2008 sont corrigées :
+> injections SQL, mots de passe, cookies, privilèges, injection de code dans les pages (XSS) et formulaires piégés (CSRF).
+> Un serveur public est envisageable, en gardant en tête que le jeu reste une version de développement avant la 1.0.
 
 ## Sommaire
 - [Le jeu](#le-jeu)
@@ -115,8 +115,8 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 |---|---|---|
 | **0.9d** | Compatibilité PHP 8.4 / MariaDB, en-têtes et crédits, corrections de bugs d'origine | ✅ Terminée |
 | **0.9e** | Sécurité critique (injections SQL, mots de passe `password_hash`, cookies, privilèges), bug de production d'énergie, installeur « Mise à jour » | ✅ Terminée |
-| **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration | ⏳ Prochaine |
-| **0.9g** | Nettoyage : conventions de nommage, retouches visuelles, traductions | 🔜 |
+| **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration, mise à jour depuis la 0.8e d'origine | ✅ Terminée |
+| **0.9g** | Nettoyage : conventions de nommage, retouches visuelles, traductions | ⏳ Prochaine |
 | **0.9h** | Mise en page sans *frames* : menu intégré à chaque page, fond d'écran pleine largeur | 🔜 |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 
@@ -141,8 +141,14 @@ php -S 127.0.0.1:8080
 ```
 
 ### Mise à jour et transfert
-Les modes « Mise à jour » et « Transfère » de l'installeur ne prennent en charge **que les bases XNova 0.9d Renaissance et plus récentes**.
-Les anciennes versions (UGamela, XNova 0.8, 0.9a à 0.9c communautaires, Legacies) ne sont pas migrées.
+Les modes « Mise à jour » et « Transfère » de l'installeur prennent en charge :
+- **la XNova 0.8e d'origine** (même structure de base que la 0.9d) : les mots de passe md5 sont convertis à la première
+  connexion de chaque joueur, et les textes enregistrés à l'époque (noms, messages, textes d'alliance…) sont nettoyés ;
+- **toutes les versions de XNova Renaissance** (0.9d et suivantes).
+
+Les autres bases (UGamela, versions communautaires 0.9a à 0.9c, Legacies et autres dérivés) ne sont pas migrées.
+Faites toujours une sauvegarde de votre base avant une mise à jour. Si les accents d'une très ancienne base
+s'affichent mal (encodage mal déclaré à l'époque), signalez-le : une mise à jour de réparation reste possible.
 
 ## Organisation du code
 

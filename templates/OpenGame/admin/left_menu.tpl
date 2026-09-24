@@ -78,6 +78,8 @@ parent.frames['Hauptframe'].location.replace("overview.php");
 </tr><tr>
 	<td style="background-color:#FFFFFF" height="1px"></td>
 </tr><tr>
+	<td><div><a href="contactlist.php" target="{mf}">{adm_contact}</a></div></td>
+</tr><tr>
 	<td><div><a href="errors.php" accesskey="e" target="{mf}">{adm_error}</a></div></td>
 </tr><tr>
 	<td><div><a href="http://www.xnova.fr/forum/index.php" accesskey="3" target="{mf}">{adm_help}</a></div></td>

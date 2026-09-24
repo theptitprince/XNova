@@ -134,6 +134,8 @@ $nextpage = $Page + 1;
 				doquery ( $QryTableStatPoints , 'statpoints' );
 				doquery ( $QryTableUsers      , 'users'      );
 				doquery ( $QryTableMulti      , 'multi'      );
+				// Table du formulaire de contact : meme definition que la mise a jour 0.9f (includes/migrations.php)
+				mysqli_query($connection, str_replace('{{prefix}}', $prefix, $RenaissanceMigrations['0.9f'][0])) or die("MySQL Error: <b>". mysqli_error($connection) ."</b>");
 
 				// Nouvelle base : directement a la version courante du schema
 				RenaissanceSetSchemaVersion($connection, $prefix, RENAISSANCE_DB_VERSION);
@@ -313,7 +315,7 @@ $nextpage = $Page + 1;
 				$Applied = RenaissanceRunMigrations($connection, $prefix, $FromVersion);
 
 				$bloc                = $lang;
-				$bloc['ins_tx_done4'] = str_replace('%s', $FromVersion, $lang['ins_goto_done_version']);
+				$bloc['ins_tx_done4'] = str_replace('%s', RenaissanceVersionLabel($FromVersion), $lang['ins_goto_done_version']);
 				$bloc['ins_tx_done3'] = (count($Applied) > 0) ? str_replace('%s', implode(', ', $Applied), $lang['ins_upg_applied']) : $lang['ins_upg_uptodate'];
 				$SubTPL = gettemplate ('install/ins_goto_done');
 				$frame  = parsetemplate ( $SubTPL, $bloc );
@@ -342,7 +344,7 @@ $nextpage = $Page + 1;
 				$Applied = RenaissanceRunMigrations($connection, $dbsettings['prefix'], $FromVersion);
 
 				$bloc                     = $lang;
-				$bloc['ins_upg_from']     = str_replace('%s', $FromVersion, $lang['ins_upg_from_version']);
+				$bloc['ins_upg_from']     = str_replace('%s', RenaissanceVersionLabel($FromVersion), $lang['ins_upg_from_version']);
 				$bloc['ins_upg_result']   = (count($Applied) > 0) ? str_replace('%s', implode(', ', $Applied), $lang['ins_upg_applied']) : $lang['ins_upg_uptodate'];
 				$SubTPL = gettemplate ('install/ins_upg_done');
 				$frame  = parsetemplate ( $SubTPL, $bloc );

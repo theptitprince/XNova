@@ -63,15 +63,15 @@ $lang['ins_acc_sex2']     = "Femme";
 
 
 // XNova Renaissance : modes Transfere et Mise a jour
-$lang['ins_tx_goto1'] = 'Il trasferimento riprende una base XNova Renaissance esistente (versione 0.9d o pi&ugrave; recente), per esempio dopo un cambio di server.';
+$lang['ins_tx_goto1'] = 'Il trasferimento riprende una base esistente (XNova 0.8e originale o XNova Renaissance), per esempio dopo un cambio di server.';
 $lang['ins_tx_goto2'] = 'Il file config.php viene riscritto e la base viene aggiornata se proviene da una versione precedente.';
-$lang['ins_tx_goto3'] = 'Le basi UGamela, XNova 0.8 e Legacies non sono supportate. Fate un backup della base prima!';
-$lang['ins_tx_goto4'] = 'Dovete gi&agrave; disporre di una base XNova Renaissance.';
+$lang['ins_tx_goto3'] = 'Le basi UGamela, Legacies e degli altri derivati non sono supportate. Fate un backup della base prima!';
+$lang['ins_tx_goto4'] = 'Dovete gi&agrave; disporre di una base XNova 0.8e o XNova Renaissance.';
 $lang['ins_tx_goto5'] = 'Compilate il modulo con i dati esatti di questa base (server, nome, prefisso delle tabelle, credenziali).';
-$lang['ins_goto_err_version'] = 'Questa base non &egrave; una base XNova Renaissance 0.9d o pi&ugrave; recente (controllate il nome della base e il prefisso).';
+$lang['ins_goto_err_version'] = 'Questa base non &egrave; n&eacute; una XNova 0.8e originale n&eacute; una XNova Renaissance (controllate il nome della base e il prefisso).';
 $lang['ins_goto_done_version'] = 'Base XNova Renaissance ripresa (versione di origine: %s) e file config.php scritto.';
 $lang['ins_upg_intro1'] = 'L\'aggiornamento applica alla base del gioco le modifiche delle versioni pi&ugrave; recenti di XNova Renaissance.';
-$lang['ins_upg_intro2'] = 'Usa i dati del file config.php esistente. Sono supportate solo le basi 0.9d o pi&ugrave; recenti.';
+$lang['ins_upg_intro2'] = 'Usa i dati del file config.php esistente. Basi supportate: XNova 0.8e originale e XNova Renaissance.';
 $lang['ins_upg_intro3'] = 'Fate un backup della base prima di continuare!';
 $lang['ins_upg_from_version'] = 'Versione della base prima dell\'aggiornamento: %s';
 $lang['ins_upg_applied'] = 'Aggiornamenti applicati: %s';

@@ -83,6 +83,7 @@ $lang['adm_md5']      = 'Outil cryptage';
 $lang['adm_build']    = 'Queue fabrication';
 
 $lang['adm_error']    = 'Erreurs';
+$lang['adm_contact']  = 'Messages de contact';
 $lang['change_pass']    = 'Changer code d\'un joueur';
 $lang['adm_help']     = 'Forum d\'aide';
 $lang['adm_back']     = 'Retour';
