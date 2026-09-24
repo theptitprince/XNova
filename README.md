@@ -158,8 +158,8 @@ Les anciennes versions (UGamela, XNova 0.8, 0.9a à 0.9c communautaires, Legacie
 | `skins/`, `images/`, `css/`, `scripts/` | graphismes, styles et JavaScript |
 | `install/` | installeur |
 
-Les branches `ref/legacies-2009.x` conservent, pour référence, les versions XNova Legacies. Elles ne sont jamais fusionnées.
-Le tag `v0.8e` marque le code d'origine, tel qu'il a été récupéré.
+Le tag `v0.8e` marque le code d'origine de l'équipe XNova, tel qu'il a été récupéré ; chaque version de
+Renaissance a ensuite son propre tag (`v0.9d`, `v0.9e`…).
 
 ## Crédits
 
