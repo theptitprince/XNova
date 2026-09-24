@@ -42,6 +42,19 @@ function check_urlaubmodus_time () {
 }
 
 // ----------------------------------------------------------------------------------------------------------------
+// XNova Renaissance : convertit en entiers les champs numeriques recus (GET et POST).
+// $Fields : liste des noms de champs ; $Pattern : expression reguliere optionnelle (ex. '/^ship[0-9]+$/')
+function SanitizeNumericInput ( $Fields, $Pattern = '' ) {
+	foreach (array('_GET', '_POST') as $Source) {
+		foreach ($GLOBALS[$Source] as $Field => $Value) {
+			if (in_array($Field, $Fields, true) || ($Pattern != '' && preg_match($Pattern, $Field))) {
+				$GLOBALS[$Source][$Field] = is_array($Value) ? 0 : intval($Value);
+			}
+		}
+	}
+}
+
+// ----------------------------------------------------------------------------------------------------------------
 //
 // Routine Test de validité d'une adresse email
 //

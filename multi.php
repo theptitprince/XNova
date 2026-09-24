@@ -34,8 +34,8 @@ if ($Mode != 'add') {
 
 }
 if ($mode == 'add') {
-    $Texte = $_POST['texte'];
-    $Joueur = $user['username'];
+    $Texte = SqlEscape(strip_tags($_POST['texte']));
+    $Joueur = SqlEscape($user['username']);
 
     $SQLAjoutDeclaration = "INSERT INTO {{table}} SET ";
     $SQLAjoutDeclaration .= "`player` = '". $Joueur ."', ";

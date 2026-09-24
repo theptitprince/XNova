@@ -16,7 +16,7 @@
 
   function sendnewpassword($mail){
 
-  	$ExistMail = doquery("SELECT `email` FROM {{table}} WHERE `email` = '". $mail ."' LIMIT 1;", 'users', true);
+  	$ExistMail = doquery("SELECT `email` FROM {{table}} WHERE `email` = '". SqlEscape($mail) ."' LIMIT 1;", 'users', true);
 
     if (empty($ExistMail['email']))	{
 	   message('L\'adresse n\'existe pas !','Erreur');

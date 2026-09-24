@@ -32,7 +32,7 @@ function ShowOfficierPage ( &$CurrentUser ) {
 	// Si recrutement d'un officier
 	if ($_GET['mode'] == 2) {
 		if ($CurrentUser['rpg_points'] > 0) {
-			$Selected    = $_GET['offi'];
+			$Selected    = intval($_GET['offi']);
 			if ( in_array($Selected, $reslist['officier']) ) {
 				$Result = IsOfficierAccessible ( $CurrentUser, $Selected );
 				if ( $Result == 1 ) {

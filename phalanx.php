@@ -43,10 +43,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 		}
 
 		if ($DoScan == true) {
-			$Galaxy  = $_GET["galaxy"];
-			$System  = $_GET["system"];
-			$Planet  = $_GET["planet"];
-			$PlType  = $_GET["planettype"];
+			$Galaxy  = intval($_GET["galaxy"]);
+			$System  = intval($_GET["system"]);
+			$Planet  = intval($_GET["planet"]);
+			$PlType  = intval($_GET["planettype"]);
 
 			$TargetInfo = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '". $Galaxy ."' AND `system` = '". $System ."' AND `planet` = '". $Planet ."' AND `planet_type` = '". $PlType ."';", 'planets', true);
 			$TargetName = $TargetInfo['name'];

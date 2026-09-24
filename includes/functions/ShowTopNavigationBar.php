@@ -41,7 +41,7 @@ function ShowTopNavigationBar ( $CurrentUser, $CurrentPlanet ) {
 					$parse['planetlist'] .= "selected=\"selected\" ";
 				}
 				$parse['planetlist'] .= "value=\"?cp=".$CurPlanet['id']."";
-				$parse['planetlist'] .= "&amp;mode=".$_GET['mode'];
+				$parse['planetlist'] .= "&amp;mode=".urlencode(isset($_GET['mode']) ? $_GET['mode'] : '');
 				$parse['planetlist'] .= "&amp;re=0\">";
 
 				// Nom et coordonnées de la planete

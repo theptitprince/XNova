@@ -22,7 +22,7 @@ include($xnova_root_path . 'common.'.$phpEx);
 
 $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 
-$a = $_GET['a'];
+$a = intval($_GET['a']);
 $n = intval($_GET['n']);
 $lang['Please_Wait'] = "Patientez...";
 
@@ -34,7 +34,7 @@ $lang['PHP_SELF'] = 'notes.'.$phpEx;
 if($_POST["s"] == 1 || $_POST["s"] == 2){//Edicion y agregar notas
 
 	$time = time();
-	$priority = $_POST["u"];
+	$priority = intval($_POST["u"]);
 	$title = ($_POST["title"]) ? SqlEscape(strip_tags($_POST["title"])) : $lang['NoTitle'];
 	$text = ($_POST["text"]) ? SqlEscape(strip_tags($_POST["text"])) : $lang['NoText'];
 

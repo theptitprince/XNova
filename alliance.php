@@ -22,7 +22,7 @@ $sort1 = intval($_GET['sort1']);
 if (empty($sort1))  { unset($sort1); }
 $sort2 = intval($_GET['sort2']);
 if (empty($sort2))  { unset($sort2); }
-$d = $_GET['d'];
+$d = isset($_GET['d']) ? intval($_GET['d']) : null;
 if ((!is_numeric($d)) || (empty($d) && $d != 0))
 	unset($d);
 
@@ -147,6 +147,9 @@ if ($user['ally_id'] == 0) { // Sin alianza
 		  Por el momento solo estoy improvisando, luego se perfeccionara el sistema :)
 		  Creo que aqui se realiza una query para comprovar el nombre, y luego le pregunta si es el tag correcto...
 		*/
+			// Tag et nom : texte brut, echappe dans chaque requete
+			$_POST['atag']  = strip_tags($_POST['atag']);
+			$_POST['aname'] = strip_tags($_POST['aname']);
 			if (!$_POST['atag']) {
 				message($lang['have_not_tag'], $lang['make_alliance']);
 			}
@@ -154,25 +157,25 @@ if ($user['ally_id'] == 0) { // Sin alianza
 				message($lang['have_not_name'], $lang['make_alliance']);
 			}
 
-			$tagquery = doquery("SELECT * FROM {{table}} WHERE ally_tag='{$_POST['atag']}'", 'alliance', true);
+			$tagquery = doquery("SELECT * FROM {{table}} WHERE ally_tag='". SqlEscape($_POST['atag']) ."'", 'alliance', true);
 
 			if ($tagquery) {
 				message(str_replace('%s', $_POST['atag'], $lang['always_exist']), $lang['make_alliance']);
 			}
 
 			doquery("INSERT INTO {{table}} SET
-			`ally_name`='{$_POST['aname']}',
-			`ally_tag`='{$_POST['atag']}' ,
+			`ally_name`='". SqlEscape($_POST['aname']) ."',
+			`ally_tag`='". SqlEscape($_POST['atag']) ."' ,
 			`ally_owner`='{$user['id']}',
 			`ally_owner_range`='Leader',
 			`ally_members`='1',
 			`ally_register_time`=" . time() , "alliance");
 
-			$allyquery = doquery("SELECT * FROM {{table}} WHERE ally_tag='{$_POST['atag']}'", 'alliance', true);
+			$allyquery = doquery("SELECT * FROM {{table}} WHERE ally_tag='". SqlEscape($_POST['atag']) ."'", 'alliance', true);
 
 			doquery("UPDATE {{table}} SET
-			`ally_id`='{$allyquery['id']}',
-			`ally_name`='{$allyquery['ally_name']}',
+			`ally_id`='". intval($allyquery['id']) ."',
+			`ally_name`='". SqlEscape($allyquery['ally_name']) ."',
 			`ally_register_time`='" . time() . "'
 			WHERE `id`='{$user['id']}'", "users");
 
@@ -196,7 +199,8 @@ if ($user['ally_id'] == 0) { // Sin alianza
 
 		if ($_POST) { // esta parte es igual que el buscador de search.php...
 			// searchtext
-			$search = doquery("SELECT * FROM {{table}} WHERE ally_name LIKE '%{$_POST['searchtext']}%' or ally_tag LIKE '%{$_POST['searchtext']}%' LIMIT 30", "alliance");
+			$SearchText = SqlEscape(addcslashes($_POST['searchtext'], '%_'));
+			$search = doquery("SELECT * FROM {{table}} WHERE ally_name LIKE '%". $SearchText ."%' or ally_tag LIKE '%". $SearchText ."%' LIMIT 30", "alliance");
 
 			if (mysqli_num_rows($search) != 0) {
 				$template = gettemplate('alliance_searchresult_row');
@@ -540,7 +544,7 @@ array(1 =>
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_edit_rights) {
 			message($lang['Denied_access'], $lang['Members_list']);
 		} elseif (!empty($_POST['newrangname'])) {
-			$name = SqlEscape(strip_tags($_POST['newrangname']));
+			$name = strip_tags($_POST['newrangname']);
 
 			$allianz_raenge[] = array('name' => $name,
 				'mails' => 0,
@@ -556,7 +560,7 @@ array(1 =>
 
 			$ranks = serialize($allianz_raenge);
 
-			doquery("UPDATE {{table}} SET `ally_ranks`='" . $ranks . "' WHERE `id`=" . $ally['id'], "alliance");
+			doquery("UPDATE {{table}} SET `ally_ranks`='" . SqlEscape($ranks) . "' WHERE `id`=" . intval($ally['id']), "alliance");
 
 			$goto = $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'];
 
@@ -627,7 +631,7 @@ array(1 =>
 
 			$ranks = serialize($ally_ranks_new);
 
-			doquery("UPDATE {{table}} SET `ally_ranks`='" . $ranks . "' WHERE `id`=" . $ally['id'], "alliance");
+			doquery("UPDATE {{table}} SET `ally_ranks`='" . SqlEscape($ranks) . "' WHERE `id`=" . intval($ally['id']), "alliance");
 
 			$goto = $_SERVER['PHP_SELF'] . "?" . $_SERVER['QUERY_STRING'];
 
@@ -639,7 +643,7 @@ array(1 =>
 			unset($ally_ranks[$d]);
 			$ally['ally_rank'] = serialize($ally_ranks);
 
-			doquery("UPDATE {{table}} SET `ally_ranks`='{$ally['ally_rank']}' WHERE `id`={$ally['id']}", "alliance");
+			doquery("UPDATE {{table}} SET `ally_ranks`='". SqlEscape($ally['ally_rank']) ."' WHERE `id`=". intval($ally['id']), "alliance");
 		}
 
 		if (count($ally_ranks) == 0 || $ally_ranks == '') { // si no hay rangos
@@ -817,7 +821,7 @@ array(1 =>
 			$q = doquery("SELECT * FROM {{table}} WHERE id='{$u}' LIMIT 1", 'users', true);
 
 			if ((isset($ally_ranks[$_POST['newrang']-1]) || $_POST['newrang'] == 0) && $q['id'] != $ally['ally_owner']) {
-				doquery("UPDATE {{table}} SET `ally_rank_id`='" . SqlEscape(strip_tags($_POST['newrang'])) . "' WHERE `id`='" . intval($id) . "'", 'users');
+				doquery("UPDATE {{table}} SET `ally_rank_id`='" . intval($_POST['newrang']) . "' WHERE `id`='" . intval($id) . "'", 'users');
 			}
 		}
 		// obtenemos las template row

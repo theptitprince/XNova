@@ -30,13 +30,13 @@ function SendSimpleMessage ( $Owner, $Sender, $Time, $Type, $From, $Subject, $Me
 	}
 
 	$QryInsertMessage  = "INSERT INTO {{table}} SET ";
-	$QryInsertMessage .= "`message_owner` = '". $Owner ."', ";
-	$QryInsertMessage .= "`message_sender` = '". $Sender ."', ";
+	$QryInsertMessage .= "`message_owner` = '". intval($Owner) ."', ";
+	$QryInsertMessage .= "`message_sender` = '". intval($Sender) ."', ";
 	$QryInsertMessage .= "`message_time` = '" . $Time . "', ";
-	$QryInsertMessage .= "`message_type` = '". $Type ."', ";
-	$QryInsertMessage .= "`message_from` = '". addslashes( $From ) ."', ";
-	$QryInsertMessage .= "`message_subject` = '". addslashes( $Subject ) ."', ";
-	$QryInsertMessage .= "`message_text` = '". addslashes( $Message ) ."';";
+	$QryInsertMessage .= "`message_type` = '". intval($Type) ."', ";
+	$QryInsertMessage .= "`message_from` = '". SqlEscape( $From ) ."', ";
+	$QryInsertMessage .= "`message_subject` = '". SqlEscape( $Subject ) ."', ";
+	$QryInsertMessage .= "`message_text` = '". SqlEscape( $Message ) ."';";
 	doquery( $QryInsertMessage, 'messages');
 
 	$QryUpdateUser  = "UPDATE {{table}} SET ";

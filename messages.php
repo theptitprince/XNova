@@ -24,8 +24,8 @@ if($user['authlevel']!="1"&$user['authlevel']!="3"&$user['authlevel']!="0"){ hea
 	includeLang('messages');
 
 
-	$OwnerID       = $_GET['id'];
-	$MessCategory  = $_GET['messcat'];
+	$OwnerID       = intval($_GET['id']);
+	$MessCategory  = intval($_GET['messcat']);
 	$MessPageMode  = $_GET["mode"];
 	$DeleteWhat    = $_POST['deletemessages'];
 	if (isset ($DeleteWhat)) {
@@ -127,7 +127,7 @@ $Message = trim ( nl2br ( strip_tags ( $_POST['text'], '<br>' ) ) ); }
 			} elseif ($DeleteWhat == 'deletemarked') {
 				foreach($_POST as $Message => $Answer) {
 					if (preg_match("/delmes/i", $Message) && $Answer == 'on') {
-						$MessId   = str_replace("delmes", "", $Message);
+						$MessId   = intval(str_replace("delmes", "", $Message));
 						$MessHere = doquery("SELECT * FROM {{table}} WHERE `message_id` = '". $MessId ."' AND `message_owner` = '". $user['id'] ."';", 'messages');
 						if ($MessHere) {
 							doquery("DELETE FROM {{table}} WHERE `message_id` = '".$MessId."';", 'messages');
@@ -137,7 +137,7 @@ $Message = trim ( nl2br ( strip_tags ( $_POST['text'], '<br>' ) ) ); }
 			} elseif ($DeleteWhat == 'deleteunmarked') {
 				foreach($_POST as $Message => $Answer) {
 					$CurMess    = preg_match("/showmes/i", $Message);
-					$MessId     = str_replace("showmes", "", $Message);
+					$MessId     = intval(str_replace("showmes", "", $Message));
 					$Selected   = "delmes".$MessId;
 					$IsSelected = $_POST[ $Selected ];
 					if (preg_match("/showmes/i", $Message) && !isset($IsSelected)) {
@@ -148,7 +148,7 @@ $Message = trim ( nl2br ( strip_tags ( $_POST['text'], '<br>' ) ) ); }
 					}
 				}
 			}
-			$MessCategory = $_POST['category'];
+			$MessCategory = intval($_POST['category']);
 
 		case 'show':
 			// -------------------------------------------------------------------------------------------------------

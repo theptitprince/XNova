@@ -21,11 +21,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 includeLang('fleet');
 
-	$Mode   = $_GET['mode'];
-	$Galaxy = $_GET['g'];
-	$System = $_GET['s'];
-	$Planet = $_GET['p'];
-	$TypePl = $_GET['t'];
+	$Mode   = intval($_GET['mode']);
+	$Galaxy = intval($_GET['g']);
+	$System = intval($_GET['s']);
+	$Planet = intval($_GET['p']);
+	$TypePl = intval($_GET['t']);
 
 	// Cadre liste de flottes ...
 	$missiontype = array(

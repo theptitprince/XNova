@@ -22,11 +22,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 	includeLang('stat');
 
 	$parse = $lang;
-	$who   = (isset($_POST['who']))   ? $_POST['who']   : $_GET['who'];
+	$who   = intval((isset($_POST['who']))   ? $_POST['who']   : $_GET['who']);
 	if (!isset($who)) {
 		$who   = 1;
 	}
-	$type  = (isset($_POST['type']))  ? $_POST['type']  : $_GET['type'];
+	$type  = intval((isset($_POST['type']))  ? $_POST['type']  : $_GET['type']);
 	if (!isset($type)) {
 		$type  = 1;
 	}

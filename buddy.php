@@ -21,9 +21,9 @@ include( $xnova_root_path . 'common.' . $phpEx );
 
 	includeLang('buddy');
 
-$a = $_GET['a'];
-$e = $_GET['e'];
-$s = $_GET['s'];
+$a = intval( $_GET['a'] );
+$e = intval( $_GET['e'] );
+$s = intval( $_GET['s'] );
 $u = intval( $_GET['u'] );
 
 if ( $s == 1 && isset( $_GET['bid'] ) ) {

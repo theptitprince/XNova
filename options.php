@@ -43,8 +43,8 @@
     }
     if ($_POST && $mode == "change") { // Array ( [db_character]
        $iduser = $user["id"];
-       $avatar = $_POST["avatar"];
-       $dpath = $_POST["dpath"];
+       $avatar = SqlEscape(strip_tags($_POST["avatar"]));
+       $dpath = SqlEscape(strip_tags($_POST["dpath"]));
 
        // Gestion des options speciales pour les admins
        if ($user['authlevel'] > 0) {
@@ -69,31 +69,32 @@
        }
        // Nombre de usuario
        if (isset($_POST["db_character"]) && $_POST["db_character"] != '') {
-          $username = CheckInputStrings ( $_POST['db_character'] );
+          // Meme regle qu'a l'inscription : lettres, chiffres, _ et - uniquement
+          $username = (preg_match("/[^A-Za-z0-9_\-]/", $_POST['db_character']) == 1) ? $user['username'] : CheckInputStrings ( $_POST['db_character'] );
        } else {
           $username = $user['username'];
        }
        // Adresse e-Mail
        if (isset($_POST["db_email"]) && $_POST["db_email"] != '') {
-          $db_email = CheckInputStrings ( $_POST['db_email'] );
+          $db_email = SqlEscape(CheckInputStrings ( $_POST['db_email'] ));
        } else {
-          $db_email = $user['email'];
+          $db_email = SqlEscape($user['email']);
        }
        // Cantidad de sondas de espionaje
        if (isset($_POST["spio_anz"]) && is_numeric($_POST["spio_anz"])) {
-          $spio_anz = $_POST["spio_anz"];
+          $spio_anz = intval($_POST["spio_anz"]);
        } else {
           $spio_anz = "1";
        }
        // Mostrar tooltip durante
        if (isset($_POST["settings_tooltiptime"]) && is_numeric($_POST["settings_tooltiptime"])) {
-          $settings_tooltiptime = $_POST["settings_tooltiptime"];
+          $settings_tooltiptime = intval($_POST["settings_tooltiptime"]);
        } else {
           $settings_tooltiptime = "1";
        }
        // Maximo mensajes de flotas
        if (isset($_POST["settings_fleetactions"]) && is_numeric($_POST["settings_fleetactions"])) {
-          $settings_fleetactions = $_POST["settings_fleetactions"];
+          $settings_fleetactions = intval($_POST["settings_fleetactions"]);
        } else {
           $settings_fleetactions = "1";
        } //
@@ -168,8 +169,13 @@
        } else {
           $db_deaktjava = "0";
        }
-       $SetSort  = $_POST['settings_sort'];
-       $SetOrder = $_POST['settings_order'];
+       $SetSort  = intval($_POST['settings_sort']);
+       $SetOrder = intval($_POST['settings_order']);
+       // Couleurs : pas de champ dans le formulaire, on conserve les valeurs existantes (elles etaient effacees)
+       $kolorminus  = SqlEscape($user['kolorminus']);
+       $kolorplus   = SqlEscape($user['kolorplus']);
+       $kolorpoziom = SqlEscape($user['kolorpoziom']);
+       $iduser      = intval($iduser);
 
        doquery("UPDATE {{table}} SET
        `email` = '$db_email',
@@ -203,10 +209,10 @@
              message($lang['succeful_changepass'], $lang['changue_pass'],"login.php",1);
           }
        }
-       if ($user['username'] != $_POST["db_character"]) {
-          $query = doquery("SELECT id FROM {{table}} WHERE username='{$_POST["db_character"]}'", 'users', true);
+       if ($user['username'] != $username) {
+          $query = doquery("SELECT id FROM {{table}} WHERE username='". SqlEscape($username) ."'", 'users', true);
           if (!$query) {
-             doquery("UPDATE {{table}} SET username='{$username}' WHERE id='{$user['id']}' LIMIT 1", "users");
+             doquery("UPDATE {{table}} SET username='". SqlEscape($username) ."' WHERE id='". intval($user['id']) ."' LIMIT 1", "users");
              setcookie($game_config['COOKIE_NAME'], "", time()-100000, "/", "", 0); //le da el expire
              message($lang['succeful_changename'], $lang['changue_name'],"login.php",1);
           }
