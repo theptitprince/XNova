@@ -4,6 +4,18 @@ $lang['Description'] = 'D&eacute;scription';
 $lang['changelog']   = array(
 
 
+'0.9e Renaissance' => 'S&eacute;curit&eacute; (theptitprince)
+- FIX : Injections SQL dans les pages du jeu et de l\'administration (mot de passe oubli&eacute;, cookie, alliance, messages...)
+- FIX : Suppression des extract($_GET) (dont la banni&egrave;re publique, qui permettait d\'&eacute;craser la configuration)
+- FIX : Un mod&eacute;rateur pouvait se promouvoir administrateur ou changer le mot de passe de n\'importe qui
+- FIX : Quantit&eacute;s n&eacute;gatives refus&eacute;es (chantier, d&eacute;fenses, porte de saut), missiles tir&eacute;s depuis sa propre plan&egrave;te uniquement
+- MOD : Mots de passe s&eacute;curis&eacute;s (password_hash), anciens mots de passe convertis &agrave; la connexion
+- MOD : Cookie de connexion sign&eacute; et prot&eacute;g&eacute; (HttpOnly, SameSite)
+- NEW : Installeur : mode Mise &agrave; jour (&agrave; partir de la 0.9d), mode Transf&egrave;re revu, config.php &eacute;crit de fa&ccedil;on s&ucirc;re
+- FIX : Production des mines au prorata de l\'&eacute;nergie disponible, production naturelle compt&eacute;e une seule fois
+- FIX : 32 textes qui s\'affichaient vides, pseudo modifiable sans contr&ocirc;le, options qui effa&ccedil;aient les couleurs
+- FIX : Statistiques des alliances, d&eacute;bannissement automatique (requ&ecirc;te erron&eacute;e)',
+
 '0.9d Renaissance' => 'Passage &agrave; PHP 8 (theptitprince)
 - NEW : XNova 0.9d Renaissance, suite directe de XNova 0.8e (apr&egrave;s les versions communautaires 0.9a &agrave; 0.9c)
 - NEW : Nom de version affich&eacute; &agrave; c&ocirc;t&eacute; du num&eacute;ro (0.9d Renaissance)

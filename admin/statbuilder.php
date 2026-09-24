@@ -179,7 +179,7 @@ include($xnova_root_path . 'admin/statfunctions.' . $phpEx);
 
 	while ($CurAlly = mysqli_fetch_assoc($GameAllys)) {
 		// Recuperation des anciennes statistiques
-		$OldStatRecord  = doquery ("SELECT * FROM {{table}} WHERE `stat_type` = '2' AND `id_owner` = '".$CurAlly['id']."';",'statpoints');
+		$OldStatRecord  = doquery ("SELECT * FROM {{table}} WHERE `stat_type` = '2' AND `id_owner` = '".$CurAlly['id']."';",'statpoints', true);
 		if ($OldStatRecord) {
 			$OldTotalRank = $OldStatRecord['total_rank'];
 			$OldTechRank  = $OldStatRecord['tech_rank'];

@@ -1,10 +1,10 @@
 <div align="center">
 
-# XNova — 0.9d Renaissance
+# XNova — 0.9e Renaissance
 
 **Le jeu de stratégie spatiale XNova, repris là où l'équipe d'origine s'était arrêtée.**
 
-![Version](https://img.shields.io/badge/version-0.9d%20Renaissance-2ea44f)
+![Version](https://img.shields.io/badge/version-0.9e%20Renaissance-2ea44f)
 ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-10.6%2B-003545?logo=mariadb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8%2B-4479A1?logo=mysql&logoColor=white)
@@ -18,9 +18,9 @@
 ---
 
 > [!WARNING]
-> **La version 0.9d n'est pas encore sécurisée.** Elle rend le jeu compatible avec PHP 8 mais conserve les failles
-> du code de 2008 (injections SQL, mots de passe en md5…). **Ne l'ouvrez pas au public** avant la version 0.9e.
-> Pour l'instant, utilisez-la uniquement en local ou pour le développement.
+> **Sécurisation en cours.** La 0.9e corrige les failles critiques du code de 2008 (injections SQL, mots de passe,
+> cookies, privilèges). Les protections contre l'injection de code dans les pages (XSS) et les formulaires piégés (CSRF)
+> arrivent en 0.9f : **attendez cette version avant d'ouvrir un serveur au public.**
 
 ## Sommaire
 - [Le jeu](#le-jeu)
@@ -114,8 +114,8 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 | Version | Contenu | État |
 |---|---|---|
 | **0.9d** | Compatibilité PHP 8.4 / MariaDB, en-têtes et crédits, corrections de bugs d'origine | ✅ Terminée |
-| **0.9e** | Sécurité critique (injections SQL, mots de passe `password_hash`, cookies…), bug de production d'énergie, installeur « Mise à jour » | ⏳ Prochaine |
-| **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration | 🔜 |
+| **0.9e** | Sécurité critique (injections SQL, mots de passe `password_hash`, cookies, privilèges), bug de production d'énergie, installeur « Mise à jour » | ✅ Terminée |
+| **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration | ⏳ Prochaine |
 | **0.9g** | Nettoyage : UTF-8, conventions de nommage, retouches visuelles | 🔜 |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 

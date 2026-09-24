@@ -45,13 +45,23 @@ function RenaissanceSchemaVersion ( $Connection, $Prefix ) {
 	return ($Hash && mysqli_num_rows($Hash) == 1) ? '0.9d' : false;
 }
 
+// Compare deux numeros de version XNova (0.9d, 0.9e, 1.0, 1.0a...) : -1, 0 ou 1.
+// version_compare() de PHP ne convient pas : il considere 0.9d et 0.9e comme egales.
+function RenaissanceVersionCompare ( $A, $B ) {
+	$Parse = function ($V) {
+		preg_match('/^(\d+)\.(\d+)([a-z]*)$/i', trim($V), $M);
+		return $M ? array(intval($M[1]), intval($M[2]), strtolower($M[3])) : array(0, 0, '');
+	};
+	return $Parse($A) <=> $Parse($B);
+}
+
 // Applique toutes les mises a jour posterieures a $FromVersion. Retourne la liste des versions appliquees.
 function RenaissanceRunMigrations ( $Connection, $Prefix, $FromVersion ) {
 	global $RenaissanceMigrations;
 
 	$Applied = array();
 	foreach ($RenaissanceMigrations as $Version => $Queries) {
-		if (version_compare($Version, $FromVersion, '<=')) {
+		if (RenaissanceVersionCompare($Version, $FromVersion) <= 0) {
 			continue;
 		}
 		foreach ($Queries as $Query) {
