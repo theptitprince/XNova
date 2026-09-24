@@ -73,4 +73,9 @@ $lang['save_settings'] = "Sauvegarder les changements";
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['changue_name'] = 'Changer de pseudo';
+$lang['succeful_changename'] = 'Le pseudo a bien &eacute;t&eacute; chang&eacute;.<br /><a href="login.php" target="_top">Reconnectez-vous</a>';
+
 ?>

@@ -78,4 +78,8 @@ $lang['ins_upg_applied'] = 'Mises &agrave; jour appliqu&eacute;es : %s';
 $lang['ins_upg_uptodate'] = 'La base est d&eacute;j&agrave; &agrave; jour, aucune modification n&eacute;cessaire.';
 $lang['ins_upg_noconfig'] = 'Le jeu n\'est pas encore install&eacute; (config.php est vide) : utilisez le mode Installer.';
 
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['ins_error3'] = 'Tous les champs sont obligatoires, et le pseudo ne doit contenir que des lettres, des chiffres, _ ou -.';
+
 ?>

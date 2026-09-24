@@ -40,4 +40,8 @@ $lang['NoteDeleted'] = 'La note a &eacute;t&eacute; supprim&eacute;e, <a href="n
 $lang['NoteDeleteds'] = 'Les notes ont &eacute;t&eacute; supprim&eacute;, <a href="notes.php"><blink>redirection...</blink></a>';
 
 // Created by Perberos. All rights reversed (C) 2006 
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['notpossiblethisway'] = 'Cette action n\'est pas possible.';
+
 ?>
