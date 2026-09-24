@@ -81,13 +81,18 @@ function sList($string) {
 }
 
 function imagefix($img) {
-    if(substr($img, 0, 7) != 'http://') {
-        $img = './images/' . $img;
+    // XNova Renaissance : adresse http(s) propre, ou image locale sans caractere dangereux
+    $img = html_entity_decode($img, ENT_QUOTES, 'UTF-8');
+    if (SafeUrl($img) == '') {
+        $img = './images/' . preg_replace('#[^A-Za-z0-9_./\-]#', '', str_replace('..', '', $img));
     }
+    $img = htmlspecialchars($img, ENT_QUOTES, 'UTF-8');
     return '<img src="' . $img . '" alt="' . $img . '" title="' . $img . '" />';
 }
 
 function urlfix($url, $title) {
+    // XNova Renaissance : liens http(s) uniquement (pas de javascript:)
+    $url   = htmlspecialchars(SafeUrl(html_entity_decode($url, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8');
     $title = stripslashes($title);
     return '<a href="' . $url . '" title="' . $title . '">' . $title . '</a>';
 }

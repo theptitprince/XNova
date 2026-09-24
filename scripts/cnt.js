@@ -25,7 +25,7 @@ function t() {
 		if ( m < 10 ) {
 			m = "0" + m
 		}
-		btc.innerHTML = h + ":" + m + ":" + s + "<br><a href=" + ps + "?cmd=" + pk + "&cp=" + pl + ">Annuler</a>"
+		btc.innerHTML = h + ":" + m + ":" + s + "<br><a href=" + ps + "?cmd=" + pk + "&cp=" + pl + "&csrf_token=" + (typeof xnova_csrf != "undefined" ? xnova_csrf : "") + ">Annuler</a>"
 	}
 	pp = pp - 1;
 	window.setTimeout("t();", 999);

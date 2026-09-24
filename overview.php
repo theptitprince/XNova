@@ -72,7 +72,7 @@ switch ($mode) {
         // -----------------------------------------------------------------------------------------------
         if ($_POST['action'] == $lang['namer']) {
             // Reponse au changement de nom de la planete
-            $UserPlanet = strip_tags(CheckInputStrings ($_POST['newname']));
+            $UserPlanet = SafeName(CheckInputStrings ($_POST['newname']), 32);
             $newname = SqlEscape(trim($UserPlanet));
             if ($newname != "") {
                 // Deja on met jour la planete qu'on garde en memoire (pour le nom)

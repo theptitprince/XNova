@@ -148,8 +148,8 @@ if ($user['ally_id'] == 0) { // Sin alianza
 		  Creo que aqui se realiza una query para comprovar el nombre, y luego le pregunta si es el tag correcto...
 		*/
 			// Tag et nom : texte brut, echappe dans chaque requete
-			$_POST['atag']  = strip_tags($_POST['atag']);
-			$_POST['aname'] = strip_tags($_POST['aname']);
+			$_POST['atag']  = SafeName($_POST['atag'], 8);
+			$_POST['aname'] = SafeName($_POST['aname'], 35);
 			if (!$_POST['atag']) {
 				message($lang['have_not_tag'], $lang['make_alliance']);
 			}
@@ -194,7 +194,7 @@ if ($user['ally_id'] == 0) { // Sin alianza
 	  Buscador de alianzas
 	*/
 		$parse = $lang;
-		$lang['searchtext'] = $_POST['searchtext'];
+		$lang['searchtext'] = SafeText($_POST['searchtext']);
 		$page = parsetemplate(gettemplate('alliance_searchform'), $lang);
 
 		if ($_POST) { // esta parte es igual que el buscador de search.php...
@@ -235,7 +235,7 @@ if ($user['ally_id'] == 0) { // Sin alianza
 		extract($allyrow);
 
 		if ($_POST['further'] == $lang['Send']) { // esta parte es igual que el buscador de search.php...
-			doquery("UPDATE {{table}} SET `ally_request`='" . intval($allyid) . "', ally_request_text='" . SqlEscape(strip_tags($_POST['text'])) . "', ally_register_time='" . time() . "' WHERE `id`='" . $user['id'] . "'", "users");
+			doquery("UPDATE {{table}} SET `ally_request`='" . intval($allyid) . "', ally_request_text='" . SqlEscape(SafeText($_POST['text'])) . "', ally_register_time='" . time() . "' WHERE `id`='" . $user['id'] . "'", "users");
 			// mensaje de cuando se envia correctamente el mensaje
 			message($lang['apply_registered'], $lang['your_apply']);
 			// mensaje de cuando falla el envio
@@ -495,7 +495,7 @@ array(1 =>
 
 		if ($sendmail == 1) {
 			$_POST['r'] = intval($_POST['r']);
-			$_POST['text'] = SqlEscape(strip_tags($_POST['text']));
+			$_POST['text'] = SqlEscape(SafeText($_POST['text']));
 
 			if ($_POST['r'] == 0) {
 				$sq = doquery("SELECT id,username FROM {{table}} WHERE ally_id='{$user['ally_id']}'", "users");
@@ -544,7 +544,7 @@ array(1 =>
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_edit_rights) {
 			message($lang['Denied_access'], $lang['Members_list']);
 		} elseif (!empty($_POST['newrangname'])) {
-			$name = strip_tags($_POST['newrangname']);
+			$name = SafeName($_POST['newrangname'], 32);
 
 			$allianz_raenge[] = array('name' => $name,
 				'mails' => 0,
@@ -719,11 +719,11 @@ array(1 =>
 		}
 
 		if ($_POST['options']) {
-			$ally['ally_owner_range'] = SqlEscape(htmlspecialchars(strip_tags($_POST['owner_range'])));
+			$ally['ally_owner_range'] = SqlEscape(SafeName($_POST['owner_range'], 32));
 
-			$ally['ally_web'] = SqlEscape(htmlspecialchars(strip_tags($_POST['web'])));
+			$ally['ally_web'] = SqlEscape(SafeUrl($_POST['web']));
 
-			$ally['ally_image'] = SqlEscape(htmlspecialchars(strip_tags($_POST['image'])));
+			$ally['ally_image'] = SqlEscape(SafeUrl($_POST['image']));
 
 			$ally['ally_request_notallow'] = intval($_POST['request_notallow']);
 
@@ -740,18 +740,18 @@ array(1 =>
 			WHERE `id`='{$ally['id']}'", "alliance");
 		} elseif ($_POST['t']) {
 			if ($t == 3) {
-				$ally['ally_request'] = SqlEscape(strip_tags($_POST['text']));
+				$ally['ally_request'] = SqlEscape(SafeText($_POST['text']));
 
 				doquery("UPDATE {{table}} SET
 				`ally_request`='{$ally['ally_request']}'
 				WHERE `id`='{$ally['id']}'", "alliance");
 			} elseif ($t == 2) {
-				$ally['ally_text'] = SqlEscape(strip_tags($_POST['text']));
+				$ally['ally_text'] = SqlEscape(SafeText($_POST['text']));
 				doquery("UPDATE {{table}} SET
 				`ally_text`='{$ally['ally_text']}'
 				WHERE `id`='{$ally['id']}'", "alliance");
 			} else {
-				$ally['ally_description'] = SqlEscape(strip_tags(stripslashes($_POST['text'])));
+				$ally['ally_description'] = SqlEscape(SafeText($_POST['text']));
 
 				doquery("UPDATE {{table}} SET
 				`ally_description`='" . $ally['ally_description'] . "'
@@ -943,7 +943,7 @@ array(1 =>
 		}
 
 		if ($_POST['action'] == "Akzeptieren") {
-			$_POST['text'] = SqlEscape(strip_tags($_POST['text']));
+			$_POST['text'] = SqlEscape(SafeText($_POST['text']));
 
 			$u = doquery("SELECT * FROM {{table}} WHERE id=$show", 'users', true);
 			// agrega los puntos al unirse el user a la alianza
@@ -974,7 +974,7 @@ array(1 =>
 			die();
 
 		} elseif ($_POST['action'] == "Ablehnen" && $_POST['action'] != '') {
-			$_POST['text'] = SqlEscape(strip_tags($_POST['text']));
+			$_POST['text'] = SqlEscape(SafeText($_POST['text']));
 
 			doquery("UPDATE {{table}} SET ally_request_text='',ally_request='0',ally_id='0',new_message=new_message+1, mnl_alliance=mnl_alliance+1 WHERE id='{$show}'", 'users');
 			// Se envia un mensaje avizando...
@@ -1041,7 +1041,7 @@ array(1 =>
 
 		if ($_POST['newname']) {
 			// Y a le nouveau Nom
-			$ally['ally_name'] = SqlEscape(strip_tags($_POST['newname']));
+			$ally['ally_name'] = SqlEscape(SafeName($_POST['newname'], 35));
 			doquery("UPDATE {{table}} SET `ally_name` = '". $ally['ally_name'] ."' WHERE `id` = '". $user['ally_id'] ."';", 'alliance');
 			doquery("UPDATE {{table}} SET `ally_name` = '". $ally['ally_name'] ."' WHERE `ally_id` = '". $ally['id'] ."';", 'users');
 		}
@@ -1067,7 +1067,7 @@ array(1 =>
 
 		if ($_POST['newtag']) {
 			// Y a le nouveau TAG
-			$ally['ally_tag'] = SqlEscape(strip_tags($_POST['newtag']));
+			$ally['ally_tag'] = SqlEscape(SafeName($_POST['newtag'], 8));
 			doquery("UPDATE {{table}} SET `ally_tag` = '". $ally['ally_tag'] ."' WHERE `id` = '". $user['ally_id'] ."';", 'alliance');
 		}
 

@@ -35,8 +35,8 @@ if($_POST["s"] == 1 || $_POST["s"] == 2){//Edicion y agregar notas
 
 	$time = time();
 	$priority = intval($_POST["u"]);
-	$title = ($_POST["title"]) ? SqlEscape(strip_tags($_POST["title"])) : $lang['NoTitle'];
-	$text = ($_POST["text"]) ? SqlEscape(strip_tags($_POST["text"])) : $lang['NoText'];
+	$title = ($_POST["title"]) ? SqlEscape(SafeText($_POST["title"])) : $lang['NoTitle'];
+	$text = ($_POST["text"]) ? SqlEscape(SafeText($_POST["text"])) : $lang['NoText'];
 
 	if($_POST["s"] ==1){
 		doquery("INSERT INTO {{table}} SET owner={$user['id']}, time=$time, priority=$priority, title='$title', text='$text'","notes");

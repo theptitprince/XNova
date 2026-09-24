@@ -30,7 +30,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		if ($mode == 'addit') {
 			$PlanetID  = intval($_POST['user']);
-			$MoonName  = SqlEscape(strip_tags($_POST['name']));
+			$MoonName  = SqlEscape(SafeName($_POST['name'], 32));
 
 			$QrySelectPlanet  = "SELECT * FROM {{table}} ";
 			$QrySelectPlanet .= "WHERE ";

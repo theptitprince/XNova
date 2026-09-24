@@ -183,7 +183,7 @@ function setcoookie($a, $b, $c = '') {
         
 
         <body>
-            <form method="POST" action="<?=$_SERVER['PHP_SELF']?>">
+            <form method="POST" action="calc.php">
 <?php
 
 $tot = SumaTodo();

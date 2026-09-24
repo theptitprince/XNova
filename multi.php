@@ -34,7 +34,7 @@ if ($Mode != 'add') {
 
 }
 if ($mode == 'add') {
-    $Texte = SqlEscape(strip_tags($_POST['texte']));
+    $Texte = SqlEscape(SafeText($_POST['texte']));
     $Joueur = SqlEscape($user['username']);
 
     $SQLAjoutDeclaration = "INSERT INTO {{table}} SET ";

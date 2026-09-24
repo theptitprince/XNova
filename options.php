@@ -43,8 +43,8 @@
     }
     if ($_POST && $mode == "change") { // Array ( [db_character]
        $iduser = $user["id"];
-       $avatar = SqlEscape(strip_tags($_POST["avatar"]));
-       $dpath = SqlEscape(strip_tags($_POST["dpath"]));
+       $avatar = SqlEscape(SafeUrl($_POST["avatar"]));
+       $dpath = SqlEscape(SafePath($_POST["dpath"]));
 
        // Gestion des options speciales pour les admins
        if ($user['authlevel'] > 0) {
@@ -76,7 +76,7 @@
        }
        // Adresse e-Mail
        if (isset($_POST["db_email"]) && $_POST["db_email"] != '') {
-          $db_email = SqlEscape(CheckInputStrings ( $_POST['db_email'] ));
+          $db_email = SqlEscape(is_email($_POST['db_email']) ? $_POST['db_email'] : $user['email']); // adresse valide uniquement
        } else {
           $db_email = SqlEscape($user['email']);
        }

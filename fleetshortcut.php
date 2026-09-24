@@ -33,7 +33,7 @@ if(isset($_GET['mode'])){
 		//Pegamos el texto :P
 		if($_POST["n"] == ""){$_POST["n"] = "Unbenannt";}
 
-		$r = str_replace(array(',', "\r", "\n"), ' ', strip_tags($_POST['n'])).",".intval($_POST['g']).",".intval($_POST['s']).",".intval($_POST['p']).",".intval($_POST['t'])."\r\n";
+		$r = str_replace(',', ' ', SafeName($_POST['n'], 32)).",".intval($_POST['g']).",".intval($_POST['s']).",".intval($_POST['p']).",".intval($_POST['t'])."\r\n";
 		$user['fleet_shortcut'] .= $r;
 		doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'","users");
 		message("Le raccourcis a &eacute;t&eacute; enregistr&eacute; !","Enregistrment","fleetshortcut.php");
@@ -69,7 +69,7 @@ elseif(isset($_GET['a'])){
 		}
 		else{
 			$r = explode(",",$scarray[$a]);
-			$r[0] = str_replace(array(',', "\r", "\n"), ' ', strip_tags($_POST['n']));
+			$r[0] = str_replace(',', ' ', SafeName($_POST['n'], 32));
 			$r[1] = intval($_POST['g']);
 			$r[2] = intval($_POST['s']);
 			$r[3] = intval($_POST['p']);

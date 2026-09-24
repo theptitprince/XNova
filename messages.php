@@ -84,18 +84,17 @@ if($user['authlevel']!="1"&$user['authlevel']!="3"&$user['authlevel']!="0"){ hea
 				if ($error == 0) {
 					$page .= "<center><font color=#00FF00>".$lang['mess_sended']."<br></font></center>";
 
-					$_POST['text'] = str_replace("'", '&#39;', $_POST['text']);
 //					$_POST['text'] = str_replace('\r\n', '<br />', $_POST['text']);
 
 					$Owner   = $OwnerID;
 					$Sender  = $user['id'];
 					$From    = $user['username'] ." [".$user['galaxy'].":".$user['system'].":".$user['planet']."]";
-					$Subject = $_POST['subject'];
+					$Subject = SafeText($_POST['subject']);
 					if($game_config['enable_bbcode'] == 1) {
-										$Message = trim ( nl2br (bbcode ( image ( strip_tags ( $_POST['text'], '<br>' ) ) ) ) ); 
+										$Message = trim ( bbcode ( image ( $_POST['text'] ) ) ); // bbcode() echappe le texte 
 					
 					} else { 
-$Message = trim ( nl2br ( strip_tags ( $_POST['text'], '<br>' ) ) ); }
+$Message = trim ( nl2br ( SafeText ( $_POST['text'] ) ) ); }
 					SendSimpleMessage ( $Owner, $Sender, '', 1, $From, $Subject, $Message);
 					$subject = "";
 					$text    = "";
@@ -213,7 +212,7 @@ $Message = trim ( nl2br ( strip_tags ( $_POST['text'], '<br>' ) ) ); }
 					$page .= "<th>". stripslashes( $CurMess['message_from'] ) ."</th>";
 					$page .= "<th>". stripslashes( $CurMess['message_subject'] ) ." ";
 					if ($CurMess['message_type'] == 1) {
-						$page .= "<a href=\"messages.php?mode=write&amp;id=". $CurMess['message_sender'] ."&amp;subject=".$lang['mess_answer_prefix'] . htmlspecialchars( $CurMess['message_subject']) ."\">";
+						$page .= "<a href=\"messages.php?mode=write&amp;id=". $CurMess['message_sender'] ."&amp;subject=".$lang['mess_answer_prefix'] . urlencode(html_entity_decode($CurMess['message_subject'], ENT_QUOTES, 'UTF-8')) ."\">";
 						$page .= "<img src=\"". $dpath ."img/m.gif\" alt=\"".$lang['mess_answer']."\" border=\"0\"></a></th>";
 					} else {
 						$page .= "</th>";
@@ -242,7 +241,7 @@ $Message = trim ( nl2br ( strip_tags ( $_POST['text'], '<br>' ) ) ); }
 						$page .= "<th>". stripslashes( $CurMess['message_from'] ) ."</th>";
 						$page .= "<th>". stripslashes( $CurMess['message_subject'] ) ." ";
 						if ($CurMess['message_type'] == 1) {
-							$page .= "<a href=\"messages.php?mode=write&amp;id=". $CurMess['message_sender'] ."&amp;subject=".$lang['mess_answer_prefix'] . htmlspecialchars( $CurMess['message_subject']) ."\">";
+							$page .= "<a href=\"messages.php?mode=write&amp;id=". $CurMess['message_sender'] ."&amp;subject=".$lang['mess_answer_prefix'] . urlencode(html_entity_decode($CurMess['message_subject'], ENT_QUOTES, 'UTF-8')) ."\">";
 							$page .= "<img src=\"". $dpath ."img/m.gif\" alt=\"".$lang['mess_answer']."\" border=\"0\"></a></th>";
 						} else {
 							$page .= "</th>";
