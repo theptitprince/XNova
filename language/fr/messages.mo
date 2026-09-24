@@ -44,4 +44,10 @@ $lang['Player_say'] = '<font color="#7f7f7f">Le joueur</font> %s <font color="#7
 
 
 // Created by Perberos. All rights reversed (C) 2006
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['Declaration'] = 'D&eacute;claration de multi-compte';
+$lang['DeclarationText'] = 'Si plusieurs joueurs utilisent la m&ecirc;me connexion (famille, colocation, travail...), d&eacute;clarez-le ici pour &eacute;viter d\'&ecirc;tre pris pour un multi-compte.';
+$lang['messages'] = 'Messages';
+
 ?>

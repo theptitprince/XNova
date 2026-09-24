@@ -45,4 +45,8 @@ $lang['reg_welldone']      = 'Inscription termin&eacute;e !';
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['error_planetnum'] = 'Le nom de la plan&egrave;te ne doit contenir que des lettres, des chiffres, _ ou -.<br />';
+
 ?>

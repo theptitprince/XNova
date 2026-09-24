@@ -56,4 +56,9 @@ $lang['Desc'][613] = "<br><br>Le General est une v&eacute;n&eacute;rable personn
 $lang['Desc'][614] = "<br><br>L'empereur a rep&eacute;r&eacute; en vous des qualit&eacute;s ind&eacute;niable de conqu&eacute;rent. Il vous propose de devenir Raideur. Le Raideur est le grade le plus &eacute;lev&eacute; de la branche des raideurs de l'arm&eacute;e imp&eacute;riale<br><br>D&eacute;blocage de la SuperNova<font color=\"red\"></font>";
 $lang['Desc'][615] = "<br><br>Vous avez montr&eacute; que vous &ecirc;tiez le plus grand conqu&eacute;rant de l'univers. Il est tant pour vous de prendre la place qui vous revient.<br><br>D&eacute;blocage du Destructeur Plan&egrave;taire<font color=\"red\"></font>";
 
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['Noob'] = 'Vous ne remplissez pas encore les conditions pour recruter cet officier.';
+$lang['officier'] = 'Officiers';
+
 ?>

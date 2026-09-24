@@ -7,4 +7,8 @@ $lang['email']    = "e-Mail";
 $lang['ButtonSendPass'] = "Envoyer";
 $lang['PassForm'] = "Formulaire";
 
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['system'] = 'Syst&egrave;me';
+
 ?>

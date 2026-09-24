@@ -101,4 +101,8 @@ $lang['ov_message']          = "Envoyer un message";
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// XNova Renaissance : texte manquant
+$lang['rename_and_abandon_planet'] = 'Renommer ou abandonner la plan&egrave;te';
+
 ?>

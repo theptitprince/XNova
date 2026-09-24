@@ -107,4 +107,8 @@ $lang['sys_destruc_null'] = ", visiblement la flotte ne d&eacute;veloppe pas la 
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['TranslationBy'] = '';
+
 ?>

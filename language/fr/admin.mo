@@ -114,4 +114,9 @@ $lang['adm_er_time']  = "Date";
 $lang['adm_er_delete']= "Supprimer";
 $lang['adm_er_nbs']   = "erreur(s) au total...";
 
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['adminpanel'] = 'Administration';
+$lang['adm_bt_delet'] = 'Supprimer';
+
 ?>

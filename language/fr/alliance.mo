@@ -134,4 +134,22 @@ $lang['Want_go_out'] = 'Voulez vous sortir de cette alliance ?';
 $lang['Denied_access'] = 'Vous ne disposez pas des droits n&eacute;cessaires !';
 
 // Created by Ichigo. All rights reversed (C) 2006 
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['Change'] = 'Changer';
+$lang['Expel_user'] = 'Exclure le membre';
+$lang['How_you_will_call_the_alliance_in_the_future'] = 'Comment voulez-vous renommer l\'alliance %s ?';
+$lang['Info_of_Alliance'] = 'Informations sur l\'alliance %s';
+$lang['Initial_page'] = 'Page d\'accueil';
+$lang['Internal_text_of_alliance'] = 'Texte interne de l\'alliance';
+$lang['New_name'] = 'Nouveau nom';
+$lang['Owner_cant_go_out'] = 'Le fondateur ne peut pas quitter l\'alliance : transf&eacute;rez-la ou dissolvez-la d\'abord.';
+$lang['Public_text_of_alliance'] = 'Texte public de l\'alliance';
+$lang['Rank_for'] = 'Rang de %s';
+$lang['Request_from'] = 'Candidature de %s';
+$lang['Set_range'] = 'Changer le rang';
+$lang['There_is_hanging_request'] = 'Il y a %n candidature(s) en attente';
+$lang['XRequests'] = 'candidature(s)';
+$lang['You_are_sure_want_kick_to'] = 'Voulez-vous vraiment exclure %s de l\'alliance ?';
+
 ?>

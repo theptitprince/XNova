@@ -36,4 +36,8 @@ $lang['no_laboratory']    = "N&eacute;cessite laboratoire de Recherches!";
 $lang['need_hangar']      = "Chantier spatial requis";
 $lang['labo_on_update']   = "Impossible de rechercher quand le laboratoire est en &eacute;volution!";
 
+
+// XNova Renaissance : textes manquants (ils s'affichaient vides)
+$lang['Builds'] = 'B&acirc;timents';
+
 ?>
