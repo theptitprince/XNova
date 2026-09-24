@@ -113,7 +113,7 @@ $lang['type_playername'] = ($_POST["type"] == "playername") ? " SELECTED" : "";
 $lang['type_planetname'] = ($_POST["type"] == "planetname") ? " SELECTED" : "";
 $lang['type_allytag'] = ($_POST["type"] == "allytag") ? " SELECTED" : "";
 $lang['type_allyname'] = ($_POST["type"] == "allyname") ? " SELECTED" : "";
-$lang['searchtext'] = $searchtext;
+$lang['searchtext'] = SafeText($_POST['searchtext']);
 $lang['search_results'] = $search_results;
 //esto es algo repetitivo ... w
 $page = parsetemplate(gettemplate('search_body'), $lang);

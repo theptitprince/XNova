@@ -8,7 +8,7 @@
 
 <tr><th><div id="shoutbox" style="margin: 5px; vertical-align: text-top; height: 305px; overflow:hidden;"></div></th></tr>
 
-<tr><th>{chat_message}: <input name="msg" type="text" id="msg" size="80" maxlength="100" onKeyPress="if(event.keyCode == 13){ addMessage(); } if (event.keyCode==60 || event.keyCode==62) event.returnValue = false; if (event.which==60 || event.which==62) return false;"> <input type="button" name="send" value="{chat_send}" id="send" onClick="addMessage()"></th></tr>
+<tr><th>{chat_message}: <input name="msg" type="text" id="msg" size="80" maxlength="100" onKeyPress="if(event.keyCode == 13){ addMessage(); } if (event.keyCode==60 || event.keyCode==62) event.returnValue = false; if (event.which==60 || event.which==62) return false;"> <input type="button" name="send" value="{chat_send}" id="send" onClick="addMessage()"><input type="hidden" id="csrf_token" value="{csrf_token}"></th></tr>
 
 </tbody></table>
 

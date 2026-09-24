@@ -56,6 +56,7 @@ function InsertGalaxyScripts ( $CurrentPlanet ) {
 	$Script .= "	ajax.requestFile = \"flotenajax.php?action=send\";\n";
 	$Script .= "	ajax.runResponse = whenResponse;\n";
 	$Script .= "	ajax.execute = true;\n\n";
+	$Script .= "	ajax.setVar(\"csrf_token\", \"". CsrfToken() ."\");\n"; // protection CSRF
 	$Script .= "	ajax.setVar(\"thisgalaxy\", ". $CurrentPlanet["galaxy"] .");\n";
 	$Script .= "	ajax.setVar(\"thissystem\", ". $CurrentPlanet["system"] .");\n";
 	$Script .= "	ajax.setVar(\"thisplanet\", ". $CurrentPlanet["planet"] .");\n";

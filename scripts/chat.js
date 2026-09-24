@@ -21,8 +21,8 @@ return;
 }
 	x_object.open("POST","chat_add.php",true); 
 	x_object.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	msg.value=msg.value.replace(/\+/g,"plus");
-	x_object.send("nick="+nick+"&msg="+msg.value);
+	// XNova Renaissance : message encode (les + et & cassaient l'envoi) et jeton CSRF
+	x_object.send("nick="+encodeURIComponent(nick)+"&msg="+encodeURIComponent(msg.value)+"&csrf_token="+encodeURIComponent(document.getElementById("csrf_token").value));
 	msg.value = "";
 	showMessage();
 }
@@ -40,7 +40,7 @@ var x_object2 = null;
 	}
 	x_object2.open("POST","chat_msg.php",true);
 	x_object2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	x_object2.send(null);
+	x_object2.send("csrf_token="+encodeURIComponent(document.getElementById("csrf_token").value));
 	
 	x_object2.onreadystatechange = function(){
 		if(x_object2.readyState==4){

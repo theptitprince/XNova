@@ -72,6 +72,14 @@ if (INSTALL != true) {
 	includeLang ("system");
 	includeLang ('tech');
 
+	// Protection CSRF : tout formulaire envoye par un joueur connecte, et toute action declenchee par un lien,
+	// doivent porter le jeton de ce joueur (un site exterieur ne peut pas le connaitre)
+	if (is_array($user) && !empty($user['id']) && !defined('LOGIN')) {
+		if (($_SERVER['REQUEST_METHOD'] == 'POST' || CsrfGetAction()) && !CsrfValid()) {
+			message($lang['sys_csrf_error'], $lang['sys_noaccess']);
+		}
+	}
+
 	if ( isset ($user) ) {
 		$_fleets = doquery("SELECT * FROM {{table}} WHERE `fleet_start_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
 		while ($row = mysqli_fetch_array($_fleets)) {

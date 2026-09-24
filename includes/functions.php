@@ -91,6 +91,109 @@ function SetAuthCookie ( $Value, $Expire ) {
 }
 
 // ----------------------------------------------------------------------------------------------------------------
+// XNova Renaissance : nettoyage des textes saisis par les joueurs (protection XSS).
+// Le moteur de templates insere les valeurs telles quelles : on nettoie donc a la saisie, une seule fois.
+//
+// Nom (planete, alliance, tag, rang, raccourci...) : ces noms sont aussi places dans des infobulles JavaScript,
+// ou l'echappement HTML ne suffit pas. On retire donc les caracteres dangereux < > " ' ` \ et les controles.
+function SafeName ( $String, $MaxLength = 64 ) {
+	$String = preg_replace('/[<>"\'`\\\\\x00-\x1F\x7F]/u', '', (string) $String);
+	$String = trim(preg_replace('/\s+/u', ' ', $String));
+	return mb_substr($String, 0, $MaxLength, 'UTF-8');
+}
+
+// Texte libre (message, texte d'alliance, note...) : echappe pour l'affichage HTML, rien n'est perdu
+function SafeText ( $String ) {
+	return htmlspecialchars(trim((string) $String), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
+// Adresse web : uniquement http(s), sans espace ni guillemet (interdit javascript:, data:...). Sinon chaine vide.
+function SafeUrl ( $Url ) {
+	$Url = trim((string) $Url);
+	if ($Url == '' || !preg_match('#^https?://[A-Za-z0-9.\-]+(:[0-9]+)?(/[A-Za-z0-9._~:/?\#\[\]@!$&()*+,;=%\-]*)?$#', $Url)) {
+		return '';
+	}
+	return $Url;
+}
+
+// Chemin de skin : vide, chemin relatif simple ou adresse http(s)
+function SafePath ( $Path ) {
+	$Path = trim((string) $Path);
+	if (preg_match('#^https?://#i', $Path)) {
+		return SafeUrl($Path);
+	}
+	return preg_match('#^[A-Za-z0-9_\-./]*$#', $Path) && strpos($Path, '..') === false ? $Path : '';
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+// XNova Renaissance : protection contre les requetes forgees (CSRF).
+// Jeton propre a chaque joueur (signe avec le mot secret, change avec le mot de passe), sans session PHP.
+function CsrfToken () {
+	global $user, $xnova_root_path;
+	if (!is_array($user) || empty($user['id'])) {
+		return '';
+	}
+	include($xnova_root_path . 'config.php');
+	return hash_hmac('sha256', 'csrf|' . intval($user['id']) . '|' . $user['password'], $dbsettings['secretword']);
+}
+
+// Le jeton recu (formulaire ou lien) est-il valide ?
+function CsrfValid () {
+	$Token = CsrfToken();
+	$Given = isset($_POST['csrf_token']) ? $_POST['csrf_token'] : (isset($_GET['csrf_token']) ? $_GET['csrf_token'] : '');
+	return ($Token != '' && is_string($Given) && hash_equals($Token, $Given));
+}
+
+// Actions declenchees par un simple lien (GET) qui modifient le jeu : elles exigent aussi le jeton.
+// Page => parametres qui declenchent l'action. Les formulaires (POST) sont tous verifies, sans liste.
+function CsrfGetAction () {
+	$Actions = array(
+		'buildings.php'          => array('cmd'),              // construire, detruire, annuler (batiments et recherche)
+		'officier.php'           => array('offi'),             // recruter un officier
+		'annonce2.php'           => array('action'),           // supprimer une annonce
+		'buddy.php'              => array('bid'),              // accepter / supprimer un ami
+		'alliance.php'           => array('kick', 'd', 'yes'), // exclure un membre, supprimer un rang, quitter
+		'quickfleet.php'         => array('mode'),             // envoi rapide de recycleurs
+		'admin/userlist.php'     => array('cmd'),              // supprimer un joueur
+		'admin/declare_list.php' => array('cmd'),
+		'admin/chat.php'         => array('delete', 'deleteall'),
+		'admin/errors.php'       => array('delete', 'deleteall'),
+		'admin/paneladmina.php'  => array('authlvl'),          // changer le niveau d'un compte
+	);
+	$Script = (defined('IN_ADMIN') ? 'admin/' : '') . basename($_SERVER['SCRIPT_NAME']);
+	if (!isset($Actions[$Script])) {
+		return false;
+	}
+	foreach ($Actions[$Script] as $Param) {
+		if (isset($_GET[$Param])) {
+			return true;
+		}
+	}
+	return false;
+}
+
+// Ajoute le jeton a tous les formulaires et a tous les liens internes d'une page (appele par display())
+function CsrfInject ( $Html ) {
+	$Token = CsrfToken();
+	if ($Token == '') {
+		return $Html;
+	}
+	$Field = '<input type="hidden" name="csrf_token" value="' . $Token . '" />';
+	$Html  = preg_replace('/(<form\b[^>]*>)/i', '$1' . $Field, $Html);
+	// Jeton aussi disponible en JavaScript, pour les liens fabriques par les comptes a rebours (annulation)
+	$Script = '<script type="text/javascript">var xnova_csrf = "' . $Token . '";</script>';
+	$Html   = (stripos($Html, '</head>') !== false) ? preg_replace('#</head>#i', $Script . '</head>', $Html, 1) : $Script . $Html;
+	// Liens internes vers une page .php avec parametres (ou "?..."), hors adresses externes
+	$Html  = preg_replace_callback('/(href\s*=\s*)(["\']?)((?!https?:|\/\/|javascript:|mailto:|#)[A-Za-z0-9_\-.\/]*\.php\?[^"\'\s>]*|\?[^"\'\s>]*)\2/i', function ($m) use ($Token) {
+		if (strpos($m[3], 'csrf_token=') !== false) {
+			return $m[0];
+		}
+		return $m[1] . $m[2] . $m[3] . '&amp;csrf_token=' . $Token . $m[2];
+	}, $Html);
+	return $Html;
+}
+
+// ----------------------------------------------------------------------------------------------------------------
 // XNova Renaissance : convertit en entiers les champs numeriques recus (GET et POST).
 // $Fields : liste des noms de champs ; $Pattern : expression reguliere optionnelle (ex. '/^ship[0-9]+$/')
 function SanitizeNumericInput ( $Fields, $Pattern = '' ) {
@@ -170,6 +273,9 @@ function display ($page, $title = '', $topnav = true, $metatags = '', $AdminPage
 	if ($link instanceof mysqli) {
 		mysqli_close($link);
 	}
+
+	// Protection CSRF : jeton ajoute a tous les formulaires et liens internes de la page
+	$DisplayPage = CsrfInject($DisplayPage);
 
 	echo $DisplayPage;
 

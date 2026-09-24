@@ -121,7 +121,7 @@ if ($_POST) {
         $newpass = $_POST['passwrd'];
         $UserName = CheckInputStrings ($_POST['character']);
         $UserEmail = CheckInputStrings ($_POST['email']);
-        $UserPlanet = CheckInputStrings (addslashes($_POST['planet']));
+        $UserPlanet = SqlEscape(SafeName(CheckInputStrings ($_POST['planet']), 32));
 
         $md5newpass = PasswordHash($newpass);
         // Creation de l'utilisateur

@@ -180,7 +180,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "<input type=\"hidden\" name=\"speedallsmin\"   value=\"". $_POST["speedallsmin"] ."\" />\n";
 	$page .= "<input type=\"hidden\" name=\"speed\"          value=\"". $_POST['speed'] ."\" />\n";
 	$page .= "<input type=\"hidden\" name=\"speedfactor\"    value=\"". $_POST["speedfactor"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"usedfleet\"      value=\"". $_POST["usedfleet"] ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"usedfleet\"      value=\"". htmlspecialchars($_POST["usedfleet"], ENT_QUOTES) ."\" />\n";
 	$page .= "<input type=\"hidden\" name=\"maxepedition\"   value=\"". $_POST['maxepedition'] ."\" />\n";
 	$page .= "<input type=\"hidden\" name=\"curepedition\"   value=\"". $_POST['curepedition'] ."\" />\n";
 	foreach ($fleetarray as $Ship => $Count) {

@@ -30,7 +30,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse     = $lang;
 		if ($mode == 'banit') {
 			$name              = SqlEscape($_POST['name']);
-			$reas              = SqlEscape($_POST['why']);
+			$reas              = SqlEscape(SafeText($_POST['why'])); // affiche dans le pilori public
 			$days              = intval($_POST['days']);
 			$hour              = intval($_POST['hour']);
 			$mins              = intval($_POST['mins']);

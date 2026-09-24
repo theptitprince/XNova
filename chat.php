@@ -24,6 +24,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	$nick = $user['username'];
 	$parse = $lang;
+	$parse['csrf_token'] = CsrfToken(); // protection CSRF (le chat envoie ses messages en JavaScript)
 
 	$page = parsetemplate($BodyTPL, $parse);
 	display($page, $lang['Chat'], false);
