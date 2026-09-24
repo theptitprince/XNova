@@ -4,18 +4,18 @@ $lang['Description'] = 'D&eacute;scription';
 $lang['changelog']   = array(
 
 
-'<font color="lime">0.9 Renaissance</font>' => 'Reprise de la branche originale (theptitprince)
+'0.9 Renaissance' => 'Reprise de la branche originale (theptitprince)
 - NEW : XNova 0.9 Renaissance, suite directe de XNova 0.8e
 - NEW : Nom de version affich&eacute; &agrave; c&ocirc;t&eacute; du num&eacute;ro (0.9 Renaissance)
 - NEW : Cr&eacute;dits de la reprise ajout&eacute;s (les cr&eacute;dits d\'origine sont conserv&eacute;s)
 ',
 
-'<font color="lime">0.8e</font>' => '- ADD : Fonction SecureArray() pour les variables POST et GET (Bono)
+'0.8e' => '- ADD : Fonction SecureArray() pour les variables POST et GET (Bono)
 - ADD : Les administrateurs choisissent desormais le fond de la baniere... (Bono)
 - ADD : Mode vacances + Production a 0 + Interdiction de construire(Prethorian)
 ',
 
-'<font color="lime">0.8d</font>' => '- ADD : Les administrateurs voient d&eacute;sormais quelle page est consult&eacute;e par quel joueur (Bono)
+'0.8d' => '- ADD : Les administrateurs voient d&eacute;sormais quelle page est consult&eacute;e par quel joueur (Bono)
 - ADD : Bot antimulticompte, personnalisation et activation/d&eacute;sactivation a volont&eacute;...  (Bono)
 - ADD : Politique de customisation du serveur entam&eacute;e...  (Bono)
 - ADD : Possibilit&eacute; d\'activer/personnaliser/customiser un lien personnalis&eacute; (Bono)
