@@ -23,11 +23,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	$parse = $lang;
 	$who   = intval((isset($_POST['who']))   ? $_POST['who']   : $_GET['who']);
-	if (!isset($who)) {
+	if ($who < 1) {
 		$who   = 1;
 	}
 	$type  = intval((isset($_POST['type']))  ? $_POST['type']  : $_GET['type']);
-	if (!isset($type)) {
+	if ($type < 1) {
 		$type  = 1;
 	}
 	$range = (isset($_POST['range'])) ? $_POST['range'] : $_GET['range'];

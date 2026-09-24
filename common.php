@@ -12,7 +12,7 @@
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
-define('VERSION'     ,'0.9d');        // Version d'XNova utilisée...
+define('VERSION'     ,'0.9e');        // Version d'XNova utilisée...
 define('VERSION_NAME','Renaissance'); // Nom de la version (0.9 et suivantes)
 
 $phpEx = "php";
