@@ -8,7 +8,8 @@ $lang['changelog']   = array(
 - FIX : Injections SQL dans les pages du jeu et de l\'administration (mot de passe oubli&eacute;, cookie, alliance, messages...)
 - FIX : Suppression des extract($_GET) (dont la banni&egrave;re publique, qui permettait d\'&eacute;craser la configuration)
 - FIX : Un mod&eacute;rateur pouvait se promouvoir administrateur ou changer le mot de passe de n\'importe qui
-- FIX : Quantit&eacute;s n&eacute;gatives refus&eacute;es (chantier, d&eacute;fenses, porte de saut), missiles tir&eacute;s depuis sa propre plan&egrave;te uniquement
+- FIX : Quantit&eacute;s n&eacute;gatives refus&eacute;es (chantier, d&eacute;fenses, porte de saut, envoi de flotte), missiles tir&eacute;s depuis sa propre plan&egrave;te uniquement
+- FIX : Donn&eacute;es de flotte et cookies du calculateur : plus de cr&eacute;ation d'objets PHP (unserialize)
 - MOD : Mots de passe s&eacute;curis&eacute;s (password_hash), anciens mots de passe convertis &agrave; la connexion
 - MOD : Cookie de connexion sign&eacute; et prot&eacute;g&eacute; (HttpOnly, SameSite)
 - NEW : Installeur : mode Mise &agrave; jour (&agrave; partir de la 0.9d), mode Transf&egrave;re revu, config.php &eacute;crit de fa&ccedil;on s&ucirc;re

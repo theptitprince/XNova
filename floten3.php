@@ -39,9 +39,23 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$protectiontime = 9999999999999999;
 	}
 
-	$fleetarray  = unserialize(base64_decode(str_rot13($_POST["usedfleet"])));
+	$fleetarray  = unserialize(base64_decode(str_rot13($_POST["usedfleet"])), array('allowed_classes' => false));
 
-	if (!is_array($fleetarray)) {
+	// La liste vient du navigateur : on ne garde que des vaisseaux existants en quantites positives
+	// (une quantite negative ajoutait des vaisseaux a la planete au depart de la flotte)
+	$CleanFleet = array();
+	if (is_array($fleetarray)) {
+		foreach ($fleetarray as $Ship => $Count) {
+			$Ship  = intval($Ship);
+			$Count = intval($Count);
+			if ($Ship > 200 && $Ship < 300 && isset($resource[$Ship]) && $Count > 0) {
+				$CleanFleet[$Ship] = $Count;
+			}
+		}
+	}
+	$fleetarray = $CleanFleet;
+
+	if (count($fleetarray) == 0) {
 		message ("<font color=\"red\"><b>". $lang['fl_fleet_err'] ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
 	}
 
