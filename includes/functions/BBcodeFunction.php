@@ -11,43 +11,31 @@
  */
 
 function bbcode($string) {
-    $pattern = array(
-        '/\\n/',
-        '/\\r/',
-        '/\[list\](.*?)\[\/list\]/ise',
-        '/\[b\](.*?)\[\/b\]/is',
-        '/\[strong\](.*?)\[\/strong\]/is',
-        '/\[i\](.*?)\[\/i\]/is',
-        '/\[u\](.*?)\[\/u\]/is',
-        '/\[s\](.*?)\[\/s\]/is',
-        '/\[del\](.*?)\[\/del\]/is',
-        '/\[url=(.*?)\](.*?)\[\/url\]/ise',
-        '/\[email=(.*?)\](.*?)\[\/email\]/is',
-        '/\[img](.*?)\[\/img\]/ise',
-        '/\[color=(.*?)\](.*?)\[\/color\]/is',
-        '/\[quote\](.*?)\[\/quote\]/ise',
-        '/\[code\](.*?)\[\/code\]/ise'
-    );
-   
-    $replace = array(
-        '',
-        '',
-        'sList(\'\\1\')',
-        '<b>\1</b>',
-        '<strong>\1</strong>',
-        '<i>\1</i>',
-        '<span style="text-decoration: underline;">\1</span>',
-        '<span style="text-decoration: line-through;">\1</span>',
-        '<span style="text-decoration: line-through;">\1</span>',
-        'urlfix(\'\\1\',\'\\2\')',
-        '<a href="mailto:\1" title="\1">\2</a>',
-        'imagefix(\'\\1\')',
-        '<span style="color: \1;">\2</span>',
-        'sQuote(\'\1\')',
-        'sCode(\'\1\')'
+    // PHP 7+ : le modificateur /e n'existe plus, les remplacements dynamiques passent par des callbacks
+    $rules = array(
+        '/\\n/'                                  => '',
+        '/\\r/'                                  => '',
+        '/\[list\](.*?)\[\/list\]/is'            => function ($m) { return sList($m[1]); },
+        '/\[b\](.*?)\[\/b\]/is'                  => '<b>\1</b>',
+        '/\[strong\](.*?)\[\/strong\]/is'        => '<strong>\1</strong>',
+        '/\[i\](.*?)\[\/i\]/is'                  => '<i>\1</i>',
+        '/\[u\](.*?)\[\/u\]/is'                  => '<span style="text-decoration: underline;">\1</span>',
+        '/\[s\](.*?)\[\/s\]/is'                  => '<span style="text-decoration: line-through;">\1</span>',
+        '/\[del\](.*?)\[\/del\]/is'              => '<span style="text-decoration: line-through;">\1</span>',
+        '/\[url=(.*?)\](.*?)\[\/url\]/is'        => function ($m) { return urlfix($m[1], $m[2]); },
+        '/\[email=(.*?)\](.*?)\[\/email\]/is'    => '<a href="mailto:\1" title="\1">\2</a>',
+        '/\[img](.*?)\[\/img\]/is'               => function ($m) { return imagefix($m[1]); },
+        '/\[color=(.*?)\](.*?)\[\/color\]/is'    => '<span style="color: \1;">\2</span>',
+        // sQuote() n'a jamais existe dans XNova : simple citation
+        '/\[quote\](.*?)\[\/quote\]/is'          => function ($m) { return '<blockquote>' . $m[1] . '</blockquote>'; },
+        '/\[code\](.*?)\[\/code\]/is'            => function ($m) { return sCode($m[1]); },
     );
 
-    return preg_replace($pattern, $replace, nl2br(htmlspecialchars(stripslashes($string))));
+    $string = nl2br(htmlspecialchars(stripslashes($string)));
+    foreach ($rules as $pattern => $replace) {
+        $string = is_callable($replace) ? preg_replace_callback($pattern, $replace, $string) : preg_replace($pattern, $replace, $string);
+    }
+    return $string;
 }
 
 

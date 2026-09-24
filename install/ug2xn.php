@@ -245,6 +245,7 @@ $db         = $_POST['db'];
 
 mysqli_report(MYSQLI_REPORT_OFF);
 				$connection = @mysqli_connect($host, $user, $pass);
+				if ($connection) { mysqli_set_charset($connection, 'utf8mb4'); mysqli_query($connection, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'"); }
 
 if (!$connection) {
     header("Location: ?step=2&error=1");

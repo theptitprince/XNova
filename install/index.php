@@ -61,6 +61,7 @@ $nextpage = $Page + 1;
 
 				mysqli_report(MYSQLI_REPORT_OFF);
 				$connection = @mysqli_connect($host, $user, $pass);
+				if ($connection) { mysqli_set_charset($connection, 'utf8mb4'); mysqli_query($connection, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'"); }
 					if (!$connection) {
 					header("Location: ?mode=ins&page=1&error=1");
 					exit();
@@ -168,6 +169,7 @@ $nextpage = $Page + 1;
 
 				mysqli_report(MYSQLI_REPORT_OFF);
 				$connection = @mysqli_connect($db_host, $db_user, $db_pass);
+				if ($connection) { mysqli_set_charset($connection, 'utf8mb4'); mysqli_query($connection, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'"); }
 					if (!$connection) {
 					header("Location: ?mode=ins&page=1&error=1");
 					exit();
@@ -271,6 +273,7 @@ $nextpage = $Page + 1;
 
 				mysqli_report(MYSQLI_REPORT_OFF);
 				$connection = @mysqli_connect($host, $user, $pass);
+				if ($connection) { mysqli_set_charset($connection, 'utf8mb4'); mysqli_query($connection, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'"); }
 					if (!$connection) {
 					header("Location: ?mode=goto&page=2&error=1");
 					exit();
