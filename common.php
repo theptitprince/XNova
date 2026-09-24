@@ -7,7 +7,8 @@
  * @copyright 2008 by ??????? for XNova
  */
 
-define('VERSION','0.8e');       // Afficher la version d'XNova utilisée...
+define('VERSION'     ,'0.9');         // Version d'XNova utilisée...
+define('VERSION_NAME','Renaissance'); // Nom de la version (0.9 et suivantes)
 
 set_magic_quotes_runtime(0);
 $phpEx = "php";

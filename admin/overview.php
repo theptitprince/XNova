@@ -30,7 +30,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse                      = $lang;
 		$parse['dpath']             = $dpath;
 		$parse['mf']                = $mf;
-		$parse['adm_ov_data_yourv'] = colorRed(VERSION);
+		$parse['adm_ov_data_yourv'] = colorRed(VERSION .' '. VERSION_NAME);
 
 		$Last15Mins = doquery("SELECT * FROM {{table}} WHERE `onlinetime` >= '". (time() - 15 * 60) ."' ORDER BY `". $TypeSort ."` ASC;", 'users');
 		$Count      = 0;
