@@ -34,7 +34,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		if (isset($_GET['result'])) {
 			switch ($_GET['result']){
 				case 'usr_search':
-					$Pattern = $_GET['player'];
+					$Pattern = SqlEscape(addcslashes($_GET['player'], '%_'));
 					$SelUser = doquery("SELECT * FROM {{table}} WHERE `username` LIKE '%". $Pattern ."%' LIMIT 1;", 'users', true);
 					$UsrMain = doquery("SELECT `name` FROM {{table}} WHERE `id` = '". $SelUser['id_planet'] ."';", 'planets', true);
 
@@ -52,7 +52,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					break;
 
 				case 'usr_data':
-					$Pattern = $_GET['player'];
+					$Pattern = SqlEscape(addcslashes($_GET['player'], '%_'));
 					$SelUser = doquery("SELECT * FROM {{table}} WHERE `username` LIKE '%". $Pattern ."%' LIMIT 1;", 'users', true);
 					$UsrMain = doquery("SELECT `name` FROM {{table}} WHERE `id` = '". $SelUser['id_planet'] ."';", 'planets', true);
 
@@ -93,8 +93,12 @@ include($xnova_root_path . 'common.' . $phpEx);
 					break;
 
 				case 'usr_level':
-					$Player     = $_GET['player'];
-					$NewLvl     = $_GET['authlvl'];
+					// Seul un administrateur (niveau 3) peut changer le niveau d'un compte (un moderateur pouvait se promouvoir)
+					if ($user['authlevel'] < 3) {
+						message($lang['sys_noalloaw'], $lang['sys_noaccess']);
+					}
+					$Player     = SqlEscape($_GET['player']);
+					$NewLvl     = max(0, min(3, intval($_GET['authlvl'])));
 
 					$QryUpdate  = doquery("UPDATE {{table}} SET `authlevel` = '".$NewLvl."' WHERE `username` = '".$Player."';", 'users');
 					$Message    = $lang['adm_mess_lvl1']. " ". $Player ." ".$lang['adm_mess_lvl2'];
@@ -104,7 +108,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					break;
 
 				case 'ip_search':
-					$Pattern    = $_GET['ip'];
+					$Pattern    = SqlEscape($_GET['ip']);
 					$SelUser    = doquery("SELECT * FROM {{table}} WHERE `user_lastip` = '". $ip ."' LIMIT 10;", 'users');
 					$bloc                   = $lang;
 					$bloc['adm_this_ip']    = $Pattern;

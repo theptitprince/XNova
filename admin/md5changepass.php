@@ -21,7 +21,7 @@ $xnova_root_path = './../';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-	if ($user['authlevel'] >= "1") {
+	if ($user['authlevel'] >= 3) { // changer le mot de passe d'un compte : administrateur uniquement
 		includeLang('admin/changepass');
 
 		$parse   = $lang;

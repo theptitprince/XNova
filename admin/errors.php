@@ -27,7 +27,9 @@ $parse = $lang;
 	if ($user['authlevel'] >= 3) {
 
 		// Supprimer les erreurs
-		extract($_GET);
+		// extract($_GET) remplace par des lectures explicites (il permettait d'ecraser n'importe quelle variable)
+		$delete    = isset($_GET['delete']) ? intval($_GET['delete']) : null;
+		$deleteall = isset($_GET['deleteall']) ? $_GET['deleteall'] : '';
 		if (isset($delete)) {
 			doquery("DELETE FROM {{table}} WHERE `error_id`=$delete", 'errors');
 		} elseif ($deleteall == 'yes') {

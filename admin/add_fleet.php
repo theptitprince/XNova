@@ -23,6 +23,10 @@ include($xnova_root_path . 'common.'.$phpEx);
 	if ($user['authlevel'] >= 1) {
 		includeLang('admin/add_fleet');
 		$mode = $_GET['mode'];
+		// Tous les champs du formulaire sont des nombres (id de planete et quantites de vaisseaux)
+		foreach ($_POST as $Field => $Value) {
+			if ($Field != 'mode') { $_POST[$Field] = max(0, intval($Value)); }
+		}
 
 		if($mode != 'add') {
 			$parse['ID']     = $lang['Id'];

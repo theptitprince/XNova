@@ -29,8 +29,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse     = $lang;
 
 		if ($mode == 'addit') {
-			$PlanetID  = $_POST['user'];
-			$MoonName  = $_POST['name'];
+			$PlanetID  = intval($_POST['user']);
+			$MoonName  = SqlEscape(strip_tags($_POST['name']));
 
 			$QrySelectPlanet  = "SELECT * FROM {{table}} ";
 			$QrySelectPlanet .= "WHERE ";

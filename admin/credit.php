@@ -37,9 +37,9 @@ if ($user['authlevel'] >= 3) {
 		}
 
 		// Update values
-		doquery("UPDATE {{table}} SET `config_value` = '". $game_config['ExtCopyFrame'] ."' WHERE `config_name` = 'ExtCopyFrame';", 'config');
-		doquery("UPDATE {{table}} SET `config_value` = '". $game_config['ExtCopyOwner'] ."' WHERE `config_name` = 'ExtCopyOwner';", 'config');
-		doquery("UPDATE {{table}} SET `config_value` = '". $game_config['ExtCopyFunct'] ."' WHERE `config_name` = 'ExtCopyFunct';", 'config');
+		doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['ExtCopyFrame']) ."' WHERE `config_name` = 'ExtCopyFrame';", 'config');
+		doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['ExtCopyOwner']) ."' WHERE `config_name` = 'ExtCopyOwner';", 'config');
+		doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['ExtCopyFunct']) ."' WHERE `config_name` = 'ExtCopyFunct';", 'config');
 
 		AdminMessage ($lang['cred_done'], $lang['cred_ext']);
 

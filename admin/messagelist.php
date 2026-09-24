@@ -30,10 +30,10 @@ include($xnova_root_path . 'common.' . $phpEx);
         $Next       = ( !empty($_POST['next'])   ) ? true : false;
         $DelSel     = ( !empty($_POST['delsel']) ) ? true : false;
         $DelDat     = ( !empty($_POST['deldat']) ) ? true : false;
-        $CurrPage   = ( !empty($_POST['curr'])   ) ? $_POST['curr'] : 1;
-        $Selected   = ( !empty($_POST['sele'])   ) ? $_POST['sele'] : 0;
-        $SelType    = $_POST['type'];
-        $SelPage    = $_POST['page'];
+        $CurrPage   = ( !empty($_POST['curr'])   ) ? intval($_POST['curr']) : 1;
+        $Selected   = ( !empty($_POST['sele']) && !is_array($_POST['sele']) ) ? intval($_POST['sele']) : 0;
+        $SelType    = intval($_POST['type']);
+        $SelPage    = intval($_POST['page']);
 
         $ViewPage = 1;
         if ( $Selected != $SelType ) {
@@ -62,13 +62,13 @@ include($xnova_root_path . 'common.' . $phpEx);
         } elseif ($DelSel == true) {
             foreach($_POST['sele'] as $MessId => $Value) {
                 if ($Value = "on") {
-                    doquery ( "DELETE FROM {{table}} WHERE `message_id` = '". $MessId ."';", 'messages');
+                    doquery ( "DELETE FROM {{table}} WHERE `message_id` = '". intval($MessId) ."';", 'messages');
                 }
             }
         } elseif ($DelDat == true) {
-            $SelDay    = $_POST['selday'];
-            $SelMonth  = $_POST['selmonth'];
-            $SelYear   = $_POST['selyear'];
+            $SelDay    = intval($_POST['selday']);
+            $SelMonth  = intval($_POST['selmonth']);
+            $SelYear   = intval($_POST['selyear']);
             $LimitDate = mktime (0,0,0, $SelMonth, $SelDay, $SelYear );
             if ($LimitDate != false) {
                 doquery ( "DELETE FROM {{table}} WHERE `message_time` <= '". $LimitDate ."';", 'messages');
@@ -124,7 +124,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$display            = parsetemplate($BodyTpl , $parse);
 
 		if (isset($_POST['delit'])) {
-			doquery ("DELETE FROM {{table}} WHERE `message_id` = '". $_POST['delit'] ."';", 'messages');
+			doquery ("DELETE FROM {{table}} WHERE `message_id` = '". intval($_POST['delit']) ."';", 'messages');
 			AdminMessage ( $lang['mlst_mess_del'] ." ( ". $_POST['delit'] ." )", $lang['mlst_title'], "./messagelist.".$phpEx, 3);
 		}
 		display ($display, $lang['mlst_title'], false, '', true);

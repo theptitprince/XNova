@@ -21,7 +21,7 @@ $xnova_root_path = './../';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-	if ($user['authlevel'] >= "1") {
+	if ($user['authlevel'] >= 3) { // SQL brut : administrateur uniquement (etait accessible aux moderateurs)
 		includeLang('admin/Queries');
 
 		$parse   = $lang;
