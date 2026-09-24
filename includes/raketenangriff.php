@@ -3,7 +3,7 @@
 /**
  * includes/raketenangriff.php
  *
- * XNova 0.9 Renaissance
+ * XNova Renaissance
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original : -= MoF =- pour le Deutsches UGamela Forum (voir mentions d'origine ci-dessous)

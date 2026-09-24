@@ -1,10 +1,10 @@
 <div align="center">
 
-# XNova — 0.9 Renaissance
+# XNova — 0.9d Renaissance
 
 **Le jeu de stratégie spatiale XNova, repris là où l'équipe d'origine s'était arrêtée.**
 
-![Version](https://img.shields.io/badge/version-0.9%20Renaissance-2ea44f)
+![Version](https://img.shields.io/badge/version-0.9d%20Renaissance-2ea44f)
 ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-10.6%2B-003545?logo=mariadb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8%2B-4479A1?logo=mysql&logoColor=white)
@@ -18,8 +18,8 @@
 ---
 
 > [!WARNING]
-> **La version 0.9 n'est pas encore sécurisée.** Elle rend le jeu compatible avec PHP 8 mais conserve les failles
-> du code de 2008 (injections SQL, mots de passe en md5…). **Ne l'ouvrez pas au public** avant la version 0.9a.
+> **La version 0.9d n'est pas encore sécurisée.** Elle rend le jeu compatible avec PHP 8 mais conserve les failles
+> du code de 2008 (injections SQL, mots de passe en md5…). **Ne l'ouvrez pas au public** avant la version 0.9e.
 > Pour l'instant, utilisez-la uniquement en local ou pour le développement.
 
 ## Sommaire
@@ -47,9 +47,10 @@ Son gameplay s'inspire ouvertement d'OGame (Gameforge), mais XNova est écrit av
 ## Histoire du projet
 
 ### UGamela, le point de départ (2006)
-Vers 2006, un développeur argentin connu sous le pseudo **Perberos** publie **UGamela**, l'un des tout premiers clones
-libres d'OGame, écrit en PHP. Le code reste ouvert jusqu'à la version 0.2-r13. Des communautés se forment
-autour de lui, en Amérique latine, en Allemagne, en Pologne et en France.
+Le **26 juin 2006**, un étudiant argentin connu sous le pseudo **Perberos** lance **UGamela**, son projet de fin d'études :
+l'un des tout premiers clones libres d'OGame, écrit en PHP. Son serveur compte environ **22 000 joueurs actifs en 2007**.
+Le code reste ouvert jusqu'à la version 0.2, puis une communauté allemande le reprend jusqu'à la 0.5.
+D'autres communautés se forment en Amérique latine, en Pologne et en France.
 
 ### XNova, l'équipe française (fin 2007 – 2008)
 Fin 2007 et début 2008, une équipe française reprend UGamela et en fait **XNova** :
@@ -61,23 +62,33 @@ Fin 2007 et début 2008, une équipe française reprend UGamela et en fait **XNo
 
 L'équipe ne se contente pas de rafistoler UGamela. Elle **reforge le noyau** version après version : de la 0.5 à la
 0.7, puis la **0.8**, qui deviendra l'une des versions d'OGame-like les plus diffusées. Le site officiel est
-**xnova.fr**, avec son forum. Au tout début, le projet est **accueilli par le forum Britania**, que la page
-de crédits du jeu remercie encore aujourd'hui « pour avoir accueilli XNova à ses débuts ».
+**xnova.fr**, avec son forum. De ses débuts jusqu'au printemps 2008, le projet a aussi été **hébergé par le forum Britania** (britania.ws),
+que la page de crédits du jeu remercie « pour avoir accueilli XNova à ses débuts ». Britania a ensuite gardé une section
+XNova jusqu'à sa fermeture, en 2016.
 
-### L'éclatement (2008 – 2011)
-Le succès d'XNova donne naissance à de nombreux dérivés :
-- **XG Proyect** (2008), communauté hispanophone qui corrige les bugs et rapproche le jeu d'OGame, puis **2Moons** ;
-- **XNova Legacies** (2009.1 à 2009.4), reprise par une nouvelle équipe, qui se lance ensuite dans une
-  réécriture complète sous le nom de **Wootook**… jamais terminée ;
-- une multitude de « repacks » (Redesigned, Revolution, SuperNova…).
+### L'éclatement (2008 – 2014)
+En octobre 2008, Chlorel quitte la scène. Le projet se divise alors en plusieurs branches, qui avancent en parallèle :
+- **XNova** (2008 – 2011) : le jeu tel qu'on y jouait sur xnova.fr ;
+- **XNova NG** (« NextGen », 2009 – 2011) : une réécriture complète annoncée par l'équipe française ;
+- **XNova Legacies** (2009 – 2014) : reprise par une nouvelle équipe (versions 2009.1 à 2009.4) ;
+- **Wootook** (dès 2011) : la réécriture complète issue de Legacies, jamais achevée.
 
-Puis les sites ferment les uns après les autres. xnova.fr disparaît, les forums aussi, et avec eux une grande partie
-du travail des communautés.
+Ailleurs, le code essaime : **XG Proyect** (2008), communauté hispanophone qui corrige les bugs et rapproche le jeu d'OGame,
+puis **2Moons**, et une multitude de « repacks » (Redesigned, Revolution, SuperNova…).
+
+Puis les serveurs et les forums ferment les uns après les autres, et avec eux disparaît une grande partie du travail
+des communautés.
 
 ### theptitprince et le forum Britania
-**theptitprince**, qui porte aujourd'hui cette reprise, a participé à l'aventure dès 2006 au sein du
-**forum Britania**, jusqu'à sa fermeture. Les contributions de cette époque ont disparu avec le forum.
-XNova Renaissance est aussi une façon de rendre à ce projet ce qui a été perdu.
+**theptitprince**, qui porte aujourd'hui cette reprise, a participé à l'aventure au sein du **forum Britania**
+de 2006 jusqu'aux alentours de 2010-2011, et y a même été **modérateur** pendant un temps.
+Quelques traces subsistent dans les archives du web :
+- un tutoriel « Captcha à l'inscription » pour XNova, republié en 2009 dans la section XNova du forum ;
+- une archive de XNova hébergée sur son site, vers laquelle pointait le tutoriel « Installer XNova sans hébergeur » ;
+- des échanges avec Bono, en 2010, au sujet de l'outil « XNova Studio ».
+
+Le reste des contributions de cette époque a disparu avec le forum. XNova Renaissance est aussi une façon de rendre
+à ce projet ce qui a été perdu.
 
 ## Pourquoi « Renaissance »
 
@@ -87,7 +98,9 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 - **on repart de la dernière version de l'équipe d'origine, XNova 0.8e**, et non d'un dérivé ;
 - **on ne réécrit pas** : la structure du code, son style et le gameplay restent ceux de Chlorel et de son équipe ;
 - **on modernise et on sécurise pas à pas**. Chaque version reste jouable, et la numérotation reprend la logique
-  d'origine (0.8e → 0.9 → 0.9a → 0.9b…) ;
+  d'origine (0.8e → 0.9d → 0.9e → 0.9f…).
+  La numérotation démarre à **0.9d** car des versions communautaires « 0.9a » à « 0.9c » ont circulé en 2008-2009 :
+  on continue après elles, sans doublon ;
 - **on garde la trace de tous les auteurs** : chaque fichier conserve sa mention d'origine.
 
 « Renaissance » n'est pas un nouveau jeu : c'est le **nom de la version** qui suit la 0.8e. Le jeu, lui, s'appelle toujours XNova.
@@ -96,10 +109,10 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 
 | Version | Contenu | État |
 |---|---|---|
-| **0.9** | Compatibilité PHP 8.4 / MariaDB, en-têtes et crédits, corrections de bugs d'origine | ✅ Terminée |
-| **0.9a** | Sécurité critique (injections SQL, mots de passe `password_hash`, cookies…), bug de production d'énergie, installeur « Mise à jour » | ⏳ Prochaine |
-| **0.9b** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration | 🔜 |
-| **0.9c** | Nettoyage : UTF-8, conventions de nommage, retouches visuelles | 🔜 |
+| **0.9d** | Compatibilité PHP 8.4 / MariaDB, en-têtes et crédits, corrections de bugs d'origine | ✅ Terminée |
+| **0.9e** | Sécurité critique (injections SQL, mots de passe `password_hash`, cookies…), bug de production d'énergie, installeur « Mise à jour » | ⏳ Prochaine |
+| **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration | 🔜 |
+| **0.9g** | Nettoyage : UTF-8, conventions de nommage, retouches visuelles | 🔜 |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 
 Au-delà de la 1.0, on pourra envisager l'abandon des *frames* au profit d'une interface moderne.
@@ -125,8 +138,8 @@ php -S 127.0.0.1:8080
 ```
 
 ### Mise à jour et transfert
-Les modes « Mise à jour » et « Transfère » de l'installeur ne prennent en charge **que les bases XNova 0.9 et plus récentes**.
-Les anciennes versions (UGamela, XNova 0.8, Legacies) ne sont pas migrées.
+Les modes « Mise à jour » et « Transfère » de l'installeur ne prennent en charge **que les bases XNova 0.9d Renaissance et plus récentes**.
+Les anciennes versions (UGamela, XNova 0.8, 0.9a à 0.9c communautaires, Legacies) ne sont pas migrées.
 
 ## Organisation du code
 
@@ -159,7 +172,7 @@ Le tag `v0.8e` marque le code d'origine, tel qu'il a été récupéré.
 - Code issu de la communauté UGamela allemande (MoF) et de prethOgame (Aleksandar Spasojevic / KGsystem)
 - Forum Britania, pour avoir accueilli XNova à ses débuts
 
-**XNova 0.9 Renaissance**
+**XNova Renaissance** (depuis la 0.9d)
 - theptitprince : reprise, modernisation et maintenance (depuis 2026)
 
 ## Licence
@@ -183,6 +196,11 @@ dans [`LICENCE.txt`](LICENCE.txt).
 
 ## Sources
 
+- [Ugamela — perberos.me](https://perberos.me/ugamela/about.php) · [Ugamela — blog d'Emilio Márquez (2007)](https://emiliomarquez.com/2007/07/14/ugamela/)
+- [XNova News (de+fr), octobre 2008 — UGamela Blog](http://ugamela-blog.pheelgood.net/2008/10/01/xnova-news-defr-tratsch/)
+- Archives du forum Britania, section XNova (Wayback Machine) : [section XNova en 2008](https://web.archive.org/web/20080505201053/http://www.britania.ws:80/board/archive/index.php/forum-222.html),
+  [tutoriel « Captcha à l'inscription »](https://web.archive.org/web/20091031185340/http://britania.ws:80/forum/archive/index.php/thread-68.html)
+- Page « XNova — le jeu auquel vous avez joué » (xnova.fr, consultée en septembre 2026) : les quatre noms du projet et leurs dates
 - [Clones d'OGame et histoire d'UGamela / XNova — XG Proyect](https://forum.xgproyect.org/forum/archives/archives-aa/xg-proyect-2-x/-2-x-foro-de-soporte/320-historia-de-xnova)
 - [Xnova et OGame : légalité et évolution des clones — Kommunauty](https://www.kommunauty.fr/actualite/web/xnova-legal-opendominion-stellaris/)
 - [Fil « [ogame clone] Xnova » — SMPFR](https://smpfr.info/viewtopic.php?t=8247)

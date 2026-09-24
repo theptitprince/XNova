@@ -3,7 +3,7 @@
 /**
  * common.php
  *
- * XNova 0.9 Renaissance
+ * XNova Renaissance
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original :
@@ -12,7 +12,7 @@
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
-define('VERSION'     ,'0.9');         // Version d'XNova utilisée...
+define('VERSION'     ,'0.9d');        // Version d'XNova utilisée...
 define('VERSION_NAME','Renaissance'); // Nom de la version (0.9 et suivantes)
 
 $phpEx = "php";
@@ -38,6 +38,12 @@ include($xnova_root_path . 'includes/functions.'.$phpEx);
 include($xnova_root_path . 'includes/unlocalised.'.$phpEx);
 include($xnova_root_path . 'includes/todofleetcontrol.'.$phpEx);
 include($xnova_root_path . 'language/'. DEFAULT_LANG .'/lang_info.cfg');
+
+// Jeu pas encore installe (config.php vide) : quelle que soit la page demandee, direction l'installeur
+if (INSTALL != true && (!file_exists($xnova_root_path . 'config.php') || filesize($xnova_root_path . 'config.php') == 0)) {
+	header('Location: ' . $xnova_root_path . 'install/');
+	exit();
+}
 
 if (INSTALL != true) {
     include($xnova_root_path . 'includes/vars.'.$phpEx);

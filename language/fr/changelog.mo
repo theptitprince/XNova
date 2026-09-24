@@ -4,9 +4,9 @@ $lang['Description'] = 'D&eacute;scription';
 $lang['changelog']   = array(
 
 
-'0.9 Renaissance' => 'Passage &agrave; PHP 8 (theptitprince)
-- NEW : XNova 0.9 Renaissance, suite directe de XNova 0.8e
-- NEW : Nom de version affich&eacute; &agrave; c&ocirc;t&eacute; du num&eacute;ro (0.9 Renaissance)
+'0.9d Renaissance' => 'Passage &agrave; PHP 8 (theptitprince)
+- NEW : XNova 0.9d Renaissance, suite directe de XNova 0.8e (apr&egrave;s les versions communautaires 0.9a &agrave; 0.9c)
+- NEW : Nom de version affich&eacute; &agrave; c&ocirc;t&eacute; du num&eacute;ro (0.9d Renaissance)
 - NEW : Cr&eacute;dits de la reprise ajout&eacute;s (les cr&eacute;dits d\'origine sont conserv&eacute;s)
 - MOD : Compatible PHP 8.4 et MariaDB / MySQL r&eacute;cents (mysqli, fonctions supprim&eacute;es remplac&eacute;es)
 - MOD : Seule la derni&egrave;re version est affich&eacute;e en vert dans le changelog

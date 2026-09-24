@@ -3,7 +3,7 @@
 /**
  * includes/debug.class.php
  *
- * XNova 0.9 Renaissance
+ * XNova Renaissance
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original : XNova Team, d'apres UGamela
@@ -53,7 +53,7 @@ class debug
 			//los errores que ocurran.
 			global $user,$xnova_root_path,$phpEx;
 			include($xnova_root_path . 'config.'.$phpEx);
-			if(!$link) die('mySQL no esta disponible por el momento, sentimos el inconveniente...');
+			if(!$link) die('La base de donn&eacute;es MySQL est indisponible pour le moment, merci de r&eacute;essayer plus tard.');
 			$query = "INSERT INTO {{table}} SET
 				`error_sender` = '{$user['id']}' ,
 				`error_time` = '".time()."' ,

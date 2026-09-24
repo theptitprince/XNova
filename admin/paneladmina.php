@@ -3,7 +3,7 @@
 /**
  * paneladmina.php
  *
- * XNova 0.9 Renaissance
+ * XNova Renaissance
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original :

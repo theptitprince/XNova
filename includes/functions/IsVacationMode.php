@@ -3,7 +3,7 @@
 /**
  * includes/functions/IsVacationMode.php
  *
- * XNova 0.9 Renaissance
+ * XNova Renaissance
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original : Aleksandar Spasojevic / KGsystem, prethOgame (voir mentions d'origine ci-dessous)
