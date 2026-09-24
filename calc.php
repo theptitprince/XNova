@@ -159,10 +159,10 @@ function SumaTodo() {
 function LoadCookies() {
     global $edff, $invv, $hann, $deff;
 
-    if (!empty($_COOKIE['edf'])) $edff = unserialize($_COOKIE['edf']);
-    if (!empty($_COOKIE['inv'])) $invv = unserialize($_COOKIE['inv']);
-    if (!empty($_COOKIE['han'])) $hann = unserialize($_COOKIE['han']);
-    if (!empty($_COOKIE['def'])) $deff = unserialize($_COOKIE['def']);
+    if (!empty($_COOKIE['edf'])) $edff = unserialize($_COOKIE['edf'], array('allowed_classes' => false));
+    if (!empty($_COOKIE['inv'])) $invv = unserialize($_COOKIE['inv'], array('allowed_classes' => false));
+    if (!empty($_COOKIE['han'])) $hann = unserialize($_COOKIE['han'], array('allowed_classes' => false));
+    if (!empty($_COOKIE['def'])) $deff = unserialize($_COOKIE['def'], array('allowed_classes' => false));
 }
 
 function setcoookie($a, $b, $c = '') {
