@@ -3,7 +3,7 @@
 /**
  * install/ug2xn.php
  *
- * XNova 0.9 Renaissance
+ * XNova Renaissance
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original : e-Zobar for XNova (voir mentions d'origine ci-dessous)

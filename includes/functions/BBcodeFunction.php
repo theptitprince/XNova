@@ -3,7 +3,7 @@
 /**
  * includes/functions/BBcodeFunction.php
  *
- * XNova 0.9 Renaissance
+ * XNova Renaissance
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original : XNova Team, d'après UGamela
