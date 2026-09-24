@@ -36,7 +36,7 @@ include($xnova_root_path . 'admin/statfunctions.' . $phpEx);
 
 	while ($CurUser = mysqli_fetch_assoc($GameUsers)) {
 		// Recuperation des anciennes statistiques
-		$OldStatRecord  = doquery ("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `id_owner` = '".$CurUser['id']."';",'statpoints');
+		$OldStatRecord  = doquery ("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `id_owner` = '".$CurUser['id']."';",'statpoints', true);
 		if ($OldStatRecord) {
 			$OldTotalRank = $OldStatRecord['total_rank'];
 			$OldTechRank  = $OldStatRecord['tech_rank'];
