@@ -25,7 +25,7 @@
 
        if($CurrentUser['urlaubs_modus'] == 1){
        $query = doquery("SELECT * FROM {{table}} WHERE id_owner = '{$CurrentUser['id']}'", 'planets');
-       while($id = mysql_fetch_array($query)){
+       while($id = mysqli_fetch_array($query)){
           doquery("UPDATE {{table}} SET
                    metal_perhour = '".$game_config['metal_basic_income']."',
                    crystal_perhour = '".$game_config['crystal_basic_income']."',

@@ -30,11 +30,11 @@ function CheckCookies ( $IsUserChecked ) {
 		$UserResult = doquery("SELECT * FROM {{table}} WHERE `username` = '". $TheCookie[1]. "';", 'users');
 
 		// On verifie s'il y a qu'un seul enregistrement pour ce nom
-		if (mysql_num_rows($UserResult) != 1) {
+		if (mysqli_num_rows($UserResult) != 1) {
 			message( $lang['cookies']['Error1'] );
 		}
 
-		$UserRow    = mysql_fetch_array($UserResult);
+		$UserRow    = mysqli_fetch_array($UserResult);
 
 		// On teste si on a bien le bon UserID
 		if ($UserRow["id"] != $TheCookie[0]) {

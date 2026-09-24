@@ -29,7 +29,7 @@ $parse['mf'] = $mf;
 
 $query = doquery("SELECT * FROM {{table}} ORDER BY `id`;",'banned');
 $i=0;
-while($u = mysql_fetch_array($query)){
+while($u = mysqli_fetch_array($query)){
 	$parse['banned'] .=
         "<tr><td class=b><center><b>".$u[1]."</center></td></b>".
 	"<td class=b><center><b>".$u[2]."</center></b></td>".

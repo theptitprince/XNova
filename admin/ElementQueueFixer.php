@@ -29,7 +29,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$QrySelectPlanet .= "`b_hangar_id` != '0';";
 		$AffectedPlanets  = doquery ($QrySelectPlanet, 'planets');
 		$DeletedQueues    = 0;
-		while ( $ActualPlanet = mysql_fetch_assoc($AffectedPlanets) ) {
+		while ( $ActualPlanet = mysqli_fetch_assoc($AffectedPlanets) ) {
 			$HangarQueue = explode (";", $ActualPlanet['b_hangar_id']);
 			$bDelQueue   = false;
 			if (count($HangarQueue)) {

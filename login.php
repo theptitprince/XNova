@@ -25,7 +25,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	includeLang('login');
 
 	if ($_POST) {
-		$login = doquery("SELECT * FROM {{table}} WHERE `username` = '" . mysql_escape_string($_POST['username']) . "' LIMIT 1", "users", true);
+		$login = doquery("SELECT * FROM {{table}} WHERE `username` = '" . SqlEscape($_POST['username']) . "' LIMIT 1", "users", true);
 
 		if ($login) {
 			if ($login['password'] == md5($_POST['password'])) {

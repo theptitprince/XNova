@@ -35,8 +35,8 @@ if($_POST["s"] == 1 || $_POST["s"] == 2){//Edicion y agregar notas
 
 	$time = time();
 	$priority = $_POST["u"];
-	$title = ($_POST["title"]) ? mysql_escape_string(strip_tags($_POST["title"])) : $lang['NoTitle'];
-	$text = ($_POST["text"]) ? mysql_escape_string(strip_tags($_POST["text"])) : $lang['NoText'];
+	$title = ($_POST["title"]) ? SqlEscape(strip_tags($_POST["title"])) : $lang['NoTitle'];
+	$text = ($_POST["text"]) ? SqlEscape(strip_tags($_POST["text"])) : $lang['NoText'];
 
 	if($_POST["s"] ==1){
 		doquery("INSERT INTO {{table}} SET owner={$user['id']}, time=$time, priority=$priority, title='$title', text='$text'","notes");
@@ -134,7 +134,7 @@ elseif($_POST){//Borrar
 		//Loop para crear la lista de notas que el jugador tiene
 		$count = 0;
 		$parse=$lang;
-		while($note = mysql_fetch_array($notes_query)){
+		while($note = mysqli_fetch_array($notes_query)){
 			$count++;
 			//Colorea el titulo dependiendo de la prioridad
 			if($note["priority"] == 0){ $parse['NOTE_COLOR'] = "lime";}//Importante

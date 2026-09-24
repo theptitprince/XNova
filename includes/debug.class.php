@@ -58,11 +58,11 @@ class debug
 				`error_sender` = '{$user['id']}' ,
 				`error_time` = '".time()."' ,
 				`error_type` = '{$title}' ,
-				`error_text` = '".mysql_escape_string($message)."';";
-			$sqlquery = mysql_query(str_replace("{{table}}", $dbsettings["prefix"].'errors',$query))
+				`error_text` = '".SqlEscape($message)."';";
+			$sqlquery = mysqli_query($link, str_replace("{{table}}", $dbsettings["prefix"].'errors',$query))
 				or die('error fatal');
 			$query = "explain select * from {{table}}";
-			$q = mysql_fetch_array(mysql_query(str_replace("{{table}}", $dbsettings["prefix"].
+			$q = mysqli_fetch_array(mysqli_query($link, str_replace("{{table}}", $dbsettings["prefix"].
 				'errors', $query))) or die('error fatal: ');
 				
 

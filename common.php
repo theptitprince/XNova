@@ -15,7 +15,6 @@
 define('VERSION'     ,'0.9');         // Version d'XNova utilisée...
 define('VERSION_NAME','Renaissance'); // Nom de la version (0.9 et suivantes)
 
-set_magic_quotes_runtime(0);
 $phpEx = "php";
 
 $game_config   = array();
@@ -47,7 +46,7 @@ if (INSTALL != true) {
 
     // Lecture de la table de configuration
     $query = doquery("SELECT * FROM {{table}}",'config');
-    while ( $row = mysql_fetch_assoc($query) ) {
+    while ( $row = mysqli_fetch_assoc($query) ) {
 	    $game_config[$row['config_name']] = $row['config_value'];
     }
 
@@ -69,7 +68,7 @@ if (INSTALL != true) {
 
 	if ( isset ($user) ) {
 		$_fleets = doquery("SELECT * FROM {{table}} WHERE `fleet_start_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
-		while ($row = mysql_fetch_array($_fleets)) {
+		while ($row = mysqli_fetch_array($_fleets)) {
 			$array                = array();
 			$array['galaxy']      = $row['fleet_start_galaxy'];
 			$array['system']      = $row['fleet_start_system'];
@@ -80,7 +79,7 @@ if (INSTALL != true) {
 		}
 
 		$_fleets = doquery("SELECT * FROM {{table}} WHERE `fleet_end_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
-		while ($row = mysql_fetch_array($_fleets)) {
+		while ($row = mysqli_fetch_array($_fleets)) {
 			$array                = array();
 			$array['galaxy']      = $row['fleet_end_galaxy'];
 			$array['system']      = $row['fleet_end_system'];

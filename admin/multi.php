@@ -33,7 +33,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$RowsTPL = gettemplate('admin/multi_rows');
 		$PageTPL = gettemplate('admin/multi_body');
 
-		while ($infos = mysql_fetch_assoc($query)) {
+		while ($infos = mysqli_fetch_assoc($query)) {
 			$Bloc['player'] = $infos['player'];
 			$Bloc['text']   = $infos['text'];
 

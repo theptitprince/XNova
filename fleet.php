@@ -103,7 +103,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$i  = 0;
 
 
-	while ($f = mysql_fetch_array($fq)) {
+	while ($f = mysqli_fetch_array($fq)) {
 		$i++;
 		$page .= "<tr height=20>";
 		// (01) Fleet ID

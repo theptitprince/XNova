@@ -30,11 +30,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	$query = doquery("SELECT * FROM {{table}} WHERE fleet_id = '" . $fleetid . "'", 'fleets');
 
-	if (mysql_num_rows($query) != 1) {
+	if (mysqli_num_rows($query) != 1) {
 		message('Cette flotte n\'existe pas (ou plus)!', 'Erreur');
 	}
 
-	$daten = mysql_fetch_array($query);
+	$daten = mysqli_fetch_array($query);
 
 	if ($daten['fleet_start_time'] <= time() || $daten['fleet_end_time'] < time() || $daten['fleet_mess'] == 1) {
 		message('Votre flotte est déjà sur le chemin du retour!', 'Erreur');
@@ -92,10 +92,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 		id = '" . $fleet['fleet_group'] . "'"
 		, 'aks');
 
-		if (mysql_num_rows($aks) != 1) {
+		if (mysqli_num_rows($aks) != 1) {
 			message('AKS nicht gefunden!', 'Fehler');
 		}
-		$aks = mysql_num_rows($aks);
+		$aks = mysqli_num_rows($aks);
 	}
 
 	$missiontype = array(1 => 'Attaquer',
@@ -160,7 +160,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$fq = doquery("SELECT * FROM {{table}} WHERE fleet_owner={$user[id]}", 'fleets');
 
 	$i = 0;
-	while ($f = mysql_fetch_array($fq)) {
+	while ($f = mysqli_fetch_array($fq)) {
 		$i++;
 
 		$page .= "<tr height=20><th>$i</th><th>";
@@ -178,7 +178,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			if ($b != '') {
 				$e++;
 				$a = explode(",", $b);
-				$page .= "{$lang['tech']{$a[0]}}: {$a[1]}\n";
+				$page .= "{$lang['tech'][$a[0]]}: {$a[1]}\n";
 				if ($e > 1) {
 					$page .= "\t";
 				}

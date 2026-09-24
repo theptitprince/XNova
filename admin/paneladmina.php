@@ -71,7 +71,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					$parse['adm_sub_form2']  = "<table><tbody>";
 					$parse['adm_sub_form2'] .= "<tr><td colspan=\"4\" class=\"c\">".$lang['adm_colony']."</td></tr>";
 					$UsrColo = doquery("SELECT * FROM {{table}} WHERE `id_owner` = '". $SelUser['id'] ." ORDER BY `galaxy` ASC, `planet` ASC, `system` ASC, `planet_type` ASC';", 'planets');
-					while ( $Colo = mysql_fetch_assoc($UsrColo) ) {
+					while ( $Colo = mysqli_fetch_assoc($UsrColo) ) {
 						if ($Colo['id'] != $SelUser['id_planet']) {
 							$parse['adm_sub_form2'] .= "<tr><th>".$Colo['id']."</th>";
 							$parse['adm_sub_form2'] .= "<th>". (($Colo['planet_type'] == 1) ? $lang['adm_planet'] : $lang['adm_moon'] ) ."</th>";
@@ -108,7 +108,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					$SelUser    = doquery("SELECT * FROM {{table}} WHERE `user_lastip` = '". $ip ."' LIMIT 10;", 'users');
 					$bloc                   = $lang;
 					$bloc['adm_this_ip']    = $Pattern;
-					while ( $Usr = mysql_fetch_assoc($SelUser) ) {
+					while ( $Usr = mysqli_fetch_assoc($SelUser) ) {
 						$UsrMain = doquery("SELECT `name` FROM {{table}} WHERE `id` = '". $Usr['id_planet'] ."';", 'planets', true);
 						$bloc['adm_plyer_lst'] .= "<tr><th>".$Usr['username']."</th><th>[".$Usr['galaxy'].":".$Usr['system'].":".$Usr['planet']."] ".$UsrMain['name']."</th></tr>";
 					}

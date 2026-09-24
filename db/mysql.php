@@ -6,50 +6,56 @@
  * XNova 0.9 Renaissance
  * Reprise et modernisation : theptitprince (2026)
  *
- * Travail original : XNova Team, d'après UGamela
+ * Travail original : Perberos (UGamela), voir mention en fin de fichier
  * @license GNU GPL v2
  */
 
-function doquery($query, $table, $fetch = false){
-  global $link, $debug, $xnova_root_path;
-//    echo $query."<br />";
-	require($xnova_root_path.'config.php');
+// Connexion MySQL (mysqli) ouverte a la demande et partagee via $link
+function DbConnect() {
+	global $link, $debug, $xnova_root_path;
 
+	if (!$link) {
+		require($xnova_root_path.'config.php');
 
+		// PHP 8.1+ : mysqli leve des exceptions par defaut, on garde la gestion d'erreur d'origine
+		mysqli_report(MYSQLI_REPORT_OFF);
 
-	if(!$link)
-	{
-		$link = mysql_connect($dbsettings["server"], $dbsettings["user"],
-				$dbsettings["pass"]) or
-				$debug->error(mysql_error()."<br />$query","SQL Error");
-				//message(mysql_error()."<br />$query","SQL Error");
-
-		mysql_select_db($dbsettings["name"]) or $debug->error(mysql_error()."<br />$query","SQL Error");
-		echo mysql_error();
+		$link = mysqli_connect($dbsettings["server"], $dbsettings["user"], $dbsettings["pass"], $dbsettings["name"]);
+		if (!$link) {
+			$debug->error(mysqli_connect_error(), "SQL Error");
+		}
+		mysqli_set_charset($link, 'utf8mb4');
+		unset($dbsettings);
 	}
-	// por el momento $query se mostrara
-	// pero luego solo se vera en modo debug
 
+	return $link;
+}
 
+// Remplace mysql_escape_string()
+function SqlEscape($string) {
+	return mysqli_real_escape_string(DbConnect(), (string) $string);
+}
+
+function doquery($query, $table, $fetch = false){
+	global $link, $debug, $xnova_root_path;
+
+	DbConnect();
+	require($xnova_root_path.'config.php');
 
 	$sql = str_replace("{{table}}", $dbsettings["prefix"].$table, $query);
 
-
-	$sqlquery = mysql_query($sql) or
-				$debug->error(mysql_error()."<br />$sql<br />","SQL Error");
-				//print(mysql_error()."<br />$query"."SQL Error");
-
+	$sqlquery = mysqli_query($link, $sql) or
+				$debug->error(mysqli_error($link)."<br />$sql<br />","SQL Error");
 
 	unset($dbsettings);//se borra la array para liberar algo de memoria
 
-	global $numqueries,$debug;//,$depurerwrote003;
+	global $numqueries,$debug;
 	$numqueries++;
-	//$depurerwrote003 .= ;
 	$debug->add("<tr><th>Query $numqueries: </th><th>$query</th><th>$table</th><th>$fetch</th></tr>");
 
 	if($fetch)
 	{ //hace el fetch y regresa $sqlrow
-		$sqlrow = mysql_fetch_array($sqlquery);
+		$sqlrow = mysqli_fetch_array($sqlquery);
 		return $sqlrow;
 	}else{ //devuelve el $sqlquery ("sin fetch")
 		return $sqlquery;
