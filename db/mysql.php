@@ -25,6 +25,8 @@ function DbConnect() {
 			$debug->error(mysqli_connect_error(), "SQL Error");
 		}
 		mysqli_set_charset($link, 'utf8mb4');
+		// XNova a ete ecrit pour le mode permissif de MySQL 5 (pas de STRICT_TRANS_TABLES)
+		mysqli_query($link, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'");
 		unset($dbsettings);
 	}
 

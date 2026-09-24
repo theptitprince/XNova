@@ -195,7 +195,10 @@ function SaveToFile ($filename, $content) {
 }
 
 function parsetemplate ($template, $array) {
-	return preg_replace('#\{([a-z0-9\-_]*?)\}#Ssie', '( ( isset($array[\'\1\']) ) ? $array[\'\1\'] : \'\' );', $template);
+	// PHP 7+ : le modificateur /e n'existe plus, meme comportement via preg_replace_callback
+	return preg_replace_callback('#\{([a-z0-9\-_]*?)\}#Ssi', function ($m) use ($array) {
+		return ( isset($array[$m[1]]) ) ? $array[$m[1]] : '';
+	}, $template);
 }
 
 function gettemplate ($templatename) {

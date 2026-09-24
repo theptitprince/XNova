@@ -100,12 +100,12 @@ function display ($page, $title = '', $topnav = true, $metatags = '', $AdminPage
 	}
 	$DisplayPage .= "<center>\n". $page ."\n</center>\n";
 	// Affichage du Debug si necessaire
-	if ($user['authlevel'] == 1 || $user['authlevel'] == 3) {
+	if (is_array($user) && ($user['authlevel'] == 1 || $user['authlevel'] == 3)) {
 		if ($game_config['debug'] == 1) $debug->echo_log();
 	}
 
 	$DisplayPage .= StdFooter();
-	if (isset($link)) {
+	if ($link instanceof mysqli) {
 		mysqli_close($link);
 	}
 
