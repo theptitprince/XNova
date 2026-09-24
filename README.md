@@ -80,12 +80,17 @@ Puis les serveurs et les forums ferment les uns après les autres, et avec eux d
 des communautés.
 
 ### theptitprince et le forum Britania
-**theptitprince**, qui porte aujourd'hui cette reprise, a participé à l'aventure au sein du **forum Britania**
-de 2006 jusqu'aux alentours de 2010-2011, et y a même été **modérateur** pendant un temps.
-Quelques traces subsistent dans les archives du web :
-- un tutoriel « Captcha à l'inscription » pour XNova, republié en 2009 dans la section XNova du forum ;
-- une archive de XNova hébergée sur son site, vers laquelle pointait le tutoriel « Installer XNova sans hébergeur » ;
+**theptitprince**, qui porte aujourd'hui cette reprise, a participé à l'aventure XNova sur le **forum Britania**
+à partir de 2008. Les archives du web en gardent quelques traces :
+- en mars 2008, un premier message de remerciement à l'équipe XNova et à Chlorel, pour la version 0.8 ;
+- **la distribution communautaire « XNova 0.9b »** (février 2009), qu'il a assemblée à partir de la 0.8 en y
+  intégrant de nombreux tutoriels et correctifs. Elle était proposée sur son site aux côtés des 0.9a et 0.9c, puis
+  republiée par Britania en 2009 ;
+- un tutoriel « Captcha à l'inscription » pour XNova ;
 - des échanges avec Bono, en 2010, au sujet de l'outil « XNova Studio ».
+
+C'est pour cette raison que la numérotation de Renaissance reprend à **0.9d** : elle prolonge ces versions
+communautaires, au lieu de les écraser.
 
 Le reste des contributions de cette époque a disparu avec le forum. XNova Renaissance est aussi une façon de rendre
 à ce projet ce qui a été perdu.
@@ -99,8 +104,7 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 - **on ne réécrit pas** : la structure du code, son style et le gameplay restent ceux de Chlorel et de son équipe ;
 - **on modernise et on sécurise pas à pas**. Chaque version reste jouable, et la numérotation reprend la logique
   d'origine (0.8e → 0.9d → 0.9e → 0.9f…).
-  La numérotation démarre à **0.9d** car des versions communautaires « 0.9a » à « 0.9c » ont circulé en 2008-2009 :
-  on continue après elles, sans doublon ;
+  La numérotation démarre à **0.9d**, à la suite des versions communautaires « 0.9a » à « 0.9c » de 2008-2009 ;
 - **on garde la trace de tous les auteurs** : chaque fichier conserve sa mention d'origine.
 
 « Renaissance » n'est pas un nouveau jeu : c'est le **nom de la version** qui suit la 0.8e. Le jeu, lui, s'appelle toujours XNova.
@@ -199,7 +203,9 @@ dans [`LICENCE.txt`](LICENCE.txt).
 - [Ugamela — perberos.me](https://perberos.me/ugamela/about.php) · [Ugamela — blog d'Emilio Márquez (2007)](https://emiliomarquez.com/2007/07/14/ugamela/)
 - [XNova News (de+fr), octobre 2008 — UGamela Blog](http://ugamela-blog.pheelgood.net/2008/10/01/xnova-news-defr-tratsch/)
 - Archives du forum Britania, section XNova (Wayback Machine) : [section XNova en 2008](https://web.archive.org/web/20080505201053/http://www.britania.ws:80/board/archive/index.php/forum-222.html),
-  [tutoriel « Captcha à l'inscription »](https://web.archive.org/web/20091031185340/http://britania.ws:80/forum/archive/index.php/thread-68.html)
+  [tutoriel « Captcha à l'inscription »](https://web.archive.org/web/20091031185340/http://britania.ws:80/forum/archive/index.php/thread-68.html),
+  [distribution XNova 0.9b](https://web.archive.org/web/20091031151313/http://britania.ws:80/forum/Thread-Fichier-XNova-0-9b--71),
+  [site theptitprince.fr en 2009](https://web.archive.org/web/20090330225905/http://www.theptitprince.fr:80/xnova/)
 - Page « XNova — le jeu auquel vous avez joué » (xnova.fr, consultée en septembre 2026) : les quatre noms du projet et leurs dates
 - [Clones d'OGame et histoire d'UGamela / XNova — XG Proyect](https://forum.xgproyect.org/forum/archives/archives-aa/xg-proyect-2-x/-2-x-foro-de-soporte/320-historia-de-xnova)
 - [Xnova et OGame : légalité et évolution des clones — Kommunauty](https://www.kommunauty.fr/actualite/web/xnova-legal-opendominion-stellaris/)
