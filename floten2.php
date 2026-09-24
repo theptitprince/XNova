@@ -100,11 +100,16 @@ include($xnova_root_path . 'common.' . $phpEx);
    }
 
 	$fleetarray    = unserialize(base64_decode(str_rot13($_POST["usedfleet"])));
+	if (!is_array($fleetarray) || !$fleetarray) {
+		// Pas de flotte transmise (acces direct) : retour a la page flotte
+		header("Location: fleet.php");
+		exit();
+	}
 	$mission       = $_POST['target_mission'];
 	$SpeedFactor   = $_POST['speedfactor'];
 	$AllFleetSpeed = GetFleetMaxSpeed ($fleetarray, 0, $user);
 	$GenFleetSpeed = $_POST['speed'];
-	$MaxFleetSpeed = min($AllFleetSpeed);
+	$MaxFleetSpeed = (is_array($AllFleetSpeed) && $AllFleetSpeed) ? min($AllFleetSpeed) : 0;
 
 	$distance      = GetTargetDistance ( $_POST['thisgalaxy'], $_POST['galaxy'], $_POST['thissystem'], $_POST['system'], $_POST['thisplanet'], $_POST['planet'] );
 	$duration      = GetMissionDuration ( $GenFleetSpeed, $MaxFleetSpeed, $distance, $SpeedFactor );

@@ -248,7 +248,7 @@ for ($a = 0; $a < 4; $a++) {
                         <th style="width: 15%"><span style="color: green"><?=number_format($t_v[$i][0], 0, ',', '.');?></span></th>
                         <th style="width: 15%"><span style="color: blue"><?=number_format($t_v[$i][1], 0, ',', '.');?></span></th>
                         <th style="width: 15%"><span style="color: darkred"><?=number_format($t_v[$i][2], 0, ',', '.');?></span></th>
-                        <th style="width: 10%"><?=number_format($t_v[$i][3], 0, ',', '.');?> (<?=@round((100 * $t_v[$i][3]) / $tot)?>%)</th>
+                        <th style="width: 10%"><?=number_format($t_v[$i][3], 0, ',', '.');?> (<?=($tot ? round((100 * $t_v[$i][3]) / $tot) : 0)?>%)</th>
                     </tr>
 <?php
    
@@ -258,7 +258,7 @@ for ($a = 0; $a < 4; $a++) {
                     <tr>
                         <td colspan="4">&nbsp;</td>
                         <td class="c">Summe: </th>
-                        <th><?=$to[$a]?> (<?=@round((100 * $to[$a]) / $tot)?>%)</th>
+                        <th><?=$to[$a]?> (<?=($tot ? round((100 * $to[$a]) / $tot) : 0)?>%)</th>
                     </tr>
                 </table><br />
 <?php
