@@ -61,4 +61,21 @@ $lang['ins_acc_sex0']     = "-ind&eacute;fini-";
 $lang['ins_acc_sex1']     = "Homme";
 $lang['ins_acc_sex2']     = "Femme";
 
+
+// XNova Renaissance : modes Transfere et Mise a jour
+$lang['ins_tx_goto1'] = 'Il trasferimento riprende una base XNova Renaissance esistente (versione 0.9d o pi&ugrave; recente), per esempio dopo un cambio di server.';
+$lang['ins_tx_goto2'] = 'Il file config.php viene riscritto e la base viene aggiornata se proviene da una versione precedente.';
+$lang['ins_tx_goto3'] = 'Le basi UGamela, XNova 0.8 e Legacies non sono supportate. Fate un backup della base prima!';
+$lang['ins_tx_goto4'] = 'Dovete gi&agrave; disporre di una base XNova Renaissance.';
+$lang['ins_tx_goto5'] = 'Compilate il modulo con i dati esatti di questa base (server, nome, prefisso delle tabelle, credenziali).';
+$lang['ins_goto_err_version'] = 'Questa base non &egrave; una base XNova Renaissance 0.9d o pi&ugrave; recente (controllate il nome della base e il prefisso).';
+$lang['ins_goto_done_version'] = 'Base XNova Renaissance ripresa (versione di origine: %s) e file config.php scritto.';
+$lang['ins_upg_intro1'] = 'L\'aggiornamento applica alla base del gioco le modifiche delle versioni pi&ugrave; recenti di XNova Renaissance.';
+$lang['ins_upg_intro2'] = 'Usa i dati del file config.php esistente. Sono supportate solo le basi 0.9d o pi&ugrave; recenti.';
+$lang['ins_upg_intro3'] = 'Fate un backup della base prima di continuare!';
+$lang['ins_upg_from_version'] = 'Versione della base prima dell\'aggiornamento: %s';
+$lang['ins_upg_applied'] = 'Aggiornamenti applicati: %s';
+$lang['ins_upg_uptodate'] = 'La base &egrave; gi&agrave; aggiornata, nessuna modifica necessaria.';
+$lang['ins_upg_noconfig'] = 'Il gioco non &egrave; ancora installato (config.php &egrave; vuoto): usate la modalit&agrave; Installa.';
+
 ?>

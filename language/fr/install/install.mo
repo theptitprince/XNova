@@ -61,4 +61,21 @@ $lang['ins_acc_sex0']     = "-ind&eacute;fini-";
 $lang['ins_acc_sex1']     = "Homme";
 $lang['ins_acc_sex2']     = "Femme";
 
+
+// XNova Renaissance : modes Transfere et Mise a jour
+$lang['ins_tx_goto1'] = 'Le transfert reprend une base XNova Renaissance existante (version 0.9d ou plus r&eacute;cente), par exemple apr&egrave;s un changement de serveur.';
+$lang['ins_tx_goto2'] = 'Le fichier config.php est r&eacute;&eacute;crit, puis la base est mise &agrave; jour si elle vient d\'une version plus ancienne.';
+$lang['ins_tx_goto3'] = 'Les bases UGamela, XNova 0.8 et Legacies ne sont pas prises en charge. Faites une sauvegarde de votre base avant !';
+$lang['ins_tx_goto4'] = 'Vous devez d&eacute;j&agrave; disposer d\'une base XNova Renaissance.';
+$lang['ins_tx_goto5'] = 'Remplissez le formulaire avec les informations exactes de cette base (serveur, nom, pr&eacute;fixe des tables, identifiants).';
+$lang['ins_goto_err_version'] = 'Cette base n\'est pas une base XNova Renaissance 0.9d ou plus r&eacute;cente (v&eacute;rifiez le nom de la base et le pr&eacute;fixe des tables).';
+$lang['ins_goto_done_version'] = 'Base XNova Renaissance reprise (version d\'origine : %s) et fichier config.php &eacute;crit.';
+$lang['ins_upg_intro1'] = 'La mise &agrave; jour applique &agrave; la base du jeu les modifications apport&eacute;es par les versions plus r&eacute;centes d\'XNova Renaissance.';
+$lang['ins_upg_intro2'] = 'Elle utilise les informations du fichier config.php existant. Seules les bases 0.9d et plus r&eacute;centes sont prises en charge.';
+$lang['ins_upg_intro3'] = 'Faites une sauvegarde de votre base avant de continuer !';
+$lang['ins_upg_from_version'] = 'Version de la base avant la mise &agrave; jour : %s';
+$lang['ins_upg_applied'] = 'Mises &agrave; jour appliqu&eacute;es : %s';
+$lang['ins_upg_uptodate'] = 'La base est d&eacute;j&agrave; &agrave; jour, aucune modification n&eacute;cessaire.';
+$lang['ins_upg_noconfig'] = 'Le jeu n\'est pas encore install&eacute; (config.php est vide) : utilisez le mode Installer.';
+
 ?>

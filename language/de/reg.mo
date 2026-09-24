@@ -36,7 +36,7 @@ $lang['error_rgt']         = 'Sie muessen die AGB zustimmen.<<br />';
 $lang['error_userexist']   = 'Der User existiert bereits!<br />';
 $lang['error_emailexist']  = 'Es existiert bereits ein User mit dieser E-Mail Adresse!<br />';
 $lang['error_sex']         = 'Ung&uuml;ltiges Geschlecht.<br />';
-$lang['error_mailsend']    = 'Ein fehler beim versenden der mail das Passwort ist: ';
+$lang['error_mailsend']    = 'Ein Fehler beim Versenden der Mail. Melden Sie sich mit Ihrem gewaehlten Passwort an.';
 $lang['reg_welldone']      = 'Registrierung abgeschlossen';
 
 // Created by Perberos. All rights reversed (C) 2006

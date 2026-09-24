@@ -123,7 +123,7 @@ if ($_POST) {
         $UserEmail = CheckInputStrings ($_POST['email']);
         $UserPlanet = CheckInputStrings (addslashes($_POST['planet']));
 
-        $md5newpass = md5($newpass);
+        $md5newpass = PasswordHash($newpass);
         // Creation de l'utilisateur
         $QryInsertUser = "INSERT INTO {{table}} SET ";
         $QryInsertUser .= "`username` = '" . SqlEscape(strip_tags($UserName)) . "', ";
@@ -133,7 +133,7 @@ if ($_POST) {
 		$QryInsertUser .= "`ip_at_reg` = '" . $_SERVER["REMOTE_ADDR"] . "', ";
         $QryInsertUser .= "`id_planet` = '0', ";
         $QryInsertUser .= "`register_time` = '" . time() . "', ";
-        $QryInsertUser .= "`password`='" . $md5newpass . "';";
+        $QryInsertUser .= "`password`='" . SqlEscape($md5newpass) . "';";
         doquery($QryInsertUser, 'users');
         // On cherche le numero d'enregistrement de l'utilisateur fraichement créé
         $NewUser = doquery("SELECT `id` FROM {{table}} WHERE `username` = '" . SqlEscape($_POST['character']) . "' LIMIT 1;", 'users', true);
@@ -225,7 +225,7 @@ if ($_POST) {
             $Message .= " (" . htmlentities($_POST["email"]) . ")";
         } else {
             $Message .= " (" . htmlentities($_POST["email"]) . ")";
-            $Message .= "<br><br>" . $lang['error_mailsend'] . " <b>" . $newpass . "</b>";
+            $Message .= "<br><br>" . $lang['error_mailsend']; // le mot de passe n'est plus affiche en clair
         }
         message($Message, $lang['reg_welldone']);
     }

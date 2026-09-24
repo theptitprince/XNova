@@ -201,11 +201,11 @@
        `kolorpoziom` = '$kolorpoziom'
        WHERE `id` = '$iduser' LIMIT 1", "users");
 
-       if (isset($_POST["db_password"]) && md5($_POST["db_password"]) == $user["password"]) {
-          if ($_POST["newpass1"] == $_POST["newpass2"]) {
-             $newpass = md5($_POST["newpass1"]);
-             doquery("UPDATE {{table}} SET `password` = '{$newpass}' WHERE `id` = '{$user['id']}' LIMIT 1", "users");
-             setcookie($game_config['COOKIE_NAME'], "", time()-100000, "/", "", 0); //le da el expire
+       if (isset($_POST["db_password"]) && $_POST["db_password"] != '' && PasswordCheck($_POST["db_password"], $user)) {
+          if ($_POST["newpass1"] != '' && $_POST["newpass1"] == $_POST["newpass2"]) {
+             $newpass = PasswordHash($_POST["newpass1"]);
+             doquery("UPDATE {{table}} SET `password` = '". SqlEscape($newpass) ."' WHERE `id` = '". intval($user['id']) ."' LIMIT 1", "users");
+             SetAuthCookie("", time()-100000); //le da el expire
              message($lang['succeful_changepass'], $lang['changue_pass'],"login.php",1);
           }
        }
@@ -213,7 +213,7 @@
           $query = doquery("SELECT id FROM {{table}} WHERE username='". SqlEscape($username) ."'", 'users', true);
           if (!$query) {
              doquery("UPDATE {{table}} SET username='". SqlEscape($username) ."' WHERE id='". intval($user['id']) ."' LIMIT 1", "users");
-             setcookie($game_config['COOKIE_NAME'], "", time()-100000, "/", "", 0); //le da el expire
+             SetAuthCookie("", time()-100000); //le da el expire
              message($lang['succeful_changename'], $lang['changue_name'],"login.php",1);
           }
        }

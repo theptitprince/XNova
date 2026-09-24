@@ -100,7 +100,7 @@ switch ($mode) {
             display($page, $lang['rename_and_abandon_planet']);
         } elseif ($_POST['kolonieloeschen'] == 1 && $_POST['deleteid'] == $user['current_planet']) {
             // Controle du mot de passe pour abandon de colonie
-            if (md5($_POST['pw']) == $user["password"] && $user['id_planet'] != $user['current_planet']) {
+            if (PasswordCheck($_POST['pw'], $user) && $user['id_planet'] != $user['current_planet']) {
                 $destruyed = time() + 60 * 60 * 24;
 
                 $QryUpdatePlanet = "UPDATE {{table}} SET ";

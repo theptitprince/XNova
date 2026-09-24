@@ -20,7 +20,42 @@ $xnova_root_path = './../';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.'.$phpEx);
 include($xnova_root_path . 'includes/databaseinfos.'.$phpEx);
-include($xnova_root_path . 'includes/migrateinfo.'.$phpEx);
+include($xnova_root_path . 'includes/migrations.'.$phpEx);
+
+// Connexion MySQL de l'installeur (meme reglages que le jeu). Retourne la connexion ou false.
+function InstallConnect ( $Host, $User, $Pass, $Db ) {
+	mysqli_report(MYSQLI_REPORT_OFF);
+	$Connection = @mysqli_connect($Host, $User, $Pass);
+	if (!$Connection || !@mysqli_select_db($Connection, $Db)) {
+		return false;
+	}
+	mysqli_set_charset($Connection, 'utf8mb4');
+	mysqli_query($Connection, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'");
+	return $Connection;
+}
+
+// Ecrit config.php : valeurs exportees proprement (plus d'injection de code possible par le formulaire)
+// et mot secret aleatoire (il signe les cookies de connexion)
+function InstallWriteConfig ( $Host, $User, $Pass, $Db, $Prefix ) {
+	$Settings = array(
+		'server'     => $Host,
+		'user'       => $User,
+		'pass'       => $Pass,
+		'name'       => $Db,
+		'prefix'     => $Prefix,
+		'secretword' => bin2hex(random_bytes(32)),
+	);
+	$Content  = "<?php\n";
+	$Content .= "if(!defined(\"INSIDE\")){ die(\"attemp hacking\"); }\n";
+	$Content .= "\$dbsettings = ". var_export($Settings, true) .";\n";
+	$Content .= "?>";
+	return (@file_put_contents("../config.php", $Content) !== false);
+}
+
+// Prefixe des tables : lettres, chiffres et _ uniquement (il entre dans le nom des tables)
+function InstallValidPrefix ( $Prefix ) {
+	return (preg_match('/^[A-Za-z0-9_]*$/', $Prefix) == 1);
+}
 
 
 $Mode     = $_GET['mode'];
@@ -59,38 +94,16 @@ $nextpage = $Page + 1;
 				$prefix = $_POST['prefix'];
 				$db     = $_POST['db'];
 
-				mysqli_report(MYSQLI_REPORT_OFF);
-				$connection = @mysqli_connect($host, $user, $pass);
-				if ($connection) { mysqli_set_charset($connection, 'utf8mb4'); mysqli_query($connection, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'"); }
-					if (!$connection) {
+				$connection = InstallValidPrefix($prefix) ? InstallConnect($host, $user, $pass, $db) : false;
+				if (!$connection) {
 					header("Location: ?mode=ins&page=1&error=1");
 					exit();
-					}
+				}
 
-				$dbselect = @mysqli_select_db($connection, $db);
-					if (!$dbselect) {
-					header("Location: ?mode=ins&page=1&error=1");
-					exit();
-					}
-
-				$numcookie = mt_rand(1000, 1234567890);
-				$dz = fopen("../config.php", "w");
-					if (!$dz) {
+				if (!InstallWriteConfig($host, $user, $pass, $db, $prefix)) {
 					header("Location: ?mode=ins&page=1&error=2");
 					exit();
-					}
-
-				fwrite($dz, "<?php\n");
-				fwrite($dz, "if(!defined(\"INSIDE\")){ die(\"attemp hacking\"); }\n");
-				fwrite($dz, "\$dbsettings = Array(\n");
-				fwrite($dz, "\"server\"     => \"".$host."\", // MySQL server name.\n");
-				fwrite($dz, "\"user\"       => \"".$user."\", // MySQL username.\n");
-				fwrite($dz, "\"pass\"       => \"".$pass."\", // MySQL password.\n");
-				fwrite($dz, "\"name\"       => \"".$db."\", // MySQL database name.\n");
-				fwrite($dz, "\"prefix\"     => \"".$prefix."\", // Tables prefix.\n");
-				fwrite($dz, "\"secretword\" => \"XNova".$numcookie."\"); // Cookies.\n");
-				fwrite($dz, "?>");
-				fclose($dz);
+				}
 
 				function doquery ($InQry, $TblName) {
 					global $prefix, $connection;
@@ -122,6 +135,9 @@ $nextpage = $Page + 1;
 				doquery ( $QryTableUsers      , 'users'      );
 				doquery ( $QryTableMulti      , 'multi'      );
 
+				// Nouvelle base : directement a la version courante du schema
+				RenaissanceSetSchemaVersion($connection, $prefix, RENAISSANCE_DB_VERSION);
+
 				$SubTPL = gettemplate ('install/ins_form_done');
 				$bloc   = $lang;
 				$frame  = parsetemplate ( $SubTPL, $bloc );
@@ -141,7 +157,7 @@ $nextpage = $Page + 1;
 				$adm_email  = $_POST['adm_email'];
 				$adm_planet = $_POST['adm_planet'];
 				$adm_sex    = $_POST['adm_sex'];
-				$md5pass    = md5($adm_pass);
+				$md5pass    = PasswordHash($adm_pass);
 
 				if (!$_POST['adm_user']) {
 					header("Location: ?mode=ins&page=3&error=3");
@@ -160,26 +176,27 @@ $nextpage = $Page + 1;
 					exit();
 				}
 
+				// Pseudo : meme regle qu'a l'inscription
+				if (preg_match("/[^A-Za-z0-9_\-]/", $adm_user) == 1) {
+					header("Location: ?mode=ins&page=3&error=3");
+					exit();
+				}
+
 				include($xnova_root_path.'config.php');
-				$db_host   = $dbsettings['server'];
-				$db_user   = $dbsettings['user'];
-				$db_pass   = $dbsettings['pass'];
 				$db_prefix = $dbsettings['prefix'];
-				$db_db     = $dbsettings['name'];
 
-				mysqli_report(MYSQLI_REPORT_OFF);
-				$connection = @mysqli_connect($db_host, $db_user, $db_pass);
-				if ($connection) { mysqli_set_charset($connection, 'utf8mb4'); mysqli_query($connection, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'"); }
-					if (!$connection) {
+				$connection = InstallConnect($dbsettings['server'], $dbsettings['user'], $dbsettings['pass'], $dbsettings['name']);
+				if (!$connection) {
 					header("Location: ?mode=ins&page=1&error=1");
 					exit();
-					}
+				}
 
-				$dbselect = @mysqli_select_db($connection, $db_db);
-					if (!$dbselect) {
-					header("Location: ?mode=ins&page=1&error=1");
-					exit();
-					}
+				// Valeurs saisies echappees avant d'entrer dans les requetes
+				$adm_user   = mysqli_real_escape_string($connection, $adm_user);
+				$adm_email  = mysqli_real_escape_string($connection, $adm_email);
+				$adm_planet = mysqli_real_escape_string($connection, strip_tags($adm_planet));
+				$adm_sex    = ($adm_sex == 'F' || $adm_sex == 'M') ? $adm_sex : '';
+				$md5pass    = mysqli_real_escape_string($connection, $md5pass);
 
 				function doquery ($InQry, $TblName) {
 					global $db_prefix, $connection;
@@ -259,67 +276,77 @@ $nextpage = $Page + 1;
 				elseif ($_GET['error'] == 2) {
 				adminMessage ($lang['ins_error2'], $lang['ins_error']);
 				}
+				elseif ($_GET['error'] == 4) {
+				adminMessage ($lang['ins_goto_err_version'], $lang['ins_error']);
+				}
 
 				$SubTPL = gettemplate ('install/ins_goto_form');
 				$bloc   = $lang;
 				$frame  = parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 3) {
+				// Transfere : reprise d'une base XNova Renaissance existante (0.9d ou plus recente) sur un nouveau serveur
 				$host   = $_POST['host'];
 				$user   = $_POST['user'];
 				$pass   = $_POST['passwort'];
 				$prefix = $_POST['prefix'];
 				$db     = $_POST['db'];
 
-				mysqli_report(MYSQLI_REPORT_OFF);
-				$connection = @mysqli_connect($host, $user, $pass);
-				if ($connection) { mysqli_set_charset($connection, 'utf8mb4'); mysqli_query($connection, "SET SESSION sql_mode = 'NO_ENGINE_SUBSTITUTION'"); }
-					if (!$connection) {
+				$connection = InstallValidPrefix($prefix) ? InstallConnect($host, $user, $pass, $db) : false;
+				if (!$connection) {
 					header("Location: ?mode=goto&page=2&error=1");
 					exit();
-					}
-
-				$dbselect = @mysqli_select_db($connection, $db);
-					if (!$dbselect) {
-					header("Location: ?mode=goto&page=2&error=1");
-					exit();
-					}
-
-				$numcookie = mt_rand(1000, 1234567890);
-				$dz = fopen("../config.php", "w");
-					if (!$dz) {
-					header("Location: ?mode=ins&page=1&error=2");
-					exit();
-					}
-
-				fwrite($dz, "<?php\n");
-				fwrite($dz, "if(!defined(\"INSIDE\")){ die(\"attemp hacking\"); }\n");
-				fwrite($dz, "\$dbsettings = Array(\n");
-				fwrite($dz, "\"server\"     => \"".$host."\", // MySQL server name.\n");
-				fwrite($dz, "\"user\"       => \"".$user."\", // MySQL username.\n");
-				fwrite($dz, "\"pass\"       => \"".$pass."\", // MySQL password.\n");
-				fwrite($dz, "\"name\"       => \"".$db."\", // MySQL database name.\n");
-				fwrite($dz, "\"prefix\"     => \"".$prefix."\", // Tables prefix.\n");
-				fwrite($dz, "\"secretword\" => \"XNova".$numcookie."\"); // Cookies.\n");
-				fwrite($dz, "?>");
-				fclose($dz);
-
-				function doquery($query, $p) {
-					global $connection;
-					$query = str_replace("{{prefix}}", $p, $query);
-					$return = mysqli_query($connection, $query) or die("MySQL Error: <b>".mysqli_error($connection)."</b>");
-				return $return;
-				}
-				foreach ($QryMigrate as $query) {
-					doquery($query, $prefix);
 				}
 
+				$FromVersion = RenaissanceSchemaVersion($connection, $prefix);
+				if ($FromVersion === false) {
+					header("Location: ?mode=goto&page=2&error=4");
+					exit();
+				}
+
+				if (!InstallWriteConfig($host, $user, $pass, $db, $prefix)) {
+					header("Location: ?mode=goto&page=2&error=2");
+					exit();
+				}
+
+				// La base est mise a niveau dans la foulee si elle vient d'une version plus ancienne
+				$Applied = RenaissanceRunMigrations($connection, $prefix, $FromVersion);
+
+				$bloc                = $lang;
+				$bloc['ins_tx_done4'] = str_replace('%s', $FromVersion, $lang['ins_goto_done_version']);
+				$bloc['ins_tx_done3'] = (count($Applied) > 0) ? str_replace('%s', implode(', ', $Applied), $lang['ins_upg_applied']) : $lang['ins_upg_uptodate'];
 				$SubTPL = gettemplate ('install/ins_goto_done');
-				$bloc   = $lang;
 				$frame  = parsetemplate ( $SubTPL, $bloc );
 			}
 		 	break;
 		case 'upg':
+			// Mise a jour : applique a la base du jeu installe les modifications des versions plus recentes
+			if ($Page == 1) {
+				$SubTPL = gettemplate ('install/ins_upg_intro');
+				$bloc   = $lang;
+				$frame  = parsetemplate ( $SubTPL, $bloc );
+			}
+			elseif ($Page == 2) {
+				if (!file_exists($xnova_root_path.'config.php') || filesize($xnova_root_path.'config.php') == 0) {
+					adminMessage ($lang['ins_upg_noconfig'], $lang['ins_error']);
+				}
+				include($xnova_root_path.'config.php');
+				$connection = InstallConnect($dbsettings['server'], $dbsettings['user'], $dbsettings['pass'], $dbsettings['name']);
+				if (!$connection) {
+					adminMessage ($lang['ins_error1'], $lang['ins_error']);
+				}
+				$FromVersion = RenaissanceSchemaVersion($connection, $dbsettings['prefix']);
+				if ($FromVersion === false) {
+					adminMessage ($lang['ins_goto_err_version'], $lang['ins_error']);
+				}
+				$Applied = RenaissanceRunMigrations($connection, $dbsettings['prefix'], $FromVersion);
+
+				$bloc                     = $lang;
+				$bloc['ins_upg_from']     = str_replace('%s', $FromVersion, $lang['ins_upg_from_version']);
+				$bloc['ins_upg_result']   = (count($Applied) > 0) ? str_replace('%s', implode(', ', $Applied), $lang['ins_upg_applied']) : $lang['ins_upg_uptodate'];
+				$SubTPL = gettemplate ('install/ins_upg_done');
+				$frame  = parsetemplate ( $SubTPL, $bloc );
+			}
 		 	break;
 		case 'bye':
 				header("Location: ../");
