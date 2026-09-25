@@ -82,4 +82,7 @@ $lang['ins_upg_noconfig'] = 'Le jeu n\'est pas encore install&eacute; (config.ph
 // XNova Renaissance : textes manquants (ils s'affichaient vides)
 $lang['ins_error3'] = 'Tous les champs sont obligatoires, et le pseudo ne doit contenir que des lettres, des chiffres, _ ou -.';
 
+// XNova Renaissance 0.9g : verrou de l'installeur
+$lang['ins_locked'] = 'Le jeu est d&eacute;j&agrave; install&eacute; : installation et transfert sont verrouill&eacute;s (seule la mise &agrave; jour reste possible). Pour r&eacute;installer, videz d\'abord le fichier config.php. Pensez aussi &agrave; supprimer le dossier install du serveur.';
+
 ?>

@@ -57,6 +57,35 @@ function InstallValidPrefix ( $Prefix ) {
 	return (preg_match('/^[A-Za-z0-9_]*$/', $Prefix) == 1);
 }
 
+// Verrou de l'installeur. Sans lui, sur un serveur ou le dossier install est reste, n'importe qui pouvait
+// reecrire config.php (Installer, Transfere) et brancher le jeu sur sa propre base.
+// config.php deja rempli : le jeu est installe (ou une installation est en cours)
+function InstallConfigWritten () {
+	global $xnova_root_path;
+	$File = $xnova_root_path . 'config.php';
+	return (is_file($File) && trim((string) file_get_contents($File)) != '');
+}
+
+// Un compte administrateur existe deja dans la base de config.php : l'installation est terminee
+function InstallHasAdmin () {
+	global $xnova_root_path;
+	if (!InstallConfigWritten()) {
+		return false;
+	}
+	$dbsettings = array();
+	include($xnova_root_path . 'config.php');
+	if (!InstallValidPrefix($dbsettings['prefix'] ?? '')) {
+		return false;
+	}
+	$Connection = InstallConnect($dbsettings['server'] ?? '', $dbsettings['user'] ?? '', $dbsettings['pass'] ?? '', $dbsettings['name'] ?? '');
+	if (!$Connection) {
+		return false;
+	}
+	$Result = @mysqli_query($Connection, "SELECT COUNT(*) FROM `" . $dbsettings['prefix'] . "users` WHERE `authlevel` >= 3");
+	$Row    = $Result ? mysqli_fetch_row($Result) : null;
+	return ($Row && $Row[0] > 0);
+}
+
 
 $Mode     = ($_GET['mode'] ?? null);
 $Page     = ($_GET['page'] ?? null);
@@ -68,6 +97,16 @@ $nextpage = $Page + 1;
 
 	$MainTPL = gettemplate('install/ins_body');
 	includeLang('install/install');
+
+	// Verrou : Installer (pages 1-2) et Transfere reecrivent config.php, donc seulement s'il est vide ;
+	// le compte administrateur (pages 3-4) seulement s'il n'en existe aucun. La mise a jour reste possible.
+	if ((($Mode == 'ins' && $Page <= 2) || $Mode == 'goto') && InstallConfigWritten()) {
+		AdminMessage ($lang['ins_locked'], $lang['ins_error']);
+	}
+	if ($Mode == 'ins' && $Page >= 3 && InstallHasAdmin()) {
+		AdminMessage ($lang['ins_locked'], $lang['ins_error']);
+	}
+
 	switch ($Mode) {
 		case 'intro':
 				$SubTPL = gettemplate ('install/ins_intro');
