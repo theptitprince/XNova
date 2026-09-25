@@ -1,7 +1,7 @@
 <br>
 <table width="600" style="color:#FFFFFF">
 <tr>
-	<td class="c" colspan="6">{ban_title}</td>
+	<td class="c" colspan="5">{ban_title}</td>
 </tr><tr>
 	<th>{ban_name}</th>
 	<th>{ban_reason}</th>
