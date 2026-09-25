@@ -44,6 +44,9 @@ function DoFleetJump ( $CurrentUser, $CurrentPlanet ) {
 					$SubQueryOri = "";
 					$SubQueryDes = "";
 					for ( $Ship = 200; $Ship < 300; $Ship++ ) {
+						if (empty($resource[ $Ship ])) {
+							continue; // numero sans vaisseau
+						}
 						$ShipLabel = "c". $Ship;
 						// Quantites entieres et positives uniquement (pas de vaisseaux crees par une valeur negative)
 						$_POST[ $ShipLabel ] = isset($_POST[ $ShipLabel ]) ? max(0, intval($_POST[ $ShipLabel ])) : 0;

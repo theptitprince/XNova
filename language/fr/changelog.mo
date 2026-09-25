@@ -31,7 +31,10 @@ $lang['changelog']   = array(
 - FIX : Textes : demandes d\'ami, discussion, taille des notes en caract&egrave;res, titre des Options
 - FIX : Alliance : page des droits en erreur fatale pour une alliance neuve (PHP 8), droits des rangs, fautes
 - FIX : Administration : le message &agrave; tous les joueurs ne partait jamais ; texte d&eacute;sormais &eacute;chapp&eacute; (injection de code)
-- FIX : Messagerie : cat&eacute;gorie des messages de l\'administration absente, couleur illisible des rapports d\'exp&eacute;dition',
+- FIX : Messagerie : cat&eacute;gorie des messages de l\'administration absente, couleur illisible des rapports d\'exp&eacute;dition
+- FIX : Missiles : tir sans effet ni rapport sur une plan&egrave;te ayant une lune, textes du jeu effac&eacute;s au moment de l\'impact
+- FIX : Missiles : port&eacute;e contr&ocirc;l&eacute;e dans les deux sens, nombre n&eacute;gatif refus&eacute; (il cr&eacute;ait des missiles), rapport en fran&ccedil;ais
+- FIX : Porte de saut et bouton d\'abandon de colonie : avertissements et fautes',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)

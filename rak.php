@@ -42,7 +42,8 @@ if (isset($resource) && !empty($resource[401])) {
 			$planetrow = doquery("SELECT * FROM {{table}} WHERE
 								galaxy = '" . $selected_row['galaxy'] . "' AND
 								system = '" . $selected_row['system'] . "' AND
-								planet = '" . $selected_row['planet'] . "'", 'planets');
+								planet = '" . $selected_row['planet'] . "' AND
+								planet_type = '1'", 'planets');
 
 			$select_ziel = doquery("SELECT defence_tech FROM {{table}} WHERE
 								id = '" . $selected_row['zielid'] . "'", 'users');
@@ -82,7 +83,7 @@ if (isset($resource) && !empty($resource[401])) {
 					9 => $planet['interceptor_misil'], // Abfangrakete
 					);
 
-				$lang =
+				$RakLang =
 				array(0 => "Lanceur Missile",
 					1 => "Canon Magn&eacute;tique",
 					2 => "Batterie Electromagn&eacute;tique",
@@ -102,7 +103,7 @@ if (isset($resource) && !empty($resource[401])) {
 				$message = '';
 
 				if ($planet['interceptor_misil'] >= $selected_row['anzahl']) {
-					$message = 'Les Missiles Intercepteur adverses ont d&eacute;truit vos missiles Interplanetaire<br>';
+					$message = 'Les missiles d\'interception ont d&eacute;truit les missiles interplan&eacute;taires ennemis.<br>';
 
 					$x = $resource[$ids[9]];
 
@@ -113,13 +114,13 @@ if (isset($resource) && !empty($resource[401])) {
 
 						doquery("UPDATE {{table}} SET " . $x . " = '0' WHERE id = " . $planet['id'], 'planets');
 
-						$message = $planet['interceptor_misil'] . " missiles Interplanetaire ont &eacute;t&eacute; intercept&eacute;s par vos missiles.<br>";
+						$message = $planet['interceptor_misil'] . " missile(s) interplan&eacute;taire(s) intercept&eacute;(s) par vos missiles d'interception.<br>";
 					}
 
 					foreach ($irak['zerstoert'] as $id => $anzahl) {
 						if (!empty($anzahl) && $id < 10) {
 							if ($id != 9)
-								$message .= $lang[$id] . " (- " . $anzahl . ")<br>";
+								$message .= $RakLang[$id] . " (- " . $anzahl . ")<br>";
 
 							$x = $resource[$ids[$id]];
 
@@ -128,10 +129,13 @@ if (isset($resource) && !empty($resource[401])) {
 					}
 				}
 
+				$name        = '';
+				$name_deffer = '';
 				$planet_ = doquery("SELECT * FROM {{table}} WHERE
 								galaxy = '" . $selected_row['galaxy_angreifer'] . "' AND
 								system = '" . $selected_row['system_angreifer'] . "' AND
-								planet = '" . $selected_row['planet_angreifer'] . "'", 'planets');
+								planet = '" . $selected_row['planet_angreifer'] . "' AND
+								planet_type = '1'", 'planets');
 
 				if (mysqli_num_rows($planet_) == 1) {
 					$array = mysqli_fetch_array($planet_);
@@ -142,7 +146,8 @@ if (isset($resource) && !empty($resource[401])) {
 				$planet_2 = doquery("SELECT * FROM {{table}} WHERE
 								galaxy = '" . $selected_row['galaxy'] . "' AND
 								system = '" . $selected_row['system'] . "' AND
-								planet = '" . $selected_row['planet'] . "'", 'planets');
+								planet = '" . $selected_row['planet'] . "' AND
+								planet_type = '1'", 'planets');
 
 				if (mysqli_num_rows($planet_2) == 1) {
 					$array = mysqli_fetch_array($planet_2);
@@ -150,21 +155,13 @@ if (isset($resource) && !empty($resource[401])) {
 					$name_deffer = $array['name'];
 				}
 
-				$message_vorlage  = 'Une attaque de missiles (' . $selected_row['anzahl'] . ') de ' . $name . ' <a href="galaxy.php?mode=3&galaxy=' . $selected_row['galaxy_angreifer'] . '&system=' . $selected_row['system_angreifer'] . '&planet=' . $selected_row['planet_angreifer'] . '">[' . $selected_row['galaxy_angreifer'] . ':' . $selected_row['system_angreifer'] . ':' . $selected_row['planet_angreifer'] . ']</a>';
-				$message_vorlage .= 'de la planete ' . $name_deffer . ' <a href="galaxy.php?mode=3&galaxy=' . $selected_row['galaxy'] . '&system=' . $selected_row['system'] . '&planet=' . $selected_row['planet'] . '">[' . $selected_row['galaxy'] . ':' . $selected_row['system'] . ':' . $selected_row['planet'] . ']</a><br><br>';
+				$message_vorlage  = 'Une attaque de missiles (' . $selected_row['anzahl'] . ') venant de ' . $name . ' <a href="galaxy.php?mode=3&galaxy=' . $selected_row['galaxy_angreifer'] . '&system=' . $selected_row['system_angreifer'] . '&planet=' . $selected_row['planet_angreifer'] . '">[' . $selected_row['galaxy_angreifer'] . ':' . $selected_row['system_angreifer'] . ':' . $selected_row['planet_angreifer'] . ']</a>';
+				$message_vorlage .= ' a frapp&eacute; la plan&egrave;te ' . $name_deffer . ' <a href="galaxy.php?mode=3&galaxy=' . $selected_row['galaxy'] . '&system=' . $selected_row['system'] . '&planet=' . $selected_row['planet'] . '">[' . $selected_row['galaxy'] . ':' . $selected_row['system'] . ':' . $selected_row['planet'] . ']</a><br><br>';
 
 				if (empty($message))
-					$message = "L ennemis ne possedait pas de d&eacute;fenses, rien n a &eacute;t&eacute; d&eacute;truit !";
+					$message = "La plan&egrave;te ne poss&eacute;dait pas de d&eacute;fenses, rien n'a &eacute;t&eacute; d&eacute;truit.";
 
-				doquery("INSERT INTO {{table}} SET
-						`message_owner`='" . $selected_row['zielid'] . "',
-						`message_sender`='',
-						`message_time`=UNIX_TIMESTAMP(),
-						`message_type`='0',
-						`message_from`='QG',
-						`message_subject`='Attaque de MIP',
-						`message_text`='" . $message_vorlage . $message . "'" , 'messages');
-				doquery("UPDATE {{table}} SET new_message=new_message+1 WHERE id='" . $selected_row['zielid'] . "'", 'users');
+				SendSimpleMessage ( $selected_row['zielid'], '', time(), 3, 'QG', 'Attaque de missiles interplan&eacute;taires', $message_vorlage . $message );
 
 				doquery("DELETE FROM {{table}} WHERE id = '" . $selected_row['id'] . "'", 'iraks');
 			}
