@@ -73,4 +73,13 @@ $lang['adm_er_play']  = "Número del jugador";
 $lang['adm_er_time']  = "Fecha";
 $lang['adm_er_nbs']   = "error(es) en total...";
 
+// XNova Renaissance 0.9g : multi-comptes declares (admin/declare_list.php)
+$lang['adm_dl_title']    = 'Multicuentas declaradas';
+$lang['adm_dl_list']     = 'Jugadores que han declarado compartir su conexi&oacute;n';
+$lang['adm_dl_by']       = 'Declarante';
+$lang['adm_dl_by_id']    = 'ID del declarante';
+$lang['adm_dl_player']   = 'Jugador';
+$lang['adm_dl_reason']   = 'Motivo';
+$lang['adm_dl_count']    = 'declaraci&oacute;n(es) en total';
+
 ?>

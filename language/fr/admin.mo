@@ -117,6 +117,14 @@ $lang['adm_er_nbs']   = "erreur(s) au total...";
 
 // XNova Renaissance : textes manquants (ils s'affichaient vides)
 $lang['adminpanel'] = 'Administration';
-$lang['adm_bt_delet'] = 'Supprimer';
+
+// Multi-comptes declares (admin/declare_list.php)
+$lang['adm_dl_title']  = 'Multi-comptes d&eacute;clar&eacute;s';
+$lang['adm_dl_list']   = 'Joueurs ayant d&eacute;clar&eacute; partager leur connexion';
+$lang['adm_dl_by']     = 'D&eacute;clarant';
+$lang['adm_dl_by_id']  = 'ID du d&eacute;clarant';
+$lang['adm_dl_player'] = 'Joueur';
+$lang['adm_dl_reason'] = 'Raison';
+$lang['adm_dl_count']  = 'd&eacute;claration(s) au total';
 
 ?>

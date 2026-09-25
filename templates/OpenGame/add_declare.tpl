@@ -1,27 +1,26 @@
 <br><br>
-<h2>DECLARATION DE MULTICOMPTE</h2>
+<h2>{declare_title}</h2>
 <form action="add_declare.php" method="post">
 <input type="hidden" name="mode" value="addit">
-<table width="305">
-<tbody>
+<table width="519">
 <tr>
-	<td class="c" colspan="6">DECLARATION DE MULTICOMPTE</td>
+	<td class="c" colspan="2">{declare_title}</td>
 </tr><tr>
-	<th>Premier joueur implique</th>
-	<th><input name="dec1" type="text" value="" /></th>
+	<th colspan="2" style="font-weight: normal; padding: 6px;">{declare_text}</th>
 </tr><tr>
-	<th>Second joueur implique</td>
-	<th><input name="dec2" type="text" value="" /></th>
+	<th>{declare_player_1}</th>
+	<th><input name="dec1" type="text" value="" maxlength="64" /></th>
 </tr><tr>
-	<th>Troisieme joueur implique</td>
-	<th><input name="dec3" type="text" value="" /></th>
-</tr>
-<tr>
-	<th>Raison du multicompte</td>
-	<th><input name="reason" type="text" value="0" /></th>
+	<th>{declare_player_2}</th>
+	<th><input name="dec2" type="text" value="" maxlength="64" /></th>
 </tr><tr>
-	<th colspan="2"><input type="Submit" value="{adm_am_add}" /></th>
-</tbody>
+	<th>{declare_player_3}</th>
+	<th><input name="dec3" type="text" value="" maxlength="64" /></th>
+</tr><tr>
+	<th>{declare_reason}</th>
+	<th><input name="reason" type="text" value="" maxlength="255" /></th>
+</tr><tr>
+	<th colspan="2"><input type="submit" value="{declare_send}" /></th>
 </tr>
 </table>
 </form>

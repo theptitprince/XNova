@@ -156,7 +156,6 @@ function CsrfGetAction () {
 		'quickfleet.php'         => array('mode'),             // envoi rapide de recycleurs
 		'phalanx.php'            => array('galaxy'),           // scan de phalange (coute du deuterium)
 		'admin/userlist.php'     => array('cmd'),              // supprimer un joueur
-		'admin/declare_list.php' => array('cmd'),
 		'admin/chat.php'         => array('delete', 'deleteall'),
 		'admin/errors.php'       => array('delete', 'deleteall'),
 		'admin/paneladmina.php'  => array('authlvl'),          // changer le niveau d'un compte

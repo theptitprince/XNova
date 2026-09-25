@@ -4,6 +4,13 @@ $lang['Description'] = 'D&eacute;scription';
 $lang['changelog']   = array(
 
 
+'0.9g Renaissance' => 'Nettoyage (theptitprince)
+- FIX : D&eacute;claration de multi-compte : titre, textes traduits, message de confirmation du jeu ; au moins un joueur exig&eacute;
+- FIX : Administration : liste &laquo; multi-comptes &raquo; toujours vide supprim&eacute;e (second syst&egrave;me jamais fonctionnel), page &laquo; supprimer un joueur &raquo; inachev&eacute;e retir&eacute;e
+- FIX : Robot anti-multi : un seul bannissement par joueur (au lieu d\'un par compte partageant l\'adresse IP)
+- FIX : Bannissements : pseudo, auteur et e-mail tronqu&eacute;s &agrave; 11 et 20 caract&egrave;res (le d&eacute;bannissement ratait les pseudos longs)
+- FIX : Options, cadre du jeu, destruction de lune : chemin du jeu lu dans une ancienne variable UGamela',
+
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)
 - FIX : Protection XSS : noms de plan&egrave;te et d\'alliance, messages, textes d\'alliance, notes, recherches... ne peuvent plus contenir de code

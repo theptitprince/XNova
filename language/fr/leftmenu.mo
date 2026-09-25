@@ -58,8 +58,7 @@ $lang['adm_conf']     = 'Configuration';
 $lang['adm_reset']    = 'Remise &agrave; z&eacute;ro';
 $lang['adm_extcopy']  = 'Copyright &eacute;tendus';
 
-$lang['adm_multi']    = 'Liste multi-comptes';
-$lang['multis_declared']    = 'Multicomptes d&eacute;clar&eacute;s';
+$lang['multis_declared']    = 'Multi-comptes d&eacute;clar&eacute;s';
 
 $lang['adm_plrlst']   = 'Liste des joueurs';
 $lang['adm_plrsch']   = 'Chercher un joueur';

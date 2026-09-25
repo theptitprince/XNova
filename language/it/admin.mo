@@ -50,4 +50,13 @@ $lang['adm_bn_bnbt']  = "Bannare";
 $lang['adm_bn_thpl']  = "I giocatori";
 $lang['adm_bn_isbn']  = "sono stati bannati!";
 
+// XNova Renaissance 0.9g : multi-comptes declares (admin/declare_list.php)
+$lang['adm_dl_title']    = 'Multi-account dichiarati';
+$lang['adm_dl_list']     = 'Giocatori che hanno dichiarato di condividere la connessione';
+$lang['adm_dl_by']       = 'Dichiarante';
+$lang['adm_dl_by_id']    = 'ID del dichiarante';
+$lang['adm_dl_player']   = 'Giocatore';
+$lang['adm_dl_reason']   = 'Motivo';
+$lang['adm_dl_count']    = 'dichiarazione/i in totale';
+
 ?>

@@ -133,7 +133,6 @@ $nextpage = $Page + 1;
 				doquery ( $QryTableRw         , 'rw'         );
 				doquery ( $QryTableStatPoints , 'statpoints' );
 				doquery ( $QryTableUsers      , 'users'      );
-				doquery ( $QryTableMulti      , 'multi'      );
 				// Table du formulaire de contact : meme definition que la mise a jour 0.9f (includes/migrations.php)
 				mysqli_query($connection, str_replace('{{prefix}}', $prefix, $RenaissanceMigrations['0.9f'][0])) or die("MySQL Error: <b>". mysqli_error($connection) ."</b>");
 
