@@ -12,6 +12,7 @@ $lang['type'][3]    = "Informe(s) de combate(s)";
 $lang['type'][4]    = "Informe(s) de explotación(s)";
 $lang['type'][5]    = "Transporte(s) de flota(s)";
 $lang['type'][15]   = "Informe(s) de expedición(s)";
+$lang['type'][97]   = 'Mensaje(s) de la administraci&oacute;n';
 $lang['type'][99]   = "Informe(s) Lista de construcción";
 $lang['type'][100]  = "Ver todos los Mensajes";
 

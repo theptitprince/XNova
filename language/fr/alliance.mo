@@ -8,11 +8,11 @@ $lang['make_alliance'] = 'Fonder sa propre alliance';
 $lang['search_alliance'] = 'Chercher';
 
 $lang['searched_alliance_availables'] = 'Nous avons trouv&eacute; les alliances suivantes:';
-$lang['alliance_has_been_maked'] = 'L\'alliance %s a &eacute;t&eacute; cr&eacute;e';
+$lang['alliance_has_been_maked'] = 'L\'alliance %s a &eacute;t&eacute; cr&eacute;&eacute;e';
 $lang['have_not_tag'] = 'L\'alliance n\'a pas de TAG';
 $lang['have_not_name'] = 'L\'alliance n\'a pas de nom';
 $lang['always_exist'] = '%s existe d&eacute;j&agrave;';
-$lang['ally_maked'] = '%s cr&eacute;e';
+$lang['ally_maked'] = '%s cr&eacute;&eacute;e';
 $lang['ally_notexist'] = 'L\'alliance n\'existe plus';
 $lang['Send_circular_mail'] = 'Envoyer un mail collectif';
 $lang['Text_mail'] = 'Envoyer un mail collectif';
@@ -56,11 +56,11 @@ $lang['Back'] = 'Retour';
 $lang['Help'] = 'Petite aide';
 $lang['Message'] = 'Message';
 $lang['characters'] = 'caract&egrave;res';
-$lang['Destiny'] = 'D&eacute;stinataire';
+$lang['Destiny'] = 'Destinataire';
 
 $lang['Write_to_alliance'] = 'Envoyer une candidature &agrave; l\'alliance [%s]';
 
-$lang['There_is_no_a_text_apply'] = 'La direction de l\'alliance n\'a pas cr&eacute;e de mod&egrave;le';
+$lang['There_is_no_a_text_apply'] = 'La direction de l\'alliance n\'a pas cr&eacute;&eacute; de mod&egrave;le';
 $lang['Waiting_a_request_text'] = 'Vous avez d&eacute;j&agrave; depos&eacute; votre candidature a l\'alliance [%s]. Veuillez attendre d\'obtenir une r&eacute;ponse ou retirer votre candidature.';
 $lang['Canceled_a_request_text'] = 'L\'alliance [%s] n\'a pas accept&eacute;e votre candidature, Maintenant vous pouvez &eacute;crire une nouvelle demande ou cr&eacute;er votre propre alliance.';
 

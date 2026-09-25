@@ -21,7 +21,6 @@ if (empty($a))      { unset($a); }
 $sort1 = intval($_GET['sort1'] ?? 0);
 if (empty($sort1))  { unset($sort1); }
 $sort2 = intval($_GET['sort2'] ?? 0);
-if (empty($sort2))  { unset($sort2); }
 $d = isset($_GET['d']) ? intval($_GET['d']) : null;
 if ((!is_numeric($d)) || (empty($d) && $d != 0))
 	unset($d);
@@ -32,8 +31,6 @@ if (empty($edit))
 	unset($edit);
 
 $rank = intval($_GET['rank'] ?? 0);
-if (empty($rank))
-	unset($rank);
 
 $kick = intval($_GET['kick'] ?? 0);
 if (empty($kick))
@@ -60,6 +57,14 @@ $a        = intval(($_GET['a'] ?? null));
 $tag      = SqlEscape(($_GET['tag'] ?? null));
 
 includeLang('alliance');
+
+$page = '';
+// Rangs de l'alliance : toujours un tableau. Alliance neuve : colonne vide, unserialize() rendait false
+// et count(false) faisait planter la page des droits (erreur fatale en PHP 8).
+function AllyRanks ( $Ally ) {
+	$Ranks = @unserialize((string) ($Ally['ally_ranks'] ?? ''), array('allowed_classes' => false));
+	return is_array($Ranks) ? $Ranks : array();
+}
 
 
 /*
@@ -303,59 +308,23 @@ array(1 =>
 */
 	$ally = doquery("SELECT * FROM {{table}} WHERE id='{$user['ally_id']}'", "alliance", true);
 
-	$ally_ranks = unserialize($ally['ally_ranks']);
+	$ally_ranks = AllyRanks($ally);
 
-	$allianz_raenge = unserialize($ally['ally_ranks']);
+	$allianz_raenge = $ally_ranks;
 
-	if ($allianz_raenge[$user['ally_rank_id']-1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id']) {
-		$user_can_watch_memberlist_status = true;
-	} else
-		$user_can_watch_memberlist_status = false;
-
-	if ($allianz_raenge[$user['ally_rank_id']-1]['memberlist'] == 1 || $ally['ally_owner'] == $user['id']) {
-		$user_can_watch_memberlist = true;
-	} else
-		$user_can_watch_memberlist = false;
-
-	if ($allianz_raenge[$user['ally_rank_id']-1]['mails'] == 1 || $ally['ally_owner'] == $user['id']) {
-		$user_can_send_mails = true;
-	} else
-		$user_can_send_mails = false;
-
-	if ($allianz_raenge[$user['ally_rank_id']-1]['kick'] == 1 || $ally['ally_owner'] == $user['id']) {
-		$user_can_kick = true;
-	} else
-		$user_can_kick = false;
-
-	if ($allianz_raenge[$user['ally_rank_id']-1]['rechtehand'] == 1 || $ally['ally_owner'] == $user['id'])
-		$user_can_edit_rights = true;
-	else
-		$user_can_edit_rights = false;
-
-	if ($allianz_raenge[$user['ally_rank_id']-1]['delete'] == 1 || $ally['ally_owner'] == $user['id'])
-		$user_can_exit_alliance = true;
-	else
-		$user_can_exit_alliance = false;
-
-	if ($allianz_raenge[$user['ally_rank_id']-1]['bewerbungen'] == 1 || $ally['ally_owner'] == $user['id'])
-		$user_bewerbungen_einsehen = true;
-	else
-		$user_bewerbungen_einsehen = false;
-
-	if ($allianz_raenge[$user['ally_rank_id']-1]['bewerbungenbearbeiten'] == 1 || $ally['ally_owner'] == $user['id'])
-		$user_bewerbungen_bearbeiten = true;
-	else
-		$user_bewerbungen_bearbeiten = false;
-
-	if ($allianz_raenge[$user['ally_rank_id']-1]['administrieren'] == 1 || $ally['ally_owner'] == $user['id'])
-		$user_admin = true;
-	else
-		$user_admin = false;
-
-	if ($allianz_raenge[$user['ally_rank_id']-1]['onlinestatus'] == 1 || $ally['ally_owner'] == $user['id'])
-		$user_onlinestatus = true;
-	else
-		$user_onlinestatus = false;
+	// Droits du rang du joueur (aucun rang pour le fondateur : il a tous les droits)
+	$MyRank  = $allianz_raenge[$user['ally_rank_id'] - 1] ?? array();
+	$IsOwner = (($ally['ally_owner'] ?? 0) == $user['id']);
+	$user_can_watch_memberlist_status = (($MyRank['onlinestatus'] ?? 0) == 1 || $IsOwner);
+	$user_can_watch_memberlist = (($MyRank['memberlist'] ?? 0) == 1 || $IsOwner);
+	$user_can_send_mails = (($MyRank['mails'] ?? 0) == 1 || $IsOwner);
+	$user_can_kick = (($MyRank['kick'] ?? 0) == 1 || $IsOwner);
+	$user_can_edit_rights = (($MyRank['rechtehand'] ?? 0) == 1 || $IsOwner);
+	$user_can_exit_alliance = (($MyRank['delete'] ?? 0) == 1 || $IsOwner);
+	$user_bewerbungen_einsehen = (($MyRank['bewerbungen'] ?? 0) == 1 || $IsOwner);
+	$user_bewerbungen_bearbeiten = (($MyRank['bewerbungenbearbeiten'] ?? 0) == 1 || $IsOwner);
+	$user_admin = (($MyRank['administrieren'] ?? 0) == 1 || $IsOwner);
+	$user_onlinestatus = (($MyRank['onlinestatus'] ?? 0) == 1 || $IsOwner);
 
 	if (!$ally) {
 		doquery("UPDATE {{table}} SET `ally_id`=0 WHERE `id`='{$user['id']}'", "users");
@@ -388,8 +357,8 @@ array(1 =>
 	  voy a ver si tambien agrego las cordenadas en el id user...
 	*/
 		// obtenemos el array de los rangos
-		// $ally_ranks = unserialize($ally['ally_ranks']);
-		$allianz_raenge = unserialize($ally['ally_ranks']);
+		// $ally_ranks = AllyRanks($ally);
+		$allianz_raenge = AllyRanks($ally);
 		// $user_can_watch_memberlist
 		// comprobamos el permiso
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_watch_memberlist) {
@@ -487,7 +456,7 @@ array(1 =>
 	  creo que aqui tendria que ver yo como crear el sistema de mensajes...
 	*/
 		// un loop para mostrar losrangos
-		$allianz_raenge = unserialize($ally['ally_ranks']);
+		$allianz_raenge = AllyRanks($ally);
 		// comprobamos el permiso
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_send_mails) {
 			message($lang['Denied_access'], $lang['Send_circular_mail']);
@@ -539,7 +508,7 @@ array(1 =>
 	}
 
 	if ($mode == 'admin' && $edit == 'rights') { // Administrar leyes
-		$allianz_raenge = unserialize($ally['ally_ranks']);
+		$allianz_raenge = AllyRanks($ally);
 
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_edit_rights) {
 			message($lang['Denied_access'], $lang['Members_list']);
@@ -1033,7 +1002,7 @@ array(1 =>
 	if ($mode == 'admin' && $edit == 'name') {
 		 // Changer le nom de l'alliance
 
-		$ally_ranks = unserialize($ally['ally_ranks']);
+		$ally_ranks = AllyRanks($ally);
 		// comprobamos el permiso
 		if ($ally['ally_owner'] != $user['id'] && !$user_admin) {
 			message($lang['Denied_access'], $lang['Members_list']);
@@ -1058,7 +1027,7 @@ array(1 =>
 
 	if ($mode == 'admin' && $edit == 'tag') {
 		// Changer le TAG l'alliance
-		$ally_ranks = unserialize($ally['ally_ranks']);
+		$ally_ranks = AllyRanks($ally);
 
 		// Bon si on verifiait les autorisation ?
 		if ($ally['ally_owner'] != $user['id'] && !$user_admin) {
@@ -1082,7 +1051,7 @@ array(1 =>
 
 	if ($mode == 'admin' && $edit == 'exit') { // disolver una alianza
 		// obtenemos el array de los rangos
-		$ally_ranks = unserialize($ally['ally_ranks']);
+		$ally_ranks = AllyRanks($ally);
 		// comprobamos el permiso
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_exit_alliance) {
 			message($lang['Denied_access'], $lang['Members_list']);
@@ -1098,7 +1067,7 @@ array(1 =>
 	{
 	 // Default *falta revisar...*
 		if ($ally['ally_owner'] != $user['id']) {
-			$ally_ranks = unserialize($ally['ally_ranks']);
+			$ally_ranks = AllyRanks($ally);
 		}
 		// Imagen de la alianza
 		if ($ally['ally_ranks'] != '') {
@@ -1125,7 +1094,7 @@ array(1 =>
 			$lang['alliance_admin'] = '';
 		}
 		// El link de enviar correo circular
-		if ($ally['ally_owner'] == $user['id'] || $ally_ranks[$user['ally_rank_id']-1]['mails'] != 0) {
+		if ($ally['ally_owner'] == $user['id'] || ($ally_ranks[$user['ally_rank_id']-1]['mails'] ?? 0) != 0) {
 			$lang['send_circular_mail'] = "<tr><th>{$lang['Circular_message']}</th><th><a href=\"?mode=circular\">{$lang['Send_circular_mail']}</a></th></tr>";
 		} else {
 			$lang['send_circular_mail'] = '';
@@ -1135,13 +1104,13 @@ array(1 =>
 		$request = doquery("SELECT id FROM {{table}} WHERE ally_request='{$ally['id']}'", 'users');
 		$request_count = mysqli_num_rows($request);
 		if ($request_count != 0) {
-			if ($ally['ally_owner'] == $user['id'] || $ally_ranks[$user['ally_rank_id']-1]['bewerbungen'] != 0)
+			if ($ally['ally_owner'] == $user['id'] || ($ally_ranks[$user['ally_rank_id']-1]['bewerbungen'] ?? 0) != 0)
 				$lang['requests'] = "<tr><th>{$lang['Requests']}</th><th><a href=\"alliance.php?mode=admin&edit=requests\">{$request_count} {$lang['XRequests']}</a></th></tr>";
 		}
 		if ($ally['ally_owner'] != $user['id']) {
-			$lang['ally_owner'] .= MessageForm($lang['Exit_of_this_alliance'], "", "?mode=exit", $lang['Continue']);
+			$lang['ally_owner'] = MessageForm($lang['Exit_of_this_alliance'], "", "?mode=exit", $lang['Continue']);
 		} else {
-			$lang['ally_owner'] .= '';
+			$lang['ally_owner'] = '';
 		}
 		// La imagen de logotipo
 		$lang['ally_image'] = ($ally['ally_image'] != '')?
@@ -1157,10 +1126,10 @@ array(1 =>
 		$replacements[] = '<font color="\1">';
 		$patterns[] = "#\[/f\]#Ssi";
 		$replacements[] = '</font>';
-		$ally['ally_description'] = preg_replace($patterns, $replacements, $ally['ally_description']);
+		$ally['ally_description'] = preg_replace($patterns, $replacements, (string) ($ally['ally_description'] ?? ''));
 		$lang['ally_description'] = nl2br($ally['ally_description']);
 
-		$ally['ally_text'] = preg_replace($patterns, $replacements, $ally['ally_text']);
+		$ally['ally_text'] = preg_replace($patterns, $replacements, (string) ($ally['ally_text'] ?? ''));
 		$lang['ally_text'] = nl2br($ally['ally_text']);
 
 		$lang['ally_web'] = $ally['ally_web'];

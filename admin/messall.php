@@ -20,6 +20,8 @@ $xnova_root_path = './../';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
+	// Le formulaire envoie sur ?mode=change : jamais lu depuis la fin de extract(), le message ne partait plus
+	$mode = ($_GET['mode'] ?? '');
 	if ($user['authlevel'] >= 1) {
 		if ($_POST && $mode == "change") {
 			if (isset($_POST["tresc"]) && ($_POST["tresc"] ?? null) != '') {
@@ -28,6 +30,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			if (isset($_POST["temat"]) && ($_POST["temat"] ?? null) != '') {
 				$game_config['temat'] = ($_POST['temat'] ?? null);
 			}
+			// Couleur et titre selon le niveau (niveaux 1 et 2 : aucune valeur avant)
+			$kolor = 'orange';
+			$ranga = $lang['user_level'][$user['authlevel']] ?? '';
 			if ($user['authlevel'] == 3) {
 				$kolor = 'red';
 				$ranga = 'Administrator';
@@ -42,8 +47,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 				$sq      = doquery("SELECT `id` FROM {{table}}", "users");
 				$Time    = time();
 				$From    = "<font color=\"". $kolor ."\">". $ranga ." ".$user['username']."</font>";
-				$Subject = "<font color=\"". $kolor ."\">". $game_config['temat'] ."</font>";
-				$Message = "<font color=\"". $kolor ."\"><b>". $game_config['tresc'] ."</b></font>";
+				// Texte echappe : un moderateur pouvait injecter du HTML / du script chez tous les joueurs
+				$Subject = "<font color=\"". $kolor ."\">". SafeText($game_config['temat']) ."</font>";
+				$Message = "<font color=\"". $kolor ."\"><b>". nl2br(SafeText($game_config['tresc'])) ."</b></font>";
 				while ($u = mysqli_fetch_array($sq)) {
 					SendSimpleMessage ( $u['id'], $user['id'], $Time, 97, $From, $Subject, $Message);
 				}
