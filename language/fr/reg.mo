@@ -16,14 +16,14 @@ $lang['e_mail']            = 'Adresse e-Mail';
 $lang['main_planet']        = 'Nom de votre plan&egrave;te m&egrave;re';
 $lang['game_name_label']          = 'Pseudo';
 $lang['sex_label']               = 'Sexe';
-$lang['accept']            = 'J\'acc&egrave;pte le r&egrave;glement';
+$lang['accept']            = 'J\'accepte le r&egrave;glement';
 $lang['signup']            = ' S\'enregistrer ';
 $lang['neededpass']        = 'Mot de passe';
 
 // Send
 $lang['mail_welcome']      = 'Merci beaucoup de votre inscription &agrave; notre jeu ({gameurl})\nVotre pseudo : {username}\n\nBon amusement !\n{gameurl}';
 $lang['reg_go_login']      = 'Se connecter';
-$lang['mail_title']        = 'Enregistrment';
+$lang['mail_title']        = 'Inscription';
 $lang['thanksforregistry'] = 'Merci de vous &ecirc;tre inscrit ! Un mail de bienvenue vous a &eacute;t&eacute; envoy&eacute;.';
 $lang['sender_message_ig'] = 'Admin';
 $lang['subject_message_ig']= 'Bienvenue';
