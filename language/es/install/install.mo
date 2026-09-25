@@ -70,4 +70,7 @@ $lang['ins_upg_applied'] = 'Actualizaciones aplicadas: %s';
 $lang['ins_upg_uptodate'] = 'La base ya est&aacute; actualizada, no hace falta ning&uacute;n cambio.';
 $lang['ins_upg_noconfig'] = 'El juego a&uacute;n no est&aacute; instalado (config.php est&aacute; vac&iacute;o): utilice el modo Instalar.';
 
+// XNova Renaissance 0.9g : verrou de l'installeur
+$lang['ins_locked'] = 'El juego ya est&aacute; instalado: la instalaci&oacute;n y la transferencia est&aacute;n bloqueadas (solo queda la actualizaci&oacute;n). Para reinstalar, vac&iacute;e primero el archivo config.php. Recuerde tambi&eacute;n borrar la carpeta install del servidor.';
+
 ?>
