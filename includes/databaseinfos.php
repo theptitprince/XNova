@@ -72,13 +72,13 @@
 	// Table banned
 	$QryTableBanned      = "CREATE TABLE `{{table}}` ( ";
 	$QryTableBanned     .= "`id` bigint(11) NOT NULL auto_increment, ";
-	$QryTableBanned     .= "`who` varchar(11) character set latin1 NOT NULL default '', ";
+	$QryTableBanned     .= "`who` varchar(64) character set latin1 NOT NULL default '', ";
 	$QryTableBanned     .= "`theme` text character set latin1 NOT NULL, ";
-	$QryTableBanned     .= "`who2` varchar(11) character set latin1 NOT NULL default '', ";
+	$QryTableBanned     .= "`who2` varchar(64) character set latin1 NOT NULL default '', ";
 	$QryTableBanned     .= "`time` int(11) NOT NULL default '0', ";
 	$QryTableBanned     .= "`longer` int(11) NOT NULL default '0', ";
-	$QryTableBanned     .= "`author` varchar(11) character set latin1 NOT NULL default '', ";
-	$QryTableBanned     .= "`email` varchar(20) character set latin1 NOT NULL default '', ";
+	$QryTableBanned     .= "`author` varchar(64) character set latin1 NOT NULL default '', ";
+	$QryTableBanned     .= "`email` varchar(64) character set latin1 NOT NULL default '', ";
 	$QryTableBanned     .= "KEY `ID` (`id`) ";
 	$QryTableBanned     .= ") ENGINE=MyISAM;";
 
@@ -531,13 +531,6 @@
 	$QryTableUsers      .= "`raidsloose` int(11) default NULL  ";
 	$QryTableUsers      .= ") ENGINE=MyISAM;";
 
-	// Multi
-	$QryTableMulti       = "CREATE TABLE `{{table}}` ( ";
-	$QryTableMulti      .= "`id` int(11) NOT NULL auto_increment, ";
-	$QryTableMulti      .= "`player` bigint(11) unsigned NOT NULL, ";
-	$QryTableMulti      .= "`sharer` bigint(11) unsigned NOT NULL, ";
-	$QryTableMulti      .= "`reason` text character set latin1 NOT NULL, ";
-	$QryTableMulti      .= "PRIMARY KEY  (`id`) ";
-	$QryTableMulti      .= ") ENGINE=MyISAM;";
+	// (Table multi supprimee en 0.9g : ancien systeme de declaration jamais fonctionnel, remplace par la table declared)
 
 ?>

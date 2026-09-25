@@ -15,7 +15,7 @@
 */
 
 function MissionCaseDestruction($FleetRow) {
-   global $user, $phpEx, $ugamela_root_path, $pricelist, $lang, $resource, $CombatCaps;
+   global $user, $phpEx, $xnova_root_path, $pricelist, $lang, $resource, $CombatCaps;
 
    includeLang('system');
 
@@ -143,7 +143,7 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
-         include_once($ugamela_root_path . 'includes/ataki.' . $phpEx);
+         include_once($xnova_root_path . 'includes/ataki.' . $phpEx);
 
 
 

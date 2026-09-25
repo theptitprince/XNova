@@ -23,15 +23,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	if ($user['authlevel'] >= 2) {
 		includeLang('admin');
-		if (($_GET['cmd'] ?? null) == 'dele') {
-			DeleteSelectedUser ( intval(($_GET['user'] ?? null)) );
-		}
-		if (($_GET['cmd'] ?? null) == 'sort') {
-			$TypeSort = preg_replace('/[^a-z_]/', '', ($_GET['type'] ?? null)); // nom de colonne uniquement
-			if ($TypeSort == '') { $TypeSort = 'id'; }
-		} else {
-			$TypeSort = "id";
-		}
+		// (Le lien « supprimer le joueur » copie de userlist.php a ete retire : il n'etait affiche nulle part)
 
 		$PageTPL = gettemplate('admin/declarelist_body');
 		$RowsTPL = gettemplate('admin/declarelist_rows');
@@ -41,15 +33,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse                 = $lang;
 		$parse['adm_ul_table'] = "";
 		$i                     = 0;
-		$Color                 = "lime";
 		while ($u = mysqli_fetch_assoc($query) ) {
-			if ($PrevIP != "") {
-				if ($PrevIP == $u['declarator']) {
-					$Color = "red";
-				} else {
-					$Color = "lime";
-				}
-			}
 			$Bloc['adm_ul_data_id']     = stripslashes($u['declarator_name']);
 			$Bloc['adm_ul_data_name']   = stripslashes($u['declarator']);
 			$Bloc['adm_ul_data_mail']   = stripslashes($u['declared_1']);
@@ -64,7 +48,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse['adm_ul_count'] = $i;
 
 		$page = parsetemplate( $PageTPL, $parse );
-		display( $page, "Liste des joueurs ayant declare une IP collective", false, '', true);
+		display( $page, $lang['adm_dl_title'], false, '', true);
 	} else {
 		message( $lang['sys_noalloaw'], $lang['sys_noaccess'] );
 	}

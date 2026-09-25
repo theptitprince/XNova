@@ -34,35 +34,31 @@ includeLang('overview');
 if($game_config['enable_bot'] == 1){
 	//robot anti multi -- debut --
 $multi = $user['multi_validated'];
-$ip = $user['user_lastip'];
+$ip = SqlEscape($user['user_lastip']);
 $time = time();
-$duree = $time + (stripslashes($game_config['ban_duration']) * 86400);
+$duree = $time + (intval($game_config['ban_duration']) * 86400);
 $op = stripslashes($game_config['bot_name']);
 $mail = stripslashes($game_config['bot_adress']);
 $sql = doquery("SELECT * FROM {{table}} WHERE `user_lastip`='{$ip}'", 'users');
 $boucle = 0;
-$username ='';
-$v =',&nbsp;';
+$Names = array();
    while($m = mysqli_fetch_array($sql)){
-      $username .= $m['username'] . $v;
+      $Names[] = $m['username'];
       $boucle ++;
             }
+$username = implode(', ', $Names);
 if($boucle > 1 && $multi == 0){
-$ip = $user['user_lastip'];
-$sql = doquery("SELECT * FROM {{table}} WHERE `user_lastip`='{$ip}'", 'users');
-          while($b = mysqli_fetch_array($sql)){
+	// Un seul bannissement pour le joueur courant (l'original l'inscrivait une fois par compte partageant l'IP)
       $QryBanMulti = "INSERT INTO {{table}} SET ";
         $QryBanMulti .= "`who` = '" . SqlEscape(strip_tags($user['username'])) . "', ";
         $QryBanMulti .= "`who2` = '" . SqlEscape(strip_tags($user['username'])) . "', ";
         $QryBanMulti .= "`theme` = 'Multi-Compte entre " . SqlEscape($username) . "', ";
         $QryBanMulti .= "`time` = '" . $time . "', ";
 		$QryBanMulti .= "`longer` = '" . $duree . "', ";
-		$QryBanMulti .= "`author` = '" . $op . "', ";
-		$QryBanMulti .= "`email`='" . $mail . "';";
+		$QryBanMulti .= "`author` = '" . SqlEscape($op) . "', ";
+		$QryBanMulti .= "`email`='" . SqlEscape($mail) . "';";
         doquery($QryBanMulti, 'banned');
-		doquery("UPDATE {{table}} SET bana=1 WHERE username='{$user['username']}'","users");
-   doquery("UPDATE {{table}} SET banaday='{$duree}' WHERE username='{$user['username']}'","users"); 
-         }
+		doquery("UPDATE {{table}} SET `bana` = '1', `banaday` = '". intval($duree) ."' WHERE `id` = '". intval($user['id']) ."';", "users");
 
       }
 //robot anti multi -- FIN -- 

@@ -44,4 +44,16 @@ $lang['Player_say'] = '<font color="#7f7f7f">El jugador</font> %s <font color="#
 
 
 // Created by Perberos. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : declaration de multi-compte (add_declare.php)
+$lang['declare_title']      = 'Declaraci&oacute;n de multicuenta';
+$lang['declare_text']       = 'Si varios jugadores usan la misma conexi&oacute;n (familia, piso compartido, trabajo...), decl&aacute;ralo aqu&iacute; para que no se os tome por multicuentas. Cada jugador afectado debe hacer su propia declaraci&oacute;n.';
+$lang['declare_player_1']   = 'Primer jugador implicado';
+$lang['declare_player_2']   = 'Segundo jugador implicado';
+$lang['declare_player_3']   = 'Tercer jugador implicado';
+$lang['declare_reason']     = 'Motivo (familia, trabajo...)';
+$lang['declare_send']       = 'Enviar';
+$lang['declare_empty']      = 'Indica al menos el primer jugador implicado.';
+$lang['declare_done']       = 'Gracias, tu declaraci&oacute;n ha sido registrada. Los dem&aacute;s jugadores implicados tambi&eacute;n deben hacer la suya.';
+
 ?>

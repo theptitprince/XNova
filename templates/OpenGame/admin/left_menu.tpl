@@ -28,8 +28,6 @@ parent.frames['Hauptframe'].location.replace("overview.php");
 </tr><tr>
 	<td><div><a href="userlist.php" accesskey="a" target="{mf}">{adm_plrlst}</a></div></td>
 </tr><tr>
-    <td><div><a href="multi.php" accesskey="a" target="{mf}">{adm_multi}</a></div></td>
-</tr><tr>
 	<td><div><a href="paneladmina.php" accesskey="k" target="{mf}">{adm_plrsch}</a></div></td>
 </tr><tr>
 	<td><div><a href="QueryExecute.php" accesskey="k" target="{mf}">{qry}</a></div></td>

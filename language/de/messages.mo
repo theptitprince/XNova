@@ -44,4 +44,16 @@ $lang['Player_say'] = '<font color="#7f7f7f">Le joueur</font> %s <font color="#7
 
 
 // Created by Perberos. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : declaration de multi-compte (add_declare.php)
+$lang['declare_title']      = 'Multi-Account melden';
+$lang['declare_text']       = 'Wenn mehrere Spieler dieselbe Internetverbindung nutzen (Familie, WG, Arbeit...), meldet es hier, damit ihr nicht f&uuml;r Mehrfachkonten gehalten werdet. Jeder betroffene Spieler muss selbst eine Meldung abgeben.';
+$lang['declare_player_1']   = 'Erster beteiligter Spieler';
+$lang['declare_player_2']   = 'Zweiter beteiligter Spieler';
+$lang['declare_player_3']   = 'Dritter beteiligter Spieler';
+$lang['declare_reason']     = 'Grund (Familie, Arbeit...)';
+$lang['declare_send']       = 'Absenden';
+$lang['declare_empty']      = 'Gib mindestens den ersten beteiligten Spieler an.';
+$lang['declare_done']       = 'Danke, deine Meldung wurde gespeichert. Die anderen beteiligten Spieler m&uuml;ssen ebenfalls eine Meldung abgeben.';
+
 ?>

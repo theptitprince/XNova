@@ -46,8 +46,17 @@ $lang['Player_say'] = '<font color="#7f7f7f">Le joueur</font> %s <font color="#7
 // Created by Perberos. All rights reversed (C) 2006
 
 // XNova Renaissance : textes manquants (ils s'affichaient vides)
-$lang['Declaration'] = 'D&eacute;claration de multi-compte';
-$lang['DeclarationText'] = 'Si plusieurs joueurs utilisent la m&ecirc;me connexion (famille, colocation, travail...), d&eacute;clarez-le ici pour &eacute;viter d\'&ecirc;tre pris pour un multi-compte.';
 $lang['messages'] = 'Messages';
+
+// Declaration de multi-compte (add_declare.php)
+$lang['declare_title']    = 'D&eacute;claration de multi-compte';
+$lang['declare_text']     = 'Si plusieurs joueurs utilisent la m&ecirc;me connexion (famille, colocation, travail...), d&eacute;clarez-le ici pour &eacute;viter d\'&ecirc;tre pris pour un multi-compte. Chaque joueur concern&eacute; doit faire sa propre d&eacute;claration.';
+$lang['declare_player_1'] = 'Premier joueur concern&eacute;';
+$lang['declare_player_2'] = 'Deuxi&egrave;me joueur concern&eacute;';
+$lang['declare_player_3'] = 'Troisi&egrave;me joueur concern&eacute;';
+$lang['declare_reason']   = 'Raison (famille, travail...)';
+$lang['declare_send']     = 'Envoyer';
+$lang['declare_empty']    = 'Indiquez au moins le premier joueur concern&eacute;.';
+$lang['declare_done']     = 'Merci, votre d&eacute;claration a &eacute;t&eacute; enregistr&eacute;e. Les autres joueurs concern&eacute;s doivent aussi faire la leur.';
 
 ?>

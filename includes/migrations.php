@@ -14,7 +14,7 @@
 if (!defined('INSIDE')) { die('attemp hacking'); }
 
 // Version du schema de base installee par cette version du jeu
-define('RENAISSANCE_DB_VERSION', '0.9f');
+define('RENAISSANCE_DB_VERSION', '0.9g');
 
 // Nom de la ligne de la table config qui memorise la version du schema
 define('RENAISSANCE_DB_VERSION_KEY', 'renaissance_db_version');
@@ -54,6 +54,16 @@ $RenaissanceMigrations = array(
 		"UPDATE `{{prefix}}config` SET `config_value` = '0' WHERE `config_name` = 'game_disable';",
 		// Adresses par defaut vers xnova.fr (domaine repris par des tiers) : videes
 		"UPDATE `{{prefix}}config` SET `config_value` = '' WHERE `config_name` IN ('forum_url', 'bot_adress') AND `config_value` LIKE '%xnova.fr%';",
+	),
+	'0.9g' => array(
+		// Table multi : second systeme de declaration de multi-compte, jamais fonctionnel (page orpheline, colonnes
+		// incoherentes) et donc toujours vide. La declaration passe par la table declared (add_declare.php).
+		"DROP TABLE IF EXISTS `{{prefix}}multi`;",
+		// Bannissements : pseudo, auteur et e-mail etaient tronques a 11 et 20 caracteres (memes longueurs que users)
+		"ALTER TABLE `{{prefix}}banned` MODIFY `who` varchar(64) character set latin1 NOT NULL default '',
+			MODIFY `who2` varchar(64) character set latin1 NOT NULL default '',
+			MODIFY `author` varchar(64) character set latin1 NOT NULL default '',
+			MODIFY `email` varchar(64) character set latin1 NOT NULL default '';",
 	),
 );
 

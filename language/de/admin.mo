@@ -44,4 +44,13 @@ $lang['adm_bn_bnbt']  = "Gespert";
 $lang['adm_bn_thpl']  = "Der Spieler";
 $lang['adm_bn_isbn']  = "wurde Gesperrt!";
 
+// XNova Renaissance 0.9g : multi-comptes declares (admin/declare_list.php)
+$lang['adm_dl_title']    = 'Gemeldete Multi-Accounts';
+$lang['adm_dl_list']     = 'Spieler, die eine gemeinsame Verbindung gemeldet haben';
+$lang['adm_dl_by']       = 'Gemeldet von';
+$lang['adm_dl_by_id']    = 'ID des Meldenden';
+$lang['adm_dl_player']   = 'Spieler';
+$lang['adm_dl_reason']   = 'Grund';
+$lang['adm_dl_count']    = 'Meldung(en) insgesamt';
+
 ?>
