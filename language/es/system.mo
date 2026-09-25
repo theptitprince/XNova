@@ -140,4 +140,12 @@ $lang['sys_irak_launch_error'] = 'Lanzamiento imposible: no hay suficientes misi
 $lang['sys_irak_launched_one'] = '¡<b>1</b> misil interplanetario ha sido lanzado!';
 $lang['sys_irak_launched_many'] = '¡<b>%d</b> misiles interplanetarios han sido lanzados!';
 
+// XNova Renaissance 0.9g : erreur SQL (debug.class.php)
+$lang['sys_sql_error'] = 'Se ha producido un error, avise al administrador. Error n.º: <b>%d</b>';
+
+// XNova Renaissance 0.9g : page du joueur banni (ChekUser.php)
+$lang['sys_banned_title'] = '¡Su cuenta ha sido suspendida!';
+$lang['sys_banned_until'] = 'Está sancionado hasta el %s.';
+$lang['sys_banned_forever'] = 'Está sancionado de forma definitiva.';
+
 ?>

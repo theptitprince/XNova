@@ -66,10 +66,13 @@ class debug
 				'errors', $query))) or die('error fatal: ');
 				
 
+			// Texte de la langue du joueur s'il est deja charge (base injoignable plus haut : langue par defaut, avant tout chargement)
+			global $lang;
+			$ErrorText = sprintf($lang['sys_sql_error'] ?? "Erreur, merci de contacter l'administrateur. Erreur n&deg; : <b>%d</b>", $q['rows']);
 			if (!function_exists('message'))
-				echo "Erreur, merci de contacter l'admin. Erreur n°: <b>".$q['rows']."</b>";
+				echo $ErrorText;
 			else
-				message("Erreur, merci de contacter l'admin. Erreur n°: <b>".$q['rows']."</b>", "Erreur");
+				message($ErrorText, ($lang['sys_error'] ?? "Erreur"));
 		//}
 		
 		die();

@@ -155,12 +155,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 				$page .= "<input name=\"fleetid\" value=\"". $f['fleet_id'] ."\" type=\"hidden\">";
 				$page .= "<input value=\" ".$lang['fl_back_to_ttl']." \" type=\"submit\" name=\"send\">";
 				$page .= "</form>";
-			if ($f['fleet_mission'] == 1) {
-				$page .= "<form action=\"verband.php\" method=\"post\">";
-				$page .= "<input name=\"fleetid\" value=\"". $f['fleet_id'] ."\" type=\"hidden\">";
-				$page .= "<input value=\" ".$lang['fl_associate']." \" type=\"submit\">";
-				$page .= "</form>";
-			}
+			// (bouton « Associer » vers verband.php retire : l'attaque groupee n'a jamais ete programmee)
 		} else {
 			$page .= "&nbsp;-&nbsp;";
 		}

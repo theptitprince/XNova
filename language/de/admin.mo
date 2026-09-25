@@ -128,4 +128,33 @@ $lang['adm_no'] = 'Nein';
 // XNova Renaissance 0.9g : traductions
 $lang['user_level'][3] = 'Administrator';
 
+// XNova Renaissance 0.9g : pages d'administration (message a tous, listes, debannissement)
+$lang['adm_mall_title'] = 'Nachricht an alle Spieler';
+$lang['adm_mall_subject'] = 'Betreff';
+$lang['adm_mall_text'] = 'Text (höchstens 5000 Zeichen)';
+$lang['adm_mall_placeholder'] = 'Administrative Nachricht';
+$lang['adm_mall_send'] = 'Senden';
+$lang['adm_mall_sent'] = 'Nachricht an alle Spieler gesendet.';
+$lang['adm_mall_empty'] = 'Betreff und Text sind Pflichtfelder.';
+$lang['adm_moonlist_title'] = 'Mondliste';
+$lang['adm_moonlist_head'] = 'Mondübersicht';
+$lang['adm_planetlist_title'] = 'Planetenliste';
+$lang['adm_planetlist_head'] = 'Planetenübersicht';
+$lang['adm_col_id'] = 'ID';
+$lang['adm_col_moon'] = 'Name des Mondes';
+$lang['adm_col_planet'] = 'Name des Planeten';
+$lang['adm_col_owner'] = 'Besitzer (ID)';
+$lang['adm_col_galaxy'] = 'Galaxie';
+$lang['adm_col_system'] = 'System';
+$lang['adm_col_position'] = 'Position';
+$lang['adm_count_moons_one'] = 'Es gibt nur einen Mond.';
+$lang['adm_count_moons'] = 'Es gibt %d Monde.';
+$lang['adm_count_planets_one'] = 'Es gibt nur einen Planeten.';
+$lang['adm_count_planets'] = 'Es gibt %d Planeten.';
+$lang['adm_unban_title'] = 'Spieler entsperren';
+$lang['adm_unban_player'] = 'Zu entsperrender Spieler';
+$lang['adm_unban_name'] = 'Spielername';
+$lang['adm_unban_button'] = 'Entsperren';
+$lang['adm_unban_done'] = 'Der Spieler %s wurde entsperrt.';
+
 ?>

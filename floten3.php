@@ -173,13 +173,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		if ($YourPlanet)
 			$missiontype[4] = $lang['type_mission'][4];
 
-		if ( ($_POST['planettype'] ?? null) == 3 &&
-			(($_POST['ship214'] ?? null)         ||
-			 ($_POST['ship213'] ?? null))        &&
-			 !$YourPlanet              &&
-			 $UsedPlanet) {
-			$missiontype[2] = $lang['type_mission'][2];
-		}
+		// Mission 2 (attaque groupée) refusée : jamais programmée, la flotte disparaissait à l'arrivée
         if ( ($_POST['planettype'] ?? null) == 3 &&
 	     ($_POST['ship214'] ?? null) >= 1    &&
            !$YourPlanet            &&

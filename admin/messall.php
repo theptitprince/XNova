@@ -24,39 +24,27 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$mode = ($_GET['mode'] ?? '');
 	if ($user['authlevel'] >= 1) {
 		if ($_POST && $mode == "change") {
-			if (isset($_POST["tresc"]) && ($_POST["tresc"] ?? null) != '') {
-				$game_config['tresc'] = ($_POST['tresc'] ?? null);
+			$Text    = trim((string) ($_POST['tresc'] ?? ''));
+			$Topic   = trim((string) ($_POST['temat'] ?? ''));
+			// Sujet ou texte vide : message d'erreur (la page lisait une cle inexistante puis restait blanche)
+			if ($Text == '' || $Topic == '') {
+				message($lang['adm_mall_empty'], $lang['adm_mall_title'], 'messall.php', 3);
 			}
-			if (isset($_POST["temat"]) && ($_POST["temat"] ?? null) != '') {
-				$game_config['temat'] = ($_POST['temat'] ?? null);
-			}
-			// Couleur et titre selon le niveau (niveaux 1 et 2 : aucune valeur avant)
-			$kolor = 'orange';
+			// Couleur selon le niveau, titre traduit (il etait force en anglais : « Administrator »)
+			$kolor = ($user['authlevel'] >= 3) ? 'red' : 'orange';
 			$ranga = $lang['user_level'][$user['authlevel']] ?? '';
-			if ($user['authlevel'] == 3) {
-				$kolor = 'red';
-				$ranga = 'Administrator';
-			} elseif ($user['authlevel'] == 4) {
-				$kolor = 'skyblue';
-				$ranga = 'GameOperator';
-			} elseif ($user['authlevel'] == 5) {
-				$kolor = 'yellow';
-				$ranga = 'SuperGameOperator';
+			$sq      = doquery("SELECT `id` FROM {{table}}", "users");
+			$Time    = time();
+			$From    = "<font color=\"". $kolor ."\">". $ranga ." ".$user['username']."</font>";
+			// Texte echappe : un moderateur pouvait injecter du HTML / du script chez tous les joueurs
+			$Subject = "<font color=\"". $kolor ."\">". SafeText($Topic) ."</font>";
+			$Message = "<font color=\"". $kolor ."\"><b>". nl2br(SafeText($Text)) ."</b></font>";
+			while ($u = mysqli_fetch_array($sq)) {
+				SendSimpleMessage ( $u['id'], $user['id'], $Time, 97, $From, $Subject, $Message);
 			}
-			if ($game_config['tresc'] != '' and $game_config['temat']) {
-				$sq      = doquery("SELECT `id` FROM {{table}}", "users");
-				$Time    = time();
-				$From    = "<font color=\"". $kolor ."\">". $ranga ." ".$user['username']."</font>";
-				// Texte echappe : un moderateur pouvait injecter du HTML / du script chez tous les joueurs
-				$Subject = "<font color=\"". $kolor ."\">". SafeText($game_config['temat']) ."</font>";
-				$Message = "<font color=\"". $kolor ."\"><b>". nl2br(SafeText($game_config['tresc'])) ."</b></font>";
-				while ($u = mysqli_fetch_array($sq)) {
-					SendSimpleMessage ( $u['id'], $user['id'], $Time, 97, $From, $Subject, $Message);
-				}
-				message("<font color=\"lime\">Message envoy&eacute; &agrave; tous les joueurs</font>", "Termin&eacute;", "../overview." . $phpEx, 3);
-			}
+			message("<font color=\"lime\">". $lang['adm_mall_sent'] ."</font>", $lang['adm_done'], "../overview." . $phpEx, 3);
 		} else {
-			$parse = $game_config;
+			$parse = $lang;
 			$parse['dpath'] = $dpath;
 			$parse['debug'] = ($game_config['debug'] == 1) ? " checked='checked'/":'';
 			$page = parsetemplate(gettemplate('admin/messall_body'), $parse);

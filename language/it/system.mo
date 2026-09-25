@@ -138,4 +138,12 @@ $lang['sys_irak_launch_error'] = 'Lancio impossibile: missili interplanetari ins
 $lang['sys_irak_launched_one'] = '<b>1</b> missile interplanetario è partito!';
 $lang['sys_irak_launched_many'] = '<b>%d</b> missili interplanetari sono partiti!';
 
+// XNova Renaissance 0.9g : erreur SQL (debug.class.php)
+$lang['sys_sql_error'] = 'Si è verificato un errore, avvisate l\'amministratore. Errore n°: <b>%d</b>';
+
+// XNova Renaissance 0.9g : page du joueur banni (ChekUser.php)
+$lang['sys_banned_title'] = 'Il vostro account è stato sospeso!';
+$lang['sys_banned_until'] = 'Siete bannati fino al %s.';
+$lang['sys_banned_forever'] = 'Siete bannati definitivamente.';
+
 ?>
