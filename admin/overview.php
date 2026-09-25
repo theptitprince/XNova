@@ -75,11 +75,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 									$Bloc['usr_xp_raid']    = $TheUser['xpraid'];
 									$Bloc['usr_xp_min']    = $TheUser['xpminier'];
 									
-									if ($TheUser['urlaubs_modus'] == 1) {
-											$Bloc['state_vacancy']  = "<img src=\"../images/true.png\" >";
-									} else {
-											$Bloc['state_vacancy']  = "<img src=\"../images/false.png\">";
-									}
+									// En toutes lettres : l'image du « non » (false.png) etait une coche orange, lue comme un oui
+									$Bloc['state_vacancy']  = ($TheUser['urlaubs_modus'] == 1) ? "<font color=\"orange\">". $lang['adm_yes'] ."</font>" : $lang['adm_no'];
 									
 									if ($TheUser['bana'] == 1) {
 											$Bloc['is_banned']  = "<img src=\"../images/banned.png\" >";

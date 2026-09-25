@@ -9,7 +9,7 @@
 </tr>
 </table>
 <br>
-<table width="600">
+<table width="98%">
 <tr>
 	<td class="c" colspan="13">{adm_ov_onlin}</td>
 </tr>
