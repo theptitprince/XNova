@@ -136,9 +136,7 @@ function DisplayGameSettingsPage ( $CurrentUser ) {
 			}
 			
 			// Lien supplémentaire dans le menu
-			if (isset($_POST['enable_link_']) && is_numeric($_POST['enable_link_'])) {
-				$game_config['link_enable'] = ($_POST['enable_link_'] ?? null);
-			}
+			$game_config['link_enable'] = isset($_POST['enable_link_']) ? '1' : '0';
 						// Texte de ce lien...
 $game_config['link_name'] = addslashes( ($_POST['name_link_'] ?? null));
 	
@@ -151,17 +149,11 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 				$game_config['stat_settings'] = ($_POST['stat_settings'] ?? null);
 			}
 						// Activation -ou non- des annonces
-	if (isset($_POST['enable_announces_']) && is_numeric($_POST['enable_announces_'])) {
-				$game_config['enable_announces'] = ($_POST['enable_announces_'] ?? null);
-			}
+			$game_config['enable_announces'] = isset($_POST['enable_announces_']) ? '1' : '0';
 						// Activation -ou non- du marchand
-	if (isset($_POST['enable_marchand_']) && is_numeric($_POST['enable_marchand_'])) {
-				$game_config['enable_marchand'] = ($_POST['enable_marchand_'] ?? null);
-			}
+			$game_config['enable_marchand'] = isset($_POST['enable_marchand_']) ? '1' : '0';
 						// Activation -ou non- des notes
-	if (isset($_POST['enable_notes_']) && is_numeric($_POST['enable_notes_'])) {
-				$game_config['enable_notes'] = ($_POST['enable_notes_'] ?? null);
-			}
+			$game_config['enable_notes'] = isset($_POST['enable_notes_']) ? '1' : '0';
 									// Nom du bot antimulti
 									$game_config['bot_name'] = addslashes( ($_POST['name_bot'] ?? null));
 
@@ -174,15 +166,11 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			}
 			
 								// Activation -ou non- du bot
-	if (isset($_POST['bot_enable']) && is_numeric($_POST['bot_enable'])) {
-				$game_config['enable_bot'] = ($_POST['bot_enable'] ?? null);
-			}
+			$game_config['enable_bot'] = isset($_POST['bot_enable']) ? '1' : '0';
 			
 											// BBCode ou pas ?
 										
-	if (isset($_POST['bbcode_field']) && is_numeric($_POST['bbcode_field'])) {
-				$game_config['enable_bbcode'] = ($_POST['bbcode_field'] ?? null);
-			}
+			$game_config['enable_bbcode'] = isset($_POST['bbcode_field']) ? '1' : '0';
 
 			// Activation du jeu
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['game_disable'])           ."' WHERE `config_name` = 'game_disable';", 'config');
@@ -247,48 +235,52 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			AdminMessage ($lang['adm_opt_saved'], $lang['adm_opt_saved_title'], '?');
 		} else {
 
+			// Valeurs affichees dans des attributs value="..." : echappees (un guillemet cassait le formulaire)
+			$Esc = function ($Value) { return htmlspecialchars((string) $Value, ENT_QUOTES, 'UTF-8'); };
+			$Chk = function ($Value) { return ($Value == 1) ? ' checked="checked"' : ''; };
 			$parse                           = $lang;
-			$parse['game_name']              = $game_config['game_name'];
+			$parse['game_name']              = $Esc($game_config['game_name']);
 			$parse['game_speed']             = $game_config['game_speed'];
 			$parse['fleet_speed']            = $game_config['fleet_speed'];
 			$parse['noobprotection']         = (!empty($game_config['noobprotection'])) ? " checked=\"checked\"" : "";
 			$parse['noobprotectiontime']     = intval($game_config['noobprotectiontime'] ?? 5000);
 			$parse['noobprotectionmulti']    = intval($game_config['noobprotectionmulti'] ?? 5);
 			$parse['resource_multiplier']    = $game_config['resource_multiplier'];
-			$parse['forum_url']              = $game_config['forum_url'];
+			$parse['forum_url']              = $Esc($game_config['forum_url']);
 			$parse['initial_fields']         = $game_config['initial_fields'];
 			$parse['metal_basic_income']     = $game_config['metal_basic_income'];
 			$parse['crystal_basic_income']   = $game_config['crystal_basic_income'];
 			$parse['deuterium_basic_income'] = $game_config['deuterium_basic_income'];
 			$parse['energy_basic_income']    = $game_config['energy_basic_income'];
-			$parse['enable_link']    = $game_config['link_enable'];
-			$parse['name_link']    = $game_config['link_name'];
-			$parse['url_link']    = $game_config['link_url'];
-			$parse['enable_announces']    = $game_config['enable_announces'];
-			$parse['enable_marchand']    = $game_config['enable_marchand'];
-			$parse['enable_notes']    = $game_config['enable_notes'];
-			$parse['bot_name']    = stripslashes($game_config['bot_name']);
-			$parse['bot_adress']    = stripslashes($game_config['bot_adress']);
-			$parse['ban_duration']    = stripslashes($game_config['ban_duration']);
-			$parse['enable_bot']    = stripslashes($game_config['enable_bot']);
-			$parse['enable_bbcode']    = stripslashes($game_config['enable_bbcode']);
-			
-						$parse['banner_source_post']    = $game_config['banner_source_post'];
+			// Options oui / non : cases a cocher (il fallait taper 0 ou 1)
+			$parse['enable_link']            = $Chk($game_config['link_enable']);
+			$parse['name_link']              = $Esc(stripslashes($game_config['link_name']));
+			$parse['url_link']               = $Esc($game_config['link_url']);
+			$parse['enable_announces']       = $Chk($game_config['enable_announces']);
+			$parse['enable_marchand']        = $Chk($game_config['enable_marchand']);
+			$parse['enable_notes']           = $Chk($game_config['enable_notes']);
+			$parse['bot_name']               = $Esc(stripslashes($game_config['bot_name']));
+			$parse['bot_adress']             = $Esc(stripslashes($game_config['bot_adress']));
+			$parse['ban_duration']           = $Esc($game_config['ban_duration']);
+			$parse['enable_bot']             = $Chk($game_config['enable_bot']);
+			$parse['enable_bbcode']          = $Chk($game_config['enable_bbcode']);
+
+			$parse['banner_source_post']     = $Esc($game_config['banner_source_post']);
 						$parse['stat_settings']    = stripslashes($game_config['stat_settings']);
 
 			
 
 			$parse['closed']                 = ($game_config['game_disable'] == 1) ? " checked = 'checked' ":"";
-			$parse['close_reason']           = stripslashes( $game_config['close_reason'] );
+			$parse['close_reason']           = $Esc(stripslashes( $game_config['close_reason'] ));
 
 			$parse['newsframe']              = ($game_config['OverviewNewsFrame'] == 1) ? " checked = 'checked' ":"";
-			$parse['news_text_val']            = stripslashes( $game_config['OverviewNewsText'] );
+			$parse['news_text_val']          = $Esc(stripslashes( $game_config['OverviewNewsText'] ));
 
 			$parse['chatframe']              = ($game_config['OverviewExternChat'] == 1) ? " checked = 'checked' ":"";
-			$parse['ext_tchat_val']            = stripslashes( $game_config['OverviewExternChatCmd'] );
+			$parse['ext_tchat_val']          = $Esc(stripslashes( $game_config['OverviewExternChatCmd'] ));
 
 			$parse['googlead']               = ($game_config['OverviewBanner'] == 1) ? " checked = 'checked' ":"";
-			$parse['google_ad_val']            = stripslashes( $game_config['OverviewClickBanner'] );
+			$parse['google_ad_val']          = $Esc(stripslashes( $game_config['OverviewClickBanner'] ));
 
 			$parse['debug']                  = ($game_config['debug'] == 1)        ? " checked = 'checked' ":"";
 

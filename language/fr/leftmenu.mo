@@ -29,7 +29,7 @@ $lang['alliance_label']     = 'Alliance';
 $lang['chat']         = 'Chat';
 $lang['statistics']   = 'Statistiques';
 $lang['search']       = 'Recherche';
-$lang['blocked']      = 'Piloris';
+$lang['blocked']      = 'Pilori';
 $lang['records']      = 'Records';
 
 $lang['messages_label']     = 'Messages';

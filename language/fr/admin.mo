@@ -20,7 +20,7 @@ $lang['adm_ul_data_ip_reg']    = "IP a l'enregistrement";
 
 
 $lang['messages_settings']               = "R&eacute;glage des messages et du contenu des messages";
-$lang['bbcode_settings']               = "R&eacute;glage du BBCode<br>(0 = d&eacute;sactiv&eacute;, 1 = activ&eacute;)";
+$lang['bbcode_settings']               = "Activer le BBCode";
 
 
 $lang['adm_done']               = "Termin&eacute;";
