@@ -1,13 +1,14 @@
 <style type="text/css">
-/* Vue generale : dimensions figees, quel que soit le nombre de colonies ou la longueur des noms */
-.ov_lune     { width: 100px; height: 250px; }
-.ov_centre   { height: 250px; }
+/* Vue generale, disposition d'OGame classique : lune a gauche, planete au centre, autres planetes a droite (2 par ligne).
+   Largeurs figees : la planete ne bouge pas, seule la colonne des colonies s'allonge vers le bas s'il y en a beaucoup. */
+.ov_lune     { width: 90px; height: 250px; vertical-align: top; }
+.ov_centre   { width: 206px; height: 250px; vertical-align: top; }
 .ov_encours  { height: 40px; overflow: hidden; }
-.ov_colonies { padding: 0; }
-.ov_cadre    { width: 488px; margin: 0 auto; text-align: left; } /* 8 vignettes par ligne, 3 lignes au plus (MAX_PLAYER_PLANETS = 21) */
-.ov_planete  { display: inline-block; vertical-align: top; width: 58px; height: 86px; margin: 2px 0 2px 3px; overflow: hidden; text-align: center; font-size: 9px; }
-.ov_texte    { display: block; width: 58px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ov_nomlune  { display: block; width: 96px; margin: 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ov_colonies { width: 204px; padding: 0; vertical-align: top; }
+.ov_colos    { width: 204px; table-layout: fixed; }
+.ov_colo     { width: 50%; text-align: center; vertical-align: top; font-size: 9px; padding: 2px 0; } /* vignettes 89 px : table.s du skin */
+.ov_texte    { display: block; width: 96px; margin: 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ov_nomlune  { display: block; width: 86px; margin: 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 </style>
 <script type="text/javascript">var xnova_heure_serveur = {server_clock};</script>
 <script language="JavaScript" type="text/javascript" src="scripts/time.js"></script>
@@ -26,8 +27,8 @@
 	</tr>
 	{fleet_list}
 	<tr><th class="ov_lune">{moon_img}<span class="ov_nomlune" title="{moon}">{moon}</span></th>
-	<th colspan="3" class="ov_centre"><img src="{dpath}planeten/{planet_image}.jpg" height="200" width="200"><div class="ov_encours">{building}</div></th></tr>
-	{colonies_row}
+	<th colspan="2" class="ov_centre"><img src="{dpath}planeten/{planet_image}.jpg" height="200" width="200"><div class="ov_encours">{building}</div></th>
+	<th class="ov_colonies">{colonies_list}</th></tr>
 	<tr><th>{Diameter}</th>
 	<th colspan="3">{planet_diameter} km (<a title="{Developed_fields}">{planet_field_current}</a> / <a title="{max_eveloped_fields}">{planet_field_max}</a> {fields})</th></tr>
 	<tr><th>{Developed_fields}</th>

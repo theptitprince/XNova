@@ -19,7 +19,8 @@ $lang['changelog']   = array(
 - FIX : Galaxie : couleur des joueurs sans alliance, tag de son alliance, port&eacute;e de phalange ; vue g&eacute;n&eacute;rale d\'une lune
 - FIX : Vue g&eacute;n&eacute;rale : l\'annonce de niveau de raideur n\'efface plus celle de mineur ; rang du joueur dans le menu
 - MOD : Pages abandonn&eacute;es supprim&eacute;es (calculatrice UGamela, doublon de fiche d\'alliance) ; PhpInfo r&eacute;serv&eacute; &agrave; l\'administrateur
-- FIX : Avertissements PHP : toutes les pages et une partie compl&egrave;te sans aucun message',
+- FIX : Avertissements PHP : toutes les pages et une partie compl&egrave;te sans aucun message
+- MOD : Vue g&eacute;n&eacute;rale : colonies de nouveau &agrave; droite de la plan&egrave;te, deux par ligne, comme OGame classique (largeurs fig&eacute;es)',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)
