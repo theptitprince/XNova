@@ -2,9 +2,9 @@
 <head>
 <title>{title}</title>
 <link rel="shortcut icon" href="favicon.ico">
-{-style-}
-<meta http-equiv="content-type" content="text/html; charset={ENCODING}" />
-{-meta-}
+{style_tags}
+<meta http-equiv="content-type" content="text/html; charset={encoding}" />
+{meta_tags}
 <script type="text/javascript" src="scripts/overlib.js"></script>
 </head>
-{-body-}
+{body_tag}

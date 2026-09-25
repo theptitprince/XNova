@@ -61,12 +61,12 @@ function SetNextQueueElementOnTop ( &$CurrentPlanet, $CurrentUser ) {
 					} else {
 						$Needed      = GetBuildingPrice ($CurrentUser, $CurrentPlanet, $Element, true, $ForDestroy);
 						$Message     = sprintf ($lang['sys_notenough_money'], $ElementName,
-												pretty_number ($CurrentPlanet['metal']), $lang['Metal'],
-												pretty_number ($CurrentPlanet['crystal']), $lang['Crystal'],
-												pretty_number ($CurrentPlanet['deuterium']), $lang['Deuterium'],
-												pretty_number ($Needed['metal']), $lang['Metal'],
-												pretty_number ($Needed['crystal']), $lang['Crystal'],
-												pretty_number ($Needed['deuterium']), $lang['Deuterium']);
+												pretty_number ($CurrentPlanet['metal']), $lang['metal_label'],
+												pretty_number ($CurrentPlanet['crystal']), $lang['crystal_label'],
+												pretty_number ($CurrentPlanet['deuterium']), $lang['deuterium_label'],
+												pretty_number ($Needed['metal']), $lang['metal_label'],
+												pretty_number ($Needed['crystal']), $lang['crystal_label'],
+												pretty_number ($Needed['deuterium']), $lang['deuterium_label']);
 					}
 
 					SendSimpleMessage ( $CurrentUser['id'], '', '', 99, $lang['sys_buildlist'], $lang['sys_buildlist_fail'], $Message);

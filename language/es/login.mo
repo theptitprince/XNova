@@ -1,19 +1,19 @@
 <?php
 
-$lang['Login_Fail'] = "Usuario o contrase&ntilde;a incorrectos.";
-$lang['Login'] = 'Connexion';
-$lang['User_name'] = 'Nom:';
-$lang['Password'] = 'Password:';
-$lang['Please_Login'] = 'Merci de vous <a href="login.php" target="_main">logguer...</a>';
-$lang['Please_Wait'] = 'Patientez';
-$lang['Remember_me'] = 'Se rappeller de moi';
-$lang['Register'] = 'S\'inscrire';
-$lang['Login_Error'] = 'Erreur';
-$lang['PleaseWait'] = 'Patientez';
+$lang['login_fail'] = "Usuario o contrase&ntilde;a incorrectos.";
+$lang['login'] = 'Connexion';
+$lang['user_name'] = 'Nom:';
+$lang['password_label'] = 'Password:';
+$lang['please_login'] = 'Merci de vous <a href="login.php" target="_main">logguer...</a>';
+$lang['please_wait_label'] = 'Patientez';
+$lang['remember_me'] = 'Se rappeller de moi';
+$lang['register'] = 'S\'inscrire';
+$lang['login_error_label'] = 'Erreur';
+$lang['please_wait'] = 'Patientez';
 
-$lang['Login_Ok'] = 'Identification r&eacute;ussie, <a href="./"><blink>redirection...</blink></a><br><center><img src="images/progressbar.gif"></center>';
-$lang['Login_FailPassword'] = 'Mot de passe incorrect<br /><a href="login.php" target="_top">Retour</a>';
-$lang['Login_FailUser'] = 'Ce joueur n\'existe pas.<br><a href=login.php>Retour</a>';
+$lang['login_ok'] = 'Identification r&eacute;ussie, <a href="./"><blink>redirection...</blink></a><br><center><img src="images/progressbar.gif"></center>';
+$lang['login_fail_password'] = 'Mot de passe incorrect<br /><a href="login.php" target="_top">Retour</a>';
+$lang['login_fail_user'] = 'Ce joueur n\'existe pas.<br><a href=login.php>Retour</a>';
 
 $lang['log_univ'] = 'Merci de selectionner un Univers!';
 $lang['log_reg'] = 'Inscriptions';
@@ -25,6 +25,6 @@ $lang['log_lastreg'] = 'Dernier inscris';
 $lang['log_numbreg'] = 'Joueurs inscris';
 $lang['log_welcome'] = 'Bienvenue sur';
 
-$lang['PasswordLost'] = 'Vous avez oubli&eacute; votre mot de passe ?';
+$lang['password_lost'] = 'Vous avez oubli&eacute; votre mot de passe ?';
 
 ?>

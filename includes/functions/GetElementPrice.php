@@ -30,13 +30,13 @@ function GetElementPrice ($user, $planet, $Element, $userfactor = true) {
 
 	$is_buyeable = true;
 	$array = array(
-		'metal'      => $lang["Metal"],
-		'crystal'    => $lang["Crystal"],
-		'deuterium'  => $lang["Deuterium"],
-		'energy_max' => $lang["Energy"]
+		'metal'      => $lang["metal_label"],
+		'crystal'    => $lang["crystal_label"],
+		'deuterium'  => $lang["deuterium_label"],
+		'energy_max' => $lang["energy_label"]
 		);
 
-	$text = $lang['Requires'] . ": ";
+	$text = $lang['requires'] . ": ";
 	foreach ($array as $ResType => $ResTitle) {
 		if (!empty($pricelist[$Element][$ResType])) {
 			$text .= $ResTitle . ": ";

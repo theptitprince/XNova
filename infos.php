@@ -315,9 +315,9 @@ function ShowBuildingInfoPage ($CurrentUser, $CurrentPlanet, $BuildID) {
 			$DestroyTime          = GetBuildingTime  ($CurrentUser, $CurrentPlanet, $BuildID) / 2;
 			$parse['destroyurl']  = "buildings.php?cmd=destroy&building=".$BuildID; // Non balisé les balises sont dans le tpl
 			$parse['levelvalue']  = $CurrentPlanet[$resource[$BuildID]]; // Niveau du batiment a detruire
-			$parse['nfo_metal']   = $lang['Metal'];
-			$parse['nfo_crysta']  = $lang['Crystal'];
-			$parse['nfo_deuter']  = $lang['Deuterium'];
+			$parse['nfo_metal']   = $lang['metal_label'];
+			$parse['nfo_crysta']  = $lang['crystal_label'];
+			$parse['nfo_deuter']  = $lang['deuterium_label'];
 			$parse['metal']       = pretty_number ($NeededRessources['metal']);     // Cout en metal de la destruction
 			$parse['crystal']     = pretty_number ($NeededRessources['crystal']);   // Cout en cristal de la destruction
 			$parse['deuterium']   = pretty_number ($NeededRessources['deuterium']); // Cout en deuterium de la destruction

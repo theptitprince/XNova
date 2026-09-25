@@ -26,7 +26,7 @@ includeLang('leftmenu');
 		$parse                 = $lang;
 		$parse['mf']           = "Hauptframe";
 		$parse['dpath']        = $dpath;
-		$parse['XNovaRelease'] = VERSION .' '. VERSION_NAME;
+		$parse['xnova_release'] = VERSION .' '. VERSION_NAME;
 		$parse['servername']   = 'XNova';
 		$Page                  = parsetemplate(gettemplate('admin/left_menu'), $parse);
 		display( $Page, "", false, '', true);

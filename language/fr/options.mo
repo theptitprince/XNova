@@ -1,15 +1,15 @@
 <?php
 //Mode Vacances (Thx Prethorian)
 $lang['exit_vacations'] = "Retour de vacances";
-$lang['Vaccation_mode'] = "Mode vacances actif jusqua : ";
-$lang['You_cant_exit_vmode'] = "Vous ne pouvez pas desactiver votre mode vacances tant que la date minimale n'est pas atteinte !";
-$lang['Error'] = "Erreur";
+$lang['vaccation_mode'] = "Mode vacances actif jusqua : ";
+$lang['you_cant_exit_vmode'] = "Vous ne pouvez pas desactiver votre mode vacances tant que la date minimale n'est pas atteinte !";
+$lang['error_label'] = "Erreur";
 
 
 // Messages
 $lang['changue_pass'] = "Changer de mot de passe";
-$lang['Download'] = "T&eacute;l&eacute;charger";
-$lang['Search'] = "Chercher";
+$lang['download'] = "T&eacute;l&eacute;charger";
+$lang['search'] = "Chercher";
 $lang['succeful_changepass'] = "Le mot de passe a bien &eacute;t&eacute; chang&eacute;.<br /><a href=\"login.php\" target=\"_top\">Retour</a>";
 $lang['succeful_save'] = "Les changements ont &eacute;t&eacute; sauvegard&eacute;s.<br /><a href=\"options.php\">Retour</a>";
 
@@ -79,6 +79,6 @@ $lang['changue_name'] = 'Changer de pseudo';
 $lang['succeful_changename'] = 'Le pseudo a bien &eacute;t&eacute; chang&eacute;.<br /><a href="login.php" target="_top">Reconnectez-vous</a>';
 
 // XNova Renaissance 0.9g : titre des messages de la page
-$lang['Options'] = 'Options';
+$lang['options_label'] = 'Options';
 
 ?>

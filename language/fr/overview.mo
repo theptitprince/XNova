@@ -2,29 +2,29 @@
 
 // General
 $lang['cancel']                  = "Annuler";
-$lang['Planet_menu']             = "Menu de la plan&egrave;te";
-$lang['Planet']                  = "Plan&egrave;te";
-$lang['Have_new_message']        = "Vous avez 1 nouveau message";
-$lang['Have_new_messages']       = "Vous avez %m nouveaux messages";
-$lang['Have_new_level_mineur']   = "Vous gagnez un niveau en Mineur !";
-$lang['Have_new_level_raid']     = "Vous gagnez un niveau en Raideur!";
-$lang['Server_time']             = "Heure";
-$lang['Events']                  = "Ev&egrave;nements";
-$lang['Free']                    = "non active";
-$lang['Diameter']                = "Diam&egrave;tre";
+$lang['planet_menu']             = "Menu de la plan&egrave;te";
+$lang['planet_label']                  = "Plan&egrave;te";
+$lang['have_new_message']        = "Vous avez 1 nouveau message";
+$lang['have_new_messages']       = "Vous avez %m nouveaux messages";
+$lang['have_new_level_mineur']   = "Vous gagnez un niveau en Mineur !";
+$lang['have_new_level_raid']     = "Vous gagnez un niveau en Raideur!";
+$lang['server_time']             = "Heure";
+$lang['events']                  = "Ev&egrave;nements";
+$lang['free']                    = "non active";
+$lang['diameter_label']                = "Diam&egrave;tre";
 $lang['fields']                  = "Cases";
-$lang['Developed_fields']        = "Cases occup&eacute;es";
+$lang['developed_fields']        = "Cases occup&eacute;es";
 $lang['max_eveloped_fields']     = "Nombre maximal de cases utilisables";
-$lang['Temperature']             = "Temp&eacute;rature";
+$lang['temperature_label']             = "Temp&eacute;rature";
 $lang['approx']                  = "env.";
 $lang['to']                      = "&#224";
-$lang['Centigrade']              = "C";
-$lang['Position']                = "Position";
-$lang['Points']                  = "Points";
-$lang['Rank']                    = "Rang";
+$lang['centigrade']              = "C";
+$lang['position_label']                = "Position";
+$lang['points_label']                  = "Points";
+$lang['rank_label']                    = "Rang";
 $lang['of']                      = "sur";
 $lang['banner']                  = "Votre banni&egrave;re";
-$lang['InfoBanner']              = "Banni&egrave;re-profil pour forum (copier/coller l'adresse pour utilisation):";
+$lang['info_banner']              = "Banni&egrave;re-profil pour forum (copier/coller l'adresse pour utilisation):";
 
 $lang['ov_off_expe']             = "Exp&eacute;rience";
 $lang['ov_off_level']            = "Niveau";
@@ -64,12 +64,12 @@ $lang['deletemessage_wrong'] = "La plan&egrave;te mere ne peut etre abandonn&eac
 $lang['deletemessage_fail']  = "Mot de passe incorrect!";
 
 // Divers
-$lang['MembersOnline']       = "Membres en ligne";
+$lang['members_online']       = "Membres en ligne";
 $lang['ov_news_title']       = "News";
-$lang['Raids']               = "Raids";
-$lang['NumberOfRaids']       = "Raids Effectu&eacute;s";
-$lang['RaidsWin']            = "Raids Gagn&eacute;s";
-$lang['RaidsLoose']          = "Raids Perdus";
+$lang['raids_label']               = "Raids";
+$lang['number_of_raids']       = "Raids Effectu&eacute;s";
+$lang['raids_win']            = "Raids Gagn&eacute;s";
+$lang['raids_loose']          = "Raids Perdus";
 
 // Gestion des flottes
 $lang['ov_fleet']            = "flotte";

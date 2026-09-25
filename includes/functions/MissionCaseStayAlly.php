@@ -42,18 +42,18 @@ function MissionCaseStayAlly ( $FleetRow ) {
 
 			$Message         = sprintf( $lang['sys_tran_mess_owner'],
 									$TargetName, GetTargetAdressLink($FleetRow, ''),
-									$FleetRow['fleet_resource_metal'], $lang['Metal'],
-									$FleetRow['fleet_resource_crystal'], $lang['Crystal'],
-									$FleetRow['fleet_resource_deuterium'], $lang['Deuterium'] );
+									$FleetRow['fleet_resource_metal'], $lang['metal_label'],
+									$FleetRow['fleet_resource_crystal'], $lang['crystal_label'],
+									$FleetRow['fleet_resource_deuterium'], $lang['deuterium_label'] );
 
 			SendSimpleMessage ( $StartOwner, '', $FleetRow['fleet_start_time'], 5, $lang['sys_mess_tower'], $lang['sys_mess_transport'], $Message);
 
 			$Message         = sprintf( $lang['sys_tran_mess_user'],
 									$StartName, GetStartAdressLink($FleetRow, ''),
 									$TargetName, GetTargetAdressLink($FleetRow, ''),
-									$FleetRow['fleet_resource_metal'], $lang['Metal'],
-									$FleetRow['fleet_resource_crystal'], $lang['Crystal'],
-									$FleetRow['fleet_resource_deuterium'], $lang['Deuterium'] );
+									$FleetRow['fleet_resource_metal'], $lang['metal_label'],
+									$FleetRow['fleet_resource_crystal'], $lang['crystal_label'],
+									$FleetRow['fleet_resource_deuterium'], $lang['deuterium_label'] );
 			SendSimpleMessage ( $TargetOwner, '', $FleetRow['fleet_start_time'], 5, $lang['sys_mess_tower'], $lang['sys_mess_transport'], $Message);
 		} elseif ( $FleetRow['fleet_end_stay'] <= time() ) {
 			$QryUpdateFleet  = "UPDATE {{table}} SET ";

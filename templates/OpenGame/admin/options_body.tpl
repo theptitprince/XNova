@@ -76,16 +76,16 @@
 	<th>{adm_opt_plan_initial}</th>
 	<th><input name="initial_fields" maxlength="80" size="10" value="{initial_fields}" type="text"> cases</th>
 </tr><tr>
-	<th>{adm_opt_plan_base_inc}{Metal}</th>
+	<th>{adm_opt_plan_base_inc}{metal_label}</th>
 	<th><input name="metal_basic_income" maxlength="2" size="10" value="{metal_basic_income}" type="text"> par heure</th>
 </tr><tr>
-	<th>{adm_opt_plan_base_inc}{Crystal}</th>
+	<th>{adm_opt_plan_base_inc}{crystal_label}</th>
 	<th><input name="crystal_basic_income" maxlength="2" size="10" value="{crystal_basic_income}" type="text"> par heure   </th>
 </tr><tr>
-	<th>{adm_opt_plan_base_inc}{Deuterium}</th>
+	<th>{adm_opt_plan_base_inc}{deuterium_label}</th>
 	<th><input name="deuterium_basic_income" maxlength="2" size="10" value="{deuterium_basic_income}" type="text"> par heure   </th>
 </tr><tr>
-	<th>{adm_opt_plan_base_inc}{Energy}</th>
+	<th>{adm_opt_plan_base_inc}{energy_label}</th>
 	<th><input name="energy_basic_income" maxlength="2" size="10" value="{energy_basic_income}" type="text"> par heure</th>
 </tr><tr>
 	<td class="c" colspan="2">{adm_opt_control_pages}</td>
@@ -109,17 +109,17 @@
 	<th>{adm_opt_game_oth_news}<br /></th>
 	<th><input name="newsframe"{newsframe} type="checkbox" /></th>
 </tr><tr>
-	<th colspan="2"><textarea name="NewsText" cols="80" rows="5" size="80" >{NewsTextVal}</textarea></th>
+	<th colspan="2"><textarea name="NewsText" cols="80" rows="5" size="80" >{news_text_val}</textarea></th>
 </tr><tr>
 	<th>{adm_opt_game_oth_chat}</th>
 	<th><input name="chatframe"{chatframe} type="checkbox" /></th>
 </tr><tr>
-	<th colspan="2"><textarea name="ExternChat" cols="80" rows="5" size="80" >{ExtTchatVal}</textarea></th>
+	<th colspan="2"><textarea name="ExternChat" cols="80" rows="5" size="80" >{ext_tchat_val}</textarea></th>
 </tr><tr>
 	<th>{adm_opt_game_oth_adds}</th>
 	<th><input name="googlead"{googlead} type="checkbox" /></th>
 </tr><tr>
-	<th colspan="2"><textarea name="GoogleAds" cols="80" rows="5" size="80" >{GoogleAdVal}</textarea></th>
+	<th colspan="2"><textarea name="GoogleAds" cols="80" rows="5" size="80" >{google_ad_val}</textarea></th>
 </tr><tr>
 	<th>{adm_opt_game_debugmod}</a></th>
 	<th><input name="debug"{debug} type="checkbox" /></th>

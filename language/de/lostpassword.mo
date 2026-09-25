@@ -1,11 +1,11 @@
 <?php
 
-$lang['ResetPass'] = "Passwort vergessen";
-$lang['TextPass1'] = "Gib die E-Mail-Adresse deines Kontos bei";
-$lang['TextPass2'] = "ein, so wie sie in deinen Einstellungen steht (die Adresse der Anmeldung). Mit &bdquo;Senden&ldquo; wird ein neues Passwort erstellt und an diese Adresse geschickt.";
+$lang['reset_pass'] = "Passwort vergessen";
+$lang['text_pass1'] = "Gib die E-Mail-Adresse deines Kontos bei";
+$lang['text_pass2'] = "ein, so wie sie in deinen Einstellungen steht (die Adresse der Anmeldung). Mit &bdquo;Senden&ldquo; wird ein neues Passwort erstellt und an diese Adresse geschickt.";
 $lang['email']    = "E-Mail";
-$lang['ButtonSendPass'] = "Senden";
-$lang['PassForm'] = "Formular";
+$lang['button_send_pass'] = "Senden";
+$lang['pass_form'] = "Formular";
 $lang['system'] = "System";
 
 // XNova Renaissance 0.9g : Versand des neuen Passworts

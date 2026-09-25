@@ -2,26 +2,26 @@
 
 //Generale
 $lang['cancel'] = 'Annullare';
-$lang['Planet_menu'] = 'Menu del pianeta';
-$lang['Planet'] = 'Pianeta';
-$lang['Have_new_message'] = 'Avete 1 nuovo messaggio';
-$lang['Have_new_messages'] = 'avete %m nuovi messaggi';
-$lang['Have_new_level_mineur'] = 'Avete guadagnato un punto Minatore !';
-$lang['Have_new_level_raid'] = 'Avete guadagnato un punto Raideur!';
-$lang['Server_time'] = 'Orario';
-$lang['Events'] = 'Eventi';
-$lang['Free'] = 'Libero';
-$lang['Diameter'] = 'Diametro';
+$lang['planet_menu'] = 'Menu del pianeta';
+$lang['planet_label'] = 'Pianeta';
+$lang['have_new_message'] = 'Avete 1 nuovo messaggio';
+$lang['have_new_messages'] = 'avete %m nuovi messaggi';
+$lang['have_new_level_mineur'] = 'Avete guadagnato un punto Minatore !';
+$lang['have_new_level_raid'] = 'Avete guadagnato un punto Raideur!';
+$lang['server_time'] = 'Orario';
+$lang['events'] = 'Eventi';
+$lang['free'] = 'Libero';
+$lang['diameter_label'] = 'Diametro';
 $lang['fields'] = 'Spazi';
-$lang['Developed_fields'] = 'Spazi occupati';
+$lang['developed_fields'] = 'Spazi occupati';
 $lang['max_eveloped_fields'] = 'Numero massimo di spazi utilizzabili';
-$lang['Temperature'] = 'Temperatura';
+$lang['temperature_label'] = 'Temperatura';
 $lang['approx'] = 'circa.';
 $lang['to'] = 'a';
-$lang['Centigrade'] = 'C';
-$lang['Position'] = 'Posizione';
-$lang['Points'] = 'Punti';
-$lang['Rank'] = 'Rango';
+$lang['centigrade'] = 'C';
+$lang['position_label'] = 'Posizione';
+$lang['points_label'] = 'Punti';
+$lang['rank_label'] = 'Rango';
 $lang['of'] = 'di';
 
 
@@ -47,7 +47,7 @@ $lang['deletemessage_wrong'] = 'Il pianeta madre non pu&eacute; essere abbandona
 $lang['deletemessage_fail'] = 'Password incorretta!';
 
 // Divers
-$lang['MembersOnline']       = "Membres en ligne";
+$lang['members_online']       = "Membres en ligne";
 $lang['ov_news_title']       = "News";
 
 // Flotte
@@ -90,7 +90,7 @@ $lang['ov_debris_to'] = "un Campo di detriti";
 $lang['ov_expe_to'] = "inesplorato";
 $lang['ov_expe_from'] = "dalla regione";
 
-$lang['MembersOnline'] = "Membri online";
+$lang['members_online'] = "Membri online";
 
 $lang['level'] = "Livello";
 $lang['metal'] = "Metallo";

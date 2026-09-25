@@ -1,18 +1,18 @@
 <?php
 
-$lang['Production_of_resources_in_the_planet'] 	= 'Produktion auf "%s"';
-$lang['Production_level'] 				= 'Produktionsstufe';
-$lang['Basic_income'] 					= 'Standartproduktion';
+$lang['production_of_resources_in_the_planet'] 	= 'Produktion auf "%s"';
+$lang['production_level_label'] 				= 'Produktionsstufe';
+$lang['basic_income'] 					= 'Standartproduktion';
 $lang['quantity'] 					= 'Anzahl';
 $lang['level'] 						= 'Stufe';
-$lang['Stores_capacity'] 				= 'Speicherkapazit&auml;t';
-$lang['Widespread_production'] 			= 'Produktion';
-$lang['Daily'] 						= 'T&auml;glich';
-$lang['Weekly'] 						= 'W&ouml;chentlich';
-$lang['Monthly'] 						= 'Monatlich';
-$lang['Storage_state'] 					= 'Speicherkapazit&auml;ten';
-$lang['Calcule'] 						= 'Berechnen';
-$lang['o/o'] 						= '%';
+$lang['stores_capacity'] 				= 'Speicherkapazit&auml;t';
+$lang['widespread_production'] 			= 'Produktion';
+$lang['daily'] 						= 'T&auml;glich';
+$lang['weekly'] 						= 'W&ouml;chentlich';
+$lang['monthly'] 						= 'Monatlich';
+$lang['storage_state'] 					= 'Speicherkapazit&auml;ten';
+$lang['calcule'] 						= 'Berechnen';
+$lang['o_o'] 						= '%';
 $lang['k'] 							= 'k';
 
 

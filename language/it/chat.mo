@@ -1,6 +1,6 @@
 <?php
 
-$lang['Chat']  = "Chat";
+$lang['chat']  = "Chat";
 $lang['chat_loading']  = "Proszê czekaæ...";
 $lang['chat_disc']     = "Rozmowa na ¿ywo";
 $lang['chat_message']  = "Wiadomo¶æ";

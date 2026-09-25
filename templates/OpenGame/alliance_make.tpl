@@ -14,7 +14,7 @@
 	  <th><input type="text" name="aname" size=20 maxlength=30 value=""></th>
 	</tr>
 	<tr>
-	  <th colspan=2><input type="submit" value="{Make}"></th>
+	  <th colspan=2><input type="submit" value="{make}"></th>
 	</tr>
 </table>
 

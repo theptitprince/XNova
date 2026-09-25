@@ -429,7 +429,7 @@ function MissionCaseDestruction($FleetRow) {
 
          $StrDefenderUnits = sprintf ($lang['sys_defender_lostunits'], $zlom["wrog"]);
 
-         $StrRuins         = sprintf ($lang['sys_gcdrunits'], $zlom["metal"], $lang['Metal'], $zlom['crystal'], $lang['Crystal']);
+         $StrRuins         = sprintf ($lang['sys_gcdrunits'], $zlom["metal"], $lang['metal_label'], $zlom['crystal'], $lang['crystal_label']);
 
          $DebrisField      = $StrAttackerUnits ."<br />". $StrDefenderUnits ."<br />". $StrRuins;
 
@@ -746,7 +746,7 @@ function MissionCaseDestruction($FleetRow) {
 
          $raport .= "<font color=\"green\">   ". $lang['sys_perte_defenseur'] .":". $zlom["wrog"] ."</font><br />" ;
 
-                     $raport .= $lang['sys_debris'] ." ". $lang['Metal'] .":<font color=\"#adaead\">". $zlom['metal'] ."</font>   ". $lang['Crystal'] .":<font color=\"#ef51ef\">". $zlom['crystal'] ."</font><br /></center>";
+                     $raport .= $lang['sys_debris'] ." ". $lang['metal_label'] .":<font color=\"#adaead\">". $zlom['metal'] ."</font>   ". $lang['crystal_label'] .":<font color=\"#ef51ef\">". $zlom['crystal'] ."</font><br /></center>";
 
 
 

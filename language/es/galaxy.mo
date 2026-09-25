@@ -1,9 +1,9 @@
 <?php
 
-$lang['Galaxy'] = 'Galaxie';
-$lang['Solar_system'] = 'Syst&egrave;me Solaire';
-$lang['Afficher'] = "Afficher";
-$lang['Show'] = 'Voir';
+$lang['galaxy_label'] = 'Galaxie';
+$lang['solar_system'] = 'Syst&egrave;me Solaire';
+$lang['afficher'] = "Afficher";
+$lang['show_label'] = 'Voir';
 $lang['vacation_shortcut'] = "v";
 $lang['banned_shortcut'] = "b";
 $lang['inactif_7_shortcut'] = "i";
@@ -11,36 +11,36 @@ $lang['inactif_28_shortcut'] = "I";
 $lang['strong_player_shortcut'] = "f";
 $lang['weak_player_shortcut'] = "d";
 
-$lang['Legend'] = 'L&eacute;gende';
-$lang['Strong_player'] = 'Joueur fort';
-$lang['Weak_player'] = 'Joueur faible (d&eacute;butant)';
-$lang['Way_vacation'] = 'Mode vancances';
-$lang['Pendent_user'] = 'Bloqu&eacute;';
-$lang['Inactive_7_days'] = 'Inactif +7';
-$lang['Inactive_28_days'] = 'Inactif +28';
+$lang['legend'] = 'L&eacute;gende';
+$lang['strong_player'] = 'Joueur fort';
+$lang['weak_player'] = 'Joueur faible (d&eacute;butant)';
+$lang['way_vacation'] = 'Mode vancances';
+$lang['pendent_user'] = 'Bloqu&eacute;';
+$lang['inactive_7_days'] = 'Inactif +7';
+$lang['inactive_28_days'] = 'Inactif +28';
 
-$lang['Solar_system_at'] = 'Syst&egrave;me Solaire &agrave;';
+$lang['solar_system_at'] = 'Syst&egrave;me Solaire &agrave;';
 
-$lang['Pos'] = 'Pos';
-$lang['Planet'] = 'Plan&egrave;te';
-$lang['Name'] = 'Nom (Activit&eacute;)';
-$lang['Moon'] = 'Lune';
-$lang['Debris'] = 'D&eacute;bris';
+$lang['pos'] = 'Pos';
+$lang['planet_label'] = 'Plan&egrave;te';
+$lang['name_label'] = 'Nom (Activit&eacute;)';
+$lang['moon_label'] = 'Lune';
+$lang['debris_label'] = 'D&eacute;bris';
 $lang['caracters'] = "Caract&eacute;ristiques";
 $lang['diameter'] = "Diam&egrave;tre";
 $lang['temperature'] = "Temp&egrave;rature";
-$lang['Player'] = 'Joueur (Status)';
-$lang['Place'] = 'Place';
-$lang['State'] = 'Status';
-$lang['Alliance'] = 'Alliance';
-$lang['Actions'] = 'Actions';
+$lang['player_label'] = 'Joueur (Status)';
+$lang['place'] = 'Place';
+$lang['state_label'] = 'Status';
+$lang['alliance_label'] = 'Alliance';
+$lang['actions'] = 'Actions';
 //info tips (galaxy_row_ally)
-$lang['AllyInfoText'] = 'Alliance %n';//%n = ally_name ; %r = ally_rank ; %m = ally_members ;
-$lang['Planets_count'] = '( Planete Habit&eacute;es: %n (s) )';
+$lang['ally_info_text'] = 'Alliance %n';//%n = ally_name ; %r = ally_rank ; %m = ally_members ;
+$lang['planets_count'] = '( Planete Habit&eacute;es: %n (s) )';
 //Sackando la flota
-$lang['Sending_fleet'] = 'Envoie de Flotte';
-$lang['Sent_fleet'] = 'Flotte Envoyee';
-$lang['Obtaining_data'] = 'En attente de Donnee';
+$lang['sending_fleet'] = 'Envoie de Flotte';
+$lang['sent_fleet'] = 'Flotte Envoyee';
+$lang['obtaining_data'] = 'En attente de Donnee';
 //Errores en sackando
 $lang['an_error_has_happened_while_it_was_sent'] = 'Une erreur est survenue';
 $lang['error_there_is_no_moon'] = 'Aucune Lune dans le coin';
@@ -51,7 +51,7 @@ $lang['error_only_x_available_probes_sending'] = 'Pas assez de sonde';
 $lang['error_there_are_no_available_probes_of_spying'] = 'Aucune sonde';
 $lang['error_you_cannot_send_any_more_fleets'] = 'Slot de Flotte tous pris';
 $lang['error_you_do_not_have_sufficient_deuterium'] = 'pas assez de Deuterium';
-$lang['There_is_not_planet'] = 'Aucune Planete';
+$lang['there_is_not_planet'] = 'Aucune Planete';
 $lang['error_there_is_no_sufficient_fuel'] = 'Pas assez de carburant';
 $lang['multialarm'] = 'Alarme';
 
@@ -89,7 +89,7 @@ $lang['gs_c616'] = "Erreur, Multialarm!";
 $lang['gs_c618'] = "Erreur, Vous essayez visiblement de vous attaquer vous m&ecirc;me!";
 $lang['gs_sending'] = "Envoi de";
 $lang['gs_to'] = "vers";
-$lang['Sending'] = 'Envoie';
+$lang['sending'] = 'Envoie';
 
 $lang['gf_cntmone'] = "Plan&egrave;tes conquises";
 $lang['gf_cntmnone'] = "Aucune Plan&egrave;te peupl&eacute;e.";

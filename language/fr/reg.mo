@@ -7,15 +7,15 @@ if (!defined('INSIDE')) {
 // Registration form
 $lang['registry']          = 'Inscription';
 $lang['form']              = 'Formulaire';
-$lang['Register']          = 'XNova Inscription';
-$lang['Undefined']         = '- ind&eacute;fini -';
-$lang['Male']              = 'Homme';
-$lang['Female']            = 'Femme';
-$lang['Multiverse']        = 'XNova';
-$lang['E-Mail']            = 'Adresse e-Mail';
-$lang['MainPlanet']        = 'Nom de votre plan&egrave;te m&egrave;re';
-$lang['GameName']          = 'Pseudo';
-$lang['Sex']               = 'Sexe';
+$lang['register']          = 'XNova Inscription';
+$lang['undefined']         = '- ind&eacute;fini -';
+$lang['male']              = 'Homme';
+$lang['female']            = 'Femme';
+$lang['multiverse']        = 'XNova';
+$lang['e_mail']            = 'Adresse e-Mail';
+$lang['main_planet']        = 'Nom de votre plan&egrave;te m&egrave;re';
+$lang['game_name_label']          = 'Pseudo';
+$lang['sex_label']               = 'Sexe';
 $lang['accept']            = 'J\'acc&egrave;pte le r&egrave;glement';
 $lang['signup']            = ' S\'enregistrer ';
 $lang['neededpass']        = 'Mot de passe';

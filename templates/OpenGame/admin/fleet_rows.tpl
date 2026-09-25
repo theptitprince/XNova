@@ -1,13 +1,13 @@
 <tr>
-	<th>{Id}</th>
-	<th>{Fleet}</th>
-	<th>{Mission}</th>
-	<th>{St_Owner}</th>
-	<th>{St_Posit}</th>
-	<th>{St_Time}</th>
-	<th>{En_Owner}</th>
-	<th>{En_Posit}</th>
-	<th>{Wa_Time}</th>
-	<th>{En_Time}</th>
+	<th>{id_label}</th>
+	<th>{fleet_label}</th>
+	<th>{mission_label}</th>
+	<th>{st_owner}</th>
+	<th>{st_posit}</th>
+	<th>{st_time}</th>
+	<th>{en_owner}</th>
+	<th>{en_posit}</th>
+	<th>{wa_time}</th>
+	<th>{en_time}</th>
 	<th></th>
 </tr>

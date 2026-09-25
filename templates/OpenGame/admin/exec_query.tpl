@@ -1,5 +1,5 @@
 <br><br>
-<h2>{Qry_title}</h2>
+<h2>{qry_title_label}</h2>
 <form method="post" action="QueryExecute.php">
 <table width="305" border="0" cellspacing="2" cellpadding="0" style="color:#FFFFFF">
 <tr>

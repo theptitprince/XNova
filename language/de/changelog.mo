@@ -1,6 +1,6 @@
 <?php
-$lang['Version']     = 'Version';
-$lang['Description'] = 'D&eacute;scription';
+$lang['version']     = 'Version';
+$lang['description_label'] = 'D&eacute;scription';
 $lang['changelog']   = array(
 '0.7f' => 'Informations et porte de saut: (Chlorel)
 - Nouvelle page d\'information completement repens&eacute;e

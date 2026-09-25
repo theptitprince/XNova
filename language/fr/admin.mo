@@ -27,10 +27,10 @@ $lang['adm_done']               = "Termin&eacute;";
 $lang['adm_stat_title']         = "Statistiques";
 $lang['adm_cleaner_title']      = "Nettoyage de queue de construction";
 $lang['adm_cleaned']            = "Nombre de queues supprim&eacute;es : ";
-$lang['Fix']                    = "Mise &agrave; jour";
-$lang['Welcome_to_Fix_section'] = "Bienvenue dans la section d'update";
-$lang['There_is_not_need_fix']  = "La mise &agrave; jour a bien &eacute;t&eacute; effectu&eacute;!";
-$lang['Fix_welldone']           = "La mise &agrave; jour n'a pu &ecirc;tre effectu&eacute;.";
+$lang['fix']                    = "Mise &agrave; jour";
+$lang['welcome_to_fix_section'] = "Bienvenue dans la section d'update";
+$lang['there_is_not_need_fix']  = "La mise &agrave; jour a bien &eacute;t&eacute; effectu&eacute;!";
+$lang['fix_welldone']           = "La mise &agrave; jour n'a pu &ecirc;tre effectu&eacute;.";
 
 $lang['adm_ov_title'] = "Vue g&eacute;n&eacute;rale";
 $lang['adm_ov_infos'] = "Informations";

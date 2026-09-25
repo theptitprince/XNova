@@ -121,5 +121,5 @@ $lang['searchtext'] = SafeText(($_POST['searchtext'] ?? null));
 $lang['search_results'] = $search_results;
 //esto es algo repetitivo ... w
 $page = parsetemplate(gettemplate('search_body'), $lang);
-display($page,$lang['Search']);
+display($page,$lang['search']);
 ?>

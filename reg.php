@@ -95,7 +95,7 @@ if ($_POST) {
     }
 
     if ($errors != 0) {
-        message ($errorlist, $lang['Register']);
+        message ($errorlist, $lang['register']);
     } else {
         $newpass = ($_POST['passwrd'] ?? null);
         // Pseudo et adresse deja valides plus haut (A-Z a-z 0-9 _ - / is_email). L'ancien filtre de mots remplacait

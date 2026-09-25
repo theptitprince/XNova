@@ -23,7 +23,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$parse = $lang;
 
 	if ($game_config['ExtCopyFrame'] == '1') {
-		$parse['ExtCopyFrame'] = "<tr><td colspan=\"2\" class=\"c\">". $lang['cred_ext'] ."</td></tr><tr><th>". nl2br($game_config['ExtCopyOwner']) ."</th><th>". nl2br($game_config['ExtCopyFunct']) ."</th></tr>";
+		$parse['ext_copy_frame'] = "<tr><td colspan=\"2\" class=\"c\">". $lang['cred_ext'] ."</td></tr><tr><th>". nl2br($game_config['ExtCopyOwner']) ."</th><th>". nl2br($game_config['ExtCopyFunct']) ."</th></tr>";
 	}
 
 	$BodyTPL = gettemplate('credit_body');

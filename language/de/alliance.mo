@@ -14,27 +14,27 @@ $lang['have_not_name'] 				= 'Die Allianz hat noch keinen Namen!';
 $lang['always_exist'] 				= '%s Existiert bereits;';
 $lang['ally_maked'] 				= '%s erstellt';
 $lang['ally_notexist'] 				= 'Allianz wurde gel&ouml;scht!';
-$lang['Send_circular_mail'] 			= 'Rundmail verfassen';
-$lang['Text_mail'] 				= 'Text Mail';
-$lang['Members_list'] 				= 'Mitgliederliste';
-$lang['Alliance_admin'] 			= 'Allianz verwalten';
-$lang['Range']	 				= 'Dein Rang';
-$lang['Members'] 					= 'Mitglieder';
-$lang['Name'] 					= 'Name';
-$lang['Tag'] 					= 'TAG';
-$lang['Circular_message'] 			= 'Rundmail';
-$lang['Inner_section'] 				= 'Internerbereich';
-$lang['Main_Page'] 				= 'Homepage';
+$lang['send_circular_mail_label'] 			= 'Rundmail verfassen';
+$lang['text_mail'] 				= 'Text Mail';
+$lang['members_list_label'] 				= 'Mitgliederliste';
+$lang['alliance_admin_label'] 			= 'Allianz verwalten';
+$lang['range_label']	 				= 'Dein Rang';
+$lang['members_label'] 					= 'Mitglieder';
+$lang['name_label'] 					= 'Name';
+$lang['tag_label'] 					= 'TAG';
+$lang['circular_message'] 			= 'Rundmail';
+$lang['inner_section'] 				= 'Internerbereich';
+$lang['main_page'] 				= 'Homepage';
 
 $lang['alliance_tag'] 				= 'Allianz Tag';
 $lang['allyance_name'] 				= 'Allianz Name';
 $lang['members'] 					= 'Mitglieder';
 $lang['member']					= 'Mitglied';
-$lang['Novate'] 					= 'Neuling';
+$lang['novate'] 					= 'Neuling';
 
-$lang['Founder'] 					= 'Gr&uuml;nder';
+$lang['founder'] 					= 'Gr&uuml;nder';
 
-$lang['Circular_sended'] 			= 'Rundmail wurde gesendet';
+$lang['circular_sended'] 			= 'Rundmail wurde gesendet';
 
 //Solicitud
 $lang['it_is_not_posible_to_apply'] 	= "Nicht m&ouml;glich!";
@@ -43,95 +43,95 @@ $lang['your_apply'] 				= 'Bewerbung';
 $lang['apply_registered'] 			= 'Anfrage gesendet. Du erh&auml;lst eine Nachricht, ob dein Antrag angenommen / abgelehnt wurde. <br><a href="alliance.php">Zur&uuml;ck</a>';
 $lang['apply_cantbeadded'] 			= 'Anfrage konnte nicht zugeordnet werden. Bitte versuche es nochmals.';
 
-$lang['Exit_of_this_alliance'] 		= "Allianz verlassen";
-$lang['Continue'] 				= "Weiter";
-$lang['All_players'] 				= 'Alle Spieler';
-$lang['Send_Apply'] 				= 'Senden';
-$lang['Delete_apply'] 				= 'L&ouml;schen';
-$lang['Send'] 					= 'Senden';
-$lang['Ok'] 					= 'OK';
-$lang['Reload'] 					= 'Neuladen';
-$lang['Clear'] 					= 'Zur&uuml;cksetzen';
-$lang['Back'] 					= 'Zur&uuml;ck';
-$lang['Help'] 					= 'Hilfe';
-$lang['Message'] 					= 'Nachricht';
+$lang['exit_of_this_alliance'] 		= "Allianz verlassen";
+$lang['continue_label'] 				= "Weiter";
+$lang['all_players'] 				= 'Alle Spieler';
+$lang['send_apply'] 				= 'Senden';
+$lang['delete_apply'] 				= 'L&ouml;schen';
+$lang['send_label'] 					= 'Senden';
+$lang['ok'] 					= 'OK';
+$lang['reload'] 					= 'Neuladen';
+$lang['clear'] 					= 'Zur&uuml;cksetzen';
+$lang['back'] 					= 'Zur&uuml;ck';
+$lang['help'] 					= 'Hilfe';
+$lang['message_label'] 					= 'Nachricht';
 $lang['characters'] 				= 'Zeichen';
-$lang['Destiny'] 					= 'Empf&auml;nger';
+$lang['destiny'] 					= 'Empf&auml;nger';
 
-$lang['Write_to_alliance'] 			= 'Nachricht an die Allianz versenden [%s]';
+$lang['write_to_alliance'] 			= 'Nachricht an die Allianz versenden [%s]';
 
-$lang['There_is_no_a_text_apply'] 		= 'Der Allyleader hat keine Nachricht hinterlassen.';
-$lang['Waiting_a_request_text'] 		= 'Du hast bereits eine Bewerbung an die Allianz [%s] gestellt. Bitte warte auf die Antwort der Allianz oder ziehe deine Bewerbung zur&uuml;ck.';
-$lang['Canceled_a_request_text'] 		= 'Deine Bewerbung der Allianz [%s] wurde gel&ouml;scht. Du kannst nun eine neue Bewerbung verfassen.';
+$lang['there_is_no_a_text_apply'] 		= 'Der Allyleader hat keine Nachricht hinterlassen.';
+$lang['waiting_a_request_text'] 		= 'Du hast bereits eine Bewerbung an die Allianz [%s] gestellt. Bitte warte auf die Antwort der Allianz oder ziehe deine Bewerbung zur&uuml;ck.';
+$lang['canceled_a_request_text'] 		= 'Deine Bewerbung der Allianz [%s] wurde gel&ouml;scht. Du kannst nun eine neue Bewerbung verfassen.';
 
-$lang['Online'] 					= 'Online';
-$lang['Ammount'] 					= 'Anzahl';
-$lang['Name'] 					= 'Name';
-$lang['Number'] 					= 'Nr.';
-$lang['Position'] 				= 'Rang';
-$lang['Points'] 					= 'Punkte';
-$lang['Coordinated'] 				= 'Koordinaten';
-$lang['Member_from'] 				= 'Beitritt in die Alli';
-$lang['Function'] 				= 'Online';
-$lang['Write_a_message'] 			= 'Nachricht schreiben';
-$lang['On'] 					= 'Online';
+$lang['online'] 					= 'Online';
+$lang['ammount'] 					= 'Anzahl';
+$lang['name_label'] 					= 'Name';
+$lang['number'] 					= 'Nr.';
+$lang['position_label'] 				= 'Rang';
+$lang['points_label'] 					= 'Punkte';
+$lang['coordinated_label'] 				= 'Koordinaten';
+$lang['member_from'] 				= 'Beitritt in die Alli';
+$lang['function'] 				= 'Online';
+$lang['write_a_message'] 			= 'Nachricht schreiben';
+$lang['on_label'] 					= 'Online';
 $lang['15_min'] 					= '15 min';
-$lang['Off'] 					= 'Offline';
+$lang['off'] 					= 'Offline';
 
 //Admin
-$lang['Transfer_alliance'] 			= 'Abtragen / Allianz &uuml;bertragen?';
-$lang['Texts'] 					= 'Text Management';
-$lang['External_text'] 				= 'Externer Text';
-$lang['Internal_text'] 				= 'Interner Text';
-$lang['Request_text'] 				= 'Text';
-$lang['Show_of_request_text'] 		= 'Externer Allianz Text';
+$lang['transfer_alliance'] 			= 'Abtragen / Allianz &uuml;bertragen?';
+$lang['texts'] 					= 'Text Management';
+$lang['external_text'] 				= 'Externer Text';
+$lang['internal_text'] 				= 'Interner Text';
+$lang['request_text_label'] 				= 'Text';
+$lang['show_of_request_text'] 		= 'Externer Allianz Text';
 
-$lang['Law_settings'] 				= 'Rechte einstellen';
-$lang['Members_administrate'] 		= 'Mitglieder verwalten';
+$lang['law_settings'] 				= 'Rechte einstellen';
+$lang['members_administrate'] 		= 'Mitglieder verwalten';
 
-$lang['Return_to_overview'] 			= 'Zur&uuml;ck zur &Uuml;bersicht';
-$lang['Configure_laws'] 			= 'Rechte einstellen';
-$lang['Range_name'] 				= 'Rang Name';
-$lang['Range_make'] 				= 'Neun Rang Erstellen';
-$lang['Delete_range'] 				= '<img src="/images/ally/delete.gif"';
-$lang['Make'] 					= 'Erstellen';
-$lang['Law_leyends'] 				= 'Rechtebeschreibung';
-$lang['Alliance_dissolve'] 			= 'Allianz aufl&ouml;sen';
-$lang['Expel_users'] 				= 'Spieler kicken';
-$lang['See_the_requests'] 			= 'Bewerbung ansehen';
-$lang['See_the_list_members'] 		= 'Mitgliederliste anzeigen';
-$lang['Check_the_requests'] 			= 'Bewerbungen bearbeiten';
-$lang['See_the_online_list_member'] 	= 'Onlinestatus in der Mitgliederliste anzeigen';
-$lang['Make_a_circular_message'] 		= 'Rundmail Schreiben';
-$lang['Left_hand_text'] 			= "Rechte Hand' (zum uebertragen des Gruenderstatus notwendig)";
-$lang['Save'] 					= 'Speichern';
-$lang['There_is_not_range'] 			= 'Bis jetzt wurden noch keine R&auml;nge gespeichert';
+$lang['return_to_overview'] 			= 'Zur&uuml;ck zur &Uuml;bersicht';
+$lang['configure_laws'] 			= 'Rechte einstellen';
+$lang['range_name'] 				= 'Rang Name';
+$lang['range_make'] 				= 'Neun Rang Erstellen';
+$lang['delete_range'] 				= '<img src="/images/ally/delete.gif"';
+$lang['make'] 					= 'Erstellen';
+$lang['law_leyends'] 				= 'Rechtebeschreibung';
+$lang['alliance_dissolve'] 			= 'Allianz aufl&ouml;sen';
+$lang['expel_users'] 				= 'Spieler kicken';
+$lang['see_the_requests'] 			= 'Bewerbung ansehen';
+$lang['see_the_list_members'] 		= 'Mitgliederliste anzeigen';
+$lang['check_the_requests'] 			= 'Bewerbungen bearbeiten';
+$lang['see_the_online_list_member'] 	= 'Onlinestatus in der Mitgliederliste anzeigen';
+$lang['make_a_circular_message'] 		= 'Rundmail Schreiben';
+$lang['left_hand_text'] 			= "Rechte Hand' (zum uebertragen des Gruenderstatus notwendig)";
+$lang['save'] 					= 'Speichern';
+$lang['there_is_not_range'] 			= 'Bis jetzt wurden noch keine R&auml;nge gespeichert';
 $lang['s'] 						= '[N/A]';
 
-$lang['Change_the_ally_tag'] 			= 'Allianz-Tag &auml;ndern';
-$lang['Change_the_ally_name'] 		= 'Allianz-Name &auml;ndern';
-$lang['Options'] 					= "Optionen";
-$lang['Alliance_logo'] 				= "Allianz-Logo";
-$lang['Requests'] 				= "Bewerbungen";
-$lang['Allow_request'] 				= "Bewerbungen erlauben";
-$lang['No_allow_request'] 			= "Bewerbungen nicht erlauben";
-$lang['Founder_name'] 				= "Gr&uuml;nder Name";
-$lang['Reset'] 					= "Zur&uuml;cksetzen";
+$lang['change_the_ally_tag'] 			= 'Allianz-Tag &auml;ndern';
+$lang['change_the_ally_name'] 		= 'Allianz-Name &auml;ndern';
+$lang['options_label'] 					= "Optionen";
+$lang['alliance_logo'] 				= "Allianz-Logo";
+$lang['requests_label'] 				= "Bewerbungen";
+$lang['allow_request'] 				= "Bewerbungen erlauben";
+$lang['no_allow_request'] 			= "Bewerbungen nicht erlauben";
+$lang['founder_name'] 				= "Gr&uuml;nder Name";
+$lang['reset'] 					= "Zur&uuml;cksetzen";
 
 
-$lang['Apply_ally_overview'] 			= "Bewerbungs&uuml;bersicht";
-$lang['Candidate'] 				= "Name";
+$lang['apply_ally_overview'] 			= "Bewerbungs&uuml;bersicht";
+$lang['candidate'] 				= "Name";
 	
-$lang['Date_of_the_request'] 			= "Bewerbung gesendet am";
-$lang['Search'] 					= "Allianz Suchen";
-$lang['Request_responde'] 			= "Antworten";
-$lang['Motive_optional'] 			= "Antwort (Optimal)";
-$lang['Go_out_welldone'] 			= "Du hast die Allianz verlassen!";
-$lang['Want_go_out'] 				= "Willst du die Allianz wirklich verlassen?";
+$lang['date_of_the_request'] 			= "Bewerbung gesendet am";
+$lang['search'] 					= "Allianz Suchen";
+$lang['request_responde'] 			= "Antworten";
+$lang['motive_optional'] 			= "Antwort (Optimal)";
+$lang['go_out_welldone'] 			= "Du hast die Allianz verlassen!";
+$lang['want_go_out'] 				= "Willst du die Allianz wirklich verlassen?";
 
 
 
-$lang['Denied_access'] 				= 'Zugriff verweigert';
+$lang['denied_access'] 				= 'Zugriff verweigert';
 
 // Created by Ichigo. All rights reversed (C) 2006 
 ?>

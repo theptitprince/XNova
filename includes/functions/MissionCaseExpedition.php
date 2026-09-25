@@ -142,9 +142,9 @@ function MissionCaseExpedition ( $FleetRow ) {
 					$QryUpdateFleet .= "`fleet_id` = '". $FleetRow["fleet_id"] ."';";
 					doquery( $QryUpdateFleet, 'fleets');
 					$Message = sprintf($lang['sys_expe_found_goods'],
-						pretty_number($FoundMetal), $lang['Metal'],
-						pretty_number($FoundCrist), $lang['Crystal'],
-						pretty_number($FoundDeute), $lang['Deuterium']);
+						pretty_number($FoundMetal), $lang['metal_label'],
+						pretty_number($FoundCrist), $lang['crystal_label'],
+						pretty_number($FoundDeute), $lang['deuterium_label']);
 					SendSimpleMessage ( $FleetOwner, '', $FleetRow['fleet_end_stay'], 15, $MessSender, $MessTitle, $Message );
 				}
 			} elseif ($Hasard == 7) {

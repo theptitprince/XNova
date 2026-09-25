@@ -32,9 +32,9 @@ function MissionCaseStay ( $FleetRow ) {
 
 			$TargetAdress         = sprintf ($lang['sys_adress_planet'], $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet']);
 			$TargetAddedGoods     = sprintf ($lang['sys_stay_mess_goods'],
-												$lang['Metal'], pretty_number($FleetRow['fleet_resource_metal']),
-												$lang['Crystal'], pretty_number($FleetRow['fleet_resource_crystal']),
-												$lang['Deuterium'], pretty_number($FleetRow['fleet_resource_deuterium']));
+												$lang['metal_label'], pretty_number($FleetRow['fleet_resource_metal']),
+												$lang['crystal_label'], pretty_number($FleetRow['fleet_resource_crystal']),
+												$lang['deuterium_label'], pretty_number($FleetRow['fleet_resource_deuterium']));
 
 			$TargetMessage        = $lang['sys_stay_mess_start'] ."<a href=\"galaxy.php?mode=3&galaxy=". $FleetRow['fleet_end_galaxy'] ."&system=". $FleetRow['fleet_end_system'] ."\">";
 			$TargetMessage       .= $TargetAdress. "</a>". $lang['sys_stay_mess_end'] ."<br />". $TargetAddedGoods;
@@ -47,9 +47,9 @@ function MissionCaseStay ( $FleetRow ) {
 		if ($FleetRow['fleet_end_time'] <= time()) {
 			$TargetAdress         = sprintf ($lang['sys_adress_planet'], $FleetRow['fleet_start_galaxy'], $FleetRow['fleet_start_system'], $FleetRow['fleet_start_planet']);
 			$TargetAddedGoods     = sprintf ($lang['sys_stay_mess_goods'],
-												$lang['Metal'], pretty_number($FleetRow['fleet_resource_metal']),
-												$lang['Crystal'], pretty_number($FleetRow['fleet_resource_crystal']),
-												$lang['Deuterium'], pretty_number($FleetRow['fleet_resource_deuterium']));
+												$lang['metal_label'], pretty_number($FleetRow['fleet_resource_metal']),
+												$lang['crystal_label'], pretty_number($FleetRow['fleet_resource_crystal']),
+												$lang['deuterium_label'], pretty_number($FleetRow['fleet_resource_deuterium']));
 
 			$TargetMessage        = $lang['sys_stay_mess_back'] ."<a href=\"galaxy.php?mode=3&galaxy=". $FleetRow['fleet_start_galaxy'] ."&system=". $FleetRow['fleet_start_system'] ."\">";
 			$TargetMessage       .= $TargetAdress. "</a>". $lang['sys_stay_mess_bend'] ."<br />". $TargetAddedGoods;

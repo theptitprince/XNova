@@ -128,7 +128,7 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 	$parse['buildinglist'] = $BuildQueue ?? '';
 	$page = parsetemplate(gettemplate('buildings_fleet'), $parse);
 
-	display($page, $lang['Fleet']);
+	display($page, $lang['fleet_label']);
 }
 // Version History
 // - 1.0 Modularisation

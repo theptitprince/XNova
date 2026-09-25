@@ -180,7 +180,7 @@ function MissionCaseAttack ($FleetRow)
             $FleetDebris = $zlom['metal'] + $zlom['crystal'];
             $StrAttackerUnits = sprintf ($lang['sys_attacker_lostunits'], pretty_number ($zlom["atakujacy"]));
             $StrDefenderUnits = sprintf ($lang['sys_defender_lostunits'], pretty_number ($zlom["wrog"]));
-            $StrRuins = sprintf ($lang['sys_gcdrunits'], pretty_number ($zlom["metal"]), $lang['Metal'], pretty_number ($zlom['crystal']), $lang['Crystal']);
+            $StrRuins = sprintf ($lang['sys_gcdrunits'], pretty_number ($zlom["metal"]), $lang['metal_label'], pretty_number ($zlom['crystal']), $lang['crystal_label']);
             $DebrisField = $StrAttackerUnits . "<br />" . $StrDefenderUnits . "<br />" . $StrRuins;
             $MoonChance = $FleetDebris / 100000;
             if ($FleetDebris > 2000000) {
@@ -292,7 +292,7 @@ function MissionCaseAttack ($FleetRow)
             }
             switch ($FleetResult) {
                 case "a":
-                    $Pillage = sprintf ($lang['sys_stealed_ressources'], pretty_number ($Mining['metal']), $lang['Metal'], pretty_number ($Mining['crystal']), $lang['Crystal'], pretty_number ($Mining['deuter']), $lang['Deuterium']);
+                    $Pillage = sprintf ($lang['sys_stealed_ressources'], pretty_number ($Mining['metal']), $lang['metal_label'], pretty_number ($Mining['crystal']), $lang['crystal_label'], pretty_number ($Mining['deuter']), $lang['deuterium_label']);
                     $raport .= $lang['sys_attacker_won'] . "<br />" . $Pillage . "<br />";
                     $raport .= $DebrisField . "<br />";
                     $raport .= $ChanceMoon . "<br />";
@@ -339,8 +339,8 @@ function MissionCaseAttack ($FleetRow)
             $raport .= $lang['sys_mess_attack_report'] . " [" . $FleetRow['fleet_end_galaxy'] . ":" . $FleetRow['fleet_end_system'] . ":" . $FleetRow['fleet_end_planet'] . "] </font></a><br /><br />";
             $raport .= "<font color=\"red\">" . $lang['sys_perte_attaquant'] . ": " . pretty_number ($zlom["atakujacy"]) . "</font>";
             $raport .= "<font color=\"green\">   " . $lang['sys_perte_defenseur'] . ":" . pretty_number ($zlom["wrog"]) . "</font><br />" ;
-            $raport .= $lang['sys_gain'] . " " . $lang['Metal'] . ":<font color=\"#adaead\">" . pretty_number ($Mining['metal']) . "</font>   " . $lang['Crystal'] . ":<font color=\"#ef51ef\">" . pretty_number ($Mining['crystal']) . "</font>   " . $lang['Deuterium'] . ":<font color=\"#f77542\">" . pretty_number ($Mining['deuter']) . "</font><br />";
-            $raport .= $lang['sys_debris'] . " " . $lang['Metal'] . ":<font color=\"#adaead\">" . pretty_number ($zlom['metal']) . "</font>   " . $lang['Crystal'] . ":<font color=\"#ef51ef\">" . pretty_number ($zlom['crystal']) . "</font><br /></center>";
+            $raport .= $lang['sys_gain'] . " " . $lang['metal_label'] . ":<font color=\"#adaead\">" . pretty_number ($Mining['metal']) . "</font>   " . $lang['crystal_label'] . ":<font color=\"#ef51ef\">" . pretty_number ($Mining['crystal']) . "</font>   " . $lang['deuterium_label'] . ":<font color=\"#f77542\">" . pretty_number ($Mining['deuter']) . "</font><br />";
+            $raport .= $lang['sys_debris'] . " " . $lang['metal_label'] . ":<font color=\"#adaead\">" . pretty_number ($zlom['metal']) . "</font>   " . $lang['crystal_label'] . ":<font color=\"#ef51ef\">" . pretty_number ($zlom['crystal']) . "</font><br /></center>";
 
             $Mining['metal'] = $Mining['metal'] + $FleetRow["fleet_resource_metal"];
             $Mining['crystal'] = $Mining['crystal'] + $FleetRow["fleet_resource_crystal"];

@@ -4,10 +4,10 @@ $lang['adm_done']               = "Terminado;";
 $lang['adm_stat_title']         = "Estadísticas";
 $lang['adm_cleaner_title']      = "Limpieza de cola de construcción";
 $lang['adm_cleaned']            = "Número de colas suprimidas : ";
-$lang['Fix']                    = "Mise a Jour";
-$lang['Welcome_to_Fix_section'] = "Bienvenida en la sección de update";
-$lang['There_is_not_need_fix']  = "El update fue hecho";
-$lang['Fix_welldone']           = "El update no pudo ser hecho";
+$lang['fix']                    = "Mise a Jour";
+$lang['welcome_to_fix_section'] = "Bienvenida en la sección de update";
+$lang['there_is_not_need_fix']  = "El update fue hecho";
+$lang['fix_welldone']           = "El update no pudo ser hecho";
 
 $lang['adm_ul_title'] = "Lista jugadores";
 $lang['adm_ul_ttle2'] = "Jugadores inscrito";

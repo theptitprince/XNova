@@ -115,7 +115,7 @@ function XNovaResetUnivers ( $CurrentUser ) {
 		XNovaResetUnivers ( $user );
 	} else {
 		$Page = parsetemplate($PageTpl, $parse);
-		display ($Page, $lang['Reset'], false, '', true);
+		display ($Page, $lang['reset'], false, '', true);
 	}
 
 ?>

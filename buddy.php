@@ -55,9 +55,9 @@ if ( $s == 1 && isset( $_GET['bid'] ) ) {
 		}
 		$text = SqlEscape( SafeText( ($_POST['text'] ?? null) ) );
 		doquery( "INSERT INTO {{table}} SET sender={$uid}, owner={$u}, active=0, text='{$text}'", 'buddy' );
-		message( $lang['Request_sent'], $lang['Buddy_request'], 'buddy.php' );
+		message( $lang['request_sent'], $lang['buddy_request_label'], 'buddy.php' );
 	} else {
-		message( $lang['A_request_exists_already_for_this_user'], $lang['Buddy_request'] );
+		message( $lang['a_request_exists_already_for_this_user'], $lang['buddy_request_label'] );
 	}
 }
 
@@ -78,16 +78,16 @@ if ( $a == 2 && isset( $u ) ) {
 			<input type=hidden name=u value=" . $u["id"] . ">
 			<table width=519>
 			<tr>
-				<td class=c colspan=2>{$lang['Buddy_request']}</td>
+				<td class=c colspan=2>{$lang['buddy_request_label']}</td>
 			</tr><tr>
-				<th>{$lang['Player']}</th>
+				<th>{$lang['player_label']}</th>
 				<th>" . $u["username"] . "</th>
 			</tr><tr>
-				<th>{$lang['Request_text']} (<span id=\"cntChars\">0</span> / 5000 {$lang['characters']})</th>
+				<th>{$lang['request_text_label']} (<span id=\"cntChars\">0</span> / 5000 {$lang['characters']})</th>
 				<th><textarea name=text cols=60 rows=10 onKeyUp=\"javascript:cntchar(5000)\"></textarea></th>
 			</tr><tr>
-				<td class=c><a href=\"javascript:back();\">{$lang['Back']}</a></td>
-				<td class=c><input type=submit value='{$lang['Send']}'></td>
+				<td class=c><a href=\"javascript:back();\">{$lang['back']}</a></td>
+				<td class=c><input type=submit value='{$lang['send_label']}'></td>
 			</tr>
 		</table></form>
 		</center>
@@ -95,14 +95,14 @@ if ( $a == 2 && isset( $u ) ) {
 		</html>";
 		display( $page, 'buddy' );
 	} elseif ( $u["id"] == $user["id"] ) {
-		message( $lang['You_cannot_ask_yourself_for_a_request'], $lang['Buddy_request'] );
+		message( $lang['you_cannot_ask_yourself_for_a_request'], $lang['buddy_request_label'] );
 	}
 }
 // con a indicamos las solicitudes y con e las distiguimos
 if ( $a == 1 )
-	$TableTitle = ( $e == 1 ) ? $lang['My_requests']:$lang['Anothers_requests'];
+	$TableTitle = ( $e == 1 ) ? $lang['my_requests']:$lang['anothers_requests'];
 else
-	$TableTitle = $lang['Buddy_list'];
+	$TableTitle = $lang['buddy_list'];
 
 $page .= "
 <table width=519>
@@ -113,15 +113,15 @@ $page .= "
 if ( !isset( $a ) ) {
 	$page .= "
 	<tr>
-		<th colspan=6><a href=?a=1>{$lang['Requests']}</a></th>
+		<th colspan=6><a href=?a=1>{$lang['requests_label']}</a></th>
 	</tr><tr>
-		<th colspan=6><a href=?a=1&e=1>{$lang['My_requests']}</a></th>
+		<th colspan=6><a href=?a=1&e=1>{$lang['my_requests']}</a></th>
 	</tr><tr>
 		<td class=c></td>
-		<td class=c>{$lang['Name']}</td>
-		<td class=c>{$lang['Alliance']}</td>
-		<td class=c>{$lang['Coordinates']}</td>
-		<td class=c>{$lang['Position']}</td>
+		<td class=c>{$lang['name_label']}</td>
+		<td class=c>{$lang['alliance_label']}</td>
+		<td class=c>{$lang['coordinates_label']}</td>
+		<td class=c>{$lang['position_label']}</td>
 		<td class=c></td>
 	</tr>";
 }
@@ -139,10 +139,10 @@ while ( $b = mysqli_fetch_array( $buddyrow ) ) {
 		$page .= "
 		<tr>
 			<td class=c></td>
-			<td class=c>{$lang['User']}</td>
-			<td class=c>{$lang['Alliance']}</td>
-			<td class=c>{$lang['Coordinates']}</td>
-			<td class=c>{$lang['Text']}</td>
+			<td class=c>{$lang['user_label']}</td>
+			<td class=c>{$lang['alliance_label']}</td>
+			<td class=c>{$lang['coordinates_label']}</td>
+			<td class=c>{$lang['text_label']}</td>
 			<td class=c></td>
 		</tr>";
 	}
@@ -165,22 +165,22 @@ while ( $b = mysqli_fetch_array( $buddyrow ) ) {
 	} else {
 		$LastOnline = "<font color=";
 		if ( $u["onlinetime"] + 60 * 10 >= time() ) {
-			$LastOnline .= "lime>{$lang['On']}";
+			$LastOnline .= "lime>{$lang['on_label']}";
 		} elseif ( $u["onlinetime"] + 60 * 20 >= time() ) {
 			$LastOnline .= "yellow>{$lang['15_min']}";
 		} else {
-			$LastOnline .= "red>{$lang['Off']}";
+			$LastOnline .= "red>{$lang['off']}";
 		}
 		$LastOnline .= "</font>";
 	}
 
 	if ( isset( $a ) && isset( $e ) ) {
-		$UserCommand = "<a href=?s=1&bid=" . $b["id"] . ">{$lang['Delete_request']}</a>";
+		$UserCommand = "<a href=?s=1&bid=" . $b["id"] . ">{$lang['delete_request']}</a>";
 	} elseif ( isset( $a ) ) {
-		$UserCommand = "<a href=?s=1&bid=" . $b["id"] . ">{$lang['Ok']}</a><br/>";
-		$UserCommand .= "<a href=?a=1&s=1&bid=" . $b["id"] . ">{$lang['Reject']}</a></a>";
+		$UserCommand = "<a href=?s=1&bid=" . $b["id"] . ">{$lang['ok']}</a><br/>";
+		$UserCommand .= "<a href=?a=1&s=1&bid=" . $b["id"] . ">{$lang['reject']}</a></a>";
 	} else {
-		$UserCommand = "<a href=?s=1&bid=" . $b["id"] . ">{$lang['Delete']}</a>";
+		$UserCommand = "<a href=?s=1&bid=" . $b["id"] . ">{$lang['delete_label']}</a>";
 	}
 
 	$page .= "
@@ -197,14 +197,14 @@ while ( $b = mysqli_fetch_array( $buddyrow ) ) {
 if ( !isset( $i ) ) {
 	$page .= "
 	<tr>
-		<th colspan=6>{$lang['There_is_no_request']}</th>
+		<th colspan=6>{$lang['there_is_no_request']}</th>
 	</tr>";
 }
 
 if ( $a == 1 ) {
 	$page .= "
 	<tr>
-		<td colspan=6 class=c><a href=buddy.php>{$lang['Back']}</a></td>
+		<td colspan=6 class=c><a href=buddy.php>{$lang['back']}</a></td>
 	</tr>";
 }
 
@@ -212,6 +212,6 @@ $page .= "
 	</table>
 	</center>";
 
-display ( $page, $lang['Buddy_list'], false );
+display ( $page, $lang['buddy_list'], false );
 // Created by Perberos. All rights reversed (C) 2006
 ?>

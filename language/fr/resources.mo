@@ -1,18 +1,18 @@
 <?php
 
-$lang['Production_of_resources_in_the_planet'] = 'Production de mati&egrave;res premi&egrave;res sur la plan&egrave;te  "%s"';
-$lang['Production_level'] = 'Niveau de Production';
-$lang['Basic_income'] = 'Revenu de base';
+$lang['production_of_resources_in_the_planet'] = 'Production de mati&egrave;res premi&egrave;res sur la plan&egrave;te  "%s"';
+$lang['production_level_label'] = 'Niveau de Production';
+$lang['basic_income'] = 'Revenu de base';
 $lang['quantity'] = 'Quantit&eacute;';
 $lang['level'] = 'Niveau';
-$lang['Stores_capacity'] = 'Capacit&eacute; des d&eacute;p&ocirc;ts';
-$lang['Widespread_production'] = 'Production &eacute;tendue';
-$lang['Daily'] = 'Journali&egrave;re';
-$lang['Weekly'] = 'Hebdomadaire';
-$lang['Monthly'] = 'Mensuelle';
-$lang['Storage_state'] = 'Etat des d&eacute;p&ocirc;ts';
-$lang['Calcule'] = 'Calculer';
-$lang['o/o'] = '%';
+$lang['stores_capacity'] = 'Capacit&eacute; des d&eacute;p&ocirc;ts';
+$lang['widespread_production'] = 'Production &eacute;tendue';
+$lang['daily'] = 'Journali&egrave;re';
+$lang['weekly'] = 'Hebdomadaire';
+$lang['monthly'] = 'Mensuelle';
+$lang['storage_state'] = 'Etat des d&eacute;p&ocirc;ts';
+$lang['calcule'] = 'Calculer';
+$lang['o_o'] = '%';
 $lang['k'] = 'k';
 
 // Created by Perberos. All rights reserved (C) 2006 

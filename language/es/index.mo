@@ -1,5 +1,5 @@
 <?php
 
-$lang['NoFrames'] = "Tu navegante no acepta los frames.";
+$lang['no_frames'] = "Tu navegante no acepta los frames.";
 
 ?>

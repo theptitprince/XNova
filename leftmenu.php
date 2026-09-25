@@ -33,21 +33,21 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	$parse['lm_tx_queue']     = MAX_FLEET_OR_DEFS_PER_ROW;
 	$SubFrame                 = parsetemplate( $InfoTPL, $parse );
 	$parse['server_info']     = $SubFrame;
-	$parse['XNovaRelease']    = VERSION .' '. VERSION_NAME;
+	$parse['xnova_release']    = VERSION .' '. VERSION_NAME;
 	$parse['dpath']           = $dpath;
 	$parse['forum_url']       = $game_config['forum_url'];
 	// Lien « Forum » masque tant qu'aucune adresse n'est configuree (l'ancienne pointait vers xnova.fr)
-	$parse['forum_link']      = (!empty($game_config['forum_url'])) ? "<tr><td colspan=\"2\"><div><a href=\"". htmlspecialchars($game_config['forum_url'], ENT_QUOTES) ."\" accesskey=\"1\" target=\"_blank\" rel=\"noopener\">". $lang['Board'] ."</a></div></td></tr>" : '';
+	$parse['forum_link']      = (!empty($game_config['forum_url'])) ? "<tr><td colspan=\"2\"><div><a href=\"". htmlspecialchars($game_config['forum_url'], ENT_QUOTES) ."\" accesskey=\"1\" target=\"_blank\" rel=\"noopener\">". $lang['board'] ."</a></div></td></tr>" : '';
 	$parse['mf']              = "Hauptframe";
 	$rank                     = doquery("SELECT `total_rank` FROM {{table}} WHERE `stat_code` = '1' AND `stat_type` = '1' AND `id_owner` = '". $user['id'] ."';",'statpoints',true);
 	$parse['user_rank']       = $rank['total_rank'] ?? '';
 	if ($Level > 0) {
-		$parse['ADMIN_LINK']  = "
+		$parse['admin_link']  = "
 		<tr>
 			<td colspan=\"2\"><div><a href=\"admin/leftmenu.php\"><font color=\"lime\">".$lang['user_level'][$Level]."</font></a></div></td>
 		</tr>";
 	} else {
-		$parse['ADMIN_LINK']  = "";
+		$parse['admin_link']  = "";
 	}
 	//Lien supplémentaire déterminé dans le panel admin
 	if ($game_config['link_enable'] == 1) {

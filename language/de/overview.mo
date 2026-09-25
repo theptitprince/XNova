@@ -2,26 +2,26 @@
 
 // General
 $lang['cancel']                  	= 'Abrechen';
-$lang['Planet_menu']             	= 'Planetenmen&uuml;';
-$lang['Planet']                  	= 'Planet';
-$lang['Have_new_message']       	= 'Du hast 1 neue Nachricht';
-$lang['Have_new_messages']      	= 'Du hast %m neue Nachrichten';
-$lang['Have_new_level_mineur']  	= 'Vous gagnez un niveau en Mineur !';
-$lang['Have_new_level_raid']    	= 'Vous gagnez un niveau en Raideur!';
-$lang['Server_time']            	= 'Serverzeit';
-$lang['Events']                 	= 'Ereignisse';
-$lang['Free']                   	= 'Frei';
-$lang['Diameter']               	= 'Gr&ouml;&szlig;e';
+$lang['planet_menu']             	= 'Planetenmen&uuml;';
+$lang['planet_label']                  	= 'Planet';
+$lang['have_new_message']       	= 'Du hast 1 neue Nachricht';
+$lang['have_new_messages']      	= 'Du hast %m neue Nachrichten';
+$lang['have_new_level_mineur']  	= 'Vous gagnez un niveau en Mineur !';
+$lang['have_new_level_raid']    	= 'Vous gagnez un niveau en Raideur!';
+$lang['server_time']            	= 'Serverzeit';
+$lang['events']                 	= 'Ereignisse';
+$lang['free']                   	= 'Frei';
+$lang['diameter_label']               	= 'Gr&ouml;&szlig;e';
 $lang['fields']                  	= 'Felder';
-$lang['Developed_fields']        	= 'Bebaute Felder';
+$lang['developed_fields']        	= 'Bebaute Felder';
 $lang['max_eveloped_fields']     	= 'Max. bebaubare Felder';
-$lang['Temperature']             	= 'Temapratur';
+$lang['temperature_label']             	= 'Temapratur';
 $lang['approx']                  	= 'env.';
 $lang['to']                      	= 'to';
-$lang['Centigrade']              	= 'C';
-$lang['Position']                	= 'Position';
-$lang['Points']                  	= 'Punkte';
-$lang['Rank']                    	= 'Rang';
+$lang['centigrade']              	= 'C';
+$lang['position_label']                	= 'Position';
+$lang['points_label']                  	= 'Punkte';
+$lang['rank_label']                    	= 'Rang';
 $lang['of']                      	= 'von';
 
 
@@ -73,7 +73,7 @@ $lang['ov_planet_from'] 		= "la plan&egrave;te %s";
 $lang['ov_moon_from'] 			= "la lune %s";
 $lang['ov_expe_from'] 			= "de la r&eacute;gion";
 
-$lang['MembersOnline'] 			= "Mitglieder Online";
+$lang['members_online'] 			= "Mitglieder Online";
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008

@@ -17,16 +17,16 @@ function ShowGalaxyTitles ( $Galaxy, $System ) {
 
 	$Result  = "\n";
 	$Result .= "<tr>";
-	$Result .= "<td class=c colspan=8>".$lang['Solar_system']." ".$Galaxy.":".$System."</td>";
+	$Result .= "<td class=c colspan=8>".$lang['solar_system']." ".$Galaxy.":".$System."</td>";
 	$Result .= "</tr><tr>";
-	$Result .= "<td class=c>".$lang['Pos']."</td>";
-	$Result .= "<td class=c>".$lang['Planet']."</td>";
-	$Result .= "<td class=c>".$lang['Name']."</td>";
-	$Result .= "<td class=c>".$lang['Moon']."</td>";
-	$Result .= "<td class=c>".$lang['Debris']."</td>";
-	$Result .= "<td class=c>".$lang['Player']."</td>";
-	$Result .= "<td class=c>".$lang['Alliance']."</td>";
-	$Result .= "<td class=c>".$lang['Actions']."</td>";
+	$Result .= "<td class=c>".$lang['pos']."</td>";
+	$Result .= "<td class=c>".$lang['planet_label']."</td>";
+	$Result .= "<td class=c>".$lang['name_label']."</td>";
+	$Result .= "<td class=c>".$lang['moon_label']."</td>";
+	$Result .= "<td class=c>".$lang['debris_label']."</td>";
+	$Result .= "<td class=c>".$lang['player_label']."</td>";
+	$Result .= "<td class=c>".$lang['alliance_label']."</td>";
+	$Result .= "<td class=c>".$lang['actions']."</td>";
 	$Result .= "</tr>";
 
 	return $Result;

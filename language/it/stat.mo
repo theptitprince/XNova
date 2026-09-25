@@ -14,15 +14,15 @@ $lang['stat_research'] = "Ricerche";
 $lang['stat_building'] = "Strutture";
 $lang['stat_defenses'] = "Difese";
 
-$lang['Position'] = 'Posizione';
-$lang['Difference']    = "Diff.";
-$lang['Player'] = 'Giocatore';
-$lang['Alliance'] = 'Alleanza';
-$lang['Points'] = 'Punti';
-$lang['Members'] = 'Membri';
-$lang['PerMember'] = 'Per Membri';
-$lang['Ecrire']        = "Scrivi un messaggio";
-$lang['Kraj']          = "Kraj";
+$lang['position_label'] = 'Posizione';
+$lang['difference']    = "Diff.";
+$lang['player_label'] = 'Giocatore';
+$lang['alliance_label'] = 'Alleanza';
+$lang['points_label'] = 'Punti';
+$lang['members_label'] = 'Membri';
+$lang['per_member'] = 'Per Membri';
+$lang['ecrire']        = "Scrivi un messaggio";
+$lang['kraj']          = "Kraj";
 
 // Created by Chlorel (XNova Team). All rights reversed (C) 2008
 ?>

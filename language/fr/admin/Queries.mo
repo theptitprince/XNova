@@ -1,6 +1,6 @@
 <?php
 
-$lang['Qry_title']  = "Executer une commande SQL";
+$lang['qry_title_label']  = "Executer une commande SQL";
 $lang['qry_title'] = "Commande SQL";
 $lang['qry_succesful']    = "La commande a ete executee avec succes";
 $lang['exec_check']    = "Reelement executer la commande ?";

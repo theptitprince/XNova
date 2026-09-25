@@ -15,17 +15,17 @@ var strInfo = "";
       
 function whenLoading(){
   //var e = document.getElementById('fleetstatus'); 
-  //e.innerHTML = "{Sending_fleet}";
+  //e.innerHTML = "{sending_fleet}";
 }
       
 function whenLoaded(){
   //    var e = document.getElementById('fleetstatus'); 
-  // e.innerHTML = "{Sent_fleet}";
+  // e.innerHTML = "{sent_fleet}";
 }
       
 function whenInteractive(){
   //var e = document.getElementById('fleetstatus'); 
-  // e.innerHTML = "{Obtaining_data}";
+  // e.innerHTML = "{obtaining_data}";
 }
 
 /* 
@@ -217,7 +217,7 @@ function setShips(ship, count) {
     <td>
       <table>
         <tbody><tr>
-         <td class="c" colspan="3">{Galaxy}</td>
+         <td class="c" colspan="3">{galaxy_label}</td>
         </tr>
         <tr>
           <td class="l"><input name="galaxyLeft" value="&lt;-" onClick="galaxy_submit('galaxyLeft')" type="button"></td>
@@ -229,7 +229,7 @@ function setShips(ship, count) {
       <td>
        <table>
         <tbody><tr>
-         <td class="c" colspan="3">{Solar_system}</td>
+         <td class="c" colspan="3">{solar_system}</td>
         </tr>
          <tr>
           <td class="l"><input name="systemLeft" value="&lt;-" onClick="galaxy_submit('systemLeft')" type="button"></td>
@@ -240,28 +240,28 @@ function setShips(ship, count) {
        </td>
       </tr>
       <tr>
-        <td colspan="2" align="center"> <input value="{Show}" type="submit"></td>
+        <td colspan="2" align="center"> <input value="{show_label}" type="submit"></td>
       </tr>
      </tbody></table>
 </form>
    <table width="569">
 <tbody><tr>
-	<td class="c" colspan="8">{Solar_system_at}</td>
+	<td class="c" colspan="8">{solar_system_at}</td>
 	</tr>
 	<tr>
-	  <td class="c">{Pos}</td>
-	  <td class="c">{Planet}</td>
-	  <td class="c">{Name}</td>
-	  <td class="c">{Moon}</td>
-	  <td class="c">{Debris}</td>
-	  <td class="c">{Player} ({State})</td>
-	  <td class="c">{Alliance}</td>
-	  <td class="c">{Actions}</td>
+	  <td class="c">{pos}</td>
+	  <td class="c">{planet_label}</td>
+	  <td class="c">{name_label}</td>
+	  <td class="c">{moon_label}</td>
+	  <td class="c">{debris_label}</td>
+	  <td class="c">{player_label} ({state_label})</td>
+	  <td class="c">{alliance_label}</td>
+	  <td class="c">{actions}</td>
 	</tr>
     {echo_galaxy}
 	<tr>
 	  <td class="c" colspan="6"><table width="100%" cellpadding="0" cellspacing="0"><td>{deuter}</td><td>{rec}</td><td>{ss}</td><td>{planetcount}</td><td>Sloty <span id="slots">{wolne}</span> z {zajete}</td></table></td>
-	  <td class="c" colspan="2"><a href="#" onmouseover="this.T_WIDTH=150;return escape('<table><tr><td class=\'c\' colspan=\'2\'>{Legend}</td></tr><tr><td width=\'125\'>{Strong_player}</td><td><span class=\'strong\'>f</span></td></tr><tr><td>{Weak_player}</td><td><span class=\'noob\'>d</span></td></tr><tr><td>{Way_vacation}</td><td><span class=\'vacation\'>v</span></td></tr><tr><td>{Pendent_user}</td><td><span class=\'banned\'>s</span></td></tr><tr><td>{Inactive_7_days}</td><td><span class=\'inactive\'>i</span></td></tr><tr><td>{Inactive_28_days}</td><td><span class=\'longinactive\'>I</span></td></tr><tr><td>Admin</td><td><span class=\'espionagereport\'>A</span></td></tr></table>')">{Legend}</a></td>
+	  <td class="c" colspan="2"><a href="#" onmouseover="this.T_WIDTH=150;return escape('<table><tr><td class=\'c\' colspan=\'2\'>{legend}</td></tr><tr><td width=\'125\'>{strong_player}</td><td><span class=\'strong\'>f</span></td></tr><tr><td>{weak_player}</td><td><span class=\'noob\'>d</span></td></tr><tr><td>{way_vacation}</td><td><span class=\'vacation\'>v</span></td></tr><tr><td>{pendent_user}</td><td><span class=\'banned\'>s</span></td></tr><tr><td>{inactive_7_days}</td><td><span class=\'inactive\'>i</span></td></tr><tr><td>{inactive_28_days}</td><td><span class=\'longinactive\'>I</span></td></tr><tr><td>Admin</td><td><span class=\'espionagereport\'>A</span></td></tr></table>')">{legend}</a></td>
 	</tr>
 	<tr>
 	</tr>

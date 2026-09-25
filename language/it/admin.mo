@@ -11,10 +11,10 @@ $lang['adm_done']               = "Terminato";
 $lang['adm_stat_title']         = "Statistica";
 $lang['adm_cleaner_title']      = "Cancellare la lista di costruzione";
 $lang['adm_cleaned']            = "Nome della lista da cancellare: ";
-$lang['Fix']                    = "Inserito Fix";
-$lang['Welcome_to_Fix_section'] = "Benvenuto nella sezione aggiornamento";
-$lang['There_is_not_need_fix']  = "L'aggiornamento non &agrave; stato inserito!";
-$lang['Fix_welldone']           = "L'aggiornamento &egrave; stato inserito.";
+$lang['fix']                    = "Inserito Fix";
+$lang['welcome_to_fix_section'] = "Benvenuto nella sezione aggiornamento";
+$lang['there_is_not_need_fix']  = "L'aggiornamento non &agrave; stato inserito!";
+$lang['fix_welldone']           = "L'aggiornamento &egrave; stato inserito.";
 
 $lang['adm_pl_title'] = "Attivit&aacute; dei pianeti";
 $lang['adm_pl_activ'] = "Pianeti attivi";

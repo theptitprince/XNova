@@ -1,43 +1,43 @@
 <?php
 
-$lang['Notes'] = 'Note';
+$lang['notes'] = 'Note';
 
-$lang['Createnote'] = 'Crea una note';
-$lang['MakeNewNote'] = 'Crea una nuova nota';
-$lang['Editnote'] = 'Modifica nota';
+$lang['createnote'] = 'Crea una note';
+$lang['make_new_note'] = 'Crea una nuova nota';
+$lang['editnote'] = 'Modifica nota';
 
-$lang['Priority'] = 'Priorità';
+$lang['priority_label'] = 'Priorità';
 
-$lang['Important'] = 'Importante';
-$lang['Normal'] = 'Normale';
-$lang['Unimportant'] = 'Bassa';
+$lang['important'] = 'Importante';
+$lang['normal'] = 'Normale';
+$lang['unimportant'] = 'Bassa';
 
-$lang['Subject'] = 'Oggetto';
-$lang['NoTitle'] = 'Nessun titolo';
-$lang['NoText'] = 'Nessun testo';
+$lang['subject_label'] = 'Oggetto';
+$lang['no_title'] = 'Nessun titolo';
+$lang['no_text'] = 'Nessun testo';
 
-$lang['Date'] = 'Data';
-$lang['Size'] = 'Grandezza';
+$lang['date_label'] = 'Data';
+$lang['size'] = 'Grandezza';
 
-$lang['Note'] = 'Note';
+$lang['note'] = 'Note';
 
 $lang['characters'] = 'Caratteri';
 
-$lang['Apply'] = 'Accettare';
-$lang['Back'] = 'Indietro';
-$lang['Save'] = 'Salvare';
-$lang['Delete'] = 'Cancellare';
-$lang['Reset'] = 'Reset';
+$lang['apply'] = 'Accettare';
+$lang['back'] = 'Indietro';
+$lang['save'] = 'Salvare';
+$lang['delete_label'] = 'Cancellare';
+$lang['reset'] = 'Reset';
 
 //mensajes
-$lang['ThereIsNoNote'] = 'Non è una nota';
+$lang['there_is_no_note'] = 'Non è una nota';
 
-$lang['NoteUpdated'] = 'Nota aggiornata, <a href="notes.php"><blink>reindirizzamento...</blink></a>';
+$lang['note_updated'] = 'Nota aggiornata, <a href="notes.php"><blink>reindirizzamento...</blink></a>';
 
-$lang['NoteAdded'] = 'Nota aggiunta, <a href="notes.php"><blink>reindirizzamento...</blink></a>';
+$lang['note_added'] = 'Nota aggiunta, <a href="notes.php"><blink>reindirizzamento...</blink></a>';
 
-$lang['NoteDeleted'] = 'Nota cancellata, <a href="notes.php"><blink>reindirizzamento...</blink></a>';
-$lang['NoteDeleteds'] = 'Note cancellate, <a href="notes.php"><blink>reindirizzamento...</blink></a>';
+$lang['note_deleted'] = 'Nota cancellata, <a href="notes.php"><blink>reindirizzamento...</blink></a>';
+$lang['note_deleteds'] = 'Note cancellate, <a href="notes.php"><blink>reindirizzamento...</blink></a>';
 
 // Created by Perberos. All rights reversed (C) 2006
 ?>

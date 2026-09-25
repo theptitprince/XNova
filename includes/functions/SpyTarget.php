@@ -33,11 +33,11 @@ function SpyTarget ( $TargetPlanet, $Mode, $TitleString ) {
 		$String .= "[". $TargetPlanet["galaxy"] .":". $TargetPlanet["system"] .":". $TargetPlanet["planet"] ."]</a>";
 		$String .= " le ". date("d/m/Y H:i:s") ."</td>";
 		$String .= "</tr><tr>";
-		$String .= "<td width=220>". $lang['Metal']     ."</td><td width=220 align=right>". pretty_number($TargetPlanet['metal'])      ."</td><td>&nbsp;</td>";
-		$String .= "<td width=220>". $lang['Crystal']   ."</td></td><td width=220 align=right>". pretty_number($TargetPlanet['crystal'])    ."</td>";
+		$String .= "<td width=220>". $lang['metal_label']     ."</td><td width=220 align=right>". pretty_number($TargetPlanet['metal'])      ."</td><td>&nbsp;</td>";
+		$String .= "<td width=220>". $lang['crystal_label']   ."</td></td><td width=220 align=right>". pretty_number($TargetPlanet['crystal'])    ."</td>";
 		$String .= "</tr><tr>";
-		$String .= "<td width=220>". $lang['Deuterium'] ."</td><td width=220 align=right>". pretty_number($TargetPlanet['deuterium'])  ."</td><td>&nbsp;</td>";
-		$String .= "<td width=220>". $lang['Energy']    ."</td><td width=220 align=right>". pretty_number($TargetPlanet['energy_max']) ."</td>";
+		$String .= "<td width=220>". $lang['deuterium_label'] ."</td><td width=220 align=right>". pretty_number($TargetPlanet['deuterium'])  ."</td><td>&nbsp;</td>";
+		$String .= "<td width=220>". $lang['energy_label']    ."</td><td width=220 align=right>". pretty_number($TargetPlanet['energy_max']) ."</td>";
 		$String .= "</tr>";
 		$LookAtLoop = false;
 	} elseif ($Mode == 1) {

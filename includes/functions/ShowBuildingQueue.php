@@ -71,7 +71,7 @@ function ShowBuildingQueue ( $CurrentPlanet, $CurrentUser ) {
 					$ListIDRow .= "	<td class=\"k\">";
 					if ($ListID == 1) {
 						$ListIDRow .= "		<div id=\"blc\" class=\"z\">". $BuildTime ."<br>";
-						$ListIDRow .= "		<a href=\"buildings.php?listid=". $ListID ."&amp;cmd=cancel&amp;planet=". $PlanetID ."\">". $lang['DelFirstQueue'] ."</a></div>";
+						$ListIDRow .= "		<a href=\"buildings.php?listid=". $ListID ."&amp;cmd=cancel&amp;planet=". $PlanetID ."\">". $lang['del_first_queue'] ."</a></div>";
 						$ListIDRow .= "		<script language=\"JavaScript\">";
 						$ListIDRow .= "			pp = \"". $BuildTime ."\";\n";      // temps necessaire (a compter de maintenant et sans ajouter time() )
 						$ListIDRow .= "			pk = \"". $ListID ."\";\n";         // id index (dans la liste de construction)
@@ -82,7 +82,7 @@ function ShowBuildingQueue ( $CurrentPlanet, $CurrentUser ) {
 						$ListIDRow .= "		<strong color=\"lime\"><br><font color=\"lime\">". date("j/m H:i:s" ,$BuildEndTime) ."</font></strong>";
 					} else {
 						$ListIDRow .= "		<font color=\"red\">";
-						$ListIDRow .= "		<a href=\"buildings.php?listid=". $ListID ."&amp;cmd=remove&amp;planet=". $PlanetID ."\">". $lang['DelFromQueue'] ."</a></font>";
+						$ListIDRow .= "		<a href=\"buildings.php?listid=". $ListID ."&amp;cmd=remove&amp;planet=". $PlanetID ."\">". $lang['del_from_queue'] ."</a></font>";
 					}
 					$ListIDRow .= "	</td>";
 					$ListIDRow .= "</tr>";

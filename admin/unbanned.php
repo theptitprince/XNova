@@ -28,7 +28,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$mode = ($_GET['mode'] ?? null);
 
 		if ($mode != 'change') {
-			$parse['Name'] = "Nom du joueur";
+			$parse['name_label'] = "Nom du joueur";
 		} elseif ($mode == 'change' && $_SERVER['REQUEST_METHOD'] == 'POST') {
 			$nam = SqlEscape(($_POST['nam'] ?? null));
 			doquery("DELETE FROM {{table}} WHERE who2='{$nam}'", 'banned');

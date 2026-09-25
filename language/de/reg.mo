@@ -7,15 +7,15 @@ if (!defined('INSIDE')) {
 // Registration form
 $lang['registry']          = 'Registrieren';
 $lang['form']              = 'Anmeldung';
-$lang['Register']          = 'Sky-Game Registrieren';
-$lang['Undefined']         = 'Bitte w&auml;hlen';
-$lang['Male']              = 'M&auml;nnlich';
-$lang['Female']            = 'Weiblich';
-$lang['Multiverse']        = '<b>Sky-Game</b> Beta Uni';
-$lang['E-Mail']            = 'E-Mail Adresse (z.B. addy@mail.com)';
-$lang['MainPlanet']        = 'Name des Hauptplanets (keine Sonderzeichen)';
-$lang['GameName']          = 'Username';
-$lang['Sex']               = 'Geschlecht';
+$lang['register']          = 'Sky-Game Registrieren';
+$lang['undefined']         = 'Bitte w&auml;hlen';
+$lang['male']              = 'M&auml;nnlich';
+$lang['female']            = 'Weiblich';
+$lang['multiverse']        = '<b>Sky-Game</b> Beta Uni';
+$lang['e_mail']            = 'E-Mail Adresse (z.B. addy@mail.com)';
+$lang['main_planet']        = 'Name des Hauptplanets (keine Sonderzeichen)';
+$lang['game_name_label']          = 'Username';
+$lang['sex_label']               = 'Geschlecht';
 $lang['accept']            = 'Ich akzeptiere die <a href="help.php?conditions">Regeln &amp; AGB</a>';
 $lang['signup']            = 'Registrieren';
 $lang['neededpass']        = 'Passwort';

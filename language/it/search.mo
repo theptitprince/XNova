@@ -1,24 +1,24 @@
 <?php
 
-$lang['Position'] = 'Posizione';
-$lang['Player'] = 'Giocatore';
-$lang['Name'] = 'Nome';
-$lang['Player_name'] = 'Nome del giocatore';
-$lang['Planet'] = 'Pianeta';
-$lang['Planet_name'] = 'Nome del pianeta';
-$lang['Alliance'] = 'Alleanza';
-$lang['Alliance_name'] = 'Nome dell\'alleanza';
-$lang['Tag'] = 'Tag';
-$lang['Alliance_tag'] = 'Tag dell\'alleanza';
-$lang['Members'] = 'Membri';
-$lang['Points'] = 'Punti';
-$lang['PerMember'] = 'Per membri';
-$lang['Coordinated'] = 'Coordinate';
-$lang['Position'] = 'Posizione';
-$lang['Search'] = 'Cerca';
-$lang['Search_in_all_game'] = "Cerca sul server";
-$lang['Back'] = 'indietro';
-$lang['Search'] = 'Cerca';
+$lang['position_label'] = 'Posizione';
+$lang['player_label'] = 'Giocatore';
+$lang['name_label'] = 'Nome';
+$lang['player_name_label'] = 'Nome del giocatore';
+$lang['planet_label'] = 'Pianeta';
+$lang['planet_name_label'] = 'Nome del pianeta';
+$lang['alliance_label'] = 'Alleanza';
+$lang['alliance_name'] = 'Nome dell\'alleanza';
+$lang['tag_label'] = 'Tag';
+$lang['alliance_tag_label'] = 'Tag dell\'alleanza';
+$lang['members_label'] = 'Membri';
+$lang['points_label'] = 'Punti';
+$lang['per_member'] = 'Per membri';
+$lang['coordinated_label'] = 'Coordinate';
+$lang['position_label'] = 'Posizione';
+$lang['search'] = 'Cerca';
+$lang['search_in_all_game'] = "Cerca sul server";
+$lang['back'] = 'indietro';
+$lang['search'] = 'Cerca';
 $lang['write_a_messege'] = 'Scrivi un messaggio';
 $lang['buddy_request'] = 'Domanda di amicizia';
 

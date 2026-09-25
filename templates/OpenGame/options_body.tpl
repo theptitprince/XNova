@@ -1,6 +1,6 @@
 <center>
 <br><br>
-<form action="{PHP_SELF}?mode=change" method="post">
+<form action="{php_self}?mode=change" method="post">
 <table width="519">
 <tbody>
 {opt_adm_frame}

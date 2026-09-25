@@ -27,7 +27,7 @@ function ResearchBuildingPage (&$CurrentPlanet, $CurrentUser, $InResearch, $TheP
 	$bContinue         = true;
 	// Deja est qu'il y a un laboratoire sur la planete ???
 	if ($CurrentPlanet[$resource[31]] == 0) {
-		message($lang['no_laboratory'], $lang['Research']);
+		message($lang['no_laboratory'], $lang['research_label']);
 	}
 	// Ensuite ... Est ce que la labo est en cours d'upgrade ?
 	if (!CheckLabSettingsInQueue ( $CurrentPlanet )) {
@@ -123,7 +123,7 @@ function ResearchBuildingPage (&$CurrentPlanet, $CurrentUser, $InResearch, $TheP
 				$RowParse['tech_price']  = GetElementPrice($CurrentUser, $CurrentPlanet, $Tech);
 				$SearchTime              = GetBuildingTime($CurrentUser, $CurrentPlanet, $Tech);
 				$RowParse['search_time'] = ShowBuildTime($SearchTime);
-				$RowParse['tech_restp']  = $lang['Rest_ress'] ." ". GetRestPrice ($CurrentUser, $CurrentPlanet, $Tech, true);
+				$RowParse['tech_restp']  = $lang['rest_ress'] ." ". GetRestPrice ($CurrentUser, $CurrentPlanet, $Tech, true);
 				$CanBeDone               = IsElementBuyable($CurrentUser, $CurrentPlanet, $Tech);
 
 				// Arbre de decision de ce que l'on met dans la derniere case de la ligne
@@ -135,24 +135,24 @@ function ResearchBuildingPage (&$CurrentPlanet, $CurrentUser, $InResearch, $TheP
 							// Et dans la config du systeme, on ne permet pas la recherche pendant
 							// que le labo est en construction ou evolution !
 							if ($LevelToDo == 1) {
-								$TechnoLink  = "<font color=#FF0000>". $lang['Rechercher'] ."</font>";
+								$TechnoLink  = "<font color=#FF0000>". $lang['rechercher'] ."</font>";
 							} else {
-								$TechnoLink  = "<font color=#FF0000>". $lang['Rechercher'] ."<br>".$lang['level']." ".$LevelToDo."</font>";
+								$TechnoLink  = "<font color=#FF0000>". $lang['rechercher'] ."<br>".$lang['level']." ".$LevelToDo."</font>";
 							}
 						} else {
 							$TechnoLink  = "<a href=\"buildings.php?mode=research&cmd=search&tech=".$Tech."\">";
 							if ($LevelToDo == 1) {
-								$TechnoLink .= "<font color=#00FF00>". $lang['Rechercher'] ."</font>";
+								$TechnoLink .= "<font color=#00FF00>". $lang['rechercher'] ."</font>";
 							} else {
-								$TechnoLink .= "<font color=#00FF00>". $lang['Rechercher'] ."<br>".$lang['level']." ".$LevelToDo."</font>";
+								$TechnoLink .= "<font color=#00FF00>". $lang['rechercher'] ."<br>".$lang['level']." ".$LevelToDo."</font>";
 							}
 							$TechnoLink  .= "</a>";
 						}
 					} else {
 						if ($LevelToDo == 1) {
-							$TechnoLink  = "<font color=#FF0000>". $lang['Rechercher'] ."</font>";
+							$TechnoLink  = "<font color=#FF0000>". $lang['rechercher'] ."</font>";
 						} else {
-							$TechnoLink  = "<font color=#FF0000>". $lang['Rechercher'] ."<br>".$lang['level']." ".$LevelToDo."</font>";
+							$TechnoLink  = "<font color=#FF0000>". $lang['rechercher'] ."<br>".$lang['level']." ".$LevelToDo."</font>";
 						}
 					}
 
@@ -191,7 +191,7 @@ function ResearchBuildingPage (&$CurrentPlanet, $CurrentUser, $InResearch, $TheP
 	$PageParse['technolist']  = $TechnoList ?? '';
 	$Page                     = parsetemplate(gettemplate('buildings_research'), $PageParse);
 
-	display( $Page, $lang['Research'] );
+	display( $Page, $lang['research_label'] );
 }
 
 // History revision

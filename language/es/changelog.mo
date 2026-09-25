@@ -1,6 +1,6 @@
 <?php
-$lang['Version']     = 'Version';
-$lang['Description'] = 'D&eacute;scription';
+$lang['version']     = 'Version';
+$lang['description_label'] = 'D&eacute;scription';
 $lang['changelog']   = array(
 '0.7h' => 'Correction de bugs (Chlorel)
 - Interface Officier refaite
