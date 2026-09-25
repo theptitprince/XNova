@@ -65,7 +65,10 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 					break;
 				case 'destroy':
 					// Detruit un batiment deja construit sur la planete !
-					AddBuildingToQueue ( $CurrentPlanet, $CurrentUser, $Element, false );
+					// Terraformeur et base lunaire : jamais detruits (comme OGame ; la page d'info ne le propose pas)
+					if (!in_array(intval($Element), array(33, 41))) {
+						AddBuildingToQueue ( $CurrentPlanet, $CurrentUser, $Element, false );
+					}
 					break;
 				default:
 					break;
@@ -174,6 +177,11 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
     $parse['planet_field_current'] = $CurrentPlanet["field_current"];
     $parse['planet_field_max']     = $CurrentPlanet['field_max'] + ($CurrentPlanet[$resource[33]] * 5);
     $parse['field_libre']          = $parse['planet_field_max']  - $CurrentPlanet['field_current'];
+	// Accord : « Il reste 1 case libre » / « Il reste 5 cases libres »
+	if (abs($parse['field_libre']) <= 1) {
+		$parse['bld_theyare']  = $lang['bld_theyare_one'];
+		$parse['bld_cellfree'] = $lang['bld_cellfree_one'];
+	}
 
 	$parse['buildings_list']        = $BuildingPage;
 

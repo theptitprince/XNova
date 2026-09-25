@@ -20,24 +20,12 @@
 
 
 	
+// Joueur en mode vacances : il ne peut pas etre attaque, donc il ne peut pas non plus envoyer de flotte ni de missiles
+// (rien ne l'en empechait : il attaquait en restant intouchable). Arrete la page avec un message.
 function check_urlaubmodus ($user) {
-	if ($user['urlaubs_modus'] == 1) {
-		message("Vous êtes en mode vacances!", $title = $user['username'], $dest = "", $time = "3");
-	}
-}
-
-function check_urlaubmodus_time () {
-	global $user, $game_config;
-	if ($game_config['urlaubs_modus_erz'] == 1) {
-		$begrenzung             = 86400; //24x60x60= 24h
-		$urlaub_modus_time      = $user['urlaubs_modus_time'];
-		$urlaub_modus_time_soll = $urlaub_modus_time + $begrenzung;
-		$time_jetzt             = time();
-		if ($user['urlaubs_modus'] == 1 && $urlaub_modus_time_soll > $time_jetzt) {
-			$soll_datum = date("d.m.Y", $urlaub_modus_time_soll);
-			$soll_uhrzeit = date("H:i:s", $urlaub_modus_time_soll);
-			message("Vous êtes en mode vacances!<br>Le mode vacance dure jusque $soll_datum $soll_uhrzeit<br>	Ce n'est qu'après cette période que vous pouvez changer vos options.", "Mode vacance");
-		}
+	global $lang;
+	if (($user['urlaubs_modus'] ?? 0) == 1) {
+		message($lang['sys_vacation_active'], $lang['sys_vacation_title'], "fleet.php", 3);
 	}
 }
 

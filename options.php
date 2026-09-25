@@ -29,10 +29,15 @@
     if ($_POST && $mode == "exit") { // Array ( [db_character]
        if (isset($_POST["exit_modus"]) && ($_POST["exit_modus"] ?? null) == 'on' and $user['urlaubs_until'] <= time()){
           $urlaubs_modus = "0";
-          doquery("UPDATE {{table}} SET   
+          doquery("UPDATE {{table}} SET
              `urlaubs_modus` = '0',
              `urlaubs_until` = '0'
-             WHERE `id` = '".$user['id']."' LIMIT 1", "users");   
+             WHERE `id` = '".$user['id']."' LIMIT 1", "users");
+          // Retour de vacances : production remise a 100 % (elle restait a 0 sur toutes les planetes)
+          doquery("UPDATE {{table}} SET
+             `metal_mine_porcent` = '10', `crystal_mine_porcent` = '10', `deuterium_sintetizer_porcent` = '10',
+             `solar_plant_porcent` = '10', `fusion_plant_porcent` = '10', `solar_satelit_porcent` = '10'
+             WHERE `id_owner` = '".intval($user['id'])."' AND `planet_type` = '1'", 'planets');
           $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
           message($lang['succeful_save'], $lang['options_label'],"options.php",1);
        }else{
@@ -135,7 +140,15 @@
           $settings_rep = "0";
        }
        // Modo vacaciones
-       if (isset($_POST["urlaubs_modus"]) && ($_POST["urlaubs_modus"] ?? null) == 'on') {
+       if ($user['urlaubs_modus'] == 1) {
+          // Deja en vacances : on n'en sort que par le formulaire de retour (date minimale respectee), sans prolonger
+          $urlaubs_modus = "1";
+       } elseif (isset($_POST["urlaubs_modus"]) && ($_POST["urlaubs_modus"] ?? null) == 'on') {
+          // Comme OGame : pas de vacances tant qu'une flotte est en vol (elle attaquerait pendant l'immunite)
+          $Flying = doquery("SELECT COUNT(*) AS `number` FROM {{table}} WHERE `fleet_owner` = '".intval($user['id'])."'", 'fleets', true);
+          if ($Flying['number'] > 0) {
+             message($lang['vacation_fleets_flying'], $lang['options_label'], "options.php", 5);
+          }
           $urlaubs_modus = "1";
           $time = time() + 172800;
           doquery("UPDATE {{table}} SET   
@@ -147,8 +160,8 @@
           while($id = mysqli_fetch_array($query)){
              doquery("UPDATE {{table}} SET
                    metal_perhour = '".$game_config['metal_basic_income']."',
-                   crystal_perhour = '".$game_config['metal_basic_income']."',
-                   deuterium_perhour = '".$game_config['metal_basic_income']."',
+                   crystal_perhour = '".$game_config['crystal_basic_income']."',
+                   deuterium_perhour = '".$game_config['deuterium_basic_income']."',
                    energy_used = '0',
                    energy_max = '0',
                    metal_mine_porcent = '0',
@@ -269,9 +282,9 @@
 
        if($user['urlaubs_modus']){
 
-          display(parsetemplate(gettemplate('options_body_vmode'), $parse), 'Options', false);
+          display(parsetemplate(gettemplate('options_body_vmode'), $parse), $lang['options_label'], false);
        }else{
-       display(parsetemplate(gettemplate('options_body'), $parse), 'Options', false);
+       display(parsetemplate(gettemplate('options_body'), $parse), $lang['options_label'], false);
        }
        die();
     }

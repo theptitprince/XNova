@@ -1,8 +1,8 @@
 <?php
 //Mode Vacances (Thx Prethorian)
 $lang['exit_vacations'] = "Retour de vacances";
-$lang['vaccation_mode'] = "Mode vacances actif jusqua : ";
-$lang['you_cant_exit_vmode'] = "Vous ne pouvez pas desactiver votre mode vacances tant que la date minimale n'est pas atteinte !";
+$lang['vaccation_mode'] = "Mode vacances actif au moins jusqu'au : ";
+$lang['you_cant_exit_vmode'] = "Vous ne pouvez pas d&eacute;sactiver le mode vacances avant la date minimale (48 heures apr&egrave;s son activation).";
 $lang['error_label'] = "Erreur";
 
 
@@ -80,5 +80,8 @@ $lang['succeful_changename'] = 'Le pseudo a bien &eacute;t&eacute; chang&eacute;
 
 // XNova Renaissance 0.9g : titre des messages de la page
 $lang['options_label'] = 'Options';
+
+// XNova Renaissance 0.9g : mode vacances
+$lang['vacation_fleets_flying'] = 'Impossible de partir en vacances tant que vos flottes sont en vol : attendez leur retour.';
 
 ?>

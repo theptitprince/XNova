@@ -103,4 +103,8 @@ $lang['gf_sp_title'] = "Sonde spie disponibili";
 $lang['gf_unknowsp'] = "Spazio infinito";
 
 // Created by Perberos. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : mode vacances
+$lang['gs_c620'] = 'Errore, siete in modalità vacanza';
+
 ?>

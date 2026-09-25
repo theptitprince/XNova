@@ -19,6 +19,9 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.'.$phpEx);
 
+// Pas de tir de missiles en mode vacances
+check_urlaubmodus($user);
+
 $planet    = doquery("SELECT * FROM {{table}} WHERE `id` = '".$user['current_planet']."';", 'planets', true);
 $iraks = $planet['interplanetary_misil'];
 

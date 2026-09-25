@@ -24,6 +24,8 @@ $lang['in_build_queue']     = "Dans la liste de construction";
 $lang['bld_usedcells']    = "Cases utilis&eacute;es";
 $lang['bld_theyare']      = "Il reste";
 $lang['bld_cellfree']     = "cases libres";
+$lang['bld_theyare_one']  = "Il reste";
+$lang['bld_cellfree_one'] = "case libre";
 $lang['del_from_queue']     = "enlever";
 $lang['del_first_queue']    = "Interrompre";
 $lang['cancel']           = "Annuler";
@@ -32,8 +34,8 @@ $lang['ready']            = "Pret";
 $lang['destroy']          = "D&eacute;truire";
 $lang['on']               = "sur";
 $lang['attention']        = "Attention le bannissement est proche sale tricheur ! Ton action a &eacute;t&eacute; signal&eacute;e !";
-$lang['no_laboratory']    = "N&eacute;cessite laboratoire de Recherches!";
-$lang['need_hangar']      = "Chantier spatial requis";
+$lang['no_laboratory']    = "Un laboratoire de recherche est n&eacute;cessaire.";
+$lang['need_hangar']      = "Un chantier spatial est n&eacute;cessaire.";
 $lang['labo_on_update']   = "Impossible de rechercher quand le laboratoire est en &eacute;volution!";
 
 

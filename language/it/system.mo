@@ -95,4 +95,9 @@ $lang['sys_noalloaw'] = "Voi non avete l\'autorizzazione per accedere a queste p
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// XNova Renaissance 0.9g : mode vacances
+$lang['sys_vacation_title'] = 'Modalità vacanza';
+$lang['sys_vacation_active'] = 'Siete in modalità vacanza: impossibile inviare flotte o missili.';
+
 ?>

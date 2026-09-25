@@ -79,7 +79,7 @@ $lang['gs_c601'] = "Erreur, Aucune planete.";
 $lang['gs_c602'] = "Erreur, Donnees hors de l'Univers connu";
 $lang['gs_c603'] = "Erreur, Le joueur ne peut etre attaque a cause de la protection des joueurs tres faibles.";
 $lang['gs_c604'] = "Erreur, Le joueur ne peut etre attaque il est bien trop fort pour vous.";
-$lang['gs_c605'] = "Erreur, Le joueur est en mode vacance";
+$lang['gs_c605'] = "Erreur, le joueur est en mode vacances";
 $lang['gs_c610a'] = "Erreur, avec ";
 $lang['gs_c610b'] = " sondes. Vous n'avez pas assez de sondes";
 $lang['gs_c611'] = "Erreur, Vous n'avez pas de vaisseaux disponibles.";
@@ -102,4 +102,8 @@ $lang['gf_sp_title'] = "Sondes D'espionnage Disponibles";
 $lang['gf_unknowsp'] = "Espaces infinis";
 
 // Created by Perberos. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : mode vacances
+$lang['gs_c620'] = 'Erreur, vous êtes en mode vacances';
+
 ?>

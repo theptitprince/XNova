@@ -22,6 +22,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$dpath     = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 
 	includeLang('fleet');
+	// Pas d'envoi de flotte en mode vacances
+	check_urlaubmodus($user);
 
 	// PHP 8 : un champ vide ("") ne peut plus entrer dans un calcul ; tous les champs numeriques deviennent des entiers
 	SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettype', 'planet_type', 'thisgalaxy', 'thissystem', 'thisplanet',

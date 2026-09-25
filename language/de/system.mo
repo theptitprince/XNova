@@ -83,4 +83,9 @@ $lang['sys_noalloaw'] = "Vous n'avez pas acc&eacute;s &agrave; cette page";
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// XNova Renaissance 0.9g : mode vacances
+$lang['sys_vacation_title'] = 'Urlaubsmodus';
+$lang['sys_vacation_active'] = 'Du bist im Urlaubsmodus: Flotten und Raketen k&ouml;nnen nicht gestartet werden.';
+
 ?>

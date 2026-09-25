@@ -60,4 +60,7 @@ $lang['save_settings'] 							= 'Einstellungen speichern';
 // XNova Renaissance 0.9g : titre des messages de la page
 $lang['options_label'] = 'Einstellungen';
 
+// XNova Renaissance 0.9g : mode vacances
+$lang['vacation_fleets_flying'] = 'Du kannst nicht in den Urlaubsmodus wechseln, solange deine Flotten unterwegs sind.';
+
 ?>

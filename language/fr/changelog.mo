@@ -36,6 +36,10 @@ $lang['changelog']   = array(
 - NEW : Alliance : cession &agrave; un membre ayant le droit &laquo; Main droite &raquo; (le bouton ne faisait rien) ; un joueur supprim&eacute; transmet son alliance au plus ancien membre
 - FIX : Alliance : candidature impossible quand l\'alliance est ferm&eacute;e, candidat pr&eacute;venu en fran&ccedil;ais (accept&eacute;, refus&eacute;, exclu), onglet du mod&egrave;le de candidature
 - FIX : Alliance : rangs d&eacute;cal&eacute;s dans la liste des membres, tri par rang et par points, jours d\'inactivit&eacute; (c\'&eacute;taient des heures), textes allemands traduits
+- FIX : Mode vacances : plus d\'envoi de flotte ni de missiles (on attaquait en restant intouchable), refus&eacute; tant qu\'une flotte vole, production remise &agrave; 100 % au retour
+- FIX : Mode vacances : un formulaire forg&eacute; n\'en fait plus sortir avant les 48 heures ; revenus de base du cristal et du deut&eacute;rium
+- FIX : Lune : d&eacute;truire la base lunaire augmentait son niveau et les cases (destruction de la base lunaire et du terraformeur refus&eacute;e, comme OGame)
+- FIX : Fiche de la phalange : avertissements PHP (calcul de production inutile) ; accord &laquo; 1 case libre &raquo; ; messages laboratoire / chantier requis
 - FIX : Administration : le message &agrave; tous les joueurs ne partait jamais ; texte d&eacute;sormais &eacute;chapp&eacute; (injection de code)
 - FIX : Messagerie : cat&eacute;gorie des messages de l\'administration absente, couleur illisible des rapports d\'exp&eacute;dition
 - FIX : Missiles : tir sans effet ni rapport sur une plan&egrave;te ayant une lune, textes du jeu effac&eacute;s au moment de l\'impact

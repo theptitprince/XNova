@@ -101,4 +101,8 @@ $lang['gf_sp_title'] = "Verfuegbare Spionage Satelliten";
 $lang['gf_unknowsp'] = "Unendliche Weiten";
 
 // Created by Perberos. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : mode vacances
+$lang['gs_c620'] = 'Fehler, du bist im Urlaubsmodus';
+
 ?>
