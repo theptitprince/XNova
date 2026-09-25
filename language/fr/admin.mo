@@ -127,4 +127,8 @@ $lang['adm_dl_player'] = 'Joueur';
 $lang['adm_dl_reason'] = 'Raison';
 $lang['adm_dl_count']  = 'd&eacute;claration(s) au total';
 
+// XNova Renaissance 0.9g : vue generale de l'administration
+$lang['adm_yes'] = 'Oui';
+$lang['adm_no'] = 'Non';
+
 ?>
