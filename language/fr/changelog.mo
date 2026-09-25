@@ -28,7 +28,10 @@ $lang['changelog']   = array(
 - FIX : Petites annonces : page blanche apr&egrave;s publication (PHP 8), colonne cristal vide, suppression de ses annonces (jamais &eacute;crite)
 - FIX : Recherche de joueurs : alliance affich&eacute;e sur la ligne suivante, rang jamais affich&eacute;
 - FIX : Erreurs JavaScript de la page Flotte et de la connexion ; script orphelin du portail OGame (mot de passe en cookie) supprim&eacute;
-- FIX : Textes : demandes d\'ami, discussion, taille des notes en caract&egrave;res, titre des Options',
+- FIX : Textes : demandes d\'ami, discussion, taille des notes en caract&egrave;res, titre des Options
+- FIX : Alliance : page des droits en erreur fatale pour une alliance neuve (PHP 8), droits des rangs, fautes
+- FIX : Administration : le message &agrave; tous les joueurs ne partait jamais ; texte d&eacute;sormais &eacute;chapp&eacute; (injection de code)
+- FIX : Messagerie : cat&eacute;gorie des messages de l\'administration absente, couleur illisible des rapports d\'exp&eacute;dition',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)

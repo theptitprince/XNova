@@ -12,6 +12,7 @@ $lang['type'][3]    = "Kampf Nachricht";
 $lang['type'][4]    = "System Nachricht";
 $lang['type'][5]    = "Transport Nachricht";
 $lang['type'][15]   = "Kosten Nachricht";
+$lang['type'][97]   = 'Nachricht(en) der Administration';
 $lang['type'][99]   = "Bau Nachricht";
 $lang['type'][100]  = "Gesamte Nachrichten";
 

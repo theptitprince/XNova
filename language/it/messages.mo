@@ -12,6 +12,7 @@ $lang['type'][3]    = "Rapporto di combattimento";
 $lang['type'][4]    = "Rapporti di espolarazione";
 $lang['type'][5]    = "Trasporto flotte";
 $lang['type'][15]   = "Raaporti di spedizione";
+$lang['type'][97]   = 'Messaggi dell\'amministrazione';
 $lang['type'][99]   = "Rapporti sulle liste di costruzione";
 $lang['type'][100]  = "Vedere tutti i messaggi";
 

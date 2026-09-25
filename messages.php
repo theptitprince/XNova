@@ -35,9 +35,10 @@ if($user['authlevel']!="1"&$user['authlevel']!="3"&$user['authlevel']!="0"){ hea
 	$UsrMess       = doquery("SELECT * FROM {{table}} WHERE `message_owner` = '".$user['id']."' ORDER BY `message_time` DESC;", 'messages');
 	$UnRead        = doquery("SELECT * FROM {{table}} WHERE `id` = '". $user['id'] ."';", 'users', true);
 
-	$MessageType   = array ( 0, 1, 2, 3, 4, 5, 15, 99, 100 );
-	$TitleColor    = array ( 0 => '#FFFF00', 1 => '#FF6699', 2 => '#FF3300', 3 => '#FF9900', 4 => '#773399', 5 => '#009933', 15 => '#030070', 99 => '#007070', 100 => '#ABABAB'  );
-	$BackGndColor  = array ( 0 => '#663366', 1 => '#336666', 2 => '#000099', 3 => '#666666', 4 => '#999999', 5 => '#999999', 15 => '#999999', 99 => '#999999', 100 => '#999999'  );
+	// 97 : messages generaux de l'administration (message a tous les joueurs), compteur mnl_general
+	$MessageType   = array ( 0, 1, 2, 3, 4, 5, 15, 97, 99, 100 );
+	$TitleColor    = array ( 0 => '#FFFF00', 1 => '#FF6699', 2 => '#FF3300', 3 => '#FF9900', 4 => '#773399', 5 => '#009933', 15 => '#6699FF', 97 => '#FF0000', 99 => '#007070', 100 => '#ABABAB'  );
+	$BackGndColor  = array ( 0 => '#663366', 1 => '#336666', 2 => '#000099', 3 => '#666666', 4 => '#999999', 5 => '#999999', 15 => '#999999', 97 => '#330000', 99 => '#999999', 100 => '#999999'  );
 
 	for ($MessType = 0; $MessType < 101; $MessType++) {
 		if ( in_array($MessType, $MessageType) ) {
