@@ -20,8 +20,8 @@ $lang['info'][1]['description'] = 'La miniera di metallo fornisce le risorse bas
 $lang['info'][2]['name'] = 'Miniera di cristalli';
 $lang['info'][2]['description'] = 'I cristalli sono la principale risorsa utilizzata nei componenti elettronici e sono impiegati anche per formare alcune leghe metalliche. In confronto al processo di produzione del metallo, lavorare cristalli grezzi per ottenere cristalli industriali richiede circa il doppio dell energia; perci&ograve; i cristalli sono molto pi&ugrave; costosi da comprare via commercio. Ogni singola nave e infrastruttura richiede una certa quantit&agrave; di cristalli ma quelli adatti allo scopo sono piuttosto rari e giacciono a grandi profondit&agrave;. Le miniere necessarie per la loro estrazione divengono quindi sempre pi&ugrave; costose, man mano che si sviluppano in profondit&agrave;, ma di certo producono pi&ugrave; cristalli di quelle in superficie.';
 
-$lang['info'][3]['name'] = 'Extracteur Deuterium';
-$lang['info'][3]['description'] = 'LE deuterium est le carburant des vaisseaux. Il a une grande valeur économique; sa production engendre des bénéfices qui servent la recherche.';
+$lang['info'][3]['name'] = 'Sintetizzatore di deuterio';
+$lang['info'][3]['description'] = 'Il deuterio è il carburante delle navi. Ha un grande valore economico; la sua produzione genera profitti che finanziano la ricerca.';
 
 $lang['info'][4]['name'] = 'Centrale solare';
 $lang['info'][4]['description'] = 'Per fornire l energia necessaria alle strutture sono richiesti impianti enormi. Una centrale solare &egrave; un modo per creare questa energia. Essa sfrutta i semiconduttori per i pannelli fotovoltaici che convertono i fotoni in corrente elettrica. Pi&ugrave; sar&agrave; alto il livello della centrale solare pi&ugrave; lo sar&agrave; l area dove avviene la conversione e quindi sar&agrave; generata una maggiore quantit&agrave; d energia. Le centrali solari sono la spina dorsale delle infrastrutture planetarie.';
@@ -130,8 +130,8 @@ $lang['info'][123]['description'] = 'Gli scienziati dei tuoi pianeti possono com
 Per ogni livello di ricerca il tuo laboratorio con livello pi&ugrave; alto che non sia gi&agrave; collegato al network, verr&agrave; aggiunto alla rete. Quando la rete sar&agrave; stabilita, i loro livelli si sommeranno.
 Ogni laboratorio collegato deve avere il livello necessario per la tecnologia che si ha in programma di ricercare. In tal modo si unir&agrave; alla rete.';
 
-$lang['info'][124]['name'] = 'Technologie Expéditions';
-$lang['info'][124]['description'] = "La technologie d'expédition contient diverses technologies de scan et permet aux vaisseaux de tailles différentes d'être équipés de modules de recherche. Ceux-ci contiennent une base de données et un petit laboratoire mobile. Pour ne pas mettre en péril la sécurité du vaisseau, le module de recherche est équipé de son propre bloc énergétique et d'un générateur de champ énergétique, qui englobe le module de recherche en cas d'urgence.";
+$lang['info'][124]['name'] = 'Tecnologia per le spedizioni';
+$lang['info'][124]['description'] = 'La tecnologia per le spedizioni comprende diverse tecnologie di scansione e permette di equipaggiare navi di varie dimensioni con moduli di ricerca. Questi contengono una banca dati e un piccolo laboratorio mobile. Per non mettere a rischio la sicurezza della nave, il modulo di ricerca è dotato di una propria fonte di energia e di un generatore di campo energetico che, in caso di emergenza, avvolge il modulo di ricerca.';
 
 $lang['info'][199]['name'] = 'Tecnologia gravitonica';
 $lang['info'][199]['description'] = 'Un gravitone &egrave; una particella elementare responsabile degli effetti della gravit&agrave;. Essa non ha massa a riposo, non &egrave; carica e ha spin pari a due. Sparando delle particelle gravitoniche concentrate si crea un campo gravitazionale artificiale la cui potenza e forza attrattiva possono non solo distruggere navi ma addirittura lune intere. Per poter produrre la quantit&agrave; necessaria di gravitoni il pianedta deve poter generare un immensa quantit&agrave; di energia.';
@@ -359,5 +359,70 @@ $lang['info'][502]['description'] = 'I missili anti-missili distruggono i missil
 
 $lang['info'][503]['name'] = 'Missili interplanetari';
 $lang['info'][503]['description'] = 'I missili interplanetari distruggono le difese nemiche. Le difese distrutte dai missili interplanetari non verranno ricostruite.';
+
+// XNova Renaissance 0.9g : traductions
+$lang['nfo_page_title'] = 'Informazioni';
+$lang['nfo_title_head'] = 'Informazioni su';
+$lang['nfo_name'] = 'Nome';
+$lang['nfo_destroy'] = 'Demolisci';
+$lang['nfo_level'] = 'Livello';
+$lang['nfo_range'] = 'Portata dei sensori';
+$lang['nfo_used_energy'] = 'Consumo di energia';
+$lang['nfo_used_deuter'] = 'Consumo di deuterio';
+$lang['nfo_prod_energy'] = 'Produzione di energia';
+$lang['nfo_difference'] = 'Differenza';
+$lang['nfo_prod_p_hour'] = 'Produzione/ora';
+$lang['nfo_needed'] = 'Richiede';
+$lang['nfo_dest_durati'] = 'Durata della demolizione';
+$lang['nfo_struct_pt'] = 'Punti struttura';
+$lang['nfo_shielf_pt'] = 'Potenza dello scudo';
+$lang['nfo_attack_pt'] = 'Valore d\'attacco';
+$lang['nfo_rf_again'] = 'Fuoco rapido contro';
+$lang['nfo_rf_from'] = 'Fuoco rapido da';
+$lang['nfo_capacity'] = 'Capacità di carico';
+$lang['nfo_units'] = 'Unità';
+$lang['nfo_base_speed'] = 'Velocità di base';
+$lang['nfo_consumption'] = 'Consumo di carburante (deuterio)';
+$lang['gate_start_moon'] = 'Luna di partenza';
+$lang['gate_dest_moon'] = 'Luna di destinazione:';
+$lang['gate_use_gate'] = 'Usa il portale iperspaziale';
+$lang['gate_ship_sel'] = 'selezione delle navi';
+$lang['gate_ship_dispo'] = 'disponibili';
+$lang['gate_jump_btn'] = 'Salta';
+$lang['gate_jump_done'] = 'Il salto è avvenuto con successo, prossimo salto possibile tra: ';
+$lang['gate_wait_dest'] = 'Gli accumulatori di energia del portale di destinazione non hanno ancora avuto il tempo di ricaricarsi! Tempo di attesa: ';
+$lang['gate_no_dest_g'] = 'Non c\'è alcun portale iperspaziale sul pianeta verso cui volete inviare la flotta!';
+$lang['gate_wait_star'] = 'Gli accumulatori di energia del portale di partenza non hanno ancora avuto il tempo di ricaricarsi! Tempo di attesa: ';
+$lang['gate_wait_data'] = 'Errore, non ci sono dati per il salto!';
+$lang['info'][601]['name'] = 'Geologo';
+$lang['info'][601]['description'] = 'Il geologo è un esperto riconosciuto di astromineralogia e astrocristallografia. Con la sua squadra di esperti metallurgici e di ingegneri chimici, assiste i governi interplanetari nella ricerca di nuove fonti di materie prime e ne ottimizza la raffinazione.<br><br>+5% di produzione. Livello max.: 20';
+$lang['info'][602]['name'] = 'Ammiraglio';
+$lang['info'][602]['description'] = 'L\'ammiraglio della flotta è un veterano di guerra e un temibile stratega. Anche quando il combattimento è accanito, mantiene il sangue freddo necessario per dominare la situazione ed è in contatto costante con gli ammiragli ai suoi ordini. Un imperatore responsabile non può fare a meno dell\'ammiraglio della flotta per coordinare i propri attacchi e può riporre in lui una fiducia tale da inviare più flotte in combattimento.<br><br>+5% agli scudi, alla corazza e alle armi delle navi. Livello max.: 20';
+$lang['info'][603]['name'] = 'Ingegnere';
+$lang['info'][603]['description'] = 'L\'ingegnere è uno specialista della gestione dell\'energia. In tempo di pace ottimizza l\'efficienza delle reti energetiche delle colonie.<br><br>+5% di energia. Livello max.: 10';
+$lang['info'][604]['name'] = 'Tecnocrate';
+$lang['info'][604]['description'] = 'Le gilde dei tecnocrati riuniscono scienziati dal genio riconosciuto. Si trovano là dove la tecnica raggiunge i propri limiti. Nessuno riuscirà mai a decifrare la crittografia di un tecnocrate, e la sua sola presenza ispira i ricercatori di tutto l\'impero.<br><br>-5% del tempo di costruzione delle navi. Livello max: 10';
+$lang['info'][605]['name'] = 'Costruttore';
+$lang['info'][605]['description'] = 'Il costruttore è un nuovo tipo di edificatore. Il suo DNA è stato modificato per conferirgli una forza sovrumana. Uno solo di questi "uomini" può costruire un\'intera città.<br><br>-10% del tempo di costruzione. Livello max.: 3';
+$lang['info'][606]['name'] = 'Scienziato';
+$lang['info'][606]['description'] = 'Gli scienziati fanno parte di una gilda rivale di quella dei tecnocrati. Sono specializzati nel perfezionamento delle tecnologie.<br><br>-10% del tempo di ricerca. Livello max.: 3';
+$lang['info'][607]['name'] = 'Magazziniere';
+$lang['info'][607]['description'] = 'Il magazziniere fa parte dell\'antica confraternita del pianeta Hsac. Il suo motto è guadagnare il massimo, ma per farlo gli servono grandi spazi di stoccaggio. Per questo, con l\'aiuto del costruttore, ha sviluppato una nuova tecnica di stoccaggio.<br><br>+50% di capacità di stoccaggio. Livello max.: 2';
+$lang['info'][608]['name'] = 'Difensore';
+$lang['info'][608]['description'] = 'Il difensore è un membro dell\'esercito imperiale. Il suo zelo nel lavoro gli permette di costruire in poco tempo una difesa temibile nelle colonie ostili.<br><br>-50% del tempo di costruzione delle difese.';
+$lang['info'][609]['name'] = 'Bunker';
+$lang['info'][609]['description'] = 'L\'imperatore ha notato l\'impressionante lavoro che avete svolto per il suo impero. Per ringraziarvi, vi offre la possibilità di diventare Bunker. Il Bunker è la più alta onorificenza del ramo minerario dell\'esercito imperiale.<br><br>Sblocco del Protettore Planetario';
+$lang['info'][610]['name'] = 'Spia';
+$lang['info'][610]['description'] = 'La spia è una persona enigmatica. Nessuno ha mai visto il suo vero volto, a meno di essere già morto.<br><br>+5 livelli di spionaggio. Livello max.: 2';
+$lang['info'][611]['name'] = 'Comandante';
+$lang['info'][611]['description'] = 'Il comandante dell\'esercito imperiale è diventato maestro nell\'arte di manovrare le flotte. Il suo cervello può calcolare le traiettorie di numerose flotte, molte più di quanto possa fare un normale essere umano.<br><br>+3 slot per le flotte. Livello max.: 3';
+$lang['info'][612]['name'] = 'Distruttore';
+$lang['info'][612]['description'] = 'Il distruttore è un ufficiale spietato. Ha massacrato interi pianeti solo per il proprio piacere. Attualmente sta sviluppando un nuovo metodo di produzione delle Morti Nere.<br><br>2 Morti Nere costruite invece di una. Livello max.: 1';
+$lang['info'][613]['name'] = 'Generale';
+$lang['info'][613]['description'] = 'Il Generale è una persona venerabile che ha servito per molti anni nell\'esercito. In sua presenza gli operai che costruiscono le navi lavorano più in fretta.<br><br>+25% di velocità delle navi. Livello max.: 3';
+$lang['info'][614]['name'] = 'Predone';
+$lang['info'][614]['description'] = 'L\'imperatore ha riconosciuto in voi innegabili qualità di conquistatore. Vi propone di diventare Predone. Il Predone è il grado più alto del ramo dei predoni dell\'esercito imperiale<br><br>Sblocco della SuperNova';
+$lang['info'][615]['name'] = 'Imperatore';
+$lang['info'][615]['description'] = 'Avete dimostrato di essere il più grande conquistatore dell\'universo. È giunto il momento di prendere il posto che vi spetta.<br><br>Sblocco del Distruttore Planetario';
 
 ?>

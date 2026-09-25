@@ -19,134 +19,103 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.'.$phpEx);
 
+includeLang('fleet');
 
 $mode = ($_GET['mode'] ?? null);
-$a = intval(($_GET['a'] ?? null));
-/*
-  Este script es original xD
-  La funcion de este script es administrar una variable del $user
-  Permite agregar y quitar arrays...
-*/
-//Lets start!
-if(isset($_GET['mode'])){
-	if($_POST){
-		//Pegamos el texto :P
-		if(($_POST["n"] ?? null) == ""){$_POST["n"] = "Unbenannt";}
+$a    = intval(($_GET['a'] ?? null));
 
-		$r = str_replace(',', ' ', SafeName($_POST['n'], 32)).",".intval(($_POST['g'] ?? null)).",".intval(($_POST['s'] ?? null)).",".intval(($_POST['p'] ?? null)).",".intval(($_POST['t'] ?? null))."\r\n";
-		$user['fleet_shortcut'] .= $r;
-		doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'","users");
-		message("Le raccourcis a &eacute;t&eacute; enregistr&eacute; !","Enregistrment","fleetshortcut.php");
+// Raccourcis de flotte : une ligne par raccourci dans users.fleet_shortcut, « nom,galaxie,systeme,position,type »
+// (type 1 planete, 2 champ de debris, 3 lune). Textes dans la langue du joueur (melange francais / allemand / espagnol).
+
+// Champs du formulaire d'un raccourci ($c : valeurs actuelles, vides pour un ajout)
+function ShortcutForm ( $c ) {
+	global $lang;
+	$Esc  = function ($v) { return htmlspecialchars((string) $v, ENT_QUOTES, 'UTF-8'); };
+	$Form  = "<input type=\"text\" name=\"n\" value=\"". $Esc($c[0] ?? '') ."\" size=\"32\" maxlength=\"32\" title=\"". $lang['fs_name'] ."\">\n";
+	$Form .= "<input type=\"text\" name=\"g\" value=\"". $Esc($c[1] ?? '') ."\" size=\"3\" maxlength=\"1\" title=\"". $lang['fs_galaxy'] ."\">\n";
+	$Form .= "<input type=\"text\" name=\"s\" value=\"". $Esc($c[2] ?? '') ."\" size=\"3\" maxlength=\"3\" title=\"". $lang['fs_system'] ."\">\n";
+	$Form .= "<input type=\"text\" name=\"p\" value=\"". $Esc($c[3] ?? '') ."\" size=\"3\" maxlength=\"3\" title=\"". $lang['fs_position'] ."\">\n";
+	$Form .= "<select name=\"t\">";
+	foreach (array(1 => 'fs_type_planet', 2 => 'fs_type_debris', 3 => 'fs_type_moon') as $Type => $Key) {
+		$Form .= "<option value=\"". $Type ."\"". ((($c[4] ?? 1) == $Type) ? " selected" : "") .">". $lang[$Key] ."</option>";
 	}
-	$page = "<form method=POST><table border=0 cellpadding=0 cellspacing=1 width=519>
-	<tr height=20>
-	<td colspan=2 class=c>Nom [Galaxie/Syst&egrave;me solaire/Plan&egrave;te]</td>
-	</tr><tr height=\"20\"><th>
-	<input type=text name=n value=\"$g\" size=32 maxlength=32 title=\"Name\">
-	<input type=text name=g value=\"$s\" size=3 maxlength=1 title=\"Galaxie\">
-	<input type=text name=s value=\"$p\" size=3 maxlength=3 title=\"Sonnensystem\">
-	<input type=text name=p value=\"$t\" size=3 maxlength=3 title=\"Planet\">
-	 <select name=t>";
-	$page .= '<option value="1"'.(($c[4]==1)?" SELECTED":"").">Plan&egrave;te</option>";
-	$page .= '<option value="2"'.(($c[4]==2)?" SELECTED":"").">D&eacute;bris</option>";
-	$page .= '<option value="3"'.(($c[4]==3)?" SELECTED":"").">Lune</option>";
-	$page .= "</select>
-	</th></tr><tr>
-	<th><input type=\"reset\" value=\"Zur&uuml;cksetzen\"> <input type=\"submit\" value=\"Enregistrer\">";
-	//Muestra un (L) si el destino pertenece a luna, lo mismo para escombros
-	$page .= "</th></tr>";
-	$page .= '<tr><td colspan=2 class=c><a href=fleetshortcut.php>Effacer</a></td></tr></tr></table></form>';
+	$Form .= "</select>";
+	return $Form;
 }
-elseif(isset($_GET['a'])){
-	if($_POST){
-		//Armamos el array...
-		$scarray = explode("\r\n",$user['fleet_shortcut']);
-		if(($_POST["delete"] ?? null)){
+
+// Ligne enregistree : nom nettoye (pas de virgule, separateur), coordonnees entieres
+function ShortcutLine () {
+	global $lang;
+	$Name = str_replace(',', ' ', SafeName(($_POST['n'] ?? ''), 32));
+	if ($Name == '') {
+		$Name = $lang['fs_unnamed'];
+	}
+	return $Name .",". intval(($_POST['g'] ?? 0)) .",". intval(($_POST['s'] ?? 0)) .",". intval(($_POST['p'] ?? 0)) .",". intval(($_POST['t'] ?? 1));
+}
+
+function ShortcutSave ( $List ) {
+	global $user;
+	$user['fleet_shortcut'] = implode("\r\n", $List);
+	doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'", "users");
+}
+
+$scarray = array_values(array_filter(explode("\r\n", (string) $user['fleet_shortcut']), 'strlen'));
+
+if (isset($_GET['mode'])) {
+	// Ajout
+	if ($_POST) {
+		$scarray[] = ShortcutLine();
+		ShortcutSave($scarray);
+		message($lang['fs_saved'], $lang['fs_title'], "fleetshortcut.php");
+	}
+	$page  = "<form method=\"POST\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"1\" width=\"519\">";
+	$page .= "<tr height=\"20\"><td colspan=\"2\" class=\"c\">". $lang['fs_name_coords'] ."</td></tr>";
+	$page .= "<tr height=\"20\"><th>". ShortcutForm(array()) ."</th></tr>";
+	$page .= "<tr><th><input type=\"reset\" value=\"". $lang['fs_reset'] ."\"> <input type=\"submit\" value=\"". $lang['fs_save'] ."\"></th></tr>";
+	$page .= "<tr><td colspan=\"2\" class=\"c\"><a href=\"fleetshortcut.php\">". $lang['fs_back'] ."</a></td></tr></table></form>";
+} elseif (isset($_GET['a'])) {
+	// Modification ou suppression
+	if (!isset($scarray[$a])) {
+		message($lang['fs_not_found'], $lang['fs_title'], "fleetshortcut.php");
+	}
+	if ($_POST) {
+		if (($_POST["delete"] ?? null)) {
 			unset($scarray[$a]);
-			$user['fleet_shortcut'] =  implode("\r\n",$scarray);
-			doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'","users");
-			message("Shortcut wurde gel&ouml;scht","Gel&ouml;scht","fleetshortcut.php");
+			ShortcutSave($scarray);
+			message($lang['fs_deleted'], $lang['fs_title'], "fleetshortcut.php");
 		}
-		else{
-			$r = explode(",",$scarray[$a]);
-			$r[0] = str_replace(',', ' ', SafeName(($_POST['n'] ?? null), 32));
-			$r[1] = intval(($_POST['g'] ?? null));
-			$r[2] = intval(($_POST['s'] ?? null));
-			$r[3] = intval(($_POST['p'] ?? null));
-			$r[4] = intval(($_POST['t'] ?? null));
-			$scarray[$a] = implode(",",$r);
-			$user['fleet_shortcut'] =  implode("\r\n",$scarray);
-			doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'","users");
-			message("Le raccourcis a &eacute;t&eacute; &eacute;dit&eacute; !.","Editer","fleetshortcut.php");
-		}
+		$scarray[$a] = ShortcutLine();
+		ShortcutSave($scarray);
+		message($lang['fs_edited'], $lang['fs_title'], "fleetshortcut.php");
 	}
-	if($user['fleet_shortcut']){
-
-		$scarray = explode("\r\n",$user['fleet_shortcut']);
-		$c = explode(',',$scarray[$a]);
-
-		$page = "<form method=POST><table border=0 cellpadding=0 cellspacing=1 width=519>
-	<tr height=20>
-	<td colspan=2 class=c>Editer: {$c[0]} [{$c[1]}:{$c[2]}:{$c[3]}]</td>
-	</tr>";
-		//if($i==0){$page .= "";}
-		$page .= "<tr height=\"20\"><th>
-		<input type=hidden name=a value=$a>
-		<input type=text name=n value=\"{$c[0]}\" size=32 maxlength=32>
-		<input type=text name=g value=\"{$c[1]}\" size=3 maxlength=1>
-		<input type=text name=s value=\"{$c[2]}\" size=3 maxlength=3>
-		<input type=text name=p value=\"{$c[3]}\" size=3 maxlength=3>
-		 <select name=t>";
-		$page .= '<option value="1"'.(($c[4]==1)?" SELECTED":"").">Plan&egrave;te</option>";
-		$page .= '<option value="2"'.(($c[4]==2)?" SELECTED":"").">D&eacute;bris</option>";
-		$page .= '<option value="3"'.(($c[4]==3)?" SELECTED":"").">Lune</option>";
-		$page .= "</select>
-		</th></tr><tr>
-		<th><input type=reset value=\"Reset\"> <input type=submit value=\"Enregistrer\"> <input type=submit name=delete value=\"Supprimer\">";
-		$page .= "</th></tr>";
-
-	}else{$page .= message("Le raccourcis a &eacute;t&eacute; enregistr&eacute; !","Enregistrer","fleetshortcut.php");}
-
-	$page .= '<tr><td colspan=2 class=c><a href=fleetshortcut.php>Retour</a></td></tr></tr></table></form>';
-
-
-}
-else{
-
-	$page = '<table border="0" cellpadding="0" cellspacing="1" width="519">
-	<tr height="20">
-	<td colspan="2" class="c">Raccourcis(<a href="?mode=add">Ajout</a>)</td>
-	</tr>';
-
-	if($user['fleet_shortcut']){
-		/*
-		  Dentro de fleet_shortcut, se pueden almacenar las diferentes direcciones
-		  de acceso directo, el formato es el siguiente.
-		  Nombre, Galaxia,Sistema,Planeta,Tipo
-		*/
-		$scarray = explode("\r\n",$user['fleet_shortcut']);
-		$i=$e=0;
-		foreach($scarray as $a => $b){
-			if($b!=""){
-			$c = explode(',',$b);
-			if($i==0){$page .= "<tr height=\"20\">";}
-			$page .= "<th><a href=\"?a=".$e++."\">";
-			$page .= "{$c[0]} {$c[1]}:{$c[2]}:{$c[3]}";
-			//Muestra un (L) si el destino pertenece a luna, lo mismo para escombros
-			if($c[4]==2){$page .= " (E)";}elseif($c[4]==3){$page .= " (L)";}
+	$c     = explode(',', $scarray[$a]);
+	$page  = "<form method=\"POST\"><table border=\"0\" cellpadding=\"0\" cellspacing=\"1\" width=\"519\">";
+	$page .= "<tr height=\"20\"><td colspan=\"2\" class=\"c\">". $lang['fs_edit'] .": ". htmlspecialchars($c[0], ENT_QUOTES, 'UTF-8') ." [". intval($c[1] ?? 0) .":". intval($c[2] ?? 0) .":". intval($c[3] ?? 0) ."]</td></tr>";
+	$page .= "<tr height=\"20\"><th>". ShortcutForm($c) ."</th></tr>";
+	$page .= "<tr><th><input type=\"reset\" value=\"". $lang['fs_reset'] ."\"> <input type=\"submit\" value=\"". $lang['fs_save'] ."\"> <input type=\"submit\" name=\"delete\" value=\"". $lang['fs_delete'] ."\"></th></tr>";
+	$page .= "<tr><td colspan=\"2\" class=\"c\"><a href=\"fleetshortcut.php\">". $lang['fs_back'] ."</a></td></tr></table></form>";
+} else {
+	// Liste, deux raccourcis par ligne
+	$page  = "<table border=\"0\" cellpadding=\"0\" cellspacing=\"1\" width=\"519\">";
+	$page .= "<tr height=\"20\"><td colspan=\"2\" class=\"c\">". $lang['fs_title'] ." (<a href=\"?mode=add\">". $lang['fs_add'] ."</a>)</td></tr>";
+	if (count($scarray) > 0) {
+		$i = 0;
+		foreach ($scarray as $Index => $Line) {
+			$c = explode(',', $Line);
+			if ($i == 0) { $page .= "<tr height=\"20\">"; }
+			$page .= "<th><a href=\"?a=". $Index ."\">". htmlspecialchars($c[0], ENT_QUOTES, 'UTF-8') ." ". intval($c[1] ?? 0) .":". intval($c[2] ?? 0) .":". intval($c[3] ?? 0);
+			if (($c[4] ?? 1) == 2) { $page .= " ". $lang['fs_mark_debris']; } elseif (($c[4] ?? 1) == 3) { $page .= " ". $lang['fs_mark_moon']; }
 			$page .= "</a></th>";
-			if($i==1){$page .= "</tr>";}
-			if($i==1){$i=0;}else{$i=1;}
-			}
-
+			if ($i == 1) { $page .= "</tr>"; }
+			$i = 1 - $i;
 		}
-		if($i==1){$page .= "<th></th></tr>";}
-
-	}else{$page .= "<th colspan=\"2\">Pas de Raccourcis</th>";}
-
-	$page .= '<tr><td colspan=2 class=c><a href=fleet.php>Retour</a></td></tr></tr></table>';
+		if ($i == 1) { $page .= "<th></th></tr>"; }
+	} else {
+		$page .= "<tr><th colspan=\"2\">". $lang['fs_none'] ."</th></tr>";
+	}
+	$page .= "<tr><td colspan=\"2\" class=\"c\"><a href=\"fleet.php\">". $lang['fs_back'] ."</a></td></tr></table>";
 }
-display($page,"Shortcutmanager");
+display($page, $lang['fs_title']);
 
 // Created by Perberos. All rights reversed (C) 2006
 ?>

@@ -1,59 +1,63 @@
 <?php
 
-$lang['no_points']     = "Vous n'avez pas assez de points d'officier !";
-$lang['offi_recrute']  = "L'officier a &eacute;t&eacute; recrut&eacute; !";
-$lang['off_tx_lvl']   = "Niveau Actuel : ";
-$lang['off_points']   = "Points d'officier disponible : ";
+$lang['no_points']     = '¡No tiene suficientes puntos de oficial!';
+$lang['offi_recrute']  = '¡El oficial ha sido reclutado!';
+$lang['off_tx_lvl']   = 'Nivel actual: ';
+$lang['off_points']   = 'Puntos de oficial disponibles: ';
 
-$lang['maxlvl']       = "Niveau Maximum Atteint !";
-$lang['officier_label']     = "Officier";
+$lang['maxlvl']       = '¡Nivel máximo alcanzado!';
+$lang['officier_label']     = 'Oficial';
 
-$lang['ttle'][601] = "G&eacute;ologue";
-$lang['ttle'][602] = "Amiral";
-$lang['ttle'][603] = "Ingenieur";
-$lang['ttle'][604] = "Technocrate";
-$lang['ttle'][605] = "Constructeur";
-$lang['ttle'][606] = "Scientifique";
-$lang['ttle'][607] = "Stockeur";
-$lang['ttle'][608] = "Defenseur";
-$lang['ttle'][609] = "Bunker";
-$lang['ttle'][610] = "Espion";
-$lang['ttle'][611] = "Commandant";
-$lang['ttle'][612] = "Destructeur";
+$lang['ttle'][601] = 'Geólogo';
+$lang['ttle'][602] = 'Almirante';
+$lang['ttle'][603] = 'Ingeniero';
+$lang['ttle'][604] = 'Tecnócrata';
+$lang['ttle'][605] = 'Constructor';
+$lang['ttle'][606] = 'Científico';
+$lang['ttle'][607] = 'Almacenista';
+$lang['ttle'][608] = 'Defensor';
+$lang['ttle'][609] = 'Búnker';
+$lang['ttle'][610] = 'Espía';
+$lang['ttle'][611] = 'Comandante';
+$lang['ttle'][612] = 'Destructor';
 $lang['ttle'][613] = "General";
-$lang['ttle'][614] = "Raideur";
-$lang['ttle'][615] = "Empereur";
+$lang['ttle'][614] = 'Saqueador';
+$lang['ttle'][615] = 'Emperador';
 
-$lang['link'][601] = "Recruter le G&eacute;ologue";
-$lang['link'][602] = "Recruter l'Amiral";
-$lang['link'][603] = "Recruter l'Ing&eacute;nieur";
-$lang['link'][604] = "Recruter le Technocrate";
-$lang['link'][605] = "Recruter le Constructeur";
-$lang['link'][606] = "Recruter le Scientifique";
-$lang['link'][607] = "Recruter le Stockeur";
-$lang['link'][608] = "Recruter le Defenseur";
-$lang['link'][609] = "Devenir Bunker";
-$lang['link'][610] = "Recruter l'Espion";
-$lang['link'][611] = "Recruter le Commandant";
-$lang['link'][612] = "Recruter le Destructeur";
-$lang['link'][613] = "Recruter le General";
-$lang['link'][614] = "Devenir Raideur";
-$lang['link'][615] = "Devenir L'Empereur";
+$lang['link'][601] = 'Reclutar al Geólogo';
+$lang['link'][602] = 'Reclutar al Almirante';
+$lang['link'][603] = 'Reclutar al Ingeniero';
+$lang['link'][604] = 'Reclutar al Tecnócrata';
+$lang['link'][605] = 'Reclutar al Constructor';
+$lang['link'][606] = 'Reclutar al Científico';
+$lang['link'][607] = 'Reclutar al Almacenista';
+$lang['link'][608] = 'Reclutar al Defensor';
+$lang['link'][609] = 'Convertirse en Búnker';
+$lang['link'][610] = 'Reclutar al Espía';
+$lang['link'][611] = 'Reclutar al Comandante';
+$lang['link'][612] = 'Reclutar al Destructor';
+$lang['link'][613] = 'Reclutar al General';
+$lang['link'][614] = 'Convertirse en Saqueador';
+$lang['link'][615] = 'Convertirse en Emperador';
 
-$lang['desc'][601] = "<br><br>Le g&eacute;ologue est un expert reconnu en astromin&eacute;ralogie et en astrocristallographie. Avec son &eacute;quipe d'experts en m&eacute;tallurgie et d'ing&eacute;nieurs chimiste, il assiste les gouvernements interplan&eacute;taires dans la recherche de nouvelles sources de mati&egrave;res premi&egrave;res et optimise le raffinage de celles-ci.<br><br><font color=\"red\">+5% de production. Niveau Max. : 20</font>";
-$lang['desc'][602] = "<br><br>L'amiral de la flotte est un v&eacute;t&eacute;ran de guerre et un strat&egrave;ge redout&eacute;. M&ecirc;me lorsque le combat est acharn&eacute;, il garde le sang froid n&eacute;cessaire pour dominer la situation et est en contact permanent avec les amiraux sous ses ordres. Un empereur responsable ne saurait se passer de l'amiral de la flotte pour coordonner ses attaques et peut lui faire une telle confiance qu'il peut envoyer plus de flottes en combat.<br><br><font color=\"red\">+5% de bouclier, protection des vaisseaux et armes sur les vaisseaux. Niveau Max. : 20</font>";
-$lang['desc'][603] = "<br><br>L'ing&eacute;nieur est un sp&eacute;cialiste de la gestion d'&eacute;nergie. En temps de paix, il optimise l'efficacit&eacute; des r&eacute;seaux d'&eacute;nergie des colonies.<br><br><font color=\"red\">+5% d'energie. Niveau Max. : 10</font>";
-$lang['desc'][604] = "<br><br>Les guildes de technocrates sont des scientifiques au g&eacute;nie reconnu. On les trouve aux endroits o&ugrave; la technique atteint ses limites. Personne ne parviendra &agrave; d&eacute;chiffrer le cryptage d'un technocrate, sa seule pr&eacute;sence inspire les chercheurs de tout l'empire.<br><br><font color=\"red\">-5% de temps de construction des vaisseaux. Niveau Max : 10</font>";
-$lang['desc'][605] = "<br><br>Le constructeur est un nouveau type de b&acirc;tisseur. Son ADN a &eacute;t&eacute; modifi&eacute;e pour lui conf&eacute;rer une force surhumaine. Un seul de ces \"homme\" peut construire une ville enti&egrave;re.<br><br><font color=\"red\">-10% de temps de construction. Niveau Max. : 3</font>";
-$lang['desc'][606] = "<br><br>Les scientifiques font partis d'une guilde concurente &agrave; celle des technocrates. Ils sont sp&eacute;cialis&eacute;s dans l'am&eacute;lioration des technologies.<br><br><font color=\"red\">-10% de temps de recherche. Niveau Max. : 3</font>";
-$lang['desc'][607] = "<br><br>Le stockeur fait parti de l'ancienne confr&eacute;rie de le plan&egrave;te Hsac. Sa devise est de gagner un maximum mais pour cel&agrave; il lui faut des espaces de stockage important. C'est pourquoi &agrave; l'aide du constructeur il a d&eacute;velopp&eacute; une nouvelle technique de stockage.<br><br><font color=\"red\">+50% de stockage. Niveau Max. : 2</font>";
-$lang['desc'][608] = "<br><br>Le defenseur est membre de l'arm&eacute;e imperiale. Son ardeur dans son travail lui permet de construire une d&eacute;fense redoutable en peu de temps dans les colonies hostile.<br><br><font color=\"red\">-50% de temps de construction de la d&eacute;fense.</font>";
-$lang['desc'][609] = "<br><br>L'empereur a remarqu&eacute; le travail impressionnant que vous avez fournit &agrave; son empire. Pour vous remerciez il vous offre la chance de devenir Bunker. Le Bunker est la plus haute distinction de la branche Mini&egrave;re de l'arm&eacute;e imp&eacute;riale.<br><br><font color=\"red\">D&eacute;blocage du Protecteur Plan&egrave;taire</font> ";
-$lang['desc'][610] = "<br><br>L'espion est une personne &eacute;nigmatique. Personne n'a jamais vu son visage r&eacute;el, a moins d'&ecirc;tre d&eacute;j&ageave; mort.<br><br>+5 Lvl D'espionnage. Niveau Max. : 2<font color=\"red\"></font>";
-$lang['desc'][611] = "<br><br>Le commandant de l'arm&eacute;e imp&eacute;riale est pass&eacute; ma&icirc;tre dans l'art du maniement des flottes. Son cerveau peut calculer les trajectoires de nombreuses flotte, beaucoup plus que celle d'un humain normal.<br><br>+3 slots de flottes. Niveau Max. : 3<font color=\"red\"></font> ";
-$lang['desc'][612] = "<br><br>Le destructeur est un officier sans piti&eacute;. Il a massacr&eacute; des plan&egrave;tes enti&egrave;res juste pour son plaisir. Il d&eacute;veloppe actuellement une nouvelle m&eacute;thode de production des &eacute;toiles de la mort.<br><br>2 RIP construites au lieu d'une. Niveau Max. : 1<font color=\"red\"></font>";
-$lang['desc'][613] = "<br><br>Le General est une v&eacute;n&eacute;rable personne qui a servit de nombreuses ann&eacute;es dans l'arm&eacute;e. Les ouvrier constructeur de vaisseaux produisent plus vite en sa pr&eacute;sence.<br><br>+25% de vitesse des vaisseaux. Niveau Max. : 3<font color=\"red\"></font>";
-$lang['desc'][614] = "<br><br>L'empereur a rep&eacute;r&eacute; en vous des qualit&eacute;s ind&eacute;niable de conqu&eacute;rent. Il vous propose de devenir Raideur. Le Raideur est le grade le plus &eacute;lev&eacute; de la branche des raideurs de l'arm&eacute;e imp&eacute;riale<br><br>D&eacute;blocage de la SuperNova<font color=\"red\"></font>";
-$lang['desc'][615] = "<br><br>Vous avez montr&eacute; que vous &ecirc;tiez le plus grand conqu&eacute;rant de l'univers. Il est tant pour vous de prendre la place qui vous revient.<br><br>D&eacute;blocage du Destructeur Plan&egrave;taire<font color=\"red\"></font>";
+$lang['desc'][601] = '<br><br>El geólogo es un experto reconocido en astromineralogía y astrocristalografía. Con su equipo de expertos en metalurgia e ingenieros químicos, asiste a los gobiernos interplanetarios en la búsqueda de nuevas fuentes de materias primas y optimiza su refinado.<br><br><font color="red">+5% de producción. Nivel máx.: 20</font>';
+$lang['desc'][602] = '<br><br>El almirante de la flota es un veterano de guerra y un estratega temible. Incluso cuando el combate es encarnizado, conserva la sangre fría necesaria para dominar la situación y está en contacto permanente con los almirantes bajo su mando. Un emperador responsable no puede prescindir del almirante de la flota para coordinar sus ataques, y puede confiar tanto en él que le permite enviar más flotas al combate.<br><br><font color="red">+5% de escudo, blindaje y armas de las naves. Nivel máx.: 20</font>';
+$lang['desc'][603] = '<br><br>El ingeniero es un especialista en la gestión de la energía. En tiempos de paz, optimiza la eficiencia de las redes de energía de las colonias.<br><br><font color="red">+5% de energía. Nivel máx.: 10</font>';
+$lang['desc'][604] = '<br><br>Los gremios de tecnócratas están formados por científicos de reconocido talento. Se les encuentra allí donde la técnica alcanza sus límites. Nadie logrará descifrar el cifrado de un tecnócrata, y su sola presencia inspira a los investigadores de todo el imperio.<br><br><font color="red">-5% de tiempo de construcción de las naves. Nivel máx.: 10</font>';
+$lang['desc'][605] = '<br><br>El constructor es un nuevo tipo de edificador. Su ADN ha sido modificado para conferirle una fuerza sobrehumana. Uno solo de estos "hombres" puede construir una ciudad entera.<br><br><font color="red">-10% de tiempo de construcción. Nivel máx.: 3</font>';
+$lang['desc'][606] = '<br><br>Los científicos forman parte de un gremio rival del de los tecnócratas. Están especializados en la mejora de las tecnologías.<br><br><font color="red">-10% de tiempo de investigación. Nivel máx.: 3</font>';
+$lang['desc'][607] = '<br><br>El almacenista pertenece a la antigua hermandad del planeta Hsac. Su lema es ganar el máximo, pero para ello necesita grandes espacios de almacenamiento. Por eso, con la ayuda del constructor, ha desarrollado una nueva técnica de almacenamiento.<br><br><font color="red">+50% de almacenamiento. Nivel máx.: 2</font>';
+$lang['desc'][608] = '<br><br>El defensor es miembro del ejército imperial. Su ardor en el trabajo le permite construir en poco tiempo una defensa temible en las colonias hostiles.<br><br><font color="red">-50% de tiempo de construcción de la defensa.</font>';
+$lang['desc'][609] = '<br><br>El emperador se ha fijado en el impresionante trabajo que usted ha realizado para su imperio. Para agradecérselo, le ofrece la oportunidad de convertirse en Búnker. El Búnker es la más alta distinción de la rama minera del ejército imperial.<br><br><font color="red">Desbloqueo del Protector planetario</font> ';
+$lang['desc'][610] = '<br><br>El espía es una persona enigmática. Nadie ha visto nunca su verdadero rostro, salvo quienes ya están muertos.<br><br>+5 niveles de espionaje. Nivel máx.: 2<font color="red"></font>';
+$lang['desc'][611] = '<br><br>El comandante del ejército imperial es un maestro en el arte de dirigir flotas. Su cerebro puede calcular las trayectorias de numerosas flotas, muchas más que el de un humano normal.<br><br>+3 espacios de flota. Nivel máx.: 3<font color="red"></font> ';
+$lang['desc'][612] = '<br><br>El destructor es un oficial despiadado. Ha arrasado planetas enteros solo por placer. Actualmente desarrolla un nuevo método de producción de estrellas de la muerte.<br><br>2 estrellas de la muerte construidas en lugar de una. Nivel máx.: 1<font color="red"></font>';
+$lang['desc'][613] = '<br><br>El general es una persona venerable que ha servido durante muchos años en el ejército. Los obreros que construyen las naves trabajan más rápido en su presencia.<br><br>+25% de velocidad de las naves. Nivel máx.: 3<font color="red"></font>';
+$lang['desc'][614] = '<br><br>El emperador ha visto en usted innegables cualidades de conquistador. Le propone convertirse en Saqueador. El Saqueador es el grado más alto de la rama de los saqueadores del ejército imperial.<br><br>Desbloqueo de la SuperNova<font color="red"></font>';
+$lang['desc'][615] = '<br><br>Ha demostrado que es el mayor conquistador del universo. Ha llegado el momento de ocupar el lugar que le corresponde.<br><br>Desbloqueo del Destructor planetario<font color="red"></font>';
+
+// XNova Renaissance 0.9g : traductions
+$lang['noob'] = 'Todavía no cumple los requisitos para reclutar a este oficial.';
+$lang['officier'] = 'Oficiales';
 
 ?>

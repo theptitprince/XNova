@@ -1,41 +1,43 @@
 <?php
 
-$lang['fleet_label']            = "Flotte";
-$lang['defense_label']          = "D&eacute;fense";
-$lang['research_label']         = "Laboratoire de Recherches";
-$lang['level']            = "Niveau";
+$lang['fleet_label']            = 'Flota';
+$lang['defense_label']          = 'Defensa';
+$lang['research_label']         = 'Laboratorio de investigación';
+$lang['level']            = 'Nivel';
 $lang['dispo']            = "Disponible";
-$lang['requirements']     = "Requis: ";
-$lang['requires']         = "Ressources n&eacute;cessaires ";
-$lang['rest_ress']        = "Ressources restantes ";
-$lang['rechercher']       = "Rechercher";
-$lang['construction_time'] = "Dur&eacute;e de construction ";
-$lang['construire']       = " Construire ";
-$lang['build_first_level']  = "Construire";
-$lang['build_next_level']   = "Construire le Niveau ";
-$lang['completed']        = "Termin&eacute;";
-$lang['in_working']       = "En travail";
-$lang['work_todo']        = "En travail";
-$lang['total_left_time']  = "Temps restant";
-$lang['only_one']         = "Vous ne pouvez construire qu'un seul bouclier.";
-$lang['build_lab']        = "Erreur Batiments";
-$lang['no_more_space']      = "Plan&egrave;te pleine!";
-$lang['in_build_queue']     = "Dans la liste de construction";
-$lang['bld_usedcells']    = "Cases utilis&eacute;es";
+$lang['requirements']     = 'Requisitos: ';
+$lang['requires']         = 'Recursos necesarios ';
+$lang['rest_ress']        = 'Recursos restantes ';
+$lang['rechercher']       = 'Investigar';
+$lang['construction_time'] = 'Tiempo de construcción ';
+$lang['construire']       = ' Construir ';
+$lang['build_first_level']  = 'Construir';
+$lang['build_next_level']   = 'Construir el nivel ';
+$lang['completed']        = 'Terminado';
+$lang['in_working']       = 'En curso';
+$lang['work_todo']        = 'En curso';
+$lang['total_left_time']  = 'Tiempo restante';
+$lang['only_one']         = 'Solo puede construir una única cúpula de protección de cada tipo.';
+$lang['build_lab']        = 'Error de edificios';
+$lang['no_more_space']      = '¡Planeta lleno!';
+$lang['in_build_queue']     = 'En la cola de construcción';
+$lang['bld_usedcells']    = 'Campos usados';
 $lang['bld_theyare']      = "Quedan";
 $lang['bld_cellfree']     = "campos libres";
 $lang['bld_theyare_one']  = "Queda";
 $lang['bld_cellfree_one'] = "campo libre";
-$lang['del_from_queue']     = "enlever";
-$lang['del_first_queue']    = "Interrompre";
-$lang['cancel']           = "Annuler";
-$lang['continue']         = "Continuer";
-$lang['ready']            = "Pret";
-$lang['destroy']          = "D&eacute;truire";
-$lang['on']               = "sur";
-$lang['attention']        = "Attention le bannissement est proche sale tricheur ! Ton action a &eacute;t&eacute; signal&eacute;e !";
-$lang['no_laboratory']    = "N&eacute;cessite laboratoire de Recherches!";
-$lang['need_hangar']      = "Chantier spatial requis";
-$lang['labo_on_update']   = "Impossible de rechercher quand le laboratoire est en &eacute;volution!";
+$lang['del_from_queue']     = 'quitar';
+$lang['del_first_queue']    = 'Interrumpir';
+$lang['cancel']           = 'Cancelar';
+$lang['continue']         = 'Continuar';
+$lang['ready']            = 'Listo';
+$lang['destroy']          = 'Destruir';
+$lang['on']               = 'en';
+$lang['no_laboratory']    = 'Se necesita un laboratorio de investigación.';
+$lang['need_hangar']      = 'Se necesita un hangar.';
+$lang['labo_on_update']   = '¡No se puede investigar mientras el laboratorio se está ampliando!';
+
+// XNova Renaissance 0.9g : traductions
+$lang['builds'] = 'Edificios';
 
 ?>

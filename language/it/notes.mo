@@ -40,4 +40,11 @@ $lang['note_deleted'] = 'Nota cancellata, <a href="notes.php"><blink>reindirizza
 $lang['note_deleteds'] = 'Note cancellate, <a href="notes.php"><blink>reindirizzamento...</blink></a>';
 
 // Created by Perberos. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : traductions
+$lang['notpossiblethisway'] = 'Questa azione non è possibile.';
+
+// XNova Renaissance 0.9g : titre des messages des notes (ecrit en dur en francais)
+$lang['please_wait_label'] = 'Attendere...';
+
 ?>

@@ -21,6 +21,19 @@
 
     includeLang('options');
 
+    // Langues proposees : celles dont le dossier est installe, chacune ecrite dans sa propre langue
+    function OptionsLanguages () {
+       global $xnova_root_path;
+       $Names = array('fr' => 'Français', 'de' => 'Deutsch', 'es' => 'Español', 'it' => 'Italiano');
+       $List  = array();
+       foreach ($Names as $Code => $Name) {
+          if (is_file($xnova_root_path . 'language/' . $Code . '/lang_info.cfg')) {
+             $List[$Code] = $Name;
+          }
+       }
+       return $List;
+    }
+
     $lang['php_self'] = 'options.' . $phpEx;
 
     $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
@@ -184,6 +197,9 @@
        }
        $SetSort  = intval(($_POST['settings_sort'] ?? null));
        $SetOrder = intval(($_POST['settings_order'] ?? null));
+       // Langue : uniquement une langue installee (le code sert de nom de dossier)
+       $UserLang = array_key_exists(($_POST['lang'] ?? ''), OptionsLanguages()) ? $_POST['lang'] : $user['lang'];
+       $UserLang = SqlEscape($UserLang);
        // Couleurs : pas de champ dans le formulaire, on conserve les valeurs existantes (elles etaient effacees)
        $kolorminus  = SqlEscape($user['kolorminus']);
        $kolorplus   = SqlEscape($user['kolorplus']);
@@ -209,6 +225,7 @@
        `settings_rep` = '$settings_rep',
        `urlaubs_modus` = '$urlaubs_modus',
        `db_deaktjava` = '$db_deaktjava',
+       `lang` = '$UserLang',
        `kolorminus` = '$kolorminus',
        `kolorplus` = '$kolorplus',
        `kolorpoziom` = '$kolorpoziom'
@@ -218,6 +235,10 @@
        $dpath = ($dpath == '') ? DEFAULT_SKINPATH : $dpath;
 
        if (isset($_POST["db_password"]) && ($_POST["db_password"] ?? null) != '' && PasswordCheck($_POST["db_password"], $user)) {
+          // Nouveau mot de passe : 8 caracteres au moins (comme a l'inscription ; la page l'annoncait sans le verifier)
+          if (($_POST["newpass1"] ?? null) != '' && mb_strlen($_POST["newpass1"]) < 8) {
+             message($lang['opt_password_short'], $lang['changue_pass'], "options.php", 3);
+          }
           if (($_POST["newpass1"] ?? null) != '' && ($_POST["newpass1"] ?? null) == ($_POST["newpass2"] ?? null)) {
              $newpass = PasswordHash(($_POST["newpass1"] ?? null));
              doquery("UPDATE {{table}} SET `password` = '". SqlEscape($newpass) ."' WHERE `id` = '". intval($user['id']) ."' LIMIT 1", "users");
@@ -239,6 +260,10 @@
 
        $parse['dpath'] = $dpath;
        $parse['opt_lst_skin_data']  = "<option value =\"skins/xnova/\">skins/xnova/</option>";
+       $parse['opt_lang_data'] = '';
+       foreach (OptionsLanguages() as $Code => $Name) {
+          $parse['opt_lang_data'] .= "<option value=\"". $Code ."\"". (($user['lang'] == $Code) ? " selected": "") .">". $Name ."</option>";
+       }
        $parse['opt_lst_ord_data']   = "<option value =\"0\"". (($user['planet_sort'] == 0) ? " selected": "") .">". $lang['opt_lst_ord0'] ."</option>";
        $parse['opt_lst_ord_data']  .= "<option value =\"1\"". (($user['planet_sort'] == 1) ? " selected": "") .">". $lang['opt_lst_ord1'] ."</option>";
        $parse['opt_lst_ord_data']  .= "<option value =\"2\"". (($user['planet_sort'] == 2) ? " selected": "") .">". $lang['opt_lst_ord2'] ."</option>";

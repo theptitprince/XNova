@@ -44,4 +44,7 @@ $lang['note_deleteds'] = 'Les notes ont &eacute;t&eacute; supprim&eacute;, <a hr
 // XNova Renaissance : textes manquants (ils s'affichaient vides)
 $lang['notpossiblethisway'] = 'Cette action n\'est pas possible.';
 
+// XNova Renaissance 0.9g : titre des messages des notes (ecrit en dur en francais)
+$lang['please_wait_label'] = 'Patientez...';
+
 ?>

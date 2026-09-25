@@ -1,30 +1,30 @@
 <?php
 
 $lang['login_fail'] = "Usuario o contrase&ntilde;a incorrectos.";
-$lang['login'] = 'Connexion';
-$lang['user_name'] = 'Nom:';
-$lang['password_label'] = 'Password:';
-$lang['please_login'] = 'Merci de vous <a href="login.php" target="_main">logguer...</a>';
-$lang['please_wait_label'] = 'Patientez';
-$lang['remember_me'] = 'Se rappeller de moi';
-$lang['register'] = 'S\'inscrire';
-$lang['login_error_label'] = 'Erreur';
-$lang['please_wait'] = 'Patientez';
+$lang['login'] = 'Iniciar sesión';
+$lang['user_name'] = 'Usuario:';
+$lang['password_label'] = 'Contraseña:';
+$lang['please_login'] = 'Por favor, <a href="login.php" target="_main">inicie sesión...</a>';
+$lang['please_wait_label'] = 'Espere';
+$lang['remember_me'] = 'Recordarme';
+$lang['register'] = 'Registrarse';
+$lang['login_error_label'] = 'Error';
+$lang['please_wait'] = 'Espere';
 
-$lang['login_ok'] = 'Identification r&eacute;ussie, <a href="./"><blink>redirection...</blink></a><br><center><img src="images/progressbar.gif"></center>';
-$lang['login_fail_password'] = 'Mot de passe incorrect<br /><a href="login.php" target="_top">Retour</a>';
-$lang['login_fail_user'] = 'Ce joueur n\'existe pas.<br><a href=login.php>Retour</a>';
+$lang['login_ok'] = 'Identificación correcta, <a href="./"><blink>redirigiendo...</blink></a><br><center><img src="images/progressbar.gif"></center>';
+$lang['login_fail_password'] = 'Contraseña incorrecta<br /><a href="login.php" target="_top">Volver</a>';
+$lang['login_fail_user'] = 'Este jugador no existe.<br><a href=login.php>Volver</a>';
 
-$lang['log_univ'] = 'Merci de selectionner un Univers!';
-$lang['log_reg'] = 'Inscriptions';
-$lang['log_cred'] = 'Credits';
-$lang['log_desc'] = 'est un <strong>jeu de strat&eacute;gie gratuit</strong> dans l\'espace. Pour jouer, il suffit d\'un navigateur internet. Inscrivez-vous et d&eacute;couvrez le monde fantastique de';
-$lang['log_toreg'] = 'S\'enregistrer maintenant!';
-$lang['log_online'] = 'Joueurs en ligne';
-$lang['log_lastreg'] = 'Dernier inscris';
-$lang['log_numbreg'] = 'Joueurs inscris';
-$lang['log_welcome'] = 'Bienvenue sur';
+$lang['log_univ'] = '¡Seleccione un universo!';
+$lang['log_reg'] = 'Registro';
+$lang['log_cred'] = 'Créditos';
+$lang['log_desc'] = 'es un <strong>juego de estrategia gratuito</strong> ambientado en el espacio. Para jugar solo necesita un navegador de internet. Regístrese y descubra el fantástico mundo de';
+$lang['log_toreg'] = '¡Regístrese ahora!';
+$lang['log_online'] = 'Jugadores en línea';
+$lang['log_lastreg'] = 'Último registrado';
+$lang['log_numbreg'] = 'Jugadores registrados';
+$lang['log_welcome'] = 'Bienvenido a';
 
-$lang['password_lost'] = 'Vous avez oubli&eacute; votre mot de passe ?';
+$lang['password_lost'] = '¿Ha olvidado su contraseña?';
 
 ?>

@@ -1,0 +1,66 @@
+<?php
+
+// XNova Renaissance 0.9g : traductions
+$lang['respectrules'] = 'Diese Regeln sind einzuhalten. Jeder Verstoß gegen diese Regeln wird mit einer vorübergehenden oder dauerhaften Sperre geahndet!';
+$lang['rules'] = 'Regelwerk';
+$lang['account'] = 'I.    Accounts';
+$lang['multi_account'] = 'II.   Multi-Accounts';
+$lang['sitting'] = 'III.  Betreuung fremder Accounts (Sitting)';
+$lang['trade'] = 'IV.   Accounttausch';
+$lang['bash'] = 'V.    Bashing';
+$lang['push'] = 'VI.   Pushing';
+$lang['bugusing'] = 'VII.  Bugusing';
+$lang['mail_ingame'] = 'VIII. Missbrauch der Meldefunktion für Ingame-Nachrichten';
+$lang['out_xnova'] = 'IX.   Drohungen außerhalb des Spiels';
+$lang['spam'] = 'X.    Spam, Beleidigungen und anstößige Inhalte';
+$lang['account_text'] = 'Jeder Spieler darf pro Universum nur einen einzigen Account spielen.';
+$lang['account_text2'] = 'Ein Account darf nur von einer einzigen Person gespielt werden.';
+$lang['multi_account_text'] = 'Das Spielen von mehr als einem Account pro Universum ist streng verboten.';
+$lang['multi_account_text2'] = 'Wenn sich 2 oder mehr Spieler dieselbe IP-Adresse teilen (Mitglieder derselben Familie, Paare, Schulen usw.), darf es zwischen diesen Accounts keine weiteren Gemeinsamkeiten geben (die Mitgliedschaft in derselben Allianz wird geduldet). Andernfalls kann dies als Multi-Account gewertet und mit einer Sperre geahndet werden.';
+$lang['multi_account_text3'] = 'Jede Interaktion zwischen Accounts mit derselben IP ist verboten.';
+$lang['sitting_text'] = 'Das Sitten eines Accounts unterliegt den folgenden Regeln:';
+$lang['sitting_text2'] = 'Ein Account darf nur für 12 aufeinanderfolgende Stunden gesittet werden.';
+$lang['sitting_text3'] = 'Der Operator des Universums muss unbedingt per E-Mail über das Sitting informiert werden.';
+$lang['sitting_text4'] = 'Während der Account gesittet wird, darf der Sitter mit den auf dem Planeten vorhandenen Rohstoffen Gebäude bauen oder Forschungen starten. Das Verschieben von Rohstoffen von anderen Planeten oder Monden des Accounts ist streng verboten.';
+$lang['sitting_text5'] = 'Bevor der Account erneut gesittet werden darf, muss sich der Eigentümer des Accounts eingeloggt haben.';
+$lang['sitting_text6'] = 'Das nächste Sitting darf frühestens 7 Tage nach dem Login des Eigentümers stattfinden.';
+$lang['sitting_text7'] = 'Ein Account darf nur alle 3 Monate den Eigentümer wechseln (ohne jede Ausnahme!).';
+$lang['sitting_text8'] = 'Der Sitter darf in diesem Universum innerhalb von 7 Tagen nach einem Sitting keinen Account sitten.';
+$lang['sitting_text9'] = 'Das Sitting darf nicht genutzt werden, um sich einen Vorteil zu verschaffen (z. B. durch Nutzung einer Phalanx oder der Flotte).';
+$lang['sitting_text10'] = 'Streng verboten ist:';
+$lang['sitting_text11'] = 'Während der Account gesittet wird, sind keinerlei Flottenbewegungen erlaubt (zu diesem Zeitpunkt darf keine Flotte unterwegs sein). Wird eine Flotte jedoch gerade angegriffen, darf sie im Modus „Transport“ oder „Stationieren“ zu einem anderen Planeten oder Mond dieses Accounts geschickt werden, um dem Angriff auszuweichen.';
+$lang['sitting_text12'] = 'Das Sitten von Accounts ist in den ersten drei Wochen nach dem Start eines Universums verboten.';
+$lang['sitting_text13'] = 'Während eines Sittings darf sich nur der Sitter einloggen.';
+$lang['sitting_text14'] = 'Es ist verboten, sich während des 12-Stunden-Zeitraums von mehreren Spielern sitten zu lassen.';
+$lang['sitting_text15'] = 'Es ist verboten, einen anderen Account zu sitten.';
+$lang['trade_text'] = 'Ein Account gehört der Person, der die mit ihm verknüpfte permanente E-Mail-Adresse gehört. Findet ein Accounttausch ohne Beteiligung eines Operators des Universums statt, geschieht dies auf eigene Gefahr der jeweiligen Eigentümer. Beschwerden oder Anfragen werden nur bearbeitet, wenn sie von der permanenten E-Mail-Adresse des betroffenen Accounts stammen.';
+$lang['trade_text2'] = 'Die Operatoren des Spiels können einen Accounttausch nicht nur sehr einfach durchführen, sondern auf diese Weise auch verhindern, dass der Account während des Tauschs gestohlen wird.';
+$lang['bash_text'] = 'Einen Planeten oder Mond innerhalb von 24 aufeinanderfolgenden Stunden mehr als 6 Mal anzugreifen, gilt als Bashing und ist daher verboten.';
+$lang['bash_text2'] = 'Angriffe auf einen Mond im Modus „Zerstören“ zählen ebenfalls zu dieser Grenze von 6 Angriffen.';
+$lang['exception'] = 'Ausnahmen:';
+$lang['bash_exep_text'] = 'Bashing ist nur erlaubt, wenn sich die beteiligten Allianzen im Krieg befinden (dieser Krieg muss im entsprechenden Bereich des offiziellen Forums erklärt werden).';
+$lang['bash_exep_text2'] = 'Angreifende Flotten, die bei einem Angriff vollständig zerstört werden, und Kämpfe, die durch den Unentschieden-Bug nach einer Runde abgebrochen werden, zählen nicht zu den 6 Angriffen.';
+$lang['bash_exep_text3'] = 'Angriffe mit Interplanetarraketen sind nicht begrenzt und zählen nicht zu den 6 Angriffen.';
+$lang['push_text'] = 'Als Pushing gilt die freiwillige Übertragung von Rohstoffen in jeglicher Form von einem Spieler an einen besser platzierten Spieler ohne jede Gegenleistung. Dies gilt auch, wenn dich ein besser platzierter Spieler erpresst.';
+$lang['push_text2'] = 'Anders als beim Bashing gibt es keine Ausnahme, in der Pushing erlaubt ist:';
+$lang['push_text3'] = 'Wenn dir ein schwächerer Spieler Rohstoffe schickt, ohne dass du ihn darum gebeten hast, schicke sie ihm zurück oder übergib sie einem der Operatoren des Spiels. Du darfst diese Rohstoffe nicht behalten!';
+$lang['push_text4'] = 'Erpressung ist nicht erlaubt.';
+$lang['push_text5'] = 'Rohstofftausche müssen innerhalb von 48 Stunden abgewickelt werden.';
+$lang['exemple'] = 'Beispiele (Verstöße beschränken sich nicht auf die unten genannten Fälle):';
+$lang['push_ex'] = 'Ein Spieler schickt Rohstoffe an einen besser platzierten Spieler.';
+$lang['push_ex2'] = 'Eine Selbstmordflotte wird zu einem stärkeren Spieler geschickt, nur damit dieser das Trümmerfeld recyceln kann.';
+$lang['push_ex3'] = 'Rohstoffe werden auf einen Planeten transportiert, um sie einem stärkeren Spieler, der über dieses Manöver informiert ist, für einen Angriff zur Verfügung zu stellen.';
+$lang['recyclage'] = 'Recyclinghilfe:';
+$lang['push_rec'] = 'Wenn du einem Spieler beim Abbau eines Trümmerfelds geholfen hast, darfst du diese Rohstoffe an den besser platzierten angreifenden Spieler übertragen. Diese Lieferung muss jedoch zwingend von einer Informations-E-Mail an deinen Operator des Universums begleitet werden.';
+$lang['mercenariat'] = 'Söldneraufträge:';
+$lang['push_mer'] = 'Söldneraufträge müssen im entsprechenden Bereich des offiziellen Forums gemeldet werden, um genehmigt zu werden. Nicht gemeldete Söldneraufträge können wegen Pushing mit einer Sperre geahndet werden.';
+$lang['push_mer2'] = 'Die Belohnung darf erst ausgezahlt werden, wenn das Ziel zerstört wurde.';
+$lang['bugusing_text'] = 'Das Ausnutzen eines Bugs zum eigenen Vorteil ist streng verboten.';
+$lang['bugusing_text2'] = 'Ein Spieler, der einen Bug findet, wird gebeten, ihn sofort dem Team zu melden (z. B. über das Forum, den IRC oder per E-Mail).';
+$lang['bugusing_text3'] = 'Wer einen gefundenen Bug nicht meldet, kann gesperrt werden.';
+$lang['bugusing_text4'] = 'Jede Spielweise, die darauf abzielt, den Account eines Gegners zu verlangsamen oder unspielbar zu machen, ist absolut verboten.';
+$lang['mail_ingame_text'] = 'Es ist verboten, über den Button „Melden“ eine Nachricht zu melden, die keine Beleidigungen enthält und nicht gegen die Spielregeln verstößt.';
+$lang['out_text'] = 'Es ist verboten, jemandem mit Konsequenzen im echten Leben zu drohen. Dies gilt für das Spiel, das Forum und den IRC.';
+$lang['spam_text'] = 'Spam, Beleidigungen und Nachrichten mit anstößigen Inhalten sind verboten, ebenso wie alle fremdenfeindlichen, antisemitischen oder rassistischen Inhalte.';
+
+?>

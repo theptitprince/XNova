@@ -11,7 +11,7 @@
 *******************************************************************************************************/
 
 
-$lang['see_you'] = 'Esperando volverle a ver muy pronto. El Staff';
+$lang['see_you'] = 'Esperamos volver a verle muy pronto. El equipo.';
 $lang['session_closed'] = "Sesión terminada";
 
 ?>

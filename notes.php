@@ -24,10 +24,14 @@ $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 
 $a = intval(($_GET['a'] ?? null));
 $n = intval(($_GET['n'] ?? null));
-$lang['please_wait_label'] = "Patientez...";
 
 //lenguaje
 includeLang('notes');
+
+// Page desactivee par l'administrateur : le menu cachait le lien, l'adresse directe restait ouverte
+if ($game_config['enable_notes'] != 1) {
+	message($lang['sys_page_disabled'], $lang['notes']);
+}
 
 $lang['php_self'] = 'notes.'.$phpEx;
 

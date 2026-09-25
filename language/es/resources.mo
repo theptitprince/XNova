@@ -1,17 +1,17 @@
 <?php
 
-$lang['production_of_resources_in_the_planet'] = 'Production de mati&egrave;res premi&egrave;res sur la plan&egrave;te  "%s"';
-$lang['production_level_label'] = 'Niveau de Production';
-$lang['basic_income'] = 'Revenu de base';
-$lang['quantity'] = 'Quantit&eacute;';
-$lang['level'] = 'Niveau';
-$lang['stores_capacity'] = 'Capacit&eacute; des d&eacute;p&ocirc;ts';
-$lang['widespread_production'] = 'Production &eacute;tendue';
-$lang['daily'] = 'Journali&egrave;re';
-$lang['weekly'] = 'Hebdomadaire';
-$lang['monthly'] = 'Mensuelle';
-$lang['storage_state'] = 'Etat des d&eacute;p&ocirc;ts';
-$lang['calcule'] = 'Calculer';
+$lang['production_of_resources_in_the_planet'] = 'Producción de recursos en el planeta "%s"';
+$lang['production_level_label'] = 'Nivel de producción';
+$lang['basic_income'] = 'Ingresos básicos';
+$lang['quantity'] = 'Cantidad';
+$lang['level'] = 'Nivel';
+$lang['stores_capacity'] = 'Capacidad de los almacenes';
+$lang['widespread_production'] = 'Producción extendida';
+$lang['daily'] = 'Diaria';
+$lang['weekly'] = 'Semanal';
+$lang['monthly'] = 'Mensual';
+$lang['storage_state'] = 'Estado de los almacenes';
+$lang['calcule'] = 'Calcular';
 $lang['o_o'] = '%';
 $lang['k'] = 'k';
 

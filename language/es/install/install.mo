@@ -7,44 +7,44 @@
  * @copyright 2008
  */
 
-$lang['ins_appname']      = "XNova España";
+$lang['ins_appname']      = 'XNova';
 $lang['ins_tx_state']     = "Etapa";
 $lang['ins_tx_sys']       = "Gestión sistema";
-$lang['ins_btn_next']     = "Sigiente";
+$lang['ins_btn_next']     = 'Siguiente';
 $lang['ins_btn_inst']     = "Instalar";
 $lang['ins_btn_creat']    = "Crear";
-$lang['ins_btn_prev']     = "Precedente";
+$lang['ins_btn_prev']     = 'Anterior';
 
 $lang['ins_mnu_intro']    = "Introducción";
 $lang['ins_mnu_inst']     = "Instalar";
-$lang['ins_mnu_upgr']     = "Update";
-$lang['ins_mnu_quit']     = "Dejar";
+$lang['ins_mnu_upgr']     = 'Actualizar';
+$lang['ins_mnu_quit']     = 'Salir';
 
 $lang['ins_error']        = "Error";
-$lang['ins_error1']       = "La conexión a la base de datos a fallado;";
-$lang['ins_error2']       = "El fichero config.php no puede ser sustituir";
+$lang['ins_error1']       = 'La conexión a la base de datos ha fallado';
+$lang['ins_error2']       = 'El archivo config.php no se puede sustituir';
 
-$lang['ins_tx_welco']     = "Bienvenido en la instalación de XNova";
-$lang['ins_tx_intr1']     = "El proyecto XNova le permitirá instalar un clon de ogame casi perfecto";
-$lang['ins_tx_intr2']     = "El proyecto XNova es libre, gratuito y OpenSource. Gracias de no hacer utilización comercial";
-$lang['ins_tx_intr3']     = "Por respeto para el equipo de desarrollo de este proyecto, se les ruega no suprimir el copyright de los ficheros fuente.";
-$lang['ins_tx_inst1']     = "El fichero config.php debe ser en CHMOD 777";
-$lang['ins_tx_inst2']     = "Debe poseder una base de datos MySQL";
-$lang['ins_tx_inst3']     = "Debe llenar el formulario siguiente correctamente para seguir la instalación:";
-$lang['ins_tx_acc1']      = "Está a punto de crear una cuenta administrador";
-$lang['ins_tx_acc2']      = "Llene el formulario siguiente con la información de la cuenta:";
+$lang['ins_tx_welco']     = 'Bienvenido a la instalación de XNova';
+$lang['ins_tx_intr1']     = 'El proyecto XNova le permitirá instalar un clon casi perfecto de OGame';
+$lang['ins_tx_intr2']     = 'El proyecto XNova es libre, gratuito y de código abierto. Le rogamos que no haga un uso comercial de él';
+$lang['ins_tx_intr3']     = 'Por respeto al equipo de desarrollo de este proyecto, le rogamos que no elimine el copyright de los archivos fuente.';
+$lang['ins_tx_inst1']     = 'El archivo config.php debe tener permisos CHMOD 777';
+$lang['ins_tx_inst2']     = 'Debe disponer de una base de datos MySQL';
+$lang['ins_tx_inst3']     = 'Debe rellenar correctamente el siguiente formulario para continuar con la instalación:';
+$lang['ins_tx_acc1']      = 'Está a punto de crear una cuenta de administrador';
+$lang['ins_tx_acc2']      = 'Rellene el siguiente formulario con los datos de la cuenta:';
 $lang['ins_tx_done']      = "¡Enhorabuena, instaló correctamente a XNova!";
 
-$lang['ins_form_server']  = "Servor SQL";
-$lang['ins_form_db']      = "Base de dato";
-$lang['ins_form_prefix']  = "Préfix de las tablas";
-$lang['ins_form_login']   = "Identifiente";
+$lang['ins_form_server']  = 'Servidor SQL';
+$lang['ins_form_db']      = 'Base de datos';
+$lang['ins_form_prefix']  = 'Prefijo de las tablas';
+$lang['ins_form_login']   = 'Usuario';
 $lang['ins_form_pass']    = "Contraseña";
 $lang['ins_form_install'] = "Instalar";
 
-$lang['ins_acc_user']     = "Identifiente";
+$lang['ins_acc_user']     = 'Nombre de usuario';
 $lang['ins_acc_pass']     = "Contraseña";
-$lang['ins_acc_email']    = "Dirección correo electrónico";
+$lang['ins_acc_email']    = 'Dirección de correo electrónico';
 $lang['ins_acc_planet']   = "Planeta principal";
 $lang['ins_acc_sex']      = "Sexo";
 $lang['ins_acc_sex0']     = "-indefinido-";
@@ -72,5 +72,14 @@ $lang['ins_upg_noconfig'] = 'El juego a&uacute;n no est&aacute; instalado (confi
 
 // XNova Renaissance 0.9g : verrou de l'installeur
 $lang['ins_locked'] = 'El juego ya est&aacute; instalado: la instalaci&oacute;n y la transferencia est&aacute;n bloqueadas (solo queda la actualizaci&oacute;n). Para reinstalar, vac&iacute;e primero el archivo config.php. Recuerde tambi&eacute;n borrar la carpeta install del servidor.';
+
+// XNova Renaissance 0.9g : traductions
+$lang['ins_btn_login'] = 'Conectarse';
+$lang['ins_mnu_goto'] = 'Transferencia';
+$lang['ins_tx_done1'] = '¡La base de datos se ha instalado correctamente!';
+$lang['ins_tx_done2'] = '¡La cuenta de administrador se ha creado correctamente!';
+$lang['ins_tx_done3'] = '¡Se recomienda eliminar la carpeta <i>install</i> si ya no necesita el instalador!';
+$lang['ins_tx_done4'] = '¡La transferencia se ha realizado correctamente!';
+$lang['ins_error3'] = 'Todos los campos son obligatorios y el nombre de usuario solo puede contener letras, cifras, _ o -.';
 
 ?>

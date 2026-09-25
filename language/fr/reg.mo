@@ -32,12 +32,12 @@ $lang['text_message_ig']   = 'Bienvenue sur XNova, nous vous souhaitons bon jeu 
 
 // Errors
 $lang['error_mail']        = 'E-mail invalide !<br />';
-$lang['error_planet']      = 'Erreur dans votre nom de plan&egrave;te !.<br />';
-$lang['error_hplanetnum']  = 'Vous devez utiliser des caract&egrave;res alphanum&eacute;rique pour votre nom de plan&egrave;te !<br />';
+$lang['error_planet']      = 'Erreur dans le nom de votre plan&egrave;te !<br />';
+$lang['error_hplanetnum']  = 'Le nom de votre plan&egrave;te ne doit contenir que des lettres et des chiffres !<br />';
 $lang['error_character']   = 'Erreur dans le nom du joueur !<br />';
-$lang['error_charalpha']   = 'Le pseudo doit etre conpose de caractere alphanumerique !<br />';
-$lang['error_password']    = 'Le mot de passe doit faire 4 caracteres au minimum !<br />';
-$lang['error_rgt']         = 'Vous devez accepter les conditions d\'utilisation.<<br />';
+$lang['error_charalpha']   = 'Le pseudo ne doit contenir que des lettres, des chiffres, _ ou - !<br />';
+$lang['error_password']    = 'Le mot de passe doit contenir au moins 8 caract&egrave;res !<br />';
+$lang['error_rgt']         = 'Vous devez accepter les conditions d\'utilisation.<br />';
 $lang['error_userexist']   = 'Ce nom de joueur existe d&eacute;j&agrave; !<br />';
 $lang['error_emailexist']  = 'Cet e-mail est d&eacute;j&agrave; utilis&eacute; !<br />';
 $lang['error_sex']         = 'Erreur dans le sexe !<br />';

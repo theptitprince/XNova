@@ -17,8 +17,8 @@ $lang['succeful_save'] = "Les changements ont &eacute;t&eacute; sauvegard&eacute
 $lang['userdata'] = "Informations sur le joueur";
 $lang['username'] = "Nom du joueur";
 $lang['lastpassword'] = "Ancien mot de passe";
-$lang['newpassword'] = "Nouveau mot de passe (min. 8 Caracteres)";
-$lang['newpasswordagain'] = "Nouveau mot de passe (repetition)";
+$lang['newpassword'] = 'Nouveau mot de passe (8 caract&egrave;res minimum)';
+$lang['newpasswordagain'] = 'Nouveau mot de passe (confirmation)';
 $lang['emaildir'] = "Adresse e-mail";
 $lang['emaildir_tip'] = "Cette adresse peut &ecirc;tre chang&eacute;e &agrave; tout moment. L'adresse deviendra permanente s'il n'y a pas de changemements pendant les 7 jours qui suivent.";
 $lang['permanentemaildir'] = "Adresse e-mail permanente";
@@ -83,5 +83,11 @@ $lang['options_label'] = 'Options';
 
 // XNova Renaissance 0.9g : mode vacances
 $lang['vacation_fleets_flying'] = 'Impossible de partir en vacances tant que vos flottes sont en vol : attendez leur retour.';
+
+// XNova Renaissance 0.9g : choix de la langue
+$lang['opt_lang_label'] = 'Langue';
+
+// XNova Renaissance 0.9g : longueur minimale du mot de passe
+$lang['opt_password_short'] = 'Le nouveau mot de passe doit contenir au moins 8 caract&egrave;res : il n\'a pas &eacute;t&eacute; chang&eacute;.';
 
 ?>

@@ -105,4 +105,7 @@ $lang['ov_message']          = "Envoyer un message";
 // XNova Renaissance : texte manquant
 $lang['rename_and_abandon_planet'] = 'Renommer ou abandonner la plan&egrave;te';
 
+// XNova Renaissance 0.9g : horloge de la vue generale (scripts/time.js)
+$lang['ov_clock_format'] = 'Nous sommes le %date et il est %time.';
+
 ?>

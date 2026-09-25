@@ -5,7 +5,7 @@ $lang['defense_label']          = "Difese";
 $lang['research_label']         = "Laboratorio di Ricerca";
 $lang['level']            = 'Livello';
 $lang['dispo']            = 'Disponibile';
-$lang['requirements']     = 'Requis: ';
+$lang['requirements']     = 'Requisiti: ';
 $lang['requires']         = 'Risorse necessarie ';
 $lang['rest_ress']        = 'Risorse rimanenti ';
 $lang['rechercher']       = "Ricerca";
@@ -33,9 +33,11 @@ $lang['continue']         = 'Continuare';
 $lang['ready']            = 'Pronto';
 $lang['destroy']          = "Distrutto";
 $lang['on']               = "su";
-$lang['attention']        = 'Attention le bannissement est proche sale tricheur ! Ton action a été signalée !';
 $lang['no_laboratory']    = "Necessita di un laboratorio di ricerca!";
 $lang['need_hangar']      = "Necessita di un cantiere spaziale";
 $lang['labo_on_update']   = "Impossibile ricercare mentre si aggiorna il laboratorio di ricerca!";
+
+// XNova Renaissance 0.9g : traductions
+$lang['builds'] = 'Strutture';
 
 ?>

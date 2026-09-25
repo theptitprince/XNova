@@ -36,6 +36,14 @@ $lang['changelog']   = array(
 - NEW : Alliance : cession &agrave; un membre ayant le droit &laquo; Main droite &raquo; (le bouton ne faisait rien) ; un joueur supprim&eacute; transmet son alliance au plus ancien membre
 - FIX : Alliance : candidature impossible quand l\'alliance est ferm&eacute;e, candidat pr&eacute;venu en fran&ccedil;ais (accept&eacute;, refus&eacute;, exclu), onglet du mod&egrave;le de candidature
 - FIX : Alliance : rangs d&eacute;cal&eacute;s dans la liste des membres, tri par rang et par points, jours d\'inactivit&eacute; (c\'&eacute;taient des heures), textes allemands traduits
+- NEW : Langue au choix dans les Options (fran&ccedil;ais, allemand, espagnol, italien) ; allemand, espagnol et italien complets (1 800 textes ajout&eacute;s ou corrig&eacute;s, restes de fran&ccedil;ais et de polonais traduits)
+- FIX : Textes &eacute;crits en dur rendus traduisibles : raccourcis de flotte, petites annonces, formulaire de message, menu, horloge, cr&eacute;dits, pluriel de la galaxie
+- FIX : &Eacute;motic&ocirc;nes des messages cass&eacute;es depuis la 0.9f, et les mots &laquo; cool &raquo;, &laquo; perdu &raquo;... remplac&eacute;s par une image au milieu des phrases : codes :cool:, :perdu:... ; couleur du BBCode limit&eacute;e aux vraies couleurs
+- FIX : Annonces, marchand et notes d&eacute;sactiv&eacute;s par l\'administrateur : plus accessibles par leur adresse (seul le lien disparaissait)
+- FIX : Mot de passe : 8 caract&egrave;res au moins, &agrave; l\'inscription comme au changement (la page Options l\'annon&ccedil;ait sans le v&eacute;rifier)
+- FIX : Fiche de la centrale &agrave; fusion (production mal lue), statistiques recalculables par t&acirc;che planifi&eacute;e, classement des alliances enfin calcul&eacute;
+- FIX : Administration : configuration du serveur lisible (vitesses tronqu&eacute;es, revenus limit&eacute;s &agrave; 2 chiffres, cases &agrave; cocher), vue g&eacute;n&eacute;rale sans d&eacute;filement horizontal
+- FIX : E-mails valid&eacute;s par PHP (.paris, .app... &eacute;taient refus&eacute;s) ; Pilori traduit, &laquo; 1 joueur banni &raquo;
 - FIX : Installeur verrouill&eacute; une fois le jeu install&eacute; : on pouvait r&eacute;&eacute;crire config.php et brancher le jeu sur une autre base (seule la mise &agrave; jour reste ouverte)
 - FIX : Mode vacances : plus d\'envoi de flotte ni de missiles (on attaquait en restant intouchable), refus&eacute; tant qu\'une flotte vole, production remise &agrave; 100 % au retour
 - FIX : Mode vacances : un formulaire forg&eacute; n\'en fait plus sortir avant les 48 heures ; revenus de base du cristal et du deut&eacute;rium

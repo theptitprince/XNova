@@ -17,10 +17,10 @@ $lang['unimportant'] = 'Unwichtig';
 
 $lang['subject_label'] = 'Betreff';
 $lang['no_title'] = 'Kein Titel';
-$lang['no_text'] = 'Kein Betreff';
+$lang['no_text'] = 'Kein Text';
 
 $lang['date_label'] = 'Datum';
-$lang['size'] = 'Gr&ouml;sse';
+$lang['size'] = 'Größe';
 
 $lang['note'] = 'Notiz';
 
@@ -43,4 +43,11 @@ $lang['note_deleted'] = 'Notiz gel&ouml;scht, <a href="notes.php"><blink>Weiter<
 $lang['note_deleteds'] = 'Notizen gel&ouml;scht, <a href="notes.php"><blink>Weiter</blink></a>';
 
 // Created by Perberos. All rights reversed (C) 2006 
+
+// XNova Renaissance 0.9g : traductions
+$lang['notpossiblethisway'] = 'Diese Aktion ist nicht möglich.';
+
+// XNova Renaissance 0.9g : titre des messages des notes (ecrit en dur en francais)
+$lang['please_wait_label'] = 'Bitte warten...';
+
 ?>

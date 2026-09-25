@@ -1,18 +1,18 @@
 <?php
 
-$lang['imperium_vision'] = "Imperiumuebersicht";
+$lang['imperium_vision'] = 'Imperiumsübersicht';
 $lang['name'] = "Name";
-$lang['coordinates'] = "Kordinaten";
+$lang['coordinates'] = 'Koordinaten';
 $lang['fields'] = "Felder";
 $lang['resources'] = "Rohstoffe";
 $lang['metal'] = "Metall";
 $lang['crystal'] = "Kristall";
 $lang['deuterium'] = "Deuterium";
 $lang['energy'] = "Energie";
-$lang['buildings'] = "Gebuede";
+$lang['buildings'] = 'Gebäude';
 $lang['investigation'] = "Forschung";
 $lang['ships'] = "Schiffe";
-$lang['defense'] = "Abwehr";
+$lang['defense'] = 'Verteidigung';
 
 // Created by Perberos. All rights reserved (C) 2006 
 ?>

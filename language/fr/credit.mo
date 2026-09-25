@@ -22,4 +22,7 @@ $lang['cred_funct']   = 'Fonctions (une ligne par fonction)';
 $lang['cred_save']    = 'Sauvegarder';
 $lang['cred_done']    = 'Copyright chang&eacute;s avec succ&egrave;s!';
 
+// XNova Renaissance 0.9g : credits
+$lang['cred_renaissance'] = 'Reprise du projet (suite de XNova 0.8e)';
+
 ?>

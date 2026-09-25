@@ -16,7 +16,7 @@
 	<td colspan="2" class="c"><b>XNova Renaissance</b></td>
 </tr><tr>
 	<th width="278">theptitprince</th>
-	<th width="279">Reprise du projet (suite de XNova 0.8e)</th>
+	<th width="279">{cred_renaissance}</th>
 </tr><tr>
 	<td colspan="2" class="c"><b>{cred_thx}</b></td>
 </tr><tr>

@@ -1,12 +1,15 @@
 <?php
 
-$lang['addm_title'] = "Ajouter une lune";
-$lang['addm_addform'] = "Formulaire d'ajout";
-$lang['addm_playerid'] = "ID du joueur";
-$lang['addm_moonname'] = "Nom de la lune";
-$lang['addm_moongala'] = "Choisir une galaxie";
-$lang['addm_moonsyst'] = "Choisir une syst&egrave;me";
-$lang['addm_moonplan'] = "Choisir une position";
-$lang['addm_moondoit'] = "Ajouter";
+$lang['addm_title'] = 'Aggiungi una luna';
+$lang['addm_addform'] = 'Modulo di aggiunta';
+$lang['addm_playerid'] = 'ID del giocatore';
+$lang['addm_moonname'] = 'Nome della luna';
+$lang['addm_moongala'] = 'Scegli una galassia';
+$lang['addm_moonsyst'] = 'Scegli un sistema';
+$lang['addm_moonplan'] = 'Scegli una posizione';
+$lang['addm_moondoit'] = 'Aggiungi';
+
+// XNova Renaissance 0.9g : traductions
+$lang['addm_done'] = 'Luna aggiunta';
 
 ?>

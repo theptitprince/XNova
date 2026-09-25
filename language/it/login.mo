@@ -25,6 +25,6 @@ $lang['log_lastreg'] = 'Ultimo iscritto';
 $lang['log_numbreg'] = 'Giocatori totali';
 $lang['log_welcome'] = 'Benvenuto su';
 
-$lang['password_lost'] = 'Vous avez oubli&eacute; votre mot de passe ?';
+$lang['password_lost'] = 'Avete dimenticato la password?';
 
 ?>
