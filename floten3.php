@@ -262,7 +262,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$FlyingFleets = mysqli_fetch_assoc(doquery("SELECT COUNT(fleet_id) as number FROM {{table}} WHERE `fleet_owner`='{$user['id']}'", 'fleets'));
 	$ActualFleets = $FlyingFleets["number"];
 	if (($user[$resource[108]] + 1) <= $ActualFleets) {
-		message("Pas de slot disponible", "Erreur", "fleet." . $phpEx, 1);
+		message($lang['fl_noslotfree'], $lang['fl_error'], "fleet." . $phpEx, 1);
 	}
 
 	if (($_POST['resource1'] ?? null) + ($_POST['resource2'] ?? null) + ($_POST['resource3'] ?? null) < 1 AND ($_POST['mission'] ?? null) == 3) {

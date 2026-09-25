@@ -322,14 +322,13 @@ switch ($mode) {
 						planet = '" . $irak['planet_angreifer'] . "' AND
 						planet_type = '1'", 'planets', true);
 
-                    if (mysqli_num_rows($planet_start) == 1) {
-                        $planet = mysqli_fetch_array($planet_start);
-                    }
+                    $planet = (mysqli_num_rows($planet_start) == 1) ? mysqli_fetch_array($planet_start) : array('name' => '');
 
-                    $fpage[$irak['zeit']] .= "<tr><th><div id=\"bxxfs$i\" class=\"z\"></div><font color=\"lime\">" . date("H:i:s", $irak['zeit']) . "</font> </th><th colspan=\"3\"><font color=\"#0099FF\">Une attaque de missiles (" . $irak['anzahl'] . ") de " . $user_planet['name'] . " ";
-                    $fpage[$irak['zeit']] .= '<a href="galaxy.php?mode=3&galaxy=' . $irak["galaxy_angreifer"] . '&system=' . $irak["system_angreifer"] . '&planet=' . $irak["planet_angreifer"] . '">[' . $irak["galaxy_angreifer"] . ':' . $irak["system_angreifer"] . ':' . $irak["planet_angreifer"] . ']</a>';
-                    $fpage[$irak['zeit']] .= ' arrive sur la plan&egrave;te' . $planet["name"] . ' ';
-                    $fpage[$irak['zeit']] .= '<a href="galaxy.php?mode=3&galaxy=' . $irak["galaxy"] . '&system=' . $irak["system"] . '&planet=' . $irak["planet"] . '">[' . $irak["galaxy"] . ':' . $irak["system"] . ':' . $irak["planet"] . ']</a>';
+                    // Phrase dans la langue du joueur (elle etait ecrite en dur en francais)
+                    $FromLink = '<a href="galaxy.php?mode=3&galaxy=' . $irak["galaxy_angreifer"] . '&system=' . $irak["system_angreifer"] . '&planet=' . $irak["planet_angreifer"] . '">[' . $irak["galaxy_angreifer"] . ':' . $irak["system_angreifer"] . ':' . $irak["planet_angreifer"] . ']</a>';
+                    $ToLink   = '<a href="galaxy.php?mode=3&galaxy=' . $irak["galaxy"] . '&system=' . $irak["system"] . '&planet=' . $irak["planet"] . '">[' . $irak["galaxy"] . ':' . $irak["system"] . ':' . $irak["planet"] . ']</a>';
+                    $fpage[$irak['zeit']] .= "<tr><th><div id=\"bxxfs". $Record ."\" class=\"z\"></div><font color=\"lime\">" . date("H:i:s", $irak['zeit']) . "</font> </th><th colspan=\"3\"><font color=\"#0099FF\">";
+                    $fpage[$irak['zeit']] .= sprintf($lang['ov_missile_attack'], intval($irak['anzahl']), ($user_planet['name'] ?? ''), $FromLink, $planet['name'], $ToLink);
                     $fpage[$irak['zeit']] .= '</font>';
                     $fpage[$irak['zeit']] .= InsertJavaScriptChronoApplet ("fm", $Record, $time, false);
                     $fpage[$irak['zeit']] .= "</th>";

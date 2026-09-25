@@ -32,4 +32,8 @@ $lang['anothers_requests'] = 'Peticiones recibidas';
 
 // Created by Perberos. All rights reversed (C) 2006
 // Traduction By Katsumi.All rights reversed (C) 2008
+
+// XNova Renaissance 0.9g : demande d'ami trop longue
+$lang['bud_text_too_long'] = '¡El texto no debe superar los 5000 caracteres!';
+
 ?>

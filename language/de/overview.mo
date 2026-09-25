@@ -113,4 +113,7 @@ $lang['ov_une_hostile'] = 'Eine ';
 // XNova Renaissance 0.9g : horloge de la vue generale (scripts/time.js)
 $lang['ov_clock_format'] = 'Heute ist der %date, es ist %time Uhr.';
 
+// XNova Renaissance 0.9g : attaque de missiles en cours (vue generale)
+$lang['ov_missile_attack'] = 'Ein Raketenangriff (%1$d) von %2$s %3$s erreicht den Planeten %4$s %5$s';
+
 ?>

@@ -127,4 +127,17 @@ $lang['sys_page_disabled'] = 'Cette page a &eacute;t&eacute; d&eacute;sactiv&eac
 // XNova Renaissance 0.9g : frames.php (index.mo, jamais charge, supprime)
 $lang['no_frames'] = 'Votre navigateur n\'affiche pas les cadres (frames), n&eacute;cessaires au jeu.';
 
+// XNova Renaissance 0.9g : rapport d'attaque de missiles (rak.php)
+$lang['sys_irak_sender'] = 'QG';
+$lang['sys_irak_subject'] = 'Attaque de missiles interplan&eacute;taires';
+$lang['sys_irak_report'] = 'Une attaque de missiles (%1$d) venant de %2$s %3$s a frapp&eacute; la plan&egrave;te %4$s %5$s';
+$lang['sys_irak_all_intercepted'] = 'Les missiles d\'interception ont d&eacute;truit les missiles interplan&eacute;taires ennemis.';
+$lang['sys_irak_some_intercepted'] = '%d missile(s) interplan&eacute;taire(s) intercept&eacute;(s) par vos missiles d\'interception.';
+$lang['sys_irak_no_defense'] = 'La plan&egrave;te ne poss&eacute;dait pas de d&eacute;fenses, rien n\'a &eacute;t&eacute; d&eacute;truit.';
+
+// XNova Renaissance 0.9g : lancement de missiles (raketenangriff.php)
+$lang['sys_irak_launch_error'] = 'Tir impossible : pas assez de missiles interplan&eacute;taires, plan&egrave;te introuvable, ou port&eacute;e / technologie insuffisante.';
+$lang['sys_irak_launched_one'] = '<b>1</b> missile interplan&eacute;taire est parti !';
+$lang['sys_irak_launched_many'] = '<b>%d</b> missiles interplan&eacute;taires sont partis !';
+
 ?>

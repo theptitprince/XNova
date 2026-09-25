@@ -108,4 +108,7 @@ $lang['rename_and_abandon_planet'] = 'Renommer ou abandonner la plan&egrave;te';
 // XNova Renaissance 0.9g : horloge de la vue generale (scripts/time.js)
 $lang['ov_clock_format'] = 'Nous sommes le %date et il est %time.';
 
+// XNova Renaissance 0.9g : attaque de missiles en cours (vue generale)
+$lang['ov_missile_attack'] = 'Une attaque de missiles (%1$d) partie de %2$s %3$s arrive sur la plan&egrave;te %4$s %5$s';
+
 ?>
