@@ -259,9 +259,9 @@ switch ($mode) {
                 $QryPlanets .= "`name` " . $Order;
             }
             $planets_query = doquery ($QryPlanets, 'planets');
-            // Autres planetes : vignettes de taille fixe dans un cadre a defilement (voir overview_body.tpl),
-            // pour que la vue generale garde la meme taille quel que soit le nombre de colonies
-            $AllPlanets = "";
+            // Autres planetes : disposition d'OGame classique (et de la 0.8e d'origine), a droite de la planete,
+            // deux par ligne : nom, image, construction en cours. Largeurs figees (voir overview_body.tpl).
+            $ColoCells = array();
             while ($UserPlanet = mysqli_fetch_array($planets_query)) {
                 PlanetResourceUpdate ($user, $UserPlanet, time());
                 if ($UserPlanet["id"] != $user["current_planet"] && $UserPlanet['planet_type'] != 3) {
@@ -281,12 +281,21 @@ switch ($mode) {
                         }
                     }
                     $PlanetTitle = $UserPlanet['name'] . " [" . $UserPlanet['galaxy'] . ":" . $UserPlanet['system'] . ":" . $UserPlanet['planet'] . "] : " . $PlanetStateTitle;
-                    $AllPlanets .= "<div class=\"ov_planete\" title=\"" . strip_tags($PlanetTitle) . "\">";
-                    $AllPlanets .= "<span class=\"ov_texte\">" . $UserPlanet['name'] . "</span>";
-                    $AllPlanets .= "<a href=\"?cp=" . $UserPlanet['id'] . "&re=0\"><img src=\"" . $dpath . "planeten/small/s_" . $UserPlanet['image'] . ".jpg\" height=\"50\" width=\"50\"></a>";
-                    $AllPlanets .= "<span class=\"ov_texte\">" . $PlanetState . "</span>";
-                    $AllPlanets .= "</div>";
+                    $Cell  = "<th class=\"ov_colo\" title=\"" . strip_tags($PlanetTitle) . "\">";
+                    $Cell .= "<span class=\"ov_texte\">" . $UserPlanet['name'] . "</span>";
+                    $Cell .= "<a href=\"?cp=" . $UserPlanet['id'] . "&re=0\"><img src=\"" . $dpath . "planeten/small/s_" . $UserPlanet['image'] . ".jpg\" height=\"50\" width=\"50\"></a>";
+                    $Cell .= "<span class=\"ov_texte\">" . $PlanetState . "</span>";
+                    $Cell .= "</th>";
+                    $ColoCells[] = $Cell;
                 }
+            }
+            $AllPlanets = "";
+            if (count($ColoCells) > 0) {
+                $AllPlanets = "<table class=\"s ov_colos\" border=\"0\">";
+                foreach (array_chunk($ColoCells, 2) as $Pair) {
+                    $AllPlanets .= "<tr>" . implode('', $Pair) . "</tr>";
+                }
+                $AllPlanets .= "</table>";
             }
             // -----------------------------------------------------------------------------------------------
             // --- Gestion des attaques missiles -------------------------------------------------------------
@@ -411,8 +420,7 @@ switch ($mode) {
             $parse['server_clock'] = (time() + date('Z')) * 1000;
             $parse['dpath'] = $dpath;
             $parse['planet_image'] = $planetrow['image'];
-            // Bandeau des autres planetes sous la lune et la planete (absent s'il n'y a pas de colonie)
-            $parse['colonies_row'] = ($AllPlanets != '') ? "<tr><td class=\"c\" colspan=\"4\">" . $lang['ov_colonies'] . "</td></tr><tr><th colspan=\"4\" class=\"ov_colonies\"><div class=\"ov_cadre\">" . $AllPlanets . "</div></th></tr>" : "";
+            $parse['colonies_list'] = $AllPlanets;
             $parse['max_users'] = $game_config['users_amount'];
 
             $parse['metal_debris'] = pretty_number($galaxyrow['metal']);

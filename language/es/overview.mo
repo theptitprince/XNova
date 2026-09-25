@@ -11,7 +11,6 @@ $lang['Have_new_level_raid'] = 'Vous gagnez un niveau en Raideur!';
 $lang['Server_time'] = 'Heure';
 $lang['Events'] = 'Evenements';
 $lang['Free'] = 'non active';
-$lang['ov_colonies'] = 'Otros planetas';
 $lang['Diameter'] = 'Diametre';
 $lang['fields'] = 'Cases';
 $lang['Developed_fields'] = 'Cases occup&eacute;es';
