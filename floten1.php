@@ -20,6 +20,8 @@ include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
 	includeLang('fleet');
+	// Pas d'envoi de flotte en mode vacances
+	check_urlaubmodus($user);
 
 	// Champs numeriques du formulaire convertis en entiers (securite + PHP 8)
 	SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettype', 'planet_type', 'thisgalaxy', 'thissystem', 'thisplanet',

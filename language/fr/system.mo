@@ -117,4 +117,8 @@ $lang['translation_by'] = '';
 // XNova Renaissance : protection CSRF
 $lang['sys_csrf_error'] = 'Cette action a &eacute;t&eacute; refus&eacute;e : la demande ne vient pas d\'une page du jeu (ou la page est trop ancienne). Rechargez la page et recommencez.';
 
+// XNova Renaissance 0.9g : mode vacances
+$lang['sys_vacation_title'] = 'Mode vacances';
+$lang['sys_vacation_active'] = 'Vous &ecirc;tes en mode vacances : impossible d\'envoyer une flotte ou des missiles.';
+
 ?>

@@ -71,6 +71,19 @@ function BuildJumpableMoonCombo ( $CurrentUser, $CurrentPlanet ) {
 function ShowProductionTable ($CurrentUser, $CurrentPlanet, $BuildID, $Template) {
 	global $ProdGrid, $resource, $game_config;
 
+	// Phalange : seulement la portee par niveau (elle ne produit rien ; le calcul de production donnait des avertissements)
+	if ($BuildID == 42) {
+		$CurrentBuildtLvl = $CurrentPlanet[ $resource[$BuildID] ];
+		$BuildStartLvl    = max(1, $CurrentBuildtLvl - 2);
+		$Table            = "";
+		for ( $BuildLevel = $BuildStartLvl; $BuildLevel < $BuildStartLvl + 10; $BuildLevel++ ) {
+			$bloc['build_lvl']   = ($CurrentBuildtLvl == $BuildLevel) ? "<font color=\"#ff0000\">".$BuildLevel."</font>" : $BuildLevel;
+			$bloc['build_range'] = GetPhalanxRange($BuildLevel);
+			$Table .= parsetemplate($Template, $bloc);
+		}
+		return $Table;
+	}
+
 	$BuildLevelFactor = $CurrentPlanet[ $resource[$BuildID]."_porcent" ];
 	$BuildTemp        = $CurrentPlanet[ 'temp_max' ];
 	$CurrentBuildtLvl = $CurrentPlanet[ $resource[$BuildID] ];
@@ -130,10 +143,6 @@ function ShowProductionTable ($CurrentUser, $CurrentPlanet, $BuildID, $Template)
 					$ProdFirst = floor($Prod[4]);
 				}
 			}
-		} else {
-			// Cas particulier de la phalange
-			$bloc['build_lvl']       = ($CurrentBuildtLvl == $BuildLevel) ? "<font color=\"#ff0000\">".$BuildLevel."</font>" : $BuildLevel;
-			$bloc['build_range']     = ($BuildLevel * $BuildLevel) - 1;
 		}
 		$Table    .= parsetemplate($Template, $bloc);
 	}

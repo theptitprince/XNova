@@ -20,6 +20,8 @@ include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
 includeLang('fleet');
+// Pas d'envoi de flotte en mode vacances
+check_urlaubmodus($user);
 
 	$Mode   = intval(($_GET['mode'] ?? null));
 	$Galaxy = intval(($_GET['g'] ?? null));

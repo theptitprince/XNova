@@ -101,4 +101,8 @@ $lang['gf_sp_title'] = "Sondes D'espionnage Disponibles";
 $lang['gf_unknowsp'] = "Espaces infinis";
 
 // Created by Perberos. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : mode vacances
+$lang['gs_c620'] = 'Error, está en modo vacaciones';
+
 ?>

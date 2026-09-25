@@ -69,10 +69,17 @@ function CheckPlanetBuildingQueue ( &$CurrentPlanet, &$CurrentUser ) {
 			// Pour une lune
 			if ($CurrentPlanet['planet_type'] == 3) {
 				if ($Element == 41) {
-					// Base Lunaire
-					$current += 1;
-					$max     += FIELDS_BY_MOONBASIS_LEVEL;
-					$CurrentPlanet[$resource[$Element]]++;
+					// Base Lunaire : chaque niveau occupe une case et en ajoute FIELDS_BY_MOONBASIS_LEVEL
+					// (la destruction augmentait aussi le niveau et les cases)
+					if ($ForDestroy == false) {
+						$current += 1;
+						$max     += FIELDS_BY_MOONBASIS_LEVEL;
+						$CurrentPlanet[$resource[$Element]]++;
+					} else {
+						$current -= 1;
+						$max     -= FIELDS_BY_MOONBASIS_LEVEL;
+						$CurrentPlanet[$resource[$Element]]--;
+					}
 				} elseif ($Element != 0) {
 					if ($ForDestroy == false) {
 						$current += 1;

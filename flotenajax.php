@@ -37,6 +37,11 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 	$CurrentFlyingFleets = doquery("SELECT COUNT(fleet_id) AS `Nbre` FROM {{table}} WHERE `fleet_owner` = '".$user['id']."';", 'fleets', true);
 	$CurrentFlyingFleets = intval($CurrentFlyingFleets["Nbre"]);
 
+	// Pas d'envoi en mode vacances (espionnage, recyclage depuis la galaxie)
+	if ($user['urlaubs_modus'] == 1) {
+		die ( "620;".$lang['gs_c620']."|".$CurrentFlyingFleets." ".$UserSpyProbes." ".$UserRecycles." ".$UserMissiles );
+	}
+
 	$fleet          = array('fleetarray' => array(), 'fleetlist' => '', 'amount' => 0);
 	$speedalls      = array();
 	$PartialFleet   = false; // 610
