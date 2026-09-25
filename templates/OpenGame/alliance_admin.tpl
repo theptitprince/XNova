@@ -24,18 +24,18 @@
 <input type="hidden" name="t" value="{t}">
 <table width=519>
 	<tr>
-	  <td class="c" colspan=2>{texts}</td>
+	  <td class="c" colspan=3>{texts}</td>
 	</tr>
 	<tr>
 	  <th><a href="?mode=admin&edit=ally&t=1">{external_text}</a></th>
 	  <th><a href="?mode=admin&edit=ally&t=2">{internal_text}</a></th>
+	  <th><a href="?mode=admin&edit=ally&t=3">{request_text_label}</a></th>
 	</tr>
 	<tr>
-	  <td class=c colspan=3>{show_of_request_text} (<span id="cntChars">0</span> / 5000 {characters})</td>
+	  <td class=c colspan=3>{request_type} (<span id="cntChars">0</span> / 5000 {characters})</td>
 	</tr>
 	<tr>
 	  <th colspan=3><textarea name="text" cols=70 rows=15 onkeyup="javascript:cntchar(5000)">{text}</textarea>
-{request_type}
 	</th>
 	</tr>
 	<tr>

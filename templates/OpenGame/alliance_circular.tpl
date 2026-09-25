@@ -1,3 +1,4 @@
+<script src="scripts/cntchar.js" type="text/javascript"></script>
 <br>
 <form action="?mode=circular&sendmail=1" method="post">
   <table width=519>

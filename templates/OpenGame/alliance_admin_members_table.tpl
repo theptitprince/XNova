@@ -11,8 +11,8 @@
 	  <th><a href="alliance.php?mode=admin&edit=members&sort1=3&sort2={s}">{points_label}</a></th>
 	  <th><a href="alliance.php?mode=admin&edit=members&sort1=0&sort2={s}">{coordinated_label}</a></th>
 	  <th><a href="alliance.php?mode=admin&edit=members&sort1=4&sort2={s}">{member_from}</a></th>
-	  <th><a href="alliance.php?mode=admin&edit=members&sort1=5&sort2={s}">Inaktiv seit</a></th>
-	  <th>Funktionen</th>
+	  <th><a href="alliance.php?mode=admin&edit=members&sort1=5&sort2={s}">{inactive_since}</a></th>
+	  <th>{functions_label}</th>
 	</tr>
 	{memberslist}
 	<tr>
