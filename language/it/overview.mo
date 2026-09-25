@@ -129,4 +129,7 @@ $lang['raids_loose'] = 'Raid persi';
 // XNova Renaissance 0.9g : horloge de la vue generale (scripts/time.js)
 $lang['ov_clock_format'] = 'Oggi è il %date e sono le %time.';
 
+// XNova Renaissance 0.9g : attaque de missiles en cours (vue generale)
+$lang['ov_missile_attack'] = 'Un attacco missilistico (%1$d) partito da %2$s %3$s raggiunge il pianeta %4$s %5$s';
+
 ?>

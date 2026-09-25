@@ -120,4 +120,17 @@ $lang['sys_page_disabled'] = 'Diese Seite wurde vom Administrator deaktiviert.';
 // XNova Renaissance 0.9g : frames.php (index.mo, jamais charge, supprime)
 $lang['no_frames'] = 'Dein Browser zeigt keine Frames an, die für das Spiel nötig sind.';
 
+// XNova Renaissance 0.9g : rapport d'attaque de missiles (rak.php)
+$lang['sys_irak_sender'] = 'HQ';
+$lang['sys_irak_subject'] = 'Angriff mit Interplanetarraketen';
+$lang['sys_irak_report'] = 'Ein Raketenangriff (%1$d) von %2$s %3$s hat den Planeten %4$s %5$s getroffen';
+$lang['sys_irak_all_intercepted'] = 'Die Abfangraketen haben die feindlichen Interplanetarraketen zerstört.';
+$lang['sys_irak_some_intercepted'] = '%d Interplanetarrakete(n) von deinen Abfangraketen abgefangen.';
+$lang['sys_irak_no_defense'] = 'Der Planet hatte keine Verteidigung, nichts wurde zerstört.';
+
+// XNova Renaissance 0.9g : lancement de missiles (raketenangriff.php)
+$lang['sys_irak_launch_error'] = 'Abschuss unmöglich: nicht genug Interplanetarraketen, Planet nicht gefunden oder Reichweite / Technologie unzureichend.';
+$lang['sys_irak_launched_one'] = '<b>1</b> Interplanetarrakete wurde abgefeuert!';
+$lang['sys_irak_launched_many'] = '<b>%d</b> Interplanetarraketen wurden abgefeuert!';
+
 ?>

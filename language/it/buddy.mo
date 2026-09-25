@@ -30,4 +30,8 @@ $lang['my_requests'] = 'Mie richieste';
 $lang['anothers_requests'] = 'Altre richieste';
 
 // Created by Perberos. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : demande d'ami trop longue
+$lang['bud_text_too_long'] = 'Il testo non deve superare i 5000 caratteri!';
+
 ?>

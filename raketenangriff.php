@@ -36,7 +36,9 @@ $pziel = ($_POST['Target'] ?? null);
 
 $currentplanet = doquery("SELECT * FROM {{table}} WHERE id={$user['current_planet']}",'planets',true);
 
-$tempvar1 = (($s-$currentplanet['system'])*-1);
+// Distance en systemes (valeur absolue : vers un systeme de numero plus eleve, le temps de vol devenait negatif
+// et le missile arrivait aussitot)
+$tempvar1 = abs($s - $currentplanet['system']);
 $tempvar2 = ($user['impulse_motor_tech'] * 2) - 1;
 $tempvar3 = doquery("SELECT * FROM {{table}} WHERE galaxy = ".$g." AND
 			system = ".$s." AND
@@ -70,7 +72,7 @@ elseif ((!is_numeric($pziel) && $pziel != "all") OR ($pziel != "all" && (intval(
 
 
 if ($error == 1) {
-	message('Tir impossible : pas assez de missiles interplan&eacute;taires, plan&egrave;te introuvable, ou port&eacute;e / technologie insuffisante.', 'Erreur');
+	message($lang['sys_irak_launch_error'], $lang['sys_error']);
 	exit();
 }
 
@@ -114,21 +116,6 @@ $select = doquery("SELECT * FROM {{table}} WHERE id = ".$ziel_id, 'users', true)
 
 		);
 
- $lang =
-	array(
-        0 => "Lanceur Missile",
-		1 => "Canon Magn&eacute;tique",
-		2 => "Batterie Electromagn&eacute;tique",
-		3 => "Canon de Gauss",
-		4 => "Lanceur Ionique",
-		5 => "Lanceur de plasma",
-		6 => "Petit bouclier",
-		7 => "Grand bouclier",
-		8 => "Missiles Intercepteur",
-		9 => "Missiles Interplanetaire",
-		10 => "Missiles Intercepteur"
-
- 	);
 
 
 
@@ -140,42 +127,6 @@ $flugzeit = round(((30 + (60 * $tempvar1)) * 2500) / $game_config['game_speed'])
 
 
 
-/*
-include("./includes/raketenangriff.php");
-
-
-$irak = raketenangriff($verteidiger_panzerung, $angreifer_waffen, $iraks, $def, $primaerziel);
-
- $ids = array(
-		0 => 401,
-		1 => 402,
-		2 => 403,
-		3 => 404,
-		4 => 405,
-		5 => 406,
-		6 => 407,
-		7 => 408,
-		8 => 502,
-		9 => 503
-	);
-
-
-
-
-
-foreach ($irak['verbleibt'] as $id => $anzahl) {
-	if ($id < 10) {
-
-		$x = $resource[$ids[$id]];
-
-		doquery("UPDATE {{table}} SET ".$x." = '".$anzahl."' WHERE id = ".$ziel_id, 'planets');
-
-
-	}
-
-
-}
-*/
 
 doquery("INSERT INTO {{table}} SET
 		`zeit` = '".(time() + $flugzeit)."',
@@ -196,13 +147,13 @@ doquery("UPDATE {{table}} SET interplanetary_misil = '".($iraks_anzahl - $anz)."
 	$dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 
 // Singulier / pluriel (l'original gardait le « n » du pluriel allemand : « missiles interplanetaire n sontn partit »)
-$MissileText = ($anz == 1) ? "missile interplan&eacute;taire est parti !" : "missiles interplan&eacute;taires sont partis !";
+$MissileText = ($anz == 1) ? $lang['sys_irak_launched_one'] : sprintf($lang['sys_irak_launched_many'], $anz);
 
 
 ?>
 <html>
 <head>
-<title>Attaque par missiles interplan&eacute;taires</title>
+<title><?php echo $lang['sys_irak_subject']; ?></title>
 <link rel="SHORTCUT ICON" href="favicon.ico">
 <link rel="stylesheet" type="text/css" href="<?php echo $dpath; ?>formate.css" />
 <meta http-equiv="refresh" content="3; URL=galaxy.php?mode=3&galaxy=<?php echo $g; ?>&system=<?php echo $s; ?>&target=<?php echo $i; ?>">
@@ -219,10 +170,10 @@ $MissileText = ($anz == 1) ? "missile interplan&eacute;taire est parti !" : "mis
       <table>
         <tbody>
         <tr>
-         <td class="c" colspan="1">Attaque par missiles interplan&eacute;taires</td>
+         <td class="c" colspan="1"><?php echo $lang['sys_irak_subject']; ?></td>
 	</tr>
         <tr>
-	<td class="l"><?php echo "<b>".$anz."</b> ". $MissileText; ?>
+	<td class="l"><?php echo $MissileText; ?>
         </tr>
        </tbody></table>
       </td>

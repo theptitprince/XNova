@@ -125,4 +125,17 @@ $lang['sys_page_disabled'] = 'Questa pagina è stata disattivata dall\'amministr
 // XNova Renaissance 0.9g : frames.php (index.mo, jamais charge, supprime)
 $lang['no_frames'] = 'Il vostro browser non visualizza i frame, necessari per il gioco.';
 
+// XNova Renaissance 0.9g : rapport d'attaque de missiles (rak.php)
+$lang['sys_irak_sender'] = 'QG';
+$lang['sys_irak_subject'] = 'Attacco di missili interplanetari';
+$lang['sys_irak_report'] = 'Un attacco missilistico (%1$d) partito da %2$s %3$s ha colpito il pianeta %4$s %5$s';
+$lang['sys_irak_all_intercepted'] = 'I missili intercettori hanno distrutto i missili interplanetari nemici.';
+$lang['sys_irak_some_intercepted'] = '%d missile/i interplanetario/i intercettato/i dai vostri missili intercettori.';
+$lang['sys_irak_no_defense'] = 'Il pianeta non aveva difese, non è stato distrutto nulla.';
+
+// XNova Renaissance 0.9g : lancement de missiles (raketenangriff.php)
+$lang['sys_irak_launch_error'] = 'Lancio impossibile: missili interplanetari insufficienti, pianeta non trovato o portata / tecnologia insufficiente.';
+$lang['sys_irak_launched_one'] = '<b>1</b> missile interplanetario è partito!';
+$lang['sys_irak_launched_many'] = '<b>%d</b> missili interplanetari sono partiti!';
+
 ?>

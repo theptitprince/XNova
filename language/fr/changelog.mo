@@ -44,6 +44,7 @@ $lang['changelog']   = array(
 - FIX : Fiche de la centrale &agrave; fusion (production mal lue), statistiques recalculables par t&acirc;che planifi&eacute;e, classement des alliances enfin calcul&eacute;
 - FIX : Administration : configuration du serveur lisible (vitesses tronqu&eacute;es, revenus limit&eacute;s &agrave; 2 chiffres, cases &agrave; cocher), vue g&eacute;n&eacute;rale sans d&eacute;filement horizontal
 - FIX : E-mails valid&eacute;s par PHP (.paris, .app... &eacute;taient refus&eacute;s) ; Pilori traduit, &laquo; 1 joueur banni &raquo;
+- FIX : Missiles : une interception retirait les missiles interplan&eacute;taires de la cible (intercepteurs jamais consomm&eacute;s, puis stock n&eacute;gatif) ; temps de vol n&eacute;gatif vers un syst&egrave;me de num&eacute;ro plus &eacute;lev&eacute; (impact imm&eacute;diat) ; noms de d&eacute;fenses faux dans le rapport ; textes traduits
 - FIX : Installeur verrouill&eacute; une fois le jeu install&eacute; : on pouvait r&eacute;&eacute;crire config.php et brancher le jeu sur une autre base (seule la mise &agrave; jour reste ouverte)
 - FIX : Mode vacances : plus d\'envoi de flotte ni de missiles (on attaquait en restant intouchable), refus&eacute; tant qu\'une flotte vole, production remise &agrave; 100 % au retour
 - FIX : Mode vacances : un formulaire forg&eacute; n\'en fait plus sortir avant les 48 heures ; revenus de base du cristal et du deut&eacute;rium

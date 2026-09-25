@@ -51,7 +51,7 @@ if ( $s == 1 && isset( $_GET['bid'] ) ) {
 
 	if ( !$buddy ) {
 		if ( strlen( ($_POST['text'] ?? null) ) > 5000 ) {
-			message( "Le texte ne doit pas faire plus de 5000 caract&egrave;res !", "Erreur" );
+			message( $lang['bud_text_too_long'], $lang['sys_error'] );
 		}
 		$text = SqlEscape( SafeText( ($_POST['text'] ?? null) ) );
 		doquery( "INSERT INTO {{table}} SET sender={$uid}, owner={$u}, active=0, text='{$text}'", 'buddy' );

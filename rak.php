@@ -58,6 +58,9 @@ if (isset($resource) && !empty($resource[401])) {
 				$angreifer = mysqli_fetch_array($select_owner);
 				$planet = mysqli_fetch_array($planetrow);
 
+				// Index 8 : missiles interplanetaires, 9 : missiles d'interception (comme $def et raketenangriff()).
+				// 502 et 503 etaient inverses : une interception retirait les missiles interplanetaires de la cible
+				// (et ses missiles d'interception n'etaient jamais consommes).
 				$ids = array(0 => 401,
 					1 => 402,
 					2 => 403,
@@ -66,8 +69,8 @@ if (isset($resource) && !empty($resource[401])) {
 					5 => 406,
 					6 => 407,
 					7 => 408,
-					8 => 502,
-					9 => 503
+					8 => 503,
+					9 => 502
 					);
 
 				$def =
@@ -83,27 +86,14 @@ if (isset($resource) && !empty($resource[401])) {
 					9 => $planet['interceptor_misil'], // Abfangrakete
 					);
 
-				$RakLang =
-				array(0 => "Lanceur Missile",
-					1 => "Canon Magn&eacute;tique",
-					2 => "Batterie Electromagn&eacute;tique",
-					3 => "Canon de Gauss",
-					4 => "Lanceur Ionique",
-					5 => "Lanceur de plasma",
-					6 => "Petit bouclier",
-					7 => "Grand bouclier",
-					8 => "Missiles Intercepteur",
-					9 => "Missiles Interplanetaire",
-					10 => "Missiles Intercepteur"
-
-					);
-
+				// Rapport : noms des defenses de tech.mo (l'ancienne liste en dur etait fausse : « Canon Magnetique »
+				// pour l'artillerie laser legere...) et phrases de system.mo, dans la langue chargee
 				$irak = raketenangriff($verteidiger['defence_tech'], $angreifer['military_tech'], $selected_row['anzahl'], $def, $selected_row['primaer']);
 
 				$message = '';
 
 				if ($planet['interceptor_misil'] >= $selected_row['anzahl']) {
-					$message = 'Les missiles d\'interception ont d&eacute;truit les missiles interplan&eacute;taires ennemis.<br>';
+					$message = $lang['sys_irak_all_intercepted'] . '<br>';
 
 					$x = $resource[$ids[9]];
 
@@ -114,17 +104,18 @@ if (isset($resource) && !empty($resource[401])) {
 
 						doquery("UPDATE {{table}} SET " . $x . " = '0' WHERE id = " . $planet['id'], 'planets');
 
-						$message = $planet['interceptor_misil'] . " missile(s) interplan&eacute;taire(s) intercept&eacute;(s) par vos missiles d'interception.<br>";
+						$message = sprintf($lang['sys_irak_some_intercepted'], intval($planet['interceptor_misil'])) . "<br>";
 					}
 
 					foreach ($irak['zerstoert'] as $id => $anzahl) {
-						if (!empty($anzahl) && $id < 10) {
-							if ($id != 9)
-								$message .= $RakLang[$id] . " (- " . $anzahl . ")<br>";
+						// Index 9 (missiles d'interception consommes) : deja mis a 0 juste au-dessus (ils etaient
+						// retires une seconde fois : stock negatif)
+						if (!empty($anzahl) && $id < 9) {
+							$message .= $lang['tech'][$ids[$id]] . " (- " . $anzahl . ")<br>";
 
 							$x = $resource[$ids[$id]];
 
-							doquery("UPDATE {{table}} SET " . $x . " = " . $x . "-" . $anzahl . " WHERE id = " . $planet['id'], 'planets');
+							doquery("UPDATE {{table}} SET " . $x . " = GREATEST(" . $x . " - " . intval($anzahl) . ", 0) WHERE id = " . $planet['id'], 'planets');
 						}
 					}
 				}
@@ -155,13 +146,14 @@ if (isset($resource) && !empty($resource[401])) {
 					$name_deffer = $array['name'];
 				}
 
-				$message_vorlage  = 'Une attaque de missiles (' . $selected_row['anzahl'] . ') venant de ' . $name . ' <a href="galaxy.php?mode=3&galaxy=' . $selected_row['galaxy_angreifer'] . '&system=' . $selected_row['system_angreifer'] . '&planet=' . $selected_row['planet_angreifer'] . '">[' . $selected_row['galaxy_angreifer'] . ':' . $selected_row['system_angreifer'] . ':' . $selected_row['planet_angreifer'] . ']</a>';
-				$message_vorlage .= ' a frapp&eacute; la plan&egrave;te ' . $name_deffer . ' <a href="galaxy.php?mode=3&galaxy=' . $selected_row['galaxy'] . '&system=' . $selected_row['system'] . '&planet=' . $selected_row['planet'] . '">[' . $selected_row['galaxy'] . ':' . $selected_row['system'] . ':' . $selected_row['planet'] . ']</a><br><br>';
+				$FromLink = '<a href="galaxy.php?mode=3&galaxy=' . $selected_row['galaxy_angreifer'] . '&system=' . $selected_row['system_angreifer'] . '&planet=' . $selected_row['planet_angreifer'] . '">[' . $selected_row['galaxy_angreifer'] . ':' . $selected_row['system_angreifer'] . ':' . $selected_row['planet_angreifer'] . ']</a>';
+				$ToLink   = '<a href="galaxy.php?mode=3&galaxy=' . $selected_row['galaxy'] . '&system=' . $selected_row['system'] . '&planet=' . $selected_row['planet'] . '">[' . $selected_row['galaxy'] . ':' . $selected_row['system'] . ':' . $selected_row['planet'] . ']</a>';
+				$message_vorlage = sprintf($lang['sys_irak_report'], intval($selected_row['anzahl']), $name, $FromLink, $name_deffer, $ToLink) . '<br><br>';
 
 				if (empty($message))
-					$message = "La plan&egrave;te ne poss&eacute;dait pas de d&eacute;fenses, rien n'a &eacute;t&eacute; d&eacute;truit.";
+					$message = $lang['sys_irak_no_defense'];
 
-				SendSimpleMessage ( $selected_row['zielid'], '', time(), 3, 'QG', 'Attaque de missiles interplan&eacute;taires', $message_vorlage . $message );
+				SendSimpleMessage ( $selected_row['zielid'], '', time(), 3, $lang['sys_irak_sender'], $lang['sys_irak_subject'], $message_vorlage . $message );
 
 				doquery("DELETE FROM {{table}} WHERE id = '" . $selected_row['id'] . "'", 'iraks');
 			}
