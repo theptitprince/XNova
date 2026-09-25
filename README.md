@@ -19,7 +19,8 @@
 
 > [!NOTE]
 > **Sécurisée, mais encore en développement.** Depuis la 0.9f, les failles connues du code de 2008 sont corrigées :
-> injections SQL, mots de passe, cookies, privilèges, injection de code dans les pages (XSS) et formulaires piégés (CSRF).
+> injections SQL, mots de passe, cookies, privilèges, injection de code dans les pages (XSS), formulaires piégés (CSRF),
+> pages accessibles sans connexion et triches par formulaire falsifié (flottes).
 > Un serveur public est envisageable, en gardant en tête que le jeu reste une version de développement avant la 1.0.
 
 ## Sommaire
@@ -115,8 +116,8 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 |---|---|---|
 | **0.9d** | Compatibilité PHP 8.4 / MariaDB, en-têtes et crédits, corrections de bugs d'origine | ✅ Terminée |
 | **0.9e** | Sécurité critique (injections SQL, mots de passe `password_hash`, cookies, privilèges), bug de production d'énergie, installeur « Mise à jour » | ✅ Terminée |
-| **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration, mise à jour depuis la 0.8e d'origine | ✅ Terminée |
-| **0.9g** | Nettoyage : conventions de nommage, retouches visuelles, traductions | ⏳ Prochaine |
+| **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration, mise à jour depuis la 0.8e d'origine, partie complète testée jusqu'à la création de lune (bugs d'origine corrigés) | ✅ Terminée |
+| **0.9g** | D'abord les bugs restants, les avertissements PHP et l'affichage des colonies (vue générale) ; puis nettoyage : conventions de nommage, retouches visuelles, traductions | ⏳ Prochaine |
 | **0.9h** | Mise en page sans *frames* : menu intégré à chaque page, fond d'écran pleine largeur | 🔜 |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 
