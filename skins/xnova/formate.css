@@ -146,6 +146,16 @@ td.f, input, select, textarea
   opacity              : 0.7;
 }
 
+/* XNova Renaissance : champs de saisie lisibles. Leur opacite (0.7) s'ajoutait a celle de la cellule (0.7) :
+   le texte tape n'apparaissait plus qu'a moitie. */
+input, select, textarea
+{
+  filter               : none;
+  -moz-opacity         : 1;
+  -khtml-opacity       : 1;
+  opacity              : 1;
+}
+
 textarea
 {
   width                : 100%;
