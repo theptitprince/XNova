@@ -60,12 +60,14 @@ $RenaissanceMigrations = array(
 		// incoherentes) et donc toujours vide. La declaration passe par la table declared (add_declare.php).
 		"DROP TABLE IF EXISTS `{{prefix}}multi`;",
 		// Bannissements : pseudo, auteur et e-mail etaient tronques a 11 et 20 caracteres (memes longueurs que users)
-		"ALTER TABLE `{{prefix}}banned` MODIFY `who` varchar(64) character set latin1 NOT NULL default '',
-			MODIFY `who2` varchar(64) character set latin1 NOT NULL default '',
-			MODIFY `author` varchar(64) character set latin1 NOT NULL default '',
-			MODIFY `email` varchar(64) character set latin1 NOT NULL default '';",
+		"ALTER TABLE `{{prefix}}banned` MODIFY `who` varchar(64) NOT NULL default '',
+			MODIFY `who2` varchar(64) NOT NULL default '',
+			MODIFY `author` varchar(64) NOT NULL default '',
+			MODIFY `email` varchar(64) NOT NULL default '';",
 		// Titre du fondateur : "Leader" etait ecrit en dur a la creation. Vide = "Fondateur", traduit dans la langue du lecteur.
 		"UPDATE `{{prefix}}alliance` SET `ally_owner_range` = '' WHERE `ally_owner_range` = 'Leader';",
+		// Colonnes latin1 -> utf8mb4 (la connexion l'etait deja : un emoji faisait echouer la requete)
+		'RenaissanceConvertUtf8mb4',
 	),
 );
 
@@ -230,6 +232,25 @@ function RenaissanceFixReportLinks ( $Connection, $Prefix ) {
 		if ($Text !== $Row['message_text']) {
 			mysqli_query($Connection, "UPDATE `". $Prefix ."messages` SET `message_text` = '". mysqli_real_escape_string($Connection, $Text) ."' WHERE `message_id` = '". intval($Row['message_id']) ."';");
 		}
+	}
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+// 0.9g : tables et colonnes en utf8mb4. Les colonnes etaient en latin1 alors que la connexion est en utf8mb4 :
+// un caractere hors cp1252 (emoji...) faisait echouer la requete. Les donnees ont ete ecrites par une connexion
+// utf8mb4 (conversion faite par le serveur) : CONVERT TO les retrouve intactes. Seules les tables du jeu presentes
+// sont converties (une ancienne base peut ne pas toutes les avoir) ; sans effet sur une table deja convertie.
+function RenaissanceConvertUtf8mb4 ( $Connection, $Prefix ) {
+	$Tables = array('aks', 'alliance', 'annonce', 'banned', 'buddy', 'chat', 'config', 'contact', 'declared', 'errors', 'fleets',
+	                'galaxy', 'iraks', 'lunas', 'messages', 'notes', 'planets', 'rw', 'statpoints', 'users');
+	foreach ($Tables as $Table) {
+		$Name   = $Prefix . $Table;
+		$Exists = mysqli_query($Connection, "SHOW TABLES LIKE '". mysqli_real_escape_string($Connection, $Name) ."';");
+		if (!$Exists || mysqli_num_rows($Exists) == 0) {
+			continue;
+		}
+		mysqli_query($Connection, "ALTER TABLE `". $Name ."` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;")
+			or die("MySQL Error (0.9g, ". $Name ."): <b>". mysqli_error($Connection) ."</b>");
 	}
 }
 
