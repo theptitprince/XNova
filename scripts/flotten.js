@@ -257,6 +257,10 @@ function fleetInfo() {
 }
 
 function shortInfo() {
+	// Page Flotte (choix des vaisseaux) : pas encore de cible ni de distance a afficher
+	if (!document.getElementsByName("thisgalaxy")[0] || !document.getElementById("distance")) {
+		return;
+	}
 
 	document.getElementById("distance").innerHTML = tsdpkt(distance());
 	var seconds = duration();

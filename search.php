@@ -62,6 +62,7 @@ switch($type){
 */
 if(isset($searchtext) && isset($type)){
 
+	$result_list = '';
 	while($r = mysqli_fetch_array($search, MYSQLI_BOTH)){
 
 		if($type=='playername'||$type=='planetname'){
@@ -76,17 +77,19 @@ if(isset($searchtext) && isset($type)){
 			$s['ally_name'] = ($pquery['ally_name']!='')?"<a href=\"alliance.php?mode=ainfo&tag={$pquery['ally_name']}\">{$pquery['ally_name']}</a>":'';
 			}else{
 			$pquery = doquery("SELECT name FROM {{table}} WHERE id = {$s['id_planet']}","planets",true);
-			$s['planet_name'] = $pquery['name'];
-			$s['ally_name'] = ($aquery['ally_name']!='')?"<a href=\"alliance.php?mode=ainfo&tag={$aquery['ally_name']}\">{$aquery['ally_name']}</a>":'';
+			$s['planet_name'] = $pquery['name'] ?? '';
+			// Alliance du joueur : lue avant d'etre affichee (l'original affichait celle du joueur precedent)
+			$aquery = array();
+			if(($s['ally_id'] ?? 0)!=0&&($s['ally_request'] ?? 0)==0){
+				$aquery = doquery("SELECT ally_name FROM {{table}} WHERE id = ". intval($s['ally_id']),"alliance",true);
 			}
-			//ahora la alianza
-			if($s['ally_id']!=0&&$s['ally_request']==0){
-				$aquery = doquery("SELECT ally_name FROM {{table}} WHERE id = {$s['ally_id']}","alliance",true);
-			}else{
-				$aquery = array();
+			$s['ally_name'] = (($aquery['ally_name'] ?? '')!='')?"<a href=\"alliance.php?mode=ainfo&tag={$aquery['ally_name']}\">{$aquery['ally_name']}</a>":'';
 			}
 
-
+			// Rang au classement general (la table des joueurs n'a pas de colonne rank : la position etait vide)
+			$OwnerId  = ($type == "planetname") ? intval($s['id_owner']) : intval($s['id']);
+			$RankRow  = doquery("SELECT `total_rank` FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $OwnerId ."';", 'statpoints', true);
+			$s['rank'] = $RankRow['total_rank'] ?? '';
 
 			$s['position'] = "<a href=\"stat.php?start=".$s['rank']."\">".$s['rank']."</a>";
 			$s['dpath'] = $dpath;

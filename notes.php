@@ -66,6 +66,7 @@ elseif($_POST){//Borrar
 
 			$id = str_replace("delmes","",$a);
 			$note_query = doquery("SELECT * FROM {{table}} WHERE id=$id AND owner={$user['id']}","notes");
+			$deleted = $deleted ?? 0;
 			//comprobamos,
 			if($note_query){
 				$deleted++;
@@ -109,8 +110,9 @@ elseif($_POST){//Borrar
 
 		if(!$note){ message($lang['notpossiblethisway'],$lang['Error']); }
 
-		$cntChars = strlen($note['text']);
+		$cntChars = mb_strlen(html_entity_decode($note['text'], ENT_QUOTES, 'UTF-8'), 'UTF-8');
 
+		$SELECTED = array(0 => '', 1 => '', 2 => '');
 		$SELECTED[$note['priority']] = ' selected="selected"';
 
 		$parse = array_merge($note,$lang);
@@ -146,7 +148,7 @@ elseif($_POST){//Borrar
 			$parse['NOTE_ID'] = $note['id'];
 			$parse['NOTE_TIME'] = date("d/m/Y H:i:s",$note["time"]);
 			$parse['NOTE_TITLE'] = $note['title'];
-			$parse['NOTE_TEXT'] = strlen($note['text']);
+			$parse['NOTE_TEXT'] = mb_strlen(html_entity_decode($note['text'], ENT_QUOTES, 'UTF-8'), 'UTF-8');
 
 			$list .= parsetemplate(gettemplate('notes_body_entry'), $parse);
 

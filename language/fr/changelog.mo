@@ -24,7 +24,11 @@ $lang['changelog']   = array(
 - FIX : Espionnage : le rapport annon&ccedil;ait la flotte d&eacute;truite quand elle survivait (messages invers&eacute;s), vraie probabilit&eacute; affich&eacute;e
 - FIX : Exp&eacute;dition : trou noir total jamais atteint, capacit&eacute; des soutes mal compt&eacute;e, trouvaille vide annonc&eacute;e, tirage affich&eacute;
 - FIX : Page Flotte : heures d\'envoi et d\'arriv&eacute;e d&eacute;cal&eacute;es d\'une colonne, flotte rappel&eacute;e affich&eacute;e comme retour
-- FIX : Rapports : dur&eacute;e du calcul lisible, message de retour de flotte, fautes des rapports d\'exp&eacute;dition',
+- FIX : Rapports : dur&eacute;e du calcul lisible, message de retour de flotte, fautes des rapports d\'exp&eacute;dition
+- FIX : Petites annonces : page blanche apr&egrave;s publication (PHP 8), colonne cristal vide, suppression de ses annonces (jamais &eacute;crite)
+- FIX : Recherche de joueurs : alliance affich&eacute;e sur la ligne suivante, rang jamais affich&eacute;
+- FIX : Erreurs JavaScript de la page Flotte et de la connexion ; script orphelin du portail OGame (mot de passe en cookie) supprim&eacute;
+- FIX : Textes : demandes d\'ami, discussion, taille des notes en caract&egrave;res, titre des Options',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)

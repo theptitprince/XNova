@@ -1,24 +1,7 @@
 <div id="main">
-<script type="text/javascript">
-var lastType = "";
-function changeAction(type) {
-	if (document.formular.Uni.value == '') {
-		alert('{log_univ}');
-	} else {
-		if(type == "login" && lastType == "") {
-			var url = "http://" + document.formular.Uni.value + "";
-			document.formular.action = url;
-		} else {
-			var url = "http://" + document.formular.Uni.value + "/reg.php";
-			document.formular.action = url;
-			document.formular.submit();
-		}
-	}
-}
-</script>
 <div id="login">
 <div id="login_input">
-<form name="formular" action="" method="post" onsubmit="changeAction('login');">
+<form name="formular" action="" method="post">
 <table width="400" border="0" cellpadding="0" cellspacing="0">
 <tbody>
 {login_error}

@@ -55,5 +55,9 @@ $lang['deleteaccount_tip'] 						= 'Wenn du hier ein H&auml;kchen setzt, wird de
 $lang['save_settings'] 							= 'Einstellungen speichern';
 
 
-// Created by Perberos. All rights reversed (C) 2006 
+// Created by Perberos. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : titre des messages de la page
+$lang['Options'] = 'Einstellungen';
+
 ?>
