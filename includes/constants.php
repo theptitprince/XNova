@@ -17,7 +17,8 @@
 
 if ( defined('INSIDE') ) {
 	define('ADMINEMAIL'               , ""); // vide : adresse du compte administrateur (voir reg.php)
-	define('GAMEURL'                  , "http://".$_SERVER['HTTP_HOST']."/");
+	// Adresse du jeu (mail de bienvenue) : https si le serveur l'utilise ; pas d'hote en ligne de commande (tools/)
+	define('GAMEURL'                  , ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? "https://" : "http://") . ($_SERVER['HTTP_HOST'] ?? 'localhost') . "/");
 
 	// Definition du monde connu !
 	define('MAX_GALAXY_IN_WORLD'      , 9);

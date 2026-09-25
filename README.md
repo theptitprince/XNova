@@ -134,12 +134,20 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 3. Rendez le fichier `config.php` accessible en écriture au serveur web.
 4. Ouvrez le site dans un navigateur : vous êtes redirigé vers l'installeur (`install/`).
 5. Renseignez la connexion à la base, puis créez le compte administrateur.
-6. **Supprimez ou protégez le dossier `install/`** une fois l'installation terminée.
+6. **Supprimez ou protégez le dossier `install/`** une fois l'installation terminée. Depuis la 0.9g, l'installeur
+   se verrouille de lui-même dès que `config.php` est rempli (seule la mise à jour reste ouverte).
 
 Pour développer en local :
 ```bash
 php -S 127.0.0.1:8080
 ```
+
+### Statistiques automatiques
+Le classement des joueurs et des alliances se recalcule depuis l'administration (« Statistiques »), ou
+automatiquement par une tâche planifiée qui lance `php tools/stats.php` depuis la racine du jeu :
+- Linux (cron, toutes les heures) : `0 * * * * cd /chemin/du/jeu && php tools/stats.php >> stats.log`
+- Windows (Planificateur de tâches) : programme `php.exe`, argument `tools\stats.php`, dossier de démarrage
+  = la racine du jeu.
 
 ### Mise à jour et transfert
 Les modes « Mise à jour » et « Transfère » de l'installeur prennent en charge :
