@@ -20,7 +20,11 @@ $lang['changelog']   = array(
 - FIX : Vue g&eacute;n&eacute;rale : l\'annonce de niveau de raideur n\'efface plus celle de mineur ; rang du joueur dans le menu
 - MOD : Pages abandonn&eacute;es supprim&eacute;es (calculatrice UGamela, doublon de fiche d\'alliance) ; PhpInfo r&eacute;serv&eacute; &agrave; l\'administrateur
 - FIX : Avertissements PHP : toutes les pages et une partie compl&egrave;te sans aucun message
-- MOD : Vue g&eacute;n&eacute;rale : colonies de nouveau &agrave; droite de la plan&egrave;te, deux par ligne, comme OGame classique (largeurs fig&eacute;es)',
+- MOD : Vue g&eacute;n&eacute;rale : colonies de nouveau &agrave; droite de la plan&egrave;te, deux par ligne, comme OGame classique (largeurs fig&eacute;es)
+- FIX : Espionnage : le rapport annon&ccedil;ait la flotte d&eacute;truite quand elle survivait (messages invers&eacute;s), vraie probabilit&eacute; affich&eacute;e
+- FIX : Exp&eacute;dition : trou noir total jamais atteint, capacit&eacute; des soutes mal compt&eacute;e, trouvaille vide annonc&eacute;e, tirage affich&eacute;
+- FIX : Page Flotte : heures d\'envoi et d\'arriv&eacute;e d&eacute;cal&eacute;es d\'une colonne, flotte rappel&eacute;e affich&eacute;e comme retour
+- FIX : Rapports : dur&eacute;e du calcul lisible, message de retour de flotte, fautes des rapports d\'exp&eacute;dition',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)

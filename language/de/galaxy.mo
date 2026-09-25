@@ -87,7 +87,7 @@ $lang['gs_c612'] = "Erreur, Pas assez de slots de flotte.";
 $lang['gs_c613'] = "Erreur, Pas assez de deut&eacute;rium disponible.";
 $lang['gs_c616'] = "Erreur, Multialarm!";
 $lang['gs_c618'] = "Erreur, Vous essayez visiblement de vous attaquer vous m&ecirc;me!";
-$lang['gs_sending'] = "Envois de";
+$lang['gs_sending'] = "Envoi de";
 $lang['gs_to'] = "vers";
 $lang['Sending'] = 'Envoie';
 

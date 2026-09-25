@@ -117,7 +117,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	$select = mysqli_fetch_array($select);
 
-	if ($select['id_owner'] == $user['id']) {
+	if (($select['id_owner'] ?? 0) == $user['id']) {
 		$YourPlanet = true;
 		$UsedPlanet = true;
 	} elseif (!empty($select['id_owner'])) {
@@ -192,7 +192,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	CheckPlanetUsedFields($CurrentPlanet);
 
-	if ($TargetPlanet['id_owner'] == '') {
+	if (empty($TargetPlanet['id_owner'])) {
 		$HeDBRec = $MyDBRec;
 	} elseif ($TargetPlanet['id_owner'] != '') {
 		$HeDBRec = doquery("SELECT * FROM {{table}} WHERE `id` = '". $TargetPlanet['id_owner'] ."';", 'users', true);
@@ -362,8 +362,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	$fleet['start_time'] = $duration + time();
 	// Durees limitees aux choix du formulaire (avant : n'importe quelle valeur, meme negative)
-	$ExpeHours = in_array(intval($_POST['expeditiontime'] ?? 0), array(1, 2)) ? intval($_POST['expeditiontime']) : 1;
-	$HoldHours = in_array(intval($_POST['holdingtime'] ?? 0), array(0, 1, 2, 4, 8, 16, 32)) ? intval($_POST['holdingtime']) : 0;
+	$ExpeHours = in_array(intval($_POST['expeditiontime'] ?? 0), array(1, 2)) ? intval($_POST['expeditiontime'] ?? 0) : 1;
+	$HoldHours = in_array(intval($_POST['holdingtime'] ?? 0), array(0, 1, 2, 4, 8, 16, 32)) ? intval($_POST['holdingtime'] ?? 0) : 0;
 	if (($_POST['mission'] ?? null) == 15) {
 		$StayDuration    = $ExpeHours * 3600;
 		$StayTime        = $fleet['start_time'] + $ExpeHours * 3600;
@@ -429,7 +429,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		message ("<font color=\"red\"><b>". $lang['fl_nostoragespa'] . pretty_number($StorageNeeded - $FleetStorage) ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
 	}
 
-	if ($TargetPlanet['id_level'] > $user['authlevel']) {
+	if (($TargetPlanet['id_level'] ?? 0) > $user['authlevel']) {
 		$Allowed = true;
 		switch (($_POST['mission'] ?? null)){
 			case 1:
@@ -472,7 +472,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$QryInsertFleet .= "`fleet_resource_metal` = '". $TransMetal ."', ";
 	$QryInsertFleet .= "`fleet_resource_crystal` = '". $TransCrystal ."', ";
 	$QryInsertFleet .= "`fleet_resource_deuterium` = '". $TransDeuterium ."', ";
-	$QryInsertFleet .= "`fleet_target_owner` = '". $TargetPlanet['id_owner'] ."', ";
+	$QryInsertFleet .= "`fleet_target_owner` = '". intval($TargetPlanet['id_owner'] ?? 0) ."', ";
 	$QryInsertFleet .= "`start_time` = '". time() ."';";
 	doquery( $QryInsertFleet, 'fleets');
 

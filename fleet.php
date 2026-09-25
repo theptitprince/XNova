@@ -113,7 +113,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 		// (02) Fleet Mission
 		$page .= "<th>";
 		$page .= "<a>". $missiontype[$f['fleet_mission']] ."</a>";
-		if (($f['fleet_start_time'] + 1) == $f['fleet_end_time']) {
+		// Flotte sur le retour (mission faite ou flotte rappelee) : l'original comparait deux heures jamais egales apres un rappel
+		if ($f['fleet_mess'] == 1) {
 			$page .= "<br><a title=\"".$lang['fl_back_to_ttl']."\">".$lang['fl_back_to']."</a>";
 		} else {
 			$page .= "<br><a title=\"".$lang['fl_get_to_ttl']."\">".$lang['fl_get_to']."</a>";
@@ -137,12 +138,12 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$page .= "\">". pretty_number($f['fleet_amount']) ."</a></th>";
 		// (04) Fleet From (Planete d'origine)
 		$page .= "<th>[".$f['fleet_start_galaxy'].":".$f['fleet_start_system'].":".$f['fleet_start_planet']."]</th>";
-		// (05) Fleet Start Time
-		$page .= "<th>". date("d/m/Y H:i:s", $f['fleet_start_time']) ."</th>";
+		// (05) Fleet Start Time : heure d'envoi (start_time ; fleet_start_time est l'arrivee sur la cible)
+		$page .= "<th>". date("d/m/Y H:i:s", $f['start_time']) ."</th>";
 		// (06) Fleet Target (Planete de destination)
 		$page .= "<th>[".$f['fleet_end_galaxy'].":".$f['fleet_end_system'].":".$f['fleet_end_planet']."]</th>";
-		// (07) Fleet Target Time
-		$page .= "<th>". date("d/m/Y H:i:s", $f['fleet_end_time']) ."</th>";
+		// (07) Fleet Target Time : arrivee sur la cible (avant : l'heure de retour, deja donnee par la colonne suivante)
+		$page .= "<th>". date("d/m/Y H:i:s", $f['fleet_start_time']) ."</th>";
 		// (08) Fleet Back Time
 //		$page .= "<th><font color=\"lime\"><div id=\"time_0\"><font>". pretty_time(floor($f['fleet_end_time'] + 1 - time())) ."</font></th>";
 		// (09) Fleet Back In

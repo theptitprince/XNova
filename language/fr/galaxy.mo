@@ -88,7 +88,7 @@ $lang['gs_c613'] = "Erreur, Pas assez de deuterium disponible.";
 $lang['gs_c616'] = "Erreur, Multialarm!";
 $lang['gs_c618'] = "Erreur, Vous essayez visiblement de vous attaquer vous meme!";
 $lang['gs_c619'] = "Erreur, Vous n'etes pas de taille!";
-$lang['gs_sending'] = "Envois de";
+$lang['gs_sending'] = "Envoi de";
 $lang['gs_to'] = "vers";
 $lang['Sending'] = 'Envoie';
 
