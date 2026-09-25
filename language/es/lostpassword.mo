@@ -7,4 +7,10 @@ $lang['email']    = "correo electrónico";
 $lang['ButtonSendPass'] = "Enviar";
 $lang['PassForm'] = "Formulario";
 
+// XNova Renaissance 0.9g : envio de la nueva contrasena
+$lang['system']        = "Sistema";
+$lang['lp_sent']       = "Si esta direcci&oacute;n corresponde a una cuenta, se le acaba de enviar una nueva contrase&ntilde;a.";
+$lang['lp_mail_title'] = "Nueva contrase&ntilde;a";
+$lang['lp_mail_body']  = "Hola {username},\n\naqu&iacute; tienes tu nueva contrase&ntilde;a para {gamename}: {password}\n\nC&aacute;mbiala en tus Opciones en tu pr&oacute;xima conexi&oacute;n.";
+
 ?>

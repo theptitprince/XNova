@@ -33,7 +33,27 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse['phl_pl_place']     = $PhalanxMoon['planet'];
 		$parse['phl_pl_name']      = $user['username'];
 
-		if ( $PhalanxMoon['deuterium'] > 10000 ) {
+		$Galaxy  = intval(($_GET["galaxy"] ?? null));
+		$System  = intval(($_GET["system"] ?? null));
+		$Planet  = intval(($_GET["planet"] ?? null));
+		$PlType  = intval(($_GET["planettype"] ?? null));
+
+		// Controles cote serveur, les memes que la galaxie pour afficher le lien (avant : en forgeant l'adresse,
+		// n'importe quelle lune, meme sans phalange, scannait n'importe quelle position de l'univers)
+		$Range = GetPhalanxRange ( $PhalanxMoon['phalanx'] );
+		if ($PhalanxMoon['phalanx'] < 1 ||
+			$Galaxy != $PhalanxMoon['galaxy'] ||
+			abs($System - $PhalanxMoon['system']) > $Range ||
+			$Planet < 1 || $Planet > MAX_PLANET_IN_SYSTEM ||
+			$PlType != 1) {
+			message ( $lang['phl_out_of_range'], $lang['phl_tbl_title'] );
+		}
+
+		$Record = 0;
+		$fpage  = array();
+		$Fleets = '';
+
+		if ( $PhalanxMoon['deuterium'] >= 10000 ) {
 			doquery ("UPDATE {{table}} SET `deuterium` = `deuterium` - '10000' WHERE `id` = '". $user['current_planet'] ."';", 'planets');
 			$parse['phl_er_deuter'] = "";
 			$DoScan                 = true;
@@ -43,11 +63,6 @@ include($xnova_root_path . 'common.' . $phpEx);
 		}
 
 		if ($DoScan == true) {
-			$Galaxy  = intval(($_GET["galaxy"] ?? null));
-			$System  = intval(($_GET["system"] ?? null));
-			$Planet  = intval(($_GET["planet"] ?? null));
-			$PlType  = intval(($_GET["planettype"] ?? null));
-
 			$TargetInfo = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '". $Galaxy ."' AND `system` = '". $System ."' AND `planet` = '". $Planet ."' AND `planet_type` = '". $PlType ."';", 'planets', true);
 			$TargetName = $TargetInfo['name'];
 
@@ -121,6 +136,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$parse['phl_fleets_table'] = $Fleets;
 		$page = parsetemplate( $PageTPL, $parse );
+	} else {
+		// Depuis une planete : page vide avant
+		message ( $lang['phl_moon_only'], $lang['phl_tbl_title'] );
 	}
 
 	display ($page, $lang['sys_phalanx'], false, '', false);

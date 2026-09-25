@@ -17,10 +17,10 @@ function ShowGalaxyRows ($Galaxy, $System) {
 
 	$Result = "";
 	for ($Planet = 1; $Planet < 16; $Planet++) {
-		unset($GalaxyRowPlanet);
-		unset($GalaxyRowMoon);
-		unset($GalaxyRowPlayer);
-		unset($GalaxyRowAlly);
+		$GalaxyRowPlanet = null;
+		$GalaxyRowMoon   = null;
+		$GalaxyRowPlayer = null;
+		$GalaxyRowAlly   = null;
 
 		$GalaxyRow = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '".$Galaxy."' AND `system` = '".$System."' AND `planet` = '".$Planet."';", 'galaxy', true);
 

@@ -39,7 +39,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$protectiontime = 9999999999999999;
 	}
 
-	$fleetarray  = unserialize(base64_decode(str_rot13(($_POST["usedfleet"] ?? null))), array('allowed_classes' => false));
+	$fleetarray  = unserialize(base64_decode(str_rot13((string) ($_POST["usedfleet"] ?? ''))), array('allowed_classes' => false));
 
 	// La liste vient du navigateur : on ne garde que des vaisseaux existants en quantites positives
 	// (une quantite negative ajoutait des vaisseaux a la planete au depart de la flotte)
@@ -201,8 +201,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$UserPoints    = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $MyDBRec['id'] ."';", 'statpoints', true);
 	$User2Points   = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $HeDBRec['id'] ."';", 'statpoints', true);
 
-	$MyGameLevel  = $UserPoints['total_points'];
-	$HeGameLevel  = $User2Points['total_points'];
+	$MyGameLevel  = $UserPoints['total_points'] ?? 0;
+	$HeGameLevel  = $User2Points['total_points'] ?? 0;
 	$VacationMode = $HeDBRec['urlaubs_modus'];
 
 	if ($MyGameLevel > ($HeGameLevel * $protectionmulti) AND

@@ -17,6 +17,12 @@ function GalaxyRowMoon ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 
 	// Lune
 	$Result  = "<th style=\"white-space: nowrap;\" width=30>";
+	if (!$GalaxyRow || empty($GalaxyRow['id_luna']) || !$GalaxyRowPlanet) {
+		return $Result . "</th>";
+	}
+	if (!is_array($GalaxyRowUser)) {
+		$GalaxyRowUser = array('id' => null);
+	}
 	if ($GalaxyRowUser['id'] != $user['id']) {
 		$MissionType6Link = "<a href=# onclick=&#039javascript:doit(6, ".$Galaxy.", ".$System.", ".$Planet.", ".$PlanetType.", ".$user["spio_anz"].");&#039 >". $lang['type_mission'][6] ."</a><br /><br />";
 	} elseif ($GalaxyRowUser['id'] == $user['id']) {

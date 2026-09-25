@@ -25,7 +25,7 @@ function ElementBuildListBox ( $CurrentUser, $CurrentPlanet ) {
 		if ($Element != '') {
 			$Element = explode(',', $Element);
 			$ElementTime  = GetBuildingTime( $CurrentUser, $CurrentPlanet, $Element[0] );
-			$QueueTime   += $ElementTime * $Element[1];
+			$QueueTime    = ($QueueTime ?? 0) + $ElementTime * $Element[1];
 			$TimePerType .= "".$ElementTime.",";
 			$NamePerType .= "'". html_entity_decode($lang['tech'][$Element[0]]) ."',";
 			$NbrePerType .= "".$Element[1].",";
@@ -40,7 +40,7 @@ function ElementBuildListBox ( $CurrentUser, $CurrentPlanet ) {
 
 	$parse['pretty_time_b_hangar'] = pretty_time($QueueTime - $CurrentPlanet['b_hangar']);
 
-	$text .= parsetemplate(gettemplate('buildings_script'), $parse);
+	$text = parsetemplate(gettemplate('buildings_script'), $parse);
 
 	return $text;
 }

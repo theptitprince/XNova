@@ -45,7 +45,7 @@ function colorGreen($n) {
 
 function pretty_number($n, $floor = true) {
 	if ($floor) {
-		$n = floor($n);
+		$n = floor((float) $n);
 	}
 	return number_format($n, 0, ",", ".");
 }

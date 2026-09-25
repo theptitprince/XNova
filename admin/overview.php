@@ -35,7 +35,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$parse                      = $lang;
 		$parse['dpath']             = $dpath;
-		$parse['mf']                = $mf;
+		$parse['mf']                = "Hauptframe";
+		$parse['adm_ov_data_table'] = '';
+		$PrevIP                     = '';
 		$parse['adm_ov_data_yourv'] = colorRed(VERSION .' '. VERSION_NAME);
 
 		$Last15Mins = doquery("SELECT * FROM {{table}} WHERE `onlinetime` >= '". (time() - 15 * 60) ."' ORDER BY `". $TypeSort ."` ASC;", 'users');
@@ -63,7 +65,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Bloc['adm_ov_data_clip']    = $Color;
 			$Bloc['adm_ov_data_adip']    = $TheUser['user_lastip'];
 			$Bloc['adm_ov_data_ally']    = $TheUser['ally_name'];
-			$Bloc['adm_ov_data_point']   = pretty_number ( $UserPoints['total_points'] );
+			$Bloc['adm_ov_data_point']   = pretty_number ( $UserPoints['total_points'] ?? 0 ); // pas encore classe : 0
 			$Bloc['adm_ov_data_activ']   = pretty_time ( time() - $TheUser['onlinetime'] );
 			$Bloc['adm_ov_data_pict']    = "m.gif";
 			$PrevIP                      = $TheUser['user_lastip'];

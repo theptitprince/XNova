@@ -9,7 +9,17 @@ $lang['changelog']   = array(
 - FIX : Administration : liste &laquo; multi-comptes &raquo; toujours vide supprim&eacute;e (second syst&egrave;me jamais fonctionnel), page &laquo; supprimer un joueur &raquo; inachev&eacute;e retir&eacute;e
 - FIX : Robot anti-multi : un seul bannissement par joueur (au lieu d\'un par compte partageant l\'adresse IP)
 - FIX : Bannissements : pseudo, auteur et e-mail tronqu&eacute;s &agrave; 11 et 20 caract&egrave;res (le d&eacute;bannissement ratait les pseudos longs)
-- FIX : Options, cadre du jeu, destruction de lune : chemin du jeu lu dans une ancienne variable UGamela',
+- FIX : Options, cadre du jeu, destruction de lune : chemin du jeu lu dans une ancienne variable UGamela
+- FIX : Phalange : port&eacute;e, pr&eacute;sence d\'une phalange et cible v&eacute;rifi&eacute;es par le serveur (une adresse forg&eacute;e scannait tout l\'univers)
+- FIX : Mot de passe oubli&eacute; r&eacute;par&eacute; et s&eacute;curis&eacute; (injection SQL, mot de passe fort, m&ecirc;me message que l\'adresse existe ou non)
+- FIX : Inscription : les pseudos contenant &laquo; script &raquo; ou &laquo; http &raquo; donnaient un compte inutilisable ; noms de plan&egrave;te intacts
+- FIX : Recyclage rapide de la vue g&eacute;n&eacute;rale : plus de flotte vide, emplacements de flotte et carburant v&eacute;rifi&eacute;s
+- FIX : Officier Amiral : son bonus de combat s\'applique enfin (niveau de l\'attaquant et du d&eacute;fenseur)
+- FIX : Envoi de flotte : la mission choisie dans la galaxie est de nouveau pr&eacute;s&eacute;lectionn&eacute;e
+- FIX : Galaxie : couleur des joueurs sans alliance, tag de son alliance, port&eacute;e de phalange ; vue g&eacute;n&eacute;rale d\'une lune
+- FIX : Vue g&eacute;n&eacute;rale : l\'annonce de niveau de raideur n\'efface plus celle de mineur ; rang du joueur dans le menu
+- MOD : Pages abandonn&eacute;es supprim&eacute;es (calculatrice UGamela, doublon de fiche d\'alliance) ; PhpInfo r&eacute;serv&eacute; &agrave; l\'administrateur
+- FIX : Avertissements PHP : toutes les pages et une partie compl&egrave;te sans aucun message',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)

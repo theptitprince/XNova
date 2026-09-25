@@ -96,7 +96,7 @@ elseif($_POST){//Borrar
 		$parse['title'] = '';
 		$parse['inputs'] = '<input type=hidden name=s value=1>';
 
-		$page .= parsetemplate(gettemplate('notes_form'), $parse);
+		$page = parsetemplate(gettemplate('notes_form'), $parse);
 
 		display($page,$lang['Notes'],false);
 
@@ -123,7 +123,7 @@ elseif($_POST){//Borrar
 		$parse['TITLE'] = $lang['Editnote'];
 		$parse['inputs'] = '<input type=hidden name=s value=2><input type=hidden name=n value='.$note['id'].'>';
 
-		$page .= parsetemplate(gettemplate('notes_form'), $parse);
+		$page = parsetemplate(gettemplate('notes_form'), $parse);
 
 		display($page,$lang['Notes'],false);
 
@@ -133,6 +133,7 @@ elseif($_POST){//Borrar
 		$notes_query = doquery("SELECT * FROM {{table}} WHERE owner={$user['id']} ORDER BY time DESC",'notes');
 		//Loop para crear la lista de notas que el jugador tiene
 		$count = 0;
+		$list  = '';
 		$parse=$lang;
 		while($note = mysqli_fetch_array($notes_query)){
 			$count++;
@@ -158,7 +159,7 @@ elseif($_POST){//Borrar
 		$parse = $lang;
 		$parse['BODY_LIST'] = $list;
 		//fragmento de template
-		$page .= parsetemplate(gettemplate('notes_body'), $parse);
+		$page = parsetemplate(gettemplate('notes_body'), $parse);
 
 		display($page,$lang['Notes'],false);
 	}

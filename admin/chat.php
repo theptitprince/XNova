@@ -38,6 +38,7 @@ $parse = $lang;
 		// Affichage des messages
 		$query = doquery("SELECT * FROM {{table}} ORDER BY messageid DESC LIMIT 25", 'chat');
 		$i = 0;
+		$parse['msg_list'] = '';
 		while ($e = mysqli_fetch_array($query)) {
 			$i++;
 			$parse['msg_list'] .= stripslashes("<tr><th class=b>" . date('H:i:s', $e['timestamp']) . "</th>".

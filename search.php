@@ -26,6 +26,7 @@ $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 
 includeLang('search');
 $i = 0;
+$search_results = '';
 //creamos la query
 $searchtext = SqlEscape(($_POST["searchtext"] ?? null));
 switch($type){

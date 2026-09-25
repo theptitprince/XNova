@@ -62,12 +62,36 @@ includeLang('fleet');
 		$FleetArray[209] = $FleetCount;
 	}
 
+	// Seul le recyclage du champ de debris de la planete courante est prevu (lien de la vue generale).
+	// Autre mission, adresse sans parametre ou aucun recycleur : pas d'envoi (l'original envoyait une flotte vide).
+	if ($Mode != 8 || empty($FleetArray[209])) {
+		header("Location: overview.php");
+		exit();
+	}
+	// Le champ de debris vise est toujours celui de la planete courante (celui qui a servi au calcul des recycleurs)
+	$Galaxy = $planetrow['galaxy'];
+	$System = $planetrow['system'];
+	$Planet = $planetrow['planet'];
+	$TypePl = 2;
+
+	// Emplacements de flotte, comme pour un envoi normal
+	$MaxFlottes   = 1 + $user[$resource[108]];
+	$FlyingFleets = doquery("SELECT COUNT(`fleet_id`) AS `Nbre` FROM {{table}} WHERE `fleet_owner` = '". $user['id'] ."';", 'fleets', true);
+	if ($FlyingFleets['Nbre'] >= $MaxFlottes) {
+		message ("<font color=\"red\"><b>". $lang['fl_noslotfree'] ."</b></font>", $lang['fl_error'], "overview.php", 2);
+	}
+
 	$distance      = GetTargetDistance  ( $planetrow['galaxy'], $Galaxy, $planetrow['system'], $System, $planetrow['planet'], $Planet );
 	$SpeedFactor   = $game_config['fleet_speed'] / 2500;
 	$GenFleetSpeed = 10; // a 100%
 	$duration      = GetMissionDuration ( $GenFleetSpeed, $RecyclerSpeed, $distance, $SpeedFactor );
+	// Carburant : l'original affichait « 10 » sans rien prelever
+	$consumption   = GetFleetConsumption ( $FleetArray, $SpeedFactor, $duration, $distance, $RecyclerSpeed, $user );
+	if ($planetrow['deuterium'] < $consumption) {
+		message ("<font color=\"red\"><b>". $lang['fl_noressources'] . pretty_number($consumption) ."</b></font>", $lang['fl_error'], "overview.php", 2);
+	}
 
-	$page .= "<br /><br />";
+	$page  = "<br /><br />";
 	$page .= "<center>";
 	$page .= "<table width=\"519\" border=\"0\" cellpadding=\"0\" cellspacing=\"1\">";
 	$page .= "<tr height=\"20\">";
@@ -85,11 +109,11 @@ includeLang('fleet');
 	$page .= "</tr>";
 	$page .= "<tr height=\"20\">";
 	$page .= "<th>". $lang['fl_fleetspeed'] ."</th>";
-	$page .= "<th>28750</th>";
+	$page .= "<th>". pretty_number($RecyclerSpeed) ."</th>";
 	$page .= "</tr>";
 	$page .= "<tr height=\"20\">";
 	$page .= "<th>". $lang['fl_deute_need'] ."</th>";
-	$page .= "<th>10</th>";
+	$page .= "<th>". pretty_number($consumption) ."</th>";
 	$page .= "</tr>";
 	$page .= "<tr height=\"20\">";
 	$page .= "<th>". $lang['fl_from'] ."</th>";
@@ -111,10 +135,11 @@ includeLang('fleet');
 	$page .= "<td class=\"c\" colspan=\"2\">". $lang['fl_title'] ."</td>";
 	$page .= "</tr>";
 	$page .= "<tr height=\"20\">";
-	$ShipCount = 0;
-	$ShipArray = "";
+	$ShipCount   = 0;
+	$ShipArray   = "";
+	$FleetSubQRY = "";
 	foreach ($FleetArray as $Ship => $Count) {
-		$page            .= "<th width=\"50%\>". $lang['tech'][$Ship] ."</th>";
+		$page            .= "<th width=\"50%\">". $lang['tech'][$Ship] ."</th>";
 		$page            .= "<th>". pretty_number($Count) ."</th>";
 		$FleetSubQRY     .= "`".$resource[$Ship] . "` = `" . $resource[$Ship] . "` - " . $Count . " , ";
 		$ShipArray       .= $Ship.",".$Count.";";
@@ -143,10 +168,16 @@ includeLang('fleet');
 
 	$QryUpdatePlanet  = "UPDATE {{table}} SET ";
 	$QryUpdatePlanet .= $FleetSubQRY;
+	$QryUpdatePlanet .= "`deuterium` = `deuterium` - '". floatval($consumption) ."', ";
 	$QryUpdatePlanet .= "`planet_type` = '".$planetrow['planet_type']."' ";
 	$QryUpdatePlanet .= "WHERE ";
 	$QryUpdatePlanet .= "`id` = '". $planetrow['id'] ."'";
 	doquery ($QryUpdatePlanet, "planets");
+	// Meme chose en memoire : la barre du haut reenregistre les ressources de $planetrow (comme floten3.php)
+	$planetrow['deuterium'] -= $consumption;
+	foreach ($FleetArray as $Ship => $Count) {
+		$planetrow[$resource[$Ship]] -= $Count;
+	}
 
 
 

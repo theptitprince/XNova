@@ -1,8 +1,8 @@
 <?php
 
-$lang['ResetPass'] = "Restitution de mot-de-passe";
+$lang['ResetPass'] = "Mot de passe oubli&eacute;";
 $lang['TextPass1'] = "Veuillez saisir l'adresse mail de votre compte";
-$lang['TextPass2'] = "telle qu'elle est renseign&eacute;e dans vos Options. C'est aussi celle que vous avez utilis&eacute;e pour l'inscription. Si vous appuyez sur 'Envoyer', un nouveau mot-de-passe sera cr&eacute;&eacute;, vous le re&ccedil;everait alors par e-Mail &agrave; l'adresse indiqu&eacute;e.";
+$lang['TextPass2'] = "telle qu'elle est renseign&eacute;e dans vos Options. C'est aussi celle que vous avez utilis&eacute;e pour l'inscription. Si vous appuyez sur 'Envoyer', un nouveau mot de passe sera cr&eacute;&eacute; et envoy&eacute; &agrave; cette adresse.";
 $lang['email']    = "e-Mail";
 $lang['ButtonSendPass'] = "Envoyer";
 $lang['PassForm'] = "Formulaire";
@@ -10,5 +10,10 @@ $lang['PassForm'] = "Formulaire";
 
 // XNova Renaissance : textes manquants (ils s'affichaient vides)
 $lang['system'] = 'Syst&egrave;me';
+
+// XNova Renaissance 0.9g : envoi du nouveau mot de passe
+$lang['lp_sent']       = "Si cette adresse correspond &agrave; un compte, un nouveau mot de passe vient d'y &ecirc;tre envoy&eacute;.";
+$lang['lp_mail_title'] = "Nouveau mot de passe";
+$lang['lp_mail_body']  = "Bonjour {username},\n\nVoici votre nouveau mot de passe pour {gamename} : {password}\n\nPensez &agrave; le changer dans vos Options d&egrave;s votre prochaine connexion.";
 
 ?>

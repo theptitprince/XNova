@@ -16,10 +16,13 @@ function GalaxyRowActions ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowPlayer, $Gal
 	global $lang, $user, $dpath, $CurrentMIP, $CurrentSystem, $CurrentGalaxy;
 	// Icones action
 	$Result  = "<th style=\"white-space: nowrap;\" width=125>";
+	if (!$GalaxyRowPlayer) {
+		return $Result . "</th>";
+	}
 	if ($GalaxyRowPlayer['id'] != $user['id']) {
 
 		if ($CurrentMIP <> 0) {
-			if ($GalaxyRowUser['id'] != $user['id']) {
+			if ($GalaxyRowPlayer['id'] != $user['id']) {
 				if ($GalaxyRowPlanet["galaxy"] == $CurrentGalaxy) {
 					$Range = GetMissileRange();
 					$SystemLimitMin = $CurrentSystem - $Range;

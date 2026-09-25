@@ -62,13 +62,15 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	foreach($lang['tech'] as $Element => $ElementName) {
 		if ($ElementName != "") {
-			if ($resource[$Element] != "") {
+			if (!empty($resource[$Element])) {
 				// Je sais bien qu'il n'y a aucune raison de blinder ce test ...
 				// Mais avec les zozos qui vont le pomper ... Mieux vaut prevoir que guerir !!
 				if       ($Element >=   1 && $Element <=  39 || $Element == 44) {
 					// Batiment
 					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .");", 'planets', true);
+					$PlanetRow          = $PlanetRow ?: array('id_owner' => 0, 'current' => 0); // aucun detenteur
 					$UserRow            = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '".$PlanetRow['id_owner']."';", 'users', true);
+					$UserRow            = $UserRow ?: array('username' => '', 'current' => 0);
 					$Row['element']     = $ElementName;
 					$Row['winner']      = ($PlanetRow['current'] != 0) ? $UserRow['username'] : $lang['rec_rien'];
 					$Row['count']       = ($PlanetRow['current'] != 0) ? pretty_number( $PlanetRow['current'] ) : $lang['rec_rien'];
@@ -76,7 +78,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 				} elseif ($Element >=  41 && $Element <=  99 && $Element != 44) {
 					// Batiment spéciaux
 					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .");", 'planets', true);
+					$PlanetRow          = $PlanetRow ?: array('id_owner' => 0, 'current' => 0); // aucun detenteur
 					$UserRow            = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '".$PlanetRow['id_owner']."';", 'users', true);
+					$UserRow            = $UserRow ?: array('username' => '', 'current' => 0);
 					$Row['element']     = $ElementName;
 					$Row['winner']      = ($PlanetRow['current'] != 0) ? $UserRow['username'] : $lang['rec_rien'];
 					$Row['count']       = ($PlanetRow['current'] != 0) ? pretty_number( $PlanetRow['current'] ) : $lang['rec_rien'];
@@ -84,6 +88,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 				} elseif ($Element >= 101 && $Element <= 199) {
 					// Techno
 					$UserRow            = doquery ("SELECT `username`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element] ."` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionU .");", 'users', true);
+					$UserRow            = $UserRow ?: array('username' => '', 'current' => 0);
 					$Row['element']     = $ElementName;
 					$Row['winner']      = ($UserRow['current'] != 0) ? $UserRow['username'] : $lang['rec_rien'];
 					$Row['count']       = ($UserRow['current'] != 0) ? pretty_number( $UserRow['current'] ) : $lang['rec_rien'];
@@ -91,7 +96,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 				} elseif ($Element >= 201 && $Element <= 399) {
 					// Flotte
 					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .");", 'planets', true);
+					$PlanetRow          = $PlanetRow ?: array('id_owner' => 0, 'current' => 0); // aucun detenteur
 					$UserRow            = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '".$PlanetRow['id_owner']."';", 'users', true);
+					$UserRow            = $UserRow ?: array('username' => '', 'current' => 0);
 					$Row['element']     = $ElementName;
 					$Row['winner']      = ($PlanetRow['current'] != 0) ? $UserRow['username'] : $lang['rec_rien'];
 					$Row['count']       = ($PlanetRow['current'] != 0) ? pretty_number( $PlanetRow['current'] ) : $lang['rec_rien'];
@@ -99,7 +106,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 				} elseif ($Element >= 401 && $Element <= 599) {
 					// Défenses
 					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .");", 'planets', true);
+					$PlanetRow          = $PlanetRow ?: array('id_owner' => 0, 'current' => 0); // aucun detenteur
 					$UserRow            = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '".$PlanetRow['id_owner']."';", 'users', true);
+					$UserRow            = $UserRow ?: array('username' => '', 'current' => 0);
 					$Row['element']     = $ElementName;
 					$Row['winner']      = ($PlanetRow['current'] != 0) ? $UserRow['username'] : $lang['rec_rien'];
 					$Row['count']       = ($PlanetRow['current'] != 0) ? pretty_number( $PlanetRow['current'] ) : $lang['rec_rien'];

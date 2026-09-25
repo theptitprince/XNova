@@ -21,13 +21,9 @@ $xnova_root_path = '../';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-	if ($user['authlevel'] >= 1) {
-
-				$parse['phpinfo'] = phpinfo();    
-
-		$Page = parsetemplate($PageTPL, $parse);
-
-		display ( $Page, "PhpInfo", false, '', true);
+	if ($user['authlevel'] >= 3) {
+		// phpinfo() affiche lui-meme une page complete (configuration du serveur : administrateur uniquement)
+		phpinfo();
 	} else {
 		AdminMessage ( $lang['sys_noalloaw'], $lang['sys_noaccess'] );
 	}

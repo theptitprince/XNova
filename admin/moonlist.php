@@ -26,6 +26,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse = $lang;
 		$query = doquery("SELECT * FROM {{table}} WHERE planet_type='3'", "planets");
 		$i = 0;
+		$parse['moon'] = '';
 		while ($u = mysqli_fetch_array($query)) {
 			$parse['moon'] .= "<tr>"
 			. "<td class=b><center><b>" . $u[0] . "</center></b></td>"

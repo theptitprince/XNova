@@ -162,7 +162,7 @@ function pretty_time ($seconds) {
 
 // Mise en forme de la durée sous forme xxxmin
 function pretty_time_hour ($seconds) {
-	$min = floor($seconds / 60 % 60);
+	$min = intdiv((int) floor((float) $seconds), 60) % 60; // entiers (modulo sur decimal deprecie)
 
 	$time = '';
 	if ($min != 0) { $time .= $min . 'min '; }
@@ -208,7 +208,7 @@ function parsetemplate ($template, $array) {
 	// PHP 7+ : le modificateur /e n'existe plus, meme comportement via preg_replace_callback
 	return preg_replace_callback('#\{([a-z0-9\-_]*?)\}#Ssi', function ($m) use ($array) {
 		return ( isset($array[$m[1]]) ) ? $array[$m[1]] : '';
-	}, $template);
+	}, (string) $template);
 }
 
 function gettemplate ($templatename) {

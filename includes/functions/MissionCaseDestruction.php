@@ -87,7 +87,7 @@ function MissionCaseDestruction($FleetRow) {
 
          $QryTargetTech    = "SELECT ";
 
-         $QryTargetTech   .= "`military_tech`, `defence_tech`, `shield_tech` ";
+         $QryTargetTech   .= "`military_tech`, `defence_tech`, `shield_tech`, `rpg_amiral` ";
 
          $QryTargetTech   .= "FROM {{table}} ";
 
@@ -103,7 +103,7 @@ function MissionCaseDestruction($FleetRow) {
 
          $QryCurrentTech   = "SELECT ";
 
-         $QryCurrentTech  .= "`military_tech`, `defence_tech`, `shield_tech` ";
+         $QryCurrentTech  .= "`military_tech`, `defence_tech`, `shield_tech`, `rpg_amiral` ";
 
          $QryCurrentTech  .= "FROM {{table}} ";
 

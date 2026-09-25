@@ -53,7 +53,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$parse = $game_config;
 			$parse['dpath'] = $dpath;
 			$parse['debug'] = ($game_config['debug'] == 1) ? " checked='checked'/":'';
-			$page .= parsetemplate(gettemplate('admin/messall_body'), $parse);
+			$page = parsetemplate(gettemplate('admin/messall_body'), $parse);
 			display($page, '', false,'', true);
 		}
 	} else {

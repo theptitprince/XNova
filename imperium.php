@@ -42,6 +42,11 @@ while ($p = mysqli_fetch_array($planetsrow)) {
 }
 
 $parse['mount'] = count($planet) + 1;
+foreach (array('file_images', 'file_names', 'file_coordinates', 'file_fields', 'file_metal', 'file_crystal', 'file_deuterium', 'file_energy',
+               'building_row', 'technology_row', 'fleet_row', 'defense_row') as $Key) {
+	$parse[$Key] = '';
+}
+$r = array_fill_keys(array_keys($resource), '');
 // primera tabla, con las imagenes y coordenadas
 $row  = gettemplate('imperium_row');
 $row2 = gettemplate('imperium_row2');
@@ -83,6 +88,8 @@ foreach ($planet as $p) {
 			$data['text'] = ($p[$resource[$i]]    == 0) ? '-' : "<a href=\"buildings.php?mode=fleet&cp={$p['id']}&amp;re=0&amp;planettype={$p['planet_type']}\">{$p[$resource[$i]]}</a>";
 		elseif (in_array($i, $reslist['defense']))
 			$data['text'] = ($p[$resource[$i]]    == 0) ? '-' : "<a href=\"buildings.php?mode=defense&cp={$p['id']}&amp;re=0&amp;planettype={$p['planet_type']}\">{$p[$resource[$i]]}</a>";
+		else
+			continue; // officiers, missiles... : pas de ligne dans l'empire
 
 		$r[$i] .= parsetemplate($row2, $data);
 	}
@@ -109,8 +116,8 @@ foreach ($reslist['defense'] as $a => $i) {
 	$parse['defense_row'] .= "<tr>" . parsetemplate($row2, $data) . $r[$i] . "</tr>";
 }
 
-$page .= parsetemplate(gettemplate('imperium_table'), $parse);
+$page = parsetemplate(gettemplate('imperium_table'), $parse);
 
-display($page, $lang['Imperium'], false);
+display($page, $lang['Imperium'] ?? '', false);
 // Created by Perberos. All rights reserved (C) 2006
 ?>

@@ -84,7 +84,7 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 
 				// Construction des 3 cases de la ligne d'un element dans la page d'achat !
 				// Début de ligne
-				$PageTable .= "\n<tr>";
+				$PageTable = ($PageTable ?? '') . "\n<tr>";
 
 				// Imagette + Link vers la page d'info
 				$PageTable .= "<th class=l>";
@@ -118,15 +118,15 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 	}
 
 	if ($CurrentPlanet['b_hangar_id'] != '') {
-		$BuildQueue .= ElementBuildListBox( $CurrentUser, $CurrentPlanet );
+		$BuildQueue = ElementBuildListBox( $CurrentUser, $CurrentPlanet );
 	}
 
 	$parse = $lang;
 	// La page se trouve dans $PageTable;
 	$parse['buildlist']    = $PageTable;
 	// Et la liste de constructions en cours dans $BuildQueue;
-	$parse['buildinglist'] = $BuildQueue;
-	$page .= parsetemplate(gettemplate('buildings_fleet'), $parse);
+	$parse['buildinglist'] = $BuildQueue ?? '';
+	$page = parsetemplate(gettemplate('buildings_fleet'), $parse);
 
 	display($page, $lang['Fleet']);
 }

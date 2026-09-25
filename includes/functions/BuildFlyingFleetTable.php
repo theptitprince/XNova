@@ -43,7 +43,7 @@ function BuildFlyingFleetTable () {
 
 		$table .= parsetemplate( $TableTPL, $Bloc );
 	}
-	return $table;
+	return $table ?? '';
 }
 
 
