@@ -16,7 +16,7 @@ $lang['type'][97]   = 'Messaggi dell\'amministrazione';
 $lang['type'][99]   = "Rapporti sulle liste di costruzione";
 $lang['type'][100]  = "Vedere tutti i messaggi";
 
-$lang['mess_pagetitle']      = "Invio del messeggio";
+$lang['mess_pagetitle']      = 'Invia un messaggio';
 $lang['mess_error']          = "Errore";
 $lang['mess_no_ownerid']     = "Errore! Parametro mancante, contattare un Amministratore!";
 $lang['mess_no_ownerpl']     = "Errore! Il giocatore che volevi contattare non esiste più!";
@@ -56,5 +56,20 @@ $lang['declare_reason']     = 'Motivo (famiglia, lavoro...)';
 $lang['declare_send']       = 'Invia';
 $lang['declare_empty']      = 'Indica almeno il primo giocatore coinvolto.';
 $lang['declare_done']       = 'Grazie, la tua dichiarazione &egrave; stata registrata. Anche gli altri giocatori coinvolti devono fare la loro.';
+
+// XNova Renaissance 0.9g : traductions
+$lang['messages'] = 'Messaggi';
+
+// XNova Renaissance 0.9g : formulaire de message (boutons, aide BBCode)
+$lang['msg_reset'] = 'Cancella';
+$lang['msg_send'] = 'Invia';
+$lang['msg_wait'] = 'Attendere...';
+$lang['msg_bb_title'] = 'Emoticon e BBCode:';
+$lang['msg_bb_intro'] = 'Potete usare il BBCode e queste emoticon (scrivete il codice, due punti compresi):';
+$lang['msg_bb_bold'] = 'Testo in grassetto';
+$lang['msg_bb_underline'] = 'Testo sottolineato';
+$lang['msg_bb_italic'] = 'Testo in corsivo';
+$lang['msg_bb_image'] = 'Un\'immagine';
+$lang['msg_bb_text'] = 'Testo';
 
 ?>

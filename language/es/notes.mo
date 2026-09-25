@@ -1,43 +1,50 @@
 <?php
 
-$lang['notes'] = 'Notes';
+$lang['notes'] = 'Notas';
 
-$lang['createnote'] = 'Cr&eacute;er une note';
-$lang['make_new_note'] = 'Cr&eacute;er une nouvelle note';
-$lang['editnote'] = 'Editer note';
+$lang['createnote'] = 'Crear una nota';
+$lang['make_new_note'] = 'Crear una nueva nota';
+$lang['editnote'] = 'Editar nota';
 
-$lang['priority_label'] = 'Priorit&eacute;';
+$lang['priority_label'] = 'Prioridad';
 
-$lang['important'] = 'haute';
-$lang['normal'] = 'normale';
-$lang['unimportant'] = 'basse';
+$lang['important'] = 'alta';
+$lang['normal'] = 'normal';
+$lang['unimportant'] = 'baja';
 
-$lang['subject_label'] = 'Sujet';
-$lang['no_title'] = 'Pas de titre';
-$lang['no_text'] = 'Pas de texte';
+$lang['subject_label'] = 'Asunto';
+$lang['no_title'] = 'Sin título';
+$lang['no_text'] = 'Sin texto';
 
-$lang['date_label'] = 'Date';
-$lang['size'] = 'Taille';
+$lang['date_label'] = 'Fecha';
+$lang['size'] = 'Tamaño';
 
-$lang['note'] = 'Note';
+$lang['note'] = 'Nota';
 
 $lang['characters'] = 'Caracteres';
 
-$lang['apply'] = 'Accepter';
-$lang['back'] = 'Retour';
-$lang['save'] = 'Sauvegarder';
-$lang['delete_label'] = 'Supprimer';
-$lang['reset'] = 'Effacer';
+$lang['apply'] = 'Aceptar';
+$lang['back'] = 'Volver';
+$lang['save'] = 'Guardar';
+$lang['delete_label'] = 'Eliminar';
+$lang['reset'] = 'Borrar';
 
 //mensajes
-$lang['there_is_no_note'] = 'Il n\'y a pas de notes';
+$lang['there_is_no_note'] = 'No hay notas';
 
-$lang['note_updated'] = 'La note a &eacute;t&eacute; r&eacute;actualis&eacute;e, <a href="notes.php"><blink>redirection...</blink></a>';
+$lang['note_updated'] = 'La nota ha sido actualizada, <a href="notes.php"><blink>redirigiendo...</blink></a>';
 
-$lang['note_added'] = 'La note s\'est bien cr&eacute;ee, <a href="notes.php"><blink>redirection...</blink></a>';
+$lang['note_added'] = 'La nota se ha creado correctamente, <a href="notes.php"><blink>redirigiendo...</blink></a>';
 
-$lang['note_deleted'] = 'La note a &eacute;t&eacute; supprim&eacute;e, <a href="notes.php"><blink>redirection...</blink></a>';
-$lang['note_deleteds'] = 'Les notes ont &eacute;t&eacute; supprim&eacute;, <a href="notes.php"><blink>redirection...</blink></a>';
+$lang['note_deleted'] = 'La nota ha sido eliminada, <a href="notes.php"><blink>redirigiendo...</blink></a>';
+$lang['note_deleteds'] = 'Las notas han sido eliminadas, <a href="notes.php"><blink>redirigiendo...</blink></a>';
 
 // Created by Perberos. All rights reversed (C) 2006 
+
+// XNova Renaissance 0.9g : traductions
+$lang['notpossiblethisway'] = 'Esta acción no es posible.';
+
+// XNova Renaissance 0.9g : titre des messages des notes (ecrit en dur en francais)
+$lang['please_wait_label'] = 'Espere...';
+
 ?>

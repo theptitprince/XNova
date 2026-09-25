@@ -14,13 +14,13 @@ $lang['fl_back_t'] = "Ora di arrivo<br>(Ritorno)";
 $lang['fl_back_in'] = "Ritorno da ";
 $lang['fl_order'] = "Ordine";
 $lang['fl_get_to'] = "(A)";
-$lang['fl_get_to_ttl'] = "Aller";
+$lang['fl_get_to_ttl'] = 'Andata';
 $lang['fl_back_to'] = "(R)";
 $lang['fl_back_to_ttl'] = "Ritorno";
 $lang['fl_associate'] = "Associare";
 $lang['fl_noslotfree'] = "Tutti gli slot sono utilizzati!";
 $lang['fl_notback'] = "Le flotte non sono tornate!";
-$lang['fl_onlyyours'] = "Vous ne pouvez rappeler que vos flottes !";
+$lang['fl_onlyyours'] = 'Potete richiamare solo le vostre flotte!';
 $lang['fl_isback'] = "la flotta è ritornata!";
 $lang['fl_sback'] = "Ritorno";
 $lang['fl_error'] = "Errore";
@@ -86,11 +86,11 @@ $lang['fl_no_self_spy'] = "Non puoi spiare te stesso!";
 $lang['fl_only_stay_at_home'] = "Non puoi stazionare la tua flotta nello stesso pianeta!";
 $lang['fl_cheat_speed'] = "Tentativo di modificare la velocità della flotta!";
 $lang['fl_cheat_origine'] = "Tentativo di modificare il pianeta di origine!";
-$lang['fl_limit_planet'] = "<li>Mauvaise planète !</li>";
-$lang['fl_limit_system'] = "<li>Mauvais Systeme !</li>";
-$lang['fl_limit_galaxy'] = "<li>Mauvaise Galaxie !</li>";
-$lang['fl_no_planet_type'] = "Mauvaise destination !";
-$lang['fl_no_fleetarray'] = "Mauvaise table de flotte !";
+$lang['fl_limit_planet'] = '<li>Pianeta non valido!</li>';
+$lang['fl_limit_system'] = '<li>Sistema non valido!</li>';
+$lang['fl_limit_galaxy'] = '<li>Galassia non valida!</li>';
+$lang['fl_no_planet_type'] = 'Destinazione non valida!';
+$lang['fl_no_fleetarray'] = 'Composizione della flotta non valida!';
 $lang['fl_noressources'] = "Non avete risorse. Consumo di Deut: ";
 $lang['fl_nostoragespa'] = "Non avete spazio disponibile per le risorse! Disponibile ";
 $lang['fl_fleet_send'] = "Flotte inviate";
@@ -99,8 +99,8 @@ $lang['fl_expe_staytime'] = "tempo di stazionamento";
 $lang['fl_expe_hours'] = "ore";
 $lang['fl_expe_notech'] = "Non avetela tecnologia per le spedizioni!";
 $lang['fl_expe_max'] = "Non potete inviare altre flotte in spedizione!";
-$lang['fl_adm_attak'] = "Vous &ecirc;tes sur le point de raider une colonie d'administration ... Votre flotte pourrait &ecirc;tre d&eacute;truite en repr&eacute;saille &acirc; cette attaque ... &ecirc;tes vous certains de voulloir continuer cette action ?";
-$lang['fl_warning'] = "Attention";
+$lang['fl_adm_attak'] = 'State per attaccare una colonia dell\'amministrazione ... La vostra flotta potrebbe essere distrutta per rappresaglia a questo attacco ... Siete sicuri di voler continuare questa azione?';
+$lang['fl_warning'] = 'Attenzione';
 
 $lang['res']['fleet'] = array(
 //Naves
@@ -122,4 +122,30 @@ $lang['res']['fleet'] = array(
 
 
 // Created by Ichigo. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : raccourcis de flotte (fleetshortcut.php)
+$lang['fs_title'] = 'Scorciatoie';
+$lang['fs_add'] = 'Aggiungi';
+$lang['fs_none'] = 'Nessuna scorciatoia';
+$lang['fs_back'] = 'Indietro';
+$lang['fs_name_coords'] = 'Nome [Galassia / Sistema solare / Posizione]';
+$lang['fs_name'] = 'Nome';
+$lang['fs_galaxy'] = 'Galassia';
+$lang['fs_system'] = 'Sistema solare';
+$lang['fs_position'] = 'Posizione';
+$lang['fs_type_planet'] = 'Pianeta';
+$lang['fs_type_debris'] = 'Detriti';
+$lang['fs_type_moon'] = 'Luna';
+$lang['fs_reset'] = 'Cancella';
+$lang['fs_save'] = 'Salva';
+$lang['fs_delete'] = 'Elimina';
+$lang['fs_edit'] = 'Modifica';
+$lang['fs_saved'] = 'La scorciatoia è stata salvata.';
+$lang['fs_edited'] = 'La scorciatoia è stata modificata.';
+$lang['fs_deleted'] = 'La scorciatoia è stata eliminata.';
+$lang['fs_unnamed'] = 'Senza nome';
+$lang['fs_mark_debris'] = '(D)';
+$lang['fs_mark_moon'] = '(L)';
+$lang['fs_not_found'] = 'Questa scorciatoia non esiste.';
+
 ?>

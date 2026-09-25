@@ -1,56 +1,56 @@
 <?php
 
 // Messages
-$lang['changue_pass'] = 'Changer de mot de passe';
-$lang['download'] = 'T&eacute;l&eacute;charger';
-$lang['search'] = 'Chercher';
-$lang['succeful_changepass'] = 'Le mot de passe a bien &eacute;t&eacute; chang&eacute;.<br /><a href="login.php" target="_top">Retour</a>';
-$lang['succeful_save'] = 'Les changements ont &eacute;t&eacute; sauvegard&eacute;.<br /><a href="options.php">Retour</a>';
+$lang['changue_pass'] = 'Cambiar la contraseña';
+$lang['download'] = 'Descargar';
+$lang['search'] = 'Buscar';
+$lang['succeful_changepass'] = 'La contraseña se ha cambiado correctamente.<br /><a href="login.php" target="_top">Volver</a>';
+$lang['succeful_save'] = 'Los cambios se han guardado.<br /><a href="options.php">Volver</a>';
 
 // Form
-$lang['userdata'] = 'Informations sur le joueur';
-$lang['username'] = 'Nom du joueur';
-$lang['lastpassword'] = 'Ancien mot de passe';
-$lang['newpassword'] = 'Nouveau mot de passe (min. 8 Caracteres)';
-$lang['newpasswordagain'] = 'Nouveau mot de passe (repetition)';
-$lang['emaildir'] = 'Adresse e-mail';
-$lang['emaildir_tip'] = 'Cette adresse peut &ecirc;tre chang&eacute;e &agrave; tout moment. L\'adresse deviendra permanente s\'il n\'y a pas de changemements pendant les 7 jours qui suivent.';
-$lang['permanentemaildir'] = 'Adresse e-mail permanente';
+$lang['userdata'] = 'Datos del jugador';
+$lang['username'] = 'Nombre del jugador';
+$lang['lastpassword'] = 'Contraseña actual';
+$lang['newpassword'] = 'Nueva contraseña (mín. 8 caracteres)';
+$lang['newpasswordagain'] = 'Nueva contraseña (repetir)';
+$lang['emaildir'] = 'Dirección de correo electrónico';
+$lang['emaildir_tip'] = 'Esta dirección puede cambiarse en cualquier momento. Se convertirá en permanente si no se modifica durante los 7 días siguientes.';
+$lang['permanentemaildir'] = 'Dirección de correo electrónico permanente';
 
 // General options
-$lang['thanksforregistry'] = 'Merci de votre inscription.<br />Vous recevrez dans un moment, un e-mail avec votre mot de passe.';
-$lang['general_settings'] = 'R&eacute;glage g&eacute;n&eacute;ral';
-$lang['skins_example'] = 'Skins (p.e. /css/)';
-$lang['avatar_example'] = 'Avatar (p.e. /img/avatar.jpg)';
-$lang['showskin'] = 'Montrer skin';
-$lang['untoggleip'] = 'D&eacute;sactiver la v&eacute;rification d\'IP';
-$lang['untoggleip_tip'] = 'La v&eacute;rification d\'IP signifie qu\'on effectuera un logout de s&eacute;curit&eacute; automatiquement quand il y aura un changement  d\'IP ou quand 2 personnes entreront sur le m&ecirc;me compte en utilisant diff&eacute;rentes IPs. Activer la v&eacute;rification d\'IP peut &ecirc;tre un atout de s&eacute;curit&eacute; !';
+$lang['thanksforregistry'] = 'Gracias por su inscripción.<br />En unos momentos recibirá un correo electrónico con su contraseña.';
+$lang['general_settings'] = 'Configuración general';
+$lang['skins_example'] = 'Skins (p. ej. /css/)';
+$lang['avatar_example'] = 'Avatar (p. ej. /img/avatar.jpg)';
+$lang['showskin'] = 'Mostrar skin';
+$lang['untoggleip'] = 'Desactivar la comprobación de IP';
+$lang['untoggleip_tip'] = 'La comprobación de IP significa que la sesión se cerrará automáticamente por seguridad cuando cambie la IP o cuando 2 personas accedan a la misma cuenta desde IP diferentes. ¡Activar la comprobación de IP puede ser una ventaja para la seguridad!';
 
 // Option galaxy
-$lang['galaxyvision_options'] = 'Param&eacute;trage de la vue de la galaxie';
-$lang['spy_cant'] = 'Nombre de sondes';
-$lang['spy_cant_tip'] = 'Nombre de sondes d\'espionnage envoy&eacute;es depuis le menu galaxie &agrave; chaque fois que vous espionnez quelqu\'un.';
-$lang['tooltip_time'] = 'Afficher tooltips pour';
-$lang['mess_ammount_max'] = 'Nombre maximal de messages de flotte';
-$lang['show_ally_logo'] = 'Montrer le logo des alliances';
-$lang['seconds'] = 'Secondes';
+$lang['galaxyvision_options'] = 'Configuración de la vista de galaxia';
+$lang['spy_cant'] = 'Número de sondas';
+$lang['spy_cant_tip'] = 'Número de sondas de espionaje enviadas desde el menú de galaxia cada vez que espía a alguien.';
+$lang['tooltip_time'] = 'Mostrar las ayudas emergentes durante';
+$lang['mess_ammount_max'] = 'Número máximo de mensajes de flota';
+$lang['show_ally_logo'] = 'Mostrar el logotipo de las alianzas';
+$lang['seconds'] = 'segundos';
 
 //Rapport acces
-$lang['shortcut'] = 'Acc&egrave;s direct';
-$lang['show'] = 'Montrer';
-$lang['write_a_messege'] = 'Ecrire message';
-$lang['spy'] = 'Espionner';
-$lang['add_to_buddylist'] = 'Ajouter &agrave; la liste d\'amis';
-$lang['attack_with_missile'] = 'Attaquer avec les missiles';
-$lang['show_report'] = 'Voir rapport';
+$lang['shortcut'] = 'Acceso directo';
+$lang['show'] = 'Mostrar';
+$lang['write_a_messege'] = 'Escribir mensaje';
+$lang['spy'] = 'Espiar';
+$lang['add_to_buddylist'] = 'Añadir a la lista de amigos';
+$lang['attack_with_missile'] = 'Atacar con misiles';
+$lang['show_report'] = 'Ver informe';
 
 //Vacations mod
-$lang['delete_vacations'] = 'Mode vacances / Effacer le compte';
-$lang['mode_vacations'] = 'Activer le mode vacances';
-$lang['vacations_tip'] = 'Le mode vacances est l&agrave; pour vous prot&eacute;ger pendant votre absence.';
-$lang['deleteaccount'] = 'Effacer le compte';
-$lang['deleteaccount_tip'] = 'Ton compte sera compl&egrave;tement effac&eacute; dans 7 jours.';
-$lang['save_settings'] = 'Sauvegarder les changements';
+$lang['delete_vacations'] = 'Modo vacaciones / Borrar la cuenta';
+$lang['mode_vacations'] = 'Activar el modo vacaciones';
+$lang['vacations_tip'] = 'El modo vacaciones sirve para protegerle durante su ausencia.';
+$lang['deleteaccount'] = 'Borrar la cuenta';
+$lang['deleteaccount_tip'] = 'Su cuenta se borrará por completo dentro de 7 días.';
+$lang['save_settings'] = 'Guardar los cambios';
 
 
 // Created by Perberos. All rights reversed (C) 2006
@@ -61,5 +61,29 @@ $lang['options_label'] = 'Opciones';
 
 // XNova Renaissance 0.9g : mode vacances
 $lang['vacation_fleets_flying'] = 'No puede activar el modo vacaciones mientras sus flotas estén en vuelo.';
+
+// XNova Renaissance 0.9g : choix de la langue
+$lang['opt_lang_label'] = 'Idioma';
+
+// XNova Renaissance 0.9g : traductions
+$lang['exit_vacations'] = 'Salir del modo vacaciones';
+$lang['vaccation_mode'] = 'Modo vacaciones activo como mínimo hasta el: ';
+$lang['you_cant_exit_vmode'] = 'No puede desactivar el modo vacaciones antes de la fecha mínima (48 horas después de su activación).';
+$lang['error_label'] = 'Error';
+$lang['opt_lst_ord'] = 'Ordenar los planetas por:';
+$lang['opt_lst_ord0'] = 'Fecha de colonización';
+$lang['opt_lst_ord1'] = 'Coordenadas';
+$lang['opt_lst_ord2'] = 'Orden alfabético';
+$lang['opt_lst_cla'] = 'Sentido de la ordenación:';
+$lang['opt_lst_cla0'] = 'ascendente';
+$lang['opt_lst_cla1'] = 'descendente';
+$lang['opt_chk_skin'] = 'Usar el skin';
+$lang['opt_adm_title'] = 'Opciones reservadas a la administración';
+$lang['opt_adm_planet_prot'] = 'Protección de los planetas';
+$lang['changue_name'] = 'Cambiar el nombre de jugador';
+$lang['succeful_changename'] = 'El nombre de jugador se ha cambiado correctamente.<br /><a href="login.php" target="_top">Vuelva a conectarse</a>';
+
+// XNova Renaissance 0.9g : longueur minimale du mot de passe
+$lang['opt_password_short'] = 'La nueva contraseña debe tener al menos 8 caracteres: no se ha cambiado.';
 
 ?>

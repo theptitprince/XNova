@@ -5,20 +5,20 @@ $lang['adm_af_done'] = "Naves a&ntilde;adidas.";
 $lang['adm_af_noplanet'] = "Ning&uacute;n planeta con este identificador.";
 
 $lang['adm_af_title'] = "A&ntilde;adir flota";
-$lang['id_label'] = "ID de la plan&egrave;te";
-$lang['cle'] = "Chasseur Leger"; 
-$lang['clourd'] = "Chasseur Lourd";
-$lang['pt'] = "Petit Transporteur";
-$lang['gt'] = "Grand Transporteur";
-$lang['cruise'] = "Croiseur";
-$lang['vb'] = "Vaisseau de bataille";
-$lang['colo'] = "Colonisateur";
-$lang['rc'] = "Recycleur";
-$lang['spy'] = "Sondes d'espionnage";
-$lang['bomb'] = "Bombardier";
-$lang['solar'] = "Satelitte solaire";
-$lang['des'] = "Destructeur";
-$lang['rip'] = "Etoile de la mort";
-$lang['traq'] = "Traqueur";
+$lang['id_label'] = 'ID del planeta';
+$lang['cle'] = 'Cazador ligero'; 
+$lang['clourd'] = 'Cazador pesado';
+$lang['pt'] = 'Nave pequeña de carga';
+$lang['gt'] = 'Nave grande de carga';
+$lang['cruise'] = 'Crucero';
+$lang['vb'] = 'Nave de batalla';
+$lang['colo'] = 'Colonizador';
+$lang['rc'] = 'Reciclador';
+$lang['spy'] = 'Sondas de espionaje';
+$lang['bomb'] = 'Bombardero';
+$lang['solar'] = 'Satélite solar';
+$lang['des'] = 'Destructor';
+$lang['rip'] = 'Estrella de la muerte';
+$lang['traq'] = 'Acorazado';
 
 ?>

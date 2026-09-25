@@ -33,7 +33,6 @@ $lang['continue']         = "Continuer";
 $lang['ready']            = "Pret";
 $lang['destroy']          = "D&eacute;truire";
 $lang['on']               = "sur";
-$lang['attention']        = "Attention le bannissement est proche sale tricheur ! Ton action a &eacute;t&eacute; signal&eacute;e !";
 $lang['no_laboratory']    = "Un laboratoire de recherche est n&eacute;cessaire.";
 $lang['need_hangar']      = "Un chantier spatial est n&eacute;cessaire.";
 $lang['labo_on_update']   = "Impossible de rechercher quand le laboratoire est en &eacute;volution!";

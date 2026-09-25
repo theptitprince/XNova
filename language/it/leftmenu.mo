@@ -30,7 +30,7 @@ $lang['records'] = 'Records';
 
 $lang['messages_label'] = 'Messaggi';
 $lang['notes'] = 'Note';
-$lang['buddylist'] = 'Liste amici';
+$lang['buddylist'] = 'Lista amici';
 
 $lang['board'] = 'Forum';
 $lang['contact'] = 'Contatti';
@@ -42,53 +42,61 @@ $lang['help'] = 'Aiuto';
 $lang['rules_label'] = 'Regole';
 
 // User menu titles
-$lang['devlp']        = 'D&eacute;veloppement';
-$lang['navig']        = 'Navigation';
-$lang['observ']       = 'Observatoire';
-$lang['commun']       = 'Communaut&eacute;';
-$lang['infog']        = 'Informations';
+$lang['devlp']        = 'Sviluppo';
+$lang['navig']        = 'Navigazione';
+$lang['observ']       = 'Osservatorio';
+$lang['commun']       = 'Comunità';
+$lang['infog']        = 'Informazioni';
 
 // Administrator menu links
-$lang['adm_over']     = 'Vue g&eacute;n&eacute;rale';
-$lang['adm_conf']     = 'Configuration';
-$lang['adm_reset']    = 'Remise &agrave; z&eacute;ro';
+$lang['adm_over']     = 'Visione generale';
+$lang['adm_conf']     = 'Configurazione';
+$lang['adm_reset']    = 'Azzeramento';
 
-$lang['adm_plrlst']   = 'Liste des joueurs';
-$lang['adm_plrsch']   = 'Chercher un joueur';
-$lang['adm_addres']   = 'Ajout de ressources';
-$lang['adm_addfleet'] = 'Ajout de flotte';
-$lang['adm_delres']   = 'Suppr de ressources';
+$lang['adm_plrlst']   = 'Lista dei giocatori';
+$lang['adm_plrsch']   = 'Cerca un giocatore';
+$lang['adm_addres']   = 'Aggiungi risorse';
+$lang['adm_addfleet'] = 'Aggiungi flotta';
+$lang['adm_delres']   = 'Rimuovi risorse';
 
-$lang['adm_pltlst']   = 'Liste des plan&egrave;tes';
-$lang['adm_actplt']   = 'Plan&egrave;tes actives';
+$lang['adm_pltlst']   = 'Lista dei pianeti';
+$lang['adm_actplt']   = 'Pianeti attivi';
 
-$lang['adm_moonlst']  = 'Liste des lunes';
-$lang['adm_addmoon']  = 'Ajout de lunes';
+$lang['adm_moonlst']  = 'Lista delle lune';
+$lang['adm_addmoon']  = 'Aggiungi luna';
 
-$lang['adm_fleet']    = 'Flottes en vol';
+$lang['adm_fleet']    = 'Flotte in volo';
 
-$lang['adm_ban']      = 'Bannir';
-$lang['adm_unban']    = 'D&eacute;bannir';
+$lang['adm_ban']      = 'Banna';
+$lang['adm_unban']    = 'Revoca ban';
 
-$lang['adm_chat']     = 'Administration chat';
-$lang['adm_updpt']    = 'Actualiser points';
-$lang['adm_msg']      = 'Liste des messages';
-$lang['adm_md5']      = 'Outil cryptage';
-$lang['adm_build']    = 'Queue fabrication';
+$lang['adm_chat']     = 'Amministrazione chat';
+$lang['adm_updpt']    = 'Aggiorna punti';
+$lang['adm_msg']      = 'Lista dei messaggi';
+$lang['adm_md5']      = 'Strumento di cifratura';
+$lang['adm_build']    = 'Code di costruzione';
 
-$lang['adm_error']    = 'Erreurs';
-$lang['adm_help']     = 'Forum d\'aide';
-$lang['adm_back']     = 'Retour';
+$lang['adm_error']    = 'Errori';
+$lang['adm_help']     = 'Forum di supporto';
+$lang['adm_back']     = 'Indietro';
 
 // Administrator menu titles
-$lang['admin']        = 'Administration';
-$lang['player']       = 'Joueurs';
-$lang['tool']         = 'Pratique';
+$lang['admin']        = 'Amministrazione';
+$lang['player']       = 'Giocatori';
+$lang['tool']         = 'Strumenti';
 
 // Informations serveur
-$lang['lm_ifo_serv']  = "Ressources";
-$lang['lm_ifo_game']  = "Jeu";
-$lang['lm_ifo_fleet'] = "Flotte";
-$lang['lm_ifo_queue'] = "Queues";
+$lang['lm_ifo_serv']  = 'Risorse';
+$lang['lm_ifo_game']  = 'Gioco';
+$lang['lm_ifo_fleet'] = 'Flotta';
+$lang['lm_ifo_queue'] = 'Code';
+
+// XNova Renaissance 0.9g : traductions
+$lang['qry'] = 'Esegui comando SQL';
+$lang['multi'] = 'Dichiarazione multi-account';
+$lang['adm_extcopy'] = 'Copyright estesi';
+$lang['multis_declared'] = 'Multi-account dichiarati';
+$lang['adm_contact'] = 'Messaggi di contatto';
+$lang['change_pass'] = 'Cambia password giocatore';
 
 ?>

@@ -1,11 +1,11 @@
 <?php
 
 $lang['chat']  = "Chat";
-$lang['chat_loading']  = "Proszê czekaæ...";
-$lang['chat_disc']     = "Rozmowa na ¿ywo";
-$lang['chat_message']  = "Wiadomo¶æ";
-$lang['chat_short']    = "Krótkie";
-$lang['chat_text']     = "Tekst";
-$lang['chat_send']     = "Wy¶lij";
+$lang['chat_loading']  = 'Caricamento in corso...';
+$lang['chat_disc']     = 'Discussione in diretta';
+$lang['chat_message']  = 'Messaggio';
+$lang['chat_short']    = 'Scorciatoie';
+$lang['chat_text']     = 'Testo';
+$lang['chat_send']     = 'Invia';
 
 ?>

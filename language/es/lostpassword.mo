@@ -1,8 +1,8 @@
 <?php
 
-$lang['reset_pass'] = "Restitución de contraseña";
-$lang['text_pass1'] = "Debe poner la dirección correo electrónico de su cuenta";
-$lang['text_pass2'] = "tal como se informa en sus Opciones. Es también la que utilizó para la inscripción. Si apoya en “Enviar”, una nueva contraseña será creada lo recibiría entonces por correo electrónico a la dirección indicada.";
+$lang['reset_pass'] = 'Contraseña olvidada';
+$lang['text_pass1'] = 'Introduzca la dirección de correo electrónico de su cuenta';
+$lang['text_pass2'] = 'tal como figura en sus Opciones. Es también la que utilizó para registrarse. Si pulsa “Enviar”, se creará una nueva contraseña y se enviará a esa dirección.';
 $lang['email']    = "correo electrónico";
 $lang['button_send_pass'] = "Enviar";
 $lang['pass_form'] = "Formulario";
@@ -11,6 +11,10 @@ $lang['pass_form'] = "Formulario";
 $lang['system']        = "Sistema";
 $lang['lp_sent']       = "Si esta direcci&oacute;n corresponde a una cuenta, se le acaba de enviar una nueva contrase&ntilde;a.";
 $lang['lp_mail_title'] = "Nueva contrase&ntilde;a";
-$lang['lp_mail_body']  = "Hola {username},\n\naqu&iacute; tienes tu nueva contrase&ntilde;a para {gamename}: {password}\n\nC&aacute;mbiala en tus Opciones en tu pr&oacute;xima conexi&oacute;n.";
+$lang['lp_mail_body']  = 'Hola {username},
+
+aquí tiene su nueva contraseña para {gamename}: {password}
+
+Recuerde cambiarla en sus Opciones en su próxima conexión.';
 
 ?>

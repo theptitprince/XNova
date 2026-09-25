@@ -122,4 +122,30 @@ $lang['res']['fleet'] = array(
 
 
 // Created by Ichigo. All rights reversed (C) 2006
+
+// XNova Renaissance 0.9g : raccourcis de flotte (fleetshortcut.php)
+$lang['fs_title'] = 'Raccourcis';
+$lang['fs_add'] = 'Ajouter';
+$lang['fs_none'] = 'Aucun raccourci';
+$lang['fs_back'] = 'Retour';
+$lang['fs_name_coords'] = 'Nom [Galaxie / Syst&egrave;me solaire / Position]';
+$lang['fs_name'] = 'Nom';
+$lang['fs_galaxy'] = 'Galaxie';
+$lang['fs_system'] = 'Syst&egrave;me solaire';
+$lang['fs_position'] = 'Position';
+$lang['fs_type_planet'] = 'Plan&egrave;te';
+$lang['fs_type_debris'] = 'D&eacute;bris';
+$lang['fs_type_moon'] = 'Lune';
+$lang['fs_reset'] = 'Effacer';
+$lang['fs_save'] = 'Enregistrer';
+$lang['fs_delete'] = 'Supprimer';
+$lang['fs_edit'] = 'Modifier';
+$lang['fs_saved'] = 'Le raccourci a &eacute;t&eacute; enregistr&eacute;.';
+$lang['fs_edited'] = 'Le raccourci a &eacute;t&eacute; modifi&eacute;.';
+$lang['fs_deleted'] = 'Le raccourci a &eacute;t&eacute; supprim&eacute;.';
+$lang['fs_unnamed'] = 'Sans nom';
+$lang['fs_mark_debris'] = '(D)';
+$lang['fs_mark_moon'] = '(L)';
+$lang['fs_not_found'] = 'Ce raccourci n\'existe pas.';
+
 ?>

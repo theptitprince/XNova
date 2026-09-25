@@ -62,10 +62,13 @@ foreach ($Missing as $K => $Where) {
 }
 
 if (in_array('--langues', $argv)) {
+	// Comparaison fichier a fichier des langues : uniquement les cles definies dans language/fr
+	// (pas celles que le code remplit lui-meme, qui n'ont rien a traduire)
+	$FrFiles = DefinedKeys($Root . '/language/fr');
 	foreach (array('de', 'es', 'it') as $L) {
 		if (!is_dir($Root . '/language/' . $L)) continue;
 		$Other = DefinedKeys($Root . '/language/' . $L);
-		$Absent = array_diff_key($Fr, $Other);
+		$Absent = array_diff_key($FrFiles, $Other);
 		echo "\n=== Cles du francais absentes de '$L' : " . count($Absent) . "\n";
 		echo wordwrap(implode(', ', array_keys($Absent)), 110) . "\n";
 	}

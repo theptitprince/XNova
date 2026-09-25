@@ -2,7 +2,7 @@
 
 $lang['production_of_resources_in_the_planet'] 	= 'Produktion auf "%s"';
 $lang['production_level_label'] 				= 'Produktionsstufe';
-$lang['basic_income'] 					= 'Standartproduktion';
+$lang['basic_income'] 					= 'Grundproduktion';
 $lang['quantity'] 					= 'Anzahl';
 $lang['level'] 						= 'Stufe';
 $lang['stores_capacity'] 				= 'Speicherkapazit&auml;t';

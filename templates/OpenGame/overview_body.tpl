@@ -10,7 +10,7 @@
 .ov_texte    { display: block; width: 96px; margin: 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ov_nomlune  { display: block; width: 86px; margin: 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 </style>
-<script type="text/javascript">var xnova_heure_serveur = {server_clock};</script>
+<script type="text/javascript">var xnova_heure_serveur = {server_clock}; var xnova_format_heure = "{ov_clock_format}";</script>
 <script language="JavaScript" type="text/javascript" src="scripts/time.js"></script>
 <br>
 <table width="519">

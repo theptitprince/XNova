@@ -11,7 +11,7 @@ $lang['searched_alliance_availables'] 	= 'Es wurden folgende Allianzen gefunden:
 $lang['alliance_has_been_maked'] 		= 'Die Allianz %s wurde erstellt.';
 $lang['have_not_tag'] 				= 'Die Allianz hat noch kein Allianz Tag!';
 $lang['have_not_name'] 				= 'Die Allianz hat noch keinen Namen!';
-$lang['always_exist'] 				= '%s Existiert bereits;';
+$lang['always_exist'] 				= '%s existiert bereits!';
 $lang['ally_maked'] 				= '%s erstellt';
 $lang['ally_notexist'] 				= 'Allianz wurde gel&ouml;scht!';
 $lang['send_circular_mail_label'] 			= 'Rundmail verfassen';
@@ -23,22 +23,22 @@ $lang['members_label'] 					= 'Mitglieder';
 $lang['name_label'] 					= 'Name';
 $lang['tag_label'] 					= 'TAG';
 $lang['circular_message'] 			= 'Rundmail';
-$lang['inner_section'] 				= 'Internerbereich';
+$lang['inner_section'] 				= 'Interner Bereich';
 $lang['main_page'] 				= 'Homepage';
 
-$lang['alliance_tag'] 				= 'Allianz Tag';
-$lang['allyance_name'] 				= 'Allianz Name';
+$lang['alliance_tag'] 				= 'Allianz-Tag';
+$lang['allyance_name'] 				= 'Allianzname';
 $lang['members'] 					= 'Mitglieder';
 $lang['member']					= 'Mitglied';
 $lang['novate'] 					= 'Neuling';
 
 $lang['founder'] 					= 'Gr&uuml;nder';
 
-$lang['circular_sended'] 			= 'Rundmail wurde gesendet';
+$lang['circular_sended'] 			= 'Folgende Spieler haben die Rundmail erhalten';
 
 //Solicitud
-$lang['it_is_not_posible_to_apply'] 	= "Nicht m&ouml;glich!";
-$lang['write_apply'] 				= "Allianztext";
+$lang['it_is_not_posible_to_apply'] 	= 'Bewerbung bei dieser Allianz nicht möglich';
+$lang['write_apply'] 				= 'Bewerbung abschicken';
 $lang['your_apply'] 				= 'Bewerbung';
 $lang['apply_registered'] 			= 'Anfrage gesendet. Du erh&auml;lst eine Nachricht, ob dein Antrag angenommen / abgelehnt wurde. <br><a href="alliance.php">Zur&uuml;ck</a>';
 $lang['apply_cantbeadded'] 			= 'Anfrage konnte nicht zugeordnet werden. Bitte versuche es nochmals.';
@@ -46,11 +46,11 @@ $lang['apply_cantbeadded'] 			= 'Anfrage konnte nicht zugeordnet werden. Bitte v
 $lang['exit_of_this_alliance'] 		= "Allianz verlassen";
 $lang['continue_label'] 				= "Weiter";
 $lang['all_players'] 				= 'Alle Spieler';
-$lang['send_apply'] 				= 'Senden';
-$lang['delete_apply'] 				= 'L&ouml;schen';
+$lang['send_apply'] 				= 'Bewerbung einreichen';
+$lang['delete_apply'] 				= 'Bewerbung zurückziehen';
 $lang['send_label'] 					= 'Senden';
 $lang['ok'] 					= 'OK';
-$lang['reload'] 					= 'Neuladen';
+$lang['reload'] 					= 'Vorlage laden';
 $lang['clear'] 					= 'Zur&uuml;cksetzen';
 $lang['back'] 					= 'Zur&uuml;ck';
 $lang['help'] 					= 'Hilfe';
@@ -58,9 +58,9 @@ $lang['message_label'] 					= 'Nachricht';
 $lang['characters'] 				= 'Zeichen';
 $lang['destiny'] 					= 'Empf&auml;nger';
 
-$lang['write_to_alliance'] 			= 'Nachricht an die Allianz versenden [%s]';
+$lang['write_to_alliance'] 			= 'Bewerbung an die Allianz [%s] senden';
 
-$lang['there_is_no_a_text_apply'] 		= 'Der Allyleader hat keine Nachricht hinterlassen.';
+$lang['there_is_no_a_text_apply'] 		= 'Die Allianzleitung hat keine Bewerbungsvorlage erstellt.';
 $lang['waiting_a_request_text'] 		= 'Du hast bereits eine Bewerbung an die Allianz [%s] gestellt. Bitte warte auf die Antwort der Allianz oder ziehe deine Bewerbung zur&uuml;ck.';
 $lang['canceled_a_request_text'] 		= 'Deine Bewerbung der Allianz [%s] wurde gel&ouml;scht. Du kannst nun eine neue Bewerbung verfassen.';
 
@@ -71,7 +71,7 @@ $lang['number'] 					= 'Nr.';
 $lang['position_label'] 				= 'Rang';
 $lang['points_label'] 					= 'Punkte';
 $lang['coordinated_label'] 				= 'Koordinaten';
-$lang['member_from'] 				= 'Beitritt in die Alli';
+$lang['member_from'] 				= 'Mitglied seit';
 $lang['function'] 				= 'Funktionen';
 $lang['write_a_message'] 			= 'Nachricht schreiben';
 $lang['on_label'] 					= 'Online';
@@ -80,29 +80,29 @@ $lang['off'] 					= 'Offline';
 
 //Admin
 $lang['transfer_alliance'] 			= 'Allianz &uuml;bertragen';
-$lang['texts'] 					= 'Text Management';
+$lang['texts'] 					= 'Textverwaltung';
 $lang['external_text'] 				= 'Externer Text';
 $lang['internal_text'] 				= 'Interner Text';
-$lang['request_text_label'] 				= 'Text';
-$lang['show_of_request_text'] 		= 'Externer Allianz Text';
+$lang['request_text_label'] 				= 'Bewerbungstext';
+$lang['show_of_request_text'] 		= 'Bewerbungstext';
 
 $lang['law_settings'] 				= 'Rechte einstellen';
 $lang['members_administrate'] 		= 'Mitglieder verwalten';
 
-$lang['return_to_overview'] 			= 'Zur&uuml;ck zur &Uuml;bersicht';
+$lang['return_to_overview'] 			= 'Zurück zur Allianzseite';
 $lang['configure_laws'] 			= 'Rechte einstellen';
-$lang['range_name'] 				= 'Rang Name';
-$lang['range_make'] 				= 'Neun Rang Erstellen';
+$lang['range_name'] 				= 'Rangname';
+$lang['range_make'] 				= 'Neuen Rang erstellen';
 $lang['delete_range'] 				= 'Rang l&ouml;schen';
 $lang['make'] 					= 'Erstellen';
 $lang['law_leyends'] 				= 'Rechtebeschreibung';
 $lang['alliance_dissolve'] 			= 'Allianz aufl&ouml;sen';
-$lang['expel_users'] 				= 'Spieler kicken';
-$lang['see_the_requests'] 			= 'Bewerbung ansehen';
+$lang['expel_users'] 				= 'Mitglieder ausschließen';
+$lang['see_the_requests'] 			= 'Bewerbungen ansehen';
 $lang['see_the_list_members'] 		= 'Mitgliederliste anzeigen';
 $lang['check_the_requests'] 			= 'Bewerbungen bearbeiten';
 $lang['see_the_online_list_member'] 	= 'Onlinestatus in der Mitgliederliste anzeigen';
-$lang['make_a_circular_message'] 		= 'Rundmail Schreiben';
+$lang['make_a_circular_message'] 		= 'Rundmail schreiben';
 $lang['left_hand_text'] 			= '\'Rechte Hand\' (notwendig, um den Gr&uuml;nderstatus zu &uuml;bertragen)';
 $lang['save'] 					= 'Speichern';
 $lang['there_is_not_range'] 			= 'Bis jetzt wurden noch keine R&auml;nge gespeichert';
@@ -123,9 +123,9 @@ $lang['apply_ally_overview'] 			= "Bewerbungs&uuml;bersicht";
 $lang['candidate'] 				= "Name";
 	
 $lang['date_of_the_request'] 			= "Bewerbung gesendet am";
-$lang['search'] 					= "Allianz Suchen";
+$lang['search'] 					= 'Allianz suchen';
 $lang['request_responde'] 			= "Antworten";
-$lang['motive_optional'] 			= "Antwort (Optimal)";
+$lang['motive_optional'] 			= 'Begründung (optional)';
 $lang['go_out_welldone'] 			= 'Du hast die Allianz %s verlassen.';
 $lang['want_go_out'] 				= 'Willst du die Allianz %s wirklich verlassen?';
 

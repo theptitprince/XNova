@@ -20,9 +20,14 @@ include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
 function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
-	global $lang, $_POST;
+	global $lang, $_POST, $game_config;
 
 	includeLang('marchand');
+
+	// Page desactivee par l'administrateur : le menu cachait le lien, l'adresse directe restait ouverte
+	if ($game_config['enable_marchand'] != 1) {
+		message($lang['sys_page_disabled'], $lang['mod_ma_title']);
+	}
 
 	$parse   = $lang;
 

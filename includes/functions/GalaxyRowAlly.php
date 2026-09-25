@@ -22,17 +22,14 @@ function GalaxyRowAlly ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 		if ($allyquery) {
 			$members_count = doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE ally_id=" . $allyquery['id'] . ";", "users", true);
 
-			if ($members_count[0] > 1) {
-				$add = "s";
-			} else {
-				$add = "";
-			}
+			// Pluriel dans la langue du joueur (un « s » francais etait ajoute au mot, en toute langue)
+			$MembersLabel = ($members_count[0] > 1) ? $lang['gl_membres'] : $lang['gl_membre'];
 
 			$Result .= "<a style=\"cursor: pointer;\"";
 			$Result .= " onmouseover='return overlib(\"";
 			$Result .= "<table width=240>";
 			$Result .= "<tr>";
-			$Result .= "<td class=c>".$lang['alliance_label']." ". $allyquery['ally_name'] ." ".$lang['gl_with']." ". $members_count[0] ." ". $lang['gl_membre'] . $add ."</td>";
+			$Result .= "<td class=c>".$lang['alliance_label']." ". $allyquery['ally_name'] ." ".$lang['gl_with']." ". $members_count[0] ." ". $MembersLabel ."</td>";
 			$Result .= "</tr>";
 			$Result .= "<th>";
 			$Result .= "<table>";

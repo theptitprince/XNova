@@ -121,4 +121,10 @@ $lang['sys_csrf_error'] = 'Cette action a &eacute;t&eacute; refus&eacute;e : la 
 $lang['sys_vacation_title'] = 'Mode vacances';
 $lang['sys_vacation_active'] = 'Vous &ecirc;tes en mode vacances : impossible d\'envoyer une flotte ou des missiles.';
 
+// XNova Renaissance 0.9g : pages desactivees par l'administrateur
+$lang['sys_page_disabled'] = 'Cette page a &eacute;t&eacute; d&eacute;sactiv&eacute;e par l\'administrateur.';
+
+// XNova Renaissance 0.9g : frames.php (index.mo, jamais charge, supprime)
+$lang['no_frames'] = 'Votre navigateur n\'affiche pas les cadres (frames), n&eacute;cessaires au jeu.';
+
 ?>

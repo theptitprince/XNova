@@ -16,26 +16,26 @@ $lang['newpasswordagain'] = 'Nuova password (Ripetere)';
 $lang['emaildir'] = 'Indirizzo e-mail';
 $lang['emaildir_tip'] = 'Questo indirizzo lo potete cambiare quando volete. L\'indirizzo sarà permanente fra 7 giorni.';
 $lang['permanentemaildir'] = 'Indirizzo e-mail permanente';
-$lang['languese'] = 'Jêzyk';
-$lang['pl'] = 'Polski';
-$lang['fr'] = 'Francuski';
-$lang['es'] = 'Hiszpañski';
-$lang['de'] = 'Niemiecki';
-$lang['en'] = 'Angielski';
-$lang['it'] = 'W³oski';
+$lang['languese'] = 'Lingua';
+$lang['pl'] = 'Polacco';
+$lang['fr'] = 'Francese';
+$lang['es'] = 'Spagnolo';
+$lang['de'] = 'Tedesco';
+$lang['en'] = 'Inglese';
+$lang['it'] = 'Italiano';
 
-$lang['opt_lst_ord']  = "Classer les planetes dans l'ordre suivant :";
-$lang['opt_lst_ord0'] = "Date de colonisation";
-$lang['opt_lst_ord1'] = "Coordonnees";
-$lang['opt_lst_ord2'] = "Ordre alphabetique";
-$lang['opt_lst_cla']  = "Ordre de classement :";
-$lang['opt_lst_cla0'] = "croissant";
-$lang['opt_lst_cla1'] = "décroissant";
-$lang['opt_chk_skin'] = "Utiliser le skin";
+$lang['opt_lst_ord']  = 'Ordina i pianeti per:';
+$lang['opt_lst_ord0'] = 'Data di colonizzazione';
+$lang['opt_lst_ord1'] = 'Coordinate';
+$lang['opt_lst_ord2'] = 'Ordine alfabetico';
+$lang['opt_lst_cla']  = 'Ordinamento:';
+$lang['opt_lst_cla0'] = 'crescente';
+$lang['opt_lst_cla1'] = 'decrescente';
+$lang['opt_chk_skin'] = 'Usa la skin';
 
 // Admin Options
-$lang['opt_adm_title'] = "Options r&eacute;serv&eacute;es a l'administration";
-$lang['opt_adm_planet_prot'] = "Protection des plan&egrave;tes";
+$lang['opt_adm_title'] = 'Opzioni riservate all\'amministrazione';
+$lang['opt_adm_planet_prot'] = 'Protezione dei pianeti';
 
 //Opzioni generale
 $lang['thanksforregistry'] = 'Grazie per l\'iscrizione.<br />Riceverete una e-mail con la vostra password.';
@@ -81,5 +81,19 @@ $lang['options_label'] = 'Opzioni';
 
 // XNova Renaissance 0.9g : mode vacances
 $lang['vacation_fleets_flying'] = 'Impossibile attivare la modalità vacanza finché le vostre flotte sono in volo.';
+
+// XNova Renaissance 0.9g : choix de la langue
+$lang['opt_lang_label'] = 'Lingua';
+
+// XNova Renaissance 0.9g : traductions
+$lang['exit_vacations'] = 'Esci dalla modalità vacanza';
+$lang['vaccation_mode'] = 'Modalità vacanza attiva almeno fino al: ';
+$lang['you_cant_exit_vmode'] = 'Non potete disattivare la modalità vacanza prima della data minima (48 ore dopo la sua attivazione).';
+$lang['error_label'] = 'Errore';
+$lang['changue_name'] = 'Cambio del nome';
+$lang['succeful_changename'] = 'Il nome del giocatore è stato cambiato.<br /><a href="login.php" target="_top">Effettuate di nuovo l\'accesso</a>';
+
+// XNova Renaissance 0.9g : longueur minimale du mot de passe
+$lang['opt_password_short'] = 'La nuova password deve contenere almeno 8 caratteri: non è stata cambiata.';
 
 ?>

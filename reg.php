@@ -62,7 +62,8 @@ if ($_POST) {
         $errors++;
     }
 
-    if (strlen(($_POST['passwrd'] ?? null)) < 4) {
+    // 8 caracteres au moins (4 dans l'original), meme regle que le changement de mot de passe des options
+    if (mb_strlen((string) ($_POST['passwrd'] ?? '')) < 8) {
         $errorlist .= $lang['error_password'];
         $errors++;
     }

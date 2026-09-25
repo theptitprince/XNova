@@ -60,4 +60,16 @@ $lang['declare_send']     = 'Envoyer';
 $lang['declare_empty']    = 'Indiquez au moins le premier joueur concern&eacute;.';
 $lang['declare_done']     = 'Merci, votre d&eacute;claration a &eacute;t&eacute; enregistr&eacute;e. Les autres joueurs concern&eacute;s doivent aussi faire la leur.';
 
+// XNova Renaissance 0.9g : formulaire de message (boutons, aide BBCode)
+$lang['msg_reset'] = 'Effacer';
+$lang['msg_send'] = 'Envoyer';
+$lang['msg_wait'] = 'Patientez...';
+$lang['msg_bb_title'] = '&Eacute;motic&ocirc;nes et BBCode :';
+$lang['msg_bb_intro'] = 'Vous pouvez utiliser le BBCode et ces &eacute;motic&ocirc;nes (tapez leur code, deux-points compris) :';
+$lang['msg_bb_bold'] = 'Texte en gras';
+$lang['msg_bb_underline'] = 'Texte soulign&eacute;';
+$lang['msg_bb_italic'] = 'Texte en italique';
+$lang['msg_bb_image'] = 'Une image';
+$lang['msg_bb_text'] = 'Texte';
+
 ?>

@@ -25,7 +25,8 @@ function bbcode($string) {
         '/\[url=(.*?)\](.*?)\[\/url\]/is'        => function ($m) { return urlfix($m[1], $m[2]); },
         '/\[email=(.*?)\](.*?)\[\/email\]/is'    => '<a href="mailto:\1" title="\1">\2</a>',
         '/\[img](.*?)\[\/img\]/is'               => function ($m) { return imagefix($m[1]); },
-        '/\[color=(.*?)\](.*?)\[\/color\]/is'    => '<span style="color: \1;">\2</span>',
+        // Couleur : un nom ou un code #rgb / #rrggbb seulement (avant : n'importe quel style CSS)
+        '/\[color=([a-z]{3,20}|#[0-9a-f]{3}|#[0-9a-f]{6})\](.*?)\[\/color\]/is' => '<span style="color: \1;">\2</span>',
         // sQuote() n'a jamais existe dans XNova : simple citation
         '/\[quote\](.*?)\[\/quote\]/is'          => function ($m) { return '<blockquote>' . $m[1] . '</blockquote>'; },
         '/\[code\](.*?)\[\/code\]/is'            => function ($m) { return sCode($m[1]); },
@@ -46,16 +47,12 @@ function image($string)
         $string = str_replace("&#39;", "'", $string);
 		
 	
-		//Emoticones.... COPIEZ COLLEZ CES LIGNES POUR RAJOUTER LES VOTRES !
-        $string = str_replace("Smile", "[img]../emoticones/Smile.png[/img]", $string);
-		$string = str_replace("cool", "[img]../emoticones/cool.png[/img]", $string);
-        $string = str_replace("grrr", "[img]../emoticones/grrr.png[/img]", $string);
-        $string = str_replace("love", "[img]../emoticones/love.png[/img]", $string);
-        $string = str_replace("msn", "[img]../emoticones/msn.png[/img]", $string);
-        $string = str_replace("Oo", "[img]../emoticones/Oo.png[/img]", $string);
-        $string = str_replace("perdu", "[img]../emoticones/perdu.png[/img]", $string);
-        $string = str_replace("wink", "[img]../emoticones/wink.png[/img]", $string);
-        $string = str_replace("wow", "[img]../emoticones/wow.png[/img]", $string);
+		// Emoticones : code entre deux-points (:cool:, :perdu:...). Avant, le mot seul etait remplace partout
+		// (« j'ai perdu ma flotte », « trop cool » recevaient une image). Pour en ajouter : completer la liste.
+		$Smileys = array('Smile', 'cool', 'grrr', 'love', 'msn', 'Oo', 'perdu', 'wink', 'wow');
+		foreach ($Smileys as $Smiley) {
+			$string = str_ireplace(':' . $Smiley . ':', '[img]emoticones/' . $Smiley . '.png[/img]', $string);
+		}
 
         return $string;
         }

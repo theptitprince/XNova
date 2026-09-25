@@ -7,16 +7,16 @@
  * @copyright 2008 By Chlorel for XNova
  */
 
-$lang['mod_ma_title'] = "Handlarz";
-$lang['mod_ma_typer'] = "Handlarz";
-$lang['mod_ma_rates'] = "Przelicznik surowców: 2/1/0.5";
-$lang['mod_ma_buton'] = "Handluj";
-$lang['mod_ma_noten'] = "Brak podanej iloœci surowców";
-$lang['mod_ma_done']  = "Wymiana wykonana z powodzeniem!";
-$lang['mod_ma_error'] = "B³¹d";
-$lang['mod_ma_donet'] = "Wymieni³eœ surowce";
-$lang['mod_ma_excha'] = "Wymieñ";
-$lang['mod_ma_cours'] = "Kurs wymiany";
-$lang['mod_ma_nbre']  = "Liczba!";
+$lang['mod_ma_title'] = 'Chiama un mercante';
+$lang['mod_ma_typer'] = 'Chiama un mercante che acquista';
+$lang['mod_ma_rates'] = 'Il tasso di cambio è 2/1/0.5';
+$lang['mod_ma_buton'] = 'Chiama il mercante';
+$lang['mod_ma_noten'] = 'Non avete abbastanza';
+$lang['mod_ma_done']  = 'Lo scambio è stato effettuato con successo!';
+$lang['mod_ma_error'] = 'Errore';
+$lang['mod_ma_donet'] = 'Scambio effettuato';
+$lang['mod_ma_excha'] = 'Scambia';
+$lang['mod_ma_cours'] = 'Tasso di cambio';
+$lang['mod_ma_nbre']  = 'Inserite un numero!';
 
 ?>

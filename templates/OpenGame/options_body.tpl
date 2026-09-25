@@ -29,6 +29,13 @@
 </tr><tr>
 	<td class="c" colspan="2">{general_settings}</td>
 </tr><tr>
+	<th>{opt_lang_label}</th>
+	<th>
+		<select name="lang">
+		{opt_lang_data}
+		</select>
+	</th>
+</tr><tr>
 	<th>{opt_lst_ord}</th>
 	<th>
 		<select name="settings_sort">

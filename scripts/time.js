@@ -37,7 +37,8 @@ DinaDate = "" + jour0 + jour + "/" +  mois0 + mois + "/" + annee0 + annee;
 total = DinaDate
 DinaHeure = heure0 + heure + ":" + min0 + min + ":" + sec0 + sec;
 total = DinaHeure
-total = "Nous sommes le " + DinaDate + " et il est " + DinaHeure + ".";
+// Phrase dans la langue du joueur, fournie par la page (%date et %time remplaces)
+total = ((typeof xnova_format_heure != 'undefined' && xnova_format_heure != '') ? xnova_format_heure : "%date %time").replace("%date", DinaDate).replace("%time", DinaHeure);
 
 document.getElementById("dateheure").innerHTML = total;
 

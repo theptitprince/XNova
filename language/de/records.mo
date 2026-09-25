@@ -20,4 +20,7 @@ $lang['rec_techn'] = "Technologien";
 $lang['rec_level'] = "Stufe"; 
 $lang['rec_nbre']  = "Anzahl"; 
 
+// XNova Renaissance 0.9g : traductions
+$lang['rec_rien'] = '-';
+
 ?>

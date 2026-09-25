@@ -1,0 +1,66 @@
+<?php
+
+// XNova Renaissance 0.9g : traductions
+$lang['respectrules'] = 'Queste regole devono essere rispettate: ogni infrazione sarà punita con un ban temporaneo o definitivo!';
+$lang['rules'] = 'Regolamento';
+$lang['account_text'] = 'Ogni giocatore ha il diritto di giocare con un solo account per universo.';
+$lang['account_text2'] = 'Un account può essere giocato da una sola persona.';
+$lang['multi_account_text'] = 'È severamente vietato giocare con più di un account per universo.';
+$lang['multi_account_text2'] = 'Se 2 o più giocatori condividono lo stesso indirizzo IP (membri di una stessa famiglia, coppie, scuole ecc.), non deve esserci nessun altro punto in comune tra questi account (far parte della stessa alleanza è tollerato), poiché ciò potrebbe essere considerato multi-account e comportare un blocco.';
+$lang['multi_account_text3'] = 'È vietata qualsiasi interazione tra account che usano lo stesso IP.';
+$lang['sitting_text'] = 'Il sitting di un account è soggetto al rispetto delle seguenti regole:';
+$lang['sitting_text2'] = 'Un account può essere affidato in sitting solo per 12 ore consecutive.';
+$lang['sitting_text3'] = 'L\'operatore dell\'universo deve essere obbligatoriamente informato via e-mail di questo sitting.';
+$lang['sitting_text4'] = 'Durante il sitting, il sitter ha il diritto di avviare la costruzione di strutture o di lanciare ricerche con le risorse presenti sul pianeta. Il trasferimento di risorse da altri pianeti o lune dell\'account è severamente vietato.';
+$lang['sitting_text5'] = 'Prima che l\'account possa essere affidato di nuovo in sitting, il proprietario deve effettuare l\'accesso.';
+$lang['sitting_text6'] = 'Il sitting successivo può avvenire solo 7 giorni dopo l\'accesso del proprietario dell\'account.';
+$lang['sitting_text7'] = 'Un account può cambiare proprietario solo ogni 3 mesi (senza alcuna eccezione possibile!).';
+$lang['sitting_text8'] = 'Il sitter non può fare da sitter a un account in questo universo nei 7 giorni successivi a un sitting.';
+$lang['sitting_text9'] = 'Il sitting non deve essere usato per procurarsi un vantaggio (ad es. usare una falange o la flotta).';
+$lang['sitting_text10'] = 'È severamente vietato:';
+$lang['sitting_text11'] = 'Durante il sitting non è consentito alcun movimento di flotta (nessuna flotta deve essere in volo in quel momento). Tuttavia, se una flotta sta per essere attaccata, è consentito inviarla in missione "Trasporto" o "Stazionare" verso un altro pianeta o luna dello stesso account per evitare l\'attacco.';
+$lang['sitting_text12'] = 'Il sitting degli account è vietato durante le prime tre settimane a partire dalla data di apertura di un universo.';
+$lang['sitting_text13'] = 'Durante un sitting, solo il sitter è autorizzato ad accedere all\'account.';
+$lang['sitting_text14'] = 'È vietato affidare il proprio account in sitting a più giocatori durante il periodo di 12 ore.';
+$lang['sitting_text15'] = 'È vietato fare da sitter a un altro account.';
+$lang['trade_text'] = 'Un account appartiene alla persona a cui appartiene l\'indirizzo e-mail permanente a esso associato. Se uno scambio di account avviene senza passare da un operatore dell\'universo, ciò avviene a rischio e pericolo dei rispettivi proprietari: nessun reclamo o richiesta sarà preso in considerazione se non proviene dall\'indirizzo e-mail permanente dell\'account interessato.';
+$lang['trade_text2'] = 'Gli operatori del gioco non solo possono effettuare molto facilmente uno scambio di account, ma in questo modo possono anche impedire che l\'account venga rubato durante lo scambio.';
+$lang['bash_text'] = 'Attaccare un pianeta o una luna più di 6 volte nell\'arco di 24 ore consecutive è considerato bash ed è quindi vietato.';
+$lang['bash_text2'] = 'Attaccare una luna in missione "Distruggere" rientra nel limite di 6 attacchi.';
+$lang['exception'] = 'Eccezioni:';
+$lang['bash_exep_text'] = 'Il bash è consentito solo se le alleanze coinvolte sono in guerra (la guerra deve essere dichiarata nella sezione apposita del forum ufficiale).';
+$lang['bash_exep_text2'] = 'Le flotte attaccanti completamente distrutte durante un attacco e i combattimenti interrotti dopo un turno a causa del bug del pareggio non vengono conteggiati nel calcolo dei 6 attacchi.';
+$lang['bash_exep_text3'] = 'Gli attacchi con missili interplanetari non sono limitati e non vengono conteggiati nel calcolo dei 6 attacchi.';
+$lang['push_text'] = 'Il push è il trasferimento volontario di risorse, in qualsiasi forma, da un giocatore a un giocatore meglio classificato senza alcuna contropartita. Ciò vale anche quando un giocatore meglio classificato vi ricatta.';
+$lang['push_text2'] = 'A differenza del bash, non esiste alcuna eccezione in cui il push sia consentito:';
+$lang['push_text3'] = 'Se un giocatore più debole di voi vi invia delle risorse senza che gliele abbiate chieste, rimandategliele oppure segnalatelo a uno degli operatori del gioco. Non potete tenere queste risorse!';
+$lang['push_text4'] = 'Il ricatto non è consentito.';
+$lang['push_text5'] = 'Gli scambi di risorse devono essere completati entro 48 ore.';
+$lang['exemple'] = 'Esempi (le infrazioni non si limitano ai casi citati qui sotto):';
+$lang['push_ex'] = 'Un giocatore invia risorse a un giocatore meglio classificato.';
+$lang['push_ex2'] = 'Una flotta suicida inviata contro un giocatore più forte al solo scopo di permettergli di riciclare il campo di detriti.';
+$lang['push_ex3'] = 'Trasportare risorse su un pianeta per metterle a disposizione dell\'attacco di un giocatore più forte informato di questa manovra.';
+$lang['recyclage'] = 'Aiuto al riciclaggio:';
+$lang['push_rec'] = 'Dopo aver aiutato un giocatore a raccogliere un campo di detriti, siete autorizzati a trasferire queste risorse al giocatore attaccante meglio classificato; l\'invio deve però essere obbligatoriamente accompagnato da un\'e-mail informativa al vostro operatore dell\'universo.';
+$lang['mercenariat'] = 'Mercenariato:';
+$lang['push_mer'] = 'Gli incarichi da mercenario devono essere dichiarati nella sezione apposita del forum ufficiale per essere approvati. Gli incarichi da mercenario non dichiarati sono punibili con il ban per push.';
+$lang['push_mer2'] = 'La ricompensa può essere versata solo quando il bersaglio è stato distrutto.';
+$lang['bugusing_text'] = 'È severamente vietato sfruttare un bug a proprio vantaggio.';
+$lang['bugusing_text2'] = 'Il giocatore che trova un bug è pregato di segnalarlo immediatamente allo staff (ad es. tramite il forum, IRC o e-mail).';
+$lang['bugusing_text3'] = 'Non segnalare un bug trovato è punibile con il ban.';
+$lang['bugusing_text4'] = 'È assolutamente vietato qualsiasi metodo di gioco volto a rendere lento o ingiocabile l\'account di un avversario.';
+$lang['mail_ingame_text'] = 'È vietato usare il pulsante Segnala per segnalare un messaggio che non contiene insulti o che non viola le regole del gioco.';
+$lang['out_text'] = 'È vietato minacciare qualcuno di conseguenze nella vita reale; ciò vale per il gioco, il forum e IRC.';
+$lang['spam_text'] = 'Lo spam, gli insulti e i messaggi dal contenuto offensivo sono vietati, così come qualsiasi contenuto xenofobo, antisemita o razzista.';
+$lang['account'] = 'I.    Account';
+$lang['multi_account'] = 'II.   Multi-account';
+$lang['sitting'] = 'III.  Gestione dell\'account altrui (Sitting)';
+$lang['trade'] = 'IV.   Scambio di account';
+$lang['bash'] = 'V.    Bash';
+$lang['push'] = 'VI.   Push';
+$lang['bugusing'] = 'VII.  Bugusing';
+$lang['mail_ingame'] = 'VIII. Abuso della funzione di segnalazione dei messaggi in gioco';
+$lang['out_xnova'] = 'IX.   Minacce al di fuori del server';
+$lang['spam'] = 'X.    Spam, insulti e contenuti offensivi';
+
+?>

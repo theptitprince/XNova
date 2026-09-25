@@ -6,22 +6,22 @@ $lang['metal_label'] = 'Metallo';
 $lang['crystal_label'] = 'Cristallo';
 $lang['deuterium_label'] = 'Deuterio';
 $lang['energy_label'] = 'Energia';
-$lang['message_label'] = "Message";
+$lang['message_label'] = 'Messaggio';
 $lang['level'] = 'livello';
 $lang['treeinfo']     = "[i]";
 $lang['te_dt_step'] = "Fase";
 $lang['te_dt_none'] = "Nessun requisito";
 $lang['te_dt_back'] = "Torna alle tecnologie";
 $lang['te_dt_unknown'] = "Elemento sconosciuto";
-$lang['comingsoon']   = "Bientot";
+$lang['comingsoon']   = 'Prossimamente';
 $lang['te_dt_tx_pre'] = "Requisiti per";
 
 $lang['type_mission'][1]  = "Attacco";
 $lang['type_mission'][2]  = "Attacco di gruppo";
-$lang['type_mission'][3]  = "trasporto";
+$lang['type_mission'][3]  = 'Trasporto';
 $lang['type_mission'][4]  = "Stazionare";
 $lang['type_mission'][5]  = "Stazionare da un alleato";
-$lang['type_mission'][6]  = "Spaire";
+$lang['type_mission'][6]  = 'Spiare';
 $lang['type_mission'][7]  = "Colonizzare";
 $lang['type_mission'][8]  = "Riciclare";
 $lang['type_mission'][9]  = "Distruggere";
@@ -123,7 +123,7 @@ $lang['tech'] = array(
 42 => "Falange di sensori",
 43 => "Portale iperspaziale",
 //Officier
-601 => "G&eacute;ologue",
+601 => 'Geologo',
 602 => "Amiral",
 603 => "Ingenieur",
 604 => "Technocrate",
@@ -206,4 +206,23 @@ $lang['res']['descriptions'] = array(
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// XNova Renaissance 0.9g : traductions
+$lang['tech'][124] = 'Tecnologia per le spedizioni';
+$lang['tech'][600] = 'Ufficiali';
+$lang['tech'][615] = 'Imperatore';
+$lang['res']['descriptions'][124] = 'Le navi possono ora essere equipaggiate con moduli di ricerca che permettono la valutazione scientifica dei dati raccolti durante le lunghe spedizioni.';
+$lang['tech'][602] = 'Ammiraglio';
+$lang['tech'][603] = 'Ingegnere';
+$lang['tech'][604] = 'Tecnocrate';
+$lang['tech'][605] = 'Costruttore';
+$lang['tech'][606] = 'Scienziato';
+$lang['tech'][607] = 'Magazziniere';
+$lang['tech'][608] = 'Difensore';
+$lang['tech'][610] = 'Spia';
+$lang['tech'][611] = 'Comandante';
+$lang['tech'][612] = 'Distruttore';
+$lang['tech'][613] = 'Generale';
+$lang['tech'][614] = 'Predone';
+
 ?>

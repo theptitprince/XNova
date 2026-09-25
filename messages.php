@@ -107,6 +107,10 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 			$parse['message_label']      = $lang['mess_message'];
 			$parse['characters']   = $lang['mess_characters'];
 			$parse['envoyer']      = $lang['mess_envoyer'];
+			// Boutons et aide BBCode du formulaire (ecrits en dur en francais dans le modele)
+			foreach (array('msg_reset', 'msg_send', 'msg_wait', 'msg_bb_title', 'msg_bb_intro', 'msg_bb_bold', 'msg_bb_underline', 'msg_bb_italic', 'msg_bb_image', 'msg_bb_text') as $Key) {
+				$parse[$Key] = $lang[$Key];
+			}
 
 			$parse['id']           = $OwnerID;
 			$parse['to']           = $OwnerRecord['username'] ." [".$OwnerHome['galaxy'].":".$OwnerHome['system'].":".$OwnerHome['planet']."]";

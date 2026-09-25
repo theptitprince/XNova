@@ -95,7 +95,8 @@ function ShowProductionTable ($CurrentUser, $CurrentPlanet, $BuildID, $Template)
 	$Prod[4]          = (floor(eval($ProdGrid[$BuildID]['formule']['energy'])    * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_ingenieur'] * 0.05)));
 	$BuildLevel       = "";
 
-	$ActualProd       = floor($Prod[$BuildID]);
+	// Centrale a fusion : elle produit de l'energie ($Prod[4]) et consomme du deuterium ($Prod[3])
+	$ActualProd       = floor(($BuildID != 12) ? $Prod[$BuildID] : $Prod[4]);
 	if ($BuildID != 12) {
 		$ActualNeed       = floor($Prod[4]);
 	} else {

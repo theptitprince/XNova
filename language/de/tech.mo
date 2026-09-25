@@ -1,6 +1,6 @@
 <?php
 
-$lang['tech_label']         = "Tech";
+$lang['tech_label']         = 'Technologien';
 $lang['requirements'] = "Ben&ouml;tigt";
 $lang['metal_label']        = "Metall";
 $lang['crystal_label']      = "Kristall";
@@ -13,16 +13,16 @@ $lang['te_dt_step'] = "Stufe";
 $lang['te_dt_none'] = "Keine Voraussetzungen";
 $lang['te_dt_back'] = "Zur&uuml;ck zu den Technologien";
 $lang['te_dt_unknown'] = "Unbekanntes Element";
-$lang['comingsoon']   = "Bientot";
+$lang['comingsoon']   = 'Demnächst';
 
 $lang['type_mission'][1]  = "Angreifen";
-$lang['type_mission'][2]  = "Flottenverband";
+$lang['type_mission'][2]  = 'Verbandsangriff';
 $lang['type_mission'][3]  = "Transport";
 $lang['type_mission'][4]  = "Stationieren";
 $lang['type_mission'][5]  = "Halten";
 $lang['type_mission'][6]  = "Spionieren";
 $lang['type_mission'][7]  = "Kolonisieren";
-$lang['type_mission'][8]  = "TF Klauen";
+$lang['type_mission'][8]  = 'Abbauen';
 $lang['type_mission'][9]  = "Zerst&ouml;ren";
 $lang['type_mission'][15] = "Expedition";
 
@@ -44,7 +44,7 @@ $lang['tech_rc'] = array (
 215 => "Schlachtkreuzer",
 
 401 => 'Missile',
-402 => 'L.l&eacute;ger.',
+402 => 'L.Laser',
 403 => 'L.lourd',
 404 => 'Can.Gauss',
 405 => 'Art.ions',
@@ -211,4 +211,40 @@ $lang['res']['descriptions'] = array(
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// XNova Renaissance 0.9g : traductions
+$lang['message_label'] = 'Nachricht';
+$lang['tech'][600] = 'Offiziere';
+$lang['tech'][615] = 'Imperator';
+
+// XNova Renaissance 0.9g : traductions
+$lang['tech_rc'][209] = 'Recycler';
+$lang['tech_rc'][214] = 'Todesstern';
+$lang['tech_rc'][401] = 'Raketenwerfer';
+$lang['tech_rc'][403] = 'S.Laser';
+$lang['tech_rc'][404] = 'Gaußkanone';
+$lang['tech_rc'][405] = 'Ionengeschütz';
+$lang['tech_rc'][406] = 'Plasmawerfer';
+$lang['tech_rc'][407] = 'Kl.Schild';
+$lang['tech_rc'][408] = 'Gr.Schild';
+$lang['tech'][0] = 'Gebäude';
+$lang['tech'][12] = 'Fusionskraftwerk';
+$lang['tech'][40] = 'Spezialgebäude';
+$lang['tech'][41] = 'Mondbasis';
+$lang['tech'][42] = 'Sensorphalanx';
+$lang['tech'][209] = 'Recycler';
+$lang['tech'][502] = 'Abfangrakete';
+$lang['tech'][503] = 'Interplanetarrakete';
+$lang['tech'][602] = 'Admiral';
+$lang['tech'][605] = 'Konstrukteur';
+$lang['tech'][607] = 'Lagermeister';
+$lang['tech'][608] = 'Verteidiger';
+$lang['tech'][612] = 'Zerstörer';
+$lang['tech'][613] = 'General';
+$lang['tech'][614] = 'Raider';
+$lang['res']['descriptions'][12] = 'Das Fusionskraftwerk erzeugt Energie, indem es 2 Wasserstoffatome zu einem Heliumatom verschmilzt.';
+$lang['res']['descriptions'][33] = 'Der Terraformer vergr&ouml;&szlig;ert die nutzbare Fl&auml;che auf Planeten.';
+$lang['res']['descriptions'][124] = 'Die Schiffe können nun mit Forschungsmodulen ausgestattet werden, die die wissenschaftliche Auswertung der gesammelten Daten bei langen Expeditionen ermöglichen.';
+$lang['res']['descriptions'][209] = 'Mit dem Recycler lassen sich Rohstoffe aus Trümmerfeldern gewinnen.';
+
 ?>

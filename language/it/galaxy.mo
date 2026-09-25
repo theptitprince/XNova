@@ -19,7 +19,7 @@ $lang['pendent_user'] = 'Bannato;';
 $lang['inactive_7_days'] = 'Inattivo da +7 giorni';
 $lang['inactive_28_days'] = 'Inattivo da +28 giorni';
 
-$lang['solar_system_at'] = 'Syst&egrave;me Solaire &agrave;';
+$lang['solar_system_at'] = 'Sistema solare';
 
 $lang['pos'] = 'Pos';
 $lang['planet_label'] = 'Pianeta';
@@ -40,7 +40,7 @@ $lang['planets_count'] = '( Pianeti abitati: %n )';
 //Sackando la flota
 $lang['sending_fleet'] = 'Invio di una flotta';
 $lang['sent_fleet'] = 'Flotta inviata';
-$lang['obtaining_data'] = 'En attente de Donnee';
+$lang['obtaining_data'] = 'In attesa di dati';
 //Errores en sackando
 $lang['an_error_has_happened_while_it_was_sent'] = 'Errore generico';
 $lang['error_there_is_no_moon'] = 'Non ci sono lune';
@@ -67,7 +67,7 @@ $lang['gl_membre'] = "Membro";
 $lang['gl_ally_internal'] = "Sito alleanza";
 $lang['gl_ally_web'] = "Sito web alleanza";
 $lang['gl_sendmess'] = "Scrivi un messaggio";
-$lang['gl_buddy'] = "Liste d amis";
+$lang['gl_buddy'] = 'Lista amici';
 $lang['gl_buddyreq'] = "Richiesta amicizia";
 $lang['gl_stats'] = "Statistica";
 $lang['gl_planet'] = "Pianeta";
@@ -79,7 +79,7 @@ $lang['gs_c601'] = "Errore, nessun pianeta.";
 $lang['gs_c602'] = "Errore, Données hors de l'Univers connu";
 $lang['gs_c603'] = "Errore, Non puoi attaccare il giocatore a casusa della protezione.";
 $lang['gs_c604'] = "Errore, Non puoi attaccare perchè è troppo forte.";
-$lang['gs_c604k'] = "Erreur, Vous n'avez sondes!" ;
+$lang['gs_c604k'] = 'Errore, non avete sonde!' ;
 $lang['gs_c605'] = "Errore, non puoi attaccare uno che si trova in vacanza";
 $lang['gs_c610a'] = "Errore, con ";
 $lang['gs_c610b'] = " sonde. Non avete sonde disponibili";
@@ -87,8 +87,8 @@ $lang['gs_c611'] = "Errore, non avete navi spaziali disponibili.";
 $lang['gs_c612'] = "Errore, non avete slot.";
 $lang['gs_c613'] = "Errore, non avete deuterio disponibile.";
 $lang['gs_c616'] = "Errore, Multiallarme!";
-$lang['gs_c618'] = "Errore, Vous essayez visiblement de vous attaquer vous même!";
-$lang['gs_c619'] = "Erreur, Vous n'etes pas de taille!";
+$lang['gs_c618'] = 'Errore, a quanto pare state cercando di attaccare voi stessi!';
+$lang['gs_c619'] = 'Errore, non siete all\'altezza!';
 $lang['gs_sending'] = "Invio di";
 $lang['gs_to'] = "verso";
 $lang['sending'] = 'Inviata';
@@ -106,5 +106,8 @@ $lang['gf_unknowsp'] = "Spazio infinito";
 
 // XNova Renaissance 0.9g : mode vacances
 $lang['gs_c620'] = 'Errore, siete in modalità vacanza';
+
+// XNova Renaissance 0.9g : pluriel des membres (galaxie)
+$lang['gl_membres'] = 'Membri';
 
 ?>

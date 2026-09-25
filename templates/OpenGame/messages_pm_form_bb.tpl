@@ -20,11 +20,11 @@
 
 </tr>
 <tr>
-	<th colspan="2"><input type="reset" value="Effacer" /></th>
+	<th colspan="2"><input type="reset" value="{msg_reset}" /></th>
 </tr><tr>
-	<th colspan="2"><input type="submit" value="Envoyer" size="20" style="font-weight:bold" onClick="this.form.submit();this.disabled=true;this.value='Patientez...'"/></th>
+	<th colspan="2"><input type="submit" value="{msg_send}" size="20" style="font-weight:bold" onClick="this.form.submit();this.disabled=true;this.value='{msg_wait}'"/></th>
 </tr><tr>
-	<th colspan="2">&Eacute;moticones et BBCode :<br />Vous pouvez utiliser le BBCode et des &eacute;moticones pour embellir vos m&eacute;ssages...<br /><br />Pour utiliser les &eacute;moticones de base fournis par le staff :<br /><img src="emoticones/Smile.png" alt="Sourire ;)"> = Smile<br /><img src="emoticones/cool.png" alt="cool ;)"> = cool<br /><img src="emoticones/grrr.png" alt="Enervé"> = grrr<br /><img src="emoticones/love.png" alt="Amour^^"> = love<br /><img src="emoticones/msn.png" alt="msn"> = msn<br /><img src="emoticones/Oo.png" alt="Oo"> = Oo<br /><img src="emoticones/perdu.png" alt="perdu"> = perdu<br /><img src="emoticones/wink.png" alt="wink"> = wink<br /><img src="emoticones/wow.png" alt="wow"> = wow<hr />Texte en gras = [b]Texte[/b]<br />Texte souligné = [u]Texte[/u]<br />Texte en italliqiue = [i]Texte[/i]<br />Une image = [img]http://liendelimage.com[/img]</th>
+	<th colspan="2">{msg_bb_title}<br />{msg_bb_intro}<br /><br /><img src="images/emoticones/Smile.png" alt=":Smile:" title=":Smile:"> :Smile: <img src="images/emoticones/cool.png" alt=":cool:" title=":cool:"> :cool: <img src="images/emoticones/grrr.png" alt=":grrr:" title=":grrr:"> :grrr: <img src="images/emoticones/love.png" alt=":love:" title=":love:"> :love: <img src="images/emoticones/msn.png" alt=":msn:" title=":msn:"> :msn: <img src="images/emoticones/Oo.png" alt=":Oo:" title=":Oo:"> :Oo: <img src="images/emoticones/perdu.png" alt=":perdu:" title=":perdu:"> :perdu: <img src="images/emoticones/wink.png" alt=":wink:" title=":wink:"> :wink: <img src="images/emoticones/wow.png" alt=":wow:" title=":wow:"> :wow:<hr />{msg_bb_bold} = [b]{msg_bb_text}[/b]<br />{msg_bb_underline} = [u]{msg_bb_text}[/u]<br />{msg_bb_italic} = [i]{msg_bb_text}[/i]<br />{msg_bb_image} = [img]https://exemple.fr/image.png[/img]</th>
 </tr>
 </table>
 </form>

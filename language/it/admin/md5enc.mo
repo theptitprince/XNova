@@ -1,9 +1,9 @@
 <?php
 
-$lang['md5_title']  = "Outil de cryptage";
-$lang['md5_pswcyp'] = "Cypter un mot de passe";
-$lang['md5_psw']    = "Mot de passe";
-$lang['md5_pswenc'] = "Mot de passe (encod&eacute;)";
-$lang['md5_doit']   = "[ encoder ]";
+$lang['md5_title']  = 'Strumento di cifratura';
+$lang['md5_pswcyp'] = 'Cifra una password';
+$lang['md5_psw']    = 'Password';
+$lang['md5_pswenc'] = 'Password (codificata)';
+$lang['md5_doit']   = '[ codifica ]';
 
 ?>

@@ -6,8 +6,8 @@ $lang['planet_menu'] = 'Menu del pianeta';
 $lang['planet_label'] = 'Pianeta';
 $lang['have_new_message'] = 'Avete 1 nuovo messaggio';
 $lang['have_new_messages'] = 'avete %m nuovi messaggi';
-$lang['have_new_level_mineur'] = 'Avete guadagnato un punto Minatore !';
-$lang['have_new_level_raid'] = 'Avete guadagnato un punto Raideur!';
+$lang['have_new_level_mineur'] = 'Avete guadagnato un livello come Minatore!';
+$lang['have_new_level_raid'] = 'Avete guadagnato un livello come Predone!';
 $lang['server_time'] = 'Orario';
 $lang['events'] = 'Eventi';
 $lang['free'] = 'Libero';
@@ -51,32 +51,32 @@ $lang['members_online']       = "Membres en ligne";
 $lang['ov_news_title']       = "News";
 
 // Flotte
-$lang['ov_fleet'] = "flotte";
-$lang['ov_une'] = "Una";
-$lang['ov_vennant'] = "viene da %s";
-$lang['ov_planet_to'] = "dal pianeta %s";
-$lang['ov_moon_to'] = "dalla luna %s";
-$lang['ov_atteint'] = "ritorna %s";
-$lang['ov_planet_to_target'] = "la plan&egrave;te ";
-$lang['ov_moon_to_target']   = "la lune ";
-$lang['ov_debris_to_target'] = "le Champ de d&eacute;bris ";
-$lang['ov_explo_to_target']  = "la position ";
-$lang['ov_mission'] = ". La sua missione &eacute; :";
+$lang['ov_fleet'] = 'flotta';
+$lang['ov_une'] = 'La vostra ';
+$lang['ov_vennant'] = ' proveniente ';
+$lang['ov_planet_to'] = 'dal pianeta ';
+$lang['ov_moon_to'] = 'dalla luna ';
+$lang['ov_atteint'] = ' raggiunge ';
+$lang['ov_planet_to_target'] = 'il pianeta ';
+$lang['ov_moon_to_target']   = 'la luna ';
+$lang['ov_debris_to_target'] = 'il Campo di detriti ';
+$lang['ov_explo_to_target']  = 'la posizione ';
+$lang['ov_mission'] = '. La sua missione era: ';
 
-$lang['ov_explo_stay']       = " explore ";
-$lang['ov_explo_mission']    = ". Elle a pour mission : ";
+$lang['ov_explo_stay']       = ' esplora ';
+$lang['ov_explo_mission']    = '. La sua missione è: ';
 
-$lang['ov_rentrant'] = "rientra da %s";
-$lang['ov_planet_from'] = "il pianeta %s";
-$lang['ov_moon_from'] = "la luna %s";
-$lang['ov_debris_from'] = "un Campo di detriti";
-$lang['ov_explo_from'] = "de la position ";
-$lang['ov_back_planet'] = " &agrave; la plan&egrave;te ";
-$lang['ov_back_moon'] = " &agrave; la lune ";
+$lang['ov_rentrant'] = ' ritorna ';
+$lang['ov_planet_from'] = 'dal pianeta ';
+$lang['ov_moon_from'] = 'dalla luna ';
+$lang['ov_debris_from'] = 'dal Campo di detriti ';
+$lang['ov_explo_from'] = 'dalla posizione ';
+$lang['ov_back_planet'] = ' al pianeta ';
+$lang['ov_back_moon'] = ' alla luna ';
 
-$lang['ov_une_hostile'] = "Une ";
-$lang['ov_hostile'] = "ostile da";
-$lang['ov_message'] = "Inivia un messaggio";
+$lang['ov_une_hostile'] = 'Una ';
+$lang['ov_hostile'] = ' ostile di ';
+$lang['ov_message'] = 'Invia un messaggio';
 $lang['ov_une_o'] = "Una";
 $lang['ov_arrivant'] = "&agrave; il pianeta";
 
@@ -104,4 +104,29 @@ $lang['total'] = "Totale";
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// XNova Renaissance 0.9g : traductions
+$lang['banner'] = 'Il vostro banner';
+$lang['info_banner'] = 'Banner del profilo per i forum (copiate e incollate l\'indirizzo per usarlo):';
+$lang['ov_off_expe'] = 'Esperienza';
+$lang['ov_off_level'] = 'Livello';
+$lang['ov_off_mines'] = 'Minatore';
+$lang['ov_off_raids'] = 'Predone';
+$lang['ov_temp_from'] = 'Da';
+$lang['ov_temp_unit'] = '&deg;C';
+$lang['ov_temp_to'] = 'a';
+$lang['ov_local_cdr'] = 'Campo di detriti';
+$lang['ov_pts_build'] = 'Strutture';
+$lang['ov_pts_fleet'] = 'Flotta';
+$lang['ov_pts_reche'] = 'Ricerca';
+$lang['ov_pts_total'] = 'Totale';
+$lang['ov_rena_dele'] = 'Rinomina o abbandona il pianeta';
+$lang['raids_label'] = 'Raid';
+$lang['number_of_raids'] = 'Raid effettuati';
+$lang['raids_win'] = 'Raid vinti';
+$lang['raids_loose'] = 'Raid persi';
+
+// XNova Renaissance 0.9g : horloge de la vue generale (scripts/time.js)
+$lang['ov_clock_format'] = 'Oggi è il %date e sono le %time.';
+
 ?>

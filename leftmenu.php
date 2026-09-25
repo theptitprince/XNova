@@ -53,7 +53,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	if ($game_config['link_enable'] == 1) {
 		$parse['added_link']  = "
 		<tr>
-			<td colspan=\"2\"><div><a href=\"".$game_config['link_url']."\" target=\"_blank\">".stripslashes($game_config['link_name'])."</a></div></td>
+			<td colspan=\"2\"><div><a href=\"".htmlspecialchars($game_config['link_url'], ENT_QUOTES, 'UTF-8')."\" target=\"_blank\" rel=\"noopener\">".htmlspecialchars(stripslashes($game_config['link_name']), ENT_QUOTES, 'UTF-8')."</a></div></td>
 		</tr>";
 	} else {
 		$parse['added_link']  = "";
@@ -63,7 +63,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	if ($game_config['enable_announces'] == 1) {
 		$parse['announce_link']  = "
 		<tr>
-			<td colspan=\"2\"><div><a href=\"annonce.php\" target=\"Hauptframe\">Annonces</a></div></td>
+			<td colspan=\"2\"><div><a href=\"annonce.php\" target=\"Hauptframe\">".$lang['annonces']."</a></div></td>
 		</tr>";
 	} else {
 		$parse['announce_link']  = "";
@@ -73,7 +73,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	if ($game_config['enable_marchand'] == 1) {
 		$parse['marchand_link']  = "
 		<tr>
-			<td colspan=\"2\"><div><a href=\"marchand.php\" target=\"Hauptframe\">Marchand</a></div></td>
+			<td colspan=\"2\"><div><a href=\"marchand.php\" target=\"Hauptframe\">".$lang['marchand_label']."</a></div></td>
 		</tr>";
 	} else {
 		$parse['marchand_link']  = "";
@@ -82,7 +82,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	if ($game_config['enable_notes'] == 1) {
 		$parse['notes_link']  = "
 		<tr>
-			<td colspan=\"2\"><div><a href=\"notes.php\" accesskey=\"n\" onClick=\"f('notes.php', 'Notes', 600, 500); return false;\">Notes</a></div></td>
+			<td colspan=\"2\"><div><a href=\"notes.php\" accesskey=\"n\" onClick=\"f('notes.php', 'Notes', 600, 500); return false;\">".$lang['notes']."</a></div></td>
 		</tr>";
 	} else {
 		$parse['notes_link']  = "";

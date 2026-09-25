@@ -3,49 +3,49 @@
 // ----------------------------------------------------------------------------------------------------------
 // Interface !
 $lang['nfo_page_title']  = "Information";
-$lang['nfo_title_head']  = "Information der";
+$lang['nfo_title_head']  = 'Informationen zu';
 $lang['nfo_name']        = "Name";
-$lang['nfo_destroy']     = "Abbaun einer Gebaeude stufe:";
+$lang['nfo_destroy']     = 'Abreißen';
 $lang['nfo_level']       = "Stufe";
 $lang['nfo_range']       = "Reichweite der Sensoren";
-$lang['nfo_used_energy'] = "Energie Verbrauch";
-$lang['nfo_used_deuter'] = "Deuterium Verbrauch";
+$lang['nfo_used_energy'] = 'Energieverbrauch';
+$lang['nfo_used_deuter'] = 'Deuteriumverbrauch';
 $lang['nfo_prod_energy'] = "Energieerzeugung";
 $lang['nfo_difference']  = "Differenz";
 $lang['nfo_prod_p_hour'] = "Produktion pro Stunde [Gewinn]";
 $lang['nfo_needed']      = "Erfordert";
-$lang['nfo_dest_durati'] = "Abbau dauer";
+$lang['nfo_dest_durati'] = 'Abrissdauer';
 
 $lang['nfo_struct_pt']   = "Strukturpunkte";
-$lang['nfo_shielf_pt']   = "Schildstaerke";
+$lang['nfo_shielf_pt']   = 'Schildstärke';
 $lang['nfo_attack_pt']   = "Angriffswert";
 $lang['nfo_rf_again']    = "Rapidfire gegen";
 $lang['nfo_rf_from']     = "Rapidfire von";
-$lang['nfo_capacity']    = "Ladekapazitaet";
+$lang['nfo_capacity']    = 'Ladekapazität';
 $lang['nfo_units']       = "Einheiten";
-$lang['nfo_base_speed']  = "Geschwindichkeit";
-$lang['nfo_consumption'] = "Deuterium verbrauch";
+$lang['nfo_base_speed']  = 'Grundgeschwindigkeit';
+$lang['nfo_consumption'] = 'Treibstoffverbrauch (Deuterium)';
 
 // ----------------------------------------------------------------------------------------------------------
 // Interface porte de saut
-$lang['gate_start_moon'] = "Ausgangspunkt Mond";
-$lang['gate_dest_moon']  = "Reiseziel Mond";
-$lang['gate_use_gate']   = "Verwenden des Sprungtores";
-$lang['gate_ship_sel']   = "Anzahl der Schiffe";
-$lang['gate_ship_dispo'] = "Verfuegbar";
-$lang['gate_jump_btn']   = "Aufladen";
-$lang['gate_jump_done']  = "Naester Sprung durch Sprungtors jetzt Moeglich: ";
-$lang['gate_wait_dest']  = "Die Energie des Ziel Sprungtors hat sich noch nicht geladen: ";
-$lang['gate_no_dest_g']  = "Es gibt kein Sprungtor auf diesen Planeten !";
-$lang['gate_wait_star']  = "Die Energie des Sprungtors wurde verbraucht, zeit bis aufladung ";
-$lang['gate_wait_data']  = "Fehler, es gibt keine Daten, ueber den Prungtor !";
+$lang['gate_start_moon'] = 'Startmond';
+$lang['gate_dest_moon']  = 'Zielmond:';
+$lang['gate_use_gate']   = 'Sprungtor benutzen';
+$lang['gate_ship_sel']   = 'Schiffsauswahl';
+$lang['gate_ship_dispo'] = 'verfügbar';
+$lang['gate_jump_btn']   = 'Springen';
+$lang['gate_jump_done']  = 'Der Sprung war erfolgreich, nächster Sprung möglich in: ';
+$lang['gate_wait_dest']  = 'Die Energiespeicher des Ziel-Sprungtors sind noch nicht wieder aufgeladen! Wartezeit: ';
+$lang['gate_no_dest_g']  = 'Auf dem Planeten, zu dem du die Flotte schicken willst, gibt es kein Sprungtor!';
+$lang['gate_wait_star']  = 'Die Energiespeicher des Start-Sprungtors sind noch nicht wieder aufgeladen! Wartezeit: ';
+$lang['gate_wait_data']  = 'Fehler, es gibt keine Sprungdaten!';
 
 // ----------------------------------------------------------------------------------------------------------
 // Batiments Mines!
 $lang['info'][1]['name']          = "Metallmine";
 $lang['info'][1]['description']   = "Hauptrohstofflieferanten f&uuml;r den Bau tragender Strukturen von Bauwerken und Schiffen. Metall ist der billigste Rohstoff, daf&uuml;r wird er mehr ben&ouml;tigt als die anderen. Metall braucht zur Herstellung am wenigsten Energie. Je gr&ouml;&szlig;er die Minen ausgebaut sind, desto tiefer sind sie. Bei den meisten Planeten befindet sich das Metall in gro&szlig;er Tiefe, durch diese tieferen Minen k&ouml;nnen mehr Metalle abgebaut werden, die Produktion steigt. Gleichzeitig muss f&uuml;r die gr&ouml;&szlig;ere Metallmine mehr Energie zur Verf&uuml;gung gestellt werden.";
 $lang['info'][2]['name']          = "Kristallmine";
-$lang['info'][2]['description']   = "Baut Mineralien ab die fuer die Feinelektronik benoetigt werden, sie benoetigt jedoch mehr da sie die Mineralien gleich in Noetigen Leggierungen verarbeitet.";
+$lang['info'][2]['description']   = 'Baut Kristall ab, das für Feinelektronik und Legierungen benötigt wird. Der Abbau verbraucht jedoch mehr Energie, da die Mineralien direkt zu den nötigen Legierungen verarbeitet werden.';
 $lang['info'][3]['name']          = "Deuteriumsynthetisierer";
 $lang['info'][3]['description']   = "Deuterium ist schwerer Wasserstoff. Daher sind &auml;hnlich wie bei den Minen die gr&ouml;&szlig;ten Vorr&auml;te auf dem Grund des Meeres. Der Ausbau des Synthetisierers sorgt ebenfalls f&uuml;r die Erschlie&szlig;ung dieser Deuterium-Tiefenlagerst&auml;tten. Deuterium wird als Treibstoff f&uuml;r die Schiffe, f&uuml;r fast alle Forschungen, f&uuml;r einen Blick in die Galaxie sowie f&uuml;r den Sensorphalanx-Scan ben&ouml;tigt.";
 
@@ -53,8 +53,8 @@ $lang['info'][3]['description']   = "Deuterium ist schwerer Wasserstoff. Daher s
 // Batiments Energie!
 $lang['info'][4]['name']          = "Solarkraftwerk";
 $lang['info'][4]['description']   = "Um die Energie zur Versorgung der Minen und Synthetisierern zu gew&auml;hrleisten, sind riesige Solarkraftwerkanlagen von N&ouml;ten. Je gr&ouml;&szlig;er die Anlagen ausgebaut sind, desto mehr Oberfl&auml;che ist mit photovoltaischen Zellen bedeckt, welche Lichtenergie in elektrische Energie umwandeln. Solarkraftwerke stellen den Grundstock der planetaren Energieversorgung dar.";
-$lang['info'][12]['name']         = "Atomkraftwerk";
-$lang['info'][12]['description']  = "In den Atomkraftwerk werden Atome gespalten um so mehr energie erzeugen als in Solarkraftwerk. Ist jedoch sehr teuer im Bau.";
+$lang['info'][12]['name']         = 'Fusionskraftwerk';
+$lang['info'][12]['description']  = 'Je höher die Stufe des Kraftwerks, desto mehr Energie erzeugt es. Achtung: Das Kraftwerk verbraucht Deuterium!';
 
 // ----------------------------------------------------------------------------------------------------------
 // Batiments Généraux!
@@ -68,18 +68,18 @@ $lang['info'][22]['name']         = "Metallspeicher";
 $lang['info'][22]['description']  = "Riesige Lagerst&auml;tte f&uuml;r abgebautes Metallerz. Je gr&ouml;&szlig;er der Speicher, desto mehr Metall kann in ihm gelagert werden. Ist das Lager voll, wird kein Metall mehr abgebaut.";
 $lang['info'][23]['name']         = "Kristallspeicher";
 $lang['info'][23]['description']  = "Das noch unbearbeitete Kristall wird in diesen riesigen Lagerhallen zwischengespeichert. Je gr&ouml;&szlig;er das Lager, desto mehr Kristall kann in ihm eingelagert werden. Sind die Kristalllager voll, wird kein weiteres Kristall abgebaut.";
-$lang['info'][24]['name']         = "Deuteriumspeicher";
+$lang['info'][24]['name']         = 'Deuteriumtank';
 $lang['info'][24]['description']  = "Riesige Tanks zur Lagerung des neu gewonnenen Deuteriums. Diese Lager findet man meistens in der N&auml;he von Raumh&auml;fen. Je gr&ouml;&szlig;er sie sind, desto mehr Deuterium kann in ihnen gelagert werden. Sind sie gef&uuml;llt, wird kein Deuterium mehr abgebaut.";
 $lang['info'][31]['name']         = "Forschungslabor";
 $lang['info'][31]['description']  = "Um neue Technologien zu erforschen, ist der Betrieb einer Forschungsstation notwendig. Die Ausbaustufe einer Forschungsstation ist ausschlaggebend daf&uuml;r, wie schnell eine neue Technologie erforscht werden kann. Je h&ouml;her die Ausbaustufe des Labors, umso mehr neue Technologien k&ouml;nnen erforscht werden. Um die Forschungsarbeiten m&ouml;glichst schnell zum Abschluss zu bringen, werden, wenn auf einem Planeten geforscht wird, automatisch alle verf&uuml;gbaren Forscher in diese Forschungsstation geschickt und stehen somit auf anderen Planeten nicht mehr zur Verf&uuml;gung. Sobald eine Technologie einmal erforscht ist, kehren die Forscher auf ihre Heimatplaneten zur&uuml;ck und bringen das Wissen um sie mit. So kann man die Technologie auf all seinen Planeten einsetzen.";
 $lang['info'][33]['name']         = "Terraformer";
-$lang['info'][33]['description']  = "Mit zunehmendem Ausbau der Planeten, wurde die Frage des begrenzten Lebensraums auf Kolonien immer wichtiger. Traditionelle Methoden wie Hoch- und Tiefbau erwiesen sich zunehmend als unzureichend. Eine kleine Gruppe von Hochenergiephysikern und Nanotechnikern fand schlie&szlig;lich die L&ouml;sung: Das TerraformingUnter Aufwand riesiger Energiemengen kann der Terraformer ganze Landstriche oder gar Kontinente urbar machen. In diesem Geb&auml;ude werden fortw&auml;hrend eigens daf&uuml;r konstruierte Naniten produziert, die f&uuml;r eine konstante Qualit&auml;t des Bodens sorgen.Einmal gebaut kann der Terraformer nicht wieder abgerissen werden.";
+$lang['info'][33]['description']  = 'Mit zunehmendem Ausbau der Planeten, wurde die Frage des begrenzten Lebensraums auf Kolonien immer wichtiger. Traditionelle Methoden wie Hoch- und Tiefbau erwiesen sich zunehmend als unzureichend. Eine kleine Gruppe von Hochenergiephysikern und Nanotechnikern fand schlie&szlig;lich die L&ouml;sung: das Terraforming. Unter Aufwand riesiger Energiemengen kann der Terraformer ganze Landstriche oder gar Kontinente urbar machen. In diesem Geb&auml;ude werden fortw&auml;hrend eigens daf&uuml;r konstruierte Naniten produziert, die f&uuml;r eine konstante Qualit&auml;t des Bodens sorgen. Einmal gebaut kann der Terraformer nicht wieder abgerissen werden.';
 $lang['info'][34]['name']         = "Allianzdepot";
 $lang['info'][34]['description']  = "Das Allianzdepot bietet die M&ouml;glichkeit, befreundete Flotten, die bei der Verteidigung helfen und im Orbit stehen, mit Treibstoff zu versorgen. F&uuml;r jeden Ausbaulevel des Allianzdepots k&ouml;nnen 10.000 Einheiten Deuterium pro Stunde an die zu versorgenden Flotten im Orbit geschickt werden.";
 
 // ----------------------------------------------------------------------------------------------------------
 // Batiments Lune!
-$lang['info'][41]['name']         = "Apollo 13 Mondbasis";
+$lang['info'][41]['name']         = 'Mondbasis';
 $lang['info'][41]['description']  = "Ein Mond verf&uuml;gt &uuml;ber keinerlei Atmosph&auml;re, deshalb muss vor der Besiedlung eine Mondbasis errichtet werden. Diese sorgt f&uuml;r die n&ouml;tige Atemluft, Gravitation und W&auml;rme. Je h&ouml;her die Ausbaustufe der Mondbasis ist, umso gr&ouml;sser ist die Fl&auml;che die mit einer Biosph&auml;re versorgt wird. Pro Mondbasislevel k&ouml;nnen 3 Felder bebaut werden bis zum Maximum der Mondgr&ouml;sse. Diese betr&auml;gt (Durchmesser des Mondes/1000)^2, wobei jede Stufe der Mondbasis selbst auch ein Feld belegt Einmal gebaut kann die Mondbasis nicht wieder abgerissen werden.";
 $lang['info'][42]['name']         = "Sensorphalanx";
 $lang['info'][42]['description']  = "Hochaufl&ouml;sende Sensoren scannen das vollst&auml;ndige Frequenzspektrum aller auf die Phalanx auftreffenden Strahlungen. Hochleistungscomputer kombinieren winzige Energieschwankungen und gewinnen so Informationen &uuml;ber Schiffsbewegungen auf entfernten Planeten. F&uuml;r den Scan muss Energie in Form von Deuterium (5.000) auf dem Mond bereitgestellt werden. Man scannt, indem man vom Mond aus ins Galaxiemenü wechselt und auf einen feindlichen Planeten in Sensorenreichweite (Phalanxstufe)^2 - 1 klickt.";
@@ -99,9 +99,9 @@ $lang['info'][109]['name']        = "Waffentechnik";
 $lang['info'][109]['description'] = "Die Waffentechnik besch&auml;ftigt sich vor allem mit der Weiterentwicklung bestehender Waffensysteme. Dabei wird insbesondere darauf Wert gelegt, die vorhandenen Systeme mit mehr Energie auszustatten und diese Energie punktgenauer zu kanalisieren. Dadurch werden die Waffensysteme effizienter und Waffen richten mehr Schaden an. Jede Stufe der Waffentechnik erh&ouml;ht die Waffenst&auml;rke der Einheiten um 10% des Grundwertes. Die Waffentechnik ist wichtig, um sp&auml;ter die eigenen Einheiten konkurrenzf&auml;hig zu halten. Deshalb sollte sie kontinuierlich das ganze Spiel hindurch entwickelt werden.";
 $lang['info'][110]['name']        = "Schildtechnik";
 $lang['info'][110]['description'] = "Die Schildtechnik besch&auml;ftigt sich mit der Erforschung immer neuer M&ouml;glichkeiten, die Schilde mit mehr Energie zu versorgen und sie so effizienter und belastbarer zu machen. Dadurch steigt mit jeder erforschten Stufe die Effizienz der Schilde um 10% des Grundwertes.";
-$lang['info'][111]['name']        = "Raumschiffpanzerrung";
+$lang['info'][111]['name']        = 'Raumschiffpanzerung';
 $lang['info'][111]['description'] = "Spezielle Legierungen machen die Panzerung der Raumschiffe immer besser. Ist einmal eine sehr widerstandsf&auml;hige Legierung gefunden, wird durch spezielle Strahlungen die molekulare Struktur des Raumschiffes ver&auml;ndert und auf den Stand der besten erforschten Legierung gebracht. Die Wirksamkeit der Panzerung kann so pro Stufe um 10% des Grundwertes gesteigert werden.";
-$lang['info'][113]['name']        = "Energietechnologie";
+$lang['info'][113]['name']        = 'Energietechnik';
 $lang['info'][113]['description'] = "Die Energietechnik besch&auml;ftigt sich mit der Weiterentwicklung der Energieleitsysteme und Energiespeicher, welche f&uuml;r viele neue Technologien ben&ouml;tigt wird.";
 $lang['info'][114]['name']        = "Hyperraumtechnik";
 $lang['info'][114]['description'] = "Durch die Einbindung der 4. und 5. Dimension ist es nun m&ouml;glich einen neuartigen Antrieb zu erforschen, welcher sparsamer und leistungsf&auml;higer ist.";
@@ -118,7 +118,7 @@ $lang['info'][121]['description'] = "Wahrhaft t&ouml;dlicher Richtstrahl aus bes
 $lang['info'][122]['name']        = "Plasmatechnik";
 $lang['info'][122]['description'] = "Eine Weiterentwicklung der Ionentechnik, die nicht Ionen beschleunigt, sondern hochenergetisches Plasma. Das hochenergetische Plasma hat eine verheerende Wirkung beim Auftreffen auf ein Objekt.";
 $lang['info'][123]['name']        = "Intergalaktisches Forschungsnetzwerk";
-$lang['info'][123]['description'] = "Forscher verschiedener Planeten kommunizieren &uuml;ber dieses Netzwerk miteinander.Pro erforschtes Level, wird ein Forschungslabor vernetzt. Dabei werden immer die Labors der h&ouml;chsten Stufe dazugeschaltet.Das vernetzte Labor muss ausreichend ausgebaut sein um die anstehende Forschung selbst&auml;ndig durchf&uuml;hren zu k&ouml;nnen. Die Ausbaustufen aller beteiligten Labors werden im intergalaktischen Forschungsnetzwerk zusammen gez&auml;hlt.";
+$lang['info'][123]['description'] = 'Forscher verschiedener Planeten kommunizieren &uuml;ber dieses Netzwerk miteinander. Pro erforschter Stufe wird ein Forschungslabor vernetzt. Dabei werden immer die Labors der h&ouml;chsten Stufe dazugeschaltet. Das vernetzte Labor muss ausreichend ausgebaut sein um die anstehende Forschung selbst&auml;ndig durchf&uuml;hren zu k&ouml;nnen. Die Ausbaustufen aller beteiligten Labors werden im intergalaktischen Forschungsnetzwerk zusammengez&auml;hlt.';
 $lang['info'][124]['name']        = "Expeditionstechnik";
 $lang['info'][124]['description'] = "Expeditionstechnik umfasst verschiedene Scanntechnologien und ermöglicht Raumschiffe diverser Größen mit einem Forschungsmodul auszurüsten. Dieses beinhaltet eine Datenbank und ein voll ausgestattetes mobiles Labor. Um bei gefährlichen Forschungsobjekten die Sicherheit des Schiffes zu gewähren, verfügt das Forschungsmodul über eine eigene Energieversorgung und einen Energiefeldgenerator, der im Notfall das Forschungsmodul mit einem starken Kraftfeld umgeben kann.";
 $lang['info'][199]['name']        = "Gravitonforschung";
@@ -130,19 +130,19 @@ $lang['info'][202]['name']        = "Kleiner Transporter";
 $lang['info'][202]['description'] = "Transporter haben ungef&auml;hr die gleiche Gr&ouml;&szlig;e wie J&auml;ger, verzichten aber auf leistungsf&auml;hige Antriebe und Bordwaffen, um Platz f&uuml;r Frachtraum zu schaffen. Der kleine Transporter verf&uuml;gt &uuml;ber eine Ladekapazit&auml;t von 10.000 Ressourceneinheiten. Aufgrund ihrer geringen Feuerkraft werden Transporter oft von anderen Schiffen eskortiert.";
 $lang['info'][203]['name']        = "Gro&szlig;er Transporter";
 $lang['info'][203]['description'] = "Dieses Schiff hat kaum Waffen oder andere Technologien an Bord. Aus diesem Grunde sollten sie nie alleine losgeschickt werden. Der gro&szlig;e Transporter dient durch sein hochentwickeltes Verbrennungstriebwerk als schneller Ressourcenlieferant zwischen den Planeten und nat&uuml;rlich begleitet er die Flotten auf ihren &uuml;berf&auml;llen feindlicher Planeten, um m&ouml;glichst viele Ressourcen zu erobern, der Gro&szlig;e Transporter verf&uuml;gt &uuml;ber eine Ladekapazit&auml;t von 50.000 Ressourceneinheiten.";
-$lang['info'][204]['name']        = "Leichter Jaeger";
+$lang['info'][204]['name']        = 'Leichter Jäger';
 $lang['info'][204]['description'] = "Der leichte J&auml;ger ist ein wendiges Schiff, das auf fast jedem Planeten vorgefunden wird. Die Kosten sind nicht besonders hoch, Schildst&auml;rke und Ladekapazit&auml;t sind allerdings sehr gering.";
-$lang['info'][205]['name']        = "Schwerer Jaeger";
-$lang['info'][205]['description'] = "Bei der Weiterentwicklung des leichten J&auml;gers kamen die Forscher zu einem Punkt, bei welchem der konventionelle Antrieb nicht mehr ausreichend Leistungen erbrachte. Um das neue Schiff optimal fortbewegen zu k&ouml;nnen wurde zum ersten Mal der Impulsantrieb genutzt. Dieses erh&ouml;hte zwar die Kosten, er&ouml;ffnete aber auch neue M&ouml;glichkeiten. Durch die Einsetzung dieses Antriebes blieb mehr Energie f&uuml;r Waffen und Schilde &uuml;brig, au&szlig;erdem wurden f&uuml;r diese neue J&auml;gergattung auch qualitativ hochwertigere Materialien verwendet. Dies f&uuml;hrte zu einer verbesserten strukturellen Integrit&auml;t und einer h&ouml;heren Feuerkraft, was ihn im Kampf zu einer immens gr&ouml;&szlig;eren Bedrohung macht als sein leichtes Pendant. Durch diese &auml;nderungen stellt der schwere J&auml;ger eine neue &auml;ra der Schiffstechnologie dar, welche die Grundlage f&uuml;r die Kreuzertechnologie ist.";
+$lang['info'][205]['name']        = 'Schwerer Jäger';
+$lang['info'][205]['description'] = 'Bei der Weiterentwicklung des leichten J&auml;gers kamen die Forscher zu einem Punkt, bei welchem der konventionelle Antrieb nicht mehr ausreichend Leistungen erbrachte. Um das neue Schiff optimal fortbewegen zu k&ouml;nnen wurde zum ersten Mal der Impulsantrieb genutzt. Dieses erh&ouml;hte zwar die Kosten, er&ouml;ffnete aber auch neue M&ouml;glichkeiten. Durch die Einsetzung dieses Antriebes blieb mehr Energie f&uuml;r Waffen und Schilde &uuml;brig, au&szlig;erdem wurden f&uuml;r diese neue J&auml;gergattung auch qualitativ hochwertigere Materialien verwendet. Dies f&uuml;hrte zu einer verbesserten strukturellen Integrit&auml;t und einer h&ouml;heren Feuerkraft, was ihn im Kampf zu einer immens gr&ouml;&szlig;eren Bedrohung macht als sein leichtes Pendant. Durch diese &Auml;nderungen stellt der schwere J&auml;ger eine neue &Auml;ra der Schiffstechnologie dar, welche die Grundlage f&uuml;r die Kreuzertechnologie ist.';
 $lang['info'][206]['name']        = "Kreuzer";
 $lang['info'][206]['description'] = "Mit der Entwicklung der schweren Laser und der Ionenkanonen kamen die J&auml;ger immer mehr in Bedr&auml;ngnis. Trotz vieler Modifikationen konnte die Waffenst&auml;rke und die Panzerung nicht so weit gesteigert werden, um diesen Verteidigungsgesch&uuml;tzen wirksam begegnen zu k&ouml;nnen. Deshalb entschied man sich, eine neue Schiffsklasse zu konstruieren, die mehr Panzerung und mehr Feuerkraft in sich vereinte. Der Kreuzer war geboren. Kreuzer sind fast dreimal so stark gepanzert wie schwere J&auml;ger und verf&uuml;gen &uuml;ber mehr als die doppelte Schusskraft. Zudem sind sie sehr schnell. Gegen mittlere Verteidigung gibt es keine bessere Waffe. Kreuzer beherrschten fast ein Jahrhundert lang unumschr&auml;nkt das All. Mit dem Aufkommen der Gau&szlig;gesch&uuml;tze und Plasmawerfer endete ihre Vorherrschaft. Jedoch werden sie auch heute noch gerne gegen J&auml;gerverb&auml;nde eingesetzt.";
 $lang['info'][207]['name']        = "Schlachtschiff";
 $lang['info'][207]['description'] = "Schlachtschiffe bilden meist das R&uuml;ckgrat einer Flotte. Ihre schweren Gesch&uuml;tze, die hohe Geschwindigkeit und der gro&szlig;e Frachtraum machen sie zu ernst zu nehmenden Gegnern.";
 $lang['info'][208]['name']        = "Kolonieschiff";
 $lang['info'][208]['description'] = "Dieses gut gepanzerte Schiff dient der Eroberung neuer Planeten, was f&uuml;r ein aufstrebendes Imperium unerl&auml;sslich ist. Das Schiff wird auf der neuen Kolonie als Rohstofflieferant genutzt, in dem es wieder auseinander gebaut wird und alles wiederverwertbare Material f&uuml;r die Erschlie&szlig;ung der Neuen Welt genutzt wird. Pro Imperium k&ouml;nnen inklusive Hauptplanet maximal 9 Planeten kolonisiert werden.";
-$lang['info'][209]['name']        = "TF Sammler";
-$lang['info'][209]['description'] = "Die Weltraumgefechte nahmen immer gr&ouml;&szlig;ere Ausma&szlig;e an. Tausende Schiffe wurden zerst&ouml;rt, aber die dadurch entstehenden Tr&uuml;mmerfelder schienen f&uuml;r immer verloren. Normale Transporter konnten sich nicht nahe genug an diese Felder heran bewegen, ohne durch kleinere Tr&uuml;mmer riesigen Schaden zu nehmen. Mit einer neuen Entwicklung im Bereich der Schildtechnologie konnte dieses Problem effizient beseitigt werden, es entstand eine neue Schiffsklasse, &auml;hnlich dem gro&szlig;en Transporter, der TF Sammler . Mit dessen Hilfe konnten die scheinbar verlorenen Ressourcen doch noch verwertet werden. Die kleinen Tr&uuml;mmer stellten aufgrund der neuen Schilde auch keine Gefahr mehr dar. Leider ben&ouml;tigen diese Vorrichtungen Platz, dadurch ist seine Ladekapazit&auml;t auf 40.000 beschr&auml;nkt.";
-$lang['info'][210]['name']        = "Spionagesatellit";
+$lang['info'][209]['name']        = 'Recycler';
+$lang['info'][209]['description'] = 'Die Weltraumgefechte nahmen immer gr&ouml;&szlig;ere Ausma&szlig;e an. Tausende Schiffe wurden zerst&ouml;rt, aber die dadurch entstehenden Tr&uuml;mmerfelder schienen f&uuml;r immer verloren. Normale Transporter konnten sich nicht nahe genug an diese Felder heran bewegen, ohne durch kleinere Tr&uuml;mmer riesigen Schaden zu nehmen. Mit einer neuen Entwicklung im Bereich der Schildtechnologie konnte dieses Problem effizient beseitigt werden, es entstand eine neue Schiffsklasse, &auml;hnlich dem gro&szlig;en Transporter, der Recycler. Mit dessen Hilfe konnten die scheinbar verlorenen Ressourcen doch noch verwertet werden. Die kleinen Tr&uuml;mmer stellten aufgrund der neuen Schilde auch keine Gefahr mehr dar. Leider ben&ouml;tigen diese Vorrichtungen Platz, dadurch ist seine Ladekapazit&auml;t auf 40.000 beschr&auml;nkt.';
+$lang['info'][210]['name']        = 'Spionagesonde';
 $lang['info'][210]['description'] = "Spionagesonden sind kleine wendige Drohnen, welche &uuml;ber weite Entfernungen hinweg Daten &uuml;ber Flotten und Planeten liefern. Ihr Hochleistungstriebwerk erm&ouml;glicht ihnen weite Strecken in wenigen Sekunden zur&uuml;ck zu legen. Einmal in der Umlaufbahn eines Planeten angekommen verweilen sie dort kurz um Daten zu sammeln. W&auml;hrend dieser Zeit sind sie vom Feind relativ leicht entdeck- und angreifbar. Um Platz zu sparen wurde auf Panzerung, Schilde und Waffen verzichtet, was die Sonden, wenn sie einmal entdeckt wurden, zu leichten Zielen macht.";
 $lang['info'][211]['name']        = "Bomber";
 $lang['info'][211]['description'] = "Der Bomber wurde speziell entwickelt um die Verteidigung eines Planeten zu zerst&ouml;ren. Mit Hilfe einer lasergesteuerten Zielvorrichtung wirft er zielgenau Plasmabomben auf die Planetenoberfl&auml;che und richtet so einen verheerenden Schaden bei Verteidigungsanlagen an.";
@@ -152,7 +152,7 @@ $lang['info'][213]['name']        = "Zerst&ouml;rer";
 $lang['info'][213]['description'] = "Der Zerst&ouml;rer ist der K&ouml;nig unter den Kriegsschiffen. Seine Multiphalanx Ionen-, Plasma- und Gau&szlig;gesch&uuml;tzt&uuml;rme k&ouml;nnen durch ihre verbesserten Anpeilungssensoren fast 99% der verteidigenden leichten Laser treffen. Da der Zerst&ouml;rer sehr gro&szlig; ist, ist seine Man&ouml;vrierf&auml;higkeit stark eingeschr&auml;nkt, wodurch er im Kampf eher einer Kampfstation gleicht, als einem Kampfschiff. So hoch wie seine Kampfkraft ist auch sein Verbrauch an Deuterium.";
 $lang['info'][214]['name']        = "Todesstern";
 $lang['info'][214]['description'] = "Der Todesstern ist mit einer riesigen Gravitonkanone bewaffnet, die Schiffe so gro&szlig; wie Zerst&ouml;rer oder sogar Monde zerst&ouml;ren kann. Da daf&uuml;r eine hohe Menge an Energie ben&ouml;tigt wird, besteht er fast nur aus Generatoren. Lediglich riesige Sternenreiche k&ouml;nnen &uuml;berhaupt die Ressourcen und Arbeiter aufbringen, um dieses mondgro&szlig;e Schiff zu bauen.";
-$lang['info'][215]['name']        = "Schlachtzreuzer";
+$lang['info'][215]['name']        = 'Schlachtkreuzer';
 $lang['info'][215]['description'] = "Dieses filigrane Schiff eignet sich hervorragend zum Zerst&ouml;ren feindlicher Flottenverb&auml;nde. Mit seinen hochentwickelten Lasergesch&uuml;tzen ist es in der Lage, eine grosse Zahl angreifender Schiffe gleichzeitig zu bek&auml;mpfen. Durch seine schlanke Bauform und die starken Bewaffnung ist die Ladekapazit&auml;t begrenzt. Dies wird jedoch durch den verbrauchsarmen Hyperraumantrieb wieder ausgeglichen.";
 
 // ----------------------------------------------------------------------------------------------------------
@@ -171,14 +171,46 @@ $lang['info'][406]['name']        = "Plasmawerfer";
 $lang['info'][406]['description'] = "Die Lasertechnik war mittlerweile nahezu perfektioniert, die Ionentechnik hatte ein Endstadium erreicht und es galt mittlerweile als praktisch unm&ouml;glich, auch aus nur einem Waffensystem qualitativ gesehen noch mehr Effektivit&auml;t herauszubekommen. Doch all dies sollte sich &auml;ndern, als man auf die Idee kam, beide Systeme miteinander zu kombinieren. Schon aus der Kernfusionstechnik bekannt, erhitzen Laser Teilchen ( meistens Deuterium ) auf extrem hohe Temperaturen, die schon einmal in die Millionen Grad gehen. Die Ionentechnik tr&auml;gt ihren Teil in Form von elektrischer Aufladung, Stabilisierungsfeldern und Beschleunigern bei. Wird die abzufeuernde Ladung gen&uuml;gend erhitzt, unter Druck gesetzt und ionisiert, jagt man sie mittels Beschleunigern in die Weiten des Alls Richtung Ziel hinaus. Der gr&uuml;nlich gl&uuml;hende Plasmastrahl bietet einen imposanten Anblick, es fragt sich aber, ob die Crew des Zielschiffes lange an ihm Gefallen haben wird, wenn in wenigen Sekunden die H&uuml;lle zerfetzt und die Elektronik geschmort wird... Der Plasmawerfer gilt als eine der gef&uuml;rchtetsten Waffen &uuml;berhaupt, und diese Technik hat auch ihren Preis. Verteidigungsanlagen deaktivieren sich, sobald sie zu stark besch&auml;digt sind. Nach einer Schlacht betr&auml;gt die Chance bis zu 70%, dass sich ausgefallene Verteidigungsanlagen wieder Instand setzen lassen.";
 $lang['info'][407]['name']        = "Kleine Schildkuppel";
 $lang['info'][407]['description'] = "Lange bevor die Schildgeneratoren klein genug waren, um auf Schiffen Einsatz zu finden, existierten bereits riesige Generatoren auf der Oberfl&auml;che von Planeten. Diese umh&uuml;llen den ganzen Planeten mit einem Kraftfeld, welches ungeheuere Mengen an Energie absorbieren kann, bevor es zusammenbricht. Kleinere Angriffsflotten scheitern immer wieder an diesen Schildkuppeln. Mit zunehmender technologischer Entwicklung k&ouml;nnen diese Schilde noch verst&auml;rkt werden. Sp&auml;ter kann man sogar eine gro&szlig;e Schildkuppel bauen, die noch st&auml;rker ist. Pro Planet kann nur eine einzige kleine Schildkuppel gebaut werden.";
-$lang['info'][408]['name']        = "Grosse Schildkuppel";
+$lang['info'][408]['name']        = 'Große Schildkuppel';
 $lang['info'][408]['description'] = "Die Weiterentwicklung der kleinen Schildkuppel. Sie basiert auf den gleichen Technologien kann aber wesentlich mehr Energie einsetzen um feindliche Angriffe abzuhalten.";
 
 // ----------------------------------------------------------------------------------------------------------
 // Missiles !
-$lang['info'][502]['name']        = "Bodenluft Rakete";
-$lang['info'][502]['description'] = "Abfangraketen zerst&ouml;ren angreifende Intercontineltalraketen. Jede Bodenluft rakete zerst&ouml;rt eine Interplanetarrakete.";
-$lang['info'][503]['name']        = "Intercontineltal Rakete";
-$lang['info'][503]['description'] = "Intercontinentalraketen zerst&ouml;ren die gegnerische Verteidigung, k&ouml;nnen allerdings durch Abfangraketen zerst&ouml;rt werden! Von Interplanetarraketen zerst&ouml;rte Verteidigungsanlagen bauen sich nicht wieder auf.";
+$lang['info'][502]['name']        = 'Abfangrakete';
+$lang['info'][502]['description'] = 'Abfangraketen zerstören angreifende Interplanetarraketen. Jede Abfangrakete zerstört eine Interplanetarrakete.';
+$lang['info'][503]['name']        = 'Interplanetarrakete';
+$lang['info'][503]['description'] = 'Interplanetarraketen zerst&ouml;ren die gegnerische Verteidigung, k&ouml;nnen allerdings durch Abfangraketen zerst&ouml;rt werden! Von Interplanetarraketen zerst&ouml;rte Verteidigungsanlagen bauen sich nicht wieder auf.';
+
+// XNova Renaissance 0.9g : traductions
+$lang['info'][601]['name'] = 'Geologe';
+$lang['info'][601]['description'] = 'Der Geologe ist ein anerkannter Experte für Astromineralogie und Astrokristallografie. Mit seinem Team aus Metallurgen und Chemieingenieuren unterstützt er interplanetare Regierungen bei der Suche nach neuen Rohstoffquellen und optimiert deren Raffination.<br><br>+5% Produktion. Max. Stufe: 20';
+$lang['info'][602]['name'] = 'Admiral';
+$lang['info'][602]['description'] = 'Der Flottenadmiral ist ein Kriegsveteran und ein gefürchteter Stratege. Selbst in erbitterten Gefechten bewahrt er die nötige Kaltblütigkeit, um die Lage zu beherrschen, und steht in ständigem Kontakt mit den Admiralen unter seinem Kommando. Ein verantwortungsvoller Imperator kann bei der Koordination seiner Angriffe nicht auf den Flottenadmiral verzichten und vertraut ihm so sehr, dass er mehr Flotten in den Kampf schicken kann.<br><br>+5% auf Schilde, Panzerung und Waffen der Schiffe. Max. Stufe: 20';
+$lang['info'][603]['name'] = 'Ingenieur';
+$lang['info'][603]['description'] = 'Der Ingenieur ist ein Spezialist für Energiemanagement. In Friedenszeiten optimiert er die Effizienz der Energienetze der Kolonien.<br><br>+5% Energie. Max. Stufe: 10';
+$lang['info'][604]['name'] = 'Technologe';
+$lang['info'][604]['description'] = 'Die Gilden der Technologen bestehen aus Wissenschaftlern von anerkanntem Genie. Man findet sie überall dort, wo die Technik an ihre Grenzen stößt. Niemand wird je die Verschlüsselung eines Technologen knacken, und allein seine Anwesenheit inspiriert die Forscher des ganzen Imperiums.<br><br>-5% Bauzeit für Schiffe. Max. Stufe: 10';
+$lang['info'][605]['name'] = 'Konstrukteur';
+$lang['info'][605]['description'] = 'Der Konstrukteur ist eine neue Art von Baumeister. Seine DNA wurde verändert, um ihm übermenschliche Kräfte zu verleihen. Ein einziger dieser „Männer“ kann eine ganze Stadt errichten.<br><br>-10% Bauzeit. Max. Stufe: 3';
+$lang['info'][606]['name'] = 'Wissenschaftler';
+$lang['info'][606]['description'] = 'Die Wissenschaftler gehören einer Gilde an, die mit der Gilde der Technologen konkurriert. Sie sind auf die Verbesserung von Technologien spezialisiert.<br><br>-10% Forschungszeit. Max. Stufe: 3';
+$lang['info'][607]['name'] = 'Lagermeister';
+$lang['info'][607]['description'] = 'Der Lagermeister gehört der alten Bruderschaft des Planeten Hsac an. Sein Leitspruch lautet, so viel wie möglich zu verdienen, doch dafür braucht er große Lagerflächen. Deshalb hat er mit Hilfe des Konstrukteurs eine neue Lagertechnik entwickelt.<br><br>+50% Lagerkapazität. Max. Stufe: 2';
+$lang['info'][608]['name'] = 'Verteidiger';
+$lang['info'][608]['description'] = 'Der Verteidiger ist Mitglied der imperialen Armee. Dank seines Arbeitseifers kann er in bedrohten Kolonien in kurzer Zeit eine gefürchtete Verteidigung errichten.<br><br>-50% Bauzeit für Verteidigungsanlagen.';
+$lang['info'][609]['name'] = 'Bunker';
+$lang['info'][609]['description'] = 'Der Imperator hat die beeindruckende Arbeit bemerkt, die du für sein Imperium geleistet hast. Als Dank bietet er dir die Chance, Bunker zu werden. Der Bunker ist die höchste Auszeichnung im Bergbauzweig der imperialen Armee.<br><br>Schaltet den Planetenbeschützer frei';
+$lang['info'][610]['name'] = 'Spion';
+$lang['info'][610]['description'] = 'Der Spion ist eine rätselhafte Person. Niemand hat je sein wahres Gesicht gesehen – es sei denn, er ist bereits tot.<br><br>+5 Stufen Spionagetechnik. Max. Stufe: 2';
+$lang['info'][611]['name'] = 'Kommandant';
+$lang['info'][611]['description'] = 'Der Kommandant der imperialen Armee ist ein Meister in der Kunst der Flottenführung. Sein Gehirn kann die Flugbahnen zahlreicher Flotten berechnen, weit mehr als das eines gewöhnlichen Menschen.<br><br>+3 Flottenslots. Max. Stufe: 3';
+$lang['info'][612]['name'] = 'Zerstörer';
+$lang['info'][612]['description'] = 'Der Zerstörer ist ein gnadenloser Offizier. Er hat ganze Planeten nur zu seinem Vergnügen ausgelöscht. Derzeit entwickelt er eine neue Produktionsmethode für Todessterne.<br><br>2 Todessterne statt einem gebaut. Max. Stufe: 1';
+$lang['info'][613]['name'] = 'General';
+$lang['info'][613]['description'] = 'Der General ist eine ehrwürdige Persönlichkeit, die viele Jahre in der Armee gedient hat. In seiner Gegenwart arbeiten die Schiffsbauer schneller.<br><br>+25% Schiffsgeschwindigkeit. Max. Stufe: 3';
+$lang['info'][614]['name'] = 'Raider';
+$lang['info'][614]['description'] = 'Der Imperator hat in dir unbestreitbare Qualitäten eines Eroberers erkannt. Er bietet dir an, Raider zu werden. Der Raider ist der höchste Rang im Raider-Zweig der imperialen Armee.<br><br>Schaltet die SuperNova frei';
+$lang['info'][615]['name'] = 'Imperator';
+$lang['info'][615]['description'] = 'Du hast gezeigt, dass du der größte Eroberer des Universums bist. Es ist Zeit, den Platz einzunehmen, der dir zusteht.<br><br>Schaltet den Planetenzerstörer frei';
 
 ?>

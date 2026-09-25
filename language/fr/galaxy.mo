@@ -106,4 +106,7 @@ $lang['gf_unknowsp'] = "Espaces infinis";
 // XNova Renaissance 0.9g : mode vacances
 $lang['gs_c620'] = 'Erreur, vous êtes en mode vacances';
 
+// XNova Renaissance 0.9g : pluriel des membres (galaxie)
+$lang['gl_membres'] = 'Membres';
+
 ?>
