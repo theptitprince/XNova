@@ -314,7 +314,7 @@ function MissionCaseAttack ($FleetRow)
                 default:
                     break;
             }
-            $SimMessage = sprintf ($lang['sys_rapport_build_time'], $totaltime);
+            $SimMessage = sprintf ($lang['sys_rapport_build_time'], number_format($totaltime, 5, ',', ''));
             $raport .= $SimMessage . "</table>";
 
             $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];

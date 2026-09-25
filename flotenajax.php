@@ -37,7 +37,7 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 	$CurrentFlyingFleets = doquery("SELECT COUNT(fleet_id) AS `Nbre` FROM {{table}} WHERE `fleet_owner` = '".$user['id']."';", 'fleets', true);
 	$CurrentFlyingFleets = intval($CurrentFlyingFleets["Nbre"]);
 
-	$fleet          = array();
+	$fleet          = array('fleetarray' => array(), 'fleetlist' => '', 'amount' => 0);
 	$speedalls      = array();
 	$PartialFleet   = false; // 610
 	$PartialCount   = 0;

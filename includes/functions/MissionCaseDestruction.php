@@ -115,6 +115,8 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
+         $TargetSet = array();
+         $Mining    = array('metal' => 0, 'crystal' => 0, 'deuter' => 0); // pas de pillage (valait deja 0)
          for ($SetItem = 200; $SetItem < 500; $SetItem++) {
 
             if (isset($resource[$SetItem]) && $TargetPlanet[$resource[$SetItem]] > 0) {
@@ -692,7 +694,7 @@ function MissionCaseDestruction($FleetRow) {
 
          }
 
-         $SimMessage        = sprintf ($lang['sys_rapport_build_time'], $totaltime);
+         $SimMessage        = sprintf ($lang['sys_rapport_build_time'], number_format($totaltime, 5, ',', ''));
 
          $raport           .= $SimMessage ."</table>";
 

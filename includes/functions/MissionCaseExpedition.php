@@ -62,6 +62,9 @@ function MissionCaseExpedition ( $FleetRow ) {
 			$FleetStayDuration = ($FleetRow['fleet_end_stay'] - $FleetRow['fleet_start_time']) / 3600;
 
 			// Initialisation du contenu de la Flotte
+			$LaFlotte     = array();
+			$FleetCapacity = 0;
+			$FleetPoints   = 0;
 			$farray = explode(";", $FleetRow['fleet_array']);
 			foreach ($farray as $Item => $Group) {
 				if ($Group != '') {
@@ -72,9 +75,9 @@ function MissionCaseExpedition ( $FleetRow ) {
 					$LaFlotte[$TypeVaisseau] = $NbreVaisseau;
 
 					//On calcul les ressources maximum qui peuvent être récupéré
-					$FleetCapacity += $pricelist[$TypeVaisseau]['capacity'];
+					$FleetCapacity += $pricelist[$TypeVaisseau]['capacity'] * $NbreVaisseau; // (l'original oubliait le nombre)
 					// Maintenant on calcul en points toute la flotte
-					$FleetPoints   += ($NbreVaisseau * $PointsFlotte[$TypeVaisseau]);
+					$FleetPoints   += ($NbreVaisseau * ($PointsFlotte[$TypeVaisseau] ?? 0));
 				}
 			}
 
@@ -88,7 +91,6 @@ function MissionCaseExpedition ( $FleetRow ) {
 			// Bon on les mange comment ces explorateurs ???
 			$Hasard = rand(0, 10);
 
-			$MessSender = $lang['sys_mess_qg']. "(".$Hasard.")";
 
 			if ($Hasard < 3) {
 				// Pas de bol, on les mange tout crus
@@ -96,11 +98,13 @@ function MissionCaseExpedition ( $FleetRow ) {
 				$LostAmount  = (($Hasard * 33) + 1) / 100;
 
 				// Message pour annoncer la bonne mauvaise nouvelle
-				if ($LostAmount == 100) {
+				if ($LostAmount >= 1) {
 					// Supprimer effectivement la flotte
 					SendSimpleMessage ( $FleetOwner, '', $FleetRow['fleet_end_stay'], 15, $MessSender, $MessTitle, $lang['sys_expe_blackholl_2'] );
 					doquery ("DELETE FROM {{table}} WHERE `fleet_id` = ". $FleetRow["fleet_id"], 'fleets');
 				} else {
+					$LostShips     = array();
+					$NewFleetArray = "";
 					foreach ($LaFlotte as $Ship => $Count) {
 						$LostShips[$Ship] = intval($Count * $LostAmount);
 						$NewFleetArray   .= $Ship.",". ($Count - $LostShips[$Ship]) .";";
@@ -150,9 +154,10 @@ function MissionCaseExpedition ( $FleetRow ) {
 			} elseif ($Hasard >= 8 && $Hasard < 11) {
 				// Gain de vaisseaux
 				$FoundChance = $FleetPoints / $FleetCount;
+				$FoundShip = array();
 				for ($Ship = 202; $Ship < 216; $Ship++) {
-					if ($LaFlotte[$Ship] != 0) {
-						$FoundShip[$Ship] = round($LaFlotte[$Ship] * $RatioGain[$Ship]);
+					if (($LaFlotte[$Ship] ?? 0) != 0) {
+						$FoundShip[$Ship] = round($LaFlotte[$Ship] * ($RatioGain[$Ship] ?? 0));
 						if ($FoundShip[$Ship] > 0) {
 							$LaFlotte[$Ship] += $FoundShip[$Ship];
 						}
@@ -165,11 +170,13 @@ function MissionCaseExpedition ( $FleetRow ) {
 						$NewFleetArray   .= $Ship.",". $Count .";";
 					}
 				}
+				$FoundList = array();
 				foreach ($FoundShip as $Ship => $Count) {
 					if ($Count != 0) {
-						$FoundShipMess   .= $Count." ".$lang['tech'][$Ship].",";
+						$FoundList[] = $Count." ".$lang['tech'][$Ship];
 					}
 				}
+				$FoundShipMess = implode(", ", $FoundList);
 
 				$QryUpdateFleet  = "UPDATE {{table}} SET ";
 				$QryUpdateFleet .= "`fleet_array` = '". $NewFleetArray ."', ";
@@ -177,7 +184,8 @@ function MissionCaseExpedition ( $FleetRow ) {
 				$QryUpdateFleet .= "WHERE ";
 				$QryUpdateFleet .= "`fleet_id` = '". $FleetRow["fleet_id"] ."';";
 				doquery( $QryUpdateFleet, 'fleets');
-				$Message = $lang['sys_expe_found_ships']. $FoundShipMess . "";
+				// Flotte trop petite pour rapporter un vaisseau entier : expedition sans resultat (avant : « Ils ont trouve : » vide)
+				$Message = ($FoundShipMess != '') ? $lang['sys_expe_found_ships']. $FoundShipMess : $lang['sys_expe_nothing_2'];
 				SendSimpleMessage ( $FleetOwner, '', $FleetRow['fleet_end_stay'], 15, $MessSender, $MessTitle, $Message );
 			}
 
@@ -186,6 +194,7 @@ function MissionCaseExpedition ( $FleetRow ) {
 		// La Flotte est de retour a quai
 		if ($FleetRow['fleet_end_time'] < time()) {
 			// Reintegration de ce qui se ballade avec la flotte
+			$FleetAutoQuery = "";
 			$farray = explode(";", $FleetRow['fleet_array']);
 			foreach ($farray as $Item => $Group) {
 				if ($Group != '') {
