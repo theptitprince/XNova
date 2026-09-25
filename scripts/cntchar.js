@@ -1,14 +1,16 @@
 var x = "";
 var e = null;
 
+// Compteur de caracteres du premier formulaire de la page (champ "text"), limite a m caracteres
 function cntchar(m) {
-	if(window.document.forms[0].text.value.length > m) {
-		window.document.forms[0].text.value = x;
+	var t = window.document.forms[0].text;
+	if(t.value.length > m) {
+		t.value = x;
 	} else {
-		x = window.document.forms[0].text.value;
+		x = t.value;
 	}
 	if(e == null)
 	e = document.getElementById('cntChars');
-	else
-	e.childNodes[0].data = window.document.forms[0].text.value.length;
+	if(e != null)
+	e.innerHTML = t.value.length;
 }

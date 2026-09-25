@@ -30,6 +30,12 @@ $lang['changelog']   = array(
 - FIX : Erreurs JavaScript de la page Flotte et de la connexion ; script orphelin du portail OGame (mot de passe en cookie) supprim&eacute;
 - FIX : Textes : demandes d\'ami, discussion, taille des notes en caract&egrave;res, titre des Options
 - FIX : Alliance : page des droits en erreur fatale pour une alliance neuve (PHP 8), droits des rangs, fautes
+- FIX : Alliance : un chef ne peut plus enr&ocirc;ler de force un joueur ni exclure le membre d\'une autre alliance, ni changer le rang d\'un joueur ext&eacute;rieur
+- FIX : Alliance : un membre qui part ou est exclu perd son rang (il gardait ses droits dans sa nouvelle alliance) ; administration r&eacute;serv&eacute;e au droit pr&eacute;vu
+- FIX : Alliance : dissolution confirm&eacute;e et prot&eacute;g&eacute;e (un lien ou une image suffisait), membres lib&eacute;r&eacute;s et pr&eacute;venus ; images des textes limit&eacute;es aux adresses http(s)
+- NEW : Alliance : cession &agrave; un membre ayant le droit &laquo; Main droite &raquo; (le bouton ne faisait rien) ; un joueur supprim&eacute; transmet son alliance au plus ancien membre
+- FIX : Alliance : candidature impossible quand l\'alliance est ferm&eacute;e, candidat pr&eacute;venu en fran&ccedil;ais (accept&eacute;, refus&eacute;, exclu), onglet du mod&egrave;le de candidature
+- FIX : Alliance : rangs d&eacute;cal&eacute;s dans la liste des membres, tri par rang et par points, jours d\'inactivit&eacute; (c\'&eacute;taient des heures), textes allemands traduits
 - FIX : Administration : le message &agrave; tous les joueurs ne partait jamais ; texte d&eacute;sormais &eacute;chapp&eacute; (injection de code)
 - FIX : Messagerie : cat&eacute;gorie des messages de l\'administration absente, couleur illisible des rapports d\'exp&eacute;dition
 - FIX : Missiles : tir sans effet ni rapport sur une plan&egrave;te ayant une lune, textes du jeu effac&eacute;s au moment de l\'impact

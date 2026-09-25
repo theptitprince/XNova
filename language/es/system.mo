@@ -86,7 +86,7 @@ $lang['sys_gain'] = "Gains";
 $lang['sys_perte_attaquant'] = "Perte Attaquant";
 $lang['sys_perte_defenseur'] = "Perte Defenseur";
 $lang['sys_debris'] = "D&eacute;bris";
-$lang['sys_noaccess'] = "Acc&eacute;s refus&eacute;";
+$lang['sys_noaccess'] = "Acceso denegado";
 $lang['sys_noalloaw'] = "Vous n'avez pas acc&eacute;s &agrave; cette page";
 
 // Created by Perberos. All rights reversed (C) 2006

@@ -1,3 +1,4 @@
+<script src="scripts/cntchar.js" type="text/javascript"></script>
 <br>
 <table width=519>
 	<tr>

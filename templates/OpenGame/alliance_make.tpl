@@ -11,7 +11,7 @@
 	</tr>
 	<tr>
 	  <th>{allyance_name} (max. 35 {characters})</th>
-	  <th><input type="text" name="aname" size=20 maxlength=30 value=""></th>
+	  <th><input type="text" name="aname" size=20 maxlength=35 value=""></th>
 	</tr>
 	<tr>
 	  <th colspan=2><input type="submit" value="{make}"></th>

@@ -64,6 +64,8 @@ $RenaissanceMigrations = array(
 			MODIFY `who2` varchar(64) character set latin1 NOT NULL default '',
 			MODIFY `author` varchar(64) character set latin1 NOT NULL default '',
 			MODIFY `email` varchar(64) character set latin1 NOT NULL default '';",
+		// Titre du fondateur : "Leader" etait ecrit en dur a la creation. Vide = "Fondateur", traduit dans la langue du lecteur.
+		"UPDATE `{{prefix}}alliance` SET `ally_owner_range` = '' WHERE `ally_owner_range` = 'Leader';",
 	),
 );
 
