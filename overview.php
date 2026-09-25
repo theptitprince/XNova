@@ -131,7 +131,7 @@ switch ($mode) {
         $parse['galaxy_planet'] = $planetrow['planet'];
         $parse['planet_name'] = $planetrow['name'];
 
-        $page .= parsetemplate(gettemplate('overview_renameplanet'), $parse);
+        $page = parsetemplate(gettemplate('overview_renameplanet'), $parse);
         // On affiche la page permettant d'abandonner OU de renomme une Colonie / Planete
         display($page, $lang['rename_and_abandon_planet']);
         break;

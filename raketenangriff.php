@@ -42,6 +42,7 @@ $tempvar3 = doquery("SELECT * FROM {{table}} WHERE galaxy = ".$g." AND
 
 
 
+$error = 0;
 if ($planet['silo'] < 4) {
 	$error = 1;
 
@@ -50,23 +51,23 @@ elseif ($user['impulse_motor_tech'] == 0) {;
 	$error = 1;
 
 }
-elseif ($tempvar1 >= $tempvar2 || $g != $currentplanet['galaxy']) {
+elseif (abs($s - $currentplanet['system']) > $tempvar2 || $g != $currentplanet['galaxy']) {
 	$error = 1;
 }
 elseif (mysqli_num_rows($tempvar3) != 1) {
 	$error = 1;
 }
-elseif ($anz > $iraks) {
+elseif ($anz < 1 || $anz > $iraks) {
 	$error = 1;
 }
-elseif ((!is_numeric($pziel) && $pziel != "all") OR ($pziel < 0 && $pziel > 7 && $pziel != "all")) {
+elseif ((!is_numeric($pziel) && $pziel != "all") OR ($pziel != "all" && (intval($pziel) < 0 || intval($pziel) > 7))) {
 	$error = 1;
 }
 
 
 
 if ($error == 1) {
-	message('Du hast entweder zu wenig Interplanetarraketen, der Planet auf den zu schiessen willst existiert nicht oder du hast nicht die n&ouml;tige Reichweite oder Technik.', 'Fehler');
+	message('Tir impossible : pas assez de missiles interplan&eacute;taires, plan&egrave;te introuvable, ou port&eacute;e / technologie insuffisante.', 'Erreur');
 	exit();
 }
 
@@ -191,16 +192,14 @@ doquery("UPDATE {{table}} SET interplanetary_misil = '".($iraks_anzahl - $anz)."
 
 	$dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 
-if ($anz == 1)
-	$n = "";
-else
-	$n = "n";
+// Singulier / pluriel (l'original gardait le « n » du pluriel allemand : « missiles interplanetaire n sontn partit »)
+$MissileText = ($anz == 1) ? "missile interplan&eacute;taire est parti !" : "missiles interplan&eacute;taires sont partis !";
 
 
 ?>
 <html>
 <head>
-<title>Attaque par missiles interplanetaire</title>
+<title>Attaque par missiles interplan&eacute;taires</title>
 <link rel="SHORTCUT ICON" href="favicon.ico">
 <link rel="stylesheet" type="text/css" href="<?php echo $dpath; ?>formate.css" />
 <meta http-equiv="refresh" content="3; URL=galaxy.php?mode=3&galaxy=<?php echo $g; ?>&system=<?php echo $s; ?>&target=<?php echo $i; ?>">
@@ -217,10 +216,10 @@ else
       <table>
         <tbody>
         <tr>
-         <td class="c" colspan="1">Attaque par missiles interplanetaire</td>
+         <td class="c" colspan="1">Attaque par missiles interplan&eacute;taires</td>
 	</tr>
         <tr>
-	<td class="l"><?php echo "<b>".$anz."</b> missiles interplanetaire ".$n." sont".$n." partit !"; ?>
+	<td class="l"><?php echo "<b>".$anz."</b> ". $MissileText; ?>
         </tr>
        </tbody></table>
       </td>

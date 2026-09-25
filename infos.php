@@ -29,8 +29,8 @@ function BuildFleetListRows ( $CurrentPlanet ) {
 	$CurrIdx  = 1;
 	$Result   = "";
 	for ($Ship = 300; $Ship > 200; $Ship-- ) {
-		if ($resource[$Ship] != "") {
-			if ($CurrentPlanet[$resource[$Ship]] > 0) {
+		if (!empty($resource[$Ship])) {
+			if (($CurrentPlanet[$resource[$Ship]] ?? 0) > 0) {
 				$bloc['idx']             = $CurrIdx;
 				$bloc['fleet_id']        = $Ship;
 				$bloc['fleet_name']      = $lang['tech'][$Ship];
