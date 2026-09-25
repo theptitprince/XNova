@@ -17,6 +17,9 @@ function GalaxyRowPlanet ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy
 
 	// Planete (Image)
 	$Result  = "<th width=30>";
+	if (!$GalaxyRow || !$GalaxyRowPlanet) {
+		return $Result . "</th>";
+	}
 
 	$GalaxyRowUser = doquery("SELECT * FROM {{table}} WHERE id='".$GalaxyRowPlanet['id_owner']."';", 'users', true);
 	if ($GalaxyRow && $GalaxyRowPlanet["destruyed"] == 0 && $GalaxyRow["id_planet"] != 0) {
@@ -24,6 +27,7 @@ function GalaxyRowPlanet ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy
 			if ($GalaxyRowUser['id'] != $user['id']) {
 				if ($GalaxyRowPlanet["galaxy"] == $CurrentGalaxy) {
 					$Range = GetPhalanxRange ( $HavePhalanx );
+					$SystemLimitMin = $CurrentSystem - $Range;
 					if ($SystemLimitMin < 1) {
 						$SystemLimitMin = 1;
 					}

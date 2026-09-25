@@ -49,8 +49,8 @@ if ( defined('INSIDE') ) {
 
 	// Debug Level
 	define('DEBUG', 1); // Debugging off
-	// Mot qui sont interdit a la saisie !
-	$ListCensure = array ( "<", ">", "script", "doquery", "http", "javascript", "'" );
+	// (Liste de mots « interdits » retiree en 0.9g : elle abimait les pseudos et noms de planete ; la saisie est
+	// protegee par SafeName / SafeText et par les regles de caracteres de l'inscription)
 } else {
 	die("Hacking attempt");
 }

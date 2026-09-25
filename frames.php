@@ -43,7 +43,7 @@ include($xnova_root_path . 'common.'.$phpEx);
 	$page .= "<frame name=\"Hauptframe\" src=\"overview.php\">";
 	$page .= "<noframes>";
 	$page .= "<body>";
-	$page .= "<p>". $lang['NoFrames']."</p>";
+	$page .= "<p>". ($lang['NoFrames'] ?? '') ."</p>";
 	$page .= "</noframes>";
 	$page .= "</frameset>";
       $page .= "</body>";

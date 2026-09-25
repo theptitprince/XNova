@@ -104,7 +104,7 @@ include($xnova_root_path . 'common.' . $phpEx);
           $missiontype[9] = $lang['type_mission'][9];
    }
 
-	$fleetarray    = unserialize(base64_decode(str_rot13(($_POST["usedfleet"] ?? null))), array('allowed_classes' => false));
+	$fleetarray    = unserialize(base64_decode(str_rot13((string) ($_POST["usedfleet"] ?? ''))), array('allowed_classes' => false));
 	if (!is_array($fleetarray) || !$fleetarray) {
 		// Pas de flotte transmise (acces direct) : retour a la page flotte
 		header("Location: fleet.php");

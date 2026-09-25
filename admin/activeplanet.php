@@ -25,7 +25,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$parse          = $lang;
 		$parse['dpath'] = $dpath;
-		$parse['mf']    = $mf;
+		$parse['mf']    = "Hauptframe";
+		$parse['online_list'] = '';
 
 		$PageTPL        = gettemplate('admin/activeplanet_body');
 		$AllActivPlanet = doquery("SELECT * FROM {{table}} WHERE `last_update` >= '". (time()-15 * 60) ."' ORDER BY `id` ASC", 'planets');

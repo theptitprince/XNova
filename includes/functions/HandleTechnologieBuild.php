@@ -26,6 +26,7 @@ function HandleTechnologieBuild ( &$CurrentPlanet, &$CurrentUser ) {
 
 	if ($CurrentUser['b_tech_planet'] != 0) {
 		// Y a une technologie en cours sur une de mes colonies
+		$WorkingPlanet = null;
 		if ($CurrentUser['b_tech_planet'] != $CurrentPlanet['id']) {
 			// Et ce n'est pas sur celle ci !!
 			$WorkingPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '". $CurrentUser['b_tech_planet'] ."';", 'planets', true);

@@ -17,7 +17,7 @@ function GalaxyRowAlly ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 
 	// Alliances
 	$Result  = "<th width=80>";
-	if ($GalaxyRowUser['ally_id'] && $GalaxyRowUser['ally_id'] != 0) {
+	if (!empty($GalaxyRowUser['ally_id'])) {
 		$allyquery = doquery("SELECT * FROM {{table}} WHERE id=" . $GalaxyRowUser['ally_id'], "alliance", true);
 		if ($allyquery) {
 			$members_count = doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE ally_id=" . $allyquery['id'] . ";", "users", true);
@@ -50,7 +50,7 @@ function GalaxyRowAlly ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 			$Result .= "</table>\"";
 			$Result .= ", STICKY, MOUSEOFF, DELAY, 750, CENTER, OFFSETX, -40, OFFSETY, -40 );'";
 			$Result .= " onmouseout='return nd();'>";
-			if ($user['ally_id'] == $GalaxyRowPlayer['ally_id']) {
+			if ($user['ally_id'] == $GalaxyRowUser['ally_id']) {
 				$Result .= "<span class=\"allymember\">". $allyquery['ally_tag'] ."</span></a>";
 			} else {
 				$Result .= $allyquery['ally_tag'] ."</a>";

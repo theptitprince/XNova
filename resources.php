@@ -255,7 +255,7 @@ function BuildRessourcePage ( $CurrentUser, $CurrentPlanet ) {
 }
 
 	$Page = BuildRessourcePage ( $user, $planetrow );
-	display( $Page, $lang['Resources'] );
+	display( $Page, $lang['Resources'] ?? '' );
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

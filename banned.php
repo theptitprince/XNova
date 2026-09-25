@@ -24,7 +24,8 @@ includeLang('banned');
 
 $parse = $lang;
 $parse['dpath'] = $dpath;
-$parse['mf'] = $mf;
+$parse['mf'] = "Hauptframe";
+$parse['banned'] = '';
 
 
 $query = doquery("SELECT * FROM {{table}} ORDER BY `id`;",'banned');

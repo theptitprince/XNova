@@ -181,15 +181,15 @@ function ResearchBuildingPage (&$CurrentPlanet, $CurrentUser, $InResearch, $TheP
 					}
 				}
 				$RowParse['tech_link']  = $TechnoLink;
-				$TechnoList            .= parsetemplate($TechRowTPL, $RowParse);
+				$TechnoList             = ($TechnoList ?? '') . parsetemplate($TechRowTPL, $RowParse);
 			}
 		}
 	}
 
 	$PageParse                = $lang;
 	$PageParse['noresearch']  = $NoResearchMessage;
-	$PageParse['technolist']  = $TechnoList;
-	$Page                    .= parsetemplate(gettemplate('buildings_research'), $PageParse);
+	$PageParse['technolist']  = $TechnoList ?? '';
+	$Page                     = parsetemplate(gettemplate('buildings_research'), $PageParse);
 
 	display( $Page, $lang['Research'] );
 }

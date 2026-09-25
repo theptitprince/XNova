@@ -19,6 +19,7 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
+	$page    = '';
 	$HeadTpl = gettemplate('techtree_head');
 	$RowTpl  = gettemplate('techtree_row');
 	foreach($lang['tech'] as $Element => $ElementName) {

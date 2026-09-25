@@ -43,7 +43,7 @@ function MissionCaseAttack ($FleetRow)
             $TargetUser = doquery($QryTargetUser, 'users', true);
 
             $QryTargetTech = "SELECT ";
-            $QryTargetTech .= "`military_tech`, `defence_tech`, `shield_tech` ";
+            $QryTargetTech .= "`military_tech`, `defence_tech`, `shield_tech`, `rpg_amiral` ";
             $QryTargetTech .= "FROM {{table}} ";
             $QryTargetTech .= "WHERE ";
             $QryTargetTech .= "`id` = '" . $TargetUserID . "';";
@@ -51,12 +51,13 @@ function MissionCaseAttack ($FleetRow)
             $TargetTechno = doquery($QryTargetTech, 'users', true);
 
             $QryCurrentTech = "SELECT ";
-            $QryCurrentTech .= "`military_tech`, `defence_tech`, `shield_tech` ";
+            $QryCurrentTech .= "`military_tech`, `defence_tech`, `shield_tech`, `rpg_amiral` ";
             $QryCurrentTech .= "FROM {{table}} ";
             $QryCurrentTech .= "WHERE ";
             $QryCurrentTech .= "`id` = '" . $CurrentUserID . "';";
             $CurrentTechno = doquery($QryCurrentTech, 'users', true);
 
+            $TargetSet = array();
             for ($SetItem = 200; $SetItem < 500; $SetItem++) {
                 if (isset($resource[$SetItem]) && $TargetPlanet[$resource[$SetItem]] > 0) {
                     $TargetSet[$SetItem]['count'] = $TargetPlanet[$resource[$SetItem]];

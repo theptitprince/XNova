@@ -17,10 +17,18 @@ function GalaxyRowPlanetName ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Ga
 
 	// Planete (Nom)
 	$Result  = "<th style=\"white-space: nowrap;\" width=130>";
+	if (!$GalaxyRow || !$GalaxyRowPlanet) {
+		return $Result . "</th>";
+	}
+	// Planete detruite ou proprietaire supprime : pas de joueur (memes comparaisons qu'avec une valeur vide)
+	if (!is_array($GalaxyRowUser)) {
+		$GalaxyRowUser = array('id' => null, 'ally_id' => null);
+	}
 
+	// Vert : membre de mon alliance (« sans alliance » vaut 0 : tous les joueurs sans alliance sortaient en vert)
 	if ($GalaxyRowUser['ally_id'] == $user['ally_id'] AND
 		$GalaxyRowUser['id']      != $user['id']      AND
-		$user['ally_id']          != '') {
+		!empty($user['ally_id'])) {
 		$TextColor = "<font color=\"green\">";
 		$EndColor  = "</font>";
 	} elseif ($GalaxyRowUser['id'] == $user['id']) {

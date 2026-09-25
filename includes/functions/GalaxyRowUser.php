@@ -23,8 +23,8 @@ function GalaxyRowUser ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 		$NoobMulti     = doquery("SELECT * FROM {{table}} WHERE `config_name` = 'noobprotectionmulti';", 'config', true);
 		$UserPoints    = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $user['id'] ."';", 'statpoints', true);
 		$User2Points   = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $GalaxyRowUser['id'] ."';", 'statpoints', true);
-		$CurrentPoints = $UserPoints['total_points'];
-		$RowUserPoints = $User2Points['total_points'];
+		$CurrentPoints = $UserPoints['total_points'] ?? 0;
+		$RowUserPoints = $User2Points['total_points'] ?? 0;
 		$CurrentLevel  = $CurrentPoints * $NoobMulti['config_value'];
 		$RowUserLevel  = $RowUserPoints * $NoobMulti['config_value'];
 		if       ($GalaxyRowUser['bana'] == 1 AND
@@ -58,7 +58,7 @@ function GalaxyRowUser ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 			$Systemtatus2 = "";
 			$Systemtatus  = "";
 		}
-		$Systemtatus4 = $User2Points['total_rank'];
+		$Systemtatus4 = $User2Points['total_rank'] ?? '';
 		if ($Systemtatus2 != '') {
 			$Systemtatus6 = "<font color=\"white\">(</font>";
 			$Systemtatus7 = "<font color=\"white\">)</font>";
@@ -71,7 +71,7 @@ function GalaxyRowUser ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 		if ($GalaxyRowUser['authlevel'] > 0) {
 			$admin = "<font color=\"lime\"><blink>A</blink></font>";
 		}
-		$Systemtart = $User2Points['total_rank'];
+		$Systemtart = (string) ($User2Points['total_rank'] ?? '');
 		if (strlen($Systemtart) < 3) {
 			$Systemtart = 1;
 		} else {

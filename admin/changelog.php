@@ -34,13 +34,13 @@ foreach($lang['changelog'] as $a => $b)
 	$IsLatest = false;
 	$parse['description']    = nl2br($b);
 
-	$body .= parsetemplate($template, $parse);
+	$body = ($body ?? '') . parsetemplate($template, $parse);
 
 }
 
-$parse['body'] = $body;
+$parse['body'] = $body ?? '';
 
-$page .= parsetemplate(gettemplate('changelog_body'), $parse);
+$page = parsetemplate(gettemplate('changelog_body'), $parse);
 
 display( $page, "Changelog", false, '', true);
 

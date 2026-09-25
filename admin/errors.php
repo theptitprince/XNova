@@ -39,6 +39,7 @@ $parse = $lang;
 		// Afficher les erreurs
 		$query = doquery("SELECT * FROM {{table}}", 'errors');
 		$i = 0;
+		$parse['errors_list'] = '';
 		while ($u = mysqli_fetch_array($query)) {
 			$i++;
 			$parse['errors_list'] .= "

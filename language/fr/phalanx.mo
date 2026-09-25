@@ -3,6 +3,8 @@
 $lang['phl_tbl_title'] = "Scan de lune";
 $lang['phl_tbl_moves'] = "Mouvements de flotte actuels";
 $lang['phl_no_deuter'] = "Vous n'avez pas assez de deut&eacute;rium !";
+$lang['phl_out_of_range'] = "Cette position est hors de port&eacute;e de votre phalange de capteur.";
+$lang['phl_moon_only']    = "La phalange de capteur ne s'utilise que depuis une lune.";
 
 // Gestion des flottes
 $lang['ov_fleet']            = "flotte";

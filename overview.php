@@ -68,7 +68,7 @@ switch ($mode) {
         // -----------------------------------------------------------------------------------------------
         if (($_POST['action'] ?? null) == $lang['namer']) {
             // Reponse au changement de nom de la planete
-            $UserPlanet = SafeName(CheckInputStrings (($_POST['newname'] ?? null)), 32);
+            $UserPlanet = SafeName(($_POST['newname'] ?? ''), 32); // (l'ancien filtre changeait « Scriptopolis » en « *opolis »)
             $newname = SqlEscape(trim($UserPlanet));
             if ($newname != "") {
                 // Deja on met jour la planete qu'on garde en memoire (pour le nom)
@@ -155,6 +155,8 @@ switch ($mode) {
             // -----------------------------------------------------------------------------------------------
             // --- Gestion Officiers -------------------------------------------------------------------------
             // Passage au niveau suivant, ajout du point de compétence et affichage du passage au nouveau level
+            $HaveNewLevelMineur = '';
+            $HaveNewLevelRaid   = '';
             $XpMinierUp = $user['lvl_minier'] * 5000;
             $XpRaidUp = $user['lvl_raid'] * 10;
             $XpMinier = $user['xpminier'];
@@ -172,7 +174,7 @@ switch ($mode) {
                     $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
                     doquery($QryUpdateUser, 'users');
                     $HaveNewLevelMineur = "<tr>";
-                    $HaveNewLevelMineur .= "<th colspan=4><a href=officier.$phpEx>" . $lang['Have_new_level_mineur'] . "</a></th>";
+                    $HaveNewLevelMineur .= "<th colspan=4><a href=officier.$phpEx>" . $lang['Have_new_level_mineur'] . "</a></th></tr>";
                 }
                 if ($XPRaid >= $XpRaidUp) {
                     $QryUpdateUser = "UPDATE {{table}} SET ";
@@ -181,8 +183,8 @@ switch ($mode) {
                     $QryUpdateUser .= "WHERE ";
                     $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
                     doquery($QryUpdateUser, 'users');
-                    $HaveNewLevelMineur = "<tr>";
-                    $HaveNewLevelMineur .= "<th colspan=4><a href=officier.$phpEx>" . $lang['Have_new_level_raid'] . "</a></th>";
+                    $HaveNewLevelRaid = "<tr>";
+                    $HaveNewLevelRaid .= "<th colspan=4><a href=officier.$phpEx>" . $lang['Have_new_level_raid'] . "</a></th></tr>";
                 }
             }
             // -----------------------------------------------------------------------------------------------
@@ -346,7 +348,7 @@ switch ($mode) {
                 $parse['bannerframe'] = "<th colspan=\"4\"><img src=\"scripts/createbanner.php?id=".$user['id']."\"><br>".$lang['InfoBanner']."<br><input name=\"bannerlink\" type=\"text\" id=\"bannerlink\" value=\"[img]".$BannerURL."[/img]\" size=\"62\"></th></tr>";
             }
             // --- Gestion de l'affichage d'une lune ---------------------------------------------------------
-            if ($lunarow['id'] <> 0) {
+            if (!empty($lunarow['id'])) {
                 if ($planetrow['planet_type'] == 1) {
                     $lune = doquery ("SELECT * FROM {{table}} WHERE `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `planet` = '" . $planetrow['planet'] . "' AND `planet_type` = '3'", 'planets', true);
                     $parse['moon_img'] = "<a href=\"?cp=" . $lune['id'] . "&re=0\" title=\"" . $lune['name'] . "\"><img src=\"" . $dpath . "planeten/" . $lune['image'] . ".jpg\" height=\"50\" width=\"50\"></a>";
@@ -371,10 +373,12 @@ switch ($mode) {
             $parse['galaxy_system'] = $planetrow['system'];
             $StatRecord = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '" . $user['id'] . "';", 'statpoints', true);
 
+            // Joueur pas encore classe (statistiques jamais calculees) : 0
+            $StatRecord = $StatRecord ?: array('build_points' => 0, 'fleet_points' => 0, 'tech_points' => 0, 'total_points' => 0, 'total_rank' => 0, 'total_old_rank' => 0);
             $parse['user_points'] = pretty_number($StatRecord['build_points']);
             $parse['user_fleet'] = pretty_number($StatRecord['fleet_points']);
             $parse['player_points_tech'] = pretty_number($StatRecord['tech_points']);
-            $parse['total_points'] = pretty_number($StatRecord['total_points']);;
+            $parse['total_points'] = pretty_number($StatRecord['total_points']);
 
             $parse['user_rank'] = $StatRecord['total_rank'];
             $ile = $StatRecord['total_old_rank'] - $StatRecord['total_rank'];
@@ -388,6 +392,7 @@ switch ($mode) {
             $parse['u_user_rank'] = $StatRecord['total_rank'];
             $parse['user_username'] = $user['username'];
 
+            $flotten = '';
             if (!empty($fpage)) {
                 ksort($fpage);
                 foreach ($fpage as $time => $content) {
@@ -489,7 +494,7 @@ switch ($mode) {
 
             $page = parsetemplate(gettemplate('overview_body'), $parse);
 
-            display($page, $lang['Overview']);
+            display($page, $lang['Overview'] ?? '');
             break;
         }
 }

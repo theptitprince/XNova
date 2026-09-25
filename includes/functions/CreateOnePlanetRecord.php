@@ -27,11 +27,11 @@ function PlanetSizeRandomiser ($Position, $HomeWorld = false) {
 		$MaxAddon         = mt_rand(0, 110);
 		$MinAddon         = mt_rand(0, 100);
 		$Addon            = ($MaxAddon - $MinAddon);
-		$PlanetFields     = ($RandomSize + $abweichung);
+		$PlanetFields     = $RandomSize; // l'original ajoutait $abweichung, jamais definie (donc 0)
 	} else {
 		$PlanetFields     = $game_config['initial_fields'];
 	}
-	$PlanetSize           = ($PlanetFields ^ (14 / 1.5)) * 75;
+	$PlanetSize           = ((int) $PlanetFields ^ 9) * 75; // formule d'origine : ($PlanetFields ^ (14 / 1.5)) * 75, ^ = OU exclusif
 
 	$return['diameter']   = $PlanetSize;
 	$return['field_max']  = $PlanetFields;
@@ -39,7 +39,7 @@ function PlanetSizeRandomiser ($Position, $HomeWorld = false) {
 }
 
 function CreateOnePlanetRecord($Galaxy, $System, $Position, $PlanetOwnerID, $PlanetName = '', $HomeWorld = false) {
-	global $lang;
+	global $lang, $game_config;
 
 	// Avant tout, on verifie s'il existe deja une planete a cet endroit
 	$QrySelectPlanet  = "SELECT	`id` ";
@@ -54,7 +54,7 @@ function CreateOnePlanetRecord($Galaxy, $System, $Position, $PlanetOwnerID, $Pla
 	// C'est donc aussi que je ne peux pas m'y poser !!
 	if (!$PlanetExist) {
 		$planet                      = PlanetSizeRandomiser ($Position, $HomeWorld);
-		$planet['diameter']          = ($planet['field_max'] ^ (14 / 1.5)) * 75 ;
+		$planet['diameter']          = ((int) $planet['field_max'] ^ 9) * 75 ; // meme formule que ci-dessus
 		$planet['metal']             = BUILD_METAL;
 		$planet['crystal']           = BUILD_CRISTAL;
 		$planet['deuterium']         = BUILD_DEUTERIUM;

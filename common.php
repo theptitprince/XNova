@@ -140,7 +140,8 @@ if (INSTALL != true) {
 			SetSelectedPlanet ( $user );
 
 			$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '".$user['current_planet']."';", 'planets', true);
-			$galaxyrow = doquery("SELECT * FROM {{table}} WHERE `id_planet` = '".$planetrow['id']."';", 'galaxy', true);
+			// Ligne de galaxie par coordonnees : fonctionne aussi pour une lune (avant : par id de planete, rien pour une lune)
+			$galaxyrow = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '". intval($planetrow['galaxy'] ?? 0) ."' AND `system` = '". intval($planetrow['system'] ?? 0) ."' AND `planet` = '". intval($planetrow['planet'] ?? 0) ."';", 'galaxy', true);
 
 			CheckPlanetUsedFields($planetrow);
 		} else {

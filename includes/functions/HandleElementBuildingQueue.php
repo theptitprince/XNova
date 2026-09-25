@@ -40,7 +40,7 @@ function HandleElementBuildingQueue ( $CurrentUser, &$CurrentPlanet, $Production
 				while ( $CurrentPlanet['b_hangar'] >= $BuildTime && !$UnFinished ) {
 					if ( $Count > 0 ) {
 						$CurrentPlanet['b_hangar'] -= $BuildTime;
-						$Builded[$Element]++;
+						$Builded[$Element] = ($Builded[$Element] ?? 0) + 1;
 						$CurrentPlanet[$resource[$Element]]++;
 						$Count--;
 						if ($Count == 0) {

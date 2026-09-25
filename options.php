@@ -70,7 +70,7 @@
        // Nombre de usuario
        if (isset($_POST["db_character"]) && ($_POST["db_character"] ?? null) != '') {
           // Meme regle qu'a l'inscription : lettres, chiffres, _ et - uniquement
-          $username = (preg_match("/[^A-Za-z0-9_\-]/", $_POST['db_character']) == 1) ? $user['username'] : CheckInputStrings ( ($_POST['db_character'] ?? null) );
+          $username = (preg_match("/[^A-Za-z0-9_\-]/", $_POST['db_character']) == 1) ? $user['username'] : $_POST['db_character'];
        } else {
           $username = $user['username'];
        }

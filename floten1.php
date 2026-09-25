@@ -58,6 +58,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	// Verifions si nous avons bien tout ce que nous voullons envoyer
 	$FleetHiddenBlock  = "";
+	$fleet = array('fleetarray' => array(), 'fleetlist' => '', 'amount' => 0);
+	$speedalls = array();
+	$page = '';
 	foreach ($reslist['fleet'] as $n => $i) {
 		if ($i > 200 && $i < 300 && ($_POST["ship$i"] ?? null) > "0") {
 			if (($_POST["ship$i"] ?? null) > $planetrow[$resource[$i]]) {
@@ -268,7 +271,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "</div></center>";
 	$page .= "<input type=\"hidden\" name=\"maxepedition\" value=\"". ($_POST['maxepedition'] ?? null) ."\" />";
 	$page .= "<input type=\"hidden\" name=\"curepedition\" value=\"". ($_POST['curepedition'] ?? null) ."\" />";
-	$page .= "<input type=\"hidden\" name=\"target_mission\" value=\"". $target_mission ."\" />";
+	$page .= "<input type=\"hidden\" name=\"target_mission\" value=\"". intval($_POST['target_mission'] ?? 0) ."\" />";
 	$page .= "</form>";
 	$page .= "<script>javascript:shortInfo(); </script>";
 

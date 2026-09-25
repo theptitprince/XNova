@@ -331,7 +331,7 @@ function AdminUserHeader ($title = '', $metatags = '') {
 function StdFooter() {
 	global $game_config, $lang;
 	$parse['copyright']     = $game_config['copyright'] ?? '';
-	$parse['TranslationBy'] = $lang['TranslationBy'];
+	$parse['TranslationBy'] = $lang['TranslationBy'] ?? '';
 	return parsetemplate(gettemplate('overall_footer'), $parse);
 }
 

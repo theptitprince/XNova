@@ -16,11 +16,11 @@ define('INSTALL' , false);
 
 $mode = ($_GET['mode'] ?? null);
 if (empty($mode))   { unset($mode); }
-$a     = intval($_GET['a']);
+$a     = intval($_GET['a'] ?? 0);
 if (empty($a))      { unset($a); }
-$sort1 = intval($_GET['sort1']);
+$sort1 = intval($_GET['sort1'] ?? 0);
 if (empty($sort1))  { unset($sort1); }
-$sort2 = intval($_GET['sort2']);
+$sort2 = intval($_GET['sort2'] ?? 0);
 if (empty($sort2))  { unset($sort2); }
 $d = isset($_GET['d']) ? intval($_GET['d']) : null;
 if ((!is_numeric($d)) || (empty($d) && $d != 0))
@@ -31,15 +31,15 @@ $edit = ($_GET['edit'] ?? null);
 if (empty($edit))
 	unset($edit);
 
-$rank = intval($_GET['rank']);
+$rank = intval($_GET['rank'] ?? 0);
 if (empty($rank))
 	unset($rank);
 
-$kick = intval($_GET['kick']);
+$kick = intval($_GET['kick'] ?? 0);
 if (empty($kick))
 	unset($kick);
 
-$id = intval($_GET['id']);
+$id = intval($_GET['id'] ?? 0);
 if (empty($id))
 	unset($id);
 
@@ -51,8 +51,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 $mode     = ($_GET['mode'] ?? null);
 $yes      = ($_GET['yes'] ?? null);
 $edit     = ($_GET['edit'] ?? null);
-$allyid   = intval($_GET['allyid']);
-$show     = intval($_GET['show']);
+$allyid   = intval($_GET['allyid'] ?? 0);
+$show     = intval($_GET['show'] ?? 0);
 $sort     = intval(($_GET['sort'] ?? null));
 $sendmail = intval(($_GET['sendmail'] ?? null));
 $t        = ($_GET['t'] ?? null);
@@ -277,7 +277,7 @@ if ($user['ally_id'] == 0) { // Sin alianza
 		/*
 	  Vista normal de cuando no se tiene ni solicitud ni alianza
 	*/
-		$page .= parsetemplate(gettemplate('alliance_defaultmenu'), $lang);
+		$page = parsetemplate(gettemplate('alliance_defaultmenu'), $lang);
 		display($page, $lang['alliance']);
 	}
 }

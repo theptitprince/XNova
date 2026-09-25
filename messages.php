@@ -110,11 +110,11 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 			$parse['id']           = $OwnerID;
 			$parse['to']           = $OwnerRecord['username'] ." [".$OwnerHome['galaxy'].":".$OwnerHome['system'].":".$OwnerHome['planet']."]";
 			$parse['subject']      = (!isset($subject)) ? $lang['mess_no_subject'] : $subject ;
-			$parse['text']         = $text;
+			$parse['text']         = $text ?? '';
 			if($game_config['enable_bbcode'] == 1) {
-			$page                 .= parsetemplate(gettemplate('messages_pm_form_bb'), $parse);
+			$page                  = parsetemplate(gettemplate('messages_pm_form_bb'), $parse);
 			} else {
-						$page                 .= parsetemplate(gettemplate('messages_pm_form'), $parse); }
+						$page                  = parsetemplate(gettemplate('messages_pm_form'), $parse); }
 			break;
 
 		case 'delete':

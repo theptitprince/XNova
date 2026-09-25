@@ -35,37 +35,7 @@ function sendpassemail($emailaddress, $username)
     return $status;
 }
 
-function mymail($to, $title, $body, $from = '')
-{
-    $from = trim($from);
-
-    // Expediteur : ADMINEMAIL si defini, sinon l'adresse du compte administrateur (avant : admin@xnova.fr)
-    $AdminMail = ADMINEMAIL;
-    if ($AdminMail == '') {
-        $AdminRow  = doquery("SELECT `email` FROM {{table}} WHERE `authlevel` >= 3 ORDER BY `id` LIMIT 1;", 'users', true);
-        $AdminMail = $AdminRow ? $AdminRow['email'] : '';
-    }
-    if (!$from) {
-        $from = $AdminMail;
-    }
-
-    $rp = $AdminMail;
-
-    $head = '';
-    $head .= "Content-Type: text/plain \r\n";
-    $head .= "Date: " . date('r') . " \r\n";
-    $head .= "Return-Path: $rp \r\n";
-    $head .= "From: $from \r\n";
-    $head .= "Sender: $from \r\n";
-    $head .= "Reply-To: $from \r\n";
-    $head .= "Organization: $org \r\n";
-    $head .= "X-Sender: $from \r\n";
-    $head .= "X-Priority: 3 \r\n";
-    $body = str_replace("\r\n", "\n", $body);
-    $body = str_replace("\n", "\r\n", $body);
-
-    return mail($to, $title, $body, $head);
-}
+// (mymail() est dans includes/functions/SendGameMail.php, commune avec le mot de passe oublie)
 
 if ($_POST) {
     $errors = 0;
@@ -82,7 +52,7 @@ if ($_POST) {
         $errors++;
     }
 
-    if (preg_match("/[^A-Za-z0-9_\-]/", ($_POST['hplanet'] ?? null)) == 1) {
+    if (preg_match("/[^A-Za-z0-9_\-]/", (string) ($_POST['hplanet'] ?? '')) == 1) {
         $errorlist .= $lang['error_planetnum'];
         $errors++;
     }
@@ -128,9 +98,12 @@ if ($_POST) {
         message ($errorlist, $lang['Register']);
     } else {
         $newpass = ($_POST['passwrd'] ?? null);
-        $UserName = CheckInputStrings (($_POST['character'] ?? null));
-        $UserEmail = CheckInputStrings (($_POST['email'] ?? null));
-        $UserPlanet = SqlEscape(SafeName(CheckInputStrings (($_POST['planet'] ?? null)), 32));
+        // Pseudo et adresse deja valides plus haut (A-Z a-z 0-9 _ - / is_email). L'ancien filtre de mots remplacait
+        // « script », « http »... par « * » : « scripttest » devenait « *test », compte impossible a utiliser
+        // (connexion avec le nom tape, planete creee sans proprietaire) et doublons possibles.
+        $UserName = ($_POST['character'] ?? '');
+        $UserEmail = trim($_POST['email'] ?? '');
+        $UserPlanet = SqlEscape(SafeName(($_POST['planet'] ?? ''), 32));
 
         $md5newpass = PasswordHash($newpass);
         // Creation de l'utilisateur
@@ -192,7 +165,7 @@ if ($_POST) {
             $QrySelectGalaxy .= "LIMIT 1;";
             $GalaxyRow = doquery($QrySelectGalaxy, 'galaxy', true);
 
-            if ($GalaxyRow["id_planet"] == "0") {
+            if ($GalaxyRow && $GalaxyRow["id_planet"] == "0") {
                 $newpos_checked = true;
             }
 
@@ -224,7 +197,7 @@ if ($_POST) {
         $sender = "Admin";
         $Subject = $lang['subject_message_ig'];
         $message = $lang['text_message_ig'];
-        SendSimpleMessage($iduser, $sender, $Time, 1, $from, $Subject, $message);
+        SendSimpleMessage($iduser, $sender, time(), 1, $from, $Subject, $message);
 
         // Mise a jour du nombre de joueurs inscripts
         doquery("UPDATE {{table}} SET `config_value` = `config_value` + '1' WHERE `config_name` = 'users_amount' LIMIT 1;", 'config');
