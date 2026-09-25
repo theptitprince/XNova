@@ -133,4 +133,12 @@ $lang['sys_irak_launch_error'] = 'Abschuss unmöglich: nicht genug Interplanetar
 $lang['sys_irak_launched_one'] = '<b>1</b> Interplanetarrakete wurde abgefeuert!';
 $lang['sys_irak_launched_many'] = '<b>%d</b> Interplanetarraketen wurden abgefeuert!';
 
+// XNova Renaissance 0.9g : erreur SQL (debug.class.php)
+$lang['sys_sql_error'] = 'Ein Fehler ist aufgetreten, bitte informiere den Administrator. Fehler Nr.: <b>%d</b>';
+
+// XNova Renaissance 0.9g : page du joueur banni (ChekUser.php)
+$lang['sys_banned_title'] = 'Dein Account wurde gesperrt!';
+$lang['sys_banned_until'] = 'Du bist gesperrt bis %s.';
+$lang['sys_banned_forever'] = 'Du bist dauerhaft gesperrt.';
+
 ?>

@@ -40,8 +40,16 @@ function FlyingFleetHandler (&$planet) {
 				break;
 
 			case 2:
-				// Attaque groupée
-				doquery ("DELETE FROM {{table}} WHERE `fleet_id` = '". $CurrentFleet['fleet_id'] ."';", 'fleets');
+				// Attaque groupée : jamais programmée (la flotte était supprimée à l'arrivée, vaisseaux compris).
+				// Mission retirée du formulaire ; une flotte qui l'aurait reçue fait demi-tour avec son chargement.
+				if ($CurrentFleet['fleet_mess'] == 0) {
+					if ($CurrentFleet['fleet_start_time'] <= time()) {
+						doquery ("UPDATE {{table}} SET `fleet_mess` = '1' WHERE `fleet_id` = '". $CurrentFleet['fleet_id'] ."';", 'fleets');
+					}
+				} elseif ($CurrentFleet['fleet_end_time'] <= time()) {
+					RestoreFleetToPlanet ( $CurrentFleet, true );
+					doquery ("DELETE FROM {{table}} WHERE `fleet_id` = '". $CurrentFleet['fleet_id'] ."';", 'fleets');
+				}
 				break;
 
 			case 3:

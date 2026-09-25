@@ -131,4 +131,33 @@ $lang['adm_dl_count']  = 'd&eacute;claration(s) au total';
 $lang['adm_yes'] = 'Oui';
 $lang['adm_no'] = 'Non';
 
+// XNova Renaissance 0.9g : pages d'administration (message a tous, listes, debannissement)
+$lang['adm_mall_title'] = 'Message &agrave; tous les joueurs';
+$lang['adm_mall_subject'] = 'Sujet';
+$lang['adm_mall_text'] = 'Texte (5000 caract&egrave;res maximum)';
+$lang['adm_mall_placeholder'] = 'Message administratif';
+$lang['adm_mall_send'] = 'Envoyer';
+$lang['adm_mall_sent'] = 'Message envoy&eacute; &agrave; tous les joueurs.';
+$lang['adm_mall_empty'] = 'Le sujet et le texte sont obligatoires.';
+$lang['adm_moonlist_title'] = 'Liste des lunes';
+$lang['adm_moonlist_head'] = 'Univers lunaire';
+$lang['adm_planetlist_title'] = 'Liste des plan&egrave;tes';
+$lang['adm_planetlist_head'] = 'Univers plan&eacute;taire';
+$lang['adm_col_id'] = 'ID';
+$lang['adm_col_moon'] = 'Nom de la lune';
+$lang['adm_col_planet'] = 'Nom de la plan&egrave;te';
+$lang['adm_col_owner'] = 'Propri&eacute;taire (ID)';
+$lang['adm_col_galaxy'] = 'Galaxie';
+$lang['adm_col_system'] = 'Syst&egrave;me';
+$lang['adm_col_position'] = 'Position';
+$lang['adm_count_moons_one'] = 'Il y a une seule lune.';
+$lang['adm_count_moons'] = 'Il y a %d lunes.';
+$lang['adm_count_planets_one'] = 'Il y a une seule plan&egrave;te.';
+$lang['adm_count_planets'] = 'Il y a %d plan&egrave;tes.';
+$lang['adm_unban_title'] = 'D&eacute;bannir un joueur';
+$lang['adm_unban_player'] = 'Joueur &agrave; d&eacute;bannir';
+$lang['adm_unban_name'] = 'Nom du joueur';
+$lang['adm_unban_button'] = 'D&eacute;bannir';
+$lang['adm_unban_done'] = 'Le joueur %s a bien &eacute;t&eacute; d&eacute;banni.';
+
 ?>

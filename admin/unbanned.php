@@ -22,21 +22,19 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	if ($user['authlevel'] >= "2") {
 
-		$parse['dpath'] = $dpath;
 		$parse = $lang;
+		$parse['dpath'] = $dpath;
 
 		$mode = ($_GET['mode'] ?? null);
 
-		if ($mode != 'change') {
-			$parse['name_label'] = "Nom du joueur";
-		} elseif ($mode == 'change' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+		if ($mode == 'change' && $_SERVER['REQUEST_METHOD'] == 'POST') {
 			$nam = SqlEscape(($_POST['nam'] ?? null));
 			doquery("DELETE FROM {{table}} WHERE who2='{$nam}'", 'banned');
 			doquery("UPDATE {{table}} SET bana=0, banaday=0 WHERE username='{$nam}'", "users");
-			message("Le joueur {$nam} a bien &eacute;t&eacute; d&eacute;banni!", 'Information');
+			message(sprintf($lang['adm_unban_done'], htmlspecialchars(($_POST['nam'] ?? ''), ENT_QUOTES, 'UTF-8')), $lang['adm_unban_title']);
 		}
 
-		display(parsetemplate(gettemplate('admin/unbanned'), $parse), "Overview", false, '', true);
+		display(parsetemplate(gettemplate('admin/unbanned'), $parse), $lang['adm_unban_title'], false, '', true);
 	} else {
 		message( $lang['sys_noalloaw'], $lang['sys_noaccess'] );
 	}

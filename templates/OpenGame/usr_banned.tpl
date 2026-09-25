@@ -1,21 +1,19 @@
-<style type="text/css">
-<!--
-.Style1 {color: #000000}
--->
-</style>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="{dpath}formate.css" />
+<title>{sys_banned_title}</title>
+</head>
+<body>
   <div align="center">
-
   <br />
   <table width="600">
     <tr>
-      <td colspan="10" class="c Style1"><div align="center">Votre compte a &eacute;t&eacute;  suspendu! </div>
-      </td>
-      <td>&nbsp;      </td>
+      <td class="c"><div align="center">{sys_banned_title}</div></td>
     </tr><tr>
-        <th colspan="10"><p>VOUS AVEZ &Eacute;T&Eacute; BANNI!<br />
-            </p>
-          </th>
+      <th><p>{sys_banned_text}</p></th>
     </tr>
   </table>
   </div>
-</form>
+</body>
+</html>

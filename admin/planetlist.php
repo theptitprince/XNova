@@ -26,23 +26,19 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$query = doquery("SELECT * FROM {{table}} WHERE planet_type='1'", "planets");
 		$i = 0;
 		$parse['planetes'] = '';
-		while ($u = mysqli_fetch_array($query)) {
-			$parse['planetes'] .= "<tr>"
-			. "<td class=b><center><b>" . $u[0] . "</center></b></td>"
-			. "<td class=b><center><b>" . $u[1] . "</center></b></td>"
-			. "<td class=b><center><b>" . $u[4] . "</center></b></td>"
-			. "<td class=b><center><b>" . $u[5] . "</center></b></td>"
-			. "<td class=b><center><b>" . $u[6] . "</center></b></td>"
-			. "</tr>";
+		// Colonnes par leur nom (lues par numero de colonne)
+		while ($u = mysqli_fetch_assoc($query)) {
+			$parse['planetes'] .= "<tr>";
+			foreach (array(intval($u['id']), htmlspecialchars($u['name'], ENT_QUOTES, 'UTF-8'), intval($u['galaxy']), intval($u['system']), intval($u['planet'])) as $Cell) {
+				$parse['planetes'] .= "<td class=b><center><b>" . $Cell . "</b></center></td>";
+			}
+			$parse['planetes'] .= "</tr>";
 			$i++;
 		}
 
-		if ($i == "1")
-			$parse['planetes'] .= "<tr><th class=b colspan=5>Il y a qu'une seule plan&egrave;te</th></tr>";
-		else
-			$parse['planetes'] .= "<tr><th class=b colspan=5>Il y a {$i} plan&egrave;tes</th></tr>";
+		$parse['planetes'] .= "<tr><th class=b colspan=5>" . (($i == 1) ? $lang['adm_count_planets_one'] : sprintf($lang['adm_count_planets'], $i)) . "</th></tr>";
 
-		display(parsetemplate(gettemplate('admin/planetlist_body'), $parse), 'Planetlist', false, '', true);
+		display(parsetemplate(gettemplate('admin/planetlist_body'), $parse), $lang['adm_planetlist_title'], false, '', true);
 	} else {
 		message($lang['sys_noalloaw'], $lang['sys_noaccess']);
 	}

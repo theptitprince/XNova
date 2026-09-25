@@ -44,6 +44,9 @@ $lang['changelog']   = array(
 - FIX : Fiche de la centrale &agrave; fusion (production mal lue), statistiques recalculables par t&acirc;che planifi&eacute;e, classement des alliances enfin calcul&eacute;
 - FIX : Administration : configuration du serveur lisible (vitesses tronqu&eacute;es, revenus limit&eacute;s &agrave; 2 chiffres, cases &agrave; cocher), vue g&eacute;n&eacute;rale sans d&eacute;filement horizontal
 - FIX : E-mails valid&eacute;s par PHP (.paris, .app... &eacute;taient refus&eacute;s) ; Pilori traduit, &laquo; 1 joueur banni &raquo;
+- FIX : Flottes : la mission &laquo; Attaque group&eacute;e &raquo; (propos&eacute;e aux destructeurs vers une lune) supprimait la flotte &agrave; l\'arriv&eacute;e, vaisseaux compris : retir&eacute;e (jamais programm&eacute;e), bouton &laquo; Associer &raquo; retir&eacute;
+- FIX : Bannissements : la dur&eacute;e &eacute;tait ignor&eacute;e (sanction d&eacute;finitive jusqu\'au d&eacute;bannissement manuel) : lev&eacute;e automatique &agrave; l\'&eacute;ch&eacute;ance, page du joueur banni traduite avec la date de fin
+- FIX : Administration : message &agrave; tous (sujet ou texte vide = page blanche), listes des lunes et des plan&egrave;tes, d&eacute;bannissement traduits
 - FIX : Missiles : une interception retirait les missiles interplan&eacute;taires de la cible (intercepteurs jamais consomm&eacute;s, puis stock n&eacute;gatif) ; temps de vol n&eacute;gatif vers un syst&egrave;me de num&eacute;ro plus &eacute;lev&eacute; (impact imm&eacute;diat) ; noms de d&eacute;fenses faux dans le rapport ; textes traduits
 - FIX : Installeur verrouill&eacute; une fois le jeu install&eacute; : on pouvait r&eacute;&eacute;crire config.php et brancher le jeu sur une autre base (seule la mise &agrave; jour reste ouverte)
 - FIX : Mode vacances : plus d\'envoi de flotte ni de missiles (on attaquait en restant intouchable), refus&eacute; tant qu\'une flotte vole, production remise &agrave; 100 % au retour
