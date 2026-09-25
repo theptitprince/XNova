@@ -43,12 +43,12 @@ SanitizeNumericInput ( array('galaxy', 'system', 'planet', 'planettype', 'curren
 	$maxfleet_count = mysqli_num_rows($maxfleet);
 
 	CheckPlanetUsedFields($CurrentPlanet);
-	CheckPlanetUsedFields($lunarow);
+	// (CheckPlanetUsedFields($lunarow) retire : $lunarow vient de la table des lunes, sans batiments ni cases)
 
 	// Imperatif, dans quel mode suis-je (pour savoir dans quel etat j'ere)
 	if (!isset($mode)) {
 		if (isset($_GET['mode'])) {
-			$mode          = intval($_GET['mode']);
+			$mode          = intval(($_GET['mode'] ?? null));
 		} else {
 			// ca ca sent l'appel sans parametres a plein nez
 			$mode          = 0;
@@ -73,67 +73,67 @@ SanitizeNumericInput ( array('galaxy', 'system', 'planet', 'planettype', 'curren
 		// $_POST['systemLeft']  => <- A ete cliqué
 		// $_POST['systemRight'] => -> A ete cliqué
 
-		if ($_POST["galaxyLeft"]) {
-			if ($_POST["galaxy"] < 1) {
+		if (($_POST["galaxyLeft"] ?? null)) {
+			if (($_POST["galaxy"] ?? null) < 1) {
 				$_POST["galaxy"] = 1;
 				$galaxy          = 1;
-			} elseif ($_POST["galaxy"] == 1) {
+			} elseif (($_POST["galaxy"] ?? null) == 1) {
 				$_POST["galaxy"] = 1;
 				$galaxy          = 1;
 			} else {
-				$galaxy = $_POST["galaxy"] - 1;
+				$galaxy = ($_POST["galaxy"] ?? null) - 1;
 			}
-		} elseif ($_POST["galaxyRight"]) {
-			if ($_POST["galaxy"]      > MAX_GALAXY_IN_WORLD OR
-				$_POST["galaxyRight"] > MAX_GALAXY_IN_WORLD) {
+		} elseif (($_POST["galaxyRight"] ?? null)) {
+			if (($_POST["galaxy"] ?? null)      > MAX_GALAXY_IN_WORLD OR
+				($_POST["galaxyRight"] ?? null) > MAX_GALAXY_IN_WORLD) {
 				$_POST["galaxy"]      = MAX_GALAXY_IN_WORLD;
 				$_POST["galaxyRight"] = MAX_GALAXY_IN_WORLD;
 				$galaxy               = MAX_GALAXY_IN_WORLD;
-			} elseif ($_POST["galaxy"] == MAX_GALAXY_IN_WORLD) {
+			} elseif (($_POST["galaxy"] ?? null) == MAX_GALAXY_IN_WORLD) {
 				$_POST["galaxy"]      = MAX_GALAXY_IN_WORLD;
 				$galaxy               = MAX_GALAXY_IN_WORLD;
 			} else {
-				$galaxy = $_POST["galaxy"] + 1;
+				$galaxy = ($_POST["galaxy"] ?? null) + 1;
 			}
 		} else {
-			$galaxy = $_POST["galaxy"];
+			$galaxy = ($_POST["galaxy"] ?? null);
 		}
 
-		if ($_POST["systemLeft"]) {
-			if ($_POST["system"] < 1) {
+		if (($_POST["systemLeft"] ?? null)) {
+			if (($_POST["system"] ?? null) < 1) {
 				$_POST["system"] = 1;
 				$system          = 1;
-			} elseif ($_POST["system"] == 1) {
+			} elseif (($_POST["system"] ?? null) == 1) {
 				$_POST["system"] = 1;
 				$system          = 1;
 			} else {
-				$system = $_POST["system"] - 1;
+				$system = ($_POST["system"] ?? null) - 1;
 			}
-		} elseif ($_POST["systemRight"]) {
-			if ($_POST["system"]      > MAX_SYSTEM_IN_GALAXY OR
-				$_POST["systemRight"] > MAX_SYSTEM_IN_GALAXY) {
+		} elseif (($_POST["systemRight"] ?? null)) {
+			if (($_POST["system"] ?? null)      > MAX_SYSTEM_IN_GALAXY OR
+				($_POST["systemRight"] ?? null) > MAX_SYSTEM_IN_GALAXY) {
 				$_POST["system"]      = MAX_SYSTEM_IN_GALAXY;
 				$system               = MAX_SYSTEM_IN_GALAXY;
-			} elseif ($_POST["system"] == MAX_SYSTEM_IN_GALAXY) {
+			} elseif (($_POST["system"] ?? null) == MAX_SYSTEM_IN_GALAXY) {
 				$_POST["system"]      = MAX_SYSTEM_IN_GALAXY;
 				$system               = MAX_SYSTEM_IN_GALAXY;
 			} else {
-				$system = $_POST["system"] + 1;
+				$system = ($_POST["system"] ?? null) + 1;
 			}
 		} else {
-			$system = $_POST["system"];
+			$system = ($_POST["system"] ?? null);
 		}
 	} elseif ($mode == 2) {
 		// Mais c'est qu'il mordrait !
 		// A t'on idée de vouloir lancer des MIP sur ce pauvre bonhomme !!
 
-		$galaxy        = $_GET['galaxy'];
-		$system        = $_GET['system'];
-		$planet        = $_GET['planet'];
+		$galaxy        = ($_GET['galaxy'] ?? null);
+		$system        = ($_GET['system'] ?? null);
+		$planet        = ($_GET['planet'] ?? null);
 	} elseif ($mode == 3) {
 		// Appel depuis un menu avec uniquement galaxy et system de passé !
-		$galaxy        = $_GET['galaxy'];
-		$system        = $_GET['system'];
+		$galaxy        = ($_GET['galaxy'] ?? null);
+		$system        = ($_GET['system'] ?? null);
 	} else {
 		// Si j'arrive ici ...
 		// C'est qu'il y a vraiment eu un bug
@@ -150,7 +150,7 @@ SanitizeNumericInput ( array('galaxy', 'system', 'planet', 'planettype', 'curren
 	$page .= ShowGalaxySelector ( $galaxy, $system );
 
 	if ($mode == 2) {
-		$CurrentPlanetID = $_GET['current'];
+		$CurrentPlanetID = ($_GET['current'] ?? null);
 		$page .= ShowGalaxyMISelector ( $galaxy, $system, $planet, $CurrentPlanetID, $CurrentMIP );
 	}
 

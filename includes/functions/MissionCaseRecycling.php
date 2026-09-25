@@ -100,9 +100,10 @@ function MissionCaseRecycling ($FleetRow) {
 		}
 	} else {
 		if ($FleetRow['fleet_end_time'] <= time()) {
-			// Mettre le message de retour de flotte
+			// Mettre le message de retour de flotte : planete de depart (avant : nom vide et coordonnees de la cible)
+			$StartPlanet     = doquery("SELECT `name` FROM {{table}} WHERE `galaxy` = '". intval($FleetRow['fleet_start_galaxy']) ."' AND `system` = '". intval($FleetRow['fleet_start_system']) ."' AND `planet` = '". intval($FleetRow['fleet_start_planet']) ."' AND `planet_type` = '". intval($FleetRow['fleet_start_type']) ."';", 'planets', true);
 			$Message         = sprintf( $lang['sys_tran_mess_owner'],
-						$TargetName, GetTargetAdressLink($FleetRow, ''),
+						($StartPlanet ? $StartPlanet['name'] : ''), GetStartAdressLink($FleetRow, ''),
 						pretty_number($FleetRow['fleet_resource_metal']), $lang['Metal'],
 						pretty_number($FleetRow['fleet_resource_crystal']), $lang['Crystal'],
 						pretty_number($FleetRow['fleet_resource_deuterium']), $lang['Deuterium'] );

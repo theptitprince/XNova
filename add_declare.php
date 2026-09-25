@@ -39,7 +39,7 @@ include( $ugamela_root_path . 'common.' . $phpEx );
 
 		includeLang('admin');
 
-		$mode      = $_POST['mode'];
+		$mode      = ($_POST['mode'] ?? null);
 
 		$PageTpl   = gettemplate("add_declare");
 		$parse     = $lang;
@@ -47,10 +47,10 @@ include( $ugamela_root_path . 'common.' . $phpEx );
 		if ($mode == 'addit') {
 			$declarator              = $user['id'];
 			$declarator_name  = SqlEscape(SafeText($user['username']));
-			$decl1        	   		  = SqlEscape(SafeText($_POST['dec1']));
-			$decl2       		       = SqlEscape(SafeText($_POST['dec2']));
-			$decl3        		      = SqlEscape(SafeText($_POST['dec3']));
-			$reason1        	  	 = SqlEscape(SafeText($_POST['reason']));
+			$decl1        	   		  = SqlEscape(SafeText(($_POST['dec1'] ?? null)));
+			$decl2       		       = SqlEscape(SafeText(($_POST['dec2'] ?? null)));
+			$decl3        		      = SqlEscape(SafeText(($_POST['dec3'] ?? null)));
+			$reason1        	  	 = SqlEscape(SafeText(($_POST['reason'] ?? null)));
 
 			$QryDeclare  = "INSERT INTO {{table}} SET ";
 			$QryDeclare .= "`declarator` = '". $declarator ."', ";

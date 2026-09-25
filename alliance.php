@@ -14,7 +14,7 @@
 
 define('INSTALL' , false);
 
-$mode = $_GET['mode'];
+$mode = ($_GET['mode'] ?? null);
 if (empty($mode))   { unset($mode); }
 $a     = intval($_GET['a']);
 if (empty($a))      { unset($a); }
@@ -26,7 +26,7 @@ $d = isset($_GET['d']) ? intval($_GET['d']) : null;
 if ((!is_numeric($d)) || (empty($d) && $d != 0))
 	unset($d);
 
-$edit = $_GET['edit'];
+$edit = ($_GET['edit'] ?? null);
 
 if (empty($edit))
 	unset($edit);
@@ -48,16 +48,16 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-$mode     = $_GET['mode'];
-$yes      = $_GET['yes'];
-$edit     = $_GET['edit'];
+$mode     = ($_GET['mode'] ?? null);
+$yes      = ($_GET['yes'] ?? null);
+$edit     = ($_GET['edit'] ?? null);
 $allyid   = intval($_GET['allyid']);
 $show     = intval($_GET['show']);
-$sort     = intval($_GET['sort']);
-$sendmail = intval($_GET['sendmail']);
-$t        = $_GET['t'];
-$a        = intval($_GET['a']);
-$tag      = SqlEscape($_GET['tag']);
+$sort     = intval(($_GET['sort'] ?? null));
+$sendmail = intval(($_GET['sendmail'] ?? null));
+$t        = ($_GET['t'] ?? null);
+$a        = intval(($_GET['a'] ?? null));
+$tag      = SqlEscape(($_GET['tag'] ?? null));
 
 includeLang('alliance');
 
@@ -70,9 +70,9 @@ includeLang('alliance');
 */
 // Parte inicial.
 
-if ($_GET['mode'] == 'ainfo') {
-	$a = intval($_GET['a']);
-	$tag = SqlEscape($_GET['tag']);
+if (($_GET['mode'] ?? null) == 'ainfo') {
+	$a = intval(($_GET['a'] ?? null));
+	$tag = SqlEscape(($_GET['tag'] ?? null));
 	// Evitamos errores casuales xD
 	// query
 	$lang['Alliance_information'] = "Allianz Information";
@@ -148,19 +148,19 @@ if ($user['ally_id'] == 0) { // Sin alianza
 		  Creo que aqui se realiza una query para comprovar el nombre, y luego le pregunta si es el tag correcto...
 		*/
 			// Tag et nom : texte brut, echappe dans chaque requete
-			$_POST['atag']  = SafeName($_POST['atag'], 8);
-			$_POST['aname'] = SafeName($_POST['aname'], 35);
-			if (!$_POST['atag']) {
+			$_POST['atag']  = SafeName(($_POST['atag'] ?? null), 8);
+			$_POST['aname'] = SafeName(($_POST['aname'] ?? null), 35);
+			if (!($_POST['atag'] ?? null)) {
 				message($lang['have_not_tag'], $lang['make_alliance']);
 			}
-			if (!$_POST['aname']) {
+			if (!($_POST['aname'] ?? null)) {
 				message($lang['have_not_name'], $lang['make_alliance']);
 			}
 
-			$tagquery = doquery("SELECT * FROM {{table}} WHERE ally_tag='". SqlEscape($_POST['atag']) ."'", 'alliance', true);
+			$tagquery = doquery("SELECT * FROM {{table}} WHERE ally_tag='". SqlEscape(($_POST['atag'] ?? null)) ."'", 'alliance', true);
 
 			if ($tagquery) {
-				message(str_replace('%s', $_POST['atag'], $lang['always_exist']), $lang['make_alliance']);
+				message(str_replace('%s', ($_POST['atag'] ?? null), $lang['always_exist']), $lang['make_alliance']);
 			}
 
 			doquery("INSERT INTO {{table}} SET
@@ -171,7 +171,7 @@ if ($user['ally_id'] == 0) { // Sin alianza
 			`ally_members`='1',
 			`ally_register_time`=" . time() , "alliance");
 
-			$allyquery = doquery("SELECT * FROM {{table}} WHERE ally_tag='". SqlEscape($_POST['atag']) ."'", 'alliance', true);
+			$allyquery = doquery("SELECT * FROM {{table}} WHERE ally_tag='". SqlEscape(($_POST['atag'] ?? null)) ."'", 'alliance', true);
 
 			doquery("UPDATE {{table}} SET
 			`ally_id`='". intval($allyquery['id']) ."',
@@ -179,9 +179,9 @@ if ($user['ally_id'] == 0) { // Sin alianza
 			`ally_register_time`='" . time() . "'
 			WHERE `id`='{$user['id']}'", "users");
 
-			$page = MessageForm(str_replace('%s', $_POST['atag'], $lang['ally_maked']),
+			$page = MessageForm(str_replace('%s', ($_POST['atag'] ?? null), $lang['ally_maked']),
 
-				str_replace('%s', $_POST['atag'], $lang['alliance_has_been_maked']) . "<br><br>", "", $lang['Ok']);
+				str_replace('%s', ($_POST['atag'] ?? null), $lang['alliance_has_been_maked']) . "<br><br>", "", $lang['Ok']);
 		} else {
 			$page .= parsetemplate(gettemplate('alliance_make'), $lang);
 		}
@@ -194,12 +194,12 @@ if ($user['ally_id'] == 0) { // Sin alianza
 	  Buscador de alianzas
 	*/
 		$parse = $lang;
-		$lang['searchtext'] = SafeText($_POST['searchtext']);
+		$lang['searchtext'] = SafeText(($_POST['searchtext'] ?? null));
 		$page = parsetemplate(gettemplate('alliance_searchform'), $lang);
 
 		if ($_POST) { // esta parte es igual que el buscador de search.php...
 			// searchtext
-			$SearchText = SqlEscape(addcslashes($_POST['searchtext'], '%_'));
+			$SearchText = SqlEscape(addcslashes(($_POST['searchtext'] ?? null), '%_'));
 			$search = doquery("SELECT * FROM {{table}} WHERE ally_name LIKE '%". $SearchText ."%' or ally_tag LIKE '%". $SearchText ."%' LIMIT 30", "alliance");
 
 			if (mysqli_num_rows($search) != 0) {
@@ -222,11 +222,11 @@ if ($user['ally_id'] == 0) { // Sin alianza
 	}
 
 	if ($mode == 'apply' && $user['ally_request'] == 0) { // solicitudes
-		if (!is_numeric($_GET['allyid']) || !$_GET['allyid'] || $user['ally_request'] != 0 || $user['ally_id'] != 0) {
+		if (!is_numeric(($_GET['allyid'] ?? null)) || !($_GET['allyid'] ?? null) || $user['ally_request'] != 0 || $user['ally_id'] != 0) {
 			message($lang['it_is_not_posible_to_apply'], $lang['it_is_not_posible_to_apply']);
 		}
 		// pedimos la info de la alianza
-		$allyrow = doquery("SELECT ally_tag,ally_request FROM {{table}} WHERE id='" . intval($_GET['allyid']) . "'", "alliance", true);
+		$allyrow = doquery("SELECT ally_tag,ally_request FROM {{table}} WHERE id='" . intval(($_GET['allyid'] ?? null)) . "'", "alliance", true);
 
 		if (!$allyrow) {
 			message($lang['it_is_not_posible_to_apply'], $lang['it_is_not_posible_to_apply']);
@@ -234,8 +234,8 @@ if ($user['ally_id'] == 0) { // Sin alianza
 
 		extract($allyrow);
 
-		if ($_POST['further'] == $lang['Send']) { // esta parte es igual que el buscador de search.php...
-			doquery("UPDATE {{table}} SET `ally_request`='" . intval($allyid) . "', ally_request_text='" . SqlEscape(SafeText($_POST['text'])) . "', ally_register_time='" . time() . "' WHERE `id`='" . $user['id'] . "'", "users");
+		if (($_POST['further'] ?? null) == $lang['Send']) { // esta parte es igual que el buscador de search.php...
+			doquery("UPDATE {{table}} SET `ally_request`='" . intval($allyid) . "', ally_request_text='" . SqlEscape(SafeText(($_POST['text'] ?? null))) . "', ally_register_time='" . time() . "' WHERE `id`='" . $user['id'] . "'", "users");
 			// mensaje de cuando se envia correctamente el mensaje
 			message($lang['apply_registered'], $lang['your_apply']);
 			// mensaje de cuando falla el envio
@@ -245,7 +245,7 @@ if ($user['ally_id'] == 0) { // Sin alianza
 		}
 
 		$parse = $lang;
-		$parse['allyid'] = intval($_GET['allyid']);
+		$parse['allyid'] = intval(($_GET['allyid'] ?? null));
 		$parse['chars_count'] = strlen($text_apply);
 		$parse['text_apply'] = $text_apply;
 		$parse['Write_to_alliance'] = str_replace('%s', $ally_tag, $lang['Write_to_alliance']);
@@ -260,7 +260,7 @@ if ($user['ally_id'] == 0) { // Sin alianza
 		$allyquery = doquery("SELECT ally_tag FROM {{table}} WHERE id='" . intval($user['ally_request']) . "' ORDER BY `id`", "alliance", true);
 
 		extract($allyquery);
-		if ($_POST['bcancel']) {
+		if (($_POST['bcancel'] ?? null)) {
 			doquery("UPDATE {{table}} SET `ally_request`=0 WHERE `id`=" . $user['id'], "users");
 
 			$lang['request_text'] = str_replace('%s', $ally_tag, $lang['Canceled_a_request_text']);
@@ -367,7 +367,7 @@ array(1 =>
 			message($lang['Owner_cant_go_out'], $lang['Alliance']);
 		}
 		// se sale de la alianza
-		if ($_GET['yes'] == 1) {
+		if (($_GET['yes'] ?? null) == 1) {
 			doquery("UPDATE {{table}} SET `ally_id`=0, `ally_name` = '' WHERE `id`='{$user['id']}'", "users");
 			$lang['Go_out_welldone'] = str_replace("%s", $ally_name, $lang['Go_out_welldone']);
 			$page = MessageForm($lang['Go_out_welldone'], "<br>", $PHP_SELF, $lang['Ok']);
@@ -397,8 +397,8 @@ array(1 =>
 		}
 		// El orden de aparicion
 		if ($sort2) {
-			$sort1 = intval($_GET['sort1']);
-			$sort2 = intval($_GET['sort2']);
+			$sort1 = intval(($_GET['sort1'] ?? null));
+			$sort2 = intval(($_GET['sort2'] ?? null));
 
 			if ($sort1 == 1) {
 				$sort = " ORDER BY `username`";
@@ -452,7 +452,7 @@ array(1 =>
 			$u['points'] = "" . pretty_number($UserPoints['total_points']) . "";
 
 			if ($u['ally_register_time'] > 0)
-				$u['ally_register_time'] = date("Y-m-d h:i:s", $u['ally_register_time']);
+				$u['ally_register_time'] = date("d/m/Y H:i:s", $u['ally_register_time']);
 			else
 				$u['ally_register_time'] = "-";
 
@@ -494,10 +494,10 @@ array(1 =>
 		}
 
 		if ($sendmail == 1) {
-			$_POST['r'] = intval($_POST['r']);
-			$_POST['text'] = SqlEscape(SafeText($_POST['text']));
+			$_POST['r'] = intval(($_POST['r'] ?? null));
+			$_POST['text'] = SqlEscape(SafeText(($_POST['text'] ?? null)));
 
-			if ($_POST['r'] == 0) {
+			if (($_POST['r'] ?? null) == 0) {
 				$sq = doquery("SELECT id,username FROM {{table}} WHERE ally_id='{$user['ally_id']}'", "users");
 			} else {
 				$sq = doquery("SELECT id,username FROM {{table}} WHERE ally_id='{$user['ally_id']}' AND ally_rank_id='{$_POST['r']}'", "users");
@@ -544,7 +544,7 @@ array(1 =>
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_edit_rights) {
 			message($lang['Denied_access'], $lang['Members_list']);
 		} elseif (!empty($_POST['newrangname'])) {
-			$name = SafeName($_POST['newrangname'], 32);
+			$name = SafeName(($_POST['newrangname'] ?? null), 32);
 
 			$allianz_raenge[] = array('name' => $name,
 				'mails' => 0,
@@ -566,10 +566,10 @@ array(1 =>
 
 			header("Location: " . $goto);
 			exit();
-		} elseif ($_POST['id'] != '' && is_array($_POST['id'])) {
+		} elseif (($_POST['id'] ?? null) != '' && is_array(($_POST['id'] ?? null))) {
 			$ally_ranks_new = array();
 
-			foreach ($_POST['id'] as $id) {
+			foreach (($_POST['id'] ?? null) as $id) {
 				$name = $allianz_raenge[$id]['name'];
 
 				$ally_ranks_new[$id]['name'] = $name;
@@ -711,21 +711,21 @@ array(1 =>
 		// post!
 		if ($_POST) {
 			{ // magic_quotes supprime depuis PHP 5.4 : traitement toujours applique
-				$_POST['owner_range'] = stripslashes($_POST['owner_range']);
-				$_POST['web'] = stripslashes($_POST['web']);
-				$_POST['image'] = stripslashes($_POST['image']);
-				$_POST['text'] = stripslashes($_POST['text']);
+				$_POST['owner_range'] = stripslashes(($_POST['owner_range'] ?? null));
+				$_POST['web'] = stripslashes(($_POST['web'] ?? null));
+				$_POST['image'] = stripslashes(($_POST['image'] ?? null));
+				$_POST['text'] = stripslashes(($_POST['text'] ?? null));
 			}
 		}
 
-		if ($_POST['options']) {
-			$ally['ally_owner_range'] = SqlEscape(SafeName($_POST['owner_range'], 32));
+		if (($_POST['options'] ?? null)) {
+			$ally['ally_owner_range'] = SqlEscape(SafeName(($_POST['owner_range'] ?? null), 32));
 
-			$ally['ally_web'] = SqlEscape(SafeUrl($_POST['web']));
+			$ally['ally_web'] = SqlEscape(SafeUrl(($_POST['web'] ?? null)));
 
-			$ally['ally_image'] = SqlEscape(SafeUrl($_POST['image']));
+			$ally['ally_image'] = SqlEscape(SafeUrl(($_POST['image'] ?? null)));
 
-			$ally['ally_request_notallow'] = intval($_POST['request_notallow']);
+			$ally['ally_request_notallow'] = intval(($_POST['request_notallow'] ?? null));
 
 			if ($ally['ally_request_notallow'] != 0 && $ally['ally_request_notallow'] != 1) {
 				message("W&auml;hle bei \"Bewerbungen\" eine Option aus dem Formular!", "Fehler");
@@ -738,20 +738,20 @@ array(1 =>
 			`ally_web`='{$ally['ally_web']}',
 			`ally_request_notallow`='{$ally['ally_request_notallow']}'
 			WHERE `id`='{$ally['id']}'", "alliance");
-		} elseif ($_POST['t']) {
+		} elseif (($_POST['t'] ?? null)) {
 			if ($t == 3) {
-				$ally['ally_request'] = SqlEscape(SafeText($_POST['text']));
+				$ally['ally_request'] = SqlEscape(SafeText(($_POST['text'] ?? null)));
 
 				doquery("UPDATE {{table}} SET
 				`ally_request`='{$ally['ally_request']}'
 				WHERE `id`='{$ally['id']}'", "alliance");
 			} elseif ($t == 2) {
-				$ally['ally_text'] = SqlEscape(SafeText($_POST['text']));
+				$ally['ally_text'] = SqlEscape(SafeText(($_POST['text'] ?? null)));
 				doquery("UPDATE {{table}} SET
 				`ally_text`='{$ally['ally_text']}'
 				WHERE `id`='{$ally['id']}'", "alliance");
 			} else {
-				$ally['ally_description'] = SqlEscape(SafeText($_POST['text']));
+				$ally['ally_description'] = SqlEscape(SafeText(($_POST['text'] ?? null)));
 
 				doquery("UPDATE {{table}} SET
 				`ally_description`='" . $ally['ally_description'] . "'
@@ -820,8 +820,8 @@ array(1 =>
 		} elseif (isset($_POST['newrang'])) {
 			$q = doquery("SELECT * FROM {{table}} WHERE id='{$u}' LIMIT 1", 'users', true);
 
-			if ((isset($ally_ranks[$_POST['newrang']-1]) || $_POST['newrang'] == 0) && $q['id'] != $ally['ally_owner']) {
-				doquery("UPDATE {{table}} SET `ally_rank_id`='" . intval($_POST['newrang']) . "' WHERE `id`='" . intval($id) . "'", 'users');
+			if ((isset($ally_ranks[$_POST['newrang']-1]) || ($_POST['newrang'] ?? null) == 0) && $q['id'] != $ally['ally_owner']) {
+				doquery("UPDATE {{table}} SET `ally_rank_id`='" . intval(($_POST['newrang'] ?? null)) . "' WHERE `id`='" . intval($id) . "'", 'users');
 			}
 		}
 		// obtenemos las template row
@@ -896,7 +896,7 @@ array(1 =>
 			} else {
 				$u['ally_range'] = '';
 			}
-			$u['ally_register_time'] = date("Y-m-d h:i:s", $u['ally_register_time']);
+			$u['ally_register_time'] = date("d/m/Y H:i:s", $u['ally_register_time']);
 			$page_list .= parsetemplate($template, $u);
 			if ($rank == $u['id']) {
 				$r['Rank_for'] = str_replace("%s", $u['username'], $lang['Rank_for']);
@@ -942,8 +942,8 @@ array(1 =>
 			message($lang['Denied_access'], $lang['Check_the_requests']);
 		}
 
-		if ($_POST['action'] == "Akzeptieren") {
-			$_POST['text'] = SqlEscape(SafeText($_POST['text']));
+		if (($_POST['action'] ?? null) == "Akzeptieren") {
+			$_POST['text'] = SqlEscape(SafeText(($_POST['text'] ?? null)));
 
 			$u = doquery("SELECT * FROM {{table}} WHERE id=$show", 'users', true);
 			// agrega los puntos al unirse el user a la alianza
@@ -973,8 +973,8 @@ array(1 =>
 			header('Location:alliance.php?mode=admin&edit=requests');
 			die();
 
-		} elseif ($_POST['action'] == "Ablehnen" && $_POST['action'] != '') {
-			$_POST['text'] = SqlEscape(SafeText($_POST['text']));
+		} elseif (($_POST['action'] ?? null) == "Ablehnen" && ($_POST['action'] ?? null) != '') {
+			$_POST['text'] = SqlEscape(SafeText(($_POST['text'] ?? null)));
 
 			doquery("UPDATE {{table}} SET ally_request_text='',ally_request='0',ally_id='0',new_message=new_message+1, mnl_alliance=mnl_alliance+1 WHERE id='{$show}'", 'users');
 			// Se envia un mensaje avizando...
@@ -1003,7 +1003,7 @@ array(1 =>
 				$s['id'] = $r['id'];
 			}
 			// la fecha de cuando se envio la solicitud
-			$r['time'] = date("Y-m-d h:i:s", $r['ally_register_time']);
+			$r['time'] = date("d/m/Y H:i:s", $r['ally_register_time']);
 			$parse['list'] .= parsetemplate($row, $r);
 			$i++;
 		}
@@ -1039,9 +1039,9 @@ array(1 =>
 			message($lang['Denied_access'], $lang['Members_list']);
 		}
 
-		if ($_POST['newname']) {
+		if (($_POST['newname'] ?? null)) {
 			// Y a le nouveau Nom
-			$ally['ally_name'] = SqlEscape(SafeName($_POST['newname'], 35));
+			$ally['ally_name'] = SqlEscape(SafeName(($_POST['newname'] ?? null), 35));
 			doquery("UPDATE {{table}} SET `ally_name` = '". $ally['ally_name'] ."' WHERE `id` = '". $user['ally_id'] ."';", 'alliance');
 			doquery("UPDATE {{table}} SET `ally_name` = '". $ally['ally_name'] ."' WHERE `ally_id` = '". $ally['id'] ."';", 'users');
 		}
@@ -1065,9 +1065,9 @@ array(1 =>
 			message($lang['Denied_access'], $lang['Members_list']);
 		}
 
-		if ($_POST['newtag']) {
+		if (($_POST['newtag'] ?? null)) {
 			// Y a le nouveau TAG
-			$ally['ally_tag'] = SqlEscape(SafeName($_POST['newtag'], 8));
+			$ally['ally_tag'] = SqlEscape(SafeName(($_POST['newtag'] ?? null), 8));
 			doquery("UPDATE {{table}} SET `ally_tag` = '". $ally['ally_tag'] ."' WHERE `id` = '". $user['ally_id'] ."';", 'alliance');
 		}
 

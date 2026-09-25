@@ -47,7 +47,9 @@ var x_object2 = null;
 			if(x_object2.status==200){
 			document.getElementById('shoutbox').innerHTML = x_object2.responseText;
 			descendreTchat();
-			Layer1.style.visibility="hidden";
+			// Indicateur de chargement : absent du modele, on ne le masque que s'il existe
+			var loader = document.getElementById('Layer1');
+			if (loader) loader.style.visibility="hidden";
 			}
 		}
 	}

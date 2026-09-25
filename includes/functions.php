@@ -140,7 +140,7 @@ function CsrfToken () {
 // Le jeton recu (formulaire ou lien) est-il valide ?
 function CsrfValid () {
 	$Token = CsrfToken();
-	$Given = isset($_POST['csrf_token']) ? $_POST['csrf_token'] : (isset($_GET['csrf_token']) ? $_GET['csrf_token'] : '');
+	$Given = isset($_POST['csrf_token']) ? ($_POST['csrf_token'] ?? null) : (isset($_GET['csrf_token']) ? ($_GET['csrf_token'] ?? null) : '');
 	return ($Token != '' && is_string($Given) && hash_equals($Token, $Given));
 }
 
@@ -154,6 +154,7 @@ function CsrfGetAction () {
 		'buddy.php'              => array('bid'),              // accepter / supprimer un ami
 		'alliance.php'           => array('kick', 'd', 'yes'), // exclure un membre, supprimer un rang, quitter
 		'quickfleet.php'         => array('mode'),             // envoi rapide de recycleurs
+		'phalanx.php'            => array('galaxy'),           // scan de phalange (coute du deuterium)
 		'admin/userlist.php'     => array('cmd'),              // supprimer un joueur
 		'admin/declare_list.php' => array('cmd'),
 		'admin/chat.php'         => array('delete', 'deleteall'),
@@ -220,13 +221,14 @@ function is_email($email) {
 // Routine Affichage d'un message administrateur avec saut vers une autre page si souhaité
 //
 function AdminMessage ($mes, $title = 'Error', $dest = "", $time = "3") {
-	$parse['color'] = $color;
+	$page = '';
+	$parse['color'] = '';
 	$parse['title'] = $title;
 	$parse['mes']   = $mes;
 
 	$page .= parsetemplate(gettemplate('admin/message_body'), $parse);
 
-	display ($page, $title, false, (($dest != "") ? "<meta http-equiv=\"refresh\" content=\"$time;URL=javascript:self.location='$dest';\">" : ""), true);
+	display ($page, $title, false, (($dest != "") ? "<meta http-equiv=\"refresh\" content=\"". intval($time) .";URL=". htmlspecialchars($dest) ."\">" : ""), true);
 }
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -234,13 +236,14 @@ function AdminMessage ($mes, $title = 'Error', $dest = "", $time = "3") {
 // Routine Affichage d'un message avec saut vers une autre page si souhaité
 //
 function message ($mes, $title = 'Error', $dest = "", $time = "3") {
-	$parse['color'] = $color;
+	$page = '';
+	$parse['color'] = '';
 	$parse['title'] = $title;
 	$parse['mes']   = $mes;
 
 	$page .= parsetemplate(gettemplate('message_body'), $parse);
 
-	display ($page, $title, false, (($dest != "") ? "<meta http-equiv=\"refresh\" content=\"$time;URL=javascript:self.location='$dest';\">" : ""), false);
+	display ($page, $title, false, (($dest != "") ? "<meta http-equiv=\"refresh\" content=\"". intval($time) .";URL=". htmlspecialchars($dest) ."\">" : ""), false);
 }
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -266,8 +269,8 @@ function display ($page, $title = '', $topnav = true, $metatags = '', $AdminPage
 	}
 	$DisplayPage .= "<center>\n". $page ."\n</center>\n";
 	// Affichage du Debug si necessaire
-	if (is_array($user) && ($user['authlevel'] == 1 || $user['authlevel'] == 3)) {
-		if ($game_config['debug'] == 1) $debug->echo_log();
+	if (is_array($user) && isset($user['authlevel']) && ($user['authlevel'] == 1 || $user['authlevel'] == 3)) {
+		if (!empty($game_config['debug'])) $debug->echo_log();
 	}
 
 	$DisplayPage .= StdFooter();
@@ -328,7 +331,7 @@ function AdminUserHeader ($title = '', $metatags = '') {
 //
 function StdFooter() {
 	global $game_config, $lang;
-	$parse['copyright']     = $game_config['copyright'];
+	$parse['copyright']     = $game_config['copyright'] ?? '';
 	$parse['TranslationBy'] = $lang['TranslationBy'];
 	return parsetemplate(gettemplate('overall_footer'), $parse);
 }

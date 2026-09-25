@@ -24,16 +24,16 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if ($user['authlevel'] >= 2) {
 		includeLang('admin');
 
-		$mode      = $_POST['mode'];
+		$mode      = ($_POST['mode'] ?? null);
 
 		$PageTpl   = gettemplate("admin/add_money");
 		$parse     = $lang;
 
 		if ($mode == 'addit') {
-			$id          = intval($_POST['id']);
-			$metal       = intval($_POST['metal']);
-			$cristal     = intval($_POST['cristal']);
-			$deut        = intval($_POST['deut']);
+			$id          = intval(($_POST['id'] ?? null));
+			$metal       = intval(($_POST['metal'] ?? null));
+			$cristal     = intval(($_POST['cristal'] ?? null));
+			$deut        = intval(($_POST['deut'] ?? null));
 
 			$QryUpdatePlanet  = "UPDATE {{table}} SET ";
 			$QryUpdatePlanet .= "`metal` = `metal` + '". $metal ."', ";

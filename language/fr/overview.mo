@@ -11,6 +11,7 @@ $lang['Have_new_level_raid']     = "Vous gagnez un niveau en Raideur!";
 $lang['Server_time']             = "Heure";
 $lang['Events']                  = "Ev&egrave;nements";
 $lang['Free']                    = "non active";
+$lang['ov_colonies'] = "Autres plan&egrave;tes";
 $lang['Diameter']                = "Diam&egrave;tre";
 $lang['fields']                  = "Cases";
 $lang['Developed_fields']        = "Cases occup&eacute;es";
@@ -73,7 +74,7 @@ $lang['RaidsLoose']          = "Raids Perdus";
 
 // Gestion des flottes
 $lang['ov_fleet']            = "flotte";
-$lang['ov_une']              = "Une de tes ";
+$lang['ov_une']              = "Votre ";
 $lang['ov_vennant']          = " venant ";
 $lang['ov_planet_to']        = "de la plan&egrave;te ";
 $lang['ov_moon_to']          = "de la lune ";

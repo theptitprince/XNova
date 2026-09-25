@@ -21,7 +21,7 @@ includeLang('messages');
 includeLang('system');
 
 
-$Mode = $_GET['mode'];
+$Mode = ($_GET['mode'] ?? null);
 
 
 if ($Mode != 'add') {
@@ -34,7 +34,7 @@ if ($Mode != 'add') {
 
 }
 if ($mode == 'add') {
-    $Texte = SqlEscape(SafeText($_POST['texte']));
+    $Texte = SqlEscape(SafeText(($_POST['texte'] ?? null)));
     $Joueur = SqlEscape($user['username']);
 
     $SQLAjoutDeclaration = "INSERT INTO {{table}} SET ";

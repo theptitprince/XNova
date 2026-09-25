@@ -40,12 +40,12 @@ include($xnova_root_path . 'common.' . $phpEx);
 	}
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		$Values['name']    = SafeName(isset($_POST['name']) ? $_POST['name'] : '', 64);
-		$Values['email']   = trim(isset($_POST['email']) ? $_POST['email'] : '');
-		$Values['subject'] = trim(isset($_POST['subject']) ? $_POST['subject'] : '');
-		$Values['message'] = trim(isset($_POST['message']) ? $_POST['message'] : '');
+		$Values['name']    = SafeName(isset($_POST['name']) ? ($_POST['name'] ?? null) : '', 64);
+		$Values['email']   = trim(isset($_POST['email']) ? ($_POST['email'] ?? null) : '');
+		$Values['subject'] = trim(isset($_POST['subject']) ? ($_POST['subject'] ?? null) : '');
+		$Values['message'] = trim(isset($_POST['message']) ? ($_POST['message'] ?? null) : '');
 		$FormTime          = isset($_POST['ft']) ? intval($_POST['ft']) : 0;
-		$FormSign          = isset($_POST['fs']) ? (string) $_POST['fs'] : '';
+		$FormSign          = isset($_POST['fs']) ? (string) ($_POST['fs'] ?? null) : '';
 		$Ip                = $_SERVER['REMOTE_ADDR'];
 
 		// Anti-robot : champ piege (invisible pour un humain), signature, delai de 3 s a 2 h

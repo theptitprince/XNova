@@ -36,6 +36,8 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	$parse['XNovaRelease']    = VERSION .' '. VERSION_NAME;
 	$parse['dpath']           = $dpath;
 	$parse['forum_url']       = $game_config['forum_url'];
+	// Lien « Forum » masque tant qu'aucune adresse n'est configuree (l'ancienne pointait vers xnova.fr)
+	$parse['forum_link']      = (!empty($game_config['forum_url'])) ? "<tr><td colspan=\"2\"><div><a href=\"". htmlspecialchars($game_config['forum_url'], ENT_QUOTES) ."\" accesskey=\"1\" target=\"_blank\" rel=\"noopener\">". $lang['Board'] ."</a></div></td></tr>" : '';
 	$parse['mf']              = "Hauptframe";
 	$rank                     = doquery("SELECT `total_rank` FROM {{table}} WHERE `stat_code` = '1' AND `stat_type` = '1' AND `id_owner` = '". $user['id'] ."';",'statpoints',true);
 	$parse['user_rank']       = $rank['total_rank'];

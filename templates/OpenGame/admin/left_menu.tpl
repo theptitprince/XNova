@@ -2,7 +2,7 @@
 <script language="JavaScript">
 function f(target_url,win_name) {
   var new_win = window.open(target_url,win_name,'resizable=yes,scrollbars=yes,menubar=no,toolbar=no,width=550,height=280,top=0,left=0');
-  new_win.focus();
+  if (new_win) new_win.focus(); // popup bloquee : pas d'erreur
 }
 parent.frames['Hauptframe'].location.replace("overview.php");
 </script>
@@ -37,6 +37,8 @@ parent.frames['Hauptframe'].location.replace("overview.php");
 	<td><div><a href="variables.php" accesskey="k" target="{mf}">PhpInfo</a></div></td>
 </tr><tr>
 	<td><div><a href="add_money.php" accesskey="k" target="{mf}">{adm_addres}</a></div></td>
+</tr><tr>
+	<td><div><a href="add_fleet.php" accesskey="k" target="{mf}">{adm_addfleet}</a></div></td>
 </tr><tr>
 	<td style="background-color:#FFFFFF" height="1px"></td>
 </tr><tr>
@@ -82,7 +84,7 @@ parent.frames['Hauptframe'].location.replace("overview.php");
 </tr><tr>
 	<td><div><a href="errors.php" accesskey="e" target="{mf}">{adm_error}</a></div></td>
 </tr><tr>
-	<td><div><a href="http://www.xnova.fr/forum/index.php" accesskey="3" target="{mf}">{adm_help}</a></div></td>
+	<td><div><a href="https://github.com/theptitprince/XNova/issues" accesskey="3" target="_blank" rel="noopener">{adm_help}</a></div></td>
 </tr><tr>
 	<td><div><a href="../frames.php" accesskey="i" target="_top" style="color:red">{adm_back}</a></div></td>
 </tr><tr>

@@ -26,7 +26,7 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 		// Et y a une liste de doléances
 		$AddedInQueue                     = false;
 		// Ici, on sait precisement ce qu'on aimerait bien construire ...
-		foreach($_POST['fmenge'] as $Element => $Count) {
+		foreach(($_POST['fmenge'] ?? null) as $Element => $Count) {
 			// Construction d'Element recuperés sur la page de Flotte ...
 			// ATTENTION ! La file d'attente Flotte est Commune a celle des Defenses
 			// Dans fmenge, on devrait trouver un tableau des elements constructibles et du nombre d'elements souhaités

@@ -25,6 +25,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 
     //Compteur de flotte en expéditions et nombre d'expédition maximum
     $MaxExpedition      = $user[$resource[124]];
+    $ExpeditionEnCours  = 0;
+    $EnvoiMaxExpedition = 0;
     if ($MaxExpedition >= 1) {
 		$maxexpde  = doquery("SELECT COUNT(fleet_owner) AS `expedi` FROM {{table}} WHERE `fleet_owner` = '".$user['id']."' AND `fleet_mission` = '15';", 'fleets', true);
 	    $ExpeditionEnCours  = $maxexpde['expedi'];
@@ -51,11 +53,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 	);
 
 	// Histoire de recuperer les infos passées par galaxy
-	$galaxy         = $_GET['galaxy'];
-	$system         = $_GET['system'];
-	$planet         = $_GET['planet'];
-	$planettype     = $_GET['planettype'];
-	$target_mission = $_GET['target_mission'];
+	$galaxy         = ($_GET['galaxy'] ?? null);
+	$system         = ($_GET['system'] ?? null);
+	$planet         = ($_GET['planet'] ?? null);
+	$planettype     = ($_GET['planettype'] ?? null);
+	$target_mission = ($_GET['target_mission'] ?? null);
 
 	if (!$galaxy) {
 		$galaxy = $planetrow['galaxy'];
@@ -136,11 +138,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 		// (04) Fleet From (Planete d'origine)
 		$page .= "<th>[".$f['fleet_start_galaxy'].":".$f['fleet_start_system'].":".$f['fleet_start_planet']."]</th>";
 		// (05) Fleet Start Time
-		$page .= "<th>". gmdate("d. M Y H:i:s", $f['fleet_start_time']) ."</th>";
+		$page .= "<th>". date("d/m/Y H:i:s", $f['fleet_start_time']) ."</th>";
 		// (06) Fleet Target (Planete de destination)
 		$page .= "<th>[".$f['fleet_end_galaxy'].":".$f['fleet_end_system'].":".$f['fleet_end_planet']."]</th>";
 		// (07) Fleet Target Time
-		$page .= "<th>". gmdate("d. M Y H:i:s", $f['fleet_end_time']) ."</th>";
+		$page .= "<th>". date("d/m/Y H:i:s", $f['fleet_end_time']) ."</th>";
 		// (08) Fleet Back Time
 //		$page .= "<th><font color=\"lime\"><div id=\"time_0\"><font>". pretty_time(floor($f['fleet_end_time'] + 1 - time())) ."</font></th>";
 		// (09) Fleet Back In
@@ -208,16 +210,17 @@ include($xnova_root_path . 'common.' . $phpEx);
 	}
 
 	// Prise des coordonnées sur la ligne de commande
-	$galaxy         = intval($_GET['galaxy']);
-	$system         = intval($_GET['system']);
-	$planet         = intval($_GET['planet']);
-	$planettype     = intval($_GET['planettype']);
-	$target_mission = intval($_GET['target_mission']);
+	$galaxy         = intval(($_GET['galaxy'] ?? null));
+	$system         = intval(($_GET['system'] ?? null));
+	$planet         = intval(($_GET['planet'] ?? null));
+	$planettype     = intval(($_GET['planettype'] ?? null));
+	$target_mission = intval(($_GET['target_mission'] ?? null));
 	$ShipData       = "";
 
 	foreach ($reslist['fleet'] as $n => $i) {
 		if ($planetrow[$resource[$i]] > 0) {
 			$page .= "<tr height=\"20\">";
+			$CurrentShipSpeed = pretty_number(GetFleetMaxSpeed ("", $i, $user));
 			$page .= "<th><a title=\"". $lang['fl_fleetspeed'] . $CurrentShipSpeed ."\">" . $lang['tech'][$i] . "</a></th>";
 			$page .= "<th>". pretty_number ($planetrow[$resource[$i]]);
 			$ShipData .= "<input type=\"hidden\" name=\"maxship". $i ."\" value=\"". $planetrow[$resource[$i]] ."\" />";

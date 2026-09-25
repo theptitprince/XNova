@@ -8,6 +8,11 @@ $lang['Deuterium']    = "Deuterium";
 $lang['Energy']       = "Energie";
 $lang['level']        = "Stufe";
 $lang['treeinfo']     = "[i]";
+$lang['te_dt_tx_pre'] = "Voraussetzungen f&uuml;r";
+$lang['te_dt_step'] = "Stufe";
+$lang['te_dt_none'] = "Keine Voraussetzungen";
+$lang['te_dt_back'] = "Zur&uuml;ck zu den Technologien";
+$lang['te_dt_unknown'] = "Unbekanntes Element";
 $lang['comingsoon']   = "Bientot";
 
 $lang['type_mission'][1]  = "Angreifen";

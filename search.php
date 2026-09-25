@@ -19,15 +19,15 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.'.$phpEx);
 
-$searchtext = SqlEscape($_POST['searchtext']);
-$type = $_POST['type'];
+$searchtext = SqlEscape(($_POST['searchtext'] ?? null));
+$type = ($_POST['type'] ?? null);
 
 $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 
 includeLang('search');
 $i = 0;
 //creamos la query
-$searchtext = SqlEscape($_POST["searchtext"]);
+$searchtext = SqlEscape(($_POST["searchtext"] ?? null));
 switch($type){
 	case "playername":
 		$table = gettemplate('search_user_table');
@@ -109,11 +109,11 @@ if(isset($searchtext) && isset($type)){
 }
 
 //el resto...
-$lang['type_playername'] = ($_POST["type"] == "playername") ? " SELECTED" : "";
-$lang['type_planetname'] = ($_POST["type"] == "planetname") ? " SELECTED" : "";
-$lang['type_allytag'] = ($_POST["type"] == "allytag") ? " SELECTED" : "";
-$lang['type_allyname'] = ($_POST["type"] == "allyname") ? " SELECTED" : "";
-$lang['searchtext'] = SafeText($_POST['searchtext']);
+$lang['type_playername'] = (($_POST["type"] ?? null) == "playername") ? " SELECTED" : "";
+$lang['type_planetname'] = (($_POST["type"] ?? null) == "planetname") ? " SELECTED" : "";
+$lang['type_allytag'] = (($_POST["type"] ?? null) == "allytag") ? " SELECTED" : "";
+$lang['type_allyname'] = (($_POST["type"] ?? null) == "allyname") ? " SELECTED" : "";
+$lang['searchtext'] = SafeText(($_POST['searchtext'] ?? null));
 $lang['search_results'] = $search_results;
 //esto es algo repetitivo ... w
 $page = parsetemplate(gettemplate('search_body'), $lang);

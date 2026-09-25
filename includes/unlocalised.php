@@ -140,10 +140,12 @@ function GetFleetConsumption ($FleetArray, $SpeedFactor, $MissionDuration, $Miss
 
 // Mise en forme de la durée sous forme xj xxh xxm xxs
 function pretty_time ($seconds) {
-	$day = floor($seconds / (24 * 3600));
-	$hs = floor($seconds / 3600 % 24);
-	$ms = floor($seconds / 60 % 60);
-	$sr = floor($seconds / 1 % 60);
+	// Calcul en entiers (PHP 8 : le modulo sur un nombre decimal est deprecie ; meme resultat)
+	$seconds = (int) floor((float) $seconds);
+	$day = intdiv($seconds, 24 * 3600);
+	$hs = intdiv($seconds, 3600) % 24;
+	$ms = intdiv($seconds, 60) % 60;
+	$sr = $seconds % 60;
 
 	if ($hs < 10) { $hh = "0" . $hs; } else { $hh = $hs; }
 	if ($ms < 10) { $mm = "0" . $ms; } else { $mm = $ms; }
@@ -224,7 +226,7 @@ function gettemplate ($templatename) {
 function includeLang ($filename, $ext = '.mo') {
 	global $xnova_root_path, $lang, $user;
 
-	if ($user['lang'] != '') {
+	if (!empty($user['lang'])) {
 		$SelLanguage = $user['lang'];
 	} else {
 		$SelLanguage = DEFAULT_LANG;

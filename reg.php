@@ -21,13 +21,16 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 includeLang('reg');
 
-function sendpassemail($emailaddress, $password)
+// Mail de bienvenue : rappelle le pseudo, jamais le mot de passe (avant : envoye en clair)
+function sendpassemail($emailaddress, $username)
 {
     global $lang;
 
-    $parse['gameurl'] = GAMEURL;
-    $parse['password'] = $password;
+    $parse['gameurl']  = GAMEURL;
+    $parse['username'] = $username;
     $email = parsetemplate($lang['mail_welcome'], $parse);
+    // Mail en texte brut : vrais retours a la ligne (les \n des textes etaient envoyes tels quels) et accents decodes
+    $email = html_entity_decode(str_replace('\n', "\n", $email), ENT_QUOTES, 'UTF-8');
     $status = mymail($emailaddress, $lang['mail_title'], $email);
     return $status;
 }
@@ -36,11 +39,17 @@ function mymail($to, $title, $body, $from = '')
 {
     $from = trim($from);
 
+    // Expediteur : ADMINEMAIL si defini, sinon l'adresse du compte administrateur (avant : admin@xnova.fr)
+    $AdminMail = ADMINEMAIL;
+    if ($AdminMail == '') {
+        $AdminRow  = doquery("SELECT `email` FROM {{table}} WHERE `authlevel` >= 3 ORDER BY `id` LIMIT 1;", 'users', true);
+        $AdminMail = $AdminRow ? $AdminRow['email'] : '';
+    }
     if (!$from) {
-        $from = ADMINEMAIL;
+        $from = $AdminMail;
     }
 
-    $rp = ADMINEMAIL;
+    $rp = $AdminMail;
 
     $head = '';
     $head .= "Content-Type: text/plain \r\n";
@@ -62,55 +71,55 @@ if ($_POST) {
     $errors = 0;
     $errorlist = "";
 
-    $_POST['email'] = strip_tags($_POST['email']);
-    if (!is_email($_POST['email'])) {
-        $errorlist .= "\"" . $_POST['email'] . "\" " . $lang['error_mail'];
+    $_POST['email'] = strip_tags(($_POST['email'] ?? null));
+    if (!is_email(($_POST['email'] ?? null))) {
+        $errorlist .= "\"" . ($_POST['email'] ?? null) . "\" " . $lang['error_mail'];
         $errors++;
     }
 
-    if (!$_POST['planet']) {
+    if (!($_POST['planet'] ?? null)) {
         $errorlist .= $lang['error_planet'];
         $errors++;
     }
 
-    if (preg_match("/[^A-Za-z0-9_\-]/", $_POST['hplanet']) == 1) {
+    if (preg_match("/[^A-Za-z0-9_\-]/", ($_POST['hplanet'] ?? null)) == 1) {
         $errorlist .= $lang['error_planetnum'];
         $errors++;
     }
 
-    if (!$_POST['character']) {
+    if (!($_POST['character'] ?? null)) {
         $errorlist .= $lang['error_character'];
         $errors++;
     }
 
-    if (strlen($_POST['passwrd']) < 4) {
+    if (strlen(($_POST['passwrd'] ?? null)) < 4) {
         $errorlist .= $lang['error_password'];
         $errors++;
     }
 
-    if (preg_match("/[^A-Za-z0-9_\-]/", $_POST['character']) == 1) {
+    if (preg_match("/[^A-Za-z0-9_\-]/", ($_POST['character'] ?? null)) == 1) {
         $errorlist .= $lang['error_charalpha'];
         $errors++;
     }
 
-    if ($_POST['rgt'] != 'on') {
+    if (($_POST['rgt'] ?? null) != 'on') {
         $errorlist .= $lang['error_rgt'];
         $errors++;
     }
     // Le meilleur moyen de voir si un nom d'utilisateur est pris c'est d'essayer de l'appeler !!
-    $ExistUser = doquery("SELECT `username` FROM {{table}} WHERE `username` = '" . SqlEscape($_POST['character']) . "' LIMIT 1;", 'users', true);
+    $ExistUser = doquery("SELECT `username` FROM {{table}} WHERE `username` = '" . SqlEscape(($_POST['character'] ?? null)) . "' LIMIT 1;", 'users', true);
     if ($ExistUser) {
         $errorlist .= $lang['error_userexist'];
         $errors++;
     }
     // Si l'on verifiait que l'adresse email n'existe pas encore ???
-    $ExistMail = doquery("SELECT `email` FROM {{table}} WHERE `email` = '" . SqlEscape($_POST['email']) . "' LIMIT 1;", 'users', true);
+    $ExistMail = doquery("SELECT `email` FROM {{table}} WHERE `email` = '" . SqlEscape(($_POST['email'] ?? null)) . "' LIMIT 1;", 'users', true);
     if ($ExistMail) {
         $errorlist .= $lang['error_emailexist'];
         $errors++;
     }
 
-    if ($_POST['sex'] != '' && $_POST['sex'] != 'F' && $_POST['sex'] != 'M') {
+    if (($_POST['sex'] ?? null) != '' && ($_POST['sex'] ?? null) != 'F' && ($_POST['sex'] ?? null) != 'M') {
         $errorlist .= $lang['error_sex'];
         $errors++;
     }
@@ -118,10 +127,10 @@ if ($_POST) {
     if ($errors != 0) {
         message ($errorlist, $lang['Register']);
     } else {
-        $newpass = $_POST['passwrd'];
-        $UserName = CheckInputStrings ($_POST['character']);
-        $UserEmail = CheckInputStrings ($_POST['email']);
-        $UserPlanet = SqlEscape(SafeName(CheckInputStrings ($_POST['planet']), 32));
+        $newpass = ($_POST['passwrd'] ?? null);
+        $UserName = CheckInputStrings (($_POST['character'] ?? null));
+        $UserEmail = CheckInputStrings (($_POST['email'] ?? null));
+        $UserPlanet = SqlEscape(SafeName(CheckInputStrings (($_POST['planet'] ?? null)), 32));
 
         $md5newpass = PasswordHash($newpass);
         // Creation de l'utilisateur
@@ -129,14 +138,14 @@ if ($_POST) {
         $QryInsertUser .= "`username` = '" . SqlEscape(strip_tags($UserName)) . "', ";
         $QryInsertUser .= "`email` = '" . SqlEscape($UserEmail) . "', ";
         $QryInsertUser .= "`email_2` = '" . SqlEscape($UserEmail) . "', ";
-        $QryInsertUser .= "`sex` = '" . SqlEscape($_POST['sex']) . "', ";
+        $QryInsertUser .= "`sex` = '" . SqlEscape(($_POST['sex'] ?? null)) . "', ";
 		$QryInsertUser .= "`ip_at_reg` = '" . $_SERVER["REMOTE_ADDR"] . "', ";
         $QryInsertUser .= "`id_planet` = '0', ";
         $QryInsertUser .= "`register_time` = '" . time() . "', ";
         $QryInsertUser .= "`password`='" . SqlEscape($md5newpass) . "';";
         doquery($QryInsertUser, 'users');
         // On cherche le numero d'enregistrement de l'utilisateur fraichement créé
-        $NewUser = doquery("SELECT `id` FROM {{table}} WHERE `username` = '" . SqlEscape($_POST['character']) . "' LIMIT 1;", 'users', true);
+        $NewUser = doquery("SELECT `id` FROM {{table}} WHERE `username` = '" . SqlEscape(($_POST['character'] ?? null)) . "' LIMIT 1;", 'users', true);
         $iduser = $NewUser['id'];
         // Recherche d'une place libre !
         $LastSettedGalaxyPos = $game_config['LastSettedGalaxyPos'];
@@ -221,13 +230,14 @@ if ($_POST) {
         doquery("UPDATE {{table}} SET `config_value` = `config_value` + '1' WHERE `config_name` = 'users_amount' LIMIT 1;", 'config');
 
         $Message = $lang['thanksforregistry'];
-        if (sendpassemail($_POST['email'], "$newpass")) {
-            $Message .= " (" . htmlentities($_POST["email"]) . ")";
+        if (sendpassemail(($_POST['email'] ?? null), $UserName)) {
+            $Message .= " (" . htmlentities(($_POST["email"] ?? null)) . ")";
         } else {
-            $Message .= " (" . htmlentities($_POST["email"]) . ")";
+            $Message .= " (" . htmlentities(($_POST["email"] ?? null)) . ")";
             $Message .= "<br><br>" . $lang['error_mailsend']; // le mot de passe n'est plus affiche en clair
         }
-        message($Message, $lang['reg_welldone']);
+        $Message .= "<br><br><a href=\"login.php\">". $lang['reg_go_login'] ."</a>";
+        message($Message, $lang['reg_welldone'], 'login.php', 10);
     }
 } else {
     // Afficher le formulaire d'enregistrement

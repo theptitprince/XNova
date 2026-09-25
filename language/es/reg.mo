@@ -22,9 +22,10 @@ $lang['signup']            = 'Registrarse ';
 $lang['neededpass']        = 'Contraseña';
 
 // Send
-$lang['mail_welcome']      = 'Muchas gracias de su inscripción a nuestro juego ({gameurl}) \nSu contraseña es : {password}\n\n¡Buena diversión!\n{gameurl}';
+$lang['mail_welcome']      = 'Muchas gracias por su inscripción en nuestro juego ({gameurl})\nSu usuario: {username}\n\n¡Buena diversión!\n{gameurl}';
+$lang['reg_go_login']      = 'Conectarse';
 $lang['mail_title']        = 'Registro';
-$lang['thanksforregistry'] = '¡Gracias de inscribésele! Va a recibir un correo electrónico con su contraseña.';
+$lang['thanksforregistry'] = '¡Gracias por inscribirse! Le hemos enviado un correo de bienvenida.';
 
 // Errors
 $lang['error_mail']        = 'Correo electrónico inválido!<br />';

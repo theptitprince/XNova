@@ -22,8 +22,7 @@ function InsertGalaxyScripts ( $CurrentPlanet ) {
 	$Script .= "}\n\n";
 
 	$Script .= "function fenster(target_url,win_name) {\n";
-	$Script .= "	var new_win = window.open(target_url,win_name,'resizable=yes,scrollbars=yes,menubar=no,toolbar=no,width=640,height=480,top=0,left=0');\n";
-	$Script .= "	new_win.focus();\n";
+	$Script .= "	if (window.event) window.event.preventDefault(); if (typeof xnova_csrf != 'undefined') target_url += (target_url.indexOf('?') < 0 ? '?' : '&') + 'csrf_token=' + xnova_csrf; window.location.href = target_url; // dans la frame du jeu, avec le jeton CSRF\n";
 	$Script .= "}\n";
 	$Script .= "</script>\n";
 

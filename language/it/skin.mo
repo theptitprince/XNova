@@ -6,7 +6,7 @@ $lang['Ustaw'] = "Ustaw";
 $lang['Ok'] = "Skin zosta³ zmieniony";
 
 $lang['Skin1'] = "Evolution";
-$lang['Skin1url'] = "http://80.237.203.201/download/use/evolution/";
+$lang['Skin1url'] = "";
 
 $lang['Skin2'] = "Blue16";
 $lang['Skin2url'] = "http://ogame-portal.ovh.org/Blue16/";

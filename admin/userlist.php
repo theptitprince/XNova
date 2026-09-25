@@ -22,11 +22,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	if ($user['authlevel'] >= 2) {
 		includeLang('admin');
-		if ($_GET['cmd'] == 'dele') {
-			DeleteSelectedUser ( intval($_GET['user']) );
+		if (($_GET['cmd'] ?? null) == 'dele') {
+			DeleteSelectedUser ( intval(($_GET['user'] ?? null)) );
 		}
-		if ($_GET['cmd'] == 'sort') {
-			$TypeSort = preg_replace('/[^a-z_]/', '', $_GET['type']); // nom de colonne uniquement
+		if (($_GET['cmd'] ?? null) == 'sort') {
+			$TypeSort = preg_replace('/[^a-z_]/', '', ($_GET['type'] ?? null)); // nom de colonne uniquement
 			if ($TypeSort == '') { $TypeSort = 'id'; }
 		} else {
 			$TypeSort = "id";
@@ -59,9 +59,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Bloc['adm_ul_data_mail']   = $u['email'];
 			$Bloc['ip_adress_at_register']   = $u['ip_at_reg'];
 			$Bloc['adm_ul_data_adip']   = "<font color=\"".$Color."\">". $u['user_lastip'] ."</font>";
-			$Bloc['adm_ul_data_regd']   = gmdate ( "d/m/Y G:i:s", $u['register_time'] );
-			$Bloc['adm_ul_data_lconn']  = gmdate ( "d/m/Y G:i:s", $u['onlinetime'] );
-			$Bloc['adm_ul_data_banna']  = ( $u['bana'] == 1 ) ? "<a href # title=\"". gmdate ( "d/m/Y G:i:s", $u['banaday']) ."\">". $lang['adm_ul_yes'] ."</a>" : $lang['adm_ul_no'];
+			$Bloc['adm_ul_data_regd']   = date ( "d/m/Y H:i:s", $u['register_time'] );
+			$Bloc['adm_ul_data_lconn']  = date ( "d/m/Y H:i:s", $u['onlinetime'] );
+			$Bloc['adm_ul_data_banna']  = ( $u['bana'] == 1 ) ? "<a href # title=\"". date ( "d/m/Y H:i:s", $u['banaday']) ."\">". $lang['adm_ul_yes'] ."</a>" : $lang['adm_ul_no'];
 			$Bloc['adm_ul_data_detai']  = ""; // Lien vers une page de details genre Empire
 			$Bloc['adm_ul_data_actio']  = "<a href=\"userlist.php?cmd=dele&user=".$u['id']."\"><img src=\"../images/r1.png\"></a>"; // Lien vers actions 'effacer'
 

@@ -19,7 +19,7 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.'.$phpEx);
 
-$actions = intval($_GET['action']);
+$actions = intval(($_GET['action'] ?? null));
 
 if($actions == 2)
 {

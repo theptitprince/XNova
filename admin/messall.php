@@ -22,11 +22,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	if ($user['authlevel'] >= 1) {
 		if ($_POST && $mode == "change") {
-			if (isset($_POST["tresc"]) && $_POST["tresc"] != '') {
-				$game_config['tresc'] = $_POST['tresc'];
+			if (isset($_POST["tresc"]) && ($_POST["tresc"] ?? null) != '') {
+				$game_config['tresc'] = ($_POST['tresc'] ?? null);
 			}
-			if (isset($_POST["temat"]) && $_POST["temat"] != '') {
-				$game_config['temat'] = $_POST['temat'];
+			if (isset($_POST["temat"]) && ($_POST["temat"] ?? null) != '') {
+				$game_config['temat'] = ($_POST['temat'] ?? null);
 			}
 			if ($user['authlevel'] == 3) {
 				$kolor = 'red';

@@ -23,18 +23,18 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if ($user['authlevel'] >= 1) {
 		includeLang('admin');
 
-		$mode      = $_POST['mode'];
+		$mode      = ($_POST['mode'] ?? null);
 
 		$PageTpl   = gettemplate("admin/banned");
 
 		$parse     = $lang;
 		if ($mode == 'banit') {
-			$name              = SqlEscape($_POST['name']);
-			$reas              = SqlEscape(SafeText($_POST['why'])); // affiche dans le pilori public
-			$days              = intval($_POST['days']);
-			$hour              = intval($_POST['hour']);
-			$mins              = intval($_POST['mins']);
-			$secs              = intval($_POST['secs']);
+			$name              = SqlEscape(($_POST['name'] ?? null));
+			$reas              = SqlEscape(SafeText(($_POST['why'] ?? null))); // affiche dans le pilori public
+			$days              = intval(($_POST['days'] ?? null));
+			$hour              = intval(($_POST['hour'] ?? null));
+			$mins              = intval(($_POST['mins'] ?? null));
+			$secs              = intval(($_POST['secs'] ?? null));
 
 			$admin             = $user['username'];
 			$mail              = $user['email'];

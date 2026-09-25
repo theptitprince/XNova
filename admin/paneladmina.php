@@ -32,7 +32,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		// Afficher les templates
 		if (isset($_GET['result'])) {
-			switch ($_GET['result']){
+			switch (($_GET['result'] ?? null)){
 				case 'usr_search':
 					$Pattern = SqlEscape(addcslashes($_GET['player'], '%_'));
 					$SelUser = doquery("SELECT * FROM {{table}} WHERE `username` LIKE '%". $Pattern ."%' LIMIT 1;", 'users', true);
@@ -52,7 +52,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					break;
 
 				case 'usr_data':
-					$Pattern = SqlEscape(addcslashes($_GET['player'], '%_'));
+					$Pattern = SqlEscape(addcslashes(($_GET['player'] ?? null), '%_'));
 					$SelUser = doquery("SELECT * FROM {{table}} WHERE `username` LIKE '%". $Pattern ."%' LIMIT 1;", 'users', true);
 					$UsrMain = doquery("SELECT `name` FROM {{table}} WHERE `id` = '". $SelUser['id_planet'] ."';", 'planets', true);
 
@@ -97,8 +97,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 					if ($user['authlevel'] < 3) {
 						message($lang['sys_noalloaw'], $lang['sys_noaccess']);
 					}
-					$Player     = SqlEscape($_GET['player']);
-					$NewLvl     = max(0, min(3, intval($_GET['authlvl'])));
+					$Player     = SqlEscape(($_GET['player'] ?? null));
+					$NewLvl     = max(0, min(3, intval(($_GET['authlvl'] ?? null))));
 
 					$QryUpdate  = doquery("UPDATE {{table}} SET `authlevel` = '".$NewLvl."' WHERE `username` = '".$Player."';", 'users');
 					$Message    = $lang['adm_mess_lvl1']. " ". $Player ." ".$lang['adm_mess_lvl2'];
@@ -108,7 +108,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					break;
 
 				case 'ip_search':
-					$Pattern    = SqlEscape($_GET['ip']);
+					$Pattern    = SqlEscape(($_GET['ip'] ?? null));
 					$SelUser    = doquery("SELECT * FROM {{table}} WHERE `user_lastip` = '". $ip ."' LIMIT 10;", 'users');
 					$bloc                   = $lang;
 					$bloc['adm_this_ip']    = $Pattern;
@@ -127,7 +127,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		// Traiter les reponses aux formulaires
 		if (isset($_GET['action'])) {
 			$bloc                   = $lang;
-			switch ($_GET['action']){
+			switch (($_GET['action'] ?? null)){
 				case 'usr_search':
 					$SubPanelTPL            = gettemplate('admin/admin_panel_frm1');
 					break;

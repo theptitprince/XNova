@@ -26,10 +26,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 	                           'thisplanettype', 'resource1', 'resource2', 'resource3', 'holdingtime', 'expeditiontime',
 	                           'speed', 'speedfactor', 'speedallsmin', 'maxepedition', 'curepedition', 'target_mission', 'fleetid'), '/^ship[0-9]+$/' );
 
-	$galaxy     = intval($_POST['galaxy']);
-	$system     = intval($_POST['system']);
-	$planet     = intval($_POST['planet']);
-	$planettype = intval($_POST['planettype']);
+	$galaxy     = intval(($_POST['galaxy'] ?? null));
+	$system     = intval(($_POST['system'] ?? null));
+	$planet     = intval(($_POST['planet'] ?? null));
+	$planettype = intval(($_POST['planettype'] ?? null));
 
 	// Test d'existance et de proprieté de la planete
 	$YourPlanet = false;
@@ -52,71 +52,71 @@ include($xnova_root_path . 'common.' . $phpEx);
 	}
 
 	// Determinons les type de missions possibles par rapport a la planete cible
-	if ($_POST['planettype'] == "2") {
-		if ($_POST['ship209'] >= 1) {
+	if (($_POST['planettype'] ?? null) == "2") {
+		if (($_POST['ship209'] ?? null) >= 1) {
 			$missiontype = array(8 => $lang['type_mission'][8]);
 		} else {
 			$missiontype = array();
 		}
-	} elseif ($_POST['planettype'] == "1" || $_POST['planettype'] == "3") {
-		if ($_POST['ship208'] >= 1 && !$UsedPlanet) {
+	} elseif (($_POST['planettype'] ?? null) == "1" || ($_POST['planettype'] ?? null) == "3") {
+		if (($_POST['ship208'] ?? null) >= 1 && !$UsedPlanet) {
 			$missiontype = array(7 => $lang['type_mission'][7]);
-		} elseif ($_POST['ship210'] >= 1 && !$YourPlanet) {
+		} elseif (($_POST['ship210'] ?? null) >= 1 && !$YourPlanet) {
 			$missiontype = array(6 => $lang['type_mission'][6]);
 		}
 
-		if ($_POST['ship202'] >= 1 ||
-			$_POST['ship203'] >= 1 ||
-			$_POST['ship204'] >= 1 ||
-			$_POST['ship205'] >= 1 ||
-			$_POST['ship206'] >= 1 ||
-			$_POST['ship207'] >= 1 ||
-			$_POST['ship210'] >= 1 ||
-			$_POST['ship211'] >= 1 ||
-			$_POST['ship213'] >= 1 ||
-			$_POST['ship214'] >= 1 ||
-			$_POST['ship215'] >= 1) {
+		if (($_POST['ship202'] ?? null) >= 1 ||
+			($_POST['ship203'] ?? null) >= 1 ||
+			($_POST['ship204'] ?? null) >= 1 ||
+			($_POST['ship205'] ?? null) >= 1 ||
+			($_POST['ship206'] ?? null) >= 1 ||
+			($_POST['ship207'] ?? null) >= 1 ||
+			($_POST['ship210'] ?? null) >= 1 ||
+			($_POST['ship211'] ?? null) >= 1 ||
+			($_POST['ship213'] ?? null) >= 1 ||
+			($_POST['ship214'] ?? null) >= 1 ||
+			($_POST['ship215'] ?? null) >= 1) {
 			if (!$YourPlanet) {
 				$missiontype[1] = $lang['type_mission'][1];
 			}
 			$missiontype[3] = $lang['type_mission'][3];
 			$missiontype[5] = $lang['type_mission'][5];
 		}
-
-		
-	} elseif ($_POST['ship209'] >= 1 || $_POST['ship208']) {
-		$missiontype[3] = $lang['type_mission'][3];
+		// Recycleurs et vaisseaux de colonisation peuvent aussi transporter (regle d'origine jamais atteinte : elle etait hors de ce bloc)
+		if (($_POST['ship208'] ?? null) >= 1 || ($_POST['ship209'] ?? null) >= 1) {
+			$missiontype[3] = $lang['type_mission'][3];
+		}
 	}
 	if ($YourPlanet)
 		$missiontype[4] = $lang['type_mission'][4];
 
-	if ( $_POST['planettype'] == 3 &&
-		($_POST['ship214']         ||
-		 $_POST['ship213'])        &&
+	if ( ($_POST['planettype'] ?? null) == 3 &&
+		(($_POST['ship214'] ?? null)         ||
+		 ($_POST['ship213'] ?? null))        &&
 		 !$YourPlanet              &&
 		 $UsedPlanet) {
 		$missiontype[2] = $lang['type_mission'][2];
 	}
-	if ( $_POST['planettype'] == 3 &&
-	     $_POST['ship214'] >= 1    &&
+	if ( ($_POST['planettype'] ?? null) == 3 &&
+	     ($_POST['ship214'] ?? null) >= 1    &&
            !$YourPlanet            &&
            $UsedPlanet) {
           $missiontype[9] = $lang['type_mission'][9];
    }
 
-	$fleetarray    = unserialize(base64_decode(str_rot13($_POST["usedfleet"])), array('allowed_classes' => false));
+	$fleetarray    = unserialize(base64_decode(str_rot13(($_POST["usedfleet"] ?? null))), array('allowed_classes' => false));
 	if (!is_array($fleetarray) || !$fleetarray) {
 		// Pas de flotte transmise (acces direct) : retour a la page flotte
 		header("Location: fleet.php");
 		exit();
 	}
-	$mission       = $_POST['target_mission'];
-	$SpeedFactor   = $_POST['speedfactor'];
+	$mission       = ($_POST['target_mission'] ?? null);
+	$SpeedFactor   = GetGameSpeedFactor (); // valeur du serveur, pas celle du formulaire
 	$AllFleetSpeed = GetFleetMaxSpeed ($fleetarray, 0, $user);
-	$GenFleetSpeed = $_POST['speed'];
+	$GenFleetSpeed = ($_POST['speed'] ?? null);
 	$MaxFleetSpeed = (is_array($AllFleetSpeed) && $AllFleetSpeed) ? min($AllFleetSpeed) : 0;
 
-	$distance      = GetTargetDistance ( $_POST['thisgalaxy'], $_POST['galaxy'], $_POST['thissystem'], $_POST['system'], $_POST['thisplanet'], $_POST['planet'] );
+	$distance      = GetTargetDistance ( ($_POST['thisgalaxy'] ?? null), ($_POST['galaxy'] ?? null), ($_POST['thissystem'] ?? null), ($_POST['system'] ?? null), ($_POST['thisplanet'] ?? null), ($_POST['planet'] ?? null) );
 	$duration      = GetMissionDuration ( $GenFleetSpeed, $MaxFleetSpeed, $distance, $SpeedFactor );
 	$consumption   = GetFleetConsumption ( $fleetarray, $SpeedFactor, $duration, $distance, $MaxFleetSpeed, $user );
 
@@ -149,11 +149,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$MissionSelector .= "</tr>";
 	}
 
-	if       ($_POST['thisplanettype'] == 1) {
-		$TableTitle = "". $_POST['thisgalaxy'] .":". $_POST['thissystem'] .":". $_POST['thisplanet'] ." - ". $lang['fl_planet'] ."";
-	} elseif ($_POST['thisplanettype'] == 3) {
-		$TableTitle = "". $_POST['thisgalaxy'] .":". $_POST['thissystem'] .":". $_POST['thisplanet'] ." - ". $lang['fl_moon'] ."";
-	}
+	// Titre : depart -> cible (avant, seule la planete de depart etait affichee, ce qui pretait a confusion)
+	$PlaceType   = array(1 => $lang['fl_planet'], 2 => $lang['fl_ruins'], 3 => $lang['fl_moon']);
+	$TableTitle  = ($_POST['thisgalaxy'] ?? null) .":". ($_POST['thissystem'] ?? null) .":". ($_POST['thisplanet'] ?? null) ." - ". ($PlaceType[($_POST['thisplanettype'] ?? null)] ?? '');
+	$TableTitle .= " &rarr; ". $galaxy .":". $system .":". $planet ." - ". ($PlaceType[($_POST['planettype'] ?? null)] ?? '');
 
 	$page  = "<script type=\"text/javascript\" src=\"scripts/flotten.js\">\n</script>";
 	$page .= "<script type=\"text/javascript\">\n";
@@ -168,21 +167,21 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "<input type=\"hidden\" name=\"thisresource3\"  value=\"". floor($planetrow["deuterium"]) ."\" />\n";
 	$page .= "<input type=\"hidden\" name=\"consumption\"    value=\"". $consumption ."\" />\n";
 	$page .= "<input type=\"hidden\" name=\"dist\"           value=\"". $distance ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"speedfactor\"    value=\"". $_POST['speedfactor'] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"thisgalaxy\"     value=\"". $_POST["thisgalaxy"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"thissystem\"     value=\"". $_POST["thissystem"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"thisplanet\"     value=\"". $_POST["thisplanet"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"galaxy\"         value=\"". $_POST["galaxy"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"system\"         value=\"". $_POST["system"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"planet\"         value=\"". $_POST["planet"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"thisplanettype\" value=\"". $_POST["thisplanettype"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"planettype\"     value=\"". $_POST["planettype"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"speedallsmin\"   value=\"". $_POST["speedallsmin"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"speed\"          value=\"". $_POST['speed'] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"speedfactor\"    value=\"". $_POST["speedfactor"] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"usedfleet\"      value=\"". htmlspecialchars($_POST["usedfleet"], ENT_QUOTES) ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"maxepedition\"   value=\"". $_POST['maxepedition'] ."\" />\n";
-	$page .= "<input type=\"hidden\" name=\"curepedition\"   value=\"". $_POST['curepedition'] ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"speedfactor\"    value=\"". ($_POST['speedfactor'] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"thisgalaxy\"     value=\"". ($_POST["thisgalaxy"] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"thissystem\"     value=\"". ($_POST["thissystem"] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"thisplanet\"     value=\"". ($_POST["thisplanet"] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"galaxy\"         value=\"". ($_POST["galaxy"] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"system\"         value=\"". ($_POST["system"] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"planet\"         value=\"". ($_POST["planet"] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"thisplanettype\" value=\"". ($_POST["thisplanettype"] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"planettype\"     value=\"". ($_POST["planettype"] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"speedallsmin\"   value=\"". ($_POST["speedallsmin"] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"speed\"          value=\"". ($_POST['speed'] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"speedfactor\"    value=\"". ($_POST["speedfactor"] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"usedfleet\"      value=\"". htmlspecialchars(($_POST["usedfleet"] ?? null), ENT_QUOTES) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"maxepedition\"   value=\"". ($_POST['maxepedition'] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"curepedition\"   value=\"". ($_POST['curepedition'] ?? null) ."\" />\n";
 	foreach ($fleetarray as $Ship => $Count) {
 		$page .= "<input type=\"hidden\" name=\"ship". $Ship ."\"        value=\"". $Count ."\" />\n";
 		$page .= "<input type=\"hidden\" name=\"capacity". $Ship ."\"    value=\"". $pricelist[$Ship]['capacity'] ."\" />\n";

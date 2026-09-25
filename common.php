@@ -56,21 +56,34 @@ if (INSTALL != true) {
 	    $game_config[$row['config_name']] = $row['config_value'];
     }
 
-	if ($InLogin != true) {
+	if (empty($InLogin)) {
 		$Result        = CheckTheUser ( $IsUserChecked );
 		$IsUserChecked = $Result['state'];
 		$user          = $Result['record'];
-	} elseif ($InLogin == false) {
-		// Jeux en mode 'clos' ???
-		if( $game_config['game_disable']) {
-			if ($user['authlevel'] < 1) {
-				message ( stripslashes ( $game_config['close_reason'] ), $game_config['game_name'] );
-			}
-		}
 	}
 
 	includeLang ("system");
 	includeLang ('tech');
+
+	// Jeu en mode 'clos' (reglage de l'admin) : seuls les administrateurs peuvent jouer.
+	// Dans l'original, ce test etait dans une branche jamais atteinte : le jeu restait toujours ouvert.
+	if (!empty($game_config['game_disable']) && empty($InLogin) && is_array($user) && !empty($user['id']) &&
+	    $user['authlevel'] < 1 && basename($_SERVER['SCRIPT_NAME']) != 'logout.php') {
+		message ( stripslashes ( $game_config['close_reason'] ), $game_config['game_name'] );
+	}
+
+	// Visiteur non connecte : seules les pages publiques s'affichent, les autres renvoient vers la connexion.
+	// (Dans l'original, n'importe qui pouvait ouvrir frames.php, overview.php, l'admin... avec un joueur vide.)
+	$PublicPages = array('index.php', 'login.php', 'reg.php', 'lostpassword.php', 'contact.php', 'credit.php',
+	                     'rules.php', 'changelog.php', 'banned.php', 'logout.php');
+	if (empty($user['id']) && !defined('LOGIN') &&
+	    (defined('IN_ADMIN') || !in_array(basename($_SERVER['SCRIPT_NAME']), $PublicPages))) {
+		$LoginUrl = $xnova_root_path . 'login.php';
+		// top.location : on sort des frames (sinon la page de connexion s'afficherait dans le cadre du jeu)
+		echo "<html><head><meta http-equiv=\"refresh\" content=\"0;URL=". $LoginUrl ."\">".
+		     "<script type=\"text/javascript\">top.location.href = '". $LoginUrl ."';</script></head><body></body></html>";
+		exit();
+	}
 
 	// Protection CSRF : tout formulaire envoye par un joueur connecte, et toute action declenchee par un lien,
 	// doivent porter le jeton de ce joueur (un site exterieur ne peut pas le connaitre)
@@ -107,29 +120,35 @@ if (INSTALL != true) {
 
 		include($xnova_root_path . 'rak.'.$phpEx);
 		if ( defined('IN_ADMIN') ) {
-			$UserSkin  = $user['dpath'];
+			$UserSkin  = $user['dpath'] ?? '';
 			$local     = stristr ( $UserSkin, "http:");
 			if ($local === false) {
-				if (!$user['dpath']) {
+				if (!$UserSkin) {
 					$dpath     = "../". DEFAULT_SKINPATH  ;
 				} else {
-					$dpath     = "../". $user["dpath"];
+					$dpath     = "../". $UserSkin;
 				}
 			} else {
 				$dpath     = $UserSkin;
 			}
 		} else {
-			$dpath     = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
+			$dpath     = empty($user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 		}
 
-		SetSelectedPlanet ( $user );
+		// Planete courante : seulement pour un joueur connecte ($user vaut un tableau vide pour un visiteur)
+		if (!empty($user['id'])) {
+			SetSelectedPlanet ( $user );
 
-		$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '".$user['current_planet']."';", 'planets', true);
-		$galaxyrow = doquery("SELECT * FROM {{table}} WHERE `id_planet` = '".$planetrow['id']."';", 'galaxy', true);
+			$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '".$user['current_planet']."';", 'planets', true);
+			$galaxyrow = doquery("SELECT * FROM {{table}} WHERE `id_planet` = '".$planetrow['id']."';", 'galaxy', true);
 
-		CheckPlanetUsedFields($planetrow);
+			CheckPlanetUsedFields($planetrow);
+		} else {
+			$planetrow = null;
+			$galaxyrow = null;
+		}
 	} else {
-		// Bah si d�ja y a quelqu'un qui passe par l� et qu'a rien a faire de press� ...
+		// Bah si déjà y a quelqu'un qui passe par là et qu'a rien a faire de pressé ...
 		// On se sert de lui pour mettre a jour tout les retardataires !!
 
 	}

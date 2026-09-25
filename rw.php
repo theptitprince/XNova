@@ -19,37 +19,28 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.'.$phpEx);
 
-	$open = true;
-
-	$raportrow = doquery("SELECT * FROM {{table}} WHERE `rid` = '".(SqlEscape($_GET["raport"]))."';", 'rw', true);
-
-	if (($raportrow["id_owner1"] == $user["id"]) or
-		($raportrow["id_owner2"] == $user["id"]) or
-		 $open) {
-		$Page  = "<html>";
-		$Page .= "<head>";
-		$Page .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"".$dpath."/formate.css\">";
-		$Page .= "<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\" />";
-		$Page .= "</head>";
-		$Page .= "<body>";
-		$Page .= "<center>";
-		$Page .= "<table width=\"99%\">";
-		$Page .= "<tr>";
-		if (($raportrow["id_owner1"] == $user["id"]) and
-			($raportrow["a_zestrzelona"] == 1)) {
-			$Page .= "<td>Le contact avec la flotte attaquante a &eacute;t&eacute; perdue.<br>";
-			$Page .= "(En d'autres termes, elle a &eacute;t&eacute; abattu au premier tour .)</td>";
-		} else {
-			$Page .= "<td>". stripslashes( $raportrow["raport"] ) ."</td>";
-		}
-		$Page .= "</tr>";
-		$Page .= "</table>";
-		$Page .= "</center>";
-		$Page .= "</body>";
-		$Page .= "</html>";
-
-		echo $Page;
+	// Rapport partageable par son lien (comme dans l'original), mais reserve aux joueurs connectes
+	$raportrow = doquery("SELECT * FROM {{table}} WHERE `rid` = '".(SqlEscape(($_GET["raport"] ?? null)))."';", 'rw', true);
+	if (!$raportrow) {
+		message($lang['sys_rw_notfound'], $lang['sys_mess_attack_report']);
 	}
+
+	if (($raportrow["id_owner1"] == $user["id"]) and ($raportrow["a_zestrzelona"] == 1)) {
+		$Body = $lang['sys_rw_lost_contact'];
+	} else {
+		$Body = stripslashes( $raportrow["raport"] );
+	}
+
+	// Tout le rapport dans un cadre, centre, avec un retour aux messages
+	// (avant : page brute, titre et bilan colles a gauche, lignes de tir hors cadre)
+	$Page  = "<style type=\"text/css\">.rapport td { text-align: center; }</style>"; // les cellules du rapport enregistre n'heritent pas du centrage
+	$Page .= "<br><table width=\"95%\">";
+	$Page .= "<tr><td class=\"c\">". $lang['sys_mess_attack_report'] ."</td></tr>";
+	$Page .= "<tr><th class=\"rapport\" style=\"text-align: center; font-weight: normal; padding: 6px;\">". $Body ."</th></tr>";
+	$Page .= "<tr><th><a href=\"messages.php?mode=show&amp;messcat=3\">". $lang['sys_rw_back'] ."</a></th></tr>";
+	$Page .= "</table>";
+
+	display($Page, $lang['sys_mess_attack_report']);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

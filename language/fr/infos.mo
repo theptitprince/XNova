@@ -34,7 +34,7 @@ $lang['gate_use_gate']   = "Utiliser la porte de saut spatial";
 $lang['gate_ship_sel']   = "s&eacute;lection des vaisseaux";
 $lang['gate_ship_dispo'] = "disponible";
 $lang['gate_jump_btn']   = "Sauter";
-$lang['gate_jump_done']  = "Les op&eacute;rations de saut se sont bien pass&eacute;, prochain saut possible dans : ";
+$lang['gate_jump_done']  = "Les op&eacute;rations de saut se sont bien pass&eacute;es, prochain saut possible dans : ";
 $lang['gate_wait_dest']  = "Les chargeurs d'&eacute;nergie de la porte de destination n'ont pas encore eu le temps de se recharger ! Temps d'attente : ";
 $lang['gate_no_dest_g']  = "Il n'y a pas de porte de saut sur la plan&egrave;te vers laquelle vous souhaitez envoyer la flotte !";
 $lang['gate_wait_star']  = "Les chargeurs d'&eacute;nergie de la porte de d&eacute;part n'ont pas encore eu le temps de se recharger ! Temps d'attente : ";
@@ -84,7 +84,7 @@ $lang['info'][41]['description']  = "Une lune n'ayant pas d'atmosph&egrave;re, u
 $lang['info'][42]['name']         = "Phalange de capteur";
 $lang['info'][42]['description']  = "Des capteurs de haute d&eacute;finition scannent le spectre complet des fr&eacute;quences de tous les rayonnements qui atteignent la phalange. Des ordinateurs de haute performance combinent des oscillations &eacute;nerg&eacute;tiques minuscules et de cette fa&ccedil;on gagnent des informations concernant le mouvement de vaisseaux sur des plan&egrave;tes &eacute;loign&eacute;es. Un tel scanner a besoin d'&eacute;nergie sous forme de deut&eacute;rium.";
 $lang['info'][43]['name']         = "Porte de saut spatial";
-$lang['info'][43]['description']  = "Les portes de saut spatial sont d'immenses &eacute;metteurs permettant de transporter des vaisseaux &agrave; travers la galaxie sans perte de temps. Cette tranmission n&eacute;cessite une technologie &eacute;lev&eacute;e et une &eacute;norme quantit&eacute; d'&eacute;nergie.";
+$lang['info'][43]['description']  = "Les portes de saut spatial sont d'immenses &eacute;metteurs permettant de transporter des vaisseaux &agrave; travers la galaxie sans perte de temps. Cette transmission n&eacute;cessite une technologie &eacute;lev&eacute;e et une &eacute;norme quantit&eacute; d'&eacute;nergie.";
 
 $lang['info'][44]['name']         = "Silo de missiles";
 $lang['info'][44]['description']  = "Les silos de missiles servent &agrave; stocker les missiles. Chaque niveau de d&eacute;veloppement permet le stockage de cinq missiles interplan&eacute;taires ou de dix missiles d'interception. Un missile interplan&eacute;taire occupe la place de deux missiles d'interception. Les types de missiles se combinent &agrave; souhait.";

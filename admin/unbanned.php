@@ -25,12 +25,12 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse['dpath'] = $dpath;
 		$parse = $lang;
 
-		$mode = $_GET['mode'];
+		$mode = ($_GET['mode'] ?? null);
 
 		if ($mode != 'change') {
 			$parse['Name'] = "Nom du joueur";
-		} elseif ($mode == 'change') {
-			$nam = SqlEscape($_POST['nam']);
+		} elseif ($mode == 'change' && $_SERVER['REQUEST_METHOD'] == 'POST') {
+			$nam = SqlEscape(($_POST['nam'] ?? null));
 			doquery("DELETE FROM {{table}} WHERE who2='{$nam}'", 'banned');
 			doquery("UPDATE {{table}} SET bana=0, banaday=0 WHERE username='{$nam}'", "users");
 			message("Le joueur {$nam} a bien &eacute;t&eacute; d&eacute;banni!", 'Information');

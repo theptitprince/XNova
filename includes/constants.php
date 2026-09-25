@@ -16,7 +16,7 @@
 // ----------------------------------------------------------------------------------------------------------------
 
 if ( defined('INSIDE') ) {
-	define('ADMINEMAIL'               , "admin@xnova.fr");
+	define('ADMINEMAIL'               , ""); // vide : adresse du compte administrateur (voir reg.php)
 	define('GAMEURL'                  , "http://".$_SERVER['HTTP_HOST']."/");
 
 	// Definition du monde connu !

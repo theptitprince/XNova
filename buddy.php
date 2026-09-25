@@ -21,14 +21,14 @@ include( $xnova_root_path . 'common.' . $phpEx );
 
 	includeLang('buddy');
 
-$a = intval( $_GET['a'] );
-$e = intval( $_GET['e'] );
-$s = intval( $_GET['s'] );
-$u = intval( $_GET['u'] );
+$a = intval( ($_GET['a'] ?? null) );
+$e = intval( ($_GET['e'] ?? null) );
+$s = intval( ($_GET['s'] ?? null) );
+$u = intval( ($_GET['u'] ?? null) );
 
 if ( $s == 1 && isset( $_GET['bid'] ) ) {
 	// Effacer une entree de la liste d'amis
-	$bid = intval( $_GET['bid'] );
+	$bid = intval( ($_GET['bid'] ?? null) );
 
 	$buddy = doquery( "SELECT * FROM {{table}} WHERE `id` = '".$bid."';", 'buddy', true );
 	if ( $buddy['owner'] == $user['id'] ) {
@@ -42,18 +42,18 @@ if ( $s == 1 && isset( $_GET['bid'] ) ) {
 	} elseif ( $buddy['sender'] == $user['id'] ) {
 		doquery( "DELETE FROM {{table}} WHERE `id` = '".$bid."';", 'buddy' );
 	}
-} elseif ( $_POST["s"] == 3 && $_POST["a"] == 1 && $_POST["e"] == 1 && isset( $_POST["u"] ) ) {
+} elseif ( ($_POST["s"] ?? null) == 3 && ($_POST["a"] ?? null) == 1 && ($_POST["e"] ?? null) == 1 && isset( $_POST["u"] ) ) {
 	// Traitement de l'enregistrement de la demande d'entree dans la liste d'amis
 	$uid = $user["id"];
-	$u = intval( $_POST["u"] );
+	$u = intval( ($_POST["u"] ?? null) );
 
 	$buddy = doquery( "SELECT * FROM {{table}} WHERE sender={$uid} AND owner={$u} OR sender={$u} AND owner={$uid}", 'buddy', true );
 
 	if ( !$buddy ) {
-		if ( strlen( $_POST['text'] ) > 5000 ) {
+		if ( strlen( ($_POST['text'] ?? null) ) > 5000 ) {
 			message( "Le texte ne doit pas faire plus de 5000 caract&egrave;res !", "Erreur" );
 		}
-		$text = SqlEscape( SafeText( $_POST['text'] ) );
+		$text = SqlEscape( SafeText( ($_POST['text'] ?? null) ) );
 		doquery( "INSERT INTO {{table}} SET sender={$uid}, owner={$u}, active=0, text='{$text}'", 'buddy' );
 		message( $lang['Request_sent'], $lang['Buddy_request'], 'buddy.php' );
 	} else {

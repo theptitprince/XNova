@@ -21,7 +21,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	includeLang('fleet');
 
-	$fleetid = intval($_POST['fleetid']);
+	$fleetid = intval(($_POST['fleetid'] ?? null));
 
 	if (!is_numeric($fleetid) || empty($fleetid)) {
 		header("Location: overview.php");
@@ -185,11 +185,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 			}
 		}
 		$page .= "\">" . pretty_number($f['fleet_amount']) . "</a></th>";
-		// $page .= "<th>".gmdate("d. M Y H:i:s",$f['fleet_start_time'])."</th>";
+		// $page .= "<th>".date("d/m/Y H:i:s",$f['fleet_start_time'])."</th>";
 		$page .= "<th>[{$f['fleet_start_galaxy']}:{$f['fleet_start_system']}:{$f['fleet_start_planet']}]</th>";
-		$page .= "<th>" . gmdate("d. M Y H:i:s", $f['fleet_start_time']) . "</th>";
+		$page .= "<th>" . date("d/m/Y H:i:s", $f['fleet_start_time']) . "</th>";
 		$page .= "<th>[{$f['fleet_end_galaxy']}:{$f['fleet_end_system']}:{$f['fleet_end_planet']}]</th>";
-		$page .= "<th>" . gmdate("d. M Y H:i:s", $f['fleet_end_time']) . "</th>";
+		$page .= "<th>" . date("d/m/Y H:i:s", $f['fleet_end_time']) . "</th>";
 		$page .= " </form>";
 
 		$page .= "<th><font color=\"lime\"><div id=\"time_0\"><font>" . pretty_time(floor($f['fleet_end_time'] + 1 - time())) . "</font></th><th>";
@@ -278,11 +278,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if (!$planetrow) {
 		message('WTF! FEHLER!', 'ERROR');
 	} //uno nunca sabe xD
-	$galaxy = intval($_GET['galaxy']);
-	$system = intval($_GET['system']);
-	$planet = intval($_GET['planet']);
-	$planettype = intval($_GET['planettype']);
-	$target_mission = intval($_GET['target_mission']);
+	$galaxy = intval(($_GET['galaxy'] ?? null));
+	$system = intval(($_GET['system'] ?? null));
+	$planet = intval(($_GET['planet'] ?? null));
+	$planettype = intval(($_GET['planettype'] ?? null));
+	$target_mission = intval(($_GET['target_mission'] ?? null));
 
 	foreach($reslist['fleet'] as $n => $i) {
 		if ($planetrow[$resource[$i]] > 0) {

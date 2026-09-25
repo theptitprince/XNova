@@ -21,9 +21,10 @@ $lang['signup']            = 'Registrieren';
 $lang['neededpass']        = 'Passwort';
 
 // Send
-$lang['mail_welcome']      = 'Vielen Dank fuer ihre Anmeldung bei uns ({gameurl}) \nVotre mot de passe est : {password}\n\nBon amusement !\n{gameurl}';
+$lang['mail_welcome']      = 'Vielen Dank f&uuml;r Ihre Anmeldung bei uns ({gameurl})\nIhr Benutzername: {username}\n\nViel Spa&szlig;!\n{gameurl}';
+$lang['reg_go_login']      = 'Anmelden';
 $lang['mail_title']        = 'Anmeldung erfolgreich';
-$lang['thanksforregistry'] = 'Danke fuer ihre Anmeldung! Sie erhalten inerhalb von 30 Minuten eine E-Mail mit ihren Passwort.';
+$lang['thanksforregistry'] = 'Danke f&uuml;r Ihre Anmeldung! Wir haben Ihnen eine Willkommens-E-Mail geschickt.';
 
 // Errors
 $lang['error_mail']        = 'E-Mail Adresse ung&uuml;ltig!<br />';

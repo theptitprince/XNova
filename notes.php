@@ -22,8 +22,8 @@ include($xnova_root_path . 'common.'.$phpEx);
 
 $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 
-$a = intval($_GET['a']);
-$n = intval($_GET['n']);
+$a = intval(($_GET['a'] ?? null));
+$n = intval(($_GET['n'] ?? null));
 $lang['Please_Wait'] = "Patientez...";
 
 //lenguaje
@@ -31,21 +31,21 @@ includeLang('notes');
 
 $lang['PHP_SELF'] = 'notes.'.$phpEx;
 
-if($_POST["s"] == 1 || $_POST["s"] == 2){//Edicion y agregar notas
+if(($_POST["s"] ?? null) == 1 || ($_POST["s"] ?? null) == 2){//Edicion y agregar notas
 
 	$time = time();
-	$priority = intval($_POST["u"]);
-	$title = ($_POST["title"]) ? SqlEscape(SafeText($_POST["title"])) : $lang['NoTitle'];
-	$text = ($_POST["text"]) ? SqlEscape(SafeText($_POST["text"])) : $lang['NoText'];
+	$priority = intval(($_POST["u"] ?? null));
+	$title = (($_POST["title"] ?? null)) ? SqlEscape(SafeText(($_POST["title"] ?? null))) : $lang['NoTitle'];
+	$text = (($_POST["text"] ?? null)) ? SqlEscape(SafeText(($_POST["text"] ?? null))) : $lang['NoText'];
 
-	if($_POST["s"] ==1){
+	if(($_POST["s"] ?? null) ==1){
 		doquery("INSERT INTO {{table}} SET owner={$user['id']}, time=$time, priority=$priority, title='$title', text='$text'","notes");
 		message($lang['NoteAdded'], $lang['Please_Wait'],'notes.'.$phpEx,"3");
-	}elseif($_POST["s"] == 2){
+	}elseif(($_POST["s"] ?? null) == 2){
 		/*
 		  pequeño query para averiguar si la nota que se edita es del propio jugador
 		*/
-		$id = intval($_POST["n"]);
+		$id = intval(($_POST["n"] ?? null));
 		$note_query = doquery("SELECT * FROM {{table}} WHERE id=$id AND owner=".$user["id"],"notes");
 
 		if(!$note_query){ error($lang['notpossiblethisway'],$lang['Notes']); }
@@ -79,7 +79,7 @@ elseif($_POST){//Borrar
 	}else{header("Location: notes.$phpEx");}
 
 }else{//sin post...
-	if($_GET["a"] == 1){//crear una nueva nota.
+	if(($_GET["a"] ?? null) == 1){//crear una nueva nota.
 		/*
 		  Formulario para crear una nueva nota.
 		*/
@@ -101,7 +101,7 @@ elseif($_POST){//Borrar
 		display($page,$lang['Notes'],false);
 
 	}
-	elseif($_GET["a"] == 2){//editar
+	elseif(($_GET["a"] ?? null) == 2){//editar
 		/*
 		  Formulario donde se puestra la nota y se puede editar.
 		*/
@@ -143,7 +143,7 @@ elseif($_POST){//Borrar
 
 			//fragmento de template
 			$parse['NOTE_ID'] = $note['id'];
-			$parse['NOTE_TIME'] = date("Y-m-d h:i:s",$note["time"]);
+			$parse['NOTE_TIME'] = date("d/m/Y H:i:s",$note["time"]);
 			$parse['NOTE_TITLE'] = $note['title'];
 			$parse['NOTE_TEXT'] = strlen($note['text']);
 

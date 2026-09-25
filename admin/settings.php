@@ -26,153 +26,162 @@ function DisplayGameSettingsPage ( $CurrentUser ) {
 	includeLang('admin/settings');
 
 	if ( $CurrentUser['authlevel'] >= 3 ) {
-		if ($_POST['opt_save'] == "1") {
-			// Jeu Ouvert ou Ferm� !
-			if (isset($_POST['closed']) && $_POST['closed'] == 'on') {
+		if (($_POST['opt_save'] ?? null) == "1") {
+			// Jeu Ouvert ou Fermé !
+			if (isset($_POST['closed']) && ($_POST['closed'] ?? null) == 'on') {
 				$game_config['game_disable']         = "1";
-				$game_config['close_reason']         = addslashes( $_POST['close_reason'] );
+				$game_config['close_reason']         = addslashes( ($_POST['close_reason'] ?? null) );
 			} else {
 				$game_config['game_disable']         = "0";
 				$game_config['close_reason']         = "";
 			}
 
 			// Y a un News Frame ? !
-			if (isset($_POST['newsframe']) && $_POST['newsframe'] == 'on') {
+			if (isset($_POST['newsframe']) && ($_POST['newsframe'] ?? null) == 'on') {
 				$game_config['OverviewNewsFrame']     = "1";
-				$game_config['OverviewNewsText']      = addslashes( $_POST['NewsText'] );
+				$game_config['OverviewNewsText']      = addslashes( ($_POST['NewsText'] ?? null) );
 			} else {
 				$game_config['OverviewNewsFrame']     = "0";
 				$game_config['OverviewNewsText']      = "";
 			}
 
 			// Y a un TCHAT externe ??
-			if (isset($_POST['chatframe']) && $_POST['chatframe'] == 'on') {
+			if (isset($_POST['chatframe']) && ($_POST['chatframe'] ?? null) == 'on') {
 				$game_config['OverviewExternChat']     = "1";
-				$game_config['OverviewExternChatCmd']  = addslashes( $_POST['ExternChat'] );
+				$game_config['OverviewExternChatCmd']  = addslashes( ($_POST['ExternChat'] ?? null) );
 			} else {
 				$game_config['OverviewExternChat']     = "0";
 				$game_config['OverviewExternChatCmd']  = "";
 			}
 
-			if (isset($_POST['googlead']) && $_POST['googlead'] == 'on') {
+			if (isset($_POST['googlead']) && ($_POST['googlead'] ?? null) == 'on') {
 				$game_config['OverviewBanner']         = "1";
-				$game_config['OverviewClickBanner']    = addslashes( $_POST['GoogleAds'] );
+				$game_config['OverviewClickBanner']    = addslashes( ($_POST['GoogleAds'] ?? null) );
 			} else {
 				$game_config['OverviewBanner']         = "0";
 				$game_config['OverviewClickBanner']    = "";
 			}
 
 			// Y a un BANNER Frame ?
-			if (isset($_POST['bannerframe']) && $_POST['bannerframe'] == 'on') {
+			if (isset($_POST['bannerframe']) && ($_POST['bannerframe'] ?? null) == 'on') {
 				$game_config['ForumBannerFrame']     = "1";
 			} else {
 				$game_config['ForumBannerFrame']     = "0";
 			}
 
 			// Mode Debug ou pas !
-			if (isset($_POST['debug']) && $_POST['debug'] == 'on') {
+			if (isset($_POST['debug']) && ($_POST['debug'] ?? null) == 'on') {
 				$game_config['debug'] = "1";
 			} else {
 				$game_config['debug'] = "0";
 			}
 
 			// Nom du Jeu
-			if (isset($_POST['game_name']) && $_POST['game_name'] != '') {
-				$game_config['game_name'] = $_POST['game_name'];
+			if (isset($_POST['game_name']) && ($_POST['game_name'] ?? null) != '') {
+				$game_config['game_name'] = ($_POST['game_name'] ?? null);
 			}
 
 			// Adresse du Forum
-			if (isset($_POST['forum_url']) && $_POST['forum_url'] != '') {
-				$game_config['forum_url'] = $_POST['forum_url'];
+			if (isset($_POST['forum_url']) && ($_POST['forum_url'] ?? null) != '') {
+				$game_config['forum_url'] = ($_POST['forum_url'] ?? null);
 			}
 
 			// Vitesse du Jeu
 			if (isset($_POST['game_speed']) && is_numeric($_POST['game_speed'])) {
-				$game_config['game_speed'] = $_POST['game_speed'];
+				$game_config['game_speed'] = ($_POST['game_speed'] ?? null);
 			}
 
 			// Vitesse des Flottes
+			// Protection des debutants : active ou non, seuil de points, rapport de force
+			$game_config['noobprotection']      = (isset($_POST['noobprotection']) && $_POST['noobprotection'] == 'on') ? '1' : '0';
+			if (isset($_POST['noobprotectiontime']) && is_numeric($_POST['noobprotectiontime'])) {
+				$game_config['noobprotectiontime']  = max(0, intval($_POST['noobprotectiontime']));
+			}
+			if (isset($_POST['noobprotectionmulti']) && is_numeric($_POST['noobprotectionmulti'])) {
+				$game_config['noobprotectionmulti'] = max(1, intval($_POST['noobprotectionmulti']));
+			}
+
 			if (isset($_POST['fleet_speed']) && is_numeric($_POST['fleet_speed'])) {
-				$game_config['fleet_speed'] = $_POST['fleet_speed'];
+				$game_config['fleet_speed'] = ($_POST['fleet_speed'] ?? null);
 			}
 
 			// Multiplicateur de Production
 			if (isset($_POST['resource_multiplier']) && is_numeric($_POST['resource_multiplier'])) {
-				$game_config['resource_multiplier'] = $_POST['resource_multiplier'];
+				$game_config['resource_multiplier'] = ($_POST['resource_multiplier'] ?? null);
 			}
 
 			// Taille de la planete mère
 			if (isset($_POST['initial_fields']) && is_numeric($_POST['initial_fields'])) {
-				$game_config['initial_fields'] = $_POST['initial_fields'];
+				$game_config['initial_fields'] = ($_POST['initial_fields'] ?? null);
 			}
 
 			// Revenu de base Metal
 			if (isset($_POST['metal_basic_income']) && is_numeric($_POST['metal_basic_income'])) {
-				$game_config['metal_basic_income'] = $_POST['metal_basic_income'];
+				$game_config['metal_basic_income'] = ($_POST['metal_basic_income'] ?? null);
 			}
 
 			// Revenu de base Cristal
 			if (isset($_POST['crystal_basic_income']) && is_numeric($_POST['crystal_basic_income'])) {
-				$game_config['crystal_basic_income'] = $_POST['crystal_basic_income'];
+				$game_config['crystal_basic_income'] = ($_POST['crystal_basic_income'] ?? null);
 			}
 
 			// Revenu de base Deuterium
 			if (isset($_POST['deuterium_basic_income']) && is_numeric($_POST['deuterium_basic_income'])) {
-				$game_config['deuterium_basic_income'] = $_POST['deuterium_basic_income'];
+				$game_config['deuterium_basic_income'] = ($_POST['deuterium_basic_income'] ?? null);
 			}
 
 			// Revenu de base Energie
 			if (isset($_POST['energy_basic_income']) && is_numeric($_POST['energy_basic_income'])) {
-				$game_config['energy_basic_income'] = $_POST['energy_basic_income'];
+				$game_config['energy_basic_income'] = ($_POST['energy_basic_income'] ?? null);
 			}
 			
 			// Lien supplémentaire dans le menu
 			if (isset($_POST['enable_link_']) && is_numeric($_POST['enable_link_'])) {
-				$game_config['link_enable'] = $_POST['enable_link_'];
+				$game_config['link_enable'] = ($_POST['enable_link_'] ?? null);
 			}
 						// Texte de ce lien...
-$game_config['link_name'] = addslashes( $_POST['name_link_']);
+$game_config['link_name'] = addslashes( ($_POST['name_link_'] ?? null));
 	
 			// URL de ce lien...
-$game_config['link_url'] = $_POST['url_link_'];
+$game_config['link_url'] = ($_POST['url_link_'] ?? null);
 			// Image de la bannière
-$game_config['banner_source_post'] = $_POST['banner_source_post'];
+$game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			// 1 point = ??? Ressources ?
 	if (isset($_POST['stat_settings']) && is_numeric($_POST['stat_settings'])) {
-				$game_config['stat_settings'] = $_POST['stat_settings'];
+				$game_config['stat_settings'] = ($_POST['stat_settings'] ?? null);
 			}
 						// Activation -ou non- des annonces
 	if (isset($_POST['enable_announces_']) && is_numeric($_POST['enable_announces_'])) {
-				$game_config['enable_announces'] = $_POST['enable_announces_'];
+				$game_config['enable_announces'] = ($_POST['enable_announces_'] ?? null);
 			}
 						// Activation -ou non- du marchand
 	if (isset($_POST['enable_marchand_']) && is_numeric($_POST['enable_marchand_'])) {
-				$game_config['enable_marchand'] = $_POST['enable_marchand_'];
+				$game_config['enable_marchand'] = ($_POST['enable_marchand_'] ?? null);
 			}
 						// Activation -ou non- des notes
 	if (isset($_POST['enable_notes_']) && is_numeric($_POST['enable_notes_'])) {
-				$game_config['enable_notes'] = $_POST['enable_notes_'];
+				$game_config['enable_notes'] = ($_POST['enable_notes_'] ?? null);
 			}
 									// Nom du bot antimulti
-									$game_config['bot_name'] = addslashes( $_POST['name_bot']);
+									$game_config['bot_name'] = addslashes( ($_POST['name_bot'] ?? null));
 
 										// email du bot antimulti
-									$game_config['bot_adress'] = addslashes( $_POST['adress_bot']);
+									$game_config['bot_adress'] = addslashes( ($_POST['adress_bot'] ?? null));
 
 					// Activation -ou non- des notes
 	if (isset($_POST['duration_ban']) && is_numeric($_POST['duration_ban'])) {
-				$game_config['ban_duration'] = $_POST['duration_ban'];
+				$game_config['ban_duration'] = ($_POST['duration_ban'] ?? null);
 			}
 			
 								// Activation -ou non- du bot
 	if (isset($_POST['bot_enable']) && is_numeric($_POST['bot_enable'])) {
-				$game_config['enable_bot'] = $_POST['bot_enable'];
+				$game_config['enable_bot'] = ($_POST['bot_enable'] ?? null);
 			}
 			
 											// BBCode ou pas ?
 										
 	if (isset($_POST['bbcode_field']) && is_numeric($_POST['bbcode_field'])) {
-				$game_config['enable_bbcode'] = $_POST['bbcode_field'];
+				$game_config['enable_bbcode'] = ($_POST['bbcode_field'] ?? null);
 			}
 
 			// Activation du jeu
@@ -188,6 +197,9 @@ $game_config['banner_source_post'] = $_POST['banner_source_post'];
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['forum_url'])              ."' WHERE `config_name` = 'forum_url';", 'config');
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['game_speed'])             ."' WHERE `config_name` = 'game_speed';", 'config');
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['fleet_speed'])            ."' WHERE `config_name` = 'fleet_speed';", 'config');
+			foreach (array('noobprotection', 'noobprotectiontime', 'noobprotectionmulti') as $NoobKey) {
+				doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config[$NoobKey]) ."' WHERE `config_name` = '". $NoobKey ."';", 'config');
+			}
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['resource_multiplier'])    ."' WHERE `config_name` = 'resource_multiplier';", 'config');
 
 			// Page Generale 
@@ -232,13 +244,16 @@ $game_config['banner_source_post'] = $_POST['banner_source_post'];
 			
 			// Mode Debug
 			doquery("UPDATE {{table}} SET `config_value` = '" .$game_config['debug']                  ."' WHERE `config_name` ='debug'", 'config');
-			AdminMessage ('Options changees avec succes !', 'Succes', '?');
+			AdminMessage ($lang['adm_opt_saved'], $lang['adm_opt_saved_title'], '?');
 		} else {
 
 			$parse                           = $lang;
 			$parse['game_name']              = $game_config['game_name'];
 			$parse['game_speed']             = $game_config['game_speed'];
 			$parse['fleet_speed']            = $game_config['fleet_speed'];
+			$parse['noobprotection']         = (!empty($game_config['noobprotection'])) ? " checked=\"checked\"" : "";
+			$parse['noobprotectiontime']     = intval($game_config['noobprotectiontime'] ?? 5000);
+			$parse['noobprotectionmulti']    = intval($game_config['noobprotectionmulti'] ?? 5);
 			$parse['resource_multiplier']    = $game_config['resource_multiplier'];
 			$parse['forum_url']              = $game_config['forum_url'];
 			$parse['initial_fields']         = $game_config['initial_fields'];

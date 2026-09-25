@@ -1,5 +1,10 @@
 <?php
+$lang['adm_af_form'] = "Modulo";
+$lang['adm_af_add'] = "Aggiungi";
+$lang['adm_af_done'] = "Navi aggiunte.";
+$lang['adm_af_noplanet'] = "Nessun pianeta con questo identificativo.";
 
+$lang['adm_af_title'] = "Aggiungi flotta";
 $lang['Id'] = "ID del giocatore";
 $lang['cle'] = "Caccia leggero";
 $lang['clourd'] = "Caccia pesante";

@@ -12,6 +12,10 @@
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
+// Ajout de vaisseaux sur une planete (outil d'administration).
+// L'original n'a jamais fonctionne : modele absent (page vide) et requete invalide
+// (`light_hunter` = '5+light_hunter' entre apostrophes, virgule en trop avant WHERE).
+
 define('INSIDE'  , true);
 define('INSTALL' , false);
 define('IN_ADMIN', true);
@@ -22,68 +26,33 @@ include($xnova_root_path . 'common.'.$phpEx);
 
 	if ($user['authlevel'] >= 1) {
 		includeLang('admin/add_fleet');
-		$mode = $_GET['mode'];
-		// Tous les champs du formulaire sont des nombres (id de planete et quantites de vaisseaux)
-		foreach ($_POST as $Field => $Value) {
-			if ($Field != 'mode') { $_POST[$Field] = max(0, intval($Value)); }
+
+		if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+			$PlanetID = max(0, intval($_POST['id'] ?? 0));
+			$Planet   = doquery("SELECT `id` FROM {{table}} WHERE `id` = '". $PlanetID ."' LIMIT 1;", 'planets', true);
+			if (!$Planet) {
+				AdminMessage ( $lang['adm_af_noplanet'], $lang['adm_af_title'], 'add_fleet.php', 3 );
+			}
+			$Set = array();
+			foreach ($reslist['fleet'] as $ShipID) {
+				$Count = max(0, intval($_POST['ship'. $ShipID] ?? 0));
+				if ($Count > 0) {
+					$Set[] = "`". $resource[$ShipID] ."` = `". $resource[$ShipID] ."` + ". $Count;
+				}
+			}
+			if ($Set) {
+				doquery("UPDATE {{table}} SET ". implode(', ', $Set) ." WHERE `id` = '". $PlanetID ."' LIMIT 1;", 'planets');
+			}
+			AdminMessage ( $lang['adm_af_done'], $lang['adm_af_title'], 'add_fleet.php', 3 );
 		}
 
-		if($mode != 'add') {
-			$parse['ID']     = $lang['Id'];
-			$parse['Cle']    = $lang['cle'];
-			$parse['Clourd'] = $lang['clourd'];
-			$parse['Pt']     = $lang['pt'];
-			$parse['Gt']     = $lang['gt'];
-			$parse['Cruise'] = $lang['cruise'];
-			$parse['Vb']     = $lang['vb'];
-			$parse['Colo']   = $lang['colo'];
-			$parse['Rc']     = $lang['rc'];
-			$parse['Spy']    = $lang['spy'];
-			$parse['Bomb']   = $lang['bomb'];
-			$parse['Solar']  = $lang['solar'];
-			$parse['Des']    = $lang['des'];
-			$parse['Rip']    = $lang['rip'];
-			$parse['Traq']   = $lang['traq'];
-
-		} elseif($mode == 'add') {
-			$id     = $_POST['id'];
-			$cle    = $_POST['cle'];
-			$clourd = $_POST['clourd'];
-			$pt     = $_POST['pt'];
-			$gt     = $_POST['gt'];
-			$cruise = $_POST['cruise'];
-			$vb     = $_POST['vb'];
-			$colo   = $_POST['colo'];
-			$rc     = $_POST['rc'];
-			$spy    = $_POST['spy'];
-			$bomb   = $_POST['bomb'];
-			$solar  = $_POST['solar'];
-			$des    = $_POST['des'];
-			$rip    = $_POST['rip'];
-			$traq   = $_POST['traq'];
-
-			$SqlAdd = "UPDATE {{table}} SET";
-			$SqlAdd .= "`light_hunter` = '".$cle."+light_hunter', ";
-			$SqlAdd .= "`heavy_hunter` = '".$clourd."+heavy_hunter', ";
-			$SqlAdd .= "`small_ship_cargo` = '".$pt."+small_ship_cargo', ";
-			$SqlAdd .= "`big_ship_cargo` = '".$gt."+big_ship_cargo', ";
-			$SqlAdd .= "`crusher` = '".$cruise."+crusher', ";
-			$SqlAdd .= "`battle_ship` = '".$vb."+battle_ship', ";
-			$SqlAdd .= "`colonizer` = '".$colo."+colonizer', ";
-			$SqlAdd .= "`recycler` = '".$rc."+recycler', ";
-			$SqlAdd .= "`spy_sonde`= '".$spy."+spy_sonde', ";
-			$SqlAdd .= "`bomber_ship` = '".$bomb."+bomber_ship', ";
-			$SqlAdd .= "`solar_satelit` = '".$solar."+solar_satelit', ";
-			$SqlAdd .= "`destructor` = '".$des."+destructor', ";
-			$SqlAdd .= "`dearth_star` = '".$rip."+dearth_star', ";
-			$SqlAdd .= "`battleship` = '".$traq."+battleship', ";
-			$SqlAdd .= " WHERE `id` = '".$id."' LIMIT 1";
-			doquery($SqlAdd, "planets");
-			message('Ajout OK');
+		$parse          = $lang;
+		$parse['rows']  = '';
+		foreach ($reslist['fleet'] as $ShipID) {
+			$parse['rows'] .= "<tr><th>". $lang['tech'][$ShipID] ."</th><th><input name=\"ship". $ShipID ."\" type=\"text\" value=\"0\" size=\"8\" /></th></tr>";
 		}
-
 		$page = parsetemplate(gettemplate('admin/add_fleet'), $parse);
-		display( $page);
+		display( $page, $lang['adm_af_title'], false, '', true );
 
 	} else {
 		message( $lang['sys_noalloaw'], $lang['sys_noaccess'] );

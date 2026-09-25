@@ -148,7 +148,7 @@ function ShowRapidFireTo ($BuildID) {
 	global $lang, $CombatCaps;
 	$ResultString = "";
 	for ($Type = 200; $Type < 500; $Type++) {
-		if ($CombatCaps[$BuildID]['sd'][$Type] > 1) {
+		if (($CombatCaps[$BuildID]['sd'][$Type] ?? 0) > 1) {
 			$ResultString .= $lang['nfo_rf_again']. " ". $lang['tech'][$Type] ." <font color=\"#00ff00\">".$CombatCaps[$BuildID]['sd'][$Type]."</font><br>";
 		}
 	}
@@ -163,7 +163,7 @@ function ShowRapidFireFrom ($BuildID) {
 
 	$ResultString = "";
 	for ($Type = 200; $Type < 500; $Type++) {
-		if ($CombatCaps[$Type]['sd'][$BuildID] > 1) {
+		if (($CombatCaps[$Type]['sd'][$BuildID] ?? 0) > 1) {
 			$ResultString .= $lang['nfo_rf_from']. " ". $lang['tech'][$Type] ." <font color=\"#ff0000\">".$CombatCaps[$Type]['sd'][$BuildID]."</font><br>";
 		}
 	}
@@ -335,7 +335,7 @@ function ShowBuildingInfoPage ($CurrentUser, $CurrentPlanet, $BuildID) {
 // Tout le reste ne sert qu'a la calculer :)
 //
 
-	$gid  = intval($_GET['gid']);
+	$gid  = intval(($_GET['gid'] ?? null));
 	$page = ShowBuildingInfoPage ($user, $planetrow, $gid);
 
 	display ($page, $lang['nfo_page_title']);

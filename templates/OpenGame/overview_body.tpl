@@ -1,3 +1,15 @@
+<style type="text/css">
+/* Vue generale : dimensions figees, quel que soit le nombre de colonies ou la longueur des noms */
+.ov_lune     { width: 100px; height: 250px; }
+.ov_centre   { height: 250px; }
+.ov_encours  { height: 40px; overflow: hidden; }
+.ov_colonies { padding: 0; }
+.ov_cadre    { width: 488px; margin: 0 auto; text-align: left; } /* 8 vignettes par ligne, 3 lignes au plus (MAX_PLAYER_PLANETS = 21) */
+.ov_planete  { display: inline-block; vertical-align: top; width: 58px; height: 86px; margin: 2px 0 2px 3px; overflow: hidden; text-align: center; font-size: 9px; }
+.ov_texte    { display: block; width: 58px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ov_nomlune  { display: block; width: 96px; margin: 0 auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+</style>
+<script type="text/javascript">var xnova_heure_serveur = {server_clock};</script>
 <script language="JavaScript" type="text/javascript" src="scripts/time.js"></script>
 <br>
 <table width="519">
@@ -13,21 +25,21 @@
 	<tr><td colspan="4" class="c">{Events}</td>
 	</tr>
 	{fleet_list}
-	<tr><th>{moon_img}<br>{moon}</th>
-	<th colspan="2"><img src="{dpath}planeten/{planet_image}.jpg" height="200" width="200"><br>{building}</th>
-	<th class="s"><table class="s" align="top" border="0"><tr>{anothers_planets}</tr></table></th></tr>
+	<tr><th class="ov_lune">{moon_img}<span class="ov_nomlune" title="{moon}">{moon}</span></th>
+	<th colspan="3" class="ov_centre"><img src="{dpath}planeten/{planet_image}.jpg" height="200" width="200"><div class="ov_encours">{building}</div></th></tr>
+	{colonies_row}
 	<tr><th>{Diameter}</th>
 	<th colspan="3">{planet_diameter} km (<a title="{Developed_fields}">{planet_field_current}</a> / <a title="{max_eveloped_fields}">{planet_field_max}</a> {fields})</th></tr>
-	<th>{Developed_fields}</th>
-	<th colspan="3" align="center"><div  style="border: 1px solid rgb(153, 153, 255); width: 400px;"><div  id="CaseBarre" style="background-color: {case_barre_barcolor}; width: {case_barre}px;"><font color="#CCF19F">{case_pourcentage}</font></div></th>
-	<tr><tr><th>{ov_off_level}</th><th colspan="3" align="center"><table border="0" width="100%"><tbody><tr>
+	<tr><th>{Developed_fields}</th>
+	<th colspan="3" align="center"><div  style="border: 1px solid rgb(153, 153, 255); width: 400px;"><div  id="CaseBarre" style="background-color: {case_barre_barcolor}; width: {case_barre}px;"><font color="#CCF19F">{case_pourcentage}</font></div></div></th></tr>
+	<tr><th>{ov_off_level}</th><th colspan="3" align="center"><table border="0" width="100%"><tbody><tr>
 		<td align="center" width="50%" style="background-color: transparent;"><b>{ov_off_mines} : {lvl_minier}</b></td>
 		<td align="center" width="50%" style="background-color: transparent;"><b>{ov_off_raids} : {lvl_raid}</b></td></tr></tbody></table></th></tr>
 	<tr><th>{ov_off_expe}</th>
 	<th colspan="3" align="center"><table border="0" width="100%"><tbody><tr>
 		<td align="center" width="50%" style="background-color: transparent;"><b>{ov_off_mines} : {xpminier} / {lvl_up_minier}</b></td>
 		<td align="center" width="50%" style="background-color: transparent;"><b>{ov_off_raids} : {xpraid} / {lvl_up_raid}</b></td></tr></tbody></table></th></tr>
-	<th>{Temperature}</th>
+	<tr><th>{Temperature}</th>
 	<th colspan="3">{ov_temp_from} {planet_temp_min}{ov_temp_unit} {ov_temp_to} {planet_temp_max}{ov_temp_unit}</th></tr>
 	<tr><th>{Position}</th>
 	<th colspan="3"><a href="galaxy.php?mode=0&galaxy={galaxy_galaxy}&system={galaxy_system}">[{galaxy_galaxy}:{galaxy_system}:{galaxy_planet}]</a></th></tr>
@@ -44,12 +56,12 @@
 		<tr><td align="right" width="50%" style="background-color: transparent;"><b>{ov_pts_total} :</b></td>
 		<td align="left" width="50%" style="background-color: transparent;"><b>{total_points}</b></td></tr>
 		<tr><td colspan="2" align="center" width="100%" style="background-color: transparent;"><b>({Rank} <a href="stat.php?range={u_user_rank}">{user_rank}</a> {of} {max_users})</b></td></tr></tbody></table></th></tr>
-	<th>{Raids}</th>
+	<tr><th>{Raids}</th>
 	<th colspan="3"><table border="0" width="100%"><tbody><tr>
 		<td align="right" width="50%" style="background-color: transparent;"><b>{NumberOfRaids} :</b></td>
 		<td align="left" width="50%" style="background-color: transparent;"><b>{raids}</b></td></tr>
 		<tr><td align="right" width="50%" style="background-color: transparent;"><b>{RaidsWin} :</b></td>
-		<td align="left" width="50%" style="background-color: transparent;"><b>{raidswin}</b></td></tr></tr>
+		<td align="left" width="50%" style="background-color: transparent;"><b>{raidswin}</b></td></tr>
 		<tr><td align="right" width="50%" style="background-color: transparent;"><b>{RaidsLoose} :</b></td>
 		<td align="left" width="50%" style="background-color: transparent;"><b>{raidsloose}</b></td></tr></tbody></table></th></tr>
 	{bannerframe}

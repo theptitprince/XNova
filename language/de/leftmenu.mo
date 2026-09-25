@@ -40,4 +40,5 @@ $lang['Logout']     = 'Logout';
 $lang['Help']       = 'Hilfe';
 $lang['Rules']      = 'Regeln';
 
+$lang['adm_addfleet'] = 'Flotte hinzuf&uuml;gen';
 ?>

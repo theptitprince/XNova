@@ -11,7 +11,23 @@ $lang['changelog']   = array(
 - NEW : Formulaire de contact : plus aucune adresse e-mail affich&eacute;e, messages lus dans l\'administration (lu / non lu, suppression)
 - NEW : Anti-spam du formulaire de contact (champ pi&egrave;ge, d&eacute;lai minimal, 3 messages par heure)
 - NEW : Mise &agrave; jour possible depuis la XNova 0.8e d\'origine ; textes des anciennes bases nettoy&eacute;s
-- FIX : Chat : les caract&egrave;res + et &amp; cassaient l\'envoi ; lien automatique vers l\'ancien site xnova.fr retir&eacute;',
+- FIX : Chat : les caract&egrave;res + et &amp; cassaient l\'envoi ; lien automatique vers l\'ancien site xnova.fr retir&eacute;
+- FIX : Pages du jeu et de l\'administration inaccessibles sans &ecirc;tre connect&eacute; (seules les pages publiques restent ouvertes)
+- FIX : Triches de flotte : vitesse, dur&eacute;es de stationnement et d\'exp&eacute;dition, limite d\'exp&eacute;ditions ne sont plus lues dans le formulaire
+- FIX : Page orpheline qui effa&ccedil;ait les missiles de n\'importe quelle plan&egrave;te supprim&eacute;e ; annonces et phalange prot&eacute;g&eacute;es
+- FIX : Liens vers xnova.fr (domaine repris par des tiers) et vers un site tiers recevant l\'IP des joueurs retir&eacute;s
+- FIX : Mail d\'inscription sans mot de passe en clair ; erreur de connexion sur la page de connexion, sans r&eacute;v&eacute;ler si le pseudo existe
+- FIX : Le r&eacute;glage &laquo; jeu ferm&eacute; &raquo; ne fonctionnait pas (serveurs existants remis sur &laquo; ouvert &raquo;)
+- FIX : Heures au fuseau du serveur partout, format fran&ccedil;ais sur 24 h, horloge de la vue g&eacute;n&eacute;rale &agrave; l\'heure du serveur
+- FIX : Lunes : temp&eacute;ratures invers&eacute;es (lunes existantes r&eacute;par&eacute;es), nom choisi repris, lune d&eacute;j&agrave; pr&eacute;sente v&eacute;rifi&eacute;e
+- FIX : Recycleurs et vaisseaux de colonisation peuvent transporter ; message de retour de recyclage
+- FIX : Phalange et rapports de combat affich&eacute;s dans le jeu (plus de popups bloqu&eacute;es), rapport encadr&eacute; et centr&eacute;
+- NEW : Vue g&eacute;n&eacute;rale &agrave; dimensions fixes (bandeau &laquo; Autres plan&egrave;tes &raquo;), bandeau du haut sans d&eacute;filement horizontal
+- NEW : Technologies [i] : arbre complet des pr&eacute;requis (jamais termin&eacute; dans l\'original)
+- NEW : Administration : ajout de flotte r&eacute;par&eacute; et au menu, protection des d&eacute;butants r&eacute;glable, redirections r&eacute;par&eacute;es
+- FIX : Redirections apr&egrave;s un message (notes, options...) bloqu&eacute;es par les navigateurs actuels
+- FIX : Galaxie : compteur de flottes et de recycleurs ; statistiques : page courante pr&eacute;s&eacute;lectionn&eacute;e
+- FIX : Caract&egrave;res perdus retap&eacute;s, nombreux textes corrig&eacute;s, mail de bienvenue italien encore en polonais traduit',
 
 '0.9e Renaissance' => 'S&eacute;curit&eacute; (theptitprince)
 - FIX : Injections SQL dans les pages du jeu et de l\'administration (mot de passe oubli&eacute;, cookie, alliance, messages...)

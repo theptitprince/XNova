@@ -28,7 +28,7 @@ $parse = $lang;
 		// Système de suppression
 		// extract($_GET) remplace par des lectures explicites (il permettait d'ecraser n'importe quelle variable)
 		$delete    = isset($_GET['delete']) ? intval($_GET['delete']) : null;
-		$deleteall = isset($_GET['deleteall']) ? $_GET['deleteall'] : '';
+		$deleteall = isset($_GET['deleteall']) ? ($_GET['deleteall'] ?? null) : '';
 		if (isset($delete)) {
 			doquery("DELETE FROM {{table}} WHERE `messageid`=$delete", 'chat');
 		} elseif ($deleteall == 'yes') {
@@ -40,7 +40,7 @@ $parse = $lang;
 		$i = 0;
 		while ($e = mysqli_fetch_array($query)) {
 			$i++;
-			$parse['msg_list'] .= stripslashes("<tr><th class=b>" . date('h:i:s', $e['timestamp']) . "</th>".
+			$parse['msg_list'] .= stripslashes("<tr><th class=b>" . date('H:i:s', $e['timestamp']) . "</th>".
 			"<th class=b>". $e['user'] . "</th>".
 			"<td class=b>" . nl2br($e['message']) . "</td>".
 			"<th class=b><a href=?delete=".$e['messageid']."><img src=\"../images/r1.png\" border=\"0\"></a></th></tr>");
