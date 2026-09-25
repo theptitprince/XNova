@@ -150,7 +150,7 @@ function CsrfGetAction () {
 	$Actions = array(
 		'buildings.php'          => array('cmd'),              // construire, detruire, annuler (batiments et recherche)
 		'officier.php'           => array('offi'),             // recruter un officier
-		'annonce2.php'           => array('action'),           // supprimer une annonce
+		'annonce.php'            => array('action'),           // supprimer une de ses annonces
 		'buddy.php'              => array('bid'),              // accepter / supprimer un ami
 		'alliance.php'           => array('kick', 'd', 'yes'), // exclure un membre, supprimer un rang, quitter
 		'quickfleet.php'         => array('mode'),             // envoi rapide de recycleurs

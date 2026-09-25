@@ -78,4 +78,7 @@ $lang['save_settings'] = "Sauvegarder les changements";
 $lang['changue_name'] = 'Changer de pseudo';
 $lang['succeful_changename'] = 'Le pseudo a bien &eacute;t&eacute; chang&eacute;.<br /><a href="login.php" target="_top">Reconnectez-vous</a>';
 
+// XNova Renaissance 0.9g : titre des messages de la page
+$lang['Options'] = 'Options';
+
 ?>

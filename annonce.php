@@ -33,13 +33,13 @@ if ($action == 5 && $_SERVER['REQUEST_METHOD'] == 'POST') { // publication : for
 	$deutsouhait = max(0, intval(($_POST['deutsouhait'] ?? null)));
 
 	while ($v_annonce = mysqli_fetch_array($users)) {
-		$user = $v_annonce['username'];
+		$Seller  = $v_annonce['username'];
 		$galaxie = $v_annonce['galaxy'];
 		$systeme = $v_annonce['system'];
 	}
 
 	doquery("INSERT INTO {{table}} SET
-user='". SqlEscape($user) ."',
+user='". SqlEscape($Seller) ."',
 galaxie='{$galaxie}',
 systeme='{$systeme}',
 metala='{$metalvendre}',
@@ -49,7 +49,7 @@ metals='{$metalsouhait}',
 cristals='{$cristalsouhait}',
 deuts='{$deutsouhait}'" , "annonce");
 
-	$page2 .= <<<HTML
+	$page2 = <<<HTML
 <center>
 <br>
 <p>Votre Annonce a bien &eacute;t&eacute; enregistr&eacute;e !</p>
@@ -58,6 +58,10 @@ deuts='{$deutsouhait}'" , "annonce");
 HTML;
 
 	display($page2);
+}
+
+if ($action == 3) {
+	doquery("DELETE FROM {{table}} WHERE `id` = '". intval($_GET['id'] ?? 0) ."' AND `user` = '". SqlEscape($user['username']) ."';", 'annonce');
 }
 
 if ($action != 5 || $_SERVER['REQUEST_METHOD'] != 'POST') {
@@ -69,7 +73,7 @@ if ($action != 5 || $_SERVER['REQUEST_METHOD'] != 'POST') {
 <table width=\"600\">
 <td class=\"c\" colspan=\"10\"><font color=\"#FFFFFF\">Petites Annonces</font></td></tr>
 <tr><th colspan=\"3\">Infos de livraison</th><th colspan=\"3\">Ressources &agrave; vendre</th><th colspan=\"3\">Ressources souhait&eacute;es</th><th>Action</th></tr>
-<tr><th>Vendeur</th><th>Galaxie</th><th>Syst&egrave;me</th><th>M&eacute;tal</th><th>Cristal</th><th>Deuterium</th><th>M&eacute;tal</th><th>Cristal</th><th>Deuterium</th><th>Delet</th></tr>
+<tr><th>Vendeur</th><th>Galaxie</th><th>Syst&egrave;me</th><th>M&eacute;tal</th><th>Cristal</th><th>Deuterium</th><th>M&eacute;tal</th><th>Cristal</th><th>Deuterium</th><th>Supprimer</th></tr>
 
 
 
@@ -83,18 +87,21 @@ if ($action != 5 || $_SERVER['REQUEST_METHOD'] != 'POST') {
 		$page2 .= '</th><th>';
 		$page2 .= $b["systeme"];
 		$page2 .= '</th><th>';
-		$page2 .= $b["metala"];
+		$page2 .= pretty_number($b["metala"]);
 		$page2 .= '</th><th>';
-		$page2 .= $b["gcristala"];
+		$page2 .= pretty_number($b["cristala"]); // (l'original lisait « gcristala » : colonne toujours vide)
 		$page2 .= '</th><th>';
-		$page2 .= $b["deuta"];
+		$page2 .= pretty_number($b["deuta"]);
 		$page2 .= '</th><th>';
-		$page2 .= $b["metals"];
+		$page2 .= pretty_number($b["metals"]);
 		$page2 .= '</th><th>';
-		$page2 .= $b["cristals"];
+		$page2 .= pretty_number($b["cristals"]);
 		$page2 .= '</th><th>';
-		$page2 .= $b["deuts"];
+		$page2 .= pretty_number($b["deuts"]);
 		$page2 .= '</th><th>';
+		if ($b["user"] == $user['username']) {
+			$page2 .= "<a href=\"annonce.php?action=3&amp;id=". intval($b["id"]) ."\">X</a>";
+		}
 		$page2 .= "</th></tr>";
 	}
 

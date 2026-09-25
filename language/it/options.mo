@@ -75,4 +75,8 @@ $lang['save_settings'] = 'Salvare i cambiamenti';
 
 // Created by Perberos. All rights reversed (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// XNova Renaissance 0.9g : titre des messages de la page
+$lang['Options'] = 'Opzioni';
+
 ?>
