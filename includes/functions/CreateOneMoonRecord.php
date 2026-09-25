@@ -44,9 +44,10 @@ function CreateOneMoonRecord ( $Galaxy, $System, $Planet, $Owner, $MoonID, $Moon
 			$maxtemp                = $MoonPlanet['temp_max'] - rand(10, 45);
 			$mintemp                = $MoonPlanet['temp_min'] - rand(10, 45);
 			$size                   = rand ($SizeMin, $SizeMax);
+			$MoonNameSql            = SqlEscape( SafeName( ($MoonName == '') ? $lang['sys_moon'] : $MoonName ) );
 
 			$QryInsertMoonInLunas   = "INSERT INTO {{table}} SET ";
-			$QryInsertMoonInLunas  .= "`name` = '". ( ($MoonName == '') ? $lang['sys_moon'] : $MoonName ) ."', ";
+			$QryInsertMoonInLunas  .= "`name` = '". $MoonNameSql ."', ";
 			$QryInsertMoonInLunas  .= "`galaxy` = '".   $Galaxy  ."', ";
 			$QryInsertMoonInLunas  .= "`system` = '".   $System  ."', ";
 			$QryInsertMoonInLunas  .= "`lunapos` = '".  $Planet  ."', ";
@@ -74,7 +75,7 @@ function CreateOneMoonRecord ( $Galaxy, $System, $Planet, $Owner, $MoonID, $Moon
 			doquery( $QryUpdateMoonInGalaxy , 'galaxy');
 
 			$QryInsertMoonInPlanet  = "INSERT INTO {{table}} SET ";
-			$QryInsertMoonInPlanet .= "`name` = '" .$lang['sys_moon'] ."', ";
+			$QryInsertMoonInPlanet .= "`name` = '". $MoonNameSql ."', "; // le nom choisi (avant : toujours « Lune »)
 			$QryInsertMoonInPlanet .= "`id_owner` = '". $Owner ."', ";
 			$QryInsertMoonInPlanet .= "`galaxy` = '". $Galaxy ."', ";
 			$QryInsertMoonInPlanet .= "`system` = '". $System ."', ";
@@ -84,8 +85,8 @@ function CreateOneMoonRecord ( $Galaxy, $System, $Planet, $Owner, $MoonID, $Moon
 			$QryInsertMoonInPlanet .= "`image` = 'mond', ";
 			$QryInsertMoonInPlanet .= "`diameter` = '". $size ."', ";
 			$QryInsertMoonInPlanet .= "`field_max` = '1', ";
-			$QryInsertMoonInPlanet .= "`temp_min` = '". $maxtemp ."', ";
-			$QryInsertMoonInPlanet .= "`temp_max` = '". $mintemp ."', ";
+			$QryInsertMoonInPlanet .= "`temp_min` = '". $mintemp ."', ";
+			$QryInsertMoonInPlanet .= "`temp_max` = '". $maxtemp ."', ";
 			$QryInsertMoonInPlanet .= "`metal` = '0', ";
 			$QryInsertMoonInPlanet .= "`metal_perhour` = '0', ";
 			$QryInsertMoonInPlanet .= "`metal_max` = '".BASE_STORAGE_SIZE."', ";

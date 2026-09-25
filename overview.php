@@ -22,11 +22,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 $lunarow = doquery("SELECT * FROM {{table}} WHERE `id_owner` = '" . $planetrow['id_owner'] . "' AND `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `lunapos` = '" . $planetrow['planet'] . "';", 'lunas', true);
 
-CheckPlanetUsedFields ($lunarow);
+// (CheckPlanetUsedFields($lunarow) retire : $lunarow vient de la table des lunes, sans batiments ni cases)
 
-$mode = $_GET['mode'];
-$pl = SqlEscape($_GET['pl']);
-$_POST['deleteid'] = intval($_POST['deleteid']);
+$mode = ($_GET['mode'] ?? null);
+$pl = SqlEscape(($_GET['pl'] ?? null));
+$_POST['deleteid'] = intval(($_POST['deleteid'] ?? null));
 
 includeLang('resources');
 includeLang('overview');
@@ -70,9 +70,9 @@ $sql = doquery("SELECT * FROM {{table}} WHERE `user_lastip`='{$ip}'", 'users');
 switch ($mode) {
     case 'renameplanet':
         // -----------------------------------------------------------------------------------------------
-        if ($_POST['action'] == $lang['namer']) {
+        if (($_POST['action'] ?? null) == $lang['namer']) {
             // Reponse au changement de nom de la planete
-            $UserPlanet = SafeName(CheckInputStrings ($_POST['newname']), 32);
+            $UserPlanet = SafeName(CheckInputStrings (($_POST['newname'] ?? null)), 32);
             $newname = SqlEscape(trim($UserPlanet));
             if ($newname != "") {
                 // Deja on met jour la planete qu'on garde en memoire (pour le nom)
@@ -85,7 +85,7 @@ switch ($mode) {
                     doquery("UPDATE {{table}} SET `name` = '" . $newname . "' WHERE `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `lunapos` = '" . $planetrow['planet'] . "' LIMIT 1;", "lunas");
                 }
             }
-        } elseif ($_POST['action'] == $lang['colony_abandon']) {
+        } elseif (($_POST['action'] ?? null) == $lang['colony_abandon']) {
             // Cas d'abandon d'une colonie
             // Affichage de la forme d'abandon de colonie
             $parse = $lang;
@@ -98,9 +98,9 @@ switch ($mode) {
             $page .= parsetemplate(gettemplate('overview_deleteplanet'), $parse);
             // On affiche la forme pour l'abandon de la colonie
             display($page, $lang['rename_and_abandon_planet']);
-        } elseif ($_POST['kolonieloeschen'] == 1 && $_POST['deleteid'] == $user['current_planet']) {
+        } elseif (($_POST['kolonieloeschen'] ?? null) == 1 && ($_POST['deleteid'] ?? null) == $user['current_planet']) {
             // Controle du mot de passe pour abandon de colonie
-            if (PasswordCheck($_POST['pw'], $user) && $user['id_planet'] != $user['current_planet']) {
+            if (PasswordCheck(($_POST['pw'] ?? null), $user) && $user['id_planet'] != $user['current_planet']) {
                 $destruyed = time() + 60 * 60 * 24;
 
                 $QryUpdatePlanet = "UPDATE {{table}} SET ";
@@ -261,41 +261,33 @@ switch ($mode) {
                 $QryPlanets .= "`name` " . $Order;
             }
             $planets_query = doquery ($QryPlanets, 'planets');
-            $Colone = 1;
-            $AllPlanets = "<tr>";
+            // Autres planetes : vignettes de taille fixe dans un cadre a defilement (voir overview_body.tpl),
+            // pour que la vue generale garde la meme taille quel que soit le nombre de colonies
+            $AllPlanets = "";
             while ($UserPlanet = mysqli_fetch_array($planets_query)) {
                 PlanetResourceUpdate ($user, $UserPlanet, time());
                 if ($UserPlanet["id"] != $user["current_planet"] && $UserPlanet['planet_type'] != 3) {
-                    $AllPlanets .= "<th>" . $UserPlanet['name'] . "<br>";
-                    $AllPlanets .= "<a href=\"?cp=" . $UserPlanet['id'] . "&re=0\" title=\"" . $UserPlanet['name'] . "\"><img src=\"" . $dpath . "planeten/small/s_" . $UserPlanet['image'] . ".jpg\" height=\"50\" width=\"50\"></a><br>";
-                    $AllPlanets .= "<center>";
-
+                    $PlanetState = $lang['Free'];
+                    $PlanetStateTitle = $lang['Free'];
                     if ($UserPlanet['b_building'] != 0) {
                         UpdatePlanetBatimentQueueList ($UserPlanet, $user);
                         if ($UserPlanet['b_building'] != 0) {
-                            $BuildQueue = $UserPlanet['b_building_id'];
-                            $QueueArray = explode (";", $BuildQueue);
+                            $QueueArray = explode (";", $UserPlanet['b_building_id']);
                             $CurrentBuild = explode (",", $QueueArray[0]);
-                            $BuildElement = $CurrentBuild[0];
-                            $BuildLevel = $CurrentBuild[1];
                             $BuildRestTime = pretty_time($CurrentBuild[3] - time());
-                            $AllPlanets .= '' . $lang['tech'][$BuildElement] . ' (' . $BuildLevel . ')';
-                            $AllPlanets .= "<br><font color=\"#7f7f7f\">(" . $BuildRestTime . ")</font>";
+                            $PlanetState = $lang['tech'][$CurrentBuild[0]] . ' (' . $CurrentBuild[1] . ')';
+                            $PlanetStateTitle = $PlanetState . ' - ' . $BuildRestTime;
+                            $PlanetState .= "<br><font color=\"#7f7f7f\">" . $BuildRestTime . "</font>";
                         } else {
                             CheckPlanetUsedFields ($UserPlanet);
-                            $AllPlanets .= $lang['Free'];
                         }
-                    } else {
-                        $AllPlanets .= $lang['Free'];
                     }
-
-                    $AllPlanets .= "</center></th>";
-                    if ($Colone <= 1) {
-                        $Colone++;
-                    } else {
-                        $AllPlanets .= "</tr><tr>";
-                        $Colone = 1;
-                    }
+                    $PlanetTitle = $UserPlanet['name'] . " [" . $UserPlanet['galaxy'] . ":" . $UserPlanet['system'] . ":" . $UserPlanet['planet'] . "] : " . $PlanetStateTitle;
+                    $AllPlanets .= "<div class=\"ov_planete\" title=\"" . strip_tags($PlanetTitle) . "\">";
+                    $AllPlanets .= "<span class=\"ov_texte\">" . $UserPlanet['name'] . "</span>";
+                    $AllPlanets .= "<a href=\"?cp=" . $UserPlanet['id'] . "&re=0\"><img src=\"" . $dpath . "planeten/small/s_" . $UserPlanet['image'] . ".jpg\" height=\"50\" width=\"50\"></a>";
+                    $AllPlanets .= "<span class=\"ov_texte\">" . $PlanetState . "</span>";
+                    $AllPlanets .= "</div>";
                 }
             }
             // -----------------------------------------------------------------------------------------------
@@ -327,7 +319,7 @@ switch ($mode) {
                         $planet = mysqli_fetch_array($planet_start);
                     }
 
-                    $fpage[$irak['zeit']] .= "<tr><th><div id=\"bxxfs$i\" class=\"z\"></div><font color=\"lime\">" . gmdate("H:i:s", $irak['zeit'] + 1 * 60 * 60) . "</font> </th><th colspan=\"3\"><font color=\"#0099FF\">Une attaque de missiles (" . $irak['anzahl'] . ") de " . $user_planet['name'] . " ";
+                    $fpage[$irak['zeit']] .= "<tr><th><div id=\"bxxfs$i\" class=\"z\"></div><font color=\"lime\">" . date("H:i:s", $irak['zeit']) . "</font> </th><th colspan=\"3\"><font color=\"#0099FF\">Une attaque de missiles (" . $irak['anzahl'] . ") de " . $user_planet['name'] . " ";
                     $fpage[$irak['zeit']] .= '<a href="galaxy.php?mode=3&galaxy=' . $irak["galaxy_angreifer"] . '&system=' . $irak["system_angreifer"] . '&planet=' . $irak["planet_angreifer"] . '">[' . $irak["galaxy_angreifer"] . ':' . $irak["system_angreifer"] . ':' . $irak["planet_angreifer"] . ']</a>';
                     $fpage[$irak['zeit']] .= ' arrive sur la plan&egrave;te' . $planet["name"] . ' ';
                     $fpage[$irak['zeit']] .= '<a href="galaxy.php?mode=3&galaxy=' . $irak["galaxy"] . '&system=' . $irak["system"] . '&planet=' . $irak["planet"] . '">[' . $irak["galaxy"] . ':' . $irak["system"] . ':' . $irak["planet"] . ']</a>';
@@ -414,9 +406,12 @@ switch ($mode) {
             $parse['Have_new_level_mineur'] = $HaveNewLevelMineur;
             $parse['Have_new_level_raid'] = $HaveNewLevelRaid;
             $parse['time'] = "<div id=\"dateheure\"></div>";
+            // Horloge : heure locale du serveur (fuseau de php.ini), exprimee comme une date UTC en millisecondes pour le JavaScript
+            $parse['server_clock'] = (time() + date('Z')) * 1000;
             $parse['dpath'] = $dpath;
             $parse['planet_image'] = $planetrow['image'];
-            $parse['anothers_planets'] = $AllPlanets;
+            // Bandeau des autres planetes sous la lune et la planete (absent s'il n'y a pas de colonie)
+            $parse['colonies_row'] = ($AllPlanets != '') ? "<tr><td class=\"c\" colspan=\"4\">" . $lang['ov_colonies'] . "</td></tr><tr><th colspan=\"4\" class=\"ov_colonies\"><div class=\"ov_cadre\">" . $AllPlanets . "</div></th></tr>" : "";
             $parse['max_users'] = $game_config['users_amount'];
 
             $parse['metal_debris'] = pretty_number($galaxyrow['metal']);
@@ -489,9 +484,9 @@ switch ($mode) {
             $parse['RaidsWin'] = $lang['RaidsWin'];
             $parse['RaidsLoose'] = $lang['RaidsLoose'];
 
-            $parse['raids'] = $user['raids'];
-            $parse['raidswin'] = $user['raidswin'];
-            $parse['raidsloose'] = $user['raidsloose'];
+            $parse['raids'] = intval($user['raids']);
+            $parse['raidswin'] = intval($user['raidswin']);
+            $parse['raidsloose'] = intval($user['raidsloose']); // NULL tant qu'aucun raid n'est perdu
             // Compteur de Membres en ligne
             $OnlineUsers = doquery("SELECT COUNT(*) FROM {{table}} WHERE onlinetime>='" . (time()-15 * 60) . "'", 'users', 'true');
             $parse['NumberMembersOnline'] = $OnlineUsers[0];

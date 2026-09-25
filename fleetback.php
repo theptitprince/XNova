@@ -24,8 +24,8 @@ define('INSTALL' , false);
 	$BoxTitle   = $lang['fl_error'];
 	$TxtColor   = "red";
 	$BoxMessage = $lang['fl_notback'];
-	if ( is_numeric($_POST['fleetid']) ) {
-		$fleetid  = intval($_POST['fleetid']);
+	if ( is_numeric(($_POST['fleetid'] ?? null)) ) {
+		$fleetid  = intval(($_POST['fleetid'] ?? null));
 
 		$FleetRow = doquery("SELECT * FROM {{table}} WHERE `fleet_id` = '". $fleetid ."';", 'fleets', true);
 		$i = 0;

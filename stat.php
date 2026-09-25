@@ -22,15 +22,15 @@ include($xnova_root_path . 'common.' . $phpEx);
 	includeLang('stat');
 
 	$parse = $lang;
-	$who   = intval((isset($_POST['who']))   ? $_POST['who']   : $_GET['who']);
+	$who   = intval((isset($_POST['who']))   ? ($_POST['who'] ?? null)   : ($_GET['who'] ?? null));
 	if ($who < 1) {
 		$who   = 1;
 	}
-	$type  = intval((isset($_POST['type']))  ? $_POST['type']  : $_GET['type']);
+	$type  = intval((isset($_POST['type']))  ? ($_POST['type'] ?? null)  : ($_GET['type'] ?? null));
 	if ($type < 1) {
 		$type  = 1;
 	}
-	$range = (isset($_POST['range'])) ? $_POST['range'] : $_GET['range'];
+	$range = (isset($_POST['range'])) ? ($_POST['range'] ?? null) : ($_GET['range'] ?? null);
 	// PHP 8 : le rang peut etre vide (joueur pas encore classe), division impossible sur une chaine
 	$range = intval($range);
 	if ($range < 1) {
@@ -80,6 +80,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	if ($who == 2) {
 		$MaxAllys = doquery ("SELECT COUNT(*) AS `count` FROM {{table}} WHERE 1;", 'alliance', true);
+		$LastPage = 0;
 		if ($MaxAllys['count'] > 100) {
 			$LastPage = floor($MaxAllys['count'] / 100);
 		}
@@ -92,16 +93,17 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$parse['stat_header'] = parsetemplate(gettemplate('stat_alliancetable_header'), $parse);
 
-		$start = floor($range / 100 % 100) * 100;
+		$start = intdiv($range - 1, 100) * 100;
 		$query = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '2' AND `stat_code` = '1' ORDER BY `". $Order ."` DESC LIMIT ". $start .",100;", 'statpoints');
 
 		$start++;
-		$parse['stat_date']   = $game_config['stats'];
+		$parse['stat_date']   = $game_config['stats'] ?? '';
 		$parse['stat_values'] = "";
 		while ($StatRow = mysqli_fetch_assoc($query)) {
 			$parse['ally_rank']       = $start;
 
 			$AllyRow                  = doquery("SELECT * FROM {{table}} WHERE `id` = '". $StatRow['id_owner'] ."';", 'alliance',true);
+			if (!$AllyRow) { continue; } // alliance dissoute depuis le dernier calcul des statistiques
 
 			$rank_old                 = $StatRow[ $OldRank ];
 			if ( $rank_old == 0) {
@@ -126,13 +128,14 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$parse['ally_mes']        = '';
 			$parse['ally_members']    = $AllyRow['ally_members'];
 			$parse['ally_points']     = pretty_number( $StatRow[ $Order ] );
-			$parse['ally_members_points'] =  pretty_number( floor($StatRow[ $Order ] / $AllyRow['ally_members']) );
+			$parse['ally_members_points'] =  pretty_number( floor($StatRow[ $Order ] / max(1, $AllyRow['ally_members'])) );
 
 			$parse['stat_values']    .= parsetemplate(gettemplate('stat_alliancetable'), $parse);
 			$start++;
 		}
 	} else {
 		$MaxUsers = doquery ("SELECT COUNT(*) AS `count` FROM {{table}} WHERE `db_deaktjava` = '0';", 'users', true);
+		$LastPage = 0;
 		if ($MaxUsers['count'] > 100) {
 			$LastPage = floor($MaxUsers['count'] / 100);
 		}
@@ -140,24 +143,23 @@ include($xnova_root_path . 'common.' . $phpEx);
 		for ($Page = 0; $Page <= $LastPage; $Page++) {
 			$PageValue      = ($Page * 100) + 1;
 			$PageRange      = $PageValue + 99;
-			$parse['range'] .= "<option value=\"". $PageValue ."\"". (($start == $PageValue) ? " SELECTED" : "") .">". $PageValue ."-". $PageRange ."</option>";
+			$parse['range'] .= "<option value=\"". $PageValue ."\"". (($range == $PageValue) ? " SELECTED" : "") .">". $PageValue ."-". $PageRange ."</option>";
 		}
 
 		$parse['stat_header'] = parsetemplate(gettemplate('stat_playertable_header'), $parse);
 
-		$start = floor($range / 100 % 100) * 100;
+		$start = intdiv($range - 1, 100) * 100;
 		$query = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' ORDER BY `". $Order ."` DESC LIMIT ". $start .",100;", 'statpoints');
 
 		$start++;
-		$parse['stat_date']   = $game_config['stats'];
+		$parse['stat_date']   = $game_config['stats'] ?? '';
 		$parse['stat_values'] = "";
 		while ($StatRow = mysqli_fetch_assoc($query)) {
-			$parse['stat_date']       = date("d M Y - H:i:s", $StatRow['stat_date']);
+			$parse['stat_date']       = date("d/m/Y - H:i:s", $StatRow['stat_date']);
 			$parse['player_rank']     = $start;
 
 			$UsrRow                   = doquery("SELECT * FROM {{table}} WHERE `id` = '". $StatRow['id_owner'] ."';", 'users',true);
-
-			$QryUpdateStats .= "`stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $TheRank['id_owner'] ."';";
+			if (!$UsrRow) { continue; } // joueur supprime depuis le dernier calcul des statistiques
 
 
 			$rank_old                 = $StatRow[ $OldRank ];

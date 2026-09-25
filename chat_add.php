@@ -23,7 +23,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if (isset($_POST["msg"]) && isset($user['username'])) {
 	   $nick = trim (str_replace ("+","plus",$user['username']));
 	   $msg  = trim (str_replace ("+","plus",$_POST["msg"]));
-	   $msg  = SqlEscape ($_POST["msg"]);
+	   $msg  = SqlEscape (($_POST["msg"] ?? null));
 	   $nick = SqlEscape ($user['username']);
 	}
 	else {

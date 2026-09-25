@@ -1,5 +1,10 @@
 <?php
+$lang['adm_af_form'] = "Formulario";
+$lang['adm_af_add'] = "A&ntilde;adir";
+$lang['adm_af_done'] = "Naves a&ntilde;adidas.";
+$lang['adm_af_noplanet'] = "Ning&uacute;n planeta con este identificador.";
 
+$lang['adm_af_title'] = "A&ntilde;adir flota";
 $lang['Id'] = "ID de la plan&egrave;te";
 $lang['cle'] = "Chasseur Leger"; 
 $lang['clourd'] = "Chasseur Lourd";

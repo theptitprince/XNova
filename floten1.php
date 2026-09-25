@@ -38,10 +38,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 		1 => 10,
 		);
 
-	$g = $_POST['galaxy'];
-	$s = $_POST['system'];
-	$p = $_POST['planet'];
-	$t = $_POST['planet_type'];
+	$g = ($_POST['galaxy'] ?? null);
+	$s = ($_POST['system'] ?? null);
+	$p = ($_POST['planet'] ?? null);
+	$t = ($_POST['planet_type'] ?? null);
 
 	if (!$g) {
 		$g = $planetrow['galaxy'];
@@ -59,21 +59,21 @@ include($xnova_root_path . 'common.' . $phpEx);
 	// Verifions si nous avons bien tout ce que nous voullons envoyer
 	$FleetHiddenBlock  = "";
 	foreach ($reslist['fleet'] as $n => $i) {
-		if ($i > 200 && $i < 300 && $_POST["ship$i"] > "0") {
-			if ($_POST["ship$i"] > $planetrow[$resource[$i]]) {
+		if ($i > 200 && $i < 300 && ($_POST["ship$i"] ?? null) > "0") {
+			if (($_POST["ship$i"] ?? null) > $planetrow[$resource[$i]]) {
 				$page .= $lang['fl_noenought'];
 				$speedalls[$i]             = GetFleetMaxSpeed ( "", $i, $user );
 			} else {
-				$fleet['fleetarray'][$i]   = $_POST["ship$i"];
+				$fleet['fleetarray'][$i]   = ($_POST["ship$i"] ?? null);
 				// Tableau des vaisseaux avec leur nombre
-				$fleet['fleetlist']       .= $i . "," . $_POST["ship$i"] . ";";
+				$fleet['fleetlist']       .= $i . "," . ($_POST["ship$i"] ?? null) . ";";
 				// Nombre total de vaisseaux
-				$fleet['amount']          += $_POST["ship$i"];
+				$fleet['amount']          += ($_POST["ship$i"] ?? null);
 				// Tableau des vitesses
 				$FleetHiddenBlock         .= "<input type=\"hidden\" name=\"consumption". $i ."\" value=\"". GetShipConsumption ( $i, $user ) ."\" />";
 				$FleetHiddenBlock         .= "<input type=\"hidden\" name=\"speed". $i ."\"       value=\"". GetFleetMaxSpeed ( "", $i, $user ) ."\" />";
 				$FleetHiddenBlock         .= "<input type=\"hidden\" name=\"capacity". $i ."\"    value=\"". $pricelist[$i]['capacity'] ."\" />";
-				$FleetHiddenBlock         .= "<input type=\"hidden\" name=\"ship". $i ."\"        value=\"". $_POST["ship$i"] ."\" />";
+				$FleetHiddenBlock         .= "<input type=\"hidden\" name=\"ship". $i ."\"        value=\"". ($_POST["ship$i"] ?? null) ."\" />";
 				$speedalls[$i]             = GetFleetMaxSpeed ( "", $i, $user );
 			}
 		}
@@ -97,9 +97,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "<input type=\"hidden\" name=\"thisgalaxy\"     value=\"". $planetrow['galaxy'] ."\" />";
 	$page .= "<input type=\"hidden\" name=\"thissystem\"     value=\"". $planetrow['system'] ."\" />";
 	$page .= "<input type=\"hidden\" name=\"thisplanet\"     value=\"". $planetrow['planet'] ."\" />";
-	$page .= "<input type=\"hidden\" name=\"galaxyend\"      value=\"". intval($_POST['galaxy']) ."\" />";
-	$page .= "<input type=\"hidden\" name=\"systemend\"      value=\"". intval($_POST['system']) ."\" />";
-	$page .= "<input type=\"hidden\" name=\"planetend\"      value=\"". intval($_POST['planet']) ."\" />";
+	$page .= "<input type=\"hidden\" name=\"galaxyend\"      value=\"". intval(($_POST['galaxy'] ?? null)) ."\" />";
+	$page .= "<input type=\"hidden\" name=\"systemend\"      value=\"". intval(($_POST['system'] ?? null)) ."\" />";
+	$page .= "<input type=\"hidden\" name=\"planetend\"      value=\"". intval(($_POST['planet'] ?? null)) ."\" />";
 	$page .= "<input type=\"hidden\" name=\"speedfactor\"    value=\"". GetGameSpeedFactor () ."\" />";
 	$page .= "<input type=\"hidden\" name=\"thisplanettype\" value=\"". $planetrow['planet_type'] ."\" />";
 	$page .= "<input type=\"hidden\" name=\"thisresource1\"  value=\"". floor($planetrow['metal']) ."\" />";
@@ -144,10 +144,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "</tr><tr height=\"20\">";
 /* A faire assez rapidement (faut juste savoir comment)
 	$page .= "<th>". $lang['fl_time_go'] ."</th>";
-	$page .= "<th><font color=\"lime\"><div id=\"llegada1\"><font>". gmdate("H:i:s") ."</font></div></font></th>";
+	$page .= "<th><font color=\"lime\"><div id=\"llegada1\"><font>". date("H:i:s") ."</font></div></font></th>";
 	$page .= "</tr><tr height=\"20\">";
 	$page .= "<th>". $lang['fl_time_back'] ."</th>";
-	$page .= "<th><font color=\"lime\"><div id=\"llegada2\"><font>". gmdate("H:i:s") ."</font></div></font></th>";
+	$page .= "<th><font color=\"lime\"><div id=\"llegada2\"><font>". date("H:i:s") ."</font></div></font></th>";
 	$page .= "</tr><tr height=\"20\">";
 */
 	$page .= "<th>". $lang['fl_deute_need'] ."</th>";
@@ -266,8 +266,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "</tr>";
 	$page .= "</table>";
 	$page .= "</div></center>";
-	$page .= "<input type=\"hidden\" name=\"maxepedition\" value=\"". $_POST['maxepedition'] ."\" />";
-	$page .= "<input type=\"hidden\" name=\"curepedition\" value=\"". $_POST['curepedition'] ."\" />";
+	$page .= "<input type=\"hidden\" name=\"maxepedition\" value=\"". ($_POST['maxepedition'] ?? null) ."\" />";
+	$page .= "<input type=\"hidden\" name=\"curepedition\" value=\"". ($_POST['curepedition'] ?? null) ."\" />";
 	$page .= "<input type=\"hidden\" name=\"target_mission\" value=\"". $target_mission ."\" />";
 	$page .= "</form>";
 	$page .= "<script>javascript:shortInfo(); </script>";

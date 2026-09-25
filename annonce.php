@@ -21,16 +21,16 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 $users   = doquery("SELECT * FROM {{table}} WHERE id='".$user['id']."';", 'users');
 $annonce = doquery("SELECT * FROM {{table}} ", 'annonce');
-$action  = intval($_GET['action']);
+$action  = intval(($_GET['action'] ?? null));
 
-if ($action == 5) {
-	$metalvendre = max(0, intval($_POST['metalvendre']));
-	$cristalvendre = max(0, intval($_POST['cristalvendre']));
-	$deutvendre = max(0, intval($_POST['deutvendre']));
+if ($action == 5 && $_SERVER['REQUEST_METHOD'] == 'POST') { // publication : formulaire uniquement (protege par le jeton CSRF)
+	$metalvendre = max(0, intval(($_POST['metalvendre'] ?? null)));
+	$cristalvendre = max(0, intval(($_POST['cristalvendre'] ?? null)));
+	$deutvendre = max(0, intval(($_POST['deutvendre'] ?? null)));
 
-	$metalsouhait = max(0, intval($_POST['metalsouhait']));
-	$cristalsouhait = max(0, intval($_POST['cristalsouhait']));
-	$deutsouhait = max(0, intval($_POST['deutsouhait']));
+	$metalsouhait = max(0, intval(($_POST['metalsouhait'] ?? null)));
+	$cristalsouhait = max(0, intval(($_POST['cristalsouhait'] ?? null)));
+	$deutsouhait = max(0, intval(($_POST['deutsouhait'] ?? null)));
 
 	while ($v_annonce = mysqli_fetch_array($users)) {
 		$user = $v_annonce['username'];
@@ -60,7 +60,7 @@ HTML;
 	display($page2);
 }
 
-if ($action != 5) {
+if ($action != 5 || $_SERVER['REQUEST_METHOD'] != 'POST') {
 	$annonce = doquery("SELECT * FROM {{table}} ORDER BY `id` DESC ", "annonce");
 
 	$page2 = "<HTML>

@@ -23,8 +23,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if ($user['authlevel'] >= 1) {
 		includeLang('admin');
 
-		if ($_GET['cmd'] == 'sort') {
-			$TypeSort = preg_replace('/[^a-z_]/', '', $_GET['type']); // nom de colonne uniquement
+		if (($_GET['cmd'] ?? null) == 'sort') {
+			$TypeSort = preg_replace('/[^a-z_]/', '', ($_GET['type'] ?? null)); // nom de colonne uniquement
 			if ($TypeSort == '') { $TypeSort = 'id'; }
 		} else {
 			$TypeSort = "id";

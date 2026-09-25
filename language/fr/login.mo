@@ -1,11 +1,12 @@
 <?php
 
+$lang['Login_Fail'] = "Pseudo ou mot de passe incorrect.";
 $lang['Login'] = 'Connexion';
-$lang['User_name'] = 'Nom:';
-$lang['Password'] = 'Password:';
+$lang['User_name'] = 'Pseudo :';
+$lang['Password'] = 'Mot de passe :';
 $lang['Please_Login'] = 'Merci de vous <a href="login.php" target="_main">logguer...</a>';
 $lang['Please_Wait'] = 'Patientez';
-$lang['Remember_me'] = 'Se rappeller de moi';
+$lang['Remember_me'] = 'Se souvenir de moi';
 $lang['Register'] = 'S\'inscrire';
 $lang['Login_Error'] = 'Erreur';
 $lang['PleaseWait'] = 'Patientez';

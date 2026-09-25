@@ -28,14 +28,15 @@ $lang['en']                = 'Angielski';
 $lang['it']                = 'W³oski';
 
 // Invio
-$lang['mail_welcome']      = 'Dziekujemy za rejestracje w naszej grze!!!
-Aby siê zalogowaæ wejd¼ tu: ({gameurl})
-Twoje has³o : {password}
-Kod Aktywacyjny : {gameurl}active.php?user={kod}
-Zapraszamy!! {gameurl}';
+$lang['mail_welcome']      = 'Grazie mille per la vostra registrazione al nostro gioco ({gameurl})
+Il vostro nome utente: {username}
 
+Buon divertimento!
+{gameurl}';
+
+$lang['reg_go_login']      = 'Accedi';
 $lang['mail_title']        = 'Registrazione';
-$lang['thanksforregistry'] = 'Grazie per la vostra registrazione ! Riceverete una password con la vostra password.';
+$lang['thanksforregistry'] = 'Grazie per la vostra registrazione! Vi abbiamo inviato una e-mail di benvenuto.';
 
 // Erreurs
 $lang['error_mail'] = 'E-mail non valida!<br />';

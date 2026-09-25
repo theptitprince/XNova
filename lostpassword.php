@@ -28,7 +28,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		display($page, $lang['system'], false);
 	}
 	if ($action == 1) {
-		$email               = $_POST['email'];
+		$email               = ($_POST['email'] ?? null);
 		sendnewpassword($email);
 		message('Le nouveau mot de passe a &eacute;t&eacute; envoy&eacute; avec succ&egrave;s !', 'OK');
 	}

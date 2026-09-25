@@ -21,11 +21,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 includeLang('fleet');
 
-	$Mode   = intval($_GET['mode']);
-	$Galaxy = intval($_GET['g']);
-	$System = intval($_GET['s']);
-	$Planet = intval($_GET['p']);
-	$TypePl = intval($_GET['t']);
+	$Mode   = intval(($_GET['mode'] ?? null));
+	$Galaxy = intval(($_GET['g'] ?? null));
+	$System = intval(($_GET['s'] ?? null));
+	$Planet = intval(($_GET['p'] ?? null));
+	$TypePl = intval(($_GET['t'] ?? null));
 
 	// Cadre liste de flottes ...
 	$missiontype = array(
@@ -101,11 +101,11 @@ includeLang('fleet');
 	$page .= "</tr>";
 	$page .= "<tr height=\"20\">";
 	$page .= "<th>". $lang['fl_time_go'] ."</th>";
-	$page .= "<th>". date("M D d H:i:s",($duration + time())) ."</th>";
+	$page .= "<th>". date("d/m/Y H:i:s",($duration + time())) ."</th>";
 	$page .= "</tr>";
 	$page .= "<tr height=\"20\">";
 	$page .= "<th>". $lang['fl_time_back'] ."</th>";
-	$page .= "<th>". date("M D d H:i:s",(($duration * 2) + time())) ."</th>";
+	$page .= "<th>". date("d/m/Y H:i:s",(($duration * 2) + time())) ."</th>";
 	$page .= "</tr>";
 	$page .= "<tr height=\"20\">";
 	$page .= "<td class=\"c\" colspan=\"2\">". $lang['fl_title'] ."</td>";

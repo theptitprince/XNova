@@ -20,8 +20,8 @@ include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.'.$phpEx);
 
 
-$mode = $_GET['mode'];
-$a = intval($_GET['a']);
+$mode = ($_GET['mode'] ?? null);
+$a = intval(($_GET['a'] ?? null));
 /*
   Este script es original xD
   La funcion de este script es administrar una variable del $user
@@ -31,9 +31,9 @@ $a = intval($_GET['a']);
 if(isset($_GET['mode'])){
 	if($_POST){
 		//Pegamos el texto :P
-		if($_POST["n"] == ""){$_POST["n"] = "Unbenannt";}
+		if(($_POST["n"] ?? null) == ""){$_POST["n"] = "Unbenannt";}
 
-		$r = str_replace(',', ' ', SafeName($_POST['n'], 32)).",".intval($_POST['g']).",".intval($_POST['s']).",".intval($_POST['p']).",".intval($_POST['t'])."\r\n";
+		$r = str_replace(',', ' ', SafeName($_POST['n'], 32)).",".intval(($_POST['g'] ?? null)).",".intval(($_POST['s'] ?? null)).",".intval(($_POST['p'] ?? null)).",".intval(($_POST['t'] ?? null))."\r\n";
 		$user['fleet_shortcut'] .= $r;
 		doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'","users");
 		message("Le raccourcis a &eacute;t&eacute; enregistr&eacute; !","Enregistrment","fleetshortcut.php");
@@ -61,7 +61,7 @@ elseif(isset($_GET['a'])){
 	if($_POST){
 		//Armamos el array...
 		$scarray = explode("\r\n",$user['fleet_shortcut']);
-		if($_POST["delete"]){
+		if(($_POST["delete"] ?? null)){
 			unset($scarray[$a]);
 			$user['fleet_shortcut'] =  implode("\r\n",$scarray);
 			doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'","users");
@@ -69,11 +69,11 @@ elseif(isset($_GET['a'])){
 		}
 		else{
 			$r = explode(",",$scarray[$a]);
-			$r[0] = str_replace(',', ' ', SafeName($_POST['n'], 32));
-			$r[1] = intval($_POST['g']);
-			$r[2] = intval($_POST['s']);
-			$r[3] = intval($_POST['p']);
-			$r[4] = intval($_POST['t']);
+			$r[0] = str_replace(',', ' ', SafeName(($_POST['n'] ?? null), 32));
+			$r[1] = intval(($_POST['g'] ?? null));
+			$r[2] = intval(($_POST['s'] ?? null));
+			$r[3] = intval(($_POST['p'] ?? null));
+			$r[4] = intval(($_POST['t'] ?? null));
 			$scarray[$a] = implode(",",$r);
 			$user['fleet_shortcut'] =  implode("\r\n",$scarray);
 			doquery("UPDATE {{table}} SET fleet_shortcut='". SqlEscape($user['fleet_shortcut']) ."' WHERE id='". intval($user['id']) ."'","users");

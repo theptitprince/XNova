@@ -23,13 +23,13 @@ include($xnova_root_path . 'common.'.$phpEx);
 $dpath = (!$userrow["dpath"]) ? DEFAULT_SKINPATH : $userrow["dpath"];
 
 
-if(!is_numeric($_GET["a"]) || !$_GET["a"] ){ message("Ung&uuml;ltige Allianz-ID","Fehler");}
+if(!is_numeric(($_GET["a"] ?? null)) || !($_GET["a"] ?? null) ){ message("Ung&uuml;ltige Allianz-ID","Fehler");}
 
-$allyrow = doquery("SELECT ally_name,ally_tag,ally_description,ally_web,ally_image FROM {{table}} WHERE id=".intval($_GET["a"]),"alliance",true);
+$allyrow = doquery("SELECT ally_name,ally_tag,ally_description,ally_web,ally_image FROM {{table}} WHERE id=".intval(($_GET["a"] ?? null)),"alliance",true);
 
 if(!$allyrow){ message("Alliance non trouv&eacute;e","Erreur");}
 
-$count = doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE ally_id=".intval($_GET["a"]).";","users",true);
+$count = doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE ally_id=".intval(($_GET["a"] ?? null)).";","users",true);
 $ally_member_scount = $count[0];
 
 $page .="<table width=519><tr><td class=c colspan=2>Informations sur l'alliance</td></tr>";

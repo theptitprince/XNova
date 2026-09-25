@@ -58,8 +58,8 @@ function InstallValidPrefix ( $Prefix ) {
 }
 
 
-$Mode     = $_GET['mode'];
-$Page     = $_GET['page'];
+$Mode     = ($_GET['mode'] ?? null);
+$Page     = ($_GET['page'] ?? null);
 $phpself  = $_SERVER['PHP_SELF'];
 $nextpage = $Page + 1;
 
@@ -76,10 +76,10 @@ $nextpage = $Page + 1;
 		 	break;
 		case 'ins':
 			if ($Page == 1) {
-				if ($_GET['error'] == 1) {
+				if (($_GET['error'] ?? null) == 1) {
 				adminMessage ($lang['ins_error1'], $lang['ins_error']);
 				}
-				elseif ($_GET['error'] == 2) {
+				elseif (($_GET['error'] ?? null) == 2) {
 				adminMessage ($lang['ins_error2'], $lang['ins_error']);
 				}
 
@@ -88,11 +88,11 @@ $nextpage = $Page + 1;
 				$frame  = parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 2) {
-				$host   = $_POST['host'];
-				$user   = $_POST['user'];
-				$pass   = $_POST['passwort'];
-				$prefix = $_POST['prefix'];
-				$db     = $_POST['db'];
+				$host   = ($_POST['host'] ?? null);
+				$user   = ($_POST['user'] ?? null);
+				$pass   = ($_POST['passwort'] ?? null);
+				$prefix = ($_POST['prefix'] ?? null);
+				$db     = ($_POST['db'] ?? null);
 
 				$connection = InstallValidPrefix($prefix) ? InstallConnect($host, $user, $pass, $db) : false;
 				if (!$connection) {
@@ -145,7 +145,7 @@ $nextpage = $Page + 1;
 				$frame  = parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 3) {
-				if ($_GET['error'] == 3) {
+				if (($_GET['error'] ?? null) == 3) {
 				adminMessage ($lang['ins_error3'], $lang['ins_error']);
 				}
 
@@ -154,26 +154,26 @@ $nextpage = $Page + 1;
 				$frame  = parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 4) {
-				$adm_user   = $_POST['adm_user'];
-				$adm_pass   = $_POST['adm_pass'];
-				$adm_email  = $_POST['adm_email'];
-				$adm_planet = $_POST['adm_planet'];
-				$adm_sex    = $_POST['adm_sex'];
+				$adm_user   = ($_POST['adm_user'] ?? null);
+				$adm_pass   = ($_POST['adm_pass'] ?? null);
+				$adm_email  = ($_POST['adm_email'] ?? null);
+				$adm_planet = ($_POST['adm_planet'] ?? null);
+				$adm_sex    = ($_POST['adm_sex'] ?? null);
 				$md5pass    = PasswordHash($adm_pass);
 
-				if (!$_POST['adm_user']) {
+				if (!($_POST['adm_user'] ?? null)) {
 					header("Location: ?mode=ins&page=3&error=3");
 					exit();
 				}
-				if (!$_POST['adm_pass']) {
+				if (!($_POST['adm_pass'] ?? null)) {
 					header("Location: ?mode=ins&page=3&error=3");
 					exit();
 				}
-				if (!$_POST['adm_email']) {
+				if (!($_POST['adm_email'] ?? null)) {
 					header("Location: ?mode=ins&page=3&error=3");
 					exit();
 				}
-				if (!$_POST['adm_planet']) {
+				if (!($_POST['adm_planet'] ?? null)) {
 					header("Location: ?mode=ins&page=3&error=3");
 					exit();
 				}
@@ -272,13 +272,13 @@ $nextpage = $Page + 1;
 				$frame  = parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 2) {
-				if ($_GET['error'] == 1) {
+				if (($_GET['error'] ?? null) == 1) {
 				adminMessage ($lang['ins_error1'], $lang['ins_error']);
 				}
-				elseif ($_GET['error'] == 2) {
+				elseif (($_GET['error'] ?? null) == 2) {
 				adminMessage ($lang['ins_error2'], $lang['ins_error']);
 				}
-				elseif ($_GET['error'] == 4) {
+				elseif (($_GET['error'] ?? null) == 4) {
 				adminMessage ($lang['ins_goto_err_version'], $lang['ins_error']);
 				}
 
@@ -288,11 +288,11 @@ $nextpage = $Page + 1;
 			}
 			elseif ($Page == 3) {
 				// Transfere : reprise d'une base XNova Renaissance existante (0.9d ou plus recente) sur un nouveau serveur
-				$host   = $_POST['host'];
-				$user   = $_POST['user'];
-				$pass   = $_POST['passwort'];
-				$prefix = $_POST['prefix'];
-				$db     = $_POST['db'];
+				$host   = ($_POST['host'] ?? null);
+				$user   = ($_POST['user'] ?? null);
+				$pass   = ($_POST['passwort'] ?? null);
+				$prefix = ($_POST['prefix'] ?? null);
+				$db     = ($_POST['db'] ?? null);
 
 				$connection = InstallValidPrefix($prefix) ? InstallConnect($host, $user, $pass, $db) : false;
 				if (!$connection) {

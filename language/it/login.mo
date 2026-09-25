@@ -1,5 +1,6 @@
 <?php
 
+$lang['Login_Fail'] = "Nome utente o password errati.";
 $lang['Login'] = 'Connessione';
 $lang['User_name'] = 'Nome:';
 $lang['Password'] = 'Password:';

@@ -24,10 +24,10 @@
     $lang['PHP_SELF'] = 'options.' . $phpEx;
 
     $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
-    $mode = $_GET['mode'];
+    $mode = ($_GET['mode'] ?? null);
 
     if ($_POST && $mode == "exit") { // Array ( [db_character]
-       if (isset($_POST["exit_modus"]) && $_POST["exit_modus"] == 'on' and $user['urlaubs_until'] <= time()){
+       if (isset($_POST["exit_modus"]) && ($_POST["exit_modus"] ?? null) == 'on' and $user['urlaubs_until'] <= time()){
           $urlaubs_modus = "0";
           doquery("UPDATE {{table}} SET   
              `urlaubs_modus` = '0',
@@ -43,12 +43,12 @@
     }
     if ($_POST && $mode == "change") { // Array ( [db_character]
        $iduser = $user["id"];
-       $avatar = SqlEscape(SafeUrl($_POST["avatar"]));
-       $dpath = SqlEscape(SafePath($_POST["dpath"]));
+       $avatar = SqlEscape(SafeUrl(($_POST["avatar"] ?? null)));
+       $dpath = SqlEscape(SafePath(($_POST["dpath"] ?? null)));
 
        // Gestion des options speciales pour les admins
        if ($user['authlevel'] > 0) {
-          if ($_POST['adm_pl_prot'] == 'on') {
+          if (($_POST['adm_pl_prot'] ?? null) == 'on') {
              doquery ("UPDATE {{table}} SET `id_level` = '".$user['authlevel']."' WHERE `id_owner` = '".$user['id']."';", 'planets');
           } else {
              doquery ("UPDATE {{table}} SET `id_level` = '0' WHERE `id_owner` = '".$user['id']."';", 'planets');
@@ -56,86 +56,86 @@
        }
 
        // Mostrar skin
-       if (isset($_POST["design"]) && $_POST["design"] == 'on') {
+       if (isset($_POST["design"]) && ($_POST["design"] ?? null) == 'on') {
           $design = "1";
        } else {
           $design = "0";
        }
        // Desactivar comprobaci? de IP
-       if (isset($_POST["noipcheck"]) && $_POST["noipcheck"] == 'on') {
+       if (isset($_POST["noipcheck"]) && ($_POST["noipcheck"] ?? null) == 'on') {
           $noipcheck = "1";
        } else {
           $noipcheck = "0";
        }
        // Nombre de usuario
-       if (isset($_POST["db_character"]) && $_POST["db_character"] != '') {
+       if (isset($_POST["db_character"]) && ($_POST["db_character"] ?? null) != '') {
           // Meme regle qu'a l'inscription : lettres, chiffres, _ et - uniquement
-          $username = (preg_match("/[^A-Za-z0-9_\-]/", $_POST['db_character']) == 1) ? $user['username'] : CheckInputStrings ( $_POST['db_character'] );
+          $username = (preg_match("/[^A-Za-z0-9_\-]/", $_POST['db_character']) == 1) ? $user['username'] : CheckInputStrings ( ($_POST['db_character'] ?? null) );
        } else {
           $username = $user['username'];
        }
        // Adresse e-Mail
-       if (isset($_POST["db_email"]) && $_POST["db_email"] != '') {
-          $db_email = SqlEscape(is_email($_POST['db_email']) ? $_POST['db_email'] : $user['email']); // adresse valide uniquement
+       if (isset($_POST["db_email"]) && ($_POST["db_email"] ?? null) != '') {
+          $db_email = SqlEscape(is_email($_POST['db_email']) ? ($_POST['db_email'] ?? null) : $user['email']); // adresse valide uniquement
        } else {
           $db_email = SqlEscape($user['email']);
        }
        // Cantidad de sondas de espionaje
        if (isset($_POST["spio_anz"]) && is_numeric($_POST["spio_anz"])) {
-          $spio_anz = intval($_POST["spio_anz"]);
+          $spio_anz = intval(($_POST["spio_anz"] ?? null));
        } else {
           $spio_anz = "1";
        }
        // Mostrar tooltip durante
        if (isset($_POST["settings_tooltiptime"]) && is_numeric($_POST["settings_tooltiptime"])) {
-          $settings_tooltiptime = intval($_POST["settings_tooltiptime"]);
+          $settings_tooltiptime = intval(($_POST["settings_tooltiptime"] ?? null));
        } else {
           $settings_tooltiptime = "1";
        }
        // Maximo mensajes de flotas
        if (isset($_POST["settings_fleetactions"]) && is_numeric($_POST["settings_fleetactions"])) {
-          $settings_fleetactions = intval($_POST["settings_fleetactions"]);
+          $settings_fleetactions = intval(($_POST["settings_fleetactions"] ?? null));
        } else {
           $settings_fleetactions = "1";
        } //
        // Mostrar logos de los aliados
-       if (isset($_POST["settings_allylogo"]) && $_POST["settings_allylogo"] == 'on') {
+       if (isset($_POST["settings_allylogo"]) && ($_POST["settings_allylogo"] ?? null) == 'on') {
           $settings_allylogo = "1";
        } else {
           $settings_allylogo = "0";
        }
        // Espionaje
-       if (isset($_POST["settings_esp"]) && $_POST["settings_esp"] == 'on') {
+       if (isset($_POST["settings_esp"]) && ($_POST["settings_esp"] ?? null) == 'on') {
           $settings_esp = "1";
        } else {
           $settings_esp = "0";
        }
        // Escribir mensaje
-       if (isset($_POST["settings_wri"]) && $_POST["settings_wri"] == 'on') {
+       if (isset($_POST["settings_wri"]) && ($_POST["settings_wri"] ?? null) == 'on') {
           $settings_wri = "1";
        } else {
           $settings_wri = "0";
        }
        // A?dir a lista de amigos
-       if (isset($_POST["settings_bud"]) && $_POST["settings_bud"] == 'on') {
+       if (isset($_POST["settings_bud"]) && ($_POST["settings_bud"] ?? null) == 'on') {
           $settings_bud = "1";
        } else {
           $settings_bud = "0";
        }
        // Ataque con misiles
-       if (isset($_POST["settings_mis"]) && $_POST["settings_mis"] == 'on') {
+       if (isset($_POST["settings_mis"]) && ($_POST["settings_mis"] ?? null) == 'on') {
           $settings_mis = "1";
        } else {
           $settings_mis = "0";
        }
        // Ver reporte
-       if (isset($_POST["settings_rep"]) && $_POST["settings_rep"] == 'on') {
+       if (isset($_POST["settings_rep"]) && ($_POST["settings_rep"] ?? null) == 'on') {
           $settings_rep = "1";
        } else {
           $settings_rep = "0";
        }
        // Modo vacaciones
-       if (isset($_POST["urlaubs_modus"]) && $_POST["urlaubs_modus"] == 'on') {
+       if (isset($_POST["urlaubs_modus"]) && ($_POST["urlaubs_modus"] ?? null) == 'on') {
           $urlaubs_modus = "1";
           $time = time() + 172800;
           doquery("UPDATE {{table}} SET   
@@ -164,13 +164,13 @@
        }
 
        // Borrar cuenta
-       if (isset($_POST["db_deaktjava"]) && $_POST["db_deaktjava"] == 'on') {
+       if (isset($_POST["db_deaktjava"]) && ($_POST["db_deaktjava"] ?? null) == 'on') {
           $db_deaktjava = "1";
        } else {
           $db_deaktjava = "0";
        }
-       $SetSort  = intval($_POST['settings_sort']);
-       $SetOrder = intval($_POST['settings_order']);
+       $SetSort  = intval(($_POST['settings_sort'] ?? null));
+       $SetOrder = intval(($_POST['settings_order'] ?? null));
        // Couleurs : pas de champ dans le formulaire, on conserve les valeurs existantes (elles etaient effacees)
        $kolorminus  = SqlEscape($user['kolorminus']);
        $kolorplus   = SqlEscape($user['kolorplus']);
@@ -201,9 +201,12 @@
        `kolorpoziom` = '$kolorpoziom'
        WHERE `id` = '$iduser' LIMIT 1", "users");
 
-       if (isset($_POST["db_password"]) && $_POST["db_password"] != '' && PasswordCheck($_POST["db_password"], $user)) {
-          if ($_POST["newpass1"] != '' && $_POST["newpass1"] == $_POST["newpass2"]) {
-             $newpass = PasswordHash($_POST["newpass1"]);
+       // La page de confirmation doit garder une skin, meme si le champ skin a ete vide
+       $dpath = ($dpath == '') ? DEFAULT_SKINPATH : $dpath;
+
+       if (isset($_POST["db_password"]) && ($_POST["db_password"] ?? null) != '' && PasswordCheck($_POST["db_password"], $user)) {
+          if (($_POST["newpass1"] ?? null) != '' && ($_POST["newpass1"] ?? null) == ($_POST["newpass2"] ?? null)) {
+             $newpass = PasswordHash(($_POST["newpass1"] ?? null));
              doquery("UPDATE {{table}} SET `password` = '". SqlEscape($newpass) ."' WHERE `id` = '". intval($user['id']) ."' LIMIT 1", "users");
              SetAuthCookie("", time()-100000); //le da el expire
              message($lang['succeful_changepass'], $lang['changue_pass'],"login.php",1);
@@ -254,7 +257,7 @@
        $parse['opt_modev_data'] = ($user['urlaubs_modus'] == 1)?" checked='checked'/":'';
        $parse['opt_modev_exit'] = ($user['urlaubs_modus'] == 0)?" checked='1'/":'';
        $parse['Vaccation_mode'] = $lang['Vaccation_mode'];
-       $parse['vacation_until'] = date("d.m.Y G:i:s",$user['urlaubs_until']);
+       $parse['vacation_until'] = date("d/m/Y H:i:s",$user['urlaubs_until']);
        $parse['user_settings_rep'] = ($user['settings_rep'] == 1) ? " checked='checked'/":'';
        $parse['user_settings_esp'] = ($user['settings_esp'] == 1) ? " checked='checked'/":'';
        $parse['user_settings_wri'] = ($user['settings_wri'] == 1) ? " checked='checked'/":'';

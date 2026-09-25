@@ -9,8 +9,12 @@ $lang['Energy'] = 'Energia';
 $lang['Message'] = "Message";
 $lang['level'] = 'livello';
 $lang['treeinfo']     = "[i]";
+$lang['te_dt_step'] = "Fase";
+$lang['te_dt_none'] = "Nessun requisito";
+$lang['te_dt_back'] = "Torna alle tecnologie";
+$lang['te_dt_unknown'] = "Elemento sconosciuto";
 $lang['comingsoon']   = "Bientot";
-$lang['te_dt_tx_pre'] = "Pr&eacute;requis pour";
+$lang['te_dt_tx_pre'] = "Requisiti per";
 
 $lang['type_mission'][1]  = "Attacco";
 $lang['type_mission'][2]  = "Attacco di gruppo";

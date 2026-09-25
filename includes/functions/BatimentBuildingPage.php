@@ -20,19 +20,21 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 	// Tables des batiments possibles par type de planete
 	$Allowed['1'] = array(  1,  2,  3,  4, 12, 14, 15, 21, 22, 23, 24, 31, 33, 34, 44);
 	$Allowed['3'] = array( 12, 14, 21, 22, 23, 24, 34, 41, 42, 43);
+	// Type de planete inconnu (planete absente) : aucun batiment, au lieu d'une erreur fatale
+	$PlanetAllowed = $Allowed[$CurrentPlanet['planet_type'] ?? 0] ?? array();
 
 	// Boucle d'interpretation des eventuelles commandes
 	if (isset($_GET['cmd'])) {
 		// On passe une commande
 		$bThisIsCheated = false;
 		$bDoItNow       = false;
-		$TheCommand     = $_GET['cmd'];
-		$Element        = $_GET['building'];
-		$ListID         = $_GET['listid'];
+		$TheCommand     = ($_GET['cmd'] ?? null);
+		$Element        = ($_GET['building'] ?? null);
+		$ListID         = ($_GET['listid'] ?? null);
 		if       ( isset ( $Element )) {
 			if ( !strchr ( $Element, " ") ) {
 				if ( !strchr ( $Element, ",") ) {
-					if (in_array( trim($Element), $Allowed[$CurrentPlanet['planet_type']])) {
+					if (in_array( trim($Element), $PlanetAllowed)) {
 						$bDoItNow = true;
 					} else {
 						$bThisIsCheated = true;
@@ -91,7 +93,7 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 	$SubTemplate         = gettemplate('buildings_builds_row');
 	$BuildingPage        = "";
 	foreach($lang['tech'] as $Element => $ElementName) {
-		if (in_array($Element, $Allowed[$CurrentPlanet['planet_type']])) {
+		if (in_array($Element, $PlanetAllowed)) {
 			$CurrentMaxFields      = CalculateMaxPlanetFields($CurrentPlanet);
 			if ($CurrentPlanet["field_current"] < ($CurrentMaxFields - $Queue['lenght'])) {
 				$RoomIsOk = true;

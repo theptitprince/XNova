@@ -24,10 +24,10 @@ if($user['authlevel']!="1"&$user['authlevel']!="3"&$user['authlevel']!="0"){ hea
 	includeLang('messages');
 
 
-	$OwnerID       = intval($_GET['id']);
-	$MessCategory  = intval($_GET['messcat']);
-	$MessPageMode  = $_GET["mode"];
-	$DeleteWhat    = $_POST['deletemessages'];
+	$OwnerID       = intval(($_GET['id'] ?? null));
+	$MessCategory  = intval(($_GET['messcat'] ?? null));
+	$MessPageMode  = ($_GET["mode"] ?? null);
+	$DeleteWhat    = ($_POST['deletemessages'] ?? null);
 	if (isset ($DeleteWhat)) {
 		$MessPageMode = "delete";
 	}
@@ -73,28 +73,28 @@ if($user['authlevel']!="1"&$user['authlevel']!="3"&$user['authlevel']!="0"){ hea
 
 			if ($_POST) {
 				$error = 0;
-				if (!$_POST["subject"]) {
+				if (!($_POST["subject"] ?? null)) {
 					$error++;
 					$page .= "<center><br><font color=#FF0000>".$lang['mess_no_subject']."<br></font></center>";
 				}
-				if (!$_POST["text"]) {
+				if (!($_POST["text"] ?? null)) {
 					$error++;
 					$page .= "<center><br><font color=#FF0000>".$lang['mess_no_text']."<br></font></center>";
 				}
 				if ($error == 0) {
 					$page .= "<center><font color=#00FF00>".$lang['mess_sended']."<br></font></center>";
 
-//					$_POST['text'] = str_replace('\r\n', '<br />', $_POST['text']);
+//					$_POST['text'] = str_replace('\r\n', '<br />', ($_POST['text'] ?? null));
 
 					$Owner   = $OwnerID;
 					$Sender  = $user['id'];
 					$From    = $user['username'] ." [".$user['galaxy'].":".$user['system'].":".$user['planet']."]";
-					$Subject = SafeText($_POST['subject']);
+					$Subject = SafeText(($_POST['subject'] ?? null));
 					if($game_config['enable_bbcode'] == 1) {
-										$Message = trim ( bbcode ( image ( $_POST['text'] ) ) ); // bbcode() echappe le texte 
+										$Message = trim ( bbcode ( image ( ($_POST['text'] ?? null) ) ) ); // bbcode() echappe le texte 
 					
 					} else { 
-$Message = trim ( nl2br ( SafeText ( $_POST['text'] ) ) ); }
+$Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 					SendSimpleMessage ( $Owner, $Sender, '', 1, $From, $Subject, $Message);
 					$subject = "";
 					$text    = "";
@@ -120,7 +120,7 @@ $Message = trim ( nl2br ( SafeText ( $_POST['text'] ) ) ); }
 		case 'delete':
 			// -------------------------------------------------------------------------------------------------------
 			// Suppression des messages selectionnés
-			$DeleteWhat = $_POST['deletemessages'];
+			$DeleteWhat = ($_POST['deletemessages'] ?? null);
 			if       ($DeleteWhat == 'deleteall') {
 				doquery("DELETE FROM {{table}} WHERE `message_owner` = '". $user['id'] ."';", 'messages');
 			} elseif ($DeleteWhat == 'deletemarked') {
@@ -138,7 +138,7 @@ $Message = trim ( nl2br ( SafeText ( $_POST['text'] ) ) ); }
 					$CurMess    = preg_match("/showmes/i", $Message);
 					$MessId     = intval(str_replace("showmes", "", $Message));
 					$Selected   = "delmes".$MessId;
-					$IsSelected = $_POST[ $Selected ];
+					$IsSelected = ($_POST[ $Selected ] ?? null);
 					if (preg_match("/showmes/i", $Message) && !isset($IsSelected)) {
 						$MessHere = doquery("SELECT * FROM {{table}} WHERE `message_id` = '". $MessId ."' AND `message_owner` = '". $user['id'] ."';", 'messages');
 						if ($MessHere) {
@@ -147,15 +147,14 @@ $Message = trim ( nl2br ( SafeText ( $_POST['text'] ) ) ); }
 					}
 				}
 			}
-			$MessCategory = intval($_POST['category']);
+			$MessCategory = intval(($_POST['category'] ?? null));
 
 		case 'show':
 			// -------------------------------------------------------------------------------------------------------
 			// Affichage de la page des messages
 			$page  = "<script language=\"JavaScript\">\n";
 			$page .= "function f(target_url, win_name) {\n";
-			$page .= "var new_win = window.open(target_url,win_name,'resizable=yes,scrollbars=yes,menubar=no,toolbar=no,width=550,height=280,top=0,left=0');\n";
-			$page .= "new_win.focus();\n";
+			$page .= "if (window.event) window.event.preventDefault(); window.location.href = target_url; // dans la frame du jeu (les popups sont souvent bloquees)\n";
 			$page .= "}\n";
 			$page .= "</script>\n";
 			$page .= "<center>";
@@ -208,7 +207,7 @@ $Message = trim ( nl2br ( SafeText ( $_POST['text'] ) ) ); }
 					$page .= "\n<tr>";
 					$page .= "<input name=\"showmes". $CurMess['message_id'] . "\" type=\"hidden\" value=\"1\">";
 					$page .= "<th><input name=\"delmes". $CurMess['message_id'] . "\" type=\"checkbox\"></th>";
-					$page .= "<th>". date("m-d H:i:s O", $CurMess['message_time']) ."</th>";
+					$page .= "<th>". date("d/m H:i:s", $CurMess['message_time']) ."</th>";
 					$page .= "<th>". stripslashes( $CurMess['message_from'] ) ."</th>";
 					$page .= "<th>". stripslashes( $CurMess['message_subject'] ) ." ";
 					if ($CurMess['message_type'] == 1) {
@@ -237,7 +236,7 @@ $Message = trim ( nl2br ( SafeText ( $_POST['text'] ) ) ); }
 						$page .= "\n<tr>";
 						$page .= "<input name=\"showmes". $CurMess['message_id'] . "\" type=\"hidden\" value=\"1\">";
 						$page .= "<th><input name=\"delmes". $CurMess['message_id'] ."\" type=\"checkbox\"></th>";
-						$page .= "<th>". date("m-d H:i:s O", $CurMess['message_time']) ."</th>";
+						$page .= "<th>". date("d/m H:i:s", $CurMess['message_time']) ."</th>";
 						$page .= "<th>". stripslashes( $CurMess['message_from'] ) ."</th>";
 						$page .= "<th>". stripslashes( $CurMess['message_subject'] ) ." ";
 						if ($CurMess['message_type'] == 1) {
@@ -283,8 +282,7 @@ $Message = trim ( nl2br ( SafeText ( $_POST['text'] ) ) ); }
 		default:
 			$page  = "<script language=\"JavaScript\">\n";
 			$page .= "function f(target_url, win_name) {\n";
-			$page .= "var new_win = window.open(target_url, win_name, 'resizable=yes, scrollbars=yes, menubar=no, toolbar=no, width=550, height=280, top=0, left=0');\n";
-			$page .= "new_win.focus();\n";
+			$page .= "if (window.event) window.event.preventDefault(); window.location.href = target_url; // dans la frame du jeu (les popups sont souvent bloquees)\n";
 			$page .= "}\n";
 			$page .= "</script>\n";
 			$page .= "<center>";

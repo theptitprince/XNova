@@ -27,6 +27,15 @@
 	<th>{adm_opt_game_fspeed}</th>
 	<th><input name="fleet_speed" size="2" value="{fleet_speed}" type="text"></th>
 </tr><tr>
+	<th>{adm_opt_noob}</th>
+	<th><input name="noobprotection"{noobprotection} type="checkbox" /></th>
+</tr><tr>
+	<th>{adm_opt_noob_time}</th>
+	<th><input name="noobprotectiontime" size="8" value="{noobprotectiontime}" type="text"></th>
+</tr><tr>
+	<th>{adm_opt_noob_multi}</th>
+	<th><input name="noobprotectionmulti" size="3" value="{noobprotectionmulti}" type="text"></th>
+</tr><tr>
 	<th>{stat_settings_desc}</th>
 	<th>{stat_desc}<input name="stat_settings" size="2" value="{stat_settings}" type="text">{stat_units}</th>
 </tr><tr>

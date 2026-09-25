@@ -117,7 +117,7 @@ function MissionCaseDestruction($FleetRow) {
 
          for ($SetItem = 200; $SetItem < 500; $SetItem++) {
 
-            if ($TargetPlanet[$resource[$SetItem]] > 0) {
+            if (isset($resource[$SetItem]) && $TargetPlanet[$resource[$SetItem]] > 0) {
 
                $TargetSet[$SetItem]['count'] = $TargetPlanet[$resource[$SetItem]];
 
@@ -193,7 +193,7 @@ function MissionCaseDestruction($FleetRow) {
 
          $dane_do_rw   = $walka["dane_do_rw"];
 
-         // Rapport court (cdr + unitées perdues)
+         // Rapport court (cdr + unités perdues)
 
          $zlom         = $walka["zlom"];
 
@@ -455,13 +455,15 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
-         if (($UserChance > 0) and ($UserChance <= $MoonChance) and $galenemyrow['id_luna'] == 0) {
+         // Lune deja presente ? ($galenemyrow n'etait jamais defini dans l'original)
+         $galenemyrow = doquery("SELECT `id_luna` FROM {{table}} WHERE `galaxy` = '". intval($FleetRow['fleet_end_galaxy']) ."' AND `system` = '". intval($FleetRow['fleet_end_system']) ."' AND `planet` = '". intval($FleetRow['fleet_end_planet']) ."';", 'galaxy', true);
+         if (($UserChance > 0) and ($UserChance <= $MoonChance) and empty($galenemyrow['id_luna'])) {
 
             $TargetPlanetName = CreateOneMoonRecord ( $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet'], $TargetUserID, $FleetRow['fleet_start_time'], '', $MoonChance );
 
             $GottenMoon       = sprintf ($lang['sys_moonbuilt'], $TargetPlanetName, $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet']);
 
-         } elseif ($UserChance = 0 or $UserChance > $MoonChance) {
+         } elseif ($UserChance == 0 or $UserChance > $MoonChance) {
 
             $GottenMoon = "";
 
@@ -469,7 +471,7 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
-         $AttackDate        = date("r", $FleetRow["fleet_start_time"]);
+         $AttackDate        = date("d/m/Y H:i:s", $FleetRow["fleet_start_time"]);
 
          $title             = sprintf ($lang['sys_destruc_title'], $AttackDate);
 
@@ -720,9 +722,7 @@ function MissionCaseDestruction($FleetRow) {
 
          // Colorisation du résumé de rapport pour l'attaquant
 
-            $raport  = "<a href # OnClick=\"f( 'rw.php?raport=". $rid ."', '');\" >";
-
-         $raport .= "<center>";
+            $raport  = "<center><a href=\"rw.php?raport=". $rid ."\">"; // <center> avant le lien (HTML valide)
 
             if       ($FleetResult == "a") {
 
@@ -770,9 +770,7 @@ function MissionCaseDestruction($FleetRow) {
 
          // Colorisation du résumé de rapport pour le defenseur
 
-         $raport2  = "<a href # OnClick=\"f( 'rw.php?raport=". $rid ."', '');\" >";
-
-         $raport2 .= "<center>";
+         $raport2  = "<center><a href=\"rw.php?raport=". $rid ."\">"; // <center> avant le lien (HTML valide)
 
          if       ($FleetResult == "a") {
 
@@ -806,7 +804,7 @@ function MissionCaseDestruction($FleetRow) {
 
       if ($FleetRow['fleet_end_time'] <= time()) {
 
-         if (!is_null($CurrentSet)) {
+         if (isset($CurrentSet)) {
 
             foreach($CurrentSet as $Ship => $Count) {
 
@@ -836,7 +834,7 @@ function MissionCaseDestruction($FleetRow) {
 
          doquery ("DELETE FROM {{table}} WHERE `fleet_id` = " . $FleetRow["fleet_id"], 'fleets');
 
-         if (!($FleetResult == "w")) {
+         if (($FleetResult ?? '') != "w") {
 
             $QryUpdatePlanet  = "UPDATE {{table}} SET ";
 

@@ -153,7 +153,7 @@ function BuildFleetEventTable ( $FleetRow, $Status, $Owner, $Label, $Record ) {
 	$bloc['fleet_style']  = $FleetStyle[ $MissionType ];
 	$bloc['fleet_javai']  = InsertJavaScriptChronoApplet ( $Label, $Record, $Rest, true );
 	$bloc['fleet_order']  = $Label . $Record;
-	$bloc['fleet_time']   = gmdate("H:i:s", $Time + 1 * 60 * 60);
+	$bloc['fleet_time']   = date("H:i:s", $Time);
 	$bloc['fleet_descr']  = $EventString;
 	$bloc['fleet_javas']  = InsertJavaScriptChronoApplet ( $Label, $Record, $Rest, false );
 

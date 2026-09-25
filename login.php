@@ -24,11 +24,14 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	includeLang('login');
 
+	// Erreur de connexion : affichee sur la page de connexion elle-meme (avant : page d'erreur sans habillage),
+	// avec un message unique qui ne revele pas si le pseudo existe
+	$LoginError = '';
 	if ($_POST) {
-		$login = doquery("SELECT * FROM {{table}} WHERE `username` = '" . SqlEscape($_POST['username']) . "' LIMIT 1", "users", true);
+		$login = doquery("SELECT * FROM {{table}} WHERE `username` = '" . SqlEscape(($_POST['username'] ?? null)) . "' LIMIT 1", "users", true);
 
 		if ($login) {
-			if (PasswordCheck($_POST['password'], $login)) {
+			if (PasswordCheck(($_POST['password'] ?? null), $login)) {
 				if (isset($_POST["rememberme"])) {
 					$expiretime = time() + 31536000;
 					$rememberme = 1;
@@ -42,13 +45,16 @@ include($xnova_root_path . 'common.' . $phpEx);
 				header("Location: ./frames.php");
 				exit;
 			} else {
-				message($lang['Login_FailPassword'], $lang['Login_Error']);
+				$LoginError = $lang['Login_Fail'];
 			}
 		} else {
-			message($lang['Login_FailUser'], $lang['Login_Error']);
+			$LoginError = $lang['Login_Fail'];
 		}
-	} else {
+	}
+	{
 		$parse                 = $lang;
+		$parse['login_error']  = ($LoginError != '') ? "<tr><td style=\"padding-right: 4px; color: #ff5050; font-weight: bold;\">". $LoginError ."</td></tr>" : "";
+		$parse['login_username'] = htmlspecialchars((string) ($_POST['username'] ?? ''), ENT_QUOTES, 'UTF-8');
 		$Count                 = doquery('SELECT COUNT(*) as `players` FROM {{table}} WHERE 1', 'users', true);
 		$LastPlayer            = doquery('SELECT `username` FROM {{table}} ORDER BY `register_time` DESC', 'users', true);
 		$parse['last_user']    = $LastPlayer['username'];
@@ -56,13 +62,13 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse['online_users'] = $PlayersOnline['onlinenow'];
 		$parse['users_amount'] = $Count['players'];
 		$parse['servername']   = $game_config['game_name'];
-		$parse['forum_url']    = $game_config['forum_url'];
+		$parse['forum_link']   = (!empty($game_config['forum_url'])) ? "<a href=\"". htmlspecialchars($game_config['forum_url'], ENT_QUOTES) ."\">Forum</a>" : '';
 		$parse['PasswordLost'] = $lang['PasswordLost'];
 
 		$page = parsetemplate(gettemplate('login_body'), $parse);
 
 		// Test pour prendre le nombre total de joueur et le nombre de joueurs connectés
-		if ($_GET['ucount'] == 1) {
+		if (($_GET['ucount'] ?? null) == 1) {
 			$page = $PlayersOnline['onlinenow']."/".$Count['players'];
 			die ( $page );
 		} else {

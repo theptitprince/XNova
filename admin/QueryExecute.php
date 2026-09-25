@@ -26,9 +26,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$parse   = $lang;
 
-		if ($_POST['really_do_it'] == 'on') {
+		if (($_POST['really_do_it'] ?? null) == 'on') {
 
-			mysqli_query(DbConnect(), $_POST['qry_sql']);
+			mysqli_query(DbConnect(), ($_POST['qry_sql'] ?? null));
 			AdminMessage ($lang['qry_succesful'], 'Succes', '?');
 			
 		} else {

@@ -71,13 +71,13 @@ if (isset($resource) && !empty($resource[401])) {
 
 				$def =
 				array(0 => $planet['misil_launcher'], // Raketenwerfer
-					1 => $planet['small_laser'], // Leichtes Lasergesch�tz
-					2 => $planet['big_laser'], // Schweres Lasergesch�tz
-					3 => $planet['gauss_canyon'], // Gau�kanone
-					4 => $planet['ionic_canyon'], // Ionengesch�tz
+					1 => $planet['small_laser'], // Leichtes Lasergeschütz
+					2 => $planet['big_laser'], // Schweres Lasergeschütz
+					3 => $planet['gauss_canyon'], // Gaußkanone
+					4 => $planet['ionic_canyon'], // Ionengeschütz
 					5 => $planet['buster_canyon'], // Plasmawerfer
 					6 => $planet['small_protection_shield'], // Kleine Schildkuppel
-					7 => $planet['big_protection_shield'], // Gro�e Schildkuppel
+					7 => $planet['big_protection_shield'], // Große Schildkuppel
 					8 => $planet['interplanetary_misil'], // Interplanetarrakete
 					9 => $planet['interceptor_misil'], // Abfangrakete
 					);

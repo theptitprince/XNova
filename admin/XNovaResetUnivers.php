@@ -75,7 +75,7 @@ function XNovaResetUnivers ( $CurrentUser ) {
 					$QryInsertUser .= "`password` = '".      $TheUser['password']      ."';";
 					doquery( $QryInsertUser, 'users');
 
-					// On cherche le numero d'enregistrement de l'utilisateur fraichement cr��
+					// On cherche le numero d'enregistrement de l'utilisateur fraîchement créé
 					$NewUser        = doquery("SELECT `id` FROM {{table}} WHERE `username` = '". $TheUser['username'] ."' LIMIT 1;", 'users', true);
 
 					CreateOnePlanetRecord ($TheUser['galaxy'], $TheUser['system'], $TheUser['planet'], $NewUser['id'], $UserPlanet['name'], true);
@@ -107,7 +107,7 @@ function XNovaResetUnivers ( $CurrentUser ) {
 	return $Page;
 }
 
-	$mode      = $_POST['mode'];
+	$mode      = ($_POST['mode'] ?? null);
 	$PageTpl   = gettemplate("admin/reset_body");
 	$parse     = $lang;
 

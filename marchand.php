@@ -26,13 +26,13 @@ function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 
 	$parse   = $lang;
 
-	if ($_POST['ress'] != '') {
+	if (($_POST['ress'] ?? null) != '') {
 		$PageTPL   = gettemplate('message_body');
 		$Error     = false;
 		$CheatTry  = false;
-		$Metal     = $_POST['metal'];
-		$Crystal   = $_POST['cristal'];
-		$Deuterium = $_POST['deut'];
+		$Metal     = ($_POST['metal'] ?? null);
+		$Crystal   = ($_POST['cristal'] ?? null);
+		$Deuterium = ($_POST['deut'] ?? null);
 		if ($Metal < 0) {
 			$Metal     *= -1;
 			$CheatTry   = true;
@@ -46,7 +46,7 @@ function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 			$CheatTry   = true;
 		}
 		if ($CheatTry  == false) {
-			switch ($_POST['ress']) {
+			switch (($_POST['ress'] ?? null)) {
 				case 'metal':
 					$Necessaire   = (( $Crystal * 2) + ( $Deuterium * 4));
 					if ($CurrentPlanet['metal'] > $Necessaire) {
@@ -105,11 +105,11 @@ function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 		}
 		$parse['mes']   = $Message;
 	} else {
-		if ($_POST['action'] != 2) {
+		if (($_POST['action'] ?? null) != 2) {
 			$PageTPL = gettemplate('marchand_main');
 		} else {
 			$parse['mod_ma_res']   = "1";
-			switch ($_POST['choix']) {
+			switch (($_POST['choix'] ?? null)) {
 				case 'metal':
 					$PageTPL = gettemplate('marchand_metal');
 					$parse['mod_ma_res_a'] = "2";

@@ -23,14 +23,14 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if ($user['authlevel'] >= 2) {
 		includeLang('admin/addmoon');
 
-		$mode      = $_POST['mode'];
+		$mode      = ($_POST['mode'] ?? null);
 
 		$PageTpl   = gettemplate("admin/add_moon");
 		$parse     = $lang;
 
 		if ($mode == 'addit') {
-			$PlanetID  = intval($_POST['user']);
-			$MoonName  = SqlEscape(SafeName($_POST['name'], 32));
+			$PlanetID  = intval(($_POST['user'] ?? null));
+			$MoonName  = SqlEscape(SafeName(($_POST['name'] ?? null), 32));
 
 			$QrySelectPlanet  = "SELECT * FROM {{table}} ";
 			$QrySelectPlanet .= "WHERE ";

@@ -43,7 +43,7 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 				$Missiles[503] += $ElmentArray[503];
 			}
 		}
-		foreach($_POST['fmenge'] as $Element => $Count) {
+		foreach(($_POST['fmenge'] ?? null) as $Element => $Count) {
 			// Construction d'Element recuperés sur la page de Flotte ...
 			// ATTENTION ! La file d'attente Flotte est Commune a celle des Defenses
 			// Dans fmenge, on devrait trouver un tableau des elements constructibles etdu nombre d'elements souhaités

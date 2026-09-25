@@ -9,6 +9,10 @@ $lang['Energy']       = "&Eacute;nergie";
 $lang['Message']      = "Mensajes";
 $lang['level']        = "nivel";
 $lang['treeinfo']     = "[i]";
+$lang['te_dt_step'] = "Etapa";
+$lang['te_dt_none'] = "Sin requisitos";
+$lang['te_dt_back'] = "Volver a las tecnolog&iacute;as";
+$lang['te_dt_unknown'] = "Elemento desconocido";
 $lang['comingsoon']   = "Bientot";
 $lang['te_dt_tx_pre'] = "Condiciones de construcción para";
 

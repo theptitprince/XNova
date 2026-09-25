@@ -30,14 +30,14 @@ function IsElementBuyable ($CurrentUser, $CurrentPlanet, $Element, $Incremental 
 }
 
 	if ($Incremental) {
-		$level  = ($CurrentPlanet[$resource[$Element]]) ? $CurrentPlanet[$resource[$Element]] : $CurrentUser[$resource[$Element]];
+		$level  = (!empty($CurrentPlanet[$resource[$Element]])) ? $CurrentPlanet[$resource[$Element]] : ($CurrentUser[$resource[$Element]] ?? 0);
 	}
 
 	$RetValue = true;
 	$array    = array('metal', 'crystal', 'deuterium', 'energy_max');
 
 	foreach ($array as $ResType) {
-		if ($pricelist[$Element][$ResType] != 0) {
+		if (!empty($pricelist[$Element][$ResType])) {
 			if ($Incremental) {
 				$cost[$ResType]  = floor($pricelist[$Element][$ResType] * pow($pricelist[$Element]['factor'], $level));
 			} else {

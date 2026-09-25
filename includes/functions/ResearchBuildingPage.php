@@ -37,8 +37,8 @@ function ResearchBuildingPage (&$CurrentPlanet, $CurrentUser, $InResearch, $TheP
 
 	// Boucle d'interpretation des eventuelles commandes
 	if (isset($_GET['cmd'])) {
-		$TheCommand = $_GET['cmd'];
-		$Techno     = $_GET['tech'];
+		$TheCommand = ($_GET['cmd'] ?? null);
+		$Techno     = ($_GET['tech'] ?? null);
 		if ( is_numeric($Techno) ) {
 			if ( in_array($Techno, $reslist['tech']) ) {
 				// Bon quand on arrive ici ... On sait deja qu'on a une technologie valide

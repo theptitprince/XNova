@@ -56,6 +56,7 @@ $lang['adm_reset']    = 'Remise &agrave; z&eacute;ro';
 $lang['adm_plrlst']   = 'Liste des joueurs';
 $lang['adm_plrsch']   = 'Chercher un joueur';
 $lang['adm_addres']   = 'Ajout de ressources';
+$lang['adm_addfleet'] = 'Ajout de flotte';
 $lang['adm_delres']   = 'Suppr de ressources';
 
 $lang['adm_pltlst']   = 'Liste des plan&egrave;tes';

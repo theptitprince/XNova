@@ -29,7 +29,7 @@ $parse = $lang;
 		// Supprimer les erreurs
 		// extract($_GET) remplace par des lectures explicites (il permettait d'ecraser n'importe quelle variable)
 		$delete    = isset($_GET['delete']) ? intval($_GET['delete']) : null;
-		$deleteall = isset($_GET['deleteall']) ? $_GET['deleteall'] : '';
+		$deleteall = isset($_GET['deleteall']) ? ($_GET['deleteall'] ?? null) : '';
 		if (isset($delete)) {
 			doquery("DELETE FROM {{table}} WHERE `error_id`=$delete", 'errors');
 		} elseif ($deleteall == 'yes') {
@@ -44,7 +44,7 @@ $parse = $lang;
 			$parse['errors_list'] .= "
 			<tr><td width=\"25\" class=n>". $u['error_id'] ."</td>
 			<td width=\"170\" class=n>". $u['error_type'] ."</td>
-			<td width=\"230\" class=n>". date('d/m/Y h:i:s', $u['error_time']) ."</td>
+			<td width=\"230\" class=n>". date('d/m/Y H:i:s', $u['error_time']) ."</td>
 			<td width=\"95\" class=n><a href=\"?delete=". $u['error_id'] ."\"><img src=\"../images/r1.png\"></a></td></tr>
 			<tr><td colspan=\"4\" class=b>".  nl2br($u['error_text'])."</td></tr>";
 		}

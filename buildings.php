@@ -25,7 +25,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	UpdatePlanetBatimentQueueList ( $planetrow, $user );
 	$IsWorking = HandleTechnologieBuild ( $planetrow, $user );
 
-	switch ($_GET['mode']) {
+	switch (($_GET['mode'] ?? null)) {
 		case 'fleet':
 			// --------------------------------------------------------------------------------------------------
 			FleetBuildingPage ( $planetrow, $user );

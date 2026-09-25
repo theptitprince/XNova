@@ -21,9 +21,10 @@ $lang['signup']            = ' S\'enregistrer ';
 $lang['neededpass']        = 'Mot de passe';
 
 // Send
-$lang['mail_welcome']      = 'Merci beaucoup de votre inscription &agrave; notre jeu ({gameurl}) \nVotre mot de passe est : {password}\n\nBon amusement !\n{gameurl}';
+$lang['mail_welcome']      = 'Merci beaucoup de votre inscription &agrave; notre jeu ({gameurl})\nVotre pseudo : {username}\n\nBon amusement !\n{gameurl}';
+$lang['reg_go_login']      = 'Se connecter';
 $lang['mail_title']        = 'Enregistrment';
-$lang['thanksforregistry'] = 'Merci de vous &ecirc;tre inscrit ! Vous allez recevoir un mail avec votre mot de passe.';
+$lang['thanksforregistry'] = 'Merci de vous &ecirc;tre inscrit ! Un mail de bienvenue vous a &eacute;t&eacute; envoy&eacute;.';
 $lang['sender_message_ig'] = 'Admin';
 $lang['subject_message_ig']= 'Bienvenue';
 $lang['text_message_ig']   = 'Bienvenue sur XNova, nous vous souhaitons bon jeu et bonne chance !';

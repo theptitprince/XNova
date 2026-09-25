@@ -30,10 +30,10 @@ include($xnova_root_path . 'common.' . $phpEx);
         $Next       = ( !empty($_POST['next'])   ) ? true : false;
         $DelSel     = ( !empty($_POST['delsel']) ) ? true : false;
         $DelDat     = ( !empty($_POST['deldat']) ) ? true : false;
-        $CurrPage   = ( !empty($_POST['curr'])   ) ? intval($_POST['curr']) : 1;
-        $Selected   = ( !empty($_POST['sele']) && !is_array($_POST['sele']) ) ? intval($_POST['sele']) : 0;
-        $SelType    = intval($_POST['type']);
-        $SelPage    = intval($_POST['page']);
+        $CurrPage   = ( !empty($_POST['curr'])   ) ? intval(($_POST['curr'] ?? null)) : 1;
+        $Selected   = ( !empty($_POST['sele']) && !is_array($_POST['sele']) ) ? intval(($_POST['sele'] ?? null)) : 0;
+        $SelType    = intval(($_POST['type'] ?? null));
+        $SelPage    = intval(($_POST['page'] ?? null));
 
         $ViewPage = 1;
         if ( $Selected != $SelType ) {
@@ -60,15 +60,15 @@ include($xnova_root_path . 'common.' . $phpEx);
                 $ViewPage = $MaxPage;
             }
         } elseif ($DelSel == true) {
-            foreach($_POST['sele'] as $MessId => $Value) {
+            foreach(($_POST['sele'] ?? null) as $MessId => $Value) {
                 if ($Value = "on") {
                     doquery ( "DELETE FROM {{table}} WHERE `message_id` = '". intval($MessId) ."';", 'messages');
                 }
             }
         } elseif ($DelDat == true) {
-            $SelDay    = intval($_POST['selday']);
-            $SelMonth  = intval($_POST['selmonth']);
-            $SelYear   = intval($_POST['selyear']);
+            $SelDay    = intval(($_POST['selday'] ?? null));
+            $SelMonth  = intval(($_POST['selmonth'] ?? null));
+            $SelYear   = intval(($_POST['selyear'] ?? null));
             $LimitDate = mktime (0,0,0, $SelMonth, $SelDay, $SelYear );
             if ($LimitDate != false) {
                 doquery ( "DELETE FROM {{table}} WHERE `message_time` <= '". $LimitDate ."';", 'messages');
@@ -100,8 +100,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$parse['mlst_scpt']  = "<script language=\"JavaScript\">\n";
 		$parse['mlst_scpt'] .= "function f(target_url, win_name) {\n";
-		$parse['mlst_scpt'] .= "var new_win = window.open(target_url,win_name,'resizable=yes,scrollbars=yes,menubar=no,toolbar=no,width=550,height=280,top=0,left=0');\n";
-		$parse['mlst_scpt'] .= "new_win.focus();\n";
+		$parse['mlst_scpt'] .= "if (window.event) window.event.preventDefault(); window.location.href = target_url; // dans la frame du jeu (les popups sont souvent bloquees)\n";
 		$parse['mlst_scpt'] .= "}\n";
 		$parse['mlst_scpt'] .= "</script>\n";
 
@@ -116,7 +115,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$bloc['mlst_from']    = $row['message_from'];
 			$bloc['mlst_to']      = $OwnerData['username'] ." ID:". $row['message_owner'];
 			$bloc['mlst_text']    = $row['message_text'];
-			$bloc['mlst_time']    = gmdate ( "d. M Y H:i:s", $row['message_time'] );
+			$bloc['mlst_time']    = date ( "d/m/Y H:i:s", $row['message_time'] );
 
 			$parse['mlst_data_rows'] .= parsetemplate($RowsTpl , $bloc);
 		}

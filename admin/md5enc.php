@@ -25,9 +25,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		$parse   = $lang;
 
-		if ($_POST['md5q'] != "") {
-			$parse['md5_md5'] = SafeText($_POST['md5q']);
-			$parse['md5_enc'] = md5 ($_POST['md5q']);
+		if (($_POST['md5q'] ?? null) != "") {
+			$parse['md5_md5'] = SafeText(($_POST['md5q'] ?? null));
+			$parse['md5_enc'] = md5 (($_POST['md5q'] ?? null));
 		} else {
 			$parse['md5_md5'] = "";
 			$parse['md5_enc'] = md5 ("");

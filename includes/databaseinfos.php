@@ -119,7 +119,7 @@
 	$QryInsertConfig    .= "('initial_fields'        , '163'), ";
 	$QryInsertConfig    .= "('COOKIE_NAME'           , 'XNova'), ";
 	$QryInsertConfig    .= "('game_name'             , 'XNova'), ";
-	$QryInsertConfig    .= "('game_disable'          , '1'), ";
+	$QryInsertConfig    .= "('game_disable'          , '0'), "; // ouvert par defaut (le reglage « clos » ne fonctionnait pas avant la 0.9f)
 	$QryInsertConfig    .= "('close_reason'          , 'Le jeu est clos pour le moment!'), ";
 	$QryInsertConfig    .= "('metal_basic_income'    , '20'), ";
 	$QryInsertConfig    .= "('crystal_basic_income'  , '10'), ";
@@ -133,7 +133,7 @@
 	$QryInsertConfig    .= "('noobprotection'        , '1'), ";
 	$QryInsertConfig    .= "('noobprotectiontime'    , '5000'), ";
 	$QryInsertConfig    .= "('noobprotectionmulti'   , '5'), ";
-	$QryInsertConfig    .= "('forum_url'             , 'http://www.xnova.fr/forum' ), ";
+	$QryInsertConfig    .= "('forum_url'             , '' ), ";
 	$QryInsertConfig    .= "('OverviewNewsFrame'     , '1' ), ";
 	$QryInsertConfig    .= "('OverviewNewsText'      , 'Bienvenue sur le nouveau serveur XNova' ), ";
 	$QryInsertConfig    .= "('OverviewExternChat'    , '0' ), ";
@@ -152,7 +152,7 @@
 	$QryInsertConfig    .= "('enable_marchand'                 , '1'), ";
 	$QryInsertConfig    .= "('enable_notes'                 , '1'), ";
 	$QryInsertConfig    .= "('bot_name'                 , 'XNoviana Reali'), ";
-	$QryInsertConfig    .= "('bot_adress'          , 'xnova@xnova.fr' ), ";
+	$QryInsertConfig    .= "('bot_adress'          , '' ), ";
 	$QryInsertConfig    .= "('banner_source_post'          , '../images/bann.png' ), ";
 	$QryInsertConfig    .= "('ban_duration'          , '30' ), ";
 	$QryInsertConfig    .= "('enable_bot'          , '0' ), ";

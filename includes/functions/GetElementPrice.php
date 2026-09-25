@@ -25,7 +25,7 @@ function GetElementPrice ($user, $planet, $Element, $userfactor = true) {
 	global $pricelist, $resource, $lang;
 
 	if ($userfactor) {
-		$level = ($planet[$resource[$Element]]) ? $planet[$resource[$Element]] : $user[$resource[$Element]];
+		$level = (!empty($planet[$resource[$Element]])) ? $planet[$resource[$Element]] : ($user[$resource[$Element]] ?? 0);
 	}
 
 	$is_buyeable = true;
@@ -38,7 +38,7 @@ function GetElementPrice ($user, $planet, $Element, $userfactor = true) {
 
 	$text = $lang['Requires'] . ": ";
 	foreach ($array as $ResType => $ResTitle) {
-		if ($pricelist[$Element][$ResType] != 0) {
+		if (!empty($pricelist[$Element][$ResType])) {
 			$text .= $ResTitle . ": ";
 			if ($userfactor) {
 				$cost = floor($pricelist[$Element][$ResType] * pow($pricelist[$Element]['factor'], $level));

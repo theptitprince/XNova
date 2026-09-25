@@ -21,14 +21,15 @@ function changeAction(type) {
 <form name="formular" action="" method="post" onsubmit="changeAction('login');">
 <table width="400" border="0" cellpadding="0" cellspacing="0">
 <tbody>
+{login_error}
 <tr style="vertical-align: top;">
 	<td style="padding-right: 4px;">
-		{User_name} <input name="username" value="" type="text">
+		{User_name} <input name="username" value="{login_username}" type="text">
 		{Password} <input name="password" value="" type="password">
 	</td>
 </tr><tr>
 	<td style="padding-right: 4px;">
-		{Remember_me} <input name="rememberme" type="checkbox"> <script type="text/javascript">document.formular.Uni.focus(); </script><input name="submit" value="{Login}" type="submit">
+		{Remember_me} <input name="rememberme" type="checkbox"> <script type="text/javascript">if (document.formular && document.formular.username) document.formular.username.focus();</script><input name="submit" value="{Login}" type="submit">
 	</td>
 </tr><tr>
 	<td style="padding-right: 4px;">
@@ -42,7 +43,7 @@ function changeAction(type) {
 </div>
 <div id="mainmenu" style="margin-top: 20px;">
 <a href="reg.php">{log_reg}</a>
-<a href="{forum_url}">Forum</a>
+{forum_link}
 <a href="contact.php">Contact</a>
 <a href="credit.php">{log_cred}</a>
 </div>

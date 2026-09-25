@@ -24,12 +24,12 @@ includeLang('credit');
 $parse   = $lang;
 
 if ($user['authlevel'] >= 3) {
-	if ($_POST['opt_save'] == "1") {
+	if (($_POST['opt_save'] ?? null) == "1") {
 		// Extended copyright is activated?
-		if (isset($_POST['ExtCopyFrame']) && $_POST['ExtCopyFrame'] == 'on') {
+		if (isset($_POST['ExtCopyFrame']) && ($_POST['ExtCopyFrame'] ?? null) == 'on') {
 			$game_config['ExtCopyFrame'] = "1";
-			$game_config['ExtCopyOwner'] = $_POST['ExtCopyOwner'];
-			$game_config['ExtCopyFunct'] = $_POST['ExtCopyFunct'];
+			$game_config['ExtCopyOwner'] = ($_POST['ExtCopyOwner'] ?? null);
+			$game_config['ExtCopyFunct'] = ($_POST['ExtCopyFunct'] ?? null);
 		} else {
 			$game_config['ExtCopyFrame'] = "0";
 			$game_config['ExtCopyOwner'] = "";
@@ -51,7 +51,7 @@ if ($user['authlevel'] >= 3) {
 
 		$BodyTPL = gettemplate('admin/credit_body');
 		$page = parsetemplate($BodyTPL, $parse);
-		display($page, $lang['cred_credit'], false);
+		display($page, $lang['cred_credit'], false, '', true);
 	}
 
 } else {

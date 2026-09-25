@@ -11,6 +11,7 @@ $lang['Have_new_level_raid'] = 'Avete guadagnato un punto Raideur!';
 $lang['Server_time'] = 'Orario';
 $lang['Events'] = 'Eventi';
 $lang['Free'] = 'Libero';
+$lang['ov_colonies'] = 'Altri pianeti';
 $lang['Diameter'] = 'Diametro';
 $lang['fields'] = 'Spazi';
 $lang['Developed_fields'] = 'Spazi occupati';

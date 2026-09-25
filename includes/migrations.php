@@ -45,6 +45,15 @@ $RenaissanceMigrations = array(
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;",
 		// Textes saisis avant la 0.9f (XNova 0.8e d'origine, 0.9d, 0.9e) : memes regles que la saisie
 		'RenaissanceCleanPlayerTexts',
+		// Lunes creees avec la temperature mini et maxi inversees (bug d'origine de CreateOneMoonRecord)
+		'RenaissanceFixMoonTemperatures',
+		// Liens des rapports de combat deja recus : ouverture dans la frame (plus de popup), HTML valide
+		'RenaissanceFixReportLinks',
+		// Le reglage « jeu clos » ne fonctionnait pas (installe a 1 par defaut, sans effet) : les serveurs etaient
+		// en realite ouverts. On le remet a 0 pour qu'ils le restent maintenant que le reglage fonctionne.
+		"UPDATE `{{prefix}}config` SET `config_value` = '0' WHERE `config_name` = 'game_disable';",
+		// Adresses par defaut vers xnova.fr (domaine repris par des tiers) : videes
+		"UPDATE `{{prefix}}config` SET `config_value` = '' WHERE `config_name` IN ('forum_url', 'bot_adress') AND `config_value` LIKE '%xnova.fr%';",
 	),
 );
 
@@ -180,6 +189,36 @@ function RenaissanceCleanPlayerTexts ( $Connection, $Prefix ) {
 	RenaissanceCleanColumns($Connection, $Prefix .'declared', array('declared_1' => 'text', 'declared_2' => 'text', 'declared_3' => 'text', 'reason' => 'text'));
 	// Messages : seulement ceux ecrits par des joueurs (type 1) ; les rapports du jeu contiennent du HTML voulu
 	RenaissanceCleanColumns($Connection, $Prefix .'messages', array('message_subject' => 'text', 'message_text' => 'html'), "`message_type` = '1'");
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+// 0.9f : les lunes etaient enregistrees avec temp_min et temp_max inverses ; on remet dans l'ordre (relancable).
+function RenaissanceFixMoonTemperatures ( $Connection, $Prefix ) {
+	$Result = @mysqli_query($Connection, "SELECT `id`, `temp_min`, `temp_max` FROM `". $Prefix ."planets` WHERE `planet_type` = '3' AND `temp_min` > `temp_max`;");
+	if (!$Result) {
+		return;
+	}
+	while ($Row = mysqli_fetch_assoc($Result)) {
+		mysqli_query($Connection, "UPDATE `". $Prefix ."planets` SET `temp_min` = '". intval($Row['temp_max']) ."', `temp_max` = '". intval($Row['temp_min']) ."' WHERE `id` = '". intval($Row['id']) ."';");
+	}
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+// 0.9f : liens des rapports de combat / destruction deja enregistres dans les messages.
+// Ancien format : <a href # OnClick="f( 'rw.php?raport=X', '');" ><center>  (popup, HTML invalide)
+// Nouveau       : <center><a href="rw.php?raport=X">                          (dans la frame). Relancable.
+function RenaissanceFixReportLinks ( $Connection, $Prefix ) {
+	$Result = @mysqli_query($Connection, "SELECT `message_id`, `message_text` FROM `". $Prefix ."messages` WHERE `message_text` LIKE '%rw.php?raport=%';");
+	if (!$Result) {
+		return;
+	}
+	while ($Row = mysqli_fetch_assoc($Result)) {
+		$Text = preg_replace('#<a href \# OnClick="f\( \'rw\.php\?raport=([0-9a-f]+)\', \'\'\);" ><center>#i', '<center><a href="rw.php?raport=$1">', $Row['message_text']);
+		$Text = preg_replace('#<a href="rw\.php\?raport=([0-9a-f]+)"><center>#i', '<center><a href="rw.php?raport=$1">', $Text);
+		if ($Text !== $Row['message_text']) {
+			mysqli_query($Connection, "UPDATE `". $Prefix ."messages` SET `message_text` = '". mysqli_real_escape_string($Connection, $Text) ."' WHERE `message_id` = '". intval($Row['message_id']) ."';");
+		}
+	}
 }
 
 ?>
