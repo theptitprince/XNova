@@ -162,7 +162,7 @@ SanitizeNumericInput ( array('galaxy', 'system', 'planet', 'planettype', 'curren
 
 	$page .= "</tbody></table></div>";
 
-	display ($page, $lang['Galaxy'] ?? '', false, '', false);
+	display ($page, $lang['galaxy_label'] ?? '', false, '', false);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

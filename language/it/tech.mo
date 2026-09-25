@@ -1,12 +1,12 @@
 <?php
 
-$lang['Tech'] = 'Tecnologia';
-$lang['Requirements'] = 'Requisiti';
-$lang['Metal'] = 'Metallo';
-$lang['Crystal'] = 'Cristallo';
-$lang['Deuterium'] = 'Deuterio';
-$lang['Energy'] = 'Energia';
-$lang['Message'] = "Message";
+$lang['tech_label'] = 'Tecnologia';
+$lang['requirements'] = 'Requisiti';
+$lang['metal_label'] = 'Metallo';
+$lang['crystal_label'] = 'Cristallo';
+$lang['deuterium_label'] = 'Deuterio';
+$lang['energy_label'] = 'Energia';
+$lang['message_label'] = "Message";
 $lang['level'] = 'livello';
 $lang['treeinfo']     = "[i]";
 $lang['te_dt_step'] = "Fase";

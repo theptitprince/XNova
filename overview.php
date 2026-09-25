@@ -143,11 +143,11 @@ switch ($mode) {
             if ($user['new_message'] != 0) {
                 $Have_new_message .= "<tr>";
                 if ($user['new_message'] == 1) {
-                    $Have_new_message .= "<th colspan=4><a href=messages.$phpEx>" . $lang['Have_new_message'] . "</a></th>";
+                    $Have_new_message .= "<th colspan=4><a href=messages.$phpEx>" . $lang['have_new_message'] . "</a></th>";
                 } elseif ($user['new_message'] > 1) {
                     $Have_new_message .= "<th colspan=4><a href=messages.$phpEx>";
                     $m = pretty_number($user['new_message']);
-                    $Have_new_message .= str_replace('%m', $m, $lang['Have_new_messages']);
+                    $Have_new_message .= str_replace('%m', $m, $lang['have_new_messages']);
                     $Have_new_message .= "</a></th>";
                 }
                 $Have_new_message .= "</tr>";
@@ -174,7 +174,7 @@ switch ($mode) {
                     $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
                     doquery($QryUpdateUser, 'users');
                     $HaveNewLevelMineur = "<tr>";
-                    $HaveNewLevelMineur .= "<th colspan=4><a href=officier.$phpEx>" . $lang['Have_new_level_mineur'] . "</a></th></tr>";
+                    $HaveNewLevelMineur .= "<th colspan=4><a href=officier.$phpEx>" . $lang['have_new_level_mineur'] . "</a></th></tr>";
                 }
                 if ($XPRaid >= $XpRaidUp) {
                     $QryUpdateUser = "UPDATE {{table}} SET ";
@@ -184,7 +184,7 @@ switch ($mode) {
                     $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
                     doquery($QryUpdateUser, 'users');
                     $HaveNewLevelRaid = "<tr>";
-                    $HaveNewLevelRaid .= "<th colspan=4><a href=officier.$phpEx>" . $lang['Have_new_level_raid'] . "</a></th></tr>";
+                    $HaveNewLevelRaid .= "<th colspan=4><a href=officier.$phpEx>" . $lang['have_new_level_raid'] . "</a></th></tr>";
                 }
             }
             // -----------------------------------------------------------------------------------------------
@@ -265,8 +265,8 @@ switch ($mode) {
             while ($UserPlanet = mysqli_fetch_array($planets_query)) {
                 PlanetResourceUpdate ($user, $UserPlanet, time());
                 if ($UserPlanet["id"] != $user["current_planet"] && $UserPlanet['planet_type'] != 3) {
-                    $PlanetState = $lang['Free'];
-                    $PlanetStateTitle = $lang['Free'];
+                    $PlanetState = $lang['free'];
+                    $PlanetStateTitle = $lang['free'];
                     if ($UserPlanet['b_building'] != 0) {
                         UpdatePlanetBatimentQueueList ($UserPlanet, $user);
                         if ($UserPlanet['b_building'] != 0) {
@@ -342,19 +342,19 @@ switch ($mode) {
             // External Chat Frame ...
             // Banner ADS Google (meme si je suis contre cela)
             if ($game_config['OverviewNewsFrame'] == '1') {
-                $parse['NewsFrame'] = "<tr><th>" . $lang['ov_news_title'] . "</th><th colspan=\"3\">" . stripslashes($game_config['OverviewNewsText']) . "</th></tr>";
+                $parse['news_frame'] = "<tr><th>" . $lang['ov_news_title'] . "</th><th colspan=\"3\">" . stripslashes($game_config['OverviewNewsText']) . "</th></tr>";
             }
             if ($game_config['OverviewExternChat'] == '1') {
-                $parse['ExternalTchatFrame'] = "<tr><th colspan=\"4\">" . stripslashes($game_config['OverviewExternChatCmd']) . "</th></tr>";
+                $parse['external_tchat_frame'] = "<tr><th colspan=\"4\">" . stripslashes($game_config['OverviewExternChatCmd']) . "</th></tr>";
             }
             if ($game_config['OverviewClickBanner'] != '') {
-                $parse['ClickBanner'] = stripslashes($game_config['OverviewClickBanner']);
+                $parse['click_banner'] = stripslashes($game_config['OverviewClickBanner']);
             }
             if ($game_config['ForumBannerFrame'] == '1') {
 
                 $BannerURL = "".dirname($_SERVER["HTTP_REFERER"])."/scripts/createbanner.php?id=".$user['id']."";
 
-                $parse['bannerframe'] = "<th colspan=\"4\"><img src=\"scripts/createbanner.php?id=".$user['id']."\"><br>".$lang['InfoBanner']."<br><input name=\"bannerlink\" type=\"text\" id=\"bannerlink\" value=\"[img]".$BannerURL."[/img]\" size=\"62\"></th></tr>";
+                $parse['bannerframe'] = "<th colspan=\"4\"><img src=\"scripts/createbanner.php?id=".$user['id']."\"><br>".$lang['info_banner']."<br><input name=\"bannerlink\" type=\"text\" id=\"bannerlink\" value=\"[img]".$BannerURL."[/img]\" size=\"62\"></th></tr>";
             }
             // --- Gestion de l'affichage d'une lune ---------------------------------------------------------
             if (!empty($lunarow['id'])) {
@@ -412,9 +412,9 @@ switch ($mode) {
             $parse['fleet_list'] = $flotten;
             $parse['energy_used'] = $planetrow["energy_max"] - $planetrow["energy_used"];
 
-            $parse['Have_new_message'] = $Have_new_message;
-            $parse['Have_new_level_mineur'] = $HaveNewLevelMineur;
-            $parse['Have_new_level_raid'] = $HaveNewLevelRaid;
+            $parse['have_new_message'] = $Have_new_message;
+            $parse['have_new_level_mineur'] = $HaveNewLevelMineur;
+            $parse['have_new_level_raid'] = $HaveNewLevelRaid;
             $parse['time'] = "<div id=\"dateheure\"></div>";
             // Horloge : heure locale du serveur (fuseau de php.ini), exprimee comme une date UTC en millisecondes pour le JavaScript
             $parse['server_clock'] = (time() + date('Z')) * 1000;
@@ -451,10 +451,10 @@ switch ($mode) {
 
                     $parse['building'] = $Build;
                 } else {
-                    $parse['building'] = $lang['Free'];
+                    $parse['building'] = $lang['free'];
                 }
             } else {
-                $parse['building'] = $lang['Free'];
+                $parse['building'] = $lang['free'];
             }
             $query = doquery('SELECT username FROM {{table}} ORDER BY register_time DESC', 'users', true);
             $parse['last_user'] = $query['username'];
@@ -464,7 +464,7 @@ switch ($mode) {
             $parse['users_amount'] = $game_config['users_amount'];
             // Rajout d'une barre pourcentage
             // Calcul du pourcentage de remplissage
-            $parse['case_pourcentage'] = floor($planetrow["field_current"] / CalculateMaxPlanetFields($planetrow) * 100) . $lang['o/o'];
+            $parse['case_pourcentage'] = floor($planetrow["field_current"] / CalculateMaxPlanetFields($planetrow) * 100) . $lang['o_o'];
             // Barre de remplissage
             $parse['case_barre'] = floor($planetrow["field_current"] / CalculateMaxPlanetFields($planetrow) * 100) * 4.0;
             // Couleur de la barre de remplissage
@@ -488,21 +488,21 @@ switch ($mode) {
             $parse['lvl_up_minier'] = $LvlMinier * 5000;
             $parse['lvl_up_raid'] = $LvlRaid * 10;
             // Nombre de raids, pertes, etc ...
-            $parse['Raids'] = $lang['Raids'];
-            $parse['NumberOfRaids'] = $lang['NumberOfRaids'];
-            $parse['RaidsWin'] = $lang['RaidsWin'];
-            $parse['RaidsLoose'] = $lang['RaidsLoose'];
+            $parse['raids_label'] = $lang['raids_label'];
+            $parse['number_of_raids'] = $lang['number_of_raids'];
+            $parse['raids_win'] = $lang['raids_win'];
+            $parse['raids_loose'] = $lang['raids_loose'];
 
             $parse['raids'] = intval($user['raids']);
             $parse['raidswin'] = intval($user['raidswin']);
             $parse['raidsloose'] = intval($user['raidsloose']); // NULL tant qu'aucun raid n'est perdu
             // Compteur de Membres en ligne
             $OnlineUsers = doquery("SELECT COUNT(*) FROM {{table}} WHERE onlinetime>='" . (time()-15 * 60) . "'", 'users', 'true');
-            $parse['NumberMembersOnline'] = $OnlineUsers[0];
+            $parse['number_members_online'] = $OnlineUsers[0];
 
             $page = parsetemplate(gettemplate('overview_body'), $parse);
 
-            display($page, $lang['Overview'] ?? '');
+            display($page, $lang['overview'] ?? '');
             break;
         }
 }

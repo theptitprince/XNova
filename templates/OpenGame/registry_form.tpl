@@ -7,7 +7,7 @@
 	  <tr>
 	    <td colspan="2" class="c"><b>{form}</b></td>
 </tr><tr>
-	<th width="293">{GameName}</th>
+	<th width="293">{game_name_label}</th>
     <th width="293"><input name="character" size="20" maxlength="20" type="text" onKeypress="
      if (event.keyCode==60 || event.keyCode==62) event.returnValue = false;
      if (event.which==60 || event.which==62) return false;"></th>
@@ -19,23 +19,23 @@
      if (event.which==60 || event.which==62) return false;"></th>
 </tr>
 <tr>
-  <th>{E-Mail}</th>
+  <th>{e_mail}</th>
   <th><input name="email" size="20" maxlength="40" type="text" onKeypress="
      if (event.keyCode==60 || event.keyCode==62) event.returnValue = false;
      if (event.which==60 || event.which==62) return false;"></th>
 </tr>
 <tr>
-  <th>{MainPlanet}</th>
+  <th>{main_planet}</th>
   <th><input name="planet" size="20" maxlength="20" type="text" onKeypress="
      if (event.keyCode==60 || event.keyCode==62) event.returnValue = false;
      if (event.which==60 || event.which==62) return false;"></th>
 </tr>
 <tr>
-  <th>{Sex}</th>
+  <th>{sex_label}</th>
   <th><select name="sex">
-		<option value="">{Undefined}</option>
-		<option value="M">{Male}</option>
-		<option value="F">{Female}</option>
+		<option value="">{undefined}</option>
+		<option value="M">{male}</option>
+		<option value="F">{female}</option>
 		</select></th>
 </tr>
 <tr>

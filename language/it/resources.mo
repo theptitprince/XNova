@@ -1,20 +1,20 @@
 <?php
 
-$lang['Production_of_resources_in_the_planet'] = 'Produzione di materi prime sul pianeta "%s"';
-$lang['Production_level'] = 'Livello di Produzione';
-$lang['Basic_income'] = 'Risorse di base';
+$lang['production_of_resources_in_the_planet'] = 'Produzione di materi prime sul pianeta "%s"';
+$lang['production_level_label'] = 'Livello di Produzione';
+$lang['basic_income'] = 'Risorse di base';
 $lang['quantity'] = 'Quantit&aacute;';
 $lang['level'] = 'Livello';
-$lang['Stores_capacity'] = 'Capacit&aacute; dei depositi';
-$lang['Widespread_production'] = 'Produzione stimata';
-$lang['Daily'] = 'Giornaliera';
-$lang['Weekly'] = 'Settimanale';
-$lang['Monthly'] = 'Mensile';
-$lang['Storage_state'] = 'Capienza dei depositi';
-$lang['Calcule'] = 'Calcolo';
-$lang['o/o'] = '%';
+$lang['stores_capacity'] = 'Capacit&aacute; dei depositi';
+$lang['widespread_production'] = 'Produzione stimata';
+$lang['daily'] = 'Giornaliera';
+$lang['weekly'] = 'Settimanale';
+$lang['monthly'] = 'Mensile';
+$lang['storage_state'] = 'Capienza dei depositi';
+$lang['calcule'] = 'Calcolo';
+$lang['o_o'] = '%';
 $lang['k'] = 'k';
-$lang['Total'] = 'Totale';
+$lang['total_label'] = 'Totale';
 
 // Created by Perberos. All rights reserved (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008

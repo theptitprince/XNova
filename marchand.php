@@ -52,7 +52,7 @@ function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 					if ($CurrentPlanet['metal'] > $Necessaire) {
 						$CurrentPlanet['metal'] -= $Necessaire;
 					} else {
-						$Message = $lang['mod_ma_noten'] ." ". $lang['Metal'] ."! ";
+						$Message = $lang['mod_ma_noten'] ." ". $lang['metal_label'] ."! ";
 						$Error   = true;
 					}
 					break;
@@ -62,7 +62,7 @@ function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 					if ($CurrentPlanet['crystal'] > $Necessaire) {
 						$CurrentPlanet['crystal'] -= $Necessaire;
 					} else {
-						$Message = $lang['mod_ma_noten'] ." ". $lang['Crystal'] ."! ";
+						$Message = $lang['mod_ma_noten'] ." ". $lang['crystal_label'] ."! ";
 						$Error   = true;
 					}
 					break;
@@ -72,7 +72,7 @@ function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 					if ($CurrentPlanet['deuterium'] > $Necessaire) {
 						$CurrentPlanet['deuterium'] -= $Necessaire;
 					} else {
-						$Message = $lang['mod_ma_noten'] ." ". $lang['Deuterium'] ."! ";
+						$Message = $lang['mod_ma_noten'] ." ". $lang['deuterium_label'] ."! ";
 						$Error   = true;
 					}
 					break;

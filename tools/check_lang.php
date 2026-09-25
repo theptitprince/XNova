@@ -8,9 +8,10 @@
  *
  * Verificateur des cles de langue (outil de developpement, en ligne de commande uniquement) :
  *  1. cles $lang['...'] utilisees dans le code mais definies dans aucun fichier de langue (texte vide a l'ecran) ;
- *  2. cles definies en francais mais absentes d'une autre langue (traduction manquante).
+ *  2. cles definies en francais mais absentes d'une autre langue (traduction manquante) ;
+ *  3. (--noms) cles de langue et balises {x} des templates hors convention : a-z, 0-9 et _ uniquement (depuis la 0.9g).
  *
- * Usage, depuis la racine du jeu :  php tools/check_lang.php [--langues]
+ * Usage, depuis la racine du jeu :  php tools/check_lang.php [--langues] [--noms]
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
@@ -69,4 +70,26 @@ if (in_array('--langues', $argv)) {
 		echo wordwrap(implode(', ', array_keys($Absent)), 110) . "\n";
 	}
 }
-exit(count($Missing) > 0 ? 1 : 0);
+$BadNames = array();
+if (in_array('--noms', $argv)) {
+	// Convention de nommage : cles de langue (toutes les langues) et balises des templates
+	foreach (array('language' => '/\.(mo|cfg)$/', 'templates' => '/\.tpl$/') as $Dir => $Ext) {
+		$Files = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($Root . '/' . $Dir, FilesystemIterator::SKIP_DOTS));
+		foreach ($Files as $File) {
+			if (!preg_match($Ext, $File->getFilename())) continue;
+			$Src  = file_get_contents($File->getPathname());
+			$Path = str_replace('\\', '/', substr($File->getPathname(), strlen($Root) + 1));
+			$Pattern = ($Dir == 'language') ? '/\$lang\s*\[\s*[\'"]([^\'"]+)[\'"]\s*\]/' : '/\{([A-Za-z0-9\-_]+)\}/';
+			if (preg_match_all($Pattern, $Src, $M)) {
+				foreach ($M[1] as $K) {
+					if (!preg_match('/^[a-z0-9_]+$/', $K)) $BadNames[$K][$Path] = true;
+				}
+			}
+		}
+	}
+	echo "\n=== Noms hors convention (a-z, 0-9, _) : " . count($BadNames) . "\n";
+	foreach ($BadNames as $K => $Where) {
+		echo str_pad($K, 32) . ' ' . implode(', ', array_slice(array_keys($Where), 0, 3)) . "\n";
+	}
+}
+exit((count($Missing) > 0 || count($BadNames) > 0) ? 1 : 0);

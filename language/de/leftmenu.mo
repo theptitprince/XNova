@@ -1,44 +1,44 @@
 <?php
 
-$lang['Multiverse'] = '<b>Sky-Game</b> Uni';
+$lang['multiverse'] = '<b>Sky-Game</b> Uni';
 
-$lang['Overview']   = '&Uuml;bersicht';
-$lang['Officiers']  = 'Officier';
+$lang['overview']   = '&Uuml;bersicht';
+$lang['officiers']  = 'Officier';
 
-$lang['Buildings']  = 'Bauhof';
-$lang['Research']   = 'Forschung';
-$lang['Shipyard']   = 'Flottenwerft';
-$lang['Defense']    = 'Verteidigung';
+$lang['buildings_label']  = 'Bauhof';
+$lang['research_label']   = 'Forschung';
+$lang['shipyard']   = 'Flottenwerft';
+$lang['defense_label']    = 'Verteidigung';
 
-$lang['Resources']  = 'Rohstoffe';
-$lang['Imperium']   = 'Imperium';
-$lang['Marchand']   = 'H&auml;ndler';
-$lang['Annonces']   = 'Rohstoffanzeigen';
-$lang['Technology'] = 'Technologien';
+$lang['resources_label']  = 'Rohstoffe';
+$lang['imperium']   = 'Imperium';
+$lang['marchand_label']   = 'H&auml;ndler';
+$lang['annonces']   = 'Rohstoffanzeigen';
+$lang['technology'] = 'Technologien';
 
-$lang['Galaxy']     = 'Galaxie';
-$lang['Fleet']      = 'Flottezentrale';
+$lang['galaxy_label']     = 'Galaxie';
+$lang['fleet_label']      = 'Flottezentrale';
 
-$lang['Alliance']   = 'Allianz';
-$lang['Chat']       = 'Chat';
-$lang['Statistics'] = 'Statistik';
-$lang['Search']     = 'Suchen';
+$lang['alliance_label']   = 'Allianz';
+$lang['chat']       = 'Chat';
+$lang['statistics'] = 'Statistik';
+$lang['search']     = 'Suchen';
 $lang['blocked']    = 'Gesperrt';
-$lang['Records']    = 'Planeten Rekord';
+$lang['records']    = 'Planeten Rekord';
 
-$lang['Messages']   = 'Nachrichten';
-$lang['Notes']      = 'Notizblock';
-$lang['Buddylist']  = 'Buddyliste';
+$lang['messages_label']   = 'Nachrichten';
+$lang['notes']      = 'Notizblock';
+$lang['buddylist']  = 'Buddyliste';
 
-$lang['Board']      = 'Forum';
-$lang['Contact']    = 'Kontakt';
+$lang['board']      = 'Forum';
+$lang['contact']    = 'Kontakt';
 $lang['go']         = 'GO';
-$lang['Options']    = 'Optionen';
+$lang['options_label']    = 'Optionen';
 
-$lang['Logout']     = 'Logout';
+$lang['logout']     = 'Logout';
 
-$lang['Help']       = 'Hilfe';
-$lang['Rules']      = 'Regeln';
+$lang['help']       = 'Hilfe';
+$lang['rules_label']      = 'Regeln';
 
 $lang['adm_addfleet'] = 'Flotte hinzuf&uuml;gen';
 ?>

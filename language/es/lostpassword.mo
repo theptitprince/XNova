@@ -1,11 +1,11 @@
 <?php
 
-$lang['ResetPass'] = "Restitución de contraseña";
-$lang['TextPass1'] = "Debe poner la dirección correo electrónico de su cuenta";
-$lang['TextPass2'] = "tal como se informa en sus Opciones. Es también la que utilizó para la inscripción. Si apoya en “Enviar”, una nueva contraseña será creada lo recibiría entonces por correo electrónico a la dirección indicada.";
+$lang['reset_pass'] = "Restitución de contraseña";
+$lang['text_pass1'] = "Debe poner la dirección correo electrónico de su cuenta";
+$lang['text_pass2'] = "tal como se informa en sus Opciones. Es también la que utilizó para la inscripción. Si apoya en “Enviar”, una nueva contraseña será creada lo recibiría entonces por correo electrónico a la dirección indicada.";
 $lang['email']    = "correo electrónico";
-$lang['ButtonSendPass'] = "Enviar";
-$lang['PassForm'] = "Formulario";
+$lang['button_send_pass'] = "Enviar";
+$lang['pass_form'] = "Formulario";
 
 // XNova Renaissance 0.9g : envio de la nueva contrasena
 $lang['system']        = "Sistema";

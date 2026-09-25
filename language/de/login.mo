@@ -1,19 +1,19 @@
 <?php
 
-$lang['Login_Fail'] = "Benutzername oder Passwort falsch.";
-$lang['Login'] 			= 'Login';
-$lang['User_name'] 		= 'Name:';
-$lang['Password'] 		= 'Passwort:';
-$lang['Please_Login'] 		= 'Bitte <a href="login.php" target="_main">logge dich.</a>';
-$lang['Please_Wait'] 		= 'Bitte Warten';
-$lang['Remember_me'] 		= 'Login Merken';
-$lang['Register'] 		= 'Registrieren';
-$lang['Login_Error'] 		= 'Fehler';
-$lang['PleaseWait'] 		= 'Fehler, Username und/oder Passwort falsch!';
+$lang['login_fail'] = "Benutzername oder Passwort falsch.";
+$lang['login'] 			= 'Login';
+$lang['user_name'] 		= 'Name:';
+$lang['password_label'] 		= 'Passwort:';
+$lang['please_login'] 		= 'Bitte <a href="login.php" target="_main">logge dich.</a>';
+$lang['please_wait_label'] 		= 'Bitte Warten';
+$lang['remember_me'] 		= 'Login Merken';
+$lang['register'] 		= 'Registrieren';
+$lang['login_error_label'] 		= 'Fehler';
+$lang['please_wait'] 		= 'Fehler, Username und/oder Passwort falsch!';
 
-$lang['Login_Ok'] = 'Login erfolgreich! <a href="./"><blink>Du wirst weitergeleitet</blink></a><br><center><img src="images/progressbar.gif"></center>';
-$lang['Login_FailPassword'] = 'Passwort falsch! <br /><a href="login.php" target="_top">Zum Login</a>';
-$lang['Login_FailUser'] = 'User existiert nicht!<br><a href="login.php" target="_top">Zum Login</a>';
+$lang['login_ok'] = 'Login erfolgreich! <a href="./"><blink>Du wirst weitergeleitet</blink></a><br><center><img src="images/progressbar.gif"></center>';
+$lang['login_fail_password'] = 'Passwort falsch! <br /><a href="login.php" target="_top">Zum Login</a>';
+$lang['login_fail_user'] = 'User existiert nicht!<br><a href="login.php" target="_top">Zum Login</a>';
 
 $lang['log_univ'] = 'Merci de selectionner un Univers!';
 $lang['log_reg'] = 'Inscriptions';

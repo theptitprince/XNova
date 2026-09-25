@@ -4,8 +4,8 @@
 $lang['changue_pass'] = 'Passowort &auml;ndern';
 
 
-$lang['Download'] 							= 'Download';
-$lang['Search'] 								= 'Suchen';
+$lang['download'] 							= 'Download';
+$lang['search'] 								= 'Suchen';
 
 $lang['succeful_changepass'] 						= 'Passwort erfolgreich ge&auml;ndert.<br /><a href="index.php" target="_self">Weiter</a>';
 $lang['succeful_save'] 							= 'Einstellungen erfolgreich ge&auml;ndert.<br /><a href="options.php">Weiter</a>';
@@ -58,6 +58,6 @@ $lang['save_settings'] 							= 'Einstellungen speichern';
 // Created by Perberos. All rights reversed (C) 2006
 
 // XNova Renaissance 0.9g : titre des messages de la page
-$lang['Options'] = 'Einstellungen';
+$lang['options_label'] = 'Einstellungen';
 
 ?>

@@ -81,7 +81,7 @@ function GalaxyRowUser ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 		$Result .= " onmouseover='return overlib(\"";
 		$Result .= "<table width=190>";
 		$Result .= "<tr>";
-		$Result .= "<td class=c colspan=2>".$lang['Player']." ".$GalaxyRowUser['username']." ".$lang['Place']." ".$Systemtatus4."</td>";
+		$Result .= "<td class=c colspan=2>".$lang['player_label']." ".$GalaxyRowUser['username']." ".$lang['place']." ".$Systemtatus4."</td>";
 		$Result .= "</tr><tr>";
 		if ($GalaxyRowUser['id'] != $user['id']) {
 			$Result .= "<td><a href=messages.php?mode=write&id=".$GalaxyRowUser['id'].">".$lang['gl_sendmess']."</a></td>";

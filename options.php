@@ -21,7 +21,7 @@
 
     includeLang('options');
 
-    $lang['PHP_SELF'] = 'options.' . $phpEx;
+    $lang['php_self'] = 'options.' . $phpEx;
 
     $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
     $mode = ($_GET['mode'] ?? null);
@@ -34,11 +34,11 @@
              `urlaubs_until` = '0'
              WHERE `id` = '".$user['id']."' LIMIT 1", "users");   
           $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
-          message($lang['succeful_save'], $lang['Options'],"options.php",1);
+          message($lang['succeful_save'], $lang['options_label'],"options.php",1);
        }else{
        $urlaubs_modus = "1";
        $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
-       message($lang['You_cant_exit_vmode'], $lan['Error'] ,"options.php",1);
+       message($lang['you_cant_exit_vmode'], $lang['error_label'] ,"options.php",1);
        }
     }
     if ($_POST && $mode == "change") { // Array ( [db_character]
@@ -220,7 +220,7 @@
              message($lang['succeful_changename'], $lang['changue_name'],"login.php",1);
           }
        }
-       message($lang['succeful_save'], $lang['Options'],"options.php",1);
+       message($lang['succeful_save'], $lang['options_label'],"options.php",1);
     } else {
        $parse = $lang;
 
@@ -256,7 +256,7 @@
        $parse['opt_delac_data'] = ($user['db_deaktjava'] == 1) ? " checked='checked'/":'';
        $parse['opt_modev_data'] = ($user['urlaubs_modus'] == 1)?" checked='checked'/":'';
        $parse['opt_modev_exit'] = ($user['urlaubs_modus'] == 0)?" checked='1'/":'';
-       $parse['Vaccation_mode'] = $lang['Vaccation_mode'];
+       $parse['vaccation_mode'] = $lang['vaccation_mode'];
        $parse['vacation_until'] = date("d/m/Y H:i:s",$user['urlaubs_until']);
        $parse['user_settings_rep'] = ($user['settings_rep'] == 1) ? " checked='checked'/":'';
        $parse['user_settings_esp'] = ($user['settings_esp'] == 1) ? " checked='checked'/":'';

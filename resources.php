@@ -131,8 +131,8 @@ function BuildRessourcePage ( $CurrentUser, $CurrentPlanet ) {
 		}
 	}
 
-	$parse['Production_of_resources_in_the_planet'] =
-	str_replace('%s', $CurrentPlanet['name'], $lang['Production_of_resources_in_the_planet']);
+	$parse['production_of_resources_in_the_planet'] =
+	str_replace('%s', $CurrentPlanet['name'], $lang['production_of_resources_in_the_planet']);
 	if       ($CurrentPlanet['energy_max'] == 0 &&
 		$CurrentPlanet['energy_used'] > 0) {
 		$parse['production_level'] = 0;
@@ -204,9 +204,9 @@ function BuildRessourcePage ( $CurrentUser, $CurrentPlanet ) {
 	$parse['weekly_deuterium']      = colorNumber(pretty_number($parse['weekly_deuterium']));
 	$parse['monthly_deuterium']     = colorNumber(pretty_number($parse['monthly_deuterium']));
 
-	$parse['metal_storage']         = floor($CurrentPlanet['metal']     / $CurrentPlanet['metal_max']     * 100) . $lang['o/o'];
-	$parse['crystal_storage']       = floor($CurrentPlanet['crystal']   / $CurrentPlanet['crystal_max']   * 100) . $lang['o/o'];
-	$parse['deuterium_storage']     = floor($CurrentPlanet['deuterium'] / $CurrentPlanet['deuterium_max'] * 100) . $lang['o/o'];
+	$parse['metal_storage']         = floor($CurrentPlanet['metal']     / $CurrentPlanet['metal_max']     * 100) . $lang['o_o'];
+	$parse['crystal_storage']       = floor($CurrentPlanet['crystal']   / $CurrentPlanet['crystal_max']   * 100) . $lang['o_o'];
+	$parse['deuterium_storage']     = floor($CurrentPlanet['deuterium'] / $CurrentPlanet['deuterium_max'] * 100) . $lang['o_o'];
 	$parse['metal_storage_bar']     = floor(($CurrentPlanet['metal']     / $CurrentPlanet['metal_max']     * 100) * 2.5);
 	$parse['crystal_storage_bar']   = floor(($CurrentPlanet['crystal']   / $CurrentPlanet['crystal_max']   * 100) * 2.5);
 	$parse['deuterium_storage_bar'] = floor(($CurrentPlanet['deuterium'] / $CurrentPlanet['deuterium_max'] * 100) * 2.5);
@@ -255,7 +255,7 @@ function BuildRessourcePage ( $CurrentUser, $CurrentPlanet ) {
 }
 
 	$Page = BuildRessourcePage ( $user, $planetrow );
-	display( $Page, $lang['Resources'] ?? '' );
+	display( $Page, $lang['resources_label'] ?? '' );
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

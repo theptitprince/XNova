@@ -174,7 +174,7 @@ function pretty_time_hour ($seconds) {
 function ShowBuildTime ($time) {
 	global $lang;
 
-	return "<br>". $lang['ConstructionTime'] .": " . pretty_time($time);
+	return "<br>". $lang['construction_time'] .": " . pretty_time($time);
 }
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -324,9 +324,9 @@ function CreateFleetPopupedMissionLink ( $FleetRow, $Texte, $FleetType ) {
 	$FleetTotalC  = $FleetRow['fleet_resource_metal'] + $FleetRow['fleet_resource_crystal'] + $FleetRow['fleet_resource_deuterium'];
 	if ($FleetTotalC <> 0) {
 		$FRessource   = "<table width=200>";
-		$FRessource  .= "<tr><td width=50% align=left><font color=white>". $lang['Metal'] ."<font></td><td width=50% align=right><font color=white>". pretty_number($FleetRow['fleet_resource_metal']) ."<font></td></tr>";
-		$FRessource  .= "<tr><td width=50% align=left><font color=white>". $lang['Crystal'] ."<font></td><td width=50% align=right><font color=white>". pretty_number($FleetRow['fleet_resource_crystal']) ."<font></td></tr>";
-		$FRessource  .= "<tr><td width=50% align=left><font color=white>". $lang['Deuterium'] ."<font></td><td width=50% align=right><font color=white>". pretty_number($FleetRow['fleet_resource_deuterium']) ."<font></td></tr>";
+		$FRessource  .= "<tr><td width=50% align=left><font color=white>". $lang['metal_label'] ."<font></td><td width=50% align=right><font color=white>". pretty_number($FleetRow['fleet_resource_metal']) ."<font></td></tr>";
+		$FRessource  .= "<tr><td width=50% align=left><font color=white>". $lang['crystal_label'] ."<font></td><td width=50% align=right><font color=white>". pretty_number($FleetRow['fleet_resource_crystal']) ."<font></td></tr>";
+		$FRessource  .= "<tr><td width=50% align=left><font color=white>". $lang['deuterium_label'] ."<font></td><td width=50% align=right><font color=white>". pretty_number($FleetRow['fleet_resource_deuterium']) ."<font></td></tr>";
 		$FRessource  .= "</table>";
 	} else {
 		$FRessource   = "";

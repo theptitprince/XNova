@@ -6,7 +6,7 @@
 <tr>
 	<td class="c" colspan="2">{adm_af_form}</td>
 </tr><tr>
-	<th width="150">{Id}</th>
+	<th width="150">{id_label}</th>
 	<th width="155"><input name="id" type="text" value="0" size="3" /></th>
 </tr>
 {rows}

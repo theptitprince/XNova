@@ -357,7 +357,7 @@ $nextpage = $Page + 1;
 
 	$parse                 = $lang;
 	$parse['ins_state']    = $Page;
-	$parse['ins_page']     = $frame;
+	$parse['ins_page']     = $frame ?? '';
 	$parse['dis_ins_btn']  = "?mode=$Mode&page=$nextpage";
 	$Displ                 = parsetemplate ($MainTPL, $parse);
 

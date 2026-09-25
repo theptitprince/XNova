@@ -24,23 +24,23 @@ $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 
 $a = intval(($_GET['a'] ?? null));
 $n = intval(($_GET['n'] ?? null));
-$lang['Please_Wait'] = "Patientez...";
+$lang['please_wait_label'] = "Patientez...";
 
 //lenguaje
 includeLang('notes');
 
-$lang['PHP_SELF'] = 'notes.'.$phpEx;
+$lang['php_self'] = 'notes.'.$phpEx;
 
 if(($_POST["s"] ?? null) == 1 || ($_POST["s"] ?? null) == 2){//Edicion y agregar notas
 
 	$time = time();
 	$priority = intval(($_POST["u"] ?? null));
-	$title = (($_POST["title"] ?? null)) ? SqlEscape(SafeText(($_POST["title"] ?? null))) : $lang['NoTitle'];
-	$text = (($_POST["text"] ?? null)) ? SqlEscape(SafeText(($_POST["text"] ?? null))) : $lang['NoText'];
+	$title = (($_POST["title"] ?? null)) ? SqlEscape(SafeText(($_POST["title"] ?? null))) : $lang['no_title'];
+	$text = (($_POST["text"] ?? null)) ? SqlEscape(SafeText(($_POST["text"] ?? null))) : $lang['no_text'];
 
 	if(($_POST["s"] ?? null) ==1){
 		doquery("INSERT INTO {{table}} SET owner={$user['id']}, time=$time, priority=$priority, title='$title', text='$text'","notes");
-		message($lang['NoteAdded'], $lang['Please_Wait'],'notes.'.$phpEx,"3");
+		message($lang['note_added'], $lang['please_wait_label'],'notes.'.$phpEx,"3");
 	}elseif(($_POST["s"] ?? null) == 2){
 		/*
 		  pequeño query para averiguar si la nota que se edita es del propio jugador
@@ -48,10 +48,10 @@ if(($_POST["s"] ?? null) == 1 || ($_POST["s"] ?? null) == 2){//Edicion y agregar
 		$id = intval(($_POST["n"] ?? null));
 		$note_query = doquery("SELECT * FROM {{table}} WHERE id=$id AND owner=".$user["id"],"notes");
 
-		if(!$note_query){ error($lang['notpossiblethisway'],$lang['Notes']); }
+		if(!$note_query){ error($lang['notpossiblethisway'],$lang['notes']); }
 
 		doquery("UPDATE {{table}} SET time=$time, priority=$priority, title='$title', text='$text' WHERE id=$id","notes");
-		message($lang['NoteUpdated'], $lang['Please_Wait'], 'notes.'.$phpEx, "3");
+		message($lang['note_updated'], $lang['please_wait_label'], 'notes.'.$phpEx, "3");
 	}
 
 }
@@ -75,8 +75,8 @@ elseif($_POST){//Borrar
 		}
 	}
 	if($deleted){
-		$mes = ($deleted == 1) ? $lang['NoteDeleted'] : $lang['NoteDeleteds'];
-		message($mes,$lang['Please_Wait'],'notes.'.$phpEx,"3");
+		$mes = ($deleted == 1) ? $lang['note_deleted'] : $lang['note_deleteds'];
+		message($mes,$lang['please_wait_label'],'notes.'.$phpEx,"3");
 	}else{header("Location: notes.$phpEx");}
 
 }else{//sin post...
@@ -87,19 +87,19 @@ elseif($_POST){//Borrar
 
 		$parse = $lang;
 
-		$parse['c_Options'] = "<option value=2 selected=selected>{$lang['Important']}</option>
-			  <option value=1>{$lang['Normal']}</option>
-			  <option value=0>{$lang['Unimportant']}</option>";
+		$parse['c_options'] = "<option value=2 selected=selected>{$lang['important']}</option>
+			  <option value=1>{$lang['normal']}</option>
+			  <option value=0>{$lang['unimportant']}</option>";
 
-		$parse['cntChars'] = '0';
-		$parse['TITLE'] = $lang['Createnote'];
+		$parse['cnt_chars'] = '0';
+		$parse['title_label'] = $lang['createnote'];
 		$parse['text'] = '';
 		$parse['title'] = '';
 		$parse['inputs'] = '<input type=hidden name=s value=1>';
 
 		$page = parsetemplate(gettemplate('notes_form'), $parse);
 
-		display($page,$lang['Notes'],false);
+		display($page,$lang['notes'],false);
 
 	}
 	elseif(($_GET["a"] ?? null) == 2){//editar
@@ -108,7 +108,7 @@ elseif($_POST){//Borrar
 		*/
 		$note = doquery("SELECT * FROM {{table}} WHERE owner={$user['id']} AND id=$n",'notes',true);
 
-		if(!$note){ message($lang['notpossiblethisway'],$lang['Error']); }
+		if(!$note){ message($lang['notpossiblethisway'],$lang['error_label']); }
 
 		$cntChars = mb_strlen(html_entity_decode($note['text'], ENT_QUOTES, 'UTF-8'), 'UTF-8');
 
@@ -117,17 +117,17 @@ elseif($_POST){//Borrar
 
 		$parse = array_merge($note,$lang);
 
-		$parse['c_Options'] = "<option value=2{$SELECTED[2]}>{$lang['Important']}</option>
-			  <option value=1{$SELECTED[1]}>{$lang['Normal']}</option>
-			  <option value=0{$SELECTED[0]}>{$lang['Unimportant']}</option>";
+		$parse['c_options'] = "<option value=2{$SELECTED[2]}>{$lang['important']}</option>
+			  <option value=1{$SELECTED[1]}>{$lang['normal']}</option>
+			  <option value=0{$SELECTED[0]}>{$lang['unimportant']}</option>";
 
-		$parse['cntChars'] = $cntChars;
-		$parse['TITLE'] = $lang['Editnote'];
+		$parse['cnt_chars'] = $cntChars;
+		$parse['title_label'] = $lang['editnote'];
 		$parse['inputs'] = '<input type=hidden name=s value=2><input type=hidden name=n value='.$note['id'].'>';
 
 		$page = parsetemplate(gettemplate('notes_form'), $parse);
 
-		display($page,$lang['Notes'],false);
+		display($page,$lang['notes'],false);
 
 	}
 	else{//default
@@ -140,30 +140,30 @@ elseif($_POST){//Borrar
 		while($note = mysqli_fetch_array($notes_query)){
 			$count++;
 			//Colorea el titulo dependiendo de la prioridad
-			if($note["priority"] == 0){ $parse['NOTE_COLOR'] = "lime";}//Importante
-			elseif($note["priority"] == 1){ $parse['NOTE_COLOR'] = "yellow";}//Normal
-			elseif($note["priority"] == 2){ $parse['NOTE_COLOR'] = "red";}//Sin importancia
+			if($note["priority"] == 0){ $parse['note_color'] = "lime";}//Importante
+			elseif($note["priority"] == 1){ $parse['note_color'] = "yellow";}//Normal
+			elseif($note["priority"] == 2){ $parse['note_color'] = "red";}//Sin importancia
 
 			//fragmento de template
-			$parse['NOTE_ID'] = $note['id'];
-			$parse['NOTE_TIME'] = date("d/m/Y H:i:s",$note["time"]);
-			$parse['NOTE_TITLE'] = $note['title'];
-			$parse['NOTE_TEXT'] = mb_strlen(html_entity_decode($note['text'], ENT_QUOTES, 'UTF-8'), 'UTF-8');
+			$parse['note_id'] = $note['id'];
+			$parse['note_time'] = date("d/m/Y H:i:s",$note["time"]);
+			$parse['note_title'] = $note['title'];
+			$parse['note_text'] = mb_strlen(html_entity_decode($note['text'], ENT_QUOTES, 'UTF-8'), 'UTF-8');
 
 			$list .= parsetemplate(gettemplate('notes_body_entry'), $parse);
 
 		}
 
 		if($count == 0){
-			$list .= "<tr><th colspan=4>{$lang['ThereIsNoNote']}</th>\n";
+			$list .= "<tr><th colspan=4>{$lang['there_is_no_note']}</th>\n";
 		}
 
 		$parse = $lang;
-		$parse['BODY_LIST'] = $list;
+		$parse['body_list'] = $list;
 		//fragmento de template
 		$page = parsetemplate(gettemplate('notes_body'), $parse);
 
-		display($page,$lang['Notes'],false);
+		display($page,$lang['notes'],false);
 	}
 }
 ?>

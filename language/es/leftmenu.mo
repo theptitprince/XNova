@@ -1,44 +1,44 @@
 <?php
 
 // User menu links
-$lang['Multiverse']   = '<b>XNova</b> Uni';
+$lang['multiverse']   = '<b>XNova</b> Uni';
 
-$lang['Overview']     = 'Vue g&eacute;n&eacute;rale';
-$lang['Officiers']    = 'Officiers';
+$lang['overview']     = 'Vue g&eacute;n&eacute;rale';
+$lang['officiers']    = 'Officiers';
 
-$lang['Buildings']    = 'B&acirc;timents';
-$lang['Research']     = 'Laboratoire';
-$lang['Shipyard']     = 'Chantier spatial';
-$lang['Defense']      = 'D&eacute;fense';
+$lang['buildings_label']    = 'B&acirc;timents';
+$lang['research_label']     = 'Laboratoire';
+$lang['shipyard']     = 'Chantier spatial';
+$lang['defense_label']      = 'D&eacute;fense';
 
-$lang['Resources']    = 'Ressources';
-$lang['Imperium']     = 'Empire';
-$lang['Marchand']     = 'Marchand';
-$lang['Annonces']     = 'Petites Annonces';
-$lang['Technology']   = 'Technologies';
+$lang['resources_label']    = 'Ressources';
+$lang['imperium']     = 'Empire';
+$lang['marchand_label']     = 'Marchand';
+$lang['annonces']     = 'Petites Annonces';
+$lang['technology']   = 'Technologies';
 
-$lang['Galaxy']       = 'Galaxie';
-$lang['Fleet']        = 'Flotte';
+$lang['galaxy_label']       = 'Galaxie';
+$lang['fleet_label']        = 'Flotte';
 
-$lang['Alliance']     = 'Alliance';
-$lang['Chat']         = 'Chat';
-$lang['Statistics']   = 'Statistiques';
-$lang['Search']       = 'Recherche';
+$lang['alliance_label']     = 'Alliance';
+$lang['chat']         = 'Chat';
+$lang['statistics']   = 'Statistiques';
+$lang['search']       = 'Recherche';
 $lang['blocked']      = 'Piloris';
-$lang['Records']      = 'Records';
+$lang['records']      = 'Records';
 
-$lang['Messages']     = 'Messages';
-$lang['Notes']        = 'Notes';
-$lang['Buddylist']    = 'Liste amis';
+$lang['messages_label']     = 'Messages';
+$lang['notes']        = 'Notes';
+$lang['buddylist']    = 'Liste amis';
 
-$lang['Board']        = 'Forum';
-$lang['Contact']      = 'Contact';
-$lang['Options']      = 'Options';
+$lang['board']        = 'Forum';
+$lang['contact']      = 'Contact';
+$lang['options_label']      = 'Options';
 
-$lang['Logout']       = 'D&eacute;connexion';
+$lang['logout']       = 'D&eacute;connexion';
 
-$lang['Help']         = 'Aide';
-$lang['Rules']        = 'Regles';
+$lang['help']         = 'Aide';
+$lang['rules_label']        = 'Regles';
 
 // User menu titles
 $lang['devlp']        = 'D&eacute;veloppement';

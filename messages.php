@@ -101,12 +101,12 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 					$text    = "";
 				}
 			}
-			$parse['Send_message'] = $lang['mess_pagetitle'];
-			$parse['Recipient']    = $lang['mess_recipient'];
-			$parse['Subject']      = $lang['mess_subject'];
-			$parse['Message']      = $lang['mess_message'];
+			$parse['send_message'] = $lang['mess_pagetitle'];
+			$parse['recipient']    = $lang['mess_recipient'];
+			$parse['subject_label']      = $lang['mess_subject'];
+			$parse['message_label']      = $lang['mess_message'];
 			$parse['characters']   = $lang['mess_characters'];
-			$parse['Envoyer']      = $lang['mess_envoyer'];
+			$parse['envoyer']      = $lang['mess_envoyer'];
 
 			$parse['id']           = $OwnerID;
 			$parse['to']           = $OwnerRecord['username'] ." [".$OwnerHome['galaxy'].":".$OwnerHome['system'].":".$OwnerHome['planet']."]";

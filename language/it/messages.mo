@@ -40,7 +40,7 @@ $lang['mess_date']           = "Data";
 $lang['mess_answer']         = "Rispondere";
 $lang['mess_answer_prefix']  = "Re:";
 
-$lang['Player_say'] = '<font color="#7f7f7f">Il giocatore</font> %s <font color="#7f7f7f">invia un messaggio:</font><br>';
+$lang['player_say'] = '<font color="#7f7f7f">Il giocatore</font> %s <font color="#7f7f7f">invia un messaggio:</font><br>';
 
 
 

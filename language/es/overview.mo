@@ -2,26 +2,26 @@
 
 // General
 $lang['cancel'] = 'Annuler';
-$lang['Planet_menu'] = 'Menu de la plan&egrave;te';
-$lang['Planet'] = 'Plan&egrave;te';
-$lang['Have_new_message'] = 'Vous avez 1 nouveau message';
-$lang['Have_new_messages'] = 'Vous avez %m nouveaux messages';
-$lang['Have_new_level_mineur'] = 'Vous gagnez un niveau en Mineur !';
-$lang['Have_new_level_raid'] = 'Vous gagnez un niveau en Raideur!';
-$lang['Server_time'] = 'Heure';
-$lang['Events'] = 'Evenements';
-$lang['Free'] = 'non active';
-$lang['Diameter'] = 'Diametre';
+$lang['planet_menu'] = 'Menu de la plan&egrave;te';
+$lang['planet_label'] = 'Plan&egrave;te';
+$lang['have_new_message'] = 'Vous avez 1 nouveau message';
+$lang['have_new_messages'] = 'Vous avez %m nouveaux messages';
+$lang['have_new_level_mineur'] = 'Vous gagnez un niveau en Mineur !';
+$lang['have_new_level_raid'] = 'Vous gagnez un niveau en Raideur!';
+$lang['server_time'] = 'Heure';
+$lang['events'] = 'Evenements';
+$lang['free'] = 'non active';
+$lang['diameter_label'] = 'Diametre';
 $lang['fields'] = 'Cases';
-$lang['Developed_fields'] = 'Cases occup&eacute;es';
+$lang['developed_fields'] = 'Cases occup&eacute;es';
 $lang['max_eveloped_fields'] = 'Nombre maximal de cases utilisables';
-$lang['Temperature'] = 'Temp&eacute;rature';
+$lang['temperature_label'] = 'Temp&eacute;rature';
 $lang['approx'] = 'env.';
 $lang['to'] = '&#224';
-$lang['Centigrade'] = 'C';
-$lang['Position'] = 'Position';
-$lang['Points'] = 'Points';
-$lang['Rank'] = 'Rang';
+$lang['centigrade'] = 'C';
+$lang['position_label'] = 'Position';
+$lang['points_label'] = 'Points';
+$lang['rank_label'] = 'Rang';
 $lang['of'] = 'sur';
 
 
@@ -73,7 +73,7 @@ $lang['ov_planet_from'] = "la plan&egrave;te %s";
 $lang['ov_moon_from'] = "la lune %s";
 $lang['ov_expe_from'] = "de la r&eacute;gion";
 
-$lang['MembersOnline'] = "Membres en ligne";
+$lang['members_online'] = "Membres en ligne";
 $lang['ov_news_title'] = "News";
 
 // Created by Perberos. All rights reversed (C) 2006

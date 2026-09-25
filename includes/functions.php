@@ -296,16 +296,16 @@ function StdUserHeader ($title = '', $metatags = '') {
 	$parse['title']    = $title;
 	if ( defined('LOGIN') ) {
 		$parse['dpath']    = "skins/xnova/";
-		$parse['-style-']  = "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\">\n";
-		$parse['-style-'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/about.css\">\n";
+		$parse['style_tags']  = "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\">\n";
+		$parse['style_tags'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/about.css\">\n";
 	} else {
 		$parse['dpath']    = $dpath;
-		$parse['-style-']  = "<link rel=\"stylesheet\" type=\"text/css\" href=\"". $dpath ."default.css\" />";
-		$parse['-style-'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"". $dpath ."formate.css\" />";
+		$parse['style_tags']  = "<link rel=\"stylesheet\" type=\"text/css\" href=\"". $dpath ."default.css\" />";
+		$parse['style_tags'] .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"". $dpath ."formate.css\" />";
 	}
 
-	$parse['-meta-']  = ($metatags) ? $metatags : "";
-	$parse['-body-']  = "<body>"; //  class=\"style\" topmargin=\"0\" leftmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">";
+	$parse['meta_tags']  = ($metatags) ? $metatags : "";
+	$parse['body_tag']  = "<body>"; //  class=\"style\" topmargin=\"0\" leftmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">";
 	return parsetemplate(gettemplate('simple_header'), $parse);
 }
 
@@ -319,8 +319,8 @@ function AdminUserHeader ($title = '', $metatags = '') {
 	$parse           = $langInfos;
 	$parse['dpath']  = $dpath;
 	$parse['title']  = $title;
-	$parse['-meta-'] = ($metatags) ? $metatags : "";
-	$parse['-body-'] = "<body>"; //  class=\"style\" topmargin=\"0\" leftmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">";
+	$parse['meta_tags'] = ($metatags) ? $metatags : "";
+	$parse['body_tag'] = "<body>"; //  class=\"style\" topmargin=\"0\" leftmargin=\"0\" marginwidth=\"0\" marginheight=\"0\">";
 	return parsetemplate(gettemplate('admin/simple_header'), $parse);
 }
 
@@ -331,7 +331,7 @@ function AdminUserHeader ($title = '', $metatags = '') {
 function StdFooter() {
 	global $game_config, $lang;
 	$parse['copyright']     = $game_config['copyright'] ?? '';
-	$parse['TranslationBy'] = $lang['TranslationBy'] ?? '';
+	$parse['translation_by'] = $lang['translation_by'] ?? '';
 	return parsetemplate(gettemplate('overall_footer'), $parse);
 }
 

@@ -33,7 +33,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if ($action == 1) {
 		sendnewpassword($_POST['email'] ?? '');
 		// Meme message que l'adresse existe ou non
-		message($lang['lp_sent'], $lang['ResetPass'], "login.php", 5);
+		message($lang['lp_sent'], $lang['reset_pass'], "login.php", 5);
 	}
 
 // History version

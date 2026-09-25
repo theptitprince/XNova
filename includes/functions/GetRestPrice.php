@@ -28,13 +28,13 @@ function GetRestPrice ($user, $planet, $Element, $userfactor = true) {
 	}
 
 	$array = array(
-		'metal'      => $lang["Metal"],
-		'crystal'    => $lang["Crystal"],
-		'deuterium'  => $lang["Deuterium"],
-		'energy_max' => $lang["Energy"]
+		'metal'      => $lang["metal_label"],
+		'crystal'    => $lang["crystal_label"],
+		'deuterium'  => $lang["deuterium_label"],
+		'energy_max' => $lang["energy_label"]
 		);
 
-	$text  = "<br><font color=\"#7f7f7f\">". $lang['Rest_ress'] .": ";
+	$text  = "<br><font color=\"#7f7f7f\">". $lang['rest_ress'] .": ";
 	foreach ($array as $ResType => $ResTitle) {
 		if (!empty($pricelist[$Element][$ResType])) {
 			$text .= $ResTitle . ": ";

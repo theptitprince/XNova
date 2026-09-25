@@ -7,7 +7,7 @@
 	<td class="c" colspan="2">Joueur &agrave; d&eacute;bannir</td>
 </tr>
 <tr>
-	<th width="129">{Name}</th>
+	<th width="129">{name_label}</th>
 	<th width="268"><input name="nam" maxlength="80" size="25" value="" type="text">
 </th>
 </tr>

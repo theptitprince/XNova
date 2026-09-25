@@ -107,8 +107,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse['tbl_rows']   = "";
 		$parse['mlst_title'] = $lang['mlst_title'];
 
-		$StartRec           = 1 + (($ViewPage - 1) * 25);
+		// Decalage a partir de 0 (avant : 1 + ..., le message le plus recent n'apparaissait jamais)
+		$StartRec           = max(0, ($ViewPage - 1) * 25);
 		$Messages           = doquery("SELECT * FROM {{table}} WHERE `message_type` = '". $Selected ."' ORDER BY `message_time` DESC LIMIT ". $StartRec .",25;", 'messages');
+		$parse['mlst_data_rows'] = '';
 		while ($row = mysqli_fetch_assoc($Messages)) {
 			$OwnerData = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '". $row['message_owner'] ."';", 'users',true);
 			$bloc['mlst_id']      = $row['message_id'];

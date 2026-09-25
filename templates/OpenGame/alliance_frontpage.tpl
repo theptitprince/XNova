@@ -7,19 +7,19 @@
 	{ally_image}
 	
 	<tr>
-	  <th>{Tag}</th>
+	  <th>{tag_label}</th>
 	  <th>{ally_tag}</th>
 	</tr>
 	<tr>
-	  <th>{Name}</th>
+	  <th>{name_label}</th>
 	  <th>{ally_name}</th>
 	</tr>
 	<tr>
-	  <th>{Members}</th>
+	  <th>{members_label}</th>
 	  <th>{ally_members}{members_list}</th>
 	</tr>
 	<tr>
-	  <th>{Range}</th>
+	  <th>{range_label}</th>
 	  <th>{range}{alliance_admin}</th>
 	</tr>
 	
@@ -31,11 +31,11 @@
 	  <th colspan=2 height=100>{ally_description}</th>
 	</tr>
 	<tr>
-	  <th>{Main_Page}</th>
+	  <th>{main_page}</th>
 	  <th><a href="{ally_web}">{ally_web}</a></th>
 	</tr>
 	<tr>
-	  <td class=c colspan=2>{Inner_section}</th>
+	  <td class=c colspan=2>{inner_section}</th>
 	</tr>
 	<tr>
 	  <th colspan=2 height=100>{ally_text}</th>

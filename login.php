@@ -45,10 +45,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 				header("Location: ./frames.php");
 				exit;
 			} else {
-				$LoginError = $lang['Login_Fail'];
+				$LoginError = $lang['login_fail'];
 			}
 		} else {
-			$LoginError = $lang['Login_Fail'];
+			$LoginError = $lang['login_fail'];
 		}
 	}
 	{
@@ -63,7 +63,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse['users_amount'] = $Count['players'];
 		$parse['servername']   = $game_config['game_name'];
 		$parse['forum_link']   = (!empty($game_config['forum_url'])) ? "<a href=\"". htmlspecialchars($game_config['forum_url'], ENT_QUOTES) ."\">Forum</a>" : '';
-		$parse['PasswordLost'] = $lang['PasswordLost'];
+		$parse['password_lost'] = $lang['password_lost'];
 
 		$page = parsetemplate(gettemplate('login_body'), $parse);
 
@@ -72,7 +72,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$page = $PlayersOnline['onlinenow']."/".$Count['players'];
 			die ( $page );
 		} else {
-			display($page, $lang['Login']);
+			display($page, $lang['login']);
 		}
 	}
 

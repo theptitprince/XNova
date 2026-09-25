@@ -7,16 +7,16 @@
 {login_error}
 <tr style="vertical-align: top;">
 	<td style="padding-right: 4px;">
-		{User_name} <input name="username" value="{login_username}" type="text">
-		{Password} <input name="password" value="" type="password">
+		{user_name} <input name="username" value="{login_username}" type="text">
+		{password_label} <input name="password" value="" type="password">
 	</td>
 </tr><tr>
 	<td style="padding-right: 4px;">
-		{Remember_me} <input name="rememberme" type="checkbox"> <script type="text/javascript">if (document.formular && document.formular.username) document.formular.username.focus();</script><input name="submit" value="{Login}" type="submit">
+		{remember_me} <input name="rememberme" type="checkbox"> <script type="text/javascript">if (document.formular && document.formular.username) document.formular.username.focus();</script><input name="submit" value="{login}" type="submit">
 	</td>
 </tr><tr>
 	<td style="padding-right: 4px;">
-		<a href="lostpassword.php">{PasswordLost}</a>
+		<a href="lostpassword.php">{password_lost}</a>
 	</td>
 </tr>
 </tbody>

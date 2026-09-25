@@ -1,45 +1,45 @@
 <?php
 
 
-$lang['Multiverse'] = '<b>CrazyBad</b> Uni';
+$lang['multiverse'] = '<b>CrazyBad</b> Uni';
 
-$lang['Overview'] = 'Visione generale';
-$lang['Officiers'] = 'Ufficiali';
+$lang['overview'] = 'Visione generale';
+$lang['officiers'] = 'Ufficiali';
 
-$lang['Buildings'] = 'Strutture';
-$lang['Research'] = 'Laboratorio';
-$lang['Shipyard'] = 'Cantiere spaziale';
-$lang['Defense'] = 'Difese';
+$lang['buildings_label'] = 'Strutture';
+$lang['research_label'] = 'Laboratorio';
+$lang['shipyard'] = 'Cantiere spaziale';
+$lang['defense_label'] = 'Difese';
 
-$lang['Resources'] = 'Risorse';
-$lang['Imperium'] = 'Impero';
-$lang['Marchand'] = 'Mercante';
-$lang['Annonces'] = 'Piccoli annunci';
-$lang['Technology'] = 'Tecnologia';
+$lang['resources_label'] = 'Risorse';
+$lang['imperium'] = 'Impero';
+$lang['marchand_label'] = 'Mercante';
+$lang['annonces'] = 'Piccoli annunci';
+$lang['technology'] = 'Tecnologia';
 
-$lang['Galaxy'] = 'Galassia';
-$lang['Fleet'] = 'Flotte';
-$lang['Teleport'] = 'Stargate';
+$lang['galaxy_label'] = 'Galassia';
+$lang['fleet_label'] = 'Flotte';
+$lang['teleport'] = 'Stargate';
 
-$lang['Alliance'] = 'Alleanza';
-$lang['Chat'] = 'Chat';
-$lang['Statistics'] = 'Statistiche';
-$lang['Search'] = 'Cerca';
+$lang['alliance_label'] = 'Alleanza';
+$lang['chat'] = 'Chat';
+$lang['statistics'] = 'Statistiche';
+$lang['search'] = 'Cerca';
 $lang['blocked'] = 'Bannati';
-$lang['Records'] = 'Records';
+$lang['records'] = 'Records';
 
-$lang['Messages'] = 'Messaggi';
-$lang['Notes'] = 'Note';
-$lang['Buddylist'] = 'Liste amici';
+$lang['messages_label'] = 'Messaggi';
+$lang['notes'] = 'Note';
+$lang['buddylist'] = 'Liste amici';
 
-$lang['Board'] = 'Forum';
-$lang['Contact'] = 'Contatti';
-$lang['Options'] = 'Opzioni';
+$lang['board'] = 'Forum';
+$lang['contact'] = 'Contatti';
+$lang['options_label'] = 'Opzioni';
 
-$lang['Logout'] = 'Logout';
+$lang['logout'] = 'Logout';
 
-$lang['Help'] = 'Aiuto';
-$lang['Rules'] = 'Regole';
+$lang['help'] = 'Aiuto';
+$lang['rules_label'] = 'Regole';
 
 // User menu titles
 $lang['devlp']        = 'D&eacute;veloppement';

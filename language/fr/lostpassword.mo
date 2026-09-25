@@ -1,11 +1,11 @@
 <?php
 
-$lang['ResetPass'] = "Mot de passe oubli&eacute;";
-$lang['TextPass1'] = "Veuillez saisir l'adresse mail de votre compte";
-$lang['TextPass2'] = "telle qu'elle est renseign&eacute;e dans vos Options. C'est aussi celle que vous avez utilis&eacute;e pour l'inscription. Si vous appuyez sur 'Envoyer', un nouveau mot de passe sera cr&eacute;&eacute; et envoy&eacute; &agrave; cette adresse.";
+$lang['reset_pass'] = "Mot de passe oubli&eacute;";
+$lang['text_pass1'] = "Veuillez saisir l'adresse mail de votre compte";
+$lang['text_pass2'] = "telle qu'elle est renseign&eacute;e dans vos Options. C'est aussi celle que vous avez utilis&eacute;e pour l'inscription. Si vous appuyez sur 'Envoyer', un nouveau mot de passe sera cr&eacute;&eacute; et envoy&eacute; &agrave; cette adresse.";
 $lang['email']    = "e-Mail";
-$lang['ButtonSendPass'] = "Envoyer";
-$lang['PassForm'] = "Formulaire";
+$lang['button_send_pass'] = "Envoyer";
+$lang['pass_form'] = "Formulaire";
 
 
 // XNova Renaissance : textes manquants (ils s'affichaient vides)

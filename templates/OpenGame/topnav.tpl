@@ -30,11 +30,11 @@
 			<td class="header" align="center" width="20%"><img src="{dpath}images/message.gif" border="0" height="22" width="42"></td>
 		</tr>
 		<tr class="header">
-			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{Metal}</font></b></i></td>
-			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{Crystal}</font></b></i></td>
-			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{Deuterium}</font></b></i></td>
-			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{Energy}</font></b></i></td>
-			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{Message}</font></b></i></td>
+			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{metal_label}</font></b></i></td>
+			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{crystal_label}</font></b></i></td>
+			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{deuterium_label}</font></b></i></td>
+			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{energy_label}</font></b></i></td>
+			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{message_label}</font></b></i></td>
 		</tr>
 		<tr class="header">
 			<td class="header" align="center" width="20%"><font>{metal}</font></td>

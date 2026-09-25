@@ -1,9 +1,9 @@
 <?php  //language/fr/infos.mo by Lost-Univers.fr
 
-$lang['Name'] = 'Nome';
+$lang['name_label'] = 'Nome';
 $lang['destroy'] = "Eliminare un livello";
 $lang['worktime'] = "Durata";
-$lang['Information_on'] = '%n';
+$lang['information_on'] = '%n';
 $lang['level'] = 'Livello';
 $lang['production'] = "Produzione per ora [Aumento / rapportato al livello]";
 $lang['neededenergy'] = "Consumo di energia";

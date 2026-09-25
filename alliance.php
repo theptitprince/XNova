@@ -80,7 +80,7 @@ if (($_GET['mode'] ?? null) == 'ainfo') {
 	$tag = SqlEscape(($_GET['tag'] ?? null));
 	// Evitamos errores casuales xD
 	// query
-	$lang['Alliance_information'] = "Allianz Information";
+	$lang['alliance_information'] = "Allianz Information";
 
 	if (isset($_GET['tag'])) {
 		$allyrow = doquery("SELECT * FROM {{table}} WHERE ally_tag='{$tag}'", "alliance", true);
@@ -106,7 +106,7 @@ if (($_GET['mode'] ?? null) == 'ainfo') {
 
 	if ($ally_web != "") {
 		$ally_web = "<tr>
-		<th>{$lang['Initial_page']}</th>
+		<th>{$lang['initial_page']}</th>
 		<th><a href=\"{$ally_web}\">{$ally_web}</a></th>
 		</tr>";
 	}
@@ -139,7 +139,7 @@ if (($_GET['mode'] ?? null) == 'ainfo') {
 		$lang['bewerbung'] = "";
 
 	$page .= parsetemplate(gettemplate('alliance_ainfo'), $lang);
-	display($page, str_replace('%s', $ally_name, $lang['Info_of_Alliance']));
+	display($page, str_replace('%s', $ally_name, $lang['info_of_alliance']));
 }
 // --[Comprobaciones de alianza]-------------------------
 if ($user['ally_id'] == 0) { // Sin alianza
@@ -186,7 +186,7 @@ if ($user['ally_id'] == 0) { // Sin alianza
 
 			$page = MessageForm(str_replace('%s', ($_POST['atag'] ?? null), $lang['ally_maked']),
 
-				str_replace('%s', ($_POST['atag'] ?? null), $lang['alliance_has_been_maked']) . "<br><br>", "", $lang['Ok']);
+				str_replace('%s', ($_POST['atag'] ?? null), $lang['alliance_has_been_maked']) . "<br><br>", "", $lang['ok']);
 		} else {
 			$page .= parsetemplate(gettemplate('alliance_make'), $lang);
 		}
@@ -239,25 +239,25 @@ if ($user['ally_id'] == 0) { // Sin alianza
 
 		extract($allyrow);
 
-		if (($_POST['further'] ?? null) == $lang['Send']) { // esta parte es igual que el buscador de search.php...
+		if (($_POST['further'] ?? null) == $lang['send_label']) { // esta parte es igual que el buscador de search.php...
 			doquery("UPDATE {{table}} SET `ally_request`='" . intval($allyid) . "', ally_request_text='" . SqlEscape(SafeText(($_POST['text'] ?? null))) . "', ally_register_time='" . time() . "' WHERE `id`='" . $user['id'] . "'", "users");
 			// mensaje de cuando se envia correctamente el mensaje
 			message($lang['apply_registered'], $lang['your_apply']);
 			// mensaje de cuando falla el envio
 			// message($lang['apply_cantbeadded'], $lang['your_apply']);
 		} else {
-			$text_apply = ($ally_request) ? $ally_request : $lang['There_is_no_a_text_apply'];
+			$text_apply = ($ally_request) ? $ally_request : $lang['there_is_no_a_text_apply'];
 		}
 
 		$parse = $lang;
 		$parse['allyid'] = intval(($_GET['allyid'] ?? null));
 		$parse['chars_count'] = strlen($text_apply);
 		$parse['text_apply'] = $text_apply;
-		$parse['Write_to_alliance'] = str_replace('%s', $ally_tag, $lang['Write_to_alliance']);
+		$parse['write_to_alliance'] = str_replace('%s', $ally_tag, $lang['write_to_alliance']);
 
 		$page = parsetemplate(gettemplate('alliance_applyform'), $parse);
 
-		display($page, $lang['Write_to_alliance']);
+		display($page, $lang['write_to_alliance']);
 	}
 
 	if ($user['ally_request'] != 0) { // Esperando una respuesta
@@ -268,12 +268,12 @@ if ($user['ally_id'] == 0) { // Sin alianza
 		if (($_POST['bcancel'] ?? null)) {
 			doquery("UPDATE {{table}} SET `ally_request`=0 WHERE `id`=" . $user['id'], "users");
 
-			$lang['request_text'] = str_replace('%s', $ally_tag, $lang['Canceled_a_request_text']);
-			$lang['button_text'] = $lang['Ok'];
+			$lang['request_text'] = str_replace('%s', $ally_tag, $lang['canceled_a_request_text']);
+			$lang['button_text'] = $lang['ok'];
 			$page = parsetemplate(gettemplate('alliance_apply_waitform'), $lang);
 		} else {
-			$lang['request_text'] = str_replace('%s', $ally_tag, $lang['Waiting_a_request_text']);
-			$lang['button_text'] = $lang['Delete_apply'];
+			$lang['request_text'] = str_replace('%s', $ally_tag, $lang['waiting_a_request_text']);
+			$lang['button_text'] = $lang['delete_apply'];
 			$page = parsetemplate(gettemplate('alliance_apply_waitform'), $lang);
 		}
 		// SqlEscape(strip_tags());
@@ -333,18 +333,18 @@ array(1 =>
 
 	if ($mode == 'exit') {
 		if ($ally['ally_owner'] == $user['id']) {
-			message($lang['Owner_cant_go_out'], $lang['Alliance']);
+			message($lang['owner_cant_go_out'], $lang['alliance_label']);
 		}
 		// se sale de la alianza
 		if (($_GET['yes'] ?? null) == 1) {
 			doquery("UPDATE {{table}} SET `ally_id`=0, `ally_name` = '' WHERE `id`='{$user['id']}'", "users");
-			$lang['Go_out_welldone'] = str_replace("%s", $ally_name, $lang['Go_out_welldone']);
-			$page = MessageForm($lang['Go_out_welldone'], "<br>", $PHP_SELF, $lang['Ok']);
+			$lang['go_out_welldone'] = str_replace("%s", $ally_name, $lang['go_out_welldone']);
+			$page = MessageForm($lang['go_out_welldone'], "<br>", $PHP_SELF, $lang['ok']);
 			// Se quitan los puntos del user en la alianza
 		} else {
 			// se pregunta si se quiere salir
-			$lang['Want_go_out'] = str_replace("%s", $ally_name, $lang['Want_go_out']);
-			$page = MessageForm($lang['Want_go_out'], "<br>", "?mode=exit&yes=1", "Ja");
+			$lang['want_go_out'] = str_replace("%s", $ally_name, $lang['want_go_out']);
+			$page = MessageForm($lang['want_go_out'], "<br>", "?mode=exit&yes=1", "Ja");
 		}
 		display($page);
 	}
@@ -362,7 +362,7 @@ array(1 =>
 		// $user_can_watch_memberlist
 		// comprobamos el permiso
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_watch_memberlist) {
-			message($lang['Denied_access'], $lang['Members_list']);
+			message($lang['denied_access'], $lang['members_list_label']);
 		}
 		// El orden de aparicion
 		if ($sort2) {
@@ -402,11 +402,11 @@ array(1 =>
 			$u['i'] = $i;
 
 			if ($u["onlinetime"] + 60 * 10 >= time() && $user_can_watch_memberlist_status) {
-				$u["onlinetime"] = "lime>{$lang['On']}<";
+				$u["onlinetime"] = "lime>{$lang['on_label']}<";
 			} elseif ($u["onlinetime"] + 60 * 20 >= time() && $user_can_watch_memberlist_status) {
 				$u["onlinetime"] = "yellow>{$lang['15_min']}<";
 			} elseif ($user_can_watch_memberlist_status) {
-				$u["onlinetime"] = "red>{$lang['Off']}<";
+				$u["onlinetime"] = "red>{$lang['off']}<";
 			} else $u["onlinetime"] = "orange>-<";
 			// Nombre de rango
 			if ($ally['ally_owner'] == $u['id']) {
@@ -414,7 +414,7 @@ array(1 =>
 			} elseif (isset($allianz_raenge[$u['ally_rank_id']]['name'])) {
 				$u["ally_range"] = $allianz_raenge[$u['ally_rank_id']]['name'];
 			} else {
-				$u["ally_range"] = $lang['Novate'];
+				$u["ally_range"] = $lang['novate'];
 			}
 
 			$u["dpath"]  = $dpath;
@@ -447,7 +447,7 @@ array(1 =>
 
 		$page .= parsetemplate(gettemplate('alliance_memberslist_table'), $parse);
 
-		display($page, $lang['Members_list']);
+		display($page, $lang['members_list_label']);
 	}
 
 	if ($mode == 'circular') { // Correo circular
@@ -459,7 +459,7 @@ array(1 =>
 		$allianz_raenge = AllyRanks($ally);
 		// comprobamos el permiso
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_send_mails) {
-			message($lang['Denied_access'], $lang['Send_circular_mail']);
+			message($lang['denied_access'], $lang['send_circular_mail_label']);
 		}
 
 		if ($sendmail == 1) {
@@ -491,11 +491,11 @@ array(1 =>
 			/*
 		  Aca un mensajito diciendo que a quien se mando.
 		*/
-			$page = MessageForm($lang['Circular_sended'], "Folgende Mitglieder erhielten eine Nachricht:" . $list, "alliance.php", $lang['Ok'], true);
-			display($page, $lang['Send_circular_mail']);
+			$page = MessageForm($lang['circular_sended'], "Folgende Mitglieder erhielten eine Nachricht:" . $list, "alliance.php", $lang['ok'], true);
+			display($page, $lang['send_circular_mail_label']);
 		}
 
-		$lang['r_list'] = "<option value=\"0\">{$lang['All_players']}</option>";
+		$lang['r_list'] = "<option value=\"0\">{$lang['all_players']}</option>";
 		if ($allianz_raenge) {
 			foreach($allianz_raenge as $id => $array) {
 				$lang['r_list'] .= "<option value=\"" . ($id + 1) . "\">" . $array['name'] . "</option>";
@@ -504,14 +504,14 @@ array(1 =>
 
 		$page .= parsetemplate(gettemplate('alliance_circular'), $lang);
 
-		display($page, $lang['Send_circular_mail']);
+		display($page, $lang['send_circular_mail_label']);
 	}
 
 	if ($mode == 'admin' && $edit == 'rights') { // Administrar leyes
 		$allianz_raenge = AllyRanks($ally);
 
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_edit_rights) {
-			message($lang['Denied_access'], $lang['Members_list']);
+			message($lang['denied_access'], $lang['members_list_label']);
 		} elseif (!empty($_POST['newrangname'])) {
 			$name = SafeName(($_POST['newrangname'] ?? null), 32);
 
@@ -616,7 +616,7 @@ array(1 =>
 		}
 
 		if (count($ally_ranks) == 0 || $ally_ranks == '') { // si no hay rangos
-			$list = "<th>{$lang['There_is_not_range']}</th>";
+			$list = "<th>{$lang['there_is_not_range']}</th>";
 		} else { // Si hay rangos
 			// cargamos la template de tabla
 			$list = parsetemplate(gettemplate('alliance_admin_laws_head'), $lang);
@@ -628,7 +628,7 @@ array(1 =>
 				if ($ally['ally_owner'] == $user['id']) {
 					// $i++;u2r5
 					$lang['id'] = $a;
-					$lang['delete'] = "<a href=\"alliance.php?mode=admin&edit=rights&d={$a}\"><img src=\"{$dpath}pic/abort.gif\" alt=\"{$lang['Delete_range']}\" border=0></a>";
+					$lang['delete'] = "<a href=\"alliance.php?mode=admin&edit=rights&d={$a}\"><img src=\"{$dpath}pic/abort.gif\" alt=\"{$lang['delete_range']}\" border=0></a>";
 					$lang['r0'] = $b['name'];
 					$lang['a'] = $a;
 					$lang['r1'] = "<input type=checkbox name=\"u{$a}r0\"" . (($b['delete'] == 1)?' checked="checked"':'') . ">"; //{$b[1]}
@@ -645,7 +645,7 @@ array(1 =>
 				} else {
 					$lang['id'] = $a;
 					$lang['r0'] = $b['name'];
-					$lang['delete'] = "<a href=\"alliance.php?mode=admin&edit=rights&d={$a}\"><img src=\"{$dpath}pic/abort.gif\" alt=\"{$lang['Delete_range']}\" border=0></a>";
+					$lang['delete'] = "<a href=\"alliance.php?mode=admin&edit=rights&d={$a}\"><img src=\"{$dpath}pic/abort.gif\" alt=\"{$lang['delete_range']}\" border=0></a>";
 					$lang['a'] = $a;
 					$lang['r1'] = "<b>-</b>";
 					$lang['r2'] = "<input type=checkbox name=\"u{$a}r1\"" . (($b['kick'] == 1)?' checked="checked"':'') . ">";
@@ -670,7 +670,7 @@ array(1 =>
 		$lang['dpath'] = $dpath;
 		$page .= parsetemplate(gettemplate('alliance_admin_laws'), $lang);
 
-		display($page, $lang['Law_settings']);
+		display($page, $lang['law_settings']);
 	}
 
 	if ($mode == 'admin' && $edit == 'ally') { // Administrar la alianza *pendiente urgente*
@@ -732,17 +732,17 @@ array(1 =>
 	  Depende del $t, muestra el formulario para cada tipo de texto.
 	*/
 		if ($t == 3) {
-			$lang['request_type'] = $lang['Show_of_request_text'];
+			$lang['request_type'] = $lang['show_of_request_text'];
 		} elseif ($t == 2) {
-			$lang['request_type'] = $lang['Internal_text_of_alliance'];
+			$lang['request_type'] = $lang['internal_text_of_alliance'];
 		} else {
-			$lang['request_type'] = $lang['Public_text_of_alliance'];
+			$lang['request_type'] = $lang['public_text_of_alliance'];
 		}
 
 		if ($t == 2) {
 			$lang['text'] = $ally['ally_text'];
-			$lang['Texts'] = "Interner Text";
-			$lang['Show_of_request_text'] = "Internet Allianz Text";
+			$lang['texts'] = "Interner Text";
+			$lang['show_of_request_text'] = "Internet Allianz Text";
 		} else {
 			$lang['text'] = $ally['ally_description'];
 		}
@@ -756,11 +756,11 @@ array(1 =>
 		$lang['ally_request_notallow_0'] = (($ally['ally_request_notallow'] == 1) ? ' SELECTED' : '');
 		$lang['ally_request_notallow_1'] = (($ally['ally_request_notallow'] == 0) ? ' SELECTED' : '');
 		$lang['ally_owner_range'] = $ally['ally_owner_range'];
-		$lang['Transfer_alliance'] = MessageForm("Abandonner / Transf&eacute;rer L'alliance", "", "?mode=admin&edit=give", $lang['Continue']);
-		$lang['Disolve_alliance'] = MessageForm("Dissoudre L'alliance", "", "?mode=admin&edit=exit", $lang['Continue']);
+		$lang['transfer_alliance'] = MessageForm("Abandonner / Transf&eacute;rer L'alliance", "", "?mode=admin&edit=give", $lang['continue_label']);
+		$lang['disolve_alliance'] = MessageForm("Dissoudre L'alliance", "", "?mode=admin&edit=exit", $lang['continue_label']);
 
 		$page .= parsetemplate(gettemplate('alliance_admin'), $lang);
-		display($page, $lang['Alliance_admin']);
+		display($page, $lang['alliance_admin_label']);
 	}
 
 	if ($mode == 'admin' && $edit == 'members') { // Administrar a los miembros
@@ -770,7 +770,7 @@ array(1 =>
 	*/
 		// comprobamos el permiso
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_kick) {
-			message($lang['Denied_access'], $lang['Members_list']);
+			message($lang['denied_access'], $lang['members_list_label']);
 		}
 
 		/*
@@ -778,7 +778,7 @@ array(1 =>
 	*/
 		if (isset($kick)) {
 			if ($ally['ally_owner'] != $user['id'] && !$user_can_kick) {
-				message($lang['Denied_access'], $lang['Members_list']);
+				message($lang['denied_access'], $lang['members_list_label']);
 			}
 
 			$u = doquery("SELECT * FROM {{table}} WHERE id='{$kick}' LIMIT 1", 'users', true);
@@ -836,9 +836,9 @@ array(1 =>
 			$u["onlinetime"] = str_replace("%s", $days, "%s d");
 			// Nombre de rango
 			if ($ally['ally_owner'] == $u['id']) {
-				$ally_range = ($ally['ally_owner_range'] == '')?$lang['Founder']:$ally['ally_owner_range'];
+				$ally_range = ($ally['ally_owner_range'] == '')?$lang['founder']:$ally['ally_owner_range'];
 			} elseif ($u['ally_rank_id'] == 0 || !isset($ally_ranks[$u['ally_rank_id']-1]['name'])) {
-				$ally_range = $lang['Novate'];
+				$ally_range = $lang['novate'];
 			} else {
 				$ally_range = $ally_ranks[$u['ally_rank_id']-1]['name'];
 			}
@@ -850,9 +850,9 @@ array(1 =>
 				$u["functions"] = '';
 			} elseif ($ally_ranks[$user['ally_rank_id']-1][5] == 1 || $ally['ally_owner'] == $user['id']) {
 				$f['dpath'] = $dpath;
-				$f['Expel_user'] = $lang['Expel_user'];
-				$f['Set_range'] = $lang['Set_range'];
-				$f['You_are_sure_want_kick_to'] = str_replace("%s", $u['username'], $lang['You_are_sure_want_kick_to']);
+				$f['expel_user'] = $lang['expel_user'];
+				$f['set_range'] = $lang['set_range'];
+				$f['you_are_sure_want_kick_to'] = str_replace("%s", $u['username'], $lang['you_are_sure_want_kick_to']);
 				$f['id'] = $u['id'];
 				$u["functions"] = parsetemplate($f_template, $f);
 			} else {
@@ -868,8 +868,8 @@ array(1 =>
 			$u['ally_register_time'] = date("d/m/Y H:i:s", $u['ally_register_time']);
 			$page_list .= parsetemplate($template, $u);
 			if ($rank == $u['id']) {
-				$r['Rank_for'] = str_replace("%s", $u['username'], $lang['Rank_for']);
-				$r['options'] .= "<option value=\"0\">{$lang['Novate']}</option>";
+				$r['rank_for'] = str_replace("%s", $u['username'], $lang['rank_for']);
+				$r['options'] .= "<option value=\"0\">{$lang['novate']}</option>";
 
 				foreach($ally_ranks as $a => $b) {
 					$r['options'] .= "<option value=\"" . ($a + 1) . "\"";
@@ -879,7 +879,7 @@ array(1 =>
 					$r['options'] .= ">{$b['name']}</option>";
 				}
 				$r['id'] = $u['id'];
-				$r['Save'] = $lang['Save'];
+				$r['save'] = $lang['save'];
 				$page_list .= parsetemplate(gettemplate('alliance_admin_members_row_edit'), $r);
 			}
 		}
@@ -900,7 +900,7 @@ array(1 =>
 		$lang['s'] = $s;
 		$page .= parsetemplate(gettemplate('alliance_admin_members_table'), $lang);
 
-		display($page, $lang['Members_administrate']);
+		display($page, $lang['members_administrate']);
 		// a=9 es para cambiar la etiqueta de la etiqueta.
 		// a=10 es para cambiarle el nombre de la alianza
 	}
@@ -908,7 +908,7 @@ array(1 =>
 
 	if ($mode == 'admin' && $edit == 'requests') { // Administrar solicitudes
 		if ($ally['ally_owner'] != $user['id'] && !$user_bewerbungen_bearbeiten) {
-			message($lang['Denied_access'], $lang['Check_the_requests']);
+			message($lang['denied_access'], $lang['check_the_requests']);
 		}
 
 		if (($_POST['action'] ?? null) == "Akzeptieren") {
@@ -982,7 +982,7 @@ array(1 =>
 		// Con $show
 		if (isset($show) && $show != 0 && $parse['list'] != '') {
 			// Los datos de la solicitud
-			$s['Request_from'] = str_replace('%s', $s['username'], $lang['Request_from']);
+			$s['request_from'] = str_replace('%s', $s['username'], $lang['request_from']);
 			// el formulario
 			$parse['request'] = parsetemplate(gettemplate('alliance_admin_request_form'), $s);
 			$parse['request'] = parsetemplate($parse['request'], $lang);
@@ -991,12 +991,12 @@ array(1 =>
 		}
 
 		$parse['ally_tag'] = $ally['ally_tag'];
-		$parse['Back'] = $lang['Back'];
+		$parse['back'] = $lang['back'];
 
-		$parse['There_is_hanging_request'] = str_replace('%n', $i, $lang['There_is_hanging_request']);
-		// $parse['list'] = $lang['Return_to_overview'];
+		$parse['there_is_hanging_request'] = str_replace('%n', $i, $lang['there_is_hanging_request']);
+		// $parse['list'] = $lang['return_to_overview'];
 		$page = parsetemplate(gettemplate('alliance_admin_request_table'), $parse);
-		display($page, $lang['Check_the_requests']);
+		display($page, $lang['check_the_requests']);
 	}
 
 	if ($mode == 'admin' && $edit == 'name') {
@@ -1005,7 +1005,7 @@ array(1 =>
 		$ally_ranks = AllyRanks($ally);
 		// comprobamos el permiso
 		if ($ally['ally_owner'] != $user['id'] && !$user_admin) {
-			message($lang['Denied_access'], $lang['Members_list']);
+			message($lang['denied_access'], $lang['members_list_label']);
 		}
 
 		if (($_POST['newname'] ?? null)) {
@@ -1015,13 +1015,13 @@ array(1 =>
 			doquery("UPDATE {{table}} SET `ally_name` = '". $ally['ally_name'] ."' WHERE `ally_id` = '". $ally['id'] ."';", 'users');
 		}
 
-		$parse['question']           = str_replace('%s', $ally['ally_name'], $lang['How_you_will_call_the_alliance_in_the_future']);
-		$parse['New_name']           = $lang['New_name'];
-		$parse['Change']             = $lang['Change'];
+		$parse['question']           = str_replace('%s', $ally['ally_name'], $lang['how_you_will_call_the_alliance_in_the_future']);
+		$parse['new_name']           = $lang['new_name'];
+		$parse['change']             = $lang['change'];
 		$parse['name']               = 'newname';
-		$parse['Return_to_overview'] = $lang['Return_to_overview'];
+		$parse['return_to_overview'] = $lang['return_to_overview'];
 		$page .= parsetemplate(gettemplate('alliance_admin_rename'), $parse);
-		display($page, $lang['Alliance_admin']);
+		display($page, $lang['alliance_admin_label']);
 
 	}
 
@@ -1031,7 +1031,7 @@ array(1 =>
 
 		// Bon si on verifiait les autorisation ?
 		if ($ally['ally_owner'] != $user['id'] && !$user_admin) {
-			message($lang['Denied_access'], $lang['Members_list']);
+			message($lang['denied_access'], $lang['members_list_label']);
 		}
 
 		if (($_POST['newtag'] ?? null)) {
@@ -1040,13 +1040,13 @@ array(1 =>
 			doquery("UPDATE {{table}} SET `ally_tag` = '". $ally['ally_tag'] ."' WHERE `id` = '". $user['ally_id'] ."';", 'alliance');
 		}
 
-		$parse['question']           = str_replace('%s', $ally['ally_tag'], $lang['How_you_will_call_the_alliance_in_the_future']);
-		$parse['New_name']           = $lang['New_name'];
-		$parse['Change']             = $lang['Change'];
+		$parse['question']           = str_replace('%s', $ally['ally_tag'], $lang['how_you_will_call_the_alliance_in_the_future']);
+		$parse['new_name']           = $lang['new_name'];
+		$parse['change']             = $lang['change'];
 		$parse['name']               = 'newtag';
-		$parse['Return_to_overview'] = $lang['Return_to_overview'];
+		$parse['return_to_overview'] = $lang['return_to_overview'];
 		$page .= parsetemplate(gettemplate('alliance_admin_rename'), $parse);
-		display($page, $lang['Alliance_admin']);
+		display($page, $lang['alliance_admin_label']);
 	}
 
 	if ($mode == 'admin' && $edit == 'exit') { // disolver una alianza
@@ -1054,7 +1054,7 @@ array(1 =>
 		$ally_ranks = AllyRanks($ally);
 		// comprobamos el permiso
 		if ($ally['ally_owner'] != $user['id'] && !$user_can_exit_alliance) {
-			message($lang['Denied_access'], $lang['Members_list']);
+			message($lang['denied_access'], $lang['members_list_label']);
 		}
 		/*
 	  Si bien, se tendria que confirmar, no tengo animos para hacerlo mas detallado...
@@ -1075,7 +1075,7 @@ array(1 =>
 		}
 		// temporalmente...
 		if ($ally['ally_owner'] == $user['id']) {
-			$range = ($ally['ally_owner_range'] != '')?$lang['Founder']:$ally['ally_owner_range'];
+			$range = ($ally['ally_owner_range'] != '')?$lang['founder']:$ally['ally_owner_range'];
 		} elseif ($user['ally_rank_id'] != 0 && isset($ally_ranks[$user['ally_rank_id']-1]['name'])) {
 			$range = $ally_ranks[$user['ally_rank_id']-1]['name'];
 		} else {
@@ -1083,19 +1083,19 @@ array(1 =>
 		}
 		// Link de la lista de miembros
 		if ($ally['ally_owner'] == $user['id'] || $ally_ranks[$user['ally_rank_id']-1]['memberlist'] != 0) {
-			$lang['members_list'] = " (<a href=\"?mode=memberslist\">{$lang['Members_list']}</a>)";
+			$lang['members_list'] = " (<a href=\"?mode=memberslist\">{$lang['members_list_label']}</a>)";
 		} else {
 			$lang['members_list'] = '';
 		}
 		// El link de adminstrar la allianza
 		if ($ally['ally_owner'] == $user['id'] || $ally_ranks[$user['ally_rank_id']-1]['administrieren'] != 0) {
-			$lang['alliance_admin'] = " (<a href=\"?mode=admin&edit=ally\">{$lang['Alliance_admin']}</a>)";
+			$lang['alliance_admin'] = " (<a href=\"?mode=admin&edit=ally\">{$lang['alliance_admin_label']}</a>)";
 		} else {
 			$lang['alliance_admin'] = '';
 		}
 		// El link de enviar correo circular
 		if ($ally['ally_owner'] == $user['id'] || ($ally_ranks[$user['ally_rank_id']-1]['mails'] ?? 0) != 0) {
-			$lang['send_circular_mail'] = "<tr><th>{$lang['Circular_message']}</th><th><a href=\"?mode=circular\">{$lang['Send_circular_mail']}</a></th></tr>";
+			$lang['send_circular_mail'] = "<tr><th>{$lang['circular_message']}</th><th><a href=\"?mode=circular\">{$lang['send_circular_mail_label']}</a></th></tr>";
 		} else {
 			$lang['send_circular_mail'] = '';
 		}
@@ -1105,10 +1105,10 @@ array(1 =>
 		$request_count = mysqli_num_rows($request);
 		if ($request_count != 0) {
 			if ($ally['ally_owner'] == $user['id'] || ($ally_ranks[$user['ally_rank_id']-1]['bewerbungen'] ?? 0) != 0)
-				$lang['requests'] = "<tr><th>{$lang['Requests']}</th><th><a href=\"alliance.php?mode=admin&edit=requests\">{$request_count} {$lang['XRequests']}</a></th></tr>";
+				$lang['requests'] = "<tr><th>{$lang['requests_label']}</th><th><a href=\"alliance.php?mode=admin&edit=requests\">{$request_count} {$lang['xrequests']}</a></th></tr>";
 		}
 		if ($ally['ally_owner'] != $user['id']) {
-			$lang['ally_owner'] = MessageForm($lang['Exit_of_this_alliance'], "", "?mode=exit", $lang['Continue']);
+			$lang['ally_owner'] = MessageForm($lang['exit_of_this_alliance'], "", "?mode=exit", $lang['continue_label']);
 		} else {
 			$lang['ally_owner'] = '';
 		}

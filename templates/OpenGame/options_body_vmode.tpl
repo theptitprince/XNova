@@ -3,7 +3,7 @@
     <table width="519">
     <tbody>
     <tr>
-       <td class="c" colspan="2">{Vaccation_mode}  {vacation_until}</td>
+       <td class="c" colspan="2">{vaccation_mode}  {vacation_until}</td>
     </tr><tr>
        <th><a title="{vacations_tip}">{exit_vacations}</a></th>
        <form action="options.php?mode=exit" method="post">

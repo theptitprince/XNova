@@ -84,7 +84,7 @@ function MissionCaseRecycling ($FleetRow) {
 			$QryUpdateGalaxy .= "LIMIT 1;";
 			doquery( $QryUpdateGalaxy, 'galaxy');
 
-			$Message = sprintf($lang['sys_recy_gotten'], pretty_number($RecycledGoods["metal"]), $lang['Metal'], pretty_number($RecycledGoods["crystal"]), $lang['Crystal']);
+			$Message = sprintf($lang['sys_recy_gotten'], pretty_number($RecycledGoods["metal"]), $lang['metal_label'], pretty_number($RecycledGoods["crystal"]), $lang['crystal_label']);
 			SendSimpleMessage ( $FleetRow['fleet_owner'], '', $FleetRow['fleet_start_time'], 4, $lang['sys_mess_spy_control'], $lang['sys_recy_report'], $Message);
 			doquery("UPDATE {{table}} SET `mnl_exploit` = `mnl_exploit` + '1' WHERE `id` = '".$FleetRow['fleet_owner']."'", 'users');
 
@@ -104,9 +104,9 @@ function MissionCaseRecycling ($FleetRow) {
 			$StartPlanet     = doquery("SELECT `name` FROM {{table}} WHERE `galaxy` = '". intval($FleetRow['fleet_start_galaxy']) ."' AND `system` = '". intval($FleetRow['fleet_start_system']) ."' AND `planet` = '". intval($FleetRow['fleet_start_planet']) ."' AND `planet_type` = '". intval($FleetRow['fleet_start_type']) ."';", 'planets', true);
 			$Message         = sprintf( $lang['sys_tran_mess_owner'],
 						($StartPlanet ? $StartPlanet['name'] : ''), GetStartAdressLink($FleetRow, ''),
-						pretty_number($FleetRow['fleet_resource_metal']), $lang['Metal'],
-						pretty_number($FleetRow['fleet_resource_crystal']), $lang['Crystal'],
-						pretty_number($FleetRow['fleet_resource_deuterium']), $lang['Deuterium'] );
+						pretty_number($FleetRow['fleet_resource_metal']), $lang['metal_label'],
+						pretty_number($FleetRow['fleet_resource_crystal']), $lang['crystal_label'],
+						pretty_number($FleetRow['fleet_resource_deuterium']), $lang['deuterium_label'] );
 			SendSimpleMessage ( $FleetRow['fleet_owner'], '', $FleetRow['fleet_end_time'], 4, $lang['sys_mess_spy_control'], $lang['sys_mess_fleetback'], $Message);
 
 			RestoreFleetToPlanet ( $FleetRow, true );

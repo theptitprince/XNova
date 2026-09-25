@@ -27,7 +27,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$parse['csrf_token'] = CsrfToken(); // protection CSRF (le chat envoie ses messages en JavaScript)
 
 	$page = parsetemplate($BodyTPL, $parse);
-	display($page, $lang['Chat'], false);
+	display($page, $lang['chat'], false);
 
 // Shoutbox by e-Zobar - Copyright XNova Team 2008
 ?>

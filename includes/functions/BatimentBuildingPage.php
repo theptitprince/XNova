@@ -131,28 +131,28 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 					if ($Queue['lenght'] == 0) {
 						if ($NextBuildLevel == 1) {
 							if ( $HaveRessources == true ) {
-								$parse['click'] = "<a href=\"?cmd=insert&building=". $Element ."\"><font color=#00FF00>". $lang['BuildFirstLevel'] ."</font></a>";
+								$parse['click'] = "<a href=\"?cmd=insert&building=". $Element ."\"><font color=#00FF00>". $lang['build_first_level'] ."</font></a>";
 							} else {
-								$parse['click'] = "<font color=#FF0000>". $lang['BuildFirstLevel'] ."</font>";
+								$parse['click'] = "<font color=#FF0000>". $lang['build_first_level'] ."</font>";
 							}
 						} else {
 							if ( $HaveRessources == true ) {
-								$parse['click'] = "<a href=\"?cmd=insert&building=". $Element ."\"><font color=#00FF00>". $lang['BuildNextLevel'] ." ". $NextBuildLevel ."</font></a>";
+								$parse['click'] = "<a href=\"?cmd=insert&building=". $Element ."\"><font color=#00FF00>". $lang['build_next_level'] ." ". $NextBuildLevel ."</font></a>";
 							} else {
-								$parse['click'] = "<font color=#FF0000>". $lang['BuildNextLevel'] ." ". $NextBuildLevel ."</font>";
+								$parse['click'] = "<font color=#FF0000>". $lang['build_next_level'] ." ". $NextBuildLevel ."</font>";
 							}
 						}
 					} else {
-						$parse['click'] = "<a href=\"?cmd=insert&building=". $Element ."\"><font color=#00FF00>". $lang['InBuildQueue'] ."</font></a>";
+						$parse['click'] = "<a href=\"?cmd=insert&building=". $Element ."\"><font color=#00FF00>". $lang['in_build_queue'] ."</font></a>";
 					}
 				} elseif ($RoomIsOk && !$CanBuildElement) {
 					if ($NextBuildLevel == 1) {
-						$parse['click'] = "<font color=#FF0000>". $lang['BuildFirstLevel'] ."</font>";
+						$parse['click'] = "<font color=#FF0000>". $lang['build_first_level'] ."</font>";
 					} else {
-						$parse['click'] = "<font color=#FF0000>". $lang['BuildNextLevel'] ." ". $NextBuildLevel ."</font>";
+						$parse['click'] = "<font color=#FF0000>". $lang['build_next_level'] ." ". $NextBuildLevel ."</font>";
 					}
 				} else {
-					$parse['click'] = "<font color=#FF0000>". $lang['NoMoreSpace'] ."</font>";
+					$parse['click'] = "<font color=#FF0000>". $lang['no_more_space'] ."</font>";
 				}
 
 				$BuildingPage .= parsetemplate($SubTemplate, $parse);
@@ -164,22 +164,22 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 
 	// Faut il afficher la liste de construction ??
 	if ($Queue['lenght'] > 0) {
-		$parse['BuildListScript']  = InsertBuildListScript ( "buildings" );
-		$parse['BuildList']        = $Queue['buildlist'];
+		$parse['build_list_script']  = InsertBuildListScript ( "buildings" );
+		$parse['build_list']        = $Queue['buildlist'];
 	} else {
-		$parse['BuildListScript']  = "";
-		$parse['BuildList']        = "";
+		$parse['build_list_script']  = "";
+		$parse['build_list']        = "";
 	}
 
     $parse['planet_field_current'] = $CurrentPlanet["field_current"];
     $parse['planet_field_max']     = $CurrentPlanet['field_max'] + ($CurrentPlanet[$resource[33]] * 5);
     $parse['field_libre']          = $parse['planet_field_max']  - $CurrentPlanet['field_current'];
 
-	$parse['BuildingsList']        = $BuildingPage;
+	$parse['buildings_list']        = $BuildingPage;
 
 	$page                          = parsetemplate(gettemplate('buildings_builds'), $parse);
 
-	display($page, $lang['Builds']);
+	display($page, $lang['builds']);
 }
 
 // -----------------------------------------------------------------------------------------------------------

@@ -2,8 +2,8 @@
 
 // Messages
 $lang['changue_pass'] = 'Changer de mot de passe';
-$lang['Download'] = 'T&eacute;l&eacute;charger';
-$lang['Search'] = 'Chercher';
+$lang['download'] = 'T&eacute;l&eacute;charger';
+$lang['search'] = 'Chercher';
 $lang['succeful_changepass'] = 'Le mot de passe a bien &eacute;t&eacute; chang&eacute;.<br /><a href="login.php" target="_top">Retour</a>';
 $lang['succeful_save'] = 'Les changements ont &eacute;t&eacute; sauvegard&eacute;.<br /><a href="options.php">Retour</a>';
 
@@ -57,6 +57,6 @@ $lang['save_settings'] = 'Sauvegarder les changements';
 // Complet by XNova Team. All rights reversed (C) 2008
 
 // XNova Renaissance 0.9g : titre des messages de la page
-$lang['Options'] = 'Opciones';
+$lang['options_label'] = 'Opciones';
 
 ?>

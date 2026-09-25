@@ -11,10 +11,10 @@ $lang['adm_done']               = "Aktualisiert";
 $lang['adm_stat_title']         = "Statistik";
 $lang['adm_cleaner_title']      = "Reinigung";
 $lang['adm_cleaned']            = "Anzahl entfernt";
-$lang['Fix']                    = "Statistik Update";
-$lang['Welcome_to_Fix_section'] = "Update";
-$lang['There_is_not_need_fix']  = "Das update wurde durch gefuert!";
-$lang['Fix_welldone']           = "Die Aktualisierung konte nicht durchgefuert werden.";
+$lang['fix']                    = "Statistik Update";
+$lang['welcome_to_fix_section'] = "Update";
+$lang['there_is_not_need_fix']  = "Das update wurde durch gefuert!";
+$lang['fix_welldone']           = "Die Aktualisierung konte nicht durchgefuert werden.";
 
 $lang['adm_pl_title'] = "Aktivitaet der Planeten";
 $lang['adm_pl_activ'] = "Planeten aktiv";

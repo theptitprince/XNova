@@ -118,6 +118,6 @@ foreach ($reslist['defense'] as $a => $i) {
 
 $page = parsetemplate(gettemplate('imperium_table'), $parse);
 
-display($page, $lang['Imperium'] ?? '', false);
+display($page, $lang['imperium'] ?? '', false);
 // Created by Perberos. All rights reserved (C) 2006
 ?>

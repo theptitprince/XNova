@@ -32,7 +32,7 @@ function GalaxyRowAlly ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 			$Result .= " onmouseover='return overlib(\"";
 			$Result .= "<table width=240>";
 			$Result .= "<tr>";
-			$Result .= "<td class=c>".$lang['Alliance']." ". $allyquery['ally_name'] ." ".$lang['gl_with']." ". $members_count[0] ." ". $lang['gl_membre'] . $add ."</td>";
+			$Result .= "<td class=c>".$lang['alliance_label']." ". $allyquery['ally_name'] ." ".$lang['gl_with']." ". $members_count[0] ." ". $lang['gl_membre'] . $add ."</td>";
 			$Result .= "</tr>";
 			$Result .= "<th>";
 			$Result .= "<table>";

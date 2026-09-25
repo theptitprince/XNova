@@ -2,7 +2,7 @@
 <script src="scripts/cnt.js" type="text/javascript"></script>
 <center>
 <br>
-<form action="{PHP_SELF}?mode=change" method="post">
+<form action="{php_self}?mode=change" method="post">
 <table width="600">
 
 	<td class="c" colspan="5">

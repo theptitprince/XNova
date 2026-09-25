@@ -16,13 +16,13 @@
 </tr><tr>
 	<td colspan="2" class="c"><b>{cred_ext}</b></td>
 </tr><tr>
-	<th colspan="2">{cred_added} <input name="ExtCopyFrame"{ExtCopyFrame} type="checkbox" /></th>
+	<th colspan="2">{cred_added} <input name="ExtCopyFrame"{ext_copy_frame} type="checkbox" /></th>
 </tr><tr>
 	<th>{cred_name}</th>
 	<th>{cred_funct}</th>
 </tr><tr>
-	<th><textarea name="ExtCopyOwner" rows="5">{ExtCopyOwnerVal}</textarea></th>
-	<th><textarea name="ExtCopyFunct" rows="5">{ExtCopyFunctVal}</textarea></th>
+	<th><textarea name="ExtCopyOwner" rows="5">{ext_copy_owner_val}</textarea></th>
+	<th><textarea name="ExtCopyFunct" rows="5">{ext_copy_funct_val}</textarea></th>
 </tr><tr>
 	<th colspan="2"><input value="{cred_save}" type="submit"></th>
 </tr>

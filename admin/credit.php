@@ -45,9 +45,9 @@ if ($user['authlevel'] >= 3) {
 
 	} else {
 		//View values
-		$parse['ExtCopyFrame'] = ($game_config['ExtCopyFrame'] == 1) ? " checked = 'checked' ":"";
-		$parse['ExtCopyOwnerVal'] = $game_config['ExtCopyOwner'];
-		$parse['ExtCopyFunctVal'] = $game_config['ExtCopyFunct'];
+		$parse['ext_copy_frame'] = ($game_config['ExtCopyFrame'] == 1) ? " checked = 'checked' ":"";
+		$parse['ext_copy_owner_val'] = $game_config['ExtCopyOwner'];
+		$parse['ext_copy_funct_val'] = $game_config['ExtCopyFunct'];
 
 		$BodyTPL = gettemplate('admin/credit_body');
 		$page = parsetemplate($BodyTPL, $parse);

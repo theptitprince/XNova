@@ -3,15 +3,15 @@
 <table width="569">
 <tbody>
 <tr>
-	<td class="c" colspan="5">{Production_of_resources_in_the_planet}</td>
+	<td class="c" colspan="5">{production_of_resources_in_the_planet}</td>
 </tr><tr>
 	<th height="22"></th>
-	<th width="60">{Metal}</th>
-	<th width="60">{Crystal}</th>
-	<th width="60">{Deuterium}</th>
-	<th width="60">{Energy}</th>
+	<th width="60">{metal_label}</th>
+	<th width="60">{crystal_label}</th>
+	<th width="60">{deuterium_label}</th>
+	<th width="60">{energy_label}</th>
 </tr><tr>
-	<th height="22">{Basic_income}</th>
+	<th height="22">{basic_income}</th>
 	<td class="k">{metal_basic_income}</td>
 	<td class="k">{crystal_basic_income}</td>
 	<td class="k">{deuterium_basic_income}</td>
@@ -19,12 +19,12 @@
 </tr>
 {resource_row}
 <tr>
-	<th height="22">{Stores_capacity}</th>
+	<th height="22">{stores_capacity}</th>
 	<td class="k">{metal_max}</td>
 	<td class="k">{crystal_max}</td>
 	<td class="k">{deuterium_max}</td>
 	<td class="k"><font color="#00ff00">-</font></td>
-	<td class="k"><input name="action" value="{Calcule}" type="submit"></td>
+	<td class="k"><input name="action" value="{calcule}" type="submit"></td>
 </tr><tr>
 	<th height="22">Total:</th>
 	<td class="k">{metal_total}</td>
@@ -39,24 +39,24 @@
 <table width="569">
 <tbody>
 <tr>
-	<td class="c" colspan="4">{Widespread_production}</td>
+	<td class="c" colspan="4">{widespread_production}</td>
 </tr><tr>
 	<th>&nbsp;</th>
-	<th>{Daily}</th>
-	<th>{Weekly}</th>
-	<th>{Monthly}</th>
+	<th>{daily}</th>
+	<th>{weekly}</th>
+	<th>{monthly}</th>
 </tr><tr>
-	<th>{Metal}</th>
+	<th>{metal_label}</th>
 	<th>{daily_metal}</th>
 	<th>{weekly_metal}</th>
 	<th>{monthly_metal}</th>
 </tr><tr>
-	<th>{Crystal}</th>
+	<th>{crystal_label}</th>
 	<th>{daily_crystal}</th>
 	<th>{weekly_crystal}</th>
 	<th>{monthly_crystal}</th>
 </tr><tr>
-	<th>{Deuterium}</th>
+	<th>{deuterium_label}</th>
 	<th>{daily_deuterium}</th>
 	<th>{weekly_deuterium}</th>
 	<th>{monthly_deuterium}</th>
@@ -67,9 +67,9 @@
 <table width="569">
 <tbody>
 <tr>
-	<td class="c" colspan="3">{Storage_state}</td>
+	<td class="c" colspan="3">{storage_state}</td>
 </tr><tr>
-	<th>{Metal}</th>
+	<th>{metal_label}</th>
 	<th>{metal_storage}</th>
 	<th width="250">
 		<div style="border: 1px solid rgb(153, 153, 255); width: 250px;">
@@ -79,7 +79,7 @@
 		</div>
 	</th>
 </tr><tr>
-	<th>{Crystal}</th>
+	<th>{crystal_label}</th>
 	<th>{crystal_storage}</th>
 	<th width="250">
 		<div style="border: 1px solid rgb(153, 153, 255); width: 250px;">
@@ -89,7 +89,7 @@
 		</div>
 	</th>
 </tr><tr>
-	<th>{Deuterium}</th>
+	<th>{deuterium_label}</th>
 	<th>{deuterium_storage}</th>
 	<th width="250">
 		<div style="border: 1px solid rgb(153, 153, 255); width: 250px;">

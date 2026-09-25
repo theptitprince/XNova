@@ -196,7 +196,7 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 	// fragmento de template
 	$page .= parsetemplate(gettemplate('buildings_defense'), $parse);
 
-	display($page, $lang['Defense']);
+	display($page, $lang['defense_label']);
 
 }
 // Version History

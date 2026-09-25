@@ -5,7 +5,7 @@ $lang['adm_af_done'] = "Schiffe hinzugef&uuml;gt.";
 $lang['adm_af_noplanet'] = "Kein Planet mit dieser ID.";
 
 $lang['adm_af_title'] = "Flotte hinzuf&uuml;gen";
-$lang['Id'] = "ID de la plan&egrave;te";
+$lang['id_label'] = "ID de la plan&egrave;te";
 $lang['cle'] = "Chasseur Leger"; 
 $lang['clourd'] = "Chasseur Lourd";
 $lang['pt'] = "Petit Transporteur";

@@ -26,7 +26,7 @@ includeLang('tech');
 
 $Id = intval(($_GET['techid'] ?? null));
 if (!isset($lang['tech'][$Id]) || !isset($resource[$Id])) {
-	message($lang['te_dt_unknown'], $lang['Tech'], 'techtree.php', 2);
+	message($lang['te_dt_unknown'], $lang['tech_label'], 'techtree.php', 2);
 }
 
 // Niveau actuel du joueur : recherches sur le compte, batiments sur la planete courante
@@ -87,9 +87,9 @@ if (empty($Required)) {
 $parse               = $lang;
 $parse['te_dt_id']   = $Id;
 $parse['te_dt_name'] = $lang['tech'][$Id];
-$parse['Liste']      = $Liste;
+$parse['liste']      = $Liste;
 $page = parsetemplate(gettemplate('techtree_details'), $parse);
 
-display ($page, $lang['Tech']);
+display ($page, $lang['tech_label']);
 
 ?>

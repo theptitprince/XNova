@@ -2,8 +2,8 @@
 
 // messages
 $lang['changue_pass'] = 'Cambiare la password';
-$lang['Download'] = 'Scaricare';
-$lang['Search'] = 'Cercare';
+$lang['download'] = 'Scaricare';
+$lang['search'] = 'Cercare';
 $lang['succeful_changepass'] = 'La password &#233 stata cambiata.<br /><a href="login.php" target="_top">Indietro</a>';
 $lang['succeful_save'] = 'I cambiamenti sono stati salvati.<br /><a href="options.php">Indietro</a>';
 
@@ -16,7 +16,7 @@ $lang['newpasswordagain'] = 'Nuova password (Ripetere)';
 $lang['emaildir'] = 'Indirizzo e-mail';
 $lang['emaildir_tip'] = 'Questo indirizzo lo potete cambiare quando volete. L\'indirizzo sarà permanente fra 7 giorni.';
 $lang['permanentemaildir'] = 'Indirizzo e-mail permanente';
-$lang['Languese'] = 'Jêzyk';
+$lang['languese'] = 'Jêzyk';
 $lang['pl'] = 'Polski';
 $lang['fr'] = 'Francuski';
 $lang['es'] = 'Hiszpañski';
@@ -77,6 +77,6 @@ $lang['save_settings'] = 'Salvare i cambiamenti';
 // Complet by XNova Team. All rights reversed (C) 2008
 
 // XNova Renaissance 0.9g : titre des messages de la page
-$lang['Options'] = 'Opzioni';
+$lang['options_label'] = 'Opzioni';
 
 ?>

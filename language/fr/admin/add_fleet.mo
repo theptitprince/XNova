@@ -5,7 +5,7 @@ $lang['adm_af_done'] = "Vaisseaux ajout&eacute;s.";
 $lang['adm_af_noplanet'] = "Aucune plan&egrave;te avec cet identifiant.";
 
 $lang['adm_af_title'] = "Ajout de flotte";
-$lang['Id'] = "ID de la plan&egrave;te";
+$lang['id_label'] = "ID de la plan&egrave;te";
 $lang['cle'] = "Chasseur l&eacute;ger"; 
 $lang['clourd'] = "Chasseur lourd";
 $lang['pt'] = "Petit transporteur";

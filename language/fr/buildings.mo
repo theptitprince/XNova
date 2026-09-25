@@ -1,31 +1,31 @@
 <?php
 
-$lang['Fleet']            = "Flotte";
-$lang['Defense']          = "D&eacute;fense";
-$lang['Research']         = "Laboratoire de Recherches";
+$lang['fleet_label']            = "Flotte";
+$lang['defense_label']          = "D&eacute;fense";
+$lang['research_label']         = "Laboratoire de Recherches";
 $lang['level']            = "Niveau";
 $lang['dispo']            = "Disponible";
-$lang['Requirements']     = "Requis: ";
-$lang['Requires']         = "Ressources n&eacute;cessaires ";
-$lang['Rest_ress']        = "Ressources restantes ";
-$lang['Rechercher']       = "Rechercher";
-$lang['ConstructionTime'] = "Dur&eacute;e de construction ";
-$lang['Construire']       = " Construire ";
-$lang['BuildFirstLevel']  = "Construire";
-$lang['BuildNextLevel']   = "Construire le Niveau ";
+$lang['requirements']     = "Requis: ";
+$lang['requires']         = "Ressources n&eacute;cessaires ";
+$lang['rest_ress']        = "Ressources restantes ";
+$lang['rechercher']       = "Rechercher";
+$lang['construction_time'] = "Dur&eacute;e de construction ";
+$lang['construire']       = " Construire ";
+$lang['build_first_level']  = "Construire";
+$lang['build_next_level']   = "Construire le Niveau ";
 $lang['completed']        = "Termin&eacute;";
 $lang['in_working']       = "En travail";
 $lang['work_todo']        = "En travail";
 $lang['total_left_time']  = "Temps restant";
 $lang['only_one']         = "Vous ne pouvez construire qu'un seul bouclier.";
-$lang['Build_lab']        = "Erreur Batiments";
-$lang['NoMoreSpace']      = "Plan&egrave;te pleine!";
-$lang['InBuildQueue']     = "Dans la liste de construction";
+$lang['build_lab']        = "Erreur Batiments";
+$lang['no_more_space']      = "Plan&egrave;te pleine!";
+$lang['in_build_queue']     = "Dans la liste de construction";
 $lang['bld_usedcells']    = "Cases utilis&eacute;es";
 $lang['bld_theyare']      = "Il reste";
 $lang['bld_cellfree']     = "cases libres";
-$lang['DelFromQueue']     = "enlever";
-$lang['DelFirstQueue']    = "Interrompre";
+$lang['del_from_queue']     = "enlever";
+$lang['del_first_queue']    = "Interrompre";
 $lang['cancel']           = "Annuler";
 $lang['continue']         = "Continuer";
 $lang['ready']            = "Pret";
@@ -38,6 +38,6 @@ $lang['labo_on_update']   = "Impossible de rechercher quand le laboratoire est e
 
 
 // XNova Renaissance : textes manquants (ils s'affichaient vides)
-$lang['Builds'] = 'B&acirc;timents';
+$lang['builds'] = 'B&acirc;timents';
 
 ?>

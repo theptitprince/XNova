@@ -185,7 +185,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			} else {
 				$parse['player_name']     = $UsrRow['username'];
 			}
-			$parse['player_mes']      = "<a href=\"messages.php?mode=write&id=" . $UsrRow['id'] . "\"><img src=\"" . $dpath . "img/m.gif\" border=\"0\" alt=\"". $lang['Ecrire'] ."\" /></a>";
+			$parse['player_mes']      = "<a href=\"messages.php?mode=write&id=" . $UsrRow['id'] . "\"><img src=\"" . $dpath . "img/m.gif\" border=\"0\" alt=\"". $lang['ecrire'] ."\" /></a>";
 			if ($UsrRow['ally_name'] == $user['ally_name']) {
 				$parse['player_alliance'] = "<font color=\"#33CCFF\">".$UsrRow['ally_name']."</font>";
 			} else {

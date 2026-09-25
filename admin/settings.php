@@ -282,13 +282,13 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			$parse['close_reason']           = stripslashes( $game_config['close_reason'] );
 
 			$parse['newsframe']              = ($game_config['OverviewNewsFrame'] == 1) ? " checked = 'checked' ":"";
-			$parse['NewsTextVal']            = stripslashes( $game_config['OverviewNewsText'] );
+			$parse['news_text_val']            = stripslashes( $game_config['OverviewNewsText'] );
 
 			$parse['chatframe']              = ($game_config['OverviewExternChat'] == 1) ? " checked = 'checked' ":"";
-			$parse['ExtTchatVal']            = stripslashes( $game_config['OverviewExternChatCmd'] );
+			$parse['ext_tchat_val']            = stripslashes( $game_config['OverviewExternChatCmd'] );
 
 			$parse['googlead']               = ($game_config['OverviewBanner'] == 1) ? " checked = 'checked' ":"";
-			$parse['GoogleAdVal']            = stripslashes( $game_config['OverviewClickBanner'] );
+			$parse['google_ad_val']            = stripslashes( $game_config['OverviewClickBanner'] );
 
 			$parse['debug']                  = ($game_config['debug'] == 1)        ? " checked = 'checked' ":"";
 

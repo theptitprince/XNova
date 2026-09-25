@@ -63,7 +63,7 @@ function GalaxyRowMoon ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 		$Result .= "<table width=240>";
 		$Result .= "<tr>";
 		$Result .= "<td class=c colspan=2>";
-		$Result .= $lang['Moon'].": ".$GalaxyRowPlanet["name"]." [".$Galaxy.":".$System.":".$Planet."]";
+		$Result .= $lang['moon_label'].": ".$GalaxyRowPlanet["name"]." [".$Galaxy.":".$System.":".$Planet."]";
 		$Result .= "</td>";
 		$Result .= "</tr><tr>";
 		$Result .= "<th width=80>";
@@ -79,7 +79,7 @@ function GalaxyRowMoon ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 		$Result .= "</tr><tr>";
 		$Result .= "<th>".$lang['temperature']."</th><th>". number_format($GalaxyRowPlanet['temp_min'], 0, '', '.') ."</th>";
 		$Result .= "</tr><tr>";
-		$Result .= "<td class=c colspan=2>".$lang['Actions']."</td>";
+		$Result .= "<td class=c colspan=2>".$lang['actions']."</td>";
 		$Result .= "</tr><tr>";
 		$Result .= "<th colspan=2 align=center>";
 		$Result .= $MissionType6Link;

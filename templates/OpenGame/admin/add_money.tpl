@@ -10,13 +10,13 @@
 	<th width="130">{adm_am_plid}</th>
 	<th width="155"><input name="id" type="text" value="0" size="3" /></th>
 </tr><tr>
-	<th>{Metal}</th>
+	<th>{metal_label}</th>
 	<th><input name="metal" type="text" value="0" /></th>
 </tr><tr>
-	<th>{Crystal}</td>
+	<th>{crystal_label}</td>
 	<th><input name="cristal" type="text" value="0" /></th>
 </tr><tr>
-	<th>{Deuterium}</td>
+	<th>{deuterium_label}</td>
 	<th><input name="deut" type="text" value="0" /></th>
 </tr><tr>
 	<th colspan="2"><input type="Submit" value="{adm_am_add}" /></th>

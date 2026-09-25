@@ -26,7 +26,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse            = array();
 		$parse['tt_name'] = $ElementName;
 		if (!isset($resource[$Element])) {
-			$parse['Requirements']  = $lang['Requirements'];
+			$parse['requirements']  = $lang['requirements'];
 			$page                  .= parsetemplate($HeadTpl, $parse);
 		} else {
 			if (isset($requeriments[$Element])) {
@@ -57,7 +57,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$parse['techtree_list'] = $page;
 	$page                   = parsetemplate(gettemplate('techtree_body'), $parse);
 
-	display($page, $lang['Tech']);
+	display($page, $lang['tech_label']);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

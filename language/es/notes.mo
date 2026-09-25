@@ -1,43 +1,43 @@
 <?php
 
-$lang['Notes'] = 'Notes';
+$lang['notes'] = 'Notes';
 
-$lang['Createnote'] = 'Cr&eacute;er une note';
-$lang['MakeNewNote'] = 'Cr&eacute;er une nouvelle note';
-$lang['Editnote'] = 'Editer note';
+$lang['createnote'] = 'Cr&eacute;er une note';
+$lang['make_new_note'] = 'Cr&eacute;er une nouvelle note';
+$lang['editnote'] = 'Editer note';
 
-$lang['Priority'] = 'Priorit&eacute;';
+$lang['priority_label'] = 'Priorit&eacute;';
 
-$lang['Important'] = 'haute';
-$lang['Normal'] = 'normale';
-$lang['Unimportant'] = 'basse';
+$lang['important'] = 'haute';
+$lang['normal'] = 'normale';
+$lang['unimportant'] = 'basse';
 
-$lang['Subject'] = 'Sujet';
-$lang['NoTitle'] = 'Pas de titre';
-$lang['NoText'] = 'Pas de texte';
+$lang['subject_label'] = 'Sujet';
+$lang['no_title'] = 'Pas de titre';
+$lang['no_text'] = 'Pas de texte';
 
-$lang['Date'] = 'Date';
-$lang['Size'] = 'Taille';
+$lang['date_label'] = 'Date';
+$lang['size'] = 'Taille';
 
-$lang['Note'] = 'Note';
+$lang['note'] = 'Note';
 
 $lang['characters'] = 'Caracteres';
 
-$lang['Apply'] = 'Accepter';
-$lang['Back'] = 'Retour';
-$lang['Save'] = 'Sauvegarder';
-$lang['Delete'] = 'Supprimer';
-$lang['Reset'] = 'Effacer';
+$lang['apply'] = 'Accepter';
+$lang['back'] = 'Retour';
+$lang['save'] = 'Sauvegarder';
+$lang['delete_label'] = 'Supprimer';
+$lang['reset'] = 'Effacer';
 
 //mensajes
-$lang['ThereIsNoNote'] = 'Il n\'y a pas de notes';
+$lang['there_is_no_note'] = 'Il n\'y a pas de notes';
 
-$lang['NoteUpdated'] = 'La note a &eacute;t&eacute; r&eacute;actualis&eacute;e, <a href="notes.php"><blink>redirection...</blink></a>';
+$lang['note_updated'] = 'La note a &eacute;t&eacute; r&eacute;actualis&eacute;e, <a href="notes.php"><blink>redirection...</blink></a>';
 
-$lang['NoteAdded'] = 'La note s\'est bien cr&eacute;ee, <a href="notes.php"><blink>redirection...</blink></a>';
+$lang['note_added'] = 'La note s\'est bien cr&eacute;ee, <a href="notes.php"><blink>redirection...</blink></a>';
 
-$lang['NoteDeleted'] = 'La note a &eacute;t&eacute; supprim&eacute;e, <a href="notes.php"><blink>redirection...</blink></a>';
-$lang['NoteDeleteds'] = 'Les notes ont &eacute;t&eacute; supprim&eacute;, <a href="notes.php"><blink>redirection...</blink></a>';
+$lang['note_deleted'] = 'La note a &eacute;t&eacute; supprim&eacute;e, <a href="notes.php"><blink>redirection...</blink></a>';
+$lang['note_deleteds'] = 'Les notes ont &eacute;t&eacute; supprim&eacute;, <a href="notes.php"><blink>redirection...</blink></a>';
 
 // Created by Perberos. All rights reversed (C) 2006 
 ?>

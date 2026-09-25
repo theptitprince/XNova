@@ -40,7 +40,7 @@ function GalaxyRowDebris ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy
 			$Result .= "<table width=240>";
 			$Result .= "<tr>";
 			$Result .= "<td class=c colspan=2>";
-			$Result .= $lang['Debris']." [".$Galaxy.":".$System.":".$Planet."]";
+			$Result .= $lang['debris_label']." [".$Galaxy.":".$System.":".$Planet."]";
 			$Result .= "</td>";
 			$Result .= "</tr><tr>";
 			$Result .= "<th width=80>";
@@ -51,9 +51,9 @@ function GalaxyRowDebris ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy
 			$Result .= "<tr>";
 			$Result .= "<td class=c colspan=2>".$lang['gl_ressource']."</td>";
 			$Result .= "</tr><tr>";
-			$Result .= "<th>".$lang['Metal']." </th><th>". number_format( $GalaxyRow['metal'], 0, '', '.') ."</th>";
+			$Result .= "<th>".$lang['metal_label']." </th><th>". number_format( $GalaxyRow['metal'], 0, '', '.') ."</th>";
 			$Result .= "</tr><tr>";
-			$Result .= "<th>".$lang['Crystal']." </th><th>". number_format( $GalaxyRow['crystal'], 0, '', '.') ."</th>";
+			$Result .= "<th>".$lang['crystal_label']." </th><th>". number_format( $GalaxyRow['crystal'], 0, '', '.') ."</th>";
 			$Result .= "</tr><tr>";
 			$Result .= "<td class=c colspan=2>".$lang['gl_action']."</td>";
 			$Result .= "</tr><tr>";

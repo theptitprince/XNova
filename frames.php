@@ -33,7 +33,7 @@ include($xnova_root_path . 'common.'.$phpEx);
 
 	$page  = "<html>";
 	$page .= "<head>";
-	$page .= "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=". $langInfos['ENCODING']."\">";
+	$page .= "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=". $langInfos['encoding']."\">";
 	$page .= "<link rel=\"shortcut icon\" href=\"favicon.ico\">";
 	$page .= "<title>". $game_config['game_name'] ."</title>";
 	$page .= "</head>";
@@ -43,7 +43,7 @@ include($xnova_root_path . 'common.'.$phpEx);
 	$page .= "<frame name=\"Hauptframe\" src=\"overview.php\">";
 	$page .= "<noframes>";
 	$page .= "<body>";
-	$page .= "<p>". ($lang['NoFrames'] ?? '') ."</p>";
+	$page .= "<p>". ($lang['no_frames'] ?? '') ."</p>";
 	$page .= "</noframes>";
 	$page .= "</frameset>";
       $page .= "</body>";

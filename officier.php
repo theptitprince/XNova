@@ -52,18 +52,18 @@ function ShowOfficierPage ( &$CurrentUser ) {
 					$QryUpdateUser .= "WHERE ";
 					$QryUpdateUser .= "`id` = '". $CurrentUser['id'] ."';";
 					doquery( $QryUpdateUser, 'users' );
-					$Message = $lang['OffiRecrute'];
+					$Message = $lang['offi_recrute'];
 				} elseif ( $Result == -1 ) {
-					$Message = $lang['Maxlvl'];
+					$Message = $lang['maxlvl'];
 				} elseif ( $Result == 0 ) {
-					$Message = $lang['Noob'];
+					$Message = $lang['noob'];
 				}
 			}
 		} else {
-			$Message = $lang['NoPoints'];
+			$Message = $lang['no_points'];
 		}
 		$MessTPL        = gettemplate('message_body');
-		$parse['title'] = $lang['Officier'];
+		$parse['title'] = $lang['officier_label'];
 		$parse['mes']   = $Message;
 
 		$page           = parsetemplate( $MessTPL, $parse);
@@ -80,11 +80,11 @@ function ShowOfficierPage ( &$CurrentUser ) {
 				$bloc['off_id']       = $Officier;
 				$bloc['off_tx_lvl']   = $lang['off_tx_lvl'];
 				$bloc['off_lvl']      = $CurrentUser[$resource[$Officier]];
-				$bloc['off_desc']     = $lang['Desc'][$Officier];
+				$bloc['off_desc']     = $lang['desc'][$Officier];
 				if ($Result == 1) {
 					$bloc['off_link'] = "<a href=\"officier.php?mode=2&offi=".$Officier."\"><font color=\"#00ff00\">". $lang['link'][$Officier]."</font>";
 				} else {
-					$bloc['off_link'] = $lang['Maxlvl'];
+					$bloc['off_link'] = $lang['maxlvl'];
 				}
 				$parse['disp_off_tbl'] .= parsetemplate( $RowsTPL, $bloc );
 			}

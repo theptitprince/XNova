@@ -23,5 +23,5 @@
 	<th width="278">UGamela<br >Britania </th>
 	<th width="279">{cred_based}<br>{cred_start}</th>
 </tr>
-{ExtCopyFrame}
+{ext_copy_frame}
 </table>

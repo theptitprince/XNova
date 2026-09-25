@@ -112,7 +112,7 @@ $lang['sys_destruc_null'] = ", visiblement la flotte ne d&eacute;veloppe pas la 
 // Complet by XNova Team. All rights reversed (C) 2008
 
 // XNova Renaissance : textes manquants (ils s'affichaient vides)
-$lang['TranslationBy'] = '';
+$lang['translation_by'] = '';
 
 // XNova Renaissance : protection CSRF
 $lang['sys_csrf_error'] = 'Cette action a &eacute;t&eacute; refus&eacute;e : la demande ne vient pas d\'une page du jeu (ou la page est trop ancienne). Rechargez la page et recommencez.';

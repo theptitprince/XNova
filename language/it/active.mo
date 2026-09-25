@@ -7,9 +7,9 @@ if (!defined('INSIDE')) {
 // Registration form
 $lang['registry']          = 'Aktywacja';
 $lang['form']              = 'Formularz';
-$lang['Register']          = 'XNova Rejestracja';
-$lang['Multiverse']        = 'XNova';
-$lang['E-Mail']            = 'Adres e-Mail';
+$lang['register']          = 'XNova Rejestracja';
+$lang['multiverse']        = 'XNova';
+$lang['e_mail']            = 'Adres e-Mail';
 $lang['signup']            = ' Aktywacja ';
 
 // Send
