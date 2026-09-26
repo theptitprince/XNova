@@ -23,10 +23,10 @@ $lang['emaildir'] = "Adresse e-mail";
 $lang['emaildir_tip'] = "Cette adresse peut &ecirc;tre chang&eacute;e &agrave; tout moment. L'adresse deviendra permanente s'il n'y a pas de changemements pendant les 7 jours qui suivent.";
 $lang['permanentemaildir'] = "Adresse e-mail permanente";
 
-$lang['opt_lst_ord']  = "Classer les planetes dans l'ordre suivant :";
+$lang['opt_lst_ord']  = "Classer les plan&egrave;tes dans l'ordre suivant :";
 $lang['opt_lst_ord0'] = "Date de colonisation";
-$lang['opt_lst_ord1'] = "Coordonnees";
-$lang['opt_lst_ord2'] = "Ordre alphabetique";
+$lang['opt_lst_ord1'] = "Coordonn&eacute;es";
+$lang['opt_lst_ord2'] = "Ordre alphab&eacute;tique";
 $lang['opt_lst_cla']  = "Ordre de classement :";
 $lang['opt_lst_cla0'] = "croissant";
 $lang['opt_lst_cla1'] = "décroissant";
@@ -56,7 +56,7 @@ $lang['seconds'] = "Secondes";
 //Rapport acces
 $lang['shortcut'] = "Acc&egrave;s direct";
 $lang['show'] = "Montrer";
-$lang['write_a_messege'] = "Ecrire message";
+$lang['write_a_messege'] = "&Eacute;crire un message";
 $lang['spy'] = "Espionner";
 $lang['add_to_buddylist'] = "Ajouter &agrave; la liste d'amis";
 $lang['attack_with_missile'] = "Attaquer avec les missiles";

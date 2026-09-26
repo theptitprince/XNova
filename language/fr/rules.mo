@@ -1,12 +1,12 @@
 <?php
 
-$lang['respectrules'] = 'Ces r&egrave;gles sont &agrave; respecter, tout infraction &agrave; ces r&egrave;gles se vera d\'un bannissement temporaire ou d&eacute;finitif !';
+$lang['respectrules'] = 'Ces r&egrave;gles sont &agrave; respecter, toute infraction &agrave; ces r&egrave;gles sera sanctionn&eacute;e par un bannissement temporaire ou d&eacute;finitif !';
 $lang['rules']        = 'R&egrave;glement';
 
 $lang['account']      = 'I.    Comptes';
 $lang['multi_account'] = 'II.   Multicomptes';
 $lang['sitting']      = 'III.  Surveillance du compte d\'autrui (Sitting)';
-$lang['trade']        = 'IV.   Echange de comptes';
+$lang['trade']        = 'IV.   &Eacute;change de comptes';
 $lang['bash']         = 'V.    Bash';
 $lang['push']         = 'VI.   Push';
 $lang['bugusing']     = 'VII.  Bugusing';
@@ -31,7 +31,7 @@ $lang['sitting_text7'] = 'Un compte ne peut changer de propri&eacute;taire que t
 $lang['sitting_text8'] = 'Le surveillant du compte ne peut sitter un compte sur cet univers dans les 7 jours qui suivent un sitting.';
 $lang['sitting_text9'] = 'Le sitting ne doit pas &ecirc;tre utilis&eacute; pour se procurer un avantage (par ex. utiliser une phalange ou la flotte).';
 $lang['sitting_text10'] = 'Ce qui est strictement interdit:';
-$lang['sitting_text11'] = 'Aucun mouvement de flotte n\'est autoris&eacute; pendant que le compte est sitt&eacute; (aucune flotte ne doit &ecirc;tre en vol &agrave; ce moment l&agrave;). Cependant, si une flotte est en train de se faire attquer, il est permis de l\'envoyer en mode "Transport" ou "Stationner" vers une autre plan&egrave;te ou lune de ce compte pour esquiver l\'attaque.';
+$lang['sitting_text11'] = 'Aucun mouvement de flotte n\'est autoris&eacute; pendant que le compte est sitt&eacute; (aucune flotte ne doit &ecirc;tre en vol &agrave; ce moment-l&agrave;). Cependant, si une flotte est en train de se faire attaquer, il est permis de l\'envoyer en mode "Transport" ou "Stationner" vers une autre plan&egrave;te ou lune de ce compte pour esquiver l\'attaque.';
 $lang['sitting_text12'] = 'Le sitting de compte est interdit pendant les trois premi&egrave;res semaines &agrave; compter de la date de d&eacute;marrage d\'un univers.';
 $lang['sitting_text13'] = 'Pendant un sitting, seul le sitteur est autoris&eacute; &agrave; se logger.';
 $lang['sitting_text14'] = 'Il est interdit de se faire sitter par plusieurs joueurs pendant la p&eacute;riode de 12 heures.';
@@ -49,18 +49,18 @@ $lang['bash_exep_text3'] = 'Les attaques par missiles interplan&eacute;taires ne
 
 $lang['push_text'] = 'Le push se d&eacute;finit par le transfert volontaire de ressources sous quelque forme que ce soit d\'un joueur vers un joueur mieux class&eacute; que lui sans aucune contrepartie. Ceci est aussi valable lorsqu\'un joueur mieux class&eacute; vous fait du chantage.';
 $lang['push_text2'] = 'Contrairement au bash, il n\'y a aucune exception o&ugrave; le push est autoris&eacute;:';
-$lang['push_text3'] = 'Si un joueur plus faible que vous vous envoie des ressources sans que vous ne lui ayez rien demand&eacute;, veuillez lui renvoyer ou l\'envoyer &agrave; un des op&eacute;rateurs de jeu. Vous ne pouvez pas garder ces ressources!';
+$lang['push_text3'] = 'Si un joueur plus faible que vous vous envoie des ressources sans que vous ne lui ayez rien demand&eacute;, veuillez les lui renvoyer ou les envoyer &agrave; un des op&eacute;rateurs de jeu. Vous ne pouvez pas garder ces ressources !';
 $lang['push_text4'] = 'Le chantage n\'est pas autoris&eacute;.';
 $lang['push_text5'] = 'Les &eacute;changes de ressources doivent &ecirc;tre ex&eacute;cut&eacute;s sous 48 heures.';
 $lang['exemple'] = 'Exemples (les infractions ne se limitent pas aux cas cit&eacute;s ci-dessous):';
 $lang['push_ex'] = 'Un joueur envoie des ressources &agrave; un joueur mieux class&eacute; que lui.';
 $lang['push_ex2'] = 'Une flotte suicide envoy&eacute;e vers un joueur plus fort dans le seul but que ce dernier puisse recycler le champ de d&eacute;bris.';
-$lang['push_ex3'] = 'Transporter des ressources vers une plan&egrave;te pour les mettre &agrave; disposition d\'une attaque d\'un joueur plus fort inform&eacute; de cette manoeuvre.';
+$lang['push_ex3'] = 'Transporter des ressources vers une plan&egrave;te pour les mettre &agrave; disposition d\'une attaque d\'un joueur plus fort inform&eacute; de cette man&oelig;uvre.';
 $lang['recyclage'] = 'Aide au recyclage:';
 $lang['push_rec'] = 'Apr&egrave;s avoir aid&eacute; un joueur &agrave; collecter un champ de d&eacute;bris, vous &ecirc;tes autoris&eacute; &agrave; transf&eacute;rer ces ressources au joueur attaquant mieux class&eacute;, cet envoi devant &ecirc;tre obligatoirement accompagn&eacute; d\'un mail d\'information &agrave; votre op&eacute;rateur d\'univers.';
 $lang['mercenariat'] = 'Mercenariats:';
 $lang['push_mer'] = 'Les mercenariats doivent &ecirc;tre d&eacute;clar&eacute;s sur le forum officiel dans la section correspondante pour &ecirc;tre approuv&eacute;s. Les mercenariats non d&eacute;clar&eacute;s sont passibles de bannissement pour push.';
-$lang['push_mer2'] = 'La r&eacute;compense ne peut-&ecirc;tre vers&eacute;e que lorsque la cible a &eacute;t&eacute; d&eacute;truite.';
+$lang['push_mer2'] = 'La r&eacute;compense ne peut &ecirc;tre vers&eacute;e que lorsque la cible a &eacute;t&eacute; d&eacute;truite.';
 
 $lang['bugusing_text'] = 'Utiliser un bug &agrave; son avantage est strictement interdit.';
 $lang['bugusing_text2'] = 'Un joueur qui trouve un bug est pri&eacute; de le signaler imm&eacute;diatement au staff (par ex. via le forum, l\'IRC ou les mails).';
