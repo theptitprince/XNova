@@ -57,6 +57,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Sender = $Users[$Row['sender_id']] ?? null;
 			$Author = stripslashes($Row['message_from']);
 			if ($Sender) {
+				// Messages d'alliance : l'expediteur affiche est le tag de l'alliance, le nom du joueur est ajoute
+				if (strpos(html_entity_decode(strip_tags($Author), ENT_QUOTES, 'UTF-8'), $Sender['username']) === false) {
+					$Author = htmlspecialchars($Sender['username'], ENT_QUOTES, 'UTF-8') ." (". $Author .")";
+				}
 				$Author .= " &mdash; <a href=\"paneladmina.php?result=usr_data&id=". intval($Sender['id']) ."\">". $lang['adm_rep_sheet'] ."</a>";
 				if ($Sender['bana'] == 1) {
 					$Author .= " (<font color=\"red\">". $lang['adm_rep_banned'] ."</font>)";
