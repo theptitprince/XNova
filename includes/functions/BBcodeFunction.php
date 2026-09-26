@@ -32,7 +32,8 @@ function bbcode($string) {
         '/\[code\](.*?)\[\/code\]/is'            => function ($m) { return sCode($m[1]); },
     );
 
-    $string = nl2br(htmlspecialchars(stripslashes($string)));
+    // (plus de stripslashes : sans magic quotes, il effacait les \ tapes par le joueur)
+    $string = nl2br(htmlspecialchars($string));
     foreach ($rules as $pattern => $replace) {
         $string = is_callable($replace) ? preg_replace_callback($pattern, $replace, $string) : preg_replace($pattern, $replace, $string);
     }
@@ -67,7 +68,7 @@ function sCode($string){
 }
    
 function sList($string) {
-    $tmp = explode('[*]', stripslashes($string));
+    $tmp = explode('[*]', $string);
     $out = null;
     foreach($tmp as $list) {
         if(strlen(str_replace('', '', $list)) > 0) {

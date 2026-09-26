@@ -70,7 +70,8 @@ $lang['changelog']   = array(
 - FIX : Installeur : bandeaux du haut harmonis&eacute;s (m&ecirc;me hauteur, &eacute;tape &agrave; droite), menu et contenu align&eacute;s ; verrou et erreurs affich&eacute;s dans le cadre de l\'installeur (formulaire conserv&eacute; sous l\'erreur) ; &laquo; Suivant &raquo; de la mise &agrave; jour ramenait &agrave; l\'&eacute;tape 1 ; param&egrave;tre recopi&eacute; tel quel dans la page (injection de code)
 - FIX : Installeur : mot de passe administrateur d\'au moins 8 caract&egrave;res et adresse e-mail valide, comme &agrave; l\'inscription ; conseil &laquo; CHMOD 777 &raquo; remplac&eacute; (le droit d\'&eacute;criture suffit) ; fautes du fran&ccedil;ais, titre de la page traduit
 - FIX : Administration : nettoyage de la file du chantier spatial (avertissements PHP sur les files vides)
-- FIX : Vue de l\'empire : &eacute;nergie restante fausse (consommation ajout&eacute;e au lieu d\'&ecirc;tre retir&eacute;e), cases maximum sans le terraformeur, titre de page vide, fautes des intitul&eacute;s',
+- FIX : Vue de l\'empire : &eacute;nergie restante fausse (consommation ajout&eacute;e au lieu d\'&ecirc;tre retir&eacute;e), cases maximum sans le terraformeur, titre de page vide, fautes des intitul&eacute;s
+- FIX : Administration du chat : messages affich&eacute;s sans &eacute;chappement (du code post&eacute; dans le chat s\'ex&eacute;cutait chez l\'administrateur) ; barres obliques inverses effac&eacute;es dans le chat, les messages priv&eacute;s et les d&eacute;clarations de multi-compte',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)
