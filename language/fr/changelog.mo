@@ -71,7 +71,8 @@ $lang['changelog']   = array(
 - FIX : Installeur : mot de passe administrateur d\'au moins 8 caract&egrave;res et adresse e-mail valide, comme &agrave; l\'inscription ; conseil &laquo; CHMOD 777 &raquo; remplac&eacute; (le droit d\'&eacute;criture suffit) ; fautes du fran&ccedil;ais, titre de la page traduit
 - FIX : Administration : nettoyage de la file du chantier spatial (avertissements PHP sur les files vides)
 - FIX : Vue de l\'empire : &eacute;nergie restante fausse (consommation ajout&eacute;e au lieu d\'&ecirc;tre retir&eacute;e), cases maximum sans le terraformeur, titre de page vide, fautes des intitul&eacute;s
-- FIX : Administration du chat : messages affich&eacute;s sans &eacute;chappement (du code post&eacute; dans le chat s\'ex&eacute;cutait chez l\'administrateur) ; barres obliques inverses effac&eacute;es dans le chat, les messages priv&eacute;s et les d&eacute;clarations de multi-compte',
+- FIX : Administration du chat : messages affich&eacute;s sans &eacute;chappement (du code post&eacute; dans le chat s\'ex&eacute;cutait chez l\'administrateur) ; barres obliques inverses effac&eacute;es dans le chat, les messages priv&eacute;s et les d&eacute;clarations de multi-compte
+- FIX : Alliance : tri de la liste des membres par rang (le fondateur &eacute;tait class&eacute; parmi les novices) ; marchand : co&ucirc;t recalcul&eacute; aussi apr&egrave;s un collage',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)

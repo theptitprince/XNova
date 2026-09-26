@@ -34,11 +34,11 @@ function calcul() {
 	<th>{mod_ma_res}</th>
 </tr><tr>
 	<th>{metal_label}</th>
-	<th><input name="metal" type="text" value="0" onkeyup="calcul()"/></th>
+	<th><input name="metal" type="text" value="0" oninput="calcul()"/></th>
 	<th>{mod_ma_res_a}</th>
 </tr><tr>
 	<th>{deuterium_label}</th>
-	<th><input name="deut" type="text" value="0" onkeyup="calcul()"/></th>
+	<th><input name="deut" type="text" value="0" oninput="calcul()"/></th>
 	<th>{mod_ma_res_b}</th>
 </tr><tr>
 	<th colspan="6"><input type="submit" value="{mod_ma_excha}" /></th>
