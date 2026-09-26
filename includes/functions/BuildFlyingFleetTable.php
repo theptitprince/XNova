@@ -16,6 +16,7 @@ function BuildFlyingFleetTable () {
 	global $lang;
 
 	$TableTPL     = gettemplate('admin/fleet_rows');
+	$table        = '';
 	$FlyingFleets = doquery ("SELECT * FROM {{table}} ORDER BY `fleet_end_time` ASC;", 'fleets');
 	while ( $CurrentFleet = mysqli_fetch_assoc( $FlyingFleets ) ) {
 		$FleetOwner       = doquery("SELECT `username` FROM {{table}} WHERE `id` = '". $CurrentFleet['fleet_owner'] ."';", 'users', true);
@@ -35,7 +36,7 @@ function BuildFlyingFleetTable () {
 		}
 		$Bloc['en_posit'] = "[".$CurrentFleet['fleet_end_galaxy'] .":". $CurrentFleet['fleet_end_system'] .":". $CurrentFleet['fleet_end_planet'] ."]<br>". ( ($CurrentFleet['fleet_end_type'] == 1) ? "[P]": (($CurrentFleet['fleet_end_type'] == 2) ? "D" : "L"  )) ."";
 		if ($CurrentFleet['fleet_mission'] == 15) {
-			$Bloc['wa_time']  = date('H:i:s d/m/Y', $CurrentFleet['fleet_stay_time']);
+			$Bloc['wa_time']  = date('H:i:s d/m/Y', $CurrentFleet['fleet_end_stay']); // fin du stationnement (fleet_stay_time n'existe pas)
 		} else {
 			$Bloc['wa_time']  = "";
 		}
@@ -43,7 +44,7 @@ function BuildFlyingFleetTable () {
 
 		$table .= parsetemplate( $TableTPL, $Bloc );
 	}
-	return $table ?? '';
+	return $table;
 }
 
 
