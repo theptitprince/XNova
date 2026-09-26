@@ -7,10 +7,10 @@ $lang['fields'] = "Cases";
 $lang['resources'] = "Ressources";
 $lang['metal'] = "M&eacute;tal";
 $lang['crystal'] = "Cristal";
-$lang['deuterium'] = "Deuterium";
-$lang['energy'] = "Energie";
-$lang['buildings'] = "B&agrave;timents";
-$lang['investigation'] = "Laboratoire";
+$lang['deuterium'] = 'Deutérium';
+$lang['energy'] = 'Énergie';
+$lang['buildings'] = 'Bâtiments';
+$lang['investigation'] = 'Recherches';
 $lang['ships'] = "Flotte";
 $lang['defense'] = "D&eacute;fense";
 

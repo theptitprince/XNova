@@ -10,7 +10,7 @@ $lang['crystal'] = "Cristallo";
 $lang['deuterium'] = "Deuterio";
 $lang['energy'] = "Energia";
 $lang['buildings'] = "Strutture";
-$lang['investigation'] = "Laboratorio";
+$lang['investigation'] = 'Ricerche';
 $lang['ships'] = "Flotte";
 $lang['defense'] = "Difese";
 
