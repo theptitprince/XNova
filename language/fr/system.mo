@@ -148,4 +148,8 @@ $lang['sys_banned_title'] = 'Votre compte a &eacute;t&eacute; suspendu !';
 $lang['sys_banned_until'] = 'Vous &ecirc;tes banni jusqu\'au %s.';
 $lang['sys_banned_forever'] = 'Vous &ecirc;tes banni d&eacute;finitivement.';
 
+// XNova Renaissance 0.9h : « Effacer le compte » (suppression 7 jours apres la demande, annulable)
+$lang['sys_account_deleted_title'] = 'Compte effacé';
+$lang['sys_account_deleted'] = 'Votre compte a été effacé, comme vous l\'aviez demandé dans les Options.';
+
 ?>

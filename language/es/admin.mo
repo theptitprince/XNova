@@ -152,4 +152,14 @@ $lang['adm_unban_name'] = 'Nombre del jugador';
 $lang['adm_unban_button'] = 'Levantar la sanción';
 $lang['adm_unban_done'] = 'La sanción del jugador %s se ha levantado.';
 
+// XNova Renaissance 0.9h : liste des joueurs (fiche) et recherche sans resultat
+$lang['adm_ul_sheet'] = 'Ficha';
+$lang['adm_usr_notfound'] = 'Ningún jugador corresponde a esta búsqueda.';
+
+// XNova Renaissance 0.9h : liste des joueurs, lien vers la suppression
+$lang['adm_delplayer_title'] = 'Borrar a este jugador';
+
+// XNova Renaissance 0.9h : on ne modifie pas son propre acces (seul administrateur prive de ses droits)
+$lang['adm_usr_ownlevel'] = 'No puede modificar su propio acceso.';
+
 ?>

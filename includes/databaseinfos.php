@@ -464,7 +464,7 @@
 	$QryTableUsers      .= "`settings_rep` tinyint(4) NOT NULL default '0', ";
 	$QryTableUsers      .= "`urlaubs_modus` tinyint(4) NOT NULL default '0', ";
 	$QryTableUsers      .= "`urlaubs_until` int(11) NOT NULL default '0', ";
-	$QryTableUsers      .= "`db_deaktjava` tinyint(4) NOT NULL default '0', ";
+	$QryTableUsers      .= "`db_deaktjava` int(11) NOT NULL default '0', ";
 	$QryTableUsers      .= "`new_message` int(11) NOT NULL default '0', ";
 	$QryTableUsers      .= "`fleet_shortcut` text, ";
 	$QryTableUsers      .= "`b_tech_planet` int(11) NOT NULL default '0', ";

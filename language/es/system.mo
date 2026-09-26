@@ -1,10 +1,10 @@
 <?php
 
 $lang['user_level'] = array (
-	'0' => 'Joueur',
+	'0' => 'Jugador',
 	'1' => 'Moderador',
 	'2' => 'Operador',
-	'3' => 'Administrateur',
+	'3' => 'Administrador',
 );
 
 $lang['mod_marchand'] = 'Mercader';
@@ -147,5 +147,9 @@ $lang['sys_sql_error'] = 'Se ha producido un error, avise al administrador. Erro
 $lang['sys_banned_title'] = '¡Su cuenta ha sido suspendida!';
 $lang['sys_banned_until'] = 'Está sancionado hasta el %s.';
 $lang['sys_banned_forever'] = 'Está sancionado de forma definitiva.';
+
+// XNova Renaissance 0.9h : « Effacer le compte » (suppression 7 jours apres la demande, annulable)
+$lang['sys_account_deleted_title'] = 'Cuenta borrada';
+$lang['sys_account_deleted'] = 'Su cuenta ha sido borrada, como lo solicitó en las Opciones.';
 
 ?>

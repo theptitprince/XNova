@@ -4,6 +4,13 @@ $lang['description_label'] = 'Description';
 $lang['changelog']   = array(
 
 
+'0.9h Renaissance' => 'Fonctions inachev&eacute;es (theptitprince)
+- NEW : Administration : page &laquo; Supprimer un joueur &raquo; remise et termin&eacute;e (fiche du compte, confirmation, r&eacute;serv&eacute;e aux administrateurs) ; la liste des joueurs supprimait en un clic
+- NEW : &laquo; Effacer le compte &raquo; (Options) : le compte est vraiment supprim&eacute; 7 jours apr&egrave;s la demande, annulable, rappel sur la vue g&eacute;n&eacute;rale
+- FIX : Suppression d\'un compte : flottes des autres joueurs vers ses plan&egrave;tes renvoy&eacute;es chez elles, missiles et d&eacute;clarations effac&eacute;s
+- FIX : Rappel d\'une flotte : dur&eacute;e du retour fausse (stationnement et aller en cours invers&eacute;s)
+- FIX : Administration : fiche de chaque joueur depuis la liste, recherche par IP (ne trouvait jamais personne), joueur introuvable signal&eacute;, on ne modifie plus son propre acc&egrave;s',
+
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
 - FIX : Mot de passe oubli&eacute; : lien de confirmation avant tout changement (conna&icirc;tre l\'adresse d\'un joueur suffisait), injection SQL corrig&eacute;e, m&ecirc;me message que l\'adresse existe ou non
 - FIX : Mots de passe de 8 caract&egrave;res au moins : inscription, Options et compte administrateur de l\'installeur

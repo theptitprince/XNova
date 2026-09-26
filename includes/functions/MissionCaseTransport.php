@@ -22,8 +22,8 @@ function MissionCaseTransport ( $FleetRow ) {
 	$QryStartPlanet  .= "`planet` = '". $FleetRow['fleet_start_planet'] ."' AND ";
 	$QryStartPlanet  .= "`planet_type` = '". $FleetRow['fleet_start_type'] ."';";
 	$StartPlanet      = doquery( $QryStartPlanet, 'planets', true);
-	$StartName        = $StartPlanet['name'];
-	$StartOwner       = $StartPlanet['id_owner'];
+	$StartName        = $StartPlanet['name'] ?? ''; // planete disparue (colonie abandonnee, compte supprime) : vide
+	$StartOwner       = $StartPlanet['id_owner'] ?? 0;
 
 	$QryTargetPlanet  = "SELECT * FROM {{table}} ";
 	$QryTargetPlanet .= "WHERE ";
@@ -32,8 +32,8 @@ function MissionCaseTransport ( $FleetRow ) {
 	$QryTargetPlanet .= "`planet` = '". $FleetRow['fleet_end_planet'] ."' AND ";
 	$QryTargetPlanet .= "`planet_type` = '". $FleetRow['fleet_end_type'] ."';";
 	$TargetPlanet     = doquery( $QryTargetPlanet, 'planets', true);
-	$TargetName       = $TargetPlanet['name'];
-	$TargetOwner      = $TargetPlanet['id_owner'];
+	$TargetName       = $TargetPlanet['name'] ?? ''; // planete disparue (colonie abandonnee, compte supprime) : vide
+	$TargetOwner      = $TargetPlanet['id_owner'] ?? 0;
 
 	if ($FleetRow['fleet_mess'] == 0) {
 		if ($FleetRow['fleet_start_time'] < time()) {

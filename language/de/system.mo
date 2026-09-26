@@ -141,4 +141,8 @@ $lang['sys_banned_title'] = 'Dein Account wurde gesperrt!';
 $lang['sys_banned_until'] = 'Du bist gesperrt bis %s.';
 $lang['sys_banned_forever'] = 'Du bist dauerhaft gesperrt.';
 
+// XNova Renaissance 0.9h : « Effacer le compte » (suppression 7 jours apres la demande, annulable)
+$lang['sys_account_deleted_title'] = 'Account gelöscht';
+$lang['sys_account_deleted'] = 'Dein Account wurde gelöscht, wie in den Einstellungen beantragt.';
+
 ?>

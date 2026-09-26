@@ -87,4 +87,8 @@ $lang['succeful_changename'] = 'Der Benutzername wurde geändert.<br /><a href="
 // XNova Renaissance 0.9g : longueur minimale du mot de passe
 $lang['opt_password_short'] = 'Das neue Passwort muss mindestens 8 Zeichen lang sein: Es wurde nicht geändert.';
 
+// XNova Renaissance 0.9h : « Effacer le compte » (suppression 7 jours apres la demande, annulable)
+$lang['opt_delac_pending'] = 'Löschung geplant am %s: Häkchen entfernen und speichern, um sie abzubrechen.';
+$lang['opt_delac_admin'] = 'Ein Administratorkonto kann nicht über die Einstellungen gelöscht werden.';
+
 ?>

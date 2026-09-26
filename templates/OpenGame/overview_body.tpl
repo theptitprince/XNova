@@ -16,6 +16,7 @@
 <table width="519">
 	<tr><td class="c" colspan="4"><a href="overview.php?mode=renameplanet" title="{planet_menu}">{planet_label} "{planet_name}"</a> ({user_username})</td></tr>
 	{have_new_message}
+	{account_delete_notice}
 	{have_new_level_mineur}
 	{have_new_level_raid}
 	<tr><th>{server_time}</th>

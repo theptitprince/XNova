@@ -14,7 +14,7 @@
 if (!defined('INSIDE')) { die('attemp hacking'); }
 
 // Version du schema de base installee par cette version du jeu
-define('RENAISSANCE_DB_VERSION', '0.9g');
+define('RENAISSANCE_DB_VERSION', '0.9h');
 
 // Nom de la ligne de la table config qui memorise la version du schema
 define('RENAISSANCE_DB_VERSION_KEY', 'renaissance_db_version');
@@ -82,6 +82,12 @@ $RenaissanceMigrations = array(
 		// de fin coupee, « < » affiche)
 		"ALTER TABLE `{{prefix}}messages` MODIFY `message_from` varchar(255) default NULL,
 			MODIFY `message_subject` varchar(255) default NULL;",
+	),
+	'0.9h' => array(
+		// « Effacer le compte » (Options) : la case etait enregistree mais le compte n'etait jamais supprime. La colonne
+		// garde maintenant la date de suppression ; une demande deja faite part pour 7 jours a compter de la mise a jour
+		"ALTER TABLE `{{prefix}}users` MODIFY `db_deaktjava` int(11) NOT NULL default '0';",
+		"UPDATE `{{prefix}}users` SET `db_deaktjava` = UNIX_TIMESTAMP() + 604800 WHERE `db_deaktjava` = 1;",
 	),
 );
 

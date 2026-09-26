@@ -189,11 +189,14 @@
           $urlaubs_modus = "0";
        }
 
-       // Borrar cuenta
-       if (isset($_POST["db_deaktjava"]) && ($_POST["db_deaktjava"] ?? null) == 'on') {
-          $db_deaktjava = "1";
+       // Effacer le compte : date de suppression (ACCOUNT_DELETE_DELAY apres la demande), annulee en decochant ; une
+       // demande deja faite garde sa date. Un compte d'administration ne peut pas s'effacer ainsi.
+       if ($user['authlevel'] > 0) {
+          $db_deaktjava = 0;
+       } elseif (isset($_POST["db_deaktjava"]) && ($_POST["db_deaktjava"] ?? null) == 'on') {
+          $db_deaktjava = ($user['db_deaktjava'] > 0) ? intval($user['db_deaktjava']) : time() + ACCOUNT_DELETE_DELAY;
        } else {
-          $db_deaktjava = "0";
+          $db_deaktjava = 0;
        }
        $SetSort  = intval(($_POST['settings_sort'] ?? null));
        $SetOrder = intval(($_POST['settings_order'] ?? null));
@@ -291,7 +294,14 @@
        $parse['opt_sskin_data'] = ($user['design'] == 1) ? " checked='checked'":'';
        $parse['opt_noipc_data'] = ($user['noipcheck'] == 1) ? " checked='checked'":'';
        $parse['opt_allyl_data'] = ($user['settings_allylogo'] == 1) ? " checked='checked'/":'';
-       $parse['opt_delac_data'] = ($user['db_deaktjava'] == 1) ? " checked='checked'/":'';
+       $parse['opt_delac_data'] = ($user['db_deaktjava'] > 0) ? " checked='checked'" : '';
+       $parse['opt_delac_info'] = '';
+       if ($user['authlevel'] > 0) {
+          $parse['opt_delac_data'] .= " disabled='disabled'";
+          $parse['opt_delac_info']  = "<br><small>". $lang['opt_delac_admin'] ."</small>";
+       } elseif ($user['db_deaktjava'] > 0) {
+          $parse['opt_delac_info']  = "<br><small><font color=\"red\">". sprintf($lang['opt_delac_pending'], date('d/m/Y H:i', $user['db_deaktjava'])) ."</font></small>";
+       }
        $parse['opt_modev_data'] = ($user['urlaubs_modus'] == 1)?" checked='checked'/":'';
        $parse['opt_modev_exit'] = ($user['urlaubs_modus'] == 0)?" checked='1'/":'';
        $parse['vaccation_mode'] = $lang['vaccation_mode'];

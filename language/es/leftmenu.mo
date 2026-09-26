@@ -97,4 +97,7 @@ $lang['multis_declared'] = 'Multicuentas declaradas';
 $lang['adm_contact'] = 'Mensajes de contacto';
 $lang['change_pass'] = 'Cambiar contraseña de un jugador';
 
+// XNova Renaissance 0.9h : pages remises dans le menu d'administration
+$lang['adm_delplayer'] = 'Borrar un jugador';
+
 ?>

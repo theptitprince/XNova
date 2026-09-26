@@ -96,4 +96,8 @@ $lang['succeful_changename'] = 'Il nome del giocatore è stato cambiato.<br /><a
 // XNova Renaissance 0.9g : longueur minimale du mot de passe
 $lang['opt_password_short'] = 'La nuova password deve contenere almeno 8 caratteri: non è stata cambiata.';
 
+// XNova Renaissance 0.9h : « Effacer le compte » (suppression 7 jours apres la demande, annulable)
+$lang['opt_delac_pending'] = 'Cancellazione prevista il %s: togli la spunta e salva per annullarla.';
+$lang['opt_delac_admin'] = 'Un account di amministrazione non può essere cancellato dalle Opzioni.';
+
 ?>

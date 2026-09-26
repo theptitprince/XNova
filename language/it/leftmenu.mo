@@ -99,4 +99,7 @@ $lang['multis_declared'] = 'Multi-account dichiarati';
 $lang['adm_contact'] = 'Messaggi di contatto';
 $lang['change_pass'] = 'Cambia password giocatore';
 
+// XNova Renaissance 0.9h : pages remises dans le menu d'administration
+$lang['adm_delplayer'] = 'Cancellare un giocatore';
+
 ?>
