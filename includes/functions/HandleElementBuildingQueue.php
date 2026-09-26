@@ -31,28 +31,26 @@ function HandleElementBuildingQueue ( $CurrentUser, &$CurrentPlanet, $Production
 
 		$CurrentPlanet['b_hangar_id'] = '';
 
+		// File traitee dans l'ordre : on ne passe a l'element suivant que lorsque le precedent est termine.
+		// L'original ne s'arretait jamais : un element rapide place derriere un long (missiles derriere une
+		// etoile de la mort) etait construit tout de suite avec le temps accumule pour le premier, qui reculait.
 		$UnFinished = false;
 		foreach ( $BuildArray as $Node => $Item ) {
+			$Element   = $Item[0];
+			$Count     = $Item[1];
+			$BuildTime = $Item[2];
 			if (!$UnFinished) {
-				$Element   = $Item[0];
-				$Count     = $Item[1];
-				$BuildTime = $Item[2];
-				while ( $CurrentPlanet['b_hangar'] >= $BuildTime && !$UnFinished ) {
-					if ( $Count > 0 ) {
-						$CurrentPlanet['b_hangar'] -= $BuildTime;
-						$Builded[$Element] = ($Builded[$Element] ?? 0) + 1;
-						$CurrentPlanet[$resource[$Element]]++;
-						$Count--;
-						if ($Count == 0) {
-							break;
-						}
-					} else {
-						$UnFinished = true;
-						break;
-					}
+				while ( $Count > 0 && $CurrentPlanet['b_hangar'] >= $BuildTime ) {
+					$CurrentPlanet['b_hangar'] -= $BuildTime;
+					$Builded[$Element] = ($Builded[$Element] ?? 0) + 1;
+					$CurrentPlanet[$resource[$Element]]++;
+					$Count--;
+				}
+				if ( $Count > 0 ) {
+					$UnFinished = true;
 				}
 			}
-			if ( $Count != 0 ) {
+			if ( $Count > 0 ) {
 				$CurrentPlanet['b_hangar_id'] .= $Element.",".$Count.";";
 			}
 		}

@@ -244,7 +244,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$page .= "</tr>";
 		$page .= $btncontinue;
 	} else {
-		$page .= "<th colspan=\"2\"><a href=\"javascript:noShips();shortInfo();noResources();\" >". $lang['fl_unselectall'] ."</a></th>";
+		// (noResources() n'existe pas : erreur JavaScript a chaque clic sur « Aucun vaisseau »)
+		$page .= "<th colspan=\"2\"><a href=\"javascript:noShips();shortInfo();\" >". $lang['fl_unselectall'] ."</a></th>";
 		$page .= "<th colspan=\"2\"><a href=\"javascript:maxShips();shortInfo();\" >". $lang['fl_selectall'] ."</a></th>";
 		$page .= "</tr>";
 
