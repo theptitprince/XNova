@@ -21,7 +21,7 @@ $lang['size'] = 'Taille';
 
 $lang['note'] = 'Note';
 
-$lang['characters'] = 'Caracteres';
+$lang['characters'] = 'Caract&egrave;res';
 
 $lang['apply'] = 'Accepter';
 $lang['back'] = 'Retour';

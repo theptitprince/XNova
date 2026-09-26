@@ -9,7 +9,7 @@ $lang['changelog']   = array(
 - FIX : Mots de passe de 8 caract&egrave;res au moins : inscription, Options et compte administrateur de l\'installeur
 - FIX : Installeur verrouill&eacute; une fois le jeu install&eacute; (config.php pouvait &ecirc;tre r&eacute;&eacute;crit), code injectable dans son adresse
 - FIX : Phalange contr&ocirc;l&eacute;e par le serveur (port&eacute;e, pr&eacute;sence, cible) : une adresse forg&eacute;e scannait tout l\'univers
-- FIX : Chat de l\'administration : du code post&eacute; par un joueur s\'ex&eacute;cutait chez l\'administrateur
+- FIX : Chat : du code post&eacute; par un joueur s\'ex&eacute;cutait chez l\'administrateur ; &eacute;motic&ocirc;nes qui coupaient les mots et les liens
 - FIX : Alliance : plus d\'enr&ocirc;lement forc&eacute;, d\'exclusion ni de changement de rang hors de son alliance ; rang perdu en partant ; administration r&eacute;serv&eacute;e au droit pr&eacute;vu
 - FIX : Alliance : dissolution confirm&eacute;e (un simple lien ou une image suffisait), membres lib&eacute;r&eacute;s et pr&eacute;venus ; images des textes en http(s) seulement
 - FIX : Mode vacances : plus d\'envoi de flotte ni de missiles, refus&eacute; tant qu\'une flotte vole, pas de sortie avant 48 h, production et revenus r&eacute;tablis au retour
@@ -32,10 +32,10 @@ $lang['changelog']   = array(
 - FIX : Galaxie : couleur et tag d\'alliance, port&eacute;e de phalange, bas de page coup&eacute; sur petit &eacute;cran, pied de page, dur&eacute;e d\'inactivit&eacute;, lien &laquo; Espaces infinis &raquo; ; vue g&eacute;n&eacute;rale d\'une lune
 - FIX : Petits et grands &eacute;crans : menu de gauche d&eacute;filant, fond d\'&eacute;cran couvrant toute la fen&ecirc;tre
 - FIX : Installeur : bandeaux harmonis&eacute;s, erreurs dans son cadre, &laquo; Suivant &raquo; de la mise &agrave; jour, conseil &laquo; CHMOD 777 &raquo; remplac&eacute;, fautes
-- FIX : Messagerie : confirmation d\'envoi et erreurs affich&eacute;es, cat&eacute;gorie administration, &eacute;motic&ocirc;nes (:cool:, :perdu:...), couleurs du BBCode, barres obliques conserv&eacute;es, sujet repris par &laquo; R&eacute;pondre &raquo;, compteur de caract&egrave;res apr&egrave;s un collage
+- FIX : Messagerie : confirmation d\'envoi et erreurs affich&eacute;es, cat&eacute;gorie administration, &eacute;motic&ocirc;nes (:cool:, :perdu:...), couleurs du BBCode, barres obliques conserv&eacute;es, sujet repris par &laquo; R&eacute;pondre &raquo;, compteur de caract&egrave;res (collage, notes)
 - FIX : Liste d\'amis : demandes re&ccedil;ues de nouveau visibles, ami supprim&eacute; par un double clic, alliance du bon joueur, demande &agrave; soi-m&ecirc;me refus&eacute;e
 - FIX : Recherche de joueurs (alliance d&eacute;cal&eacute;e, rang absent) ; marchand : co&ucirc;t recalcul&eacute; apr&egrave;s un collage
-- FIX : Inscription : pseudos contenant &laquo; script &raquo; ou &laquo; http &raquo; inutilisables, noms de plan&egrave;te intacts ; e-mails valid&eacute;s (.paris, .app...)
+- FIX : Inscription : pseudos contenant &laquo; script &raquo; ou &laquo; http &raquo; inutilisables, noms de plan&egrave;te intacts, apostrophe gard&eacute;e dans les noms (plan&egrave;te, alliance, rang) ; e-mails valid&eacute;s (.paris, .app...)
 - FIX : D&eacute;claration de multi-compte : textes, confirmation, au moins un joueur exig&eacute;
 - FIX : Administration : message &agrave; tous (jamais envoy&eacute;, non &eacute;chapp&eacute;), configuration lisible, vue g&eacute;n&eacute;rale sans d&eacute;filement, listes (messages, lunes, plan&egrave;tes), file du chantier, titres
 - MOD : Administration : liste &laquo; multi-comptes &raquo; toujours vide et page &laquo; supprimer un joueur &raquo; inachev&eacute;e retir&eacute;es ; PhpInfo r&eacute;serv&eacute; &agrave; l\'administrateur

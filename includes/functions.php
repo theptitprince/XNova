@@ -85,6 +85,9 @@ function SetAuthCookie ( $Value, $Expire ) {
 // Nom (planete, alliance, tag, rang, raccourci...) : ces noms sont aussi places dans des infobulles JavaScript,
 // ou l'echappement HTML ne suffit pas. On retire donc les caracteres dangereux < > " ' ` \ et les controles.
 function SafeName ( $String, $MaxLength = 64 ) {
+	// Apostrophe droite -> apostrophe typographique, sans danger dans le HTML et le JavaScript : elle etait
+	// supprimee (« Officier d'etat-major » devenait « Officier detat-major »)
+	$String = str_replace("'", "\u{2019}", (string) $String);
 	$String = preg_replace('/[<>"\'`\\\\\x00-\x1F\x7F]/u', '', (string) $String);
 	$String = trim(preg_replace('/\s+/u', ' ', $String));
 	return mb_substr($String, 0, $MaxLength, 'UTF-8');
