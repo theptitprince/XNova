@@ -23,7 +23,7 @@ $lang['mlst_mess_typ__2'] = "Alliance";
 $lang['mlst_mess_typ__3'] = "Attaque";
 $lang['mlst_mess_typ__4'] = "Exploitation";
 $lang['mlst_mess_typ__5'] = "Transport";
-$lang['mlst_mess_typ_15'] = "Expeditions";
-$lang['mlst_mess_typ_99'] = "Liste Batiment";
+$lang['mlst_mess_typ_15'] = "Exp&eacute;ditions";
+$lang['mlst_mess_typ_99'] = "Liste de construction";
 
 ?>
