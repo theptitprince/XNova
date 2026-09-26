@@ -28,8 +28,8 @@ $lang['ins_tx_welco']     = 'Bienvenido a la instalación de XNova';
 $lang['ins_tx_intr1']     = 'El proyecto XNova le permitirá instalar un clon casi perfecto de OGame';
 $lang['ins_tx_intr2']     = 'El proyecto XNova es libre, gratuito y de código abierto. Le rogamos que no haga un uso comercial de él';
 $lang['ins_tx_intr3']     = 'Por respeto al equipo de desarrollo de este proyecto, le rogamos que no elimine el copyright de los archivos fuente.';
-$lang['ins_tx_inst1']     = 'El archivo config.php debe tener permisos CHMOD 777';
-$lang['ins_tx_inst2']     = 'Debe disponer de una base de datos MySQL';
+$lang['ins_tx_inst1']     = 'El servidor web debe poder escribir en el archivo config.php (basta con el permiso de escritura, no hace falta CHMOD 777)';
+$lang['ins_tx_inst2']     = 'Debe disponer de una base de datos MySQL o MariaDB';
 $lang['ins_tx_inst3']     = 'Debe rellenar correctamente el siguiente formulario para continuar con la instalación:';
 $lang['ins_tx_acc1']      = 'Está a punto de crear una cuenta de administrador';
 $lang['ins_tx_acc2']      = 'Rellene el siguiente formulario con los datos de la cuenta:';
@@ -80,6 +80,9 @@ $lang['ins_tx_done1'] = '¡La base de datos se ha instalado correctamente!';
 $lang['ins_tx_done2'] = '¡La cuenta de administrador se ha creado correctamente!';
 $lang['ins_tx_done3'] = '¡Se recomienda eliminar la carpeta <i>install</i> si ya no necesita el instalador!';
 $lang['ins_tx_done4'] = '¡La transferencia se ha realizado correctamente!';
-$lang['ins_error3'] = 'Todos los campos son obligatorios y el nombre de usuario solo puede contener letras, cifras, _ o -.';
+$lang['ins_error3'] = 'Todos los campos son obligatorios: nombre de usuario con letras, cifras, _ o -, contraseña de al menos 8 caracteres y dirección de correo válida.';
+
+// XNova Renaissance 0.9g : titre de la page (« Installeur » ecrit en dur)
+$lang['ins_page_title'] = 'Instalación de XNova';
 
 ?>

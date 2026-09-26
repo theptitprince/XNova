@@ -86,14 +86,35 @@ function InstallHasAdmin () {
 	return ($Row && $Row[0] > 0);
 }
 
+// Ligne d'erreur placee au-dessus du contenu de l'etape (le formulaire reste affiche en dessous)
+function InstallErrorRow ($Text) {
+	global $lang;
+	return "<tr><td class=\"c\" colspan=\"2\">". $lang['ins_error'] ."</td></tr>"
+	     . "<tr><th colspan=\"2\"><br><font color=\"#FF6666\">". $Text ."</font><br><br></th></tr>";
+}
+
+// Message bloquant, dans le cadre de l'installeur (bandeau et menu compris) : AdminMessage affichait une page
+// nue, sans menu pour revenir
+function InstallMessage ($Text) {
+	global $lang, $Page;
+	$parse                = $lang;
+	$parse['ins_state']   = $Page;
+	$parse['ins_page']    = InstallErrorRow($Text);
+	$parse['dis_ins_btn'] = 'index.php';
+	display (parsetemplate(gettemplate('install/ins_body'), $parse), $lang['ins_page_title'], false, '', true);
+}
+
 
 $Mode     = ($_GET['mode'] ?? null);
-$Page     = ($_GET['page'] ?? null);
+$Page     = intval($_GET['page'] ?? 1);
 $phpself  = $_SERVER['PHP_SELF'];
-$nextpage = $Page + 1;
 
-	if (empty($Mode)) { $Mode = 'intro'; }
-	if (empty($Page)) { $Page = 1;       }
+	// Modes connus seulement : la valeur etait recopiee telle quelle dans l'action du formulaire (injection de code)
+	if (!in_array($Mode, array('intro', 'ins', 'goto', 'upg', 'bye'), true)) { $Mode = 'intro'; $Page = 1; }
+	if ($Page < 1)    { $Page = 1;       }
+	// Page suivante calculee apres la page par defaut (avant : depuis « Mise a jour » sans numero de page,
+	// « Suivant » ramenait a l'etape 1)
+	$nextpage = $Page + 1;
 
 	$MainTPL = gettemplate('install/ins_body');
 	includeLang('install/install');
@@ -101,10 +122,10 @@ $nextpage = $Page + 1;
 	// Verrou : Installer (pages 1-2) et Transfere reecrivent config.php, donc seulement s'il est vide ;
 	// le compte administrateur (pages 3-4) seulement s'il n'en existe aucun. La mise a jour reste possible.
 	if ((($Mode == 'ins' && $Page <= 2) || $Mode == 'goto') && InstallConfigWritten()) {
-		AdminMessage ($lang['ins_locked'], $lang['ins_error']);
+		InstallMessage ($lang['ins_locked']);
 	}
 	if ($Mode == 'ins' && $Page >= 3 && InstallHasAdmin()) {
-		AdminMessage ($lang['ins_locked'], $lang['ins_error']);
+		InstallMessage ($lang['ins_locked']);
 	}
 
 	switch ($Mode) {
@@ -115,16 +136,17 @@ $nextpage = $Page + 1;
 		 	break;
 		case 'ins':
 			if ($Page == 1) {
+				$ErrorRow = '';
 				if (($_GET['error'] ?? null) == 1) {
-				adminMessage ($lang['ins_error1'], $lang['ins_error']);
+					$ErrorRow = InstallErrorRow($lang['ins_error1']);
 				}
 				elseif (($_GET['error'] ?? null) == 2) {
-				adminMessage ($lang['ins_error2'], $lang['ins_error']);
+					$ErrorRow = InstallErrorRow($lang['ins_error2']);
 				}
 
 				$SubTPL = gettemplate ('install/ins_form');
 				$bloc   = $lang;
-				$frame  = parsetemplate ( $SubTPL, $bloc );
+				$frame  = $ErrorRow . parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 2) {
 				$host   = ($_POST['host'] ?? null);
@@ -183,13 +205,11 @@ $nextpage = $Page + 1;
 				$frame  = parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 3) {
-				if (($_GET['error'] ?? null) == 3) {
-				adminMessage ($lang['ins_error3'], $lang['ins_error']);
-				}
+				$ErrorRow = (($_GET['error'] ?? null) == 3) ? InstallErrorRow($lang['ins_error3']) : '';
 
 				$SubTPL = gettemplate ('install/ins_acc');
 				$bloc   = $lang;
-				$frame  = parsetemplate ( $SubTPL, $bloc );
+				$frame  = $ErrorRow . parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 4) {
 				$adm_user   = ($_POST['adm_user'] ?? null);
@@ -218,6 +238,11 @@ $nextpage = $Page + 1;
 
 				// Pseudo : meme regle qu'a l'inscription
 				if (preg_match("/[^A-Za-z0-9_\-]/", $adm_user) == 1) {
+					header("Location: ?mode=ins&page=3&error=3");
+					exit();
+				}
+				// Mot de passe et e-mail : memes regles qu'a l'inscription (un seul caractere suffisait pour l'administrateur)
+				if (mb_strlen((string) $adm_pass) < 8 || !is_email($adm_email)) {
 					header("Location: ?mode=ins&page=3&error=3");
 					exit();
 				}
@@ -310,19 +335,20 @@ $nextpage = $Page + 1;
 				$frame  = parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 2) {
+				$ErrorRow = '';
 				if (($_GET['error'] ?? null) == 1) {
-				adminMessage ($lang['ins_error1'], $lang['ins_error']);
+					$ErrorRow = InstallErrorRow($lang['ins_error1']);
 				}
 				elseif (($_GET['error'] ?? null) == 2) {
-				adminMessage ($lang['ins_error2'], $lang['ins_error']);
+					$ErrorRow = InstallErrorRow($lang['ins_error2']);
 				}
 				elseif (($_GET['error'] ?? null) == 4) {
-				adminMessage ($lang['ins_goto_err_version'], $lang['ins_error']);
+					$ErrorRow = InstallErrorRow($lang['ins_goto_err_version']);
 				}
 
 				$SubTPL = gettemplate ('install/ins_goto_form');
 				$bloc   = $lang;
-				$frame  = parsetemplate ( $SubTPL, $bloc );
+				$frame  = $ErrorRow . parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 3) {
 				// Transfere : reprise d'une base XNova Renaissance existante (0.9d ou plus recente) sur un nouveau serveur
@@ -368,16 +394,16 @@ $nextpage = $Page + 1;
 			}
 			elseif ($Page == 2) {
 				if (!file_exists($xnova_root_path.'config.php') || filesize($xnova_root_path.'config.php') == 0) {
-					adminMessage ($lang['ins_upg_noconfig'], $lang['ins_error']);
+					InstallMessage ($lang['ins_upg_noconfig']);
 				}
 				include($xnova_root_path.'config.php');
 				$connection = InstallConnect($dbsettings['server'], $dbsettings['user'], $dbsettings['pass'], $dbsettings['name']);
 				if (!$connection) {
-					adminMessage ($lang['ins_error1'], $lang['ins_error']);
+					InstallMessage ($lang['ins_error1']);
 				}
 				$FromVersion = RenaissanceSchemaVersion($connection, $dbsettings['prefix']);
 				if ($FromVersion === false) {
-					adminMessage ($lang['ins_goto_err_version'], $lang['ins_error']);
+					InstallMessage ($lang['ins_goto_err_version']);
 				}
 				$Applied = RenaissanceRunMigrations($connection, $dbsettings['prefix'], $FromVersion);
 
@@ -400,6 +426,6 @@ $nextpage = $Page + 1;
 	$parse['dis_ins_btn']  = "?mode=$Mode&page=$nextpage";
 	$Displ                 = parsetemplate ($MainTPL, $parse);
 
-	display ($Displ, "Installeur", false, '', true);
+	display ($Displ, $lang['ins_page_title'], false, '', true);
 
 ?>

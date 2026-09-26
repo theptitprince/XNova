@@ -87,6 +87,12 @@ body form table th table input
   width: 60px;
 }
 
+/* Installeur : champs a leur taille normale (la regle ci-dessus, faite pour les tableaux du jeu, les reduisait) */
+table.ins_page input
+{
+  width: auto;
+}
+
 th, td.a, td.b, td.c, td.f, td.g, td.h, td.i,
 td.j, td.k, td.l, td.m, td.n, td.o, td.q, td.r,
 td.v, .style td, p td, table.s th img
