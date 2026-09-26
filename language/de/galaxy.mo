@@ -92,12 +92,12 @@ $lang['gs_to'] = 'nach';
 $lang['sending'] = 'Wird gesendet';
 
 $lang['gf_cntmone'] = 'bewohnter Planet';
-$lang['gf_cntmnone'] = 'Keine bewohnten Planeten.';
-$lang['gf_cntmsome'] = 'bewohnte Planeten.';
-$lang['gf_mi_title'] = 'Interplanetarraketen';
-$lang['gf_fleetslt'] = 'Belegte Flottenslots';
-$lang['gf_rc_title'] = 'Verfügbare Recycler';
-$lang['gf_sp_title'] = 'Verfügbare Spionagesonden';
+$lang['gf_cntmnone'] = 'Keine bewohnten Planeten';
+$lang['gf_cntmsome'] = 'bewohnte Planeten';
+$lang['gf_mi_title'] = 'Interplanetarraketen:';
+$lang['gf_fleetslt'] = 'Belegte Flottenslots:';
+$lang['gf_rc_title'] = 'Verfügbare Recycler:';
+$lang['gf_sp_title'] = 'Verfügbare Spionagesonden:';
 $lang['gf_unknowsp'] = "Unendliche Weiten";
 
 // Created by Perberos. All rights reversed (C) 2006

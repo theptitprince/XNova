@@ -346,6 +346,11 @@ function ShowBuildingInfoPage ($CurrentUser, $CurrentPlanet, $BuildID) {
 //
 
 	$gid  = intval(($_GET['gid'] ?? null));
+	// Element inconnu (adresse sans gid ou modifiee) : page vide et avertissements PHP auparavant
+	if (!isset($resource[$gid])) {
+		includeLang('infos');
+		message($lang['nfo_unknown'], $lang['nfo_page_title']);
+	}
 	$page = ShowBuildingInfoPage ($user, $planetrow, $gid);
 
 	display ($page, $lang['nfo_page_title']);

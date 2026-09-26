@@ -70,6 +70,14 @@ body.style{
   background-image     : url(img/background1.jpg);
 }
 
+/* Fenetre (ou cadre) plus grande que l'image de fond (1201 x 1024) : l'image couvre tout l'ecran au lieu de
+   s'arreter net sur un aplat bleu. En dessous de ces dimensions rien ne change (raccord avec le fond du menu). */
+@media (min-width: 1202px), (min-height: 1025px) {
+  body {
+    background-size    : cover;
+  }
+}
+
 body.style table {
   margin               : 0px;
 }

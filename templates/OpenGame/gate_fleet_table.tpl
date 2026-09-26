@@ -26,7 +26,7 @@
 	<table width="100%">
 	<tbody>
 	<tr>
-		<td style=\"background-color: transparent;\" align="right">{gate_wait_time}</td>
+		<td style="background-color: transparent;" align="right">{gate_wait_time}</td>
 	</tr>
 	</tbody>
 	</table>
@@ -39,3 +39,4 @@
 </tbody>
 {gate_script_go}
 </table>
+</form>

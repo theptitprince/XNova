@@ -53,7 +53,7 @@ $parse = $lang;
 			<th class=b colspan=5>". $i ." ". $lang['adm_er_nbs'] ."</th>
 		</tr>";
 
-		display(parsetemplate(gettemplate('admin/errors_body'), $parse), "Bledy", false, '', true);
+		display(parsetemplate(gettemplate('admin/errors_body'), $parse), $lang['adm_er_ttle'], false, '', true);
 	} else {
 		message( $lang['sys_noalloaw'], $lang['sys_noaccess'] );
 	}

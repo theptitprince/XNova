@@ -31,7 +31,7 @@ function ShowGalaxyFooter ( $Galaxy, $System,  $CurrentMIP, $CurrentRC, $Current
 	$Result .= "<tr>";
 	$Result .= "<th width=\"30\">16</th>";
 	$Result .= "<th colspan=7>";
-	$Result .= "<a href=fleet.php?galaxy=".$Galaxy."&amp;system=".$System."&amp;planet=16;planettype=1&amp;target_mission=15>". $lang['gf_unknowsp'] ."</a>";
+	$Result .= "<a href=fleet.php?galaxy=".$Galaxy."&amp;system=".$System."&amp;planet=16&amp;planettype=1&amp;target_mission=15>". $lang['gf_unknowsp'] ."</a>";
 	$Result .= "</th>";
 	$Result .= "</tr>";
 
@@ -43,11 +43,13 @@ function ShowGalaxyFooter ( $Galaxy, $System,  $CurrentMIP, $CurrentRC, $Current
 
 	$Result .= "\n";
 	$Result .= "<tr>";
-	$Result .= "<td class=c colspan=3><span id=\"missiles\">". $CurrentMIP ."</span> ". $lang['gf_mi_title'] ."</td>";
-	$Result .= "<td class=c colspan=3><span id=\"slots\">". $maxfleet_count ."</span>/". $fleetmax ." ". $lang['gf_fleetslt'] ."</td>";
+	// Libelle puis nombre (« Recycleurs disponibles : 0 ») : juste au singulier comme au pluriel, y compris quand
+	// les nombres sont mis a jour apres un envoi (l'original affichait « 0 Recycleur Disponibles »)
+	$Result .= "<td class=c colspan=3>". $lang['gf_mi_title'] ." <span id=\"missiles\">". $CurrentMIP ."</span></td>";
+	$Result .= "<td class=c colspan=3>". $lang['gf_fleetslt'] ." <span id=\"slots\">". $maxfleet_count ."</span>/". $fleetmax ."</td>";
 	$Result .= "<td class=c colspan=2>";
-	$Result .= "<span id=\"recyclers\">". $Recyclers ."</span> ". $lang['gf_rc_title'] ."<br>";
-	$Result .= "<span id=\"probes\">". $SpyProbes ."</span> ". $lang['gf_sp_title'] ."</td>";
+	$Result .= $lang['gf_rc_title'] ." <span id=\"recyclers\">". $Recyclers ."</span><br>";
+	$Result .= $lang['gf_sp_title'] ." <span id=\"probes\">". $SpyProbes ."</span></td>";
 	$Result .= "</tr>";
 
 	$Result .= "\n";
