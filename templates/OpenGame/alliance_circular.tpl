@@ -17,7 +17,7 @@
 	<tr>
 	  <th>{text_mail} (<span id="cntChars">0</span> / 5000 {characters})</th>
 	  <th>
-	    <textarea name="text" cols="60" rows="10" onkeyup="javascript:cntchar(5000)"></textarea>
+	    <textarea name="text" cols="60" rows="10" oninput="cntchar(5000)"></textarea>
 	  </th>
 	</tr>
 	<tr>

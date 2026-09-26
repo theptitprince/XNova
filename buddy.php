@@ -99,7 +99,7 @@ if ( $a == 2 && $u > 0 ) {
 				<th>" . htmlspecialchars($u["username"], ENT_QUOTES, 'UTF-8') . "</th>
 			</tr><tr>
 				<th>{$lang['request_text_label']} (<span id=\"cntChars\">0</span> / 5000 {$lang['characters']})</th>
-				<th><textarea name=text cols=60 rows=10 onKeyUp=\"javascript:cntchar(5000)\"></textarea></th>
+				<th><textarea name=text cols=60 rows=10 oninput=\"cntchar(5000)\"></textarea></th>
 			</tr><tr>
 				<td class=c><a href=\"javascript:history.back();\">{$lang['back']}</a></td>
 				<td class=c><input type=submit value='{$lang['send_label']}'></td>
