@@ -62,7 +62,7 @@ function CreateOneMoonRecord ( $Galaxy, $System, $Planet, $Owner, $MoonID, $Moon
 			$QryGetMoonIdFromLunas .= "WHERE ";
 			$QryGetMoonIdFromLunas .= "`galaxy` = '".  $Galaxy ."' AND ";
 			$QryGetMoonIdFromLunas .= "`system` = '".  $System ."' AND ";
-			$QryGetMoonIdFromLunas .= "`lunapos` = '". $Planet ."';";
+			$QryGetMoonIdFromLunas .= "`lunapos` = '". $Planet ."' ORDER BY `id` DESC LIMIT 1;"; // la lune qu'on vient d'ajouter
 			$lunarow = doquery( $QryGetMoonIdFromLunas , 'lunas', true);
 
 			$QryUpdateMoonInGalaxy  = "UPDATE {{table}} SET ";

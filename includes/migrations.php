@@ -74,6 +74,10 @@ $RenaissanceMigrations = array(
 			AND p.`planet` = l.`lunapos` AND p.`planet_type` = 3 SET l.`name` = LEFT(p.`name`, 64);",
 		// Mot de passe oublie : jeton du lien de confirmation (empreinte) et heure de la demande
 		'RenaissanceAddLostPasswordColumns',
+		// Lunes detruites par une etoile de la mort : la ligne restait (marquee detruite, plus reliee a la galaxie)
+		// et la lune reapparaissait dans la vue generale ; la destruction la supprime desormais
+		"DELETE l FROM `{{prefix}}lunas` l LEFT JOIN `{{prefix}}galaxy` g ON g.`id_luna` = l.`id`
+			WHERE l.`destruyed` <> 0 AND g.`id_luna` IS NULL;",
 	),
 );
 

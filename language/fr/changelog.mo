@@ -18,7 +18,7 @@ $lang['changelog']   = array(
 - FIX : Attaque group&eacute;e : la mission supprimait la flotte &agrave; l\'arriv&eacute;e (jamais programm&eacute;e) ; retir&eacute;e en attendant la 0.9h
 - FIX : Officier Amiral : bonus de combat enfin appliqu&eacute;, &agrave; l\'attaquant comme au d&eacute;fenseur
 - FIX : Espionnage (rapport de destruction invers&eacute;, vraie probabilit&eacute;) et exp&eacute;dition (trou noir, soutes, trouvaille vide)
-- FIX : Lune : d&eacute;truire la base lunaire augmentait son niveau ; base lunaire et terraformeur indestructibles, comme OGame ; mission &laquo; D&eacute;truire &raquo; (flottes du champ de d&eacute;bris d&eacute;tourn&eacute;es, textes du rapport)
+- FIX : Lune : d&eacute;truire la base lunaire augmentait son niveau ; base lunaire et terraformeur indestructibles, comme OGame ; mission &laquo; D&eacute;truire &raquo; (flottes du champ de d&eacute;bris d&eacute;tourn&eacute;es, lune d&eacute;truite encore affich&eacute;e, textes du rapport) ; ajout de lune par l\'administration : erreurs signal&eacute;es
 - FIX : Bannissements : dur&eacute;e respect&eacute;e (lev&eacute;e automatique), pseudos longs, un seul bannissement par joueur (robot anti-multi), page du banni traduite
 - FIX : Recyclage rapide sans flotte vide (emplacements, carburant) ; mission choisie dans la galaxie pr&eacute;s&eacute;lectionn&eacute;e
 - FIX : Page Flotte : heures d&eacute;cal&eacute;es, flotte rappel&eacute;e affich&eacute;e comme retour, erreurs JavaScript ; rapports et messages de retour
