@@ -86,7 +86,7 @@ $lang['tech'] = array(
 109 => 'Technologie Armes',
 110 => 'Technologie Bouclier',
 111 => 'Technologie Protection des vaisseaux spatiaux',
-113 => 'Technologie Energie',
+113 => 'Technologie Énergie',
 114 => 'Technologie Hyperespace',
 115 => 'R&eacute;acteur &agrave; combustion',
 117 => 'R&eacute;acteur &agrave; impulsion',
@@ -111,7 +111,7 @@ $lang['tech'] = array(
 211 => 'Bombardier',
 212 => 'Satellite solaire',
 213 => 'Destructeur',
-214 => 'Etoile de la mort',
+214 => 'Étoile de la mort',
 215 => 'Traqueur',
 
 400 => 'D&eacute;fense',

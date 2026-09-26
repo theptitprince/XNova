@@ -166,15 +166,15 @@ if ($_POST) {
             $QrySelectGalaxy .= "LIMIT 1;";
             $GalaxyRow = doquery($QrySelectGalaxy, 'galaxy', true);
 
-            if ($GalaxyRow && $GalaxyRow["id_planet"] == "0") {
-                $newpos_checked = true;
+            // Place libre : pas de ligne dans la galaxie, ou une ligne sans planete (id_planet = 0). Dans ce second
+            // cas l'original validait la place sans creer de planete (compte sans planete mere). Place prise :
+            // on passe a la suivante ($newpos_checked non defini, avertissement PHP auparavant).
+            if (!$GalaxyRow || $GalaxyRow["id_planet"] == "0") {
+                if (CreateOnePlanetRecord ($Galaxy, $System, $Planet, $NewUser['id'], $UserPlanet, true)) {
+                    $newpos_checked = true;
+                }
             }
-
-            if (!$GalaxyRow) {
-                CreateOnePlanetRecord ($Galaxy, $System, $Planet, $NewUser['id'], $UserPlanet, true);
-                $newpos_checked = true;
-            }
-            if ($newpos_checked) {
+            if (!empty($newpos_checked)) {
                 doquery("UPDATE {{table}} SET `config_value` = '" . $LastSettedGalaxyPos . "' WHERE `config_name` = 'LastSettedGalaxyPos';", 'config');
                 doquery("UPDATE {{table}} SET `config_value` = '" . $LastSettedSystemPos . "' WHERE `config_name` = 'LastSettedSystemPos';", 'config');
                 doquery("UPDATE {{table}} SET `config_value` = '" . $LastSettedPlanetPos . "' WHERE `config_name` = 'LastSettedPlanetPos';", 'config');

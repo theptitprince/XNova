@@ -61,7 +61,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Bloc['ip_adress_at_register']   = $u['ip_at_reg'];
 			$Bloc['adm_ul_data_adip']   = "<font color=\"".$Color."\">". $u['user_lastip'] ."</font>";
 			$Bloc['adm_ul_data_regd']   = date ( "d/m/Y H:i:s", $u['register_time'] );
-			$Bloc['adm_ul_data_lconn']  = date ( "d/m/Y H:i:s", $u['onlinetime'] );
+			// Jamais connecte : « - » (la date zero s'affichait 01/01/1970)
+			$Bloc['adm_ul_data_lconn']  = ($u['onlinetime'] > 0) ? date ( "d/m/Y H:i:s", $u['onlinetime'] ) : '-';
 			$Bloc['adm_ul_data_banna']  = ( $u['bana'] == 1 ) ? "<a href # title=\"". date ( "d/m/Y H:i:s", $u['banaday']) ."\">". $lang['adm_ul_yes'] ."</a>" : $lang['adm_ul_no'];
 			$Bloc['adm_ul_data_detai']  = ""; // Lien vers une page de details genre Empire
 			$Bloc['adm_ul_data_actio']  = "<a href=\"userlist.php?cmd=dele&user=".$u['id']."\"><img src=\"../images/r1.png\"></a>"; // Lien vers actions 'effacer'
