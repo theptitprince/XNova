@@ -51,8 +51,9 @@ while($v=mysqli_fetch_object($query)){
 	$msg=preg_replace("#:s#isU","<img src=\"images/smileys/shit.png\" align=\"absmiddle\" title=\":s\" alt=\":s\">",$msg);
 
 	// Affichage du message
-	$msg="<div align=\"left\">".$nick." > ".$msg."<br></div>";
-	print stripslashes($msg);
+	// (plus de stripslashes : sans magic quotes, il effacait les \ tapes par les joueurs)
+	$msg="<div align=\"left\">".$nick." &gt; ".$msg."<br></div>";
+	print $msg;
 }
 
 // Shoutbox by e-Zobar - Copyright XNova Team 2008

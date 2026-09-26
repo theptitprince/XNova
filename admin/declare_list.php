@@ -34,12 +34,12 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse['adm_ul_table'] = "";
 		$i                     = 0;
 		while ($u = mysqli_fetch_assoc($query) ) {
-			$Bloc['adm_ul_data_id']     = stripslashes($u['declarator_name']);
-			$Bloc['adm_ul_data_name']   = stripslashes($u['declarator']);
-			$Bloc['adm_ul_data_mail']   = stripslashes($u['declared_1']);
-			$Bloc['adm_ul_data_adip']   = stripslashes($u['declared_2']);
-			$Bloc['adm_ul_data_detai']  = stripslashes($u['declared_3']);
-			$Bloc['adm_ul_data_regd']   = stripslashes($u['reason']);
+			$Bloc['adm_ul_data_id']     = $u['declarator_name'];
+			$Bloc['adm_ul_data_name']   = $u['declarator'];
+			$Bloc['adm_ul_data_mail']   = $u['declared_1'];
+			$Bloc['adm_ul_data_adip']   = $u['declared_2'];
+			$Bloc['adm_ul_data_detai']  = $u['declared_3'];
+			$Bloc['adm_ul_data_regd']   = $u['reason'];
 			
 
 			$parse['adm_ul_table']     .= parsetemplate( $RowsTPL, $Bloc );

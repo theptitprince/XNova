@@ -41,10 +41,12 @@ $parse = $lang;
 		$parse['msg_list'] = '';
 		while ($e = mysqli_fetch_array($query)) {
 			$i++;
-			$parse['msg_list'] .= stripslashes("<tr><th class=b>" . date('H:i:s', $e['timestamp']) . "</th>".
-			"<th class=b>". $e['user'] . "</th>".
-			"<td class=b>" . nl2br($e['message']) . "</td>".
-			"<th class=b><a href=?delete=".$e['messageid']."><img src=\"../images/r1.png\" border=\"0\"></a></th></tr>");
+			// Message et pseudo echappes : ils s'affichaient tels quels (un <script> poste dans le chat s'executait
+			// chez l'administrateur) ; plus de stripslashes (il effacait les \ des messages)
+			$parse['msg_list'] .= "<tr><th class=b>" . date('H:i:s', $e['timestamp']) . "</th>".
+			"<th class=b>". htmlspecialchars($e['user'], ENT_QUOTES, 'UTF-8') . "</th>".
+			"<td class=b>" . nl2br(htmlspecialchars($e['message'], ENT_QUOTES, 'UTF-8')) . "</td>".
+			"<th class=b><a href=?delete=".$e['messageid']."><img src=\"../images/r1.png\" border=\"0\"></a></th></tr>";
 		}
 		$parse['msg_list'] .= "<tr><th class=b colspan=4>{$i} ".$lang['adm_ch_nbs']."</th></tr>";
 
