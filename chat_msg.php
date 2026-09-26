@@ -36,19 +36,16 @@ while($v=mysqli_fetch_object($query)){
 	$msg=preg_replace("#\[u\](.+)\[/u\]#isU","<u>$1</u>",$msg);
 	$msg=preg_replace("#\[c=(blue|yellow|green|pink|red|orange)\](.+)\[/c\]#isU","<font color=\"$1\">$2</font>",$msg);
 
-	// Les smileys avec leurs raccourcis
-	$msg=preg_replace("#:c#isU","<img src=\"images/smileys/cry.png\" align=\"absmiddle\" title=\":c\" alt=\":c\">",$msg);
-	$msg=preg_replace("#:/#isU","<img src=\"images/smileys/confused.png\" align=\"absmiddle\" title=\":/\" alt=\":/\">",$msg);
-	$msg=preg_replace("#o0#isU","<img src=\"images/smileys/dizzy.png\" align=\"absmiddle\" title=\"o0\" alt=\"o0\">",$msg);
-	$msg=preg_replace("#\^\^#isU","<img src=\"images/smileys/happy.png\" align=\"absmiddle\" title=\"^^\" alt=\"^^\">",$msg);
-	$msg=preg_replace("#:D#isU","<img src=\"images/smileys/lol.png\" align=\"absmiddle\" title=\":D\" alt=\":D\">",$msg);
-	$msg=preg_replace("#:\|#isU","<img src=\"images/smileys/neutral.png\" align=\"absmiddle\" title=\":|\" alt=\":|\">",$msg);
-	$msg=preg_replace("#:\)#isU","<img src=\"images/smileys/smile.png\" align=\"absmiddle\" title=\":)\" alt=\":)\">",$msg);
-	$msg=preg_replace("#:o#isU","<img src=\"images/smileys/omg.png\" align=\"absmiddle\" title=\":o\" alt=\":o\">",$msg);
-	$msg=preg_replace("#:p#isU","<img src=\"images/smileys/tongue.png\" align=\"absmiddle\" title=\":p\" alt=\":p\">",$msg);
-	$msg=preg_replace("#:\(#isU","<img src=\"images/smileys/sad.png\" align=\"absmiddle\" title=\":(\" alt=\":(\">",$msg);
-	$msg=preg_replace("#;\)#isU","<img src=\"images/smileys/wink.png\" align=\"absmiddle\" title=\";)\" alt=\";)\">",$msg);
-	$msg=preg_replace("#:s#isU","<img src=\"images/smileys/shit.png\" align=\"absmiddle\" title=\":s\" alt=\":s\">",$msg);
+	// Les smileys avec leurs raccourcis. XNova Renaissance : code isole seulement (debut ou fin du message, espace,
+	// bord d'une balise) ; remplaces partout, ils coupaient les mots et les liens (« :cool: », « https:// », « &quot;) »)
+	$Smileys = array(':c' => 'cry', ':/' => 'confused', 'o0' => 'dizzy', '^^' => 'happy', ':D' => 'lol', ':|' => 'neutral',
+	                 ':)' => 'smile', ':o' => 'omg', ':p' => 'tongue', ':(' => 'sad', ';)' => 'wink', ':s' => 'shit');
+	$Codes = implode('|', array_map(function ($Code) { return preg_quote($Code, '#'); }, array_keys($Smileys)));
+	$msg = preg_replace_callback('#(?<=^|\s|>)(' . $Codes . ')(?=$|\s|<)#i', function ($m) use ($Smileys) {
+		$Code = strtolower($m[1]) == ':d' ? ':D' : strtolower($m[1]);
+		$Code = isset($Smileys[$Code]) ? $Code : $m[1];
+		return '<img src="images/smileys/' . $Smileys[$Code] . '.png" align="absmiddle" title="' . $Code . '" alt="' . $Code . '">';
+	}, $msg);
 
 	// Affichage du message
 	// (plus de stripslashes : sans magic quotes, il effacait les \ tapes par les joueurs)

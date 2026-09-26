@@ -1,4 +1,4 @@
-
+<script src="scripts/cntchar.js" type="text/javascript"></script>
 <form action="{php_self}" method=post>
   {inputs}
   <table width=519>
