@@ -428,6 +428,8 @@
 	$QryTableUsers      .= "`id` bigint(11) unsigned NOT NULL auto_increment PRIMARY KEY, ";
 	$QryTableUsers      .= "`username` varchar(64) NOT NULL default '', ";
 	$QryTableUsers      .= "`password` varchar(255) NOT NULL default '', ";
+	$QryTableUsers      .= "`lostpw_hash` varchar(64) NOT NULL default '', ";
+	$QryTableUsers      .= "`lostpw_time` int(11) NOT NULL default '0', ";
 	$QryTableUsers      .= "`email` varchar(64) NOT NULL default '', ";
 	$QryTableUsers      .= "`email_2` varchar(64) NOT NULL default '', ";
 	$QryTableUsers      .= "`lang` varchar(8) NOT NULL default 'fr', ";
