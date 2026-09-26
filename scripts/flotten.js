@@ -108,6 +108,41 @@ function duration() {
 	return ret;
 }
 
+// Heures d'arrivee sur l'horloge du serveur : ecart avec l'horloge du navigateur mesure au premier appel
+var serverClockOffset = null;
+
+function serverNow() {
+	var st = document.getElementsByName("servertime")[0];
+	if (!st) {
+		return null;
+	}
+	if (serverClockOffset === null) {
+		serverClockOffset = st.value * 1000 - new Date().getTime();
+	}
+	return new Date().getTime() + serverClockOffset;
+}
+
+// Date au format du jeu (d/m/Y H:i:s), dans le fuseau du serveur
+function serverDate(ms) {
+	var tz = document.getElementsByName("servertz")[0];
+	var d  = new Date(ms + (tz ? tz.value * 1000 : 0));
+	function two(n) {
+		return (n < 10 ? "0" : "") + n;
+	}
+	return two(d.getUTCDate()) + "/" + two(d.getUTCMonth() + 1) + "/" + d.getUTCFullYear() + " "
+	     + two(d.getUTCHours()) + ":" + two(d.getUTCMinutes()) + ":" + two(d.getUTCSeconds());
+}
+
+function arrivalTimes() {
+	var now = serverNow();
+	if (now === null || !document.getElementById("llegada1")) {
+		return;
+	}
+	var d = duration() * 1000;
+	document.getElementById("llegada1").innerHTML = '<font color="lime">' + serverDate(now + d) + '</font>';
+	document.getElementById("llegada2").innerHTML = '<font color="lime">' + serverDate(now + 2 * d) + '</font>';
+}
+
 function consumption2() {
 	var consumption;
 	var basicConsumption = 0;
@@ -286,7 +321,7 @@ function shortInfo() {
 		document.getElementById("consumption").innerHTML = '<font color="red">'+tsdpkt(cons)+'</font>';
 		document.getElementById("storage").innerHTML = '<font color="red">'+tsdpkt(stor)+'</font>';
 	}
-
+	arrivalTimes();
 }
 
 

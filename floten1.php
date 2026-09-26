@@ -110,6 +110,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "<input type=\"hidden\" name=\"thisresource1\"  value=\"". floor($planetrow['metal']) ."\" />";
 	$page .= "<input type=\"hidden\" name=\"thisresource2\"  value=\"". floor($planetrow['crystal']) ."\" />";
 	$page .= "<input type=\"hidden\" name=\"thisresource3\"  value=\"". floor($planetrow['deuterium']) ."\" />";
+	// Heures d'arrivee calculees sur l'horloge et le fuseau du serveur, comme a la confirmation (floten3)
+	$page .= "<input type=\"hidden\" name=\"servertime\"     value=\"". time() ."\" />";
+	$page .= "<input type=\"hidden\" name=\"servertz\"       value=\"". date('Z') ."\" />";
 
 	$page .= "<br><div><center>";
 	$page .= "<table width=\"519\" border=\"0\" cellpadding=\"0\" cellspacing=\"1\">";
@@ -147,14 +150,13 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "<th>". $lang['fl_fltime'] ."</th>";
 	$page .= "<th><div id=\"duration\">-</div></th>";
 	$page .= "</tr><tr height=\"20\">";
-/* A faire assez rapidement (faut juste savoir comment)
+	// Heures d'arrivee (aller et retour), mises a jour par flotten.js (laissees en commentaire dans l'original)
 	$page .= "<th>". $lang['fl_time_go'] ."</th>";
-	$page .= "<th><font color=\"lime\"><div id=\"llegada1\"><font>". date("H:i:s") ."</font></div></font></th>";
+	$page .= "<th><div id=\"llegada1\">-</div></th>";
 	$page .= "</tr><tr height=\"20\">";
 	$page .= "<th>". $lang['fl_time_back'] ."</th>";
-	$page .= "<th><font color=\"lime\"><div id=\"llegada2\"><font>". date("H:i:s") ."</font></div></font></th>";
+	$page .= "<th><div id=\"llegada2\">-</div></th>";
 	$page .= "</tr><tr height=\"20\">";
-*/
 	$page .= "<th>". $lang['fl_deute_need'] ."</th>";
 	$page .= "<th><div id=\"consumption\">-</div></th>";
 	$page .= "</tr><tr height=\"20\">";
@@ -260,7 +262,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	}
 
 	$page .= "</tr>";
-	// (bloc « Attaques groupees » retire avec la mission, toujours vide : il reviendra avec l'attaque groupee en 0.9h)
+	// (bloc « Attaques groupees » retire avec la mission, toujours vide : il reviendra avec l'attaque groupee en 0.9i)
 	$page .= "<tr height=\"20\">";
 	$page .= "<th colspan=\"2\"><input type=\"submit\" value=\"". $lang['fl_continue'] ."\" /></th>";
 	$page .= "</tr>";
@@ -270,7 +272,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "<input type=\"hidden\" name=\"curepedition\" value=\"". ($_POST['curepedition'] ?? null) ."\" />";
 	$page .= "<input type=\"hidden\" name=\"target_mission\" value=\"". intval($_POST['target_mission'] ?? 0) ."\" />";
 	$page .= "</form>";
-	$page .= "<script>javascript:shortInfo(); </script>";
+	$page .= "<script>javascript:shortInfo(); setInterval(shortInfo, 1000); </script>";
 
 	display($page, $lang['fl_title']);
 
