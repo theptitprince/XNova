@@ -37,7 +37,7 @@ $lang['changelog']   = array(
 - FIX : Recherche de joueurs (alliance d&eacute;cal&eacute;e, rang absent) et d\'alliances (points) ; records jamais affich&eacute;s ; liens vers le classement des alliances ; marchand : co&ucirc;t recalcul&eacute; apr&egrave;s un collage
 - FIX : Inscription : pseudos contenant &laquo; script &raquo; ou &laquo; http &raquo; inutilisables, noms de plan&egrave;te intacts, apostrophe gard&eacute;e dans les noms (plan&egrave;te, alliance, rang) ; e-mails valid&eacute;s (.paris, .app...)
 - FIX : D&eacute;claration de multi-compte : textes, confirmation, au moins un joueur exig&eacute;
-- FIX : Administration : message &agrave; tous (jamais envoy&eacute;, non &eacute;chapp&eacute;), configuration lisible, vue g&eacute;n&eacute;rale sans d&eacute;filement, listes (messages, lunes, plan&egrave;tes), file du chantier, titres
+- FIX : Administration : message &agrave; tous (jamais envoy&eacute;, non &eacute;chapp&eacute;, sujet coup&eacute;), configuration lisible, vue g&eacute;n&eacute;rale sans d&eacute;filement, listes (messages, lunes, plan&egrave;tes), file du chantier, titres
 - MOD : Administration : liste &laquo; multi-comptes &raquo; toujours vide et page &laquo; supprimer un joueur &raquo; inachev&eacute;e retir&eacute;es ; PhpInfo r&eacute;serv&eacute; &agrave; l\'administrateur
 - NEW : Langue au choix dans les Options ; allemand, espagnol et italien complets (1 800 textes ajout&eacute;s ou corrig&eacute;s)
 - FIX : Textes &eacute;crits en dur rendus traduisibles (flotte, annonces, messages, menu, horloge, cr&eacute;dits), Pilori traduit, nombreuses fautes corrig&eacute;es (dont les accents italiens)

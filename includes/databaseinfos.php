@@ -267,8 +267,8 @@
 	$QryTableMessages   .= "`message_sender` int(11) NOT NULL default '0', ";
 	$QryTableMessages   .= "`message_time` int(11) NOT NULL default '0', ";
 	$QryTableMessages   .= "`message_type` int(11) NOT NULL default '0', ";
-	$QryTableMessages   .= "`message_from` varchar(48) default NULL, ";
-	$QryTableMessages   .= "`message_subject` varchar(48) default NULL, ";
+	$QryTableMessages   .= "`message_from` varchar(255) default NULL, ";
+	$QryTableMessages   .= "`message_subject` varchar(255) default NULL, ";
 	$QryTableMessages   .= "`message_text` text, ";
 	$QryTableMessages   .= "PRIMARY KEY  (`message_id`) ";
 	$QryTableMessages   .= ") ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
