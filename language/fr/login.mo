@@ -17,7 +17,7 @@ $lang['login_fail_user'] = 'Ce joueur n\'existe pas.<br><a href=login.php>Retour
 
 $lang['log_univ'] = 'Merci de s&eacute;lectionner un univers !';
 $lang['log_reg'] = 'Inscriptions';
-$lang['log_cred'] = 'Credits';
+$lang['log_cred'] = 'Cr&eacute;dits';
 $lang['log_desc'] = 'est un <strong>jeu de strat&eacute;gie gratuit</strong> dans l\'espace. Pour jouer, il suffit d\'un navigateur internet. Inscrivez-vous et d&eacute;couvrez le monde fantastique de';
 $lang['log_toreg'] = 'S\'enregistrer maintenant!';
 $lang['log_online'] = 'Joueurs en ligne';
