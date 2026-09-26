@@ -15,6 +15,11 @@
 function InsertBuildListScript ( $CallProgram ) {
 	global $lang;
 
+	// XNova Renaissance : adresses ecrites entre guillemets par le JavaScript (jeton compris), sinon CsrfInject les coupait
+	// (listid vide) ; pas de lien d'annulation sur la vue generale : overview.php n'annule rien (lien vide dans l'original)
+	$ContinueLink = '"<a href=\"" + "'. $CallProgram .'.php?planet=" + pl + "\">'. $lang['continue'] .'</a>"';
+	$CancelLink   = ($CallProgram == 'overview') ? '' : ' + "<br><a href=\"" + "'. $CallProgram .'.php?listid=" + pk + "&cmd=" + pm + "&planet=" + pl + "&csrf_token=" + xnova_csrf + "\">'. $lang['del_first_queue'] .'</a>"';
+
 	$BuildListScript  = "<script type=\"text/javascript\">\n";
 	$BuildListScript .= "<!--\n";
 	$BuildListScript .= "function t() {\n";
@@ -28,18 +33,18 @@ function InsertBuildListScript ( $CallProgram ) {
 	$BuildListScript .= "	m           = 0;\n";
 	$BuildListScript .= "	h           = 0;\n\n";
 	$BuildListScript .= "	if ( (ss + 3) < aa ) {\n";
-	$BuildListScript .= "		blc.innerHTML = \"". $lang['completed'] ."<br>\" + \"<a href=". $CallProgram .".php?planet=\" + pl + \">". $lang['continue'] ."</a>\";\n";
+	$BuildListScript .= "		blc.innerHTML = \"". $lang['completed'] ."<br>\" + ". $ContinueLink .";\n";
 	$BuildListScript .= "		if ((ss + 6) >= aa) {\n";
 	$BuildListScript .= "			window.setTimeout('document.location.href=\"". $CallProgram .".php?planet=' + pl + '\";', 3500);\n";
 	$BuildListScript .= "		}\n";
 	$BuildListScript .= "	} else {\n";
 	$BuildListScript .= "		if ( s < 0 ) {\n";
 	$BuildListScript .= "			if (1) {\n";
-	$BuildListScript .= "				blc.innerHTML = \"". $lang['completed'] ."<br>\" + \"<a href=". $CallProgram .".php?planet=\" + pl + \">". $lang['continue'] ."</a>\";\n";
+	$BuildListScript .= "				blc.innerHTML = \"". $lang['completed'] ."<br>\" + ". $ContinueLink .";\n";
 	$BuildListScript .= "				window.setTimeout('document.location.href=\"". $CallProgram .".php?planet=' + pl + '\";', 2000);\n";
 	$BuildListScript .= "			} else {\n";
 	$BuildListScript .= "				timeout = 0;\n";
-	$BuildListScript .= "				blc.innerHTML = \"". $lang['completed'] ."<br>\" + \"<a href=". $CallProgram .".php?planet=\" + pl + \">". $lang['continue'] ."</a>\";\n";
+	$BuildListScript .= "				blc.innerHTML = \"". $lang['completed'] ."<br>\" + ". $ContinueLink .";\n";
 	$BuildListScript .= "			}\n";
 	$BuildListScript .= "		} else {\n";
 	$BuildListScript .= "			if ( s > 59) {\n";
@@ -57,9 +62,9 @@ function InsertBuildListScript ( $CallProgram ) {
 	$BuildListScript .= "				m = \"0\" + m;\n";
 	$BuildListScript .= "			}\n";
 	$BuildListScript .= "			if (1) {\n";
-	$BuildListScript .= "				blc.innerHTML = h + \":\" + m + \":\" + s + \"<br><a href=". $CallProgram .".php?listid=\" + pk + \"&cmd=\" + pm + \"&planet=\" + pl + \"&csrf_token=\" + xnova_csrf + \">". $lang['del_first_queue'] ."</a>\";\n";
+	$BuildListScript .= "				blc.innerHTML = h + \":\" + m + \":\" + s". $CancelLink .";\n";
 	$BuildListScript .= "			} else {\n";
-	$BuildListScript .= "				blc.innerHTML = h + \":\" + m + \":\" + s + \"<br><a href=". $CallProgram .".php?listid=\" + pk + \"&cmd=\" + pm + \"&planet=\" + pl + \"&csrf_token=\" + xnova_csrf + \">". $lang['del_first_queue'] ."</a>\";\n";
+	$BuildListScript .= "				blc.innerHTML = h + \":\" + m + \":\" + s". $CancelLink .";\n";
 	$BuildListScript .= "			}\n";
 	$BuildListScript .= "		}\n";
 	$BuildListScript .= "		pp = pp - 1;\n";
