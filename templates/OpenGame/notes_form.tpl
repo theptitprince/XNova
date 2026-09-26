@@ -22,7 +22,7 @@
 	<tr>
 	  <th>{note} (<span id="cntChars">{cnt_chars}</span> / 5000 {characters})</th>
 	  <th>
-	    <textarea name="text" cols="60" rows="10" onkeyup="javascript:cntchar(5000)">{text}</textarea>
+	    <textarea name="text" cols="60" rows="10" oninput="cntchar(5000)">{text}</textarea>
 	  </th>
 	</tr>
 	<tr>

@@ -85,7 +85,9 @@ function imagefix($img) {
         $img = './images/' . preg_replace('#[^A-Za-z0-9_./\-]#', '', str_replace('..', '', $img));
     }
     $img = htmlspecialchars($img, ENT_QUOTES, 'UTF-8');
-    return '<img src="' . $img . '" alt="' . $img . '" title="' . $img . '" />';
+    // Emoticone : infobulle « :cool: » plutot que le chemin de l'image
+    $alt = preg_match('#^\./images/emoticones/([A-Za-z]+)\.png$#', $img, $m) ? ':' . $m[1] . ':' : $img;
+    return '<img src="' . $img . '" alt="' . $alt . '" title="' . $alt . '" />';
 }
 
 function urlfix($url, $title) {

@@ -35,7 +35,7 @@
 	  <td class=c colspan=3>{request_type} (<span id="cntChars">0</span> / 5000 {characters})</td>
 	</tr>
 	<tr>
-	  <th colspan=3><textarea name="text" cols=70 rows=15 onkeyup="javascript:cntchar(5000)">{text}</textarea>
+	  <th colspan=3><textarea name="text" cols=70 rows=15 oninput="cntchar(5000)">{text}</textarea>
 	</th>
 	</tr>
 	<tr>

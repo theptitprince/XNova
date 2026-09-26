@@ -72,6 +72,11 @@ if($user['authlevel']!="1"&$user['authlevel']!="3"&$user['authlevel']!="0"){ hea
 				message ($lang['mess_no_ownerpl'], $lang['mess_error']);
 			}
 
+			// Sujet propose par le lien « Repondre » (register_globals le fournissait : toujours « Pas de sujet » ensuite)
+			if (isset($_GET['subject']) && is_string($_GET['subject'])) {
+				$subject = SafeText(mb_substr($_GET['subject'], 0, 48, 'UTF-8'));
+			}
+
 			// Confirmation ou erreurs, affichees au-dessus du formulaire (le formulaire ecrasait $page : « Message
 			// envoye » et « sujet / texte manquant » ne s'affichaient jamais)
 			$page = '';

@@ -32,7 +32,7 @@ $lang['changelog']   = array(
 - FIX : Galaxie : couleur et tag d\'alliance, port&eacute;e de phalange, bas de page coup&eacute; sur petit &eacute;cran, pied de page, dur&eacute;e d\'inactivit&eacute;, lien &laquo; Espaces infinis &raquo; ; vue g&eacute;n&eacute;rale d\'une lune
 - FIX : Petits et grands &eacute;crans : menu de gauche d&eacute;filant, fond d\'&eacute;cran couvrant toute la fen&ecirc;tre
 - FIX : Installeur : bandeaux harmonis&eacute;s, erreurs dans son cadre, &laquo; Suivant &raquo; de la mise &agrave; jour, conseil &laquo; CHMOD 777 &raquo; remplac&eacute;, fautes
-- FIX : Messagerie : confirmation d\'envoi et erreurs affich&eacute;es, cat&eacute;gorie administration, &eacute;motic&ocirc;nes (:cool:, :perdu:...), couleurs du BBCode, barres obliques conserv&eacute;es
+- FIX : Messagerie : confirmation d\'envoi et erreurs affich&eacute;es, cat&eacute;gorie administration, &eacute;motic&ocirc;nes (:cool:, :perdu:...), couleurs du BBCode, barres obliques conserv&eacute;es, sujet repris par &laquo; R&eacute;pondre &raquo;, compteur de caract&egrave;res apr&egrave;s un collage
 - FIX : Liste d\'amis : demandes re&ccedil;ues de nouveau visibles, ami supprim&eacute; par un double clic, alliance du bon joueur, demande &agrave; soi-m&ecirc;me refus&eacute;e
 - FIX : Recherche de joueurs (alliance d&eacute;cal&eacute;e, rang absent) ; marchand : co&ucirc;t recalcul&eacute; apr&egrave;s un collage
 - FIX : Inscription : pseudos contenant &laquo; script &raquo; ou &laquo; http &raquo; inutilisables, noms de plan&egrave;te intacts ; e-mails valid&eacute;s (.paris, .app...)

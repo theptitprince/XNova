@@ -15,7 +15,7 @@
 	</tr>
 	<tr>
 	  <th>{motive_optional} <span id="cntChars">0</span> / 500 {characters}</th>
-	  <th><textarea name="text" cols=40 rows=10 onkeyup="javascript:cntchar(500)"></textarea></th>
+	  <th><textarea name="text" cols=40 rows=10 oninput="cntchar(500)"></textarea></th>
 	</tr>
 	<tr>
 	  <th>&#160;</th>

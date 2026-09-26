@@ -9,7 +9,7 @@
 	</tr>
 	<tr>
 	  <th>{message_label} (<span id="cntChars">{chars_count}</span> / 6000 {characters})</th>
-	  <th><textarea name="text" cols=40 rows=10 placeholder="{placeholder}" onkeyup="javascript:cntchar(6000)">{text_apply}</textarea></th>
+	  <th><textarea name="text" cols=40 rows=10 placeholder="{placeholder}" oninput="cntchar(6000)">{text_apply}</textarea></th>
 	</tr>
 	<tr>
 	  <th>{help}</th>
