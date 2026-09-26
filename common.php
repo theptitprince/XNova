@@ -74,8 +74,8 @@ if (INSTALL != true) {
 
 	// Visiteur non connecte : seules les pages publiques s'affichent, les autres renvoient vers la connexion.
 	// (Dans l'original, n'importe qui pouvait ouvrir frames.php, overview.php, l'admin... avec un joueur vide.)
-	$PublicPages = array('index.php', 'login.php', 'reg.php', 'lostpassword.php', 'contact.php', 'credit.php',
-	                     'rules.php', 'changelog.php', 'banned.php', 'logout.php');
+	$PublicPages = array('index.php', 'login.php', 'reg.php', 'check_registration.php', 'lostpassword.php', 'contact.php',
+	                     'credit.php', 'rules.php', 'changelog.php', 'banned.php', 'logout.php');
 	if (empty($user['id']) && !defined('LOGIN') &&
 	    (defined('IN_ADMIN') || !in_array(basename($_SERVER['SCRIPT_NAME']), $PublicPages))) {
 		$LoginUrl = $xnova_root_path . 'login.php';

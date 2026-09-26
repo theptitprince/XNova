@@ -1,3 +1,5 @@
+<script type="text/javascript" src="scripts/tw-sack.js"></script>
+<script type="text/javascript" src="scripts/registration.js"></script>
 <center>
 <br/><br/>
 <h2><font size="+3">{registry}</font><br>{servername}</h2>
@@ -10,7 +12,7 @@
 	<th width="293">{game_name_label}</th>
     <th width="293"><input name="character" size="20" maxlength="20" type="text" onKeypress="
      if (event.keyCode==60 || event.keyCode==62) event.returnValue = false;
-     if (event.which==60 || event.which==62) return false;"></th>
+     if (event.which==60 || event.which==62) return false;" onInput="checkUsername()" onChange="checkUsername()"><div id="check_character"></div></th>
 </tr>
 <tr>
   <th>{neededpass}</th>
@@ -22,7 +24,7 @@
   <th>{e_mail}</th>
   <th><input name="email" size="20" maxlength="40" type="text" onKeypress="
      if (event.keyCode==60 || event.keyCode==62) event.returnValue = false;
-     if (event.which==60 || event.which==62) return false;"></th>
+     if (event.which==60 || event.which==62) return false;" onInput="checkEmail()" onChange="checkEmail()"><div id="check_email"></div></th>
 </tr>
 <tr>
   <th>{main_planet}</th>
