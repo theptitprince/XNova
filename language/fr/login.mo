@@ -21,8 +21,8 @@ $lang['log_cred'] = 'Cr&eacute;dits';
 $lang['log_desc'] = 'est un <strong>jeu de strat&eacute;gie gratuit</strong> dans l\'espace. Pour jouer, il suffit d\'un navigateur internet. Inscrivez-vous et d&eacute;couvrez le monde fantastique de';
 $lang['log_toreg'] = 'S\'enregistrer maintenant!';
 $lang['log_online'] = 'Joueurs en ligne';
-$lang['log_lastreg'] = 'Dernier inscris';
-$lang['log_numbreg'] = 'Joueurs inscris';
+$lang['log_lastreg'] = 'Dernier inscrit';
+$lang['log_numbreg'] = 'Joueurs inscrits';
 $lang['log_welcome'] = 'Bienvenue sur';
 
 $lang['password_lost'] = 'Vous avez oubli&eacute; votre mot de passe ?';
