@@ -1,10 +1,10 @@
 <div align="center">
 
-# XNova — 0.9f Renaissance
+# XNova — 0.9g Renaissance
 
 **Le jeu de stratégie spatiale XNova, repris là où l'équipe d'origine s'était arrêtée.**
 
-![Version](https://img.shields.io/badge/version-0.9f%20Renaissance-2ea44f)
+![Version](https://img.shields.io/badge/version-0.9g%20Renaissance-2ea44f)
 ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-10.6%2B-003545?logo=mariadb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8%2B-4479A1?logo=mysql&logoColor=white)
@@ -117,7 +117,7 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 | **0.9d** | Compatibilité PHP 8.4 / MariaDB, en-têtes et crédits, corrections de bugs d'origine | ✅ Terminée |
 | **0.9e** | Sécurité critique (injections SQL, mots de passe `password_hash`, cookies, privilèges), bug de production d'énergie, installeur « Mise à jour » | ✅ Terminée |
 | **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration, mise à jour depuis la 0.8e d'origine, partie complète testée jusqu'à la création de lune (bugs d'origine corrigés) | ✅ Terminée |
-| **0.9g** | Bugs restants, avertissements PHP et affichage des colonies ; traductions complètes (allemand, espagnol, italien), base en utf8mb4, installeur verrouillé et harmonisé, nettoyage (conventions de nommage, textes, pages) | ⏳ En cours |
+| **0.9g** | Bugs restants et avertissements PHP, mot de passe oublié par lien de confirmation, affichage des colonies ; traductions complètes (allemand, espagnol, italien), base en utf8mb4, installeur verrouillé et harmonisé, nettoyage (conventions de nommage, textes, pages) ; partie complète retestée (lune, missiles, alliance, administration) | ✅ Terminée |
 | **0.9h** | Attaque groupée : prévue dans la 0.8e mais jamais programmée (groupe, invitations, flottes synchronisées, moteur de combat à plusieurs attaquants) | 🔜 |
 | **0.9i** | Mise en page sans *frames* : menu intégré à chaque page, fond d'écran pleine largeur | 🔜 |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
