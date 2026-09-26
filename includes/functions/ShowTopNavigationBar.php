@@ -82,6 +82,16 @@ function ShowTopNavigationBar ( $CurrentUser, $CurrentPlanet ) {
 			$parse['deuterium'] = $deuterium;
 		}
 
+		// Compteur en direct (scripts/resource_counter.js) : quantite, production par seconde, plafond de production
+		// (hangar + debordement autorise) et capacite du hangar, les memes que dans PlanetResourceUpdate
+		$Counter = array();
+		foreach (array('metal', 'crystal', 'deuterium') as $Res) {
+			$Counter[] = $Res .": [". floatval($CurrentPlanet[$Res]) .", ". floatval($CurrentPlanet[$Res .'_persecond'] ?? 0) .", "
+			           . floatval($CurrentPlanet[$Res .'_max'] * MAX_OVERFLOW) .", ". floatval($CurrentPlanet[$Res .'_max']) ."]";
+		}
+		$parse['resource_counter']  = "<script type=\"text/javascript\" src=\"scripts/resource_counter.js\"></script>";
+		$parse['resource_counter'] .= "<script type=\"text/javascript\">ResourceCounter({". implode(', ', $Counter) ."});</script>";
+
 		// Message
 		if ($CurrentUser['new_message'] > 0) {
 			$parse['message'] = "<a href=\"messages.php\">[ ". $CurrentUser['new_message'] ." ]</a>";

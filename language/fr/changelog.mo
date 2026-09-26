@@ -14,12 +14,15 @@ $lang['changelog']   = array(
 - NEW : N&eacute;gociant intergalactique : rach&egrave;te les sondes d\'espionnage de la plan&egrave;te contre du cristal (1k par sonde) ; gabarit et textes livr&eacute;s avec la 0.8e, page jamais &eacute;crite ; lien &laquo; N&eacute;gociant &raquo; sous le marchand
 - NEW : Bouton &laquo; Signaler &raquo; sur les messages des joueurs (priv&eacute;s et d\'alliance), pr&eacute;vu par le r&egrave;glement (article VIII) mais jamais programm&eacute; : confirmation, copie du message pour le staff ; page d\'administration &laquo; Messages signal&eacute;s &raquo; (fiche de l\'auteur, bannissement, trait&eacute; / &agrave; traiter, suppression), nombre &agrave; traiter dans le menu
 - NEW : Administration : lien &laquo; Message &agrave; tous &raquo; dans le menu (la page existait sans lien)
+- NEW : Compteur de ressources en direct dans la barre du haut (m&eacute;tal, cristal, deut&eacute;rium) : m&ecirc;me calcul que le serveur, arr&ecirc;t au plafond des hangars, en rouge au-del&agrave; de leur capacit&eacute;
 - FIX : Suppression d\'un compte : flottes des autres joueurs vers ses plan&egrave;tes renvoy&eacute;es chez elles, missiles et d&eacute;clarations effac&eacute;s
 - FIX : Rappel d\'une flotte : dur&eacute;e du retour fausse (stationnement et aller en cours invers&eacute;s)
 - FIX : Administration : fiche de chaque joueur depuis la liste, recherche par IP (ne trouvait jamais personne), joueur introuvable signal&eacute;, on ne modifie plus son propre acc&egrave;s
 - FIX : Officiers : niveau maximum du Commandant affich&eacute; 3 au lieu de 2, faute dans la description de l\'Espion
 - FIX : B&acirc;timents, recherche, chantier spatial et d&eacute;fense : page construite avant la mise &agrave; jour de la plan&egrave;te (vaisseaux termin&eacute;s et file du chantier p&eacute;rim&eacute;s au premier chargement) ; une commande du chantier profitait du temps &eacute;coul&eacute; depuis l\'ouverture de la page (construction gratuite)
-- FIX : Messagerie : les op&eacute;rateurs (niveau 2) &eacute;taient renvoy&eacute;s vers la page de connexion',
+- FIX : Messagerie : les op&eacute;rateurs (niveau 2) &eacute;taient renvoy&eacute;s vers la page de connexion
+- FIX : Production des mines : le multiplicateur de ressources &eacute;tait appliqu&eacute; deux fois (gain r&eacute;el = multiplicateur &times; la production affich&eacute;e par la page Ressources ; sans effet avec le r&eacute;glage par d&eacute;faut)
+- FIX : Production de base : mise &agrave; jour d\'une lune, les plan&egrave;tes mises &agrave; jour ensuite dans la m&ecirc;me page perdaient leur revenu de base',
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
 - FIX : Mot de passe oubli&eacute; : lien de confirmation avant tout changement (conna&icirc;tre l\'adresse d\'un joueur suffisait), injection SQL corrig&eacute;e, m&ecirc;me message que l\'adresse existe ou non
