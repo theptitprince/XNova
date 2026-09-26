@@ -1,7 +1,7 @@
 <?php
 
 // User menu links
-$lang['qry']   = 'Executer commande SQL';
+$lang['qry']   = 'Ex&eacute;cuter une commande SQL';
 
 
 $lang['multiverse']   = '<b>XNova</b> Uni';

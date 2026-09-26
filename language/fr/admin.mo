@@ -1,22 +1,22 @@
 <?php
 //Tweaks vue générale
 $lang['usr_email']               = "Email";
-$lang['xp_raid']               = "&Eacute;xp&eacute;rience Raids";
-$lang['xp_min']               = "&Eacute;xp&eacute;rience Minage";
+$lang['xp_raid']               = "Exp&eacute;rience raids";
+$lang['xp_min']               = "Exp&eacute;rience minage";
 $lang['lang_vacancy']    = "Mode vacances";
 $lang['is_in_vacancy']    = "Mode vacances actif";
 $lang['not_in_vacancy']               = "Mode vacances inactif";
 $lang['is_banned_lang']               = "Non";
 $lang['banned_lang']               = "Banni ?"; 
 $lang['usr_current_planet']               = "Plan&egrave;te";
-$lang['usr_current_page']               = "Page actuellement vision&eacute;e";
+$lang['usr_current_page']               = "Page actuellement visionn&eacute;e";
 
 $lang['oups_youre_banned']               = "Votre compte a &eacute;t&eacute;  suspendu!";
 $lang['user_is_banned_for']               = "Vous avez &eacute;t&eacute; banni pour la raison suivante : ";
 $lang['banned_until']               = "Vous avez &eacute;t&eacute; banni jusqu'&agrave; ";
 $lang['who_has_banned']    = "Par l'op&eacute;rateur suivant";
 
-$lang['adm_ul_data_ip_reg']    = "IP a l'enregistrement";
+$lang['adm_ul_data_ip_reg']    = "IP &agrave; l'enregistrement";
 
 
 $lang['messages_settings']               = "R&eacute;glage des messages et du contenu des messages";
@@ -47,7 +47,7 @@ $lang['adm_ov_altpm'] = "[MP]";
 
 
 $lang['adm_ul_title'] = "Liste des joueurs";
-$lang['adm_ul_ttle2'] = "Joueurs inscrit";
+$lang['adm_ul_ttle2'] = "Joueurs inscrits";
 $lang['adm_ul_id']    = "ID";
 $lang['adm_ul_name']  = "Nom du joueur";
 $lang['adm_ul_mail']  = "Adresse e-Mail";
@@ -55,7 +55,7 @@ $lang['adm_ul_adip']  = "Adresse IP";
 $lang['adm_ul_regd']  = "Inscription";
 $lang['adm_ul_lconn'] = "Dernier login";
 $lang['adm_ul_bana']  = "Banni";
-$lang['adm_ul_detai'] = "Details";
+$lang['adm_ul_detai'] = "D&eacute;tails";
 $lang['adm_ul_actio'] = "Action";
 $lang['adm_ul_playe'] = " joueur(s)";
 $lang['adm_ul_yes']   = "Oui";

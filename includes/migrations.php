@@ -78,6 +78,10 @@ $RenaissanceMigrations = array(
 		// et la lune reapparaissait dans la vue generale ; la destruction la supprime desormais
 		"DELETE l FROM `{{prefix}}lunas` l LEFT JOIN `{{prefix}}galaxy` g ON g.`id_luna` = l.`id`
 			WHERE l.`destruyed` <> 0 AND g.`id_luna` IS NULL;",
+		// Messages : expediteur et sujet coupes a 48 caracteres (texte echappe, couleur du message a tous : balise
+		// de fin coupee, « < » affiche)
+		"ALTER TABLE `{{prefix}}messages` MODIFY `message_from` varchar(255) default NULL,
+			MODIFY `message_subject` varchar(255) default NULL;",
 	),
 );
 
