@@ -24,6 +24,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 	// Mise a jour de la liste de construction si necessaire
 	UpdatePlanetBatimentQueueList ( $planetrow, $user );
 	$IsWorking = HandleTechnologieBuild ( $planetrow, $user );
+	// Ressources et chantier mis a jour avant d'afficher la page ou d'enregistrer une commande. Dans l'original, la
+	// mise a jour n'avait lieu qu'ensuite (barre des ressources) : vaisseaux termines et file affiches perimes au
+	// premier chargement, et une commande du chantier profitait du temps ecoule depuis l'ouverture de la page.
+	PlanetResourceUpdate ( $user, $planetrow, time() );
 
 	switch (($_GET['mode'] ?? null)) {
 		case 'fleet':

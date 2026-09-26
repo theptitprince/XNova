@@ -15,7 +15,8 @@ $lang['changelog']   = array(
 - FIX : Suppression d\'un compte : flottes des autres joueurs vers ses plan&egrave;tes renvoy&eacute;es chez elles, missiles et d&eacute;clarations effac&eacute;s
 - FIX : Rappel d\'une flotte : dur&eacute;e du retour fausse (stationnement et aller en cours invers&eacute;s)
 - FIX : Administration : fiche de chaque joueur depuis la liste, recherche par IP (ne trouvait jamais personne), joueur introuvable signal&eacute;, on ne modifie plus son propre acc&egrave;s
-- FIX : Officiers : niveau maximum du Commandant affich&eacute; 3 au lieu de 2, faute dans la description de l\'Espion',
+- FIX : Officiers : niveau maximum du Commandant affich&eacute; 3 au lieu de 2, faute dans la description de l\'Espion
+- FIX : B&acirc;timents, recherche, chantier spatial et d&eacute;fense : page construite avant la mise &agrave; jour de la plan&egrave;te (vaisseaux termin&eacute;s et file du chantier p&eacute;rim&eacute;s au premier chargement) ; une commande du chantier profitait du temps &eacute;coul&eacute; depuis l\'ouverture de la page (construction gratuite)',
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
 - FIX : Mot de passe oubli&eacute; : lien de confirmation avant tout changement (conna&icirc;tre l\'adresse d\'un joueur suffisait), injection SQL corrig&eacute;e, m&ecirc;me message que l\'adresse existe ou non
