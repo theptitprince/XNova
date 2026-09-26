@@ -103,4 +103,7 @@ $lang['adm_delplayer'] = 'Borrar un jugador';
 // XNova Renaissance 0.9h : liste des multi-comptes remise
 $lang['adm_multi'] = 'Lista de multicuentas';
 
+// XNova Renaissance 0.9h : negociant intergalactique
+$lang['tradingscrapmetal_label'] = 'Comerciante';
+
 ?>
