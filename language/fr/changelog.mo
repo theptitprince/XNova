@@ -28,7 +28,7 @@ $lang['changelog']   = array(
 - NEW : Statistiques recalculables par t&acirc;che planifi&eacute;e ; classement des alliances enfin calcul&eacute;
 - NEW : Alliance : cession &agrave; un membre &laquo; Main droite &raquo; (le bouton ne faisait rien) ; alliance transmise au plus ancien membre si le fondateur est supprim&eacute;
 - FIX : Alliance : candidatures (alliance ferm&eacute;e, r&eacute;ponses au candidat), liste des membres (rangs, tris, jours d\'inactivit&eacute;), page des droits, textes allemands
-- MOD : Vue g&eacute;n&eacute;rale : colonies &agrave; droite de la plan&egrave;te, deux par ligne, comme OGame classique ; annonces de niveaux et rang corrig&eacute;s
+- MOD : Vue g&eacute;n&eacute;rale : colonies &agrave; droite de la plan&egrave;te, deux par ligne, comme OGame classique ; annonces de niveaux, rang et fin de construction corrig&eacute;s
 - FIX : Galaxie : couleur et tag d\'alliance, port&eacute;e de phalange, bas de page coup&eacute; sur petit &eacute;cran, pied de page, lien &laquo; Espaces infinis &raquo; ; vue g&eacute;n&eacute;rale d\'une lune
 - FIX : Petits et grands &eacute;crans : menu de gauche d&eacute;filant, fond d\'&eacute;cran couvrant toute la fen&ecirc;tre
 - FIX : Installeur : bandeaux harmonis&eacute;s, erreurs dans son cadre, &laquo; Suivant &raquo; de la mise &agrave; jour, conseil &laquo; CHMOD 777 &raquo; remplac&eacute;, fautes

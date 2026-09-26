@@ -30,6 +30,7 @@ $_POST['deleteid'] = intval(($_POST['deleteid'] ?? null));
 
 includeLang('resources');
 includeLang('overview');
+includeLang('buildings'); // textes du compte a rebours de construction (Termine / Continuer / Interrompre), absents de l'original
 
 if($game_config['enable_bot'] == 1){
 	//robot anti multi -- debut --
