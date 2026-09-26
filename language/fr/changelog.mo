@@ -5,76 +5,45 @@ $lang['changelog']   = array(
 
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
-- FIX : D&eacute;claration de multi-compte : titre, textes traduits, message de confirmation du jeu ; au moins un joueur exig&eacute;
-- FIX : Administration : liste &laquo; multi-comptes &raquo; toujours vide supprim&eacute;e (second syst&egrave;me jamais fonctionnel), page &laquo; supprimer un joueur &raquo; inachev&eacute;e retir&eacute;e
-- FIX : Robot anti-multi : un seul bannissement par joueur (au lieu d\'un par compte partageant l\'adresse IP)
-- FIX : Bannissements : pseudo, auteur et e-mail tronqu&eacute;s &agrave; 11 et 20 caract&egrave;res (le d&eacute;bannissement ratait les pseudos longs)
-- FIX : Options, cadre du jeu, destruction de lune : chemin du jeu lu dans une ancienne variable UGamela
-- FIX : Phalange : port&eacute;e, pr&eacute;sence d\'une phalange et cible v&eacute;rifi&eacute;es par le serveur (une adresse forg&eacute;e scannait tout l\'univers)
-- FIX : Mot de passe oubli&eacute; r&eacute;par&eacute; et s&eacute;curis&eacute; (injection SQL, mot de passe fort, m&ecirc;me message que l\'adresse existe ou non)
-- FIX : Inscription : les pseudos contenant &laquo; script &raquo; ou &laquo; http &raquo; donnaient un compte inutilisable ; noms de plan&egrave;te intacts
-- FIX : Recyclage rapide de la vue g&eacute;n&eacute;rale : plus de flotte vide, emplacements de flotte et carburant v&eacute;rifi&eacute;s
-- FIX : Officier Amiral : son bonus de combat s\'applique enfin (niveau de l\'attaquant et du d&eacute;fenseur)
-- FIX : Envoi de flotte : la mission choisie dans la galaxie est de nouveau pr&eacute;s&eacute;lectionn&eacute;e
-- FIX : Galaxie : couleur des joueurs sans alliance, tag de son alliance, port&eacute;e de phalange ; vue g&eacute;n&eacute;rale d\'une lune
-- FIX : Vue g&eacute;n&eacute;rale : l\'annonce de niveau de raideur n\'efface plus celle de mineur ; rang du joueur dans le menu
-- MOD : Pages abandonn&eacute;es supprim&eacute;es (calculatrice UGamela, doublon de fiche d\'alliance) ; PhpInfo r&eacute;serv&eacute; &agrave; l\'administrateur
-- FIX : Avertissements PHP : toutes les pages et une partie compl&egrave;te sans aucun message
-- MOD : Vue g&eacute;n&eacute;rale : colonies de nouveau &agrave; droite de la plan&egrave;te, deux par ligne, comme OGame classique (largeurs fig&eacute;es)
-- FIX : Espionnage : le rapport annon&ccedil;ait la flotte d&eacute;truite quand elle survivait (messages invers&eacute;s), vraie probabilit&eacute; affich&eacute;e
-- FIX : Exp&eacute;dition : trou noir total jamais atteint, capacit&eacute; des soutes mal compt&eacute;e, trouvaille vide annonc&eacute;e, tirage affich&eacute;
-- FIX : Page Flotte : heures d\'envoi et d\'arriv&eacute;e d&eacute;cal&eacute;es d\'une colonne, flotte rappel&eacute;e affich&eacute;e comme retour
-- FIX : Rapports : dur&eacute;e du calcul lisible, message de retour de flotte, fautes des rapports d\'exp&eacute;dition
-- FIX : Petites annonces : page blanche apr&egrave;s publication (PHP 8), colonne cristal vide, suppression de ses annonces (jamais &eacute;crite)
-- FIX : Recherche de joueurs : alliance affich&eacute;e sur la ligne suivante, rang jamais affich&eacute;
-- FIX : Erreurs JavaScript de la page Flotte et de la connexion ; script orphelin du portail OGame (mot de passe en cookie) supprim&eacute;
-- FIX : Textes : demandes d\'ami, discussion, taille des notes en caract&egrave;res, titre des Options
-- FIX : Alliance : page des droits en erreur fatale pour une alliance neuve (PHP 8), droits des rangs, fautes
-- FIX : Alliance : un chef ne peut plus enr&ocirc;ler de force un joueur ni exclure le membre d\'une autre alliance, ni changer le rang d\'un joueur ext&eacute;rieur
-- FIX : Alliance : un membre qui part ou est exclu perd son rang (il gardait ses droits dans sa nouvelle alliance) ; administration r&eacute;serv&eacute;e au droit pr&eacute;vu
-- FIX : Alliance : dissolution confirm&eacute;e et prot&eacute;g&eacute;e (un lien ou une image suffisait), membres lib&eacute;r&eacute;s et pr&eacute;venus ; images des textes limit&eacute;es aux adresses http(s)
-- NEW : Alliance : cession &agrave; un membre ayant le droit &laquo; Main droite &raquo; (le bouton ne faisait rien) ; un joueur supprim&eacute; transmet son alliance au plus ancien membre
-- FIX : Alliance : candidature impossible quand l\'alliance est ferm&eacute;e, candidat pr&eacute;venu en fran&ccedil;ais (accept&eacute;, refus&eacute;, exclu), onglet du mod&egrave;le de candidature
-- FIX : Alliance : rangs d&eacute;cal&eacute;s dans la liste des membres, tri par rang et par points, jours d\'inactivit&eacute; (c\'&eacute;taient des heures), textes allemands traduits
-- NEW : Langue au choix dans les Options (fran&ccedil;ais, allemand, espagnol, italien) ; allemand, espagnol et italien complets (1 800 textes ajout&eacute;s ou corrig&eacute;s, restes de fran&ccedil;ais et de polonais traduits)
-- FIX : Textes &eacute;crits en dur rendus traduisibles : raccourcis de flotte, petites annonces, formulaire de message, menu, horloge, cr&eacute;dits, pluriel de la galaxie
-- FIX : &Eacute;motic&ocirc;nes des messages cass&eacute;es depuis la 0.9f, et les mots &laquo; cool &raquo;, &laquo; perdu &raquo;... remplac&eacute;s par une image au milieu des phrases : codes :cool:, :perdu:... ; couleur du BBCode limit&eacute;e aux vraies couleurs
-- FIX : Annonces, marchand et notes d&eacute;sactiv&eacute;s par l\'administrateur : plus accessibles par leur adresse (seul le lien disparaissait)
-- FIX : Mot de passe : 8 caract&egrave;res au moins, &agrave; l\'inscription comme au changement (la page Options l\'annon&ccedil;ait sans le v&eacute;rifier)
-- FIX : Fiche de la centrale &agrave; fusion (production mal lue), statistiques recalculables par t&acirc;che planifi&eacute;e, classement des alliances enfin calcul&eacute;
-- FIX : Administration : configuration du serveur lisible (vitesses tronqu&eacute;es, revenus limit&eacute;s &agrave; 2 chiffres, cases &agrave; cocher), vue g&eacute;n&eacute;rale sans d&eacute;filement horizontal
-- FIX : E-mails valid&eacute;s par PHP (.paris, .app... &eacute;taient refus&eacute;s) ; Pilori traduit, &laquo; 1 joueur banni &raquo;
-- MOD : Base de donn&eacute;es en utf8mb4 (colonnes latin1 : un emoji dans un nom, un message ou un rang faisait &eacute;chouer la requ&ecirc;te) ; conversion faite par la mise &agrave; jour, donn&eacute;es v&eacute;rifi&eacute;es identiques
-- FIX : Flottes : la mission &laquo; Attaque group&eacute;e &raquo; (propos&eacute;e aux destructeurs vers une lune) supprimait la flotte &agrave; l\'arriv&eacute;e, vaisseaux compris : retir&eacute;e (jamais programm&eacute;e), bouton &laquo; Associer &raquo; retir&eacute; (elle sera programm&eacute;e en 0.9h)
-- FIX : Bannissements : la dur&eacute;e &eacute;tait ignor&eacute;e (sanction d&eacute;finitive jusqu\'au d&eacute;bannissement manuel) : lev&eacute;e automatique &agrave; l\'&eacute;ch&eacute;ance, page du joueur banni traduite avec la date de fin
-- FIX : Administration : message &agrave; tous (sujet ou texte vide = page blanche), listes des lunes et des plan&egrave;tes, d&eacute;bannissement traduits
-- FIX : Missiles : une interception retirait les missiles interplan&eacute;taires de la cible (intercepteurs jamais consomm&eacute;s, puis stock n&eacute;gatif) ; temps de vol n&eacute;gatif vers un syst&egrave;me de num&eacute;ro plus &eacute;lev&eacute; (impact imm&eacute;diat) ; noms de d&eacute;fenses faux dans le rapport ; textes traduits
-- FIX : Installeur verrouill&eacute; une fois le jeu install&eacute; : on pouvait r&eacute;&eacute;crire config.php et brancher le jeu sur une autre base (seule la mise &agrave; jour reste ouverte)
-- FIX : Mode vacances : plus d\'envoi de flotte ni de missiles (on attaquait en restant intouchable), refus&eacute; tant qu\'une flotte vole, production remise &agrave; 100 % au retour
-- FIX : Mode vacances : un formulaire forg&eacute; n\'en fait plus sortir avant les 48 heures ; revenus de base du cristal et du deut&eacute;rium
-- FIX : Lune : d&eacute;truire la base lunaire augmentait son niveau et les cases (destruction de la base lunaire et du terraformeur refus&eacute;e, comme OGame)
-- FIX : Fiche de la phalange : avertissements PHP (calcul de production inutile) ; accord &laquo; 1 case libre &raquo; ; messages laboratoire / chantier requis
-- FIX : Administration : le message &agrave; tous les joueurs ne partait jamais ; texte d&eacute;sormais &eacute;chapp&eacute; (injection de code)
-- FIX : Messagerie : cat&eacute;gorie des messages de l\'administration absente, couleur illisible des rapports d\'exp&eacute;dition
-- FIX : Missiles : tir sans effet ni rapport sur une plan&egrave;te ayant une lune, textes du jeu effac&eacute;s au moment de l\'impact
-- FIX : Missiles : port&eacute;e contr&ocirc;l&eacute;e dans les deux sens, nombre n&eacute;gatif refus&eacute; (il cr&eacute;ait des missiles), rapport en fran&ccedil;ais
-- FIX : Porte de saut et bouton d\'abandon de colonie : avertissements et fautes
-- MOD : Convention de nommage : toutes les cl&eacute;s de langue et balises des templates en minuscules (a-z, 0-9, _), contr&ocirc;le ajout&eacute; au v&eacute;rificateur
-- FIX : Administration : liste des messages (le plus r&eacute;cent n\'apparaissait jamais), titre d\'erreur des Options
-- FIX : Galaxie : bas de page coup&eacute; sans barre de d&eacute;filement sur un &eacute;cran peu haut ; pied de page juste au singulier comme au pluriel (&laquo; Recycleurs disponibles : 0 &raquo;) ; lien &laquo; Espaces infinis &raquo; r&eacute;par&eacute;
-- FIX : Menu de gauche : R&egrave;gles, Contact, Options et D&eacute;connexion hors d\'atteinte sur un &eacute;cran peu haut (menu d&eacute;filant)
-- FIX : Fond d\'&eacute;cran : sur un grand &eacute;cran, l\'image couvre toute la fen&ecirc;tre au lieu de s\'arr&ecirc;ter net sur un aplat bleu
-- FIX : Liste d\'amis : demandes re&ccedil;ues invisibles (liens jamais affich&eacute;s depuis le passage &agrave; PHP 8), ami tout juste accept&eacute; supprim&eacute; par un double clic, alliance du mauvais joueur, lien retour inop&eacute;rant ; demande &agrave; soi-m&ecirc;me ou &agrave; un compte inexistant refus&eacute;e
-- FIX : Adresses incompl&egrave;tes : page blanche des petites annonces, avertissements de la fiche d\'information ; titres de la bo&icirc;te de r&eacute;ception et de l\'administration (erreurs, remise &agrave; z&eacute;ro)
-- MOD : 21 mod&egrave;les de pages inutilis&eacute;s supprim&eacute;s, balises cass&eacute;es de l\'arbre technologique et de la porte de saut r&eacute;par&eacute;es
-- FIX : Installeur : bandeaux du haut harmonis&eacute;s (m&ecirc;me hauteur, &eacute;tape &agrave; droite), menu et contenu align&eacute;s ; verrou et erreurs affich&eacute;s dans le cadre de l\'installeur (formulaire conserv&eacute; sous l\'erreur) ; &laquo; Suivant &raquo; de la mise &agrave; jour ramenait &agrave; l\'&eacute;tape 1 ; param&egrave;tre recopi&eacute; tel quel dans la page (injection de code)
-- FIX : Installeur : mot de passe administrateur d\'au moins 8 caract&egrave;res et adresse e-mail valide, comme &agrave; l\'inscription ; conseil &laquo; CHMOD 777 &raquo; remplac&eacute; (le droit d\'&eacute;criture suffit) ; fautes du fran&ccedil;ais, titre de la page traduit
-- FIX : Administration : nettoyage de la file du chantier spatial (avertissements PHP sur les files vides)
-- FIX : Vue de l\'empire : &eacute;nergie restante fausse (consommation ajout&eacute;e au lieu d\'&ecirc;tre retir&eacute;e), cases maximum sans le terraformeur, titre de page vide, fautes des intitul&eacute;s
-- FIX : Administration du chat : messages affich&eacute;s sans &eacute;chappement (du code post&eacute; dans le chat s\'ex&eacute;cutait chez l\'administrateur) ; barres obliques inverses effac&eacute;es dans le chat, les messages priv&eacute;s et les d&eacute;clarations de multi-compte
-- FIX : Alliance : tri de la liste des membres par rang (le fondateur &eacute;tait class&eacute; parmi les novices) ; marchand : co&ucirc;t recalcul&eacute; aussi apr&egrave;s un collage
-- FIX : Mot de passe oubli&eacute; : conna&icirc;tre l\'adresse d\'un joueur suffisait pour changer son mot de passe. La demande envoie d&eacute;sormais un lien de confirmation (valable une heure, une demande toutes les 5 minutes au plus) ; le nouveau mot de passe part par e-mail apr&egrave;s le clic, comme avant
-- FIX : Messages : la confirmation &laquo; Message envoy&eacute; &raquo; et les erreurs (sujet ou texte manquant) ne s\'affichaient jamais',
+- FIX : Mot de passe oubli&eacute; : lien de confirmation avant tout changement (conna&icirc;tre l\'adresse d\'un joueur suffisait), injection SQL corrig&eacute;e, m&ecirc;me message que l\'adresse existe ou non
+- FIX : Mots de passe de 8 caract&egrave;res au moins : inscription, Options et compte administrateur de l\'installeur
+- FIX : Installeur verrouill&eacute; une fois le jeu install&eacute; (config.php pouvait &ecirc;tre r&eacute;&eacute;crit), code injectable dans son adresse
+- FIX : Phalange contr&ocirc;l&eacute;e par le serveur (port&eacute;e, pr&eacute;sence, cible) : une adresse forg&eacute;e scannait tout l\'univers
+- FIX : Chat de l\'administration : du code post&eacute; par un joueur s\'ex&eacute;cutait chez l\'administrateur
+- FIX : Alliance : plus d\'enr&ocirc;lement forc&eacute;, d\'exclusion ni de changement de rang hors de son alliance ; rang perdu en partant ; administration r&eacute;serv&eacute;e au droit pr&eacute;vu
+- FIX : Alliance : dissolution confirm&eacute;e (un simple lien ou une image suffisait), membres lib&eacute;r&eacute;s et pr&eacute;venus ; images des textes en http(s) seulement
+- FIX : Mode vacances : plus d\'envoi de flotte ni de missiles, refus&eacute; tant qu\'une flotte vole, pas de sortie avant 48 h, production et revenus r&eacute;tablis au retour
+- FIX : Annonces, marchand et notes d&eacute;sactiv&eacute;s par l\'administrateur : ferm&eacute;s aussi par leur adresse
+- FIX : Missiles : interception (stock de la cible vid&eacute;, puis n&eacute;gatif), temps de vol, tir sur une plan&egrave;te avec lune, port&eacute;e dans les deux sens, nombre n&eacute;gatif refus&eacute;, rapports traduits
+- FIX : Attaque group&eacute;e : la mission supprimait la flotte &agrave; l\'arriv&eacute;e (jamais programm&eacute;e) ; retir&eacute;e en attendant la 0.9h
+- FIX : Officier Amiral : bonus de combat enfin appliqu&eacute;, &agrave; l\'attaquant comme au d&eacute;fenseur
+- FIX : Espionnage (rapport de destruction invers&eacute;, vraie probabilit&eacute;) et exp&eacute;dition (trou noir, soutes, trouvaille vide)
+- FIX : Lune : d&eacute;truire la base lunaire augmentait son niveau ; base lunaire et terraformeur indestructibles, comme OGame
+- FIX : Bannissements : dur&eacute;e respect&eacute;e (lev&eacute;e automatique), pseudos longs, un seul bannissement par joueur (robot anti-multi), page du banni traduite
+- FIX : Recyclage rapide sans flotte vide (emplacements, carburant) ; mission choisie dans la galaxie pr&eacute;s&eacute;lectionn&eacute;e
+- FIX : Page Flotte : heures d&eacute;cal&eacute;es, flotte rappel&eacute;e affich&eacute;e comme retour, erreurs JavaScript ; rapports et messages de retour
+- FIX : Petites annonces : page blanche apr&egrave;s publication, colonne cristal vide, suppression de ses annonces
+- FIX : Vue de l\'empire : &eacute;nergie restante et cases (terraformeur) justes, intitul&eacute;s corrig&eacute;s
+- FIX : Fiches de la centrale &agrave; fusion et de la phalange, porte de saut, abandon de colonie : erreurs et fautes
+- NEW : Statistiques recalculables par t&acirc;che planifi&eacute;e ; classement des alliances enfin calcul&eacute;
+- NEW : Alliance : cession &agrave; un membre &laquo; Main droite &raquo; (le bouton ne faisait rien) ; alliance transmise au plus ancien membre si le fondateur est supprim&eacute;
+- FIX : Alliance : candidatures (alliance ferm&eacute;e, r&eacute;ponses au candidat), liste des membres (rangs, tris, jours d\'inactivit&eacute;), page des droits, textes allemands
+- MOD : Vue g&eacute;n&eacute;rale : colonies &agrave; droite de la plan&egrave;te, deux par ligne, comme OGame classique ; annonces de niveaux et rang corrig&eacute;s
+- FIX : Galaxie : couleur et tag d\'alliance, port&eacute;e de phalange, bas de page coup&eacute; sur petit &eacute;cran, pied de page, lien &laquo; Espaces infinis &raquo; ; vue g&eacute;n&eacute;rale d\'une lune
+- FIX : Petits et grands &eacute;crans : menu de gauche d&eacute;filant, fond d\'&eacute;cran couvrant toute la fen&ecirc;tre
+- FIX : Installeur : bandeaux harmonis&eacute;s, erreurs dans son cadre, &laquo; Suivant &raquo; de la mise &agrave; jour, conseil &laquo; CHMOD 777 &raquo; remplac&eacute;, fautes
+- FIX : Messagerie : confirmation d\'envoi et erreurs affich&eacute;es, cat&eacute;gorie administration, &eacute;motic&ocirc;nes (:cool:, :perdu:...), couleurs du BBCode, barres obliques conserv&eacute;es
+- FIX : Liste d\'amis : demandes re&ccedil;ues de nouveau visibles, ami supprim&eacute; par un double clic, alliance du bon joueur, demande &agrave; soi-m&ecirc;me refus&eacute;e
+- FIX : Recherche de joueurs (alliance d&eacute;cal&eacute;e, rang absent) ; marchand : co&ucirc;t recalcul&eacute; apr&egrave;s un collage
+- FIX : Inscription : pseudos contenant &laquo; script &raquo; ou &laquo; http &raquo; inutilisables, noms de plan&egrave;te intacts ; e-mails valid&eacute;s (.paris, .app...)
+- FIX : D&eacute;claration de multi-compte : textes, confirmation, au moins un joueur exig&eacute;
+- FIX : Administration : message &agrave; tous (jamais envoy&eacute;, non &eacute;chapp&eacute;), configuration lisible, vue g&eacute;n&eacute;rale sans d&eacute;filement, listes (messages, lunes, plan&egrave;tes), file du chantier, titres
+- MOD : Administration : liste &laquo; multi-comptes &raquo; toujours vide et page &laquo; supprimer un joueur &raquo; inachev&eacute;e retir&eacute;es ; PhpInfo r&eacute;serv&eacute; &agrave; l\'administrateur
+- NEW : Langue au choix dans les Options ; allemand, espagnol et italien complets (1 800 textes ajout&eacute;s ou corrig&eacute;s)
+- FIX : Textes &eacute;crits en dur rendus traduisibles (flotte, annonces, messages, menu, horloge, cr&eacute;dits), Pilori traduit, nombreuses fautes corrig&eacute;es
+- MOD : Base de donn&eacute;es en utf8mb4 : un emoji dans un nom ou un message faisait &eacute;chouer la requ&ecirc;te
+- FIX : Aucun avertissement PHP sur les pages du jeu ; plus de page blanche sur une adresse incompl&egrave;te
+- MOD : Nettoyage : pages abandonn&eacute;es et 21 mod&egrave;les inutilis&eacute;s supprim&eacute;s, script du portail OGame (mot de passe en cookie) retir&eacute;, chemins UGamela, convention de nommage',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)
