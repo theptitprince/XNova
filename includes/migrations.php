@@ -68,6 +68,10 @@ $RenaissanceMigrations = array(
 		"UPDATE `{{prefix}}alliance` SET `ally_owner_range` = '' WHERE `ally_owner_range` = 'Leader';",
 		// Colonnes latin1 -> utf8mb4 (la connexion l'etait deja : un emoji faisait echouer la requete)
 		'RenaissanceConvertUtf8mb4',
+		// Nom des lunes affiche dans la galaxie : 11 caracteres (le renommage en accepte 32), noms complets recopies
+		"ALTER TABLE `{{prefix}}lunas` MODIFY `name` varchar(64) NOT NULL default 'Lune';",
+		"UPDATE `{{prefix}}lunas` l JOIN `{{prefix}}planets` p ON p.`galaxy` = l.`galaxy` AND p.`system` = l.`system`
+			AND p.`planet` = l.`lunapos` AND p.`planet_type` = 3 SET l.`name` = LEFT(p.`name`, 64);",
 		// Mot de passe oublie : jeton du lien de confirmation (empreinte) et heure de la demande
 		'RenaissanceAddLostPasswordColumns',
 	),

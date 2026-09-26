@@ -247,7 +247,7 @@
 	$QryTableLunas       = "CREATE TABLE `{{table}}` ( ";
 	$QryTableLunas      .= "`id` bigint(11) NOT NULL auto_increment, ";
 	$QryTableLunas      .= "`id_luna` int(11) NOT NULL default '0', ";
-	$QryTableLunas      .= "`name` varchar(11) NOT NULL default 'Lune', ";
+	$QryTableLunas      .= "`name` varchar(64) NOT NULL default 'Lune', ";
 	$QryTableLunas      .= "`image` varchar(11) NOT NULL default 'mond', ";
 	$QryTableLunas      .= "`destruyed` int(11) NOT NULL default '0', ";
 	$QryTableLunas      .= "`id_owner` int(11) default NULL, ";

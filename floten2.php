@@ -239,7 +239,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$page .= $lang['fl_expe_hours'];
 		$page .= "</th>";
 		$page .= "</tr>";
-	} elseif ( $missiontype[5] != '' ) {
+	} elseif ( !empty($missiontype[5]) ) {
 		$page .= "<tr height=\"20\">";
 		$page .= "<td class=\"c\" colspan=\"3\">". $lang['fl_expe_staytime'] ."</td>";
 		$page .= "</tr>";

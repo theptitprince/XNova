@@ -51,12 +51,12 @@ $lang['fl_deute_need'] = "Consommation de carburant";
 $lang['fl_speed_max'] = "Vitesse max.";
 $lang['fl_max_load'] = "Capacit&eacute; de chargement";
 $lang['fl_shortcut'] = "Raccourcis";
-$lang['fl_shortlnk'] = "(Ajouter / Editer)";
+$lang['fl_shortlnk'] = '(Ajouter / Modifier)';
 $lang['fl_shrtcup1'] = "(P)";
 $lang['fl_shrtcup2'] = "(D)";
 $lang['fl_shrtcup3'] = "(L)";
 $lang['fl_noshortc'] = "Pas de raccourcis";
-$lang['fl_myplanets'] = "Mes planetes";
+$lang['fl_myplanets'] = 'Mes planètes';
 $lang['fl_nocolonies'] = "Pas de Colonie";
 $lang['fl_grattack'] = "Attaques group&eacute;es";
 

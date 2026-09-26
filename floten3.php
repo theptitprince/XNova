@@ -33,6 +33,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$CurrentPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '". $user['current_planet'] ."'", 'planets', true);
 	$TargetPlanet  = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '". ($_POST['galaxy'] ?? null) ."' AND `system` = '". ($_POST['system'] ?? null) ."' AND `planet` = '". ($_POST['planet'] ?? null) ."' AND `planet_type` = '". ($_POST['planettype'] ?? null) ."';", 'planets', true);
 	$MyDBRec       = doquery("SELECT * FROM {{table}} WHERE `id` = '". $user['id']."';", 'users', true);
+	// Case vide (colonisation, expedition) : cible sans proprietaire (avertissements PHP a chaque envoi auparavant)
+	if (!$TargetPlanet) {
+		$TargetPlanet = array('id_owner' => '', 'ally_deposit' => 0, 'id_level' => 0);
+	}
 
 	$protection      = $game_config['noobprotection'];
 	$protectiontime  = $game_config['noobprotectiontime'];
