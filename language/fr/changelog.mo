@@ -8,9 +8,14 @@ $lang['changelog']   = array(
 - NEW : Administration : page &laquo; Supprimer un joueur &raquo; remise et termin&eacute;e (fiche du compte, confirmation, r&eacute;serv&eacute;e aux administrateurs) ; la liste des joueurs supprimait en un clic
 - NEW : Administration : liste des multi-comptes remise et termin&eacute;e (comptes regroup&eacute;s par adresse IP partag&eacute;e, d&eacute;clar&eacute;s ou non, bannis ou non, fiche et bannissement en un clic)
 - NEW : &laquo; Effacer le compte &raquo; (Options) : le compte est vraiment supprim&eacute; 7 jours apr&egrave;s la demande, annulable, rappel sur la vue g&eacute;n&eacute;rale
+- NEW : Officiers Destructeur et G&eacute;n&eacute;ral : leurs effets sont enfin programm&eacute;s (2 &eacute;toiles de la mort construites pour une command&eacute;e ; +25 % de vitesse des vaisseaux par niveau)
+- NEW : Pr&eacute;paration d\'une flotte : heures d\'arriv&eacute;e (aller et retour) affich&eacute;es et mises &agrave; jour en direct, sur l\'horloge du serveur (laiss&eacute;es en commentaire dans l\'original)
+- NEW : Inscription : v&eacute;rification en direct du pseudo et de l\'adresse e-mail (disponible, d&eacute;j&agrave; pris, invalide), pr&eacute;vue dans l\'original (script jamais reli&eacute; au formulaire, check_registration.php jamais &eacute;crit)
+- NEW : N&eacute;gociant intergalactique : rach&egrave;te les sondes d\'espionnage de la plan&egrave;te contre du cristal (1k par sonde) ; gabarit et textes livr&eacute;s avec la 0.8e, page jamais &eacute;crite ; lien &laquo; N&eacute;gociant &raquo; sous le marchand
 - FIX : Suppression d\'un compte : flottes des autres joueurs vers ses plan&egrave;tes renvoy&eacute;es chez elles, missiles et d&eacute;clarations effac&eacute;s
 - FIX : Rappel d\'une flotte : dur&eacute;e du retour fausse (stationnement et aller en cours invers&eacute;s)
-- FIX : Administration : fiche de chaque joueur depuis la liste, recherche par IP (ne trouvait jamais personne), joueur introuvable signal&eacute;, on ne modifie plus son propre acc&egrave;s',
+- FIX : Administration : fiche de chaque joueur depuis la liste, recherche par IP (ne trouvait jamais personne), joueur introuvable signal&eacute;, on ne modifie plus son propre acc&egrave;s
+- FIX : Officiers : niveau maximum du Commandant affich&eacute; 3 au lieu de 2, faute dans la description de l\'Espion',
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
 - FIX : Mot de passe oubli&eacute; : lien de confirmation avant tout changement (conna&icirc;tre l\'adresse d\'un joueur suffisait), injection SQL corrig&eacute;e, m&ecirc;me message que l\'adresse existe ou non
@@ -23,7 +28,7 @@ $lang['changelog']   = array(
 - FIX : Mode vacances : plus d\'envoi de flotte ni de missiles, refus&eacute; tant qu\'une flotte vole, pas de sortie avant 48 h, production et revenus r&eacute;tablis au retour
 - FIX : Annonces, marchand et notes d&eacute;sactiv&eacute;s par l\'administrateur : ferm&eacute;s aussi par leur adresse
 - FIX : Missiles : interception (stock de la cible vid&eacute;, puis n&eacute;gatif), temps de vol, tir sur une plan&egrave;te avec lune, port&eacute;e dans les deux sens, nombre n&eacute;gatif refus&eacute;, rapports traduits
-- FIX : Attaque group&eacute;e : la mission supprimait la flotte &agrave; l\'arriv&eacute;e (jamais programm&eacute;e) ; retir&eacute;e en attendant la 0.9h
+- FIX : Attaque group&eacute;e : la mission supprimait la flotte &agrave; l\'arriv&eacute;e (jamais programm&eacute;e) ; retir&eacute;e en attendant la 0.9i
 - FIX : Officier Amiral : bonus de combat enfin appliqu&eacute;, &agrave; l\'attaquant comme au d&eacute;fenseur
 - FIX : Espionnage (rapport de destruction invers&eacute;, vraie probabilit&eacute;) et exp&eacute;dition (trou noir, soutes, trouvaille vide)
 - FIX : Lune : d&eacute;truire la base lunaire augmentait son niveau ; base lunaire et terraformeur indestructibles, comme OGame ; mission &laquo; D&eacute;truire &raquo; (flottes du champ de d&eacute;bris d&eacute;tourn&eacute;es, lune d&eacute;truite encore affich&eacute;e, textes du rapport) ; ajout de lune par l\'administration : erreurs signal&eacute;es

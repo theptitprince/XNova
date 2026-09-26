@@ -90,8 +90,17 @@ function GetFleetMaxSpeed ($FleetArray, $Fleet, $Player) {
 			$speedalls[$Ship] = $pricelist[$Ship]['speed'] + (($pricelist[$Ship]['speed'] * $Player['hyperspace_motor_tech']) * 0.3);
 		}
 	}
+	// Officier General : +25 % de vitesse des vaisseaux par niveau (sans effet dans l'original)
+	$GeneralBonus = 1 + 0.25 * intval($Player['rpg_general'] ?? 0);
+	if (!isset($speedalls)) {
+		$speedalls = array();
+	}
+	foreach ($speedalls as $SpeedShip => $Speed) {
+		$speedalls[$SpeedShip] = $Speed * $GeneralBonus;
+	}
 	if ($Fleet != 0) {
-		$ShipSpeed = $speedalls[$Ship];
+		// Satellites solaires : pas de vitesse
+		$ShipSpeed = $speedalls[$Ship] ?? 0;
 		$speedalls = $ShipSpeed;
 	}
 
