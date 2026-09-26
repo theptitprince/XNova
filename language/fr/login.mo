@@ -15,7 +15,7 @@ $lang['login_ok'] = 'Identification r&eacute;ussie, <a href="./"><blink>redirect
 $lang['login_fail_password'] = 'Mot de passe incorrect<br /><a href="login.php" target="_top">Retour</a>';
 $lang['login_fail_user'] = 'Ce joueur n\'existe pas.<br><a href=login.php>Retour</a>';
 
-$lang['log_univ'] = 'Merci de selectionner un Univers!';
+$lang['log_univ'] = 'Merci de s&eacute;lectionner un univers !';
 $lang['log_reg'] = 'Inscriptions';
 $lang['log_cred'] = 'Credits';
 $lang['log_desc'] = 'est un <strong>jeu de strat&eacute;gie gratuit</strong> dans l\'espace. Pour jouer, il suffit d\'un navigateur internet. Inscrivez-vous et d&eacute;couvrez le monde fantastique de';
