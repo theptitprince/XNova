@@ -51,7 +51,7 @@ $lang['error_only_x_available_probes_sending'] = 'Pas assez de sonde';
 $lang['error_there_are_no_available_probes_of_spying'] = 'Aucune sonde';
 $lang['error_you_cannot_send_any_more_fleets'] = 'Slot de Flotte tous pris';
 $lang['error_you_do_not_have_sufficient_deuterium'] = 'pas assez de Deuterium';
-$lang['there_is_not_planet'] = 'Aucune Planete';
+$lang['there_is_not_planet'] = 'Aucune plan&egrave;te';
 $lang['error_there_is_no_sufficient_fuel'] = 'Pas assez de carburant';
 $lang['multialarm'] = 'Alarme';
 
