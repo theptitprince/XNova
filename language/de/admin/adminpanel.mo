@@ -1,8 +1,8 @@
 <?php
 
 $lang['adm_usr_level'][0] = "Spieler";
-$lang['adm_usr_level'][1] = "Operator";
-$lang['adm_usr_level'][2] = "Moderator";
+$lang['adm_usr_level'][1] = "Moderator";
+$lang['adm_usr_level'][2] = "Operator";
 $lang['adm_usr_level'][3] = "Administrator";
 $lang['adm_usr_genre']['M'] = 'Männlich';
 $lang['adm_usr_genre']['F'] = "Weiblich";

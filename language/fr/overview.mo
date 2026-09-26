@@ -111,4 +111,8 @@ $lang['ov_clock_format'] = 'Nous sommes le %date et il est %time.';
 // XNova Renaissance 0.9g : attaque de missiles en cours (vue generale)
 $lang['ov_missile_attack'] = 'Une attaque de missiles (%1$d) partie de %2$s %3$s arrive sur la plan&egrave;te %4$s %5$s';
 
+// XNova Renaissance 0.9h : « Effacer le compte » (suppression 7 jours apres la demande, annulable)
+$lang['ov_account_delete'] = 'Votre compte sera effacé le %s.';
+$lang['ov_account_delete_link'] = 'Annuler dans les Options';
+
 ?>

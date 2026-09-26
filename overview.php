@@ -415,6 +415,8 @@ switch ($mode) {
             $parse['energy_used'] = $planetrow["energy_max"] - $planetrow["energy_used"];
 
             $parse['have_new_message'] = $Have_new_message;
+            // Suppression du compte demandee dans les Options : rappel de la date, lien pour annuler
+            $parse['account_delete_notice'] = ($user['db_deaktjava'] > 0) ? "<tr><th colspan=\"4\"><font color=\"red\">". sprintf($lang['ov_account_delete'], date('d/m/Y H:i', $user['db_deaktjava'])) ."</font> <a href=\"options.php\">". $lang['ov_account_delete_link'] ."</a></th></tr>" : '';
             $parse['have_new_level_mineur'] = $HaveNewLevelMineur;
             $parse['have_new_level_raid'] = $HaveNewLevelRaid;
             $parse['time'] = "<div id=\"dateheure\"></div>";

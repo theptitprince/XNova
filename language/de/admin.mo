@@ -157,4 +157,14 @@ $lang['adm_unban_name'] = 'Spielername';
 $lang['adm_unban_button'] = 'Entsperren';
 $lang['adm_unban_done'] = 'Der Spieler %s wurde entsperrt.';
 
+// XNova Renaissance 0.9h : liste des joueurs (fiche) et recherche sans resultat
+$lang['adm_ul_sheet'] = 'Profil';
+$lang['adm_usr_notfound'] = 'Kein Spieler entspricht dieser Suche.';
+
+// XNova Renaissance 0.9h : liste des joueurs, lien vers la suppression
+$lang['adm_delplayer_title'] = 'Diesen Spieler löschen';
+
+// XNova Renaissance 0.9h : on ne modifie pas son propre acces (seul administrateur prive de ses droits)
+$lang['adm_usr_ownlevel'] = 'Du kannst deinen eigenen Zugang nicht ändern.';
+
 ?>

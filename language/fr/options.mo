@@ -90,4 +90,8 @@ $lang['opt_lang_label'] = 'Langue';
 // XNova Renaissance 0.9g : longueur minimale du mot de passe
 $lang['opt_password_short'] = 'Le nouveau mot de passe doit contenir au moins 8 caract&egrave;res : il n\'a pas &eacute;t&eacute; chang&eacute;.';
 
+// XNova Renaissance 0.9h : « Effacer le compte » (suppression 7 jours apres la demande, annulable)
+$lang['opt_delac_pending'] = 'Suppression prévue le %s : décochez la case puis sauvegardez pour l\'annuler.';
+$lang['opt_delac_admin'] = 'Un compte d\'administration ne peut pas être effacé depuis les Options.';
+
 ?>

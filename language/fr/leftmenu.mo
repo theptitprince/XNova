@@ -99,4 +99,7 @@ $lang['lm_ifo_game']  = "Jeu";
 $lang['lm_ifo_fleet'] = "Flotte";
 $lang['lm_ifo_queue'] = "Queues";
 
+// XNova Renaissance 0.9h : pages remises dans le menu d'administration
+$lang['adm_delplayer'] = 'Supprimer un joueur';
+
 ?>

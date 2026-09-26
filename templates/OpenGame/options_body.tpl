@@ -104,7 +104,7 @@
 	<th><a title="{vacations_tip}">{mode_vacations}</a></th>
 	<th><input name="urlaubs_modus"{opt_modev_data} type="checkbox" /></th>
 </tr><tr>
-	<th><a title="{deleteaccount_tip}">{deleteaccount}</a></th>
+	<th><a title="{deleteaccount_tip}">{deleteaccount}</a>{opt_delac_info}</th>
 	<th><input name="db_deaktjava"{opt_delac_data} type="checkbox" /></th>
 </tr><tr>
 	<th colspan="2"><input value="{save_settings}" type="submit"></th>

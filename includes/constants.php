@@ -42,6 +42,9 @@ if ( defined('INSIDE') ) {
 	// 0 -> les affiche pas
 	define('SHOW_ADMIN_IN_RECORDS'    , 0);
 
+	// Delai entre la demande « Effacer le compte » (Options) et la suppression du compte, annulable d'ici la
+	define('ACCOUNT_DELETE_DELAY'     , 7 * 86400);
+
 	// Valeurs de bases pour les colonies ou planetes fraichement crées
 	define('BASE_STORAGE_SIZE'        , 1000000);
 	define('BUILD_METAL'              , 500);

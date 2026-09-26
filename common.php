@@ -12,7 +12,7 @@
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
-define('VERSION'     ,'0.9g');        // Version d'XNova utilisée...
+define('VERSION'     ,'0.9h');        // Version d'XNova utilisée...
 define('VERSION_NAME','Renaissance'); // Nom de la version (0.9 et suivantes)
 
 $phpEx = "php";
@@ -117,6 +117,18 @@ if (INSTALL != true) {
 		}
 
 		unset($_fleets);
+
+		// Comptes dont la suppression demandee dans les Options arrive a echeance (ACCOUNT_DELETE_DELAY apres la demande)
+		$Expired = doquery("SELECT `id` FROM {{table}} WHERE `db_deaktjava` > 0 AND `db_deaktjava` <= '". time() ."' LIMIT 10;", 'users');
+		$SelfDeleted = false;
+		while ($ExpiredRow = mysqli_fetch_assoc($Expired)) {
+			DeleteSelectedUser(intval($ExpiredRow['id']));
+			$SelfDeleted = $SelfDeleted || (!empty($user['id']) && $ExpiredRow['id'] == $user['id']);
+		}
+		if ($SelfDeleted) {
+			SetAuthCookie("", time() - 100000);
+			message($lang['sys_account_deleted'], $lang['sys_account_deleted_title'], 'login.php', 5);
+		}
 
 		include($xnova_root_path . 'rak.'.$phpEx);
 		if ( defined('IN_ADMIN') ) {

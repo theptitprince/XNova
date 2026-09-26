@@ -1,10 +1,10 @@
 <?php
 
 $lang['user_level'] = array (
-	'0' => 'Joueur',
+	'0' => 'Giocatore',
 	'1' => 'Moderatore',
 	'2' => 'Operatore',
-	'3' => 'Administrateur',
+	'3' => 'Amministratore',
 );
 
 $lang['sys_overview'] = "Luna";
@@ -145,5 +145,9 @@ $lang['sys_sql_error'] = 'Si è verificato un errore, avvisate l\'amministratore
 $lang['sys_banned_title'] = 'Il vostro account è stato sospeso!';
 $lang['sys_banned_until'] = 'Siete bannati fino al %s.';
 $lang['sys_banned_forever'] = 'Siete bannati definitivamente.';
+
+// XNova Renaissance 0.9h : « Effacer le compte » (suppression 7 jours apres la demande, annulable)
+$lang['sys_account_deleted_title'] = 'Account cancellato';
+$lang['sys_account_deleted'] = 'Il tuo account è stato cancellato, come richiesto nelle Opzioni.';
 
 ?>
