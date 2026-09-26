@@ -106,6 +106,7 @@ function BuildRessourcePage ( $CurrentUser, $CurrentPlanet ) {
 			$CurrRow                             = array();
 			$CurrRow['name']                     = $resource[$ProdID];
 			$CurrRow['porcent']                  = $CurrentPlanet[$Field];
+			$CurrRow['option']                   = '';
 			for ($Option = 10; $Option >= 0; $Option--) {
 				$OptValue = $Option * 10;
 				if ($Option == $CurrRow['porcent']) {

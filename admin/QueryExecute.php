@@ -27,13 +27,19 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse   = $lang;
 
 		if (($_POST['really_do_it'] ?? null) == 'on') {
-
-			mysqli_query(DbConnect(), ($_POST['qry_sql'] ?? null));
-			AdminMessage ($lang['qry_succesful'], 'Succes', '?');
-			
-		} else {
-
-		
+			// Echec signale avec le message de MySQL (avant : « succes » affiche meme quand la requete echouait)
+			$Link = DbConnect();
+			try {
+				$Done  = mysqli_query($Link, (string) ($_POST['qry_sql'] ?? ''));
+				$Error = $Done ? '' : mysqli_error($Link);
+			} catch (mysqli_sql_exception $e) {
+				$Done  = false;
+				$Error = $e->getMessage();
+			}
+			if ($Done) {
+				AdminMessage ($lang['qry_succesful'], $lang['qry_title'], '?');
+			}
+			AdminMessage ($lang['qry_unsuccesful'] . '<br><br>' . htmlspecialchars($Error, ENT_QUOTES, 'UTF-8'), $lang['qry_title']);
 		}
 		
 		$PageTpl = gettemplate("admin/exec_query");
