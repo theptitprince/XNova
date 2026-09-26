@@ -74,6 +74,9 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 		$parse['marchand_link']  = "
 		<tr>
 			<td colspan=\"2\"><div><a href=\"marchand.php\" target=\"Hauptframe\">".$lang['marchand_label']."</a></div></td>
+		</tr>
+		<tr>
+			<td colspan=\"2\"><div><a href=\"tradingscrapmetal.php\" target=\"Hauptframe\">".$lang['tradingscrapmetal_label']."</a></div></td>
 		</tr>";
 	} else {
 		$parse['marchand_link']  = "";
