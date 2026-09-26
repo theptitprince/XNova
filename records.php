@@ -53,11 +53,23 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$parse['defenses']  = parsetemplate( $HeaderTpl, $bloc);
 
 	if ( SHOW_ADMIN_IN_RECORDS == 0 ) {
-		$RecConditionP       = " WHERE `id_level` = '0'";
+		// XNova Renaissance : comptes d'administration exclus d'apres leur niveau. id_level (protection des planetes
+		// d'un administrateur) est vide pour tous les joueurs : aucun record ne s'affichait jamais.
+		$AdminIds = array(0);
+		$Admins   = doquery("SELECT `id` FROM {{table}} WHERE `authlevel` > '0';", 'users');
+		while ($Admin = mysqli_fetch_array($Admins)) {
+			$AdminIds[] = intval($Admin['id']);
+		}
+		$RecConditionP       = " WHERE `id_owner` NOT IN (". implode(',', $AdminIds) .")";
 		$RecConditionU       = " WHERE `authlevel` = '0'";
+		// Meme condition sur la ligne retenue (a egalite, un administrateur pouvait etre affiche)
+		$RecAndP             = " AND `id_owner` NOT IN (". implode(',', $AdminIds) .")";
+		$RecAndU             = " AND `authlevel` = '0'";
 	} else {
 		$RecConditionP       = "";
 		$RecConditionU       = "";
+		$RecAndP             = "";
+		$RecAndU             = "";
 	}
 
 	foreach($lang['tech'] as $Element => $ElementName) {
@@ -67,7 +79,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 				// Mais avec les zozos qui vont le pomper ... Mieux vaut prevoir que guerir !!
 				if       ($Element >=   1 && $Element <=  39 || $Element == 44) {
 					// Batiment
-					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .");", 'planets', true);
+					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .")". $RecAndP ." LIMIT 1;", 'planets', true);
 					$PlanetRow          = $PlanetRow ?: array('id_owner' => 0, 'current' => 0); // aucun detenteur
 					$UserRow            = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '".$PlanetRow['id_owner']."';", 'users', true);
 					$UserRow            = $UserRow ?: array('username' => '', 'current' => 0);
@@ -77,7 +89,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					$parse['building'] .= parsetemplate( $TableRows, $Row);
 				} elseif ($Element >=  41 && $Element <=  99 && $Element != 44) {
 					// Batiment spéciaux
-					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .");", 'planets', true);
+					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .")". $RecAndP ." LIMIT 1;", 'planets', true);
 					$PlanetRow          = $PlanetRow ?: array('id_owner' => 0, 'current' => 0); // aucun detenteur
 					$UserRow            = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '".$PlanetRow['id_owner']."';", 'users', true);
 					$UserRow            = $UserRow ?: array('username' => '', 'current' => 0);
@@ -87,7 +99,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					$parse['buildspe'] .= parsetemplate( $TableRows, $Row);
 				} elseif ($Element >= 101 && $Element <= 199) {
 					// Techno
-					$UserRow            = doquery ("SELECT `username`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element] ."` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionU .");", 'users', true);
+					$UserRow            = doquery ("SELECT `username`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element] ."` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionU .")". $RecAndU ." LIMIT 1;", 'users', true);
 					$UserRow            = $UserRow ?: array('username' => '', 'current' => 0);
 					$Row['element']     = $ElementName;
 					$Row['winner']      = ($UserRow['current'] != 0) ? $UserRow['username'] : $lang['rec_rien'];
@@ -95,7 +107,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					$parse['research'] .= parsetemplate( $TableRows, $Row);
 				} elseif ($Element >= 201 && $Element <= 399) {
 					// Flotte
-					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .");", 'planets', true);
+					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .")". $RecAndP ." LIMIT 1;", 'planets', true);
 					$PlanetRow          = $PlanetRow ?: array('id_owner' => 0, 'current' => 0); // aucun detenteur
 					$UserRow            = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '".$PlanetRow['id_owner']."';", 'users', true);
 					$UserRow            = $UserRow ?: array('username' => '', 'current' => 0);
@@ -105,7 +117,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					$parse['fleet']    .= parsetemplate( $TableRows, $Row);
 				} elseif ($Element >= 401 && $Element <= 599) {
 					// Défenses
-					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .");", 'planets', true);
+					$PlanetRow          = doquery ("SELECT `id_owner`, `". $resource[$Element] ."` AS `current` FROM {{table}} WHERE `". $resource[$Element]. "` = (SELECT MAX(`". $resource[$Element] ."`) FROM {{table}}". $RecConditionP .")". $RecAndP ." LIMIT 1;", 'planets', true);
 					$PlanetRow          = $PlanetRow ?: array('id_owner' => 0, 'current' => 0); // aucun detenteur
 					$UserRow            = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '".$PlanetRow['id_owner']."';", 'users', true);
 					$UserRow            = $UserRow ?: array('username' => '', 'current' => 0);

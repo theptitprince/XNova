@@ -36,7 +36,7 @@ function GalaxyRowAlly ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 			$Result .= "<tr>";
 			$Result .= "<td><a href=alliance.php?mode=ainfo&a=". $allyquery['id'] .">".$lang['gl_ally_internal']."</a></td>";
 			$Result .= "</tr><tr>";
-			$Result .= "<td><a href=stat.php?start=101&who=ally>".$lang['gl_stats']."</a></td>";
+			$Result .= "<td><a href=stat.php?who=2>".$lang['gl_stats']."</a></td>";
 			if ($allyquery["ally_web"] != "") {
 				$Result .= "</tr><tr>";
 				$Result .= "<td><a href=". $allyquery["ally_web"] ." target=_new>".$lang['gl_ally_web']."</a></td>";
