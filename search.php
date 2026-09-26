@@ -91,7 +91,7 @@ if(isset($searchtext) && isset($type)){
 			$RankRow  = doquery("SELECT `total_rank` FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $OwnerId ."';", 'statpoints', true);
 			$s['rank'] = $RankRow['total_rank'] ?? '';
 
-			$s['position'] = "<a href=\"stat.php?start=".$s['rank']."\">".$s['rank']."</a>";
+			$s['position'] = "<a href=\"stat.php?range=".$s['rank']."\">".$s['rank']."</a>";
 			$s['dpath'] = $dpath;
 			$s['coordinated'] = "{$s['galaxy']}:{$s['system']}:{$s['planet']}";
 			$s['buddy_request'] = $lang['buddy_request'];
@@ -100,7 +100,9 @@ if(isset($searchtext) && isset($type)){
 		}elseif($type=='allytag'||$type=='allyname'){
 			$s=$r;
 
-			$s['ally_points'] = pretty_number($s['ally_points']);
+			// Points de l'alliance : classement (statpoints, type 2) ; la table alliance n'a pas de colonne ally_points
+			$PointsRow = doquery("SELECT `total_points` FROM {{table}} WHERE `stat_type` = '2' AND `stat_code` = '1' AND `id_owner` = '". intval($s['id']) ."';", 'statpoints', true);
+			$s['ally_points'] = pretty_number($PointsRow['total_points'] ?? 0);
 
 			$s['ally_tag'] = "<a href=\"alliance.php?mode=ainfo&tag={$s['ally_tag']}\">{$s['ally_tag']}</a>";
 			$result_list .= parsetemplate($row, $s);

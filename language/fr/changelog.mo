@@ -34,7 +34,7 @@ $lang['changelog']   = array(
 - FIX : Installeur : bandeaux harmonis&eacute;s, erreurs dans son cadre, &laquo; Suivant &raquo; de la mise &agrave; jour, conseil &laquo; CHMOD 777 &raquo; remplac&eacute;, fautes
 - FIX : Messagerie : confirmation d\'envoi et erreurs affich&eacute;es, cat&eacute;gorie administration, &eacute;motic&ocirc;nes (:cool:, :perdu:...), couleurs du BBCode, barres obliques conserv&eacute;es, sujet repris par &laquo; R&eacute;pondre &raquo;, compteur de caract&egrave;res (collage, notes)
 - FIX : Liste d\'amis : demandes re&ccedil;ues de nouveau visibles, ami supprim&eacute; par un double clic, alliance du bon joueur, demande &agrave; soi-m&ecirc;me refus&eacute;e
-- FIX : Recherche de joueurs (alliance d&eacute;cal&eacute;e, rang absent) ; marchand : co&ucirc;t recalcul&eacute; apr&egrave;s un collage
+- FIX : Recherche de joueurs (alliance d&eacute;cal&eacute;e, rang absent) et d\'alliances (points) ; records jamais affich&eacute;s ; liens vers le classement des alliances ; marchand : co&ucirc;t recalcul&eacute; apr&egrave;s un collage
 - FIX : Inscription : pseudos contenant &laquo; script &raquo; ou &laquo; http &raquo; inutilisables, noms de plan&egrave;te intacts, apostrophe gard&eacute;e dans les noms (plan&egrave;te, alliance, rang) ; e-mails valid&eacute;s (.paris, .app...)
 - FIX : D&eacute;claration de multi-compte : textes, confirmation, au moins un joueur exig&eacute;
 - FIX : Administration : message &agrave; tous (jamais envoy&eacute;, non &eacute;chapp&eacute;), configuration lisible, vue g&eacute;n&eacute;rale sans d&eacute;filement, listes (messages, lunes, plan&egrave;tes), file du chantier, titres
