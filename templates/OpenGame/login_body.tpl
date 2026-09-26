@@ -43,7 +43,7 @@
 <div id="text3">
 <center><b><font color="#00cc00">{log_online}: </font>
 <font color="#c6c7c6">{online_users}</font> - <font color="#00cc00">{log_lastreg}: </font>
-<font color="#c6c7c6">{last_user}</font> - <font color="#00cc00">{log_numbreg}:</font> <font color="#c6c7c6">{users_amount}</font>
+<font color="#c6c7c6">{last_user}</font><br><font color="#00cc00">{log_numbreg}:</font> <font color="#c6c7c6">{users_amount}</font>
 </b></center>
 </div>
 </div>

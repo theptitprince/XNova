@@ -22,7 +22,9 @@ $lang['changelog']   = array(
 - FIX : B&acirc;timents, recherche, chantier spatial et d&eacute;fense : page construite avant la mise &agrave; jour de la plan&egrave;te (vaisseaux termin&eacute;s et file du chantier p&eacute;rim&eacute;s au premier chargement) ; une commande du chantier profitait du temps &eacute;coul&eacute; depuis l\'ouverture de la page (construction gratuite)
 - FIX : Messagerie : les op&eacute;rateurs (niveau 2) &eacute;taient renvoy&eacute;s vers la page de connexion
 - FIX : Production des mines : le multiplicateur de ressources &eacute;tait appliqu&eacute; deux fois (gain r&eacute;el = multiplicateur &times; la production affich&eacute;e par la page Ressources ; sans effet avec le r&eacute;glage par d&eacute;faut)
-- FIX : Production de base : mise &agrave; jour d\'une lune, les plan&egrave;tes mises &agrave; jour ensuite dans la m&ecirc;me page perdaient leur revenu de base',
+- FIX : Production de base : mise &agrave; jour d\'une lune, les plan&egrave;tes mises &agrave; jour ensuite dans la m&ecirc;me page perdaient leur revenu de base
+- FIX : Page de connexion : &laquo; Joueurs inscrits &raquo; pass&eacute; &agrave; la ligne (un pseudo long coupait la ligne n\'importe o&ugrave;), fautes &laquo; Dernier inscris / Joueurs inscris &raquo;
+- FIX : Mode debug : les op&eacute;rateurs (niveau 2) ne voyaient pas le d&eacute;tail des requ&ecirc;tes, contrairement aux mod&eacute;rateurs et aux administrateurs',
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
 - FIX : Mot de passe oubli&eacute; : lien de confirmation avant tout changement (conna&icirc;tre l\'adresse d\'un joueur suffisait), injection SQL corrig&eacute;e, m&ecirc;me message que l\'adresse existe ou non

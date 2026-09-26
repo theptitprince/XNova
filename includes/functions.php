@@ -269,8 +269,8 @@ function display ($page, $title = '', $topnav = true, $metatags = '', $AdminPage
 		$DisplayPage .= ShowTopNavigationBar( $user, $planetrow );
 	}
 	$DisplayPage .= "<center>\n". $page ."\n</center>\n";
-	// Affichage du Debug si necessaire
-	if (is_array($user) && isset($user['authlevel']) && ($user['authlevel'] == 1 || $user['authlevel'] == 3)) {
+	// Affichage du Debug si necessaire (tout le staff : l'original oubliait les operateurs, niveau 2)
+	if (is_array($user) && isset($user['authlevel']) && $user['authlevel'] >= 1) {
 		if (!empty($game_config['debug'])) $debug->echo_log();
 	}
 
