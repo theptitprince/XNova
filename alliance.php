@@ -96,7 +96,20 @@ function AllyMembersSorted ( $AllyId, $Sort1, $Sort2 ) {
 	}
 	$Fields = array(1 => 'username', 2 => 'ally_rank_id', 3 => 'total_points', 4 => 'ally_register_time', 5 => 'onlinetime');
 	$Field  = $Fields[$Sort1] ?? 'id';
-	usort($Members, function ($A, $B) use ($Field) {
+	// Tri par rang : le fondateur (rang 0, comme un novice) etait classe parmi les novices. Ordre : fondateur,
+	// rangs crees (dans leur ordre), puis novices.
+	$Owner   = doquery("SELECT `ally_owner` FROM {{table}} WHERE `id`='" . intval($AllyId) . "'", 'alliance', true);
+	$OwnerId = $Owner ? $Owner['ally_owner'] : 0;
+	$RankKey = function ($M) use ($OwnerId) {
+		if ($M['id'] == $OwnerId) {
+			return -1;
+		}
+		return ($M['ally_rank_id'] == 0) ? PHP_INT_MAX : (int) $M['ally_rank_id'];
+	};
+	usort($Members, function ($A, $B) use ($Field, $RankKey) {
+		if ($Field == 'ally_rank_id') {
+			return $RankKey($A) <=> $RankKey($B);
+		}
 		return ($Field == 'username') ? strcasecmp($A[$Field], $B[$Field]) : ($A[$Field] <=> $B[$Field]);
 	});
 	return ($Sort2 == 1) ? array_reverse($Members) : $Members;
