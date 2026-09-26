@@ -18,7 +18,7 @@ $lang['changelog']   = array(
 - FIX : Attaque group&eacute;e : la mission supprimait la flotte &agrave; l\'arriv&eacute;e (jamais programm&eacute;e) ; retir&eacute;e en attendant la 0.9h
 - FIX : Officier Amiral : bonus de combat enfin appliqu&eacute;, &agrave; l\'attaquant comme au d&eacute;fenseur
 - FIX : Espionnage (rapport de destruction invers&eacute;, vraie probabilit&eacute;) et exp&eacute;dition (trou noir, soutes, trouvaille vide)
-- FIX : Lune : d&eacute;truire la base lunaire augmentait son niveau ; base lunaire et terraformeur indestructibles, comme OGame
+- FIX : Lune : d&eacute;truire la base lunaire augmentait son niveau ; base lunaire et terraformeur indestructibles, comme OGame ; mission &laquo; D&eacute;truire &raquo; (flottes du champ de d&eacute;bris d&eacute;tourn&eacute;es, textes du rapport)
 - FIX : Bannissements : dur&eacute;e respect&eacute;e (lev&eacute;e automatique), pseudos longs, un seul bannissement par joueur (robot anti-multi), page du banni traduite
 - FIX : Recyclage rapide sans flotte vide (emplacements, carburant) ; mission choisie dans la galaxie pr&eacute;s&eacute;lectionn&eacute;e
 - FIX : Page Flotte : heures d&eacute;cal&eacute;es, flotte rappel&eacute;e affich&eacute;e comme retour, erreurs JavaScript ; rapports et messages de retour
@@ -29,7 +29,7 @@ $lang['changelog']   = array(
 - NEW : Alliance : cession &agrave; un membre &laquo; Main droite &raquo; (le bouton ne faisait rien) ; alliance transmise au plus ancien membre si le fondateur est supprim&eacute;
 - FIX : Alliance : candidatures (alliance ferm&eacute;e, r&eacute;ponses au candidat), liste des membres (rangs, tris, jours d\'inactivit&eacute;), page des droits, textes allemands
 - MOD : Vue g&eacute;n&eacute;rale : colonies &agrave; droite de la plan&egrave;te, deux par ligne, comme OGame classique ; annonces de niveaux, rang et fin de construction corrig&eacute;s
-- FIX : Galaxie : couleur et tag d\'alliance, port&eacute;e de phalange, bas de page coup&eacute; sur petit &eacute;cran, pied de page, lien &laquo; Espaces infinis &raquo; ; vue g&eacute;n&eacute;rale d\'une lune
+- FIX : Galaxie : couleur et tag d\'alliance, port&eacute;e de phalange, bas de page coup&eacute; sur petit &eacute;cran, pied de page, dur&eacute;e d\'inactivit&eacute;, lien &laquo; Espaces infinis &raquo; ; vue g&eacute;n&eacute;rale d\'une lune
 - FIX : Petits et grands &eacute;crans : menu de gauche d&eacute;filant, fond d\'&eacute;cran couvrant toute la fen&ecirc;tre
 - FIX : Installeur : bandeaux harmonis&eacute;s, erreurs dans son cadre, &laquo; Suivant &raquo; de la mise &agrave; jour, conseil &laquo; CHMOD 777 &raquo; remplac&eacute;, fautes
 - FIX : Messagerie : confirmation d\'envoi et erreurs affich&eacute;es, cat&eacute;gorie administration, &eacute;motic&ocirc;nes (:cool:, :perdu:...), couleurs du BBCode, barres obliques conserv&eacute;es
@@ -40,7 +40,7 @@ $lang['changelog']   = array(
 - FIX : Administration : message &agrave; tous (jamais envoy&eacute;, non &eacute;chapp&eacute;), configuration lisible, vue g&eacute;n&eacute;rale sans d&eacute;filement, listes (messages, lunes, plan&egrave;tes), file du chantier, titres
 - MOD : Administration : liste &laquo; multi-comptes &raquo; toujours vide et page &laquo; supprimer un joueur &raquo; inachev&eacute;e retir&eacute;es ; PhpInfo r&eacute;serv&eacute; &agrave; l\'administrateur
 - NEW : Langue au choix dans les Options ; allemand, espagnol et italien complets (1 800 textes ajout&eacute;s ou corrig&eacute;s)
-- FIX : Textes &eacute;crits en dur rendus traduisibles (flotte, annonces, messages, menu, horloge, cr&eacute;dits), Pilori traduit, nombreuses fautes corrig&eacute;es
+- FIX : Textes &eacute;crits en dur rendus traduisibles (flotte, annonces, messages, menu, horloge, cr&eacute;dits), Pilori traduit, nombreuses fautes corrig&eacute;es (dont les accents italiens)
 - MOD : Base de donn&eacute;es en utf8mb4 : un emoji dans un nom ou un message faisait &eacute;chouer la requ&ecirc;te
 - FIX : Aucun avertissement PHP sur les pages du jeu ; plus de page blanche sur une adresse incompl&egrave;te
 - MOD : Nettoyage : pages abandonn&eacute;es et 21 mod&egrave;les inutilis&eacute;s supprim&eacute;s, script du portail OGame (mot de passe en cookie) retir&eacute;, chemins UGamela, convention de nommage',

@@ -8,7 +8,7 @@ $lang['make_alliance'] = 'Fondare una propria alleanza';
 $lang['search_alliance'] = 'Cerca';
 
 $lang['searched_alliance_availables'] = 'Avete trovate le seguenti alleanza:';
-$lang['alliance_has_been_maked'] = 'L\'alleanza %s &eacute; stata creata';
+$lang['alliance_has_been_maked'] = 'L\'alleanza %s &egrave; stata creata';
 $lang['have_not_tag'] = 'L\'alleanza non ha la TAG';
 $lang['have_not_name'] = 'L\'alleanza non ha il nome';
 $lang['always_exist'] = '%s esiste gi&agrave;';
@@ -40,7 +40,7 @@ $lang['circular_sended'] = 'I giocatori hanno ricevuto il messaggio';
 $lang['it_is_not_posible_to_apply'] = "Impossibile applicare";
 $lang['write_apply'] = "Scrivere la vostra richiesta";
 $lang['your_apply'] = 'Vostra richiesta';
-$lang['apply_registered'] = 'LA vostra richiesta &eacute; stata inviata. Riceverete un messaggio se sar&aacute; accettata.<br><br><a href=alliance.php>Indietro</a>';
+$lang['apply_registered'] = 'La vostra richiesta &egrave; stata inviata. Riceverete un messaggio se sar&agrave; accettata.<br><br><a href=alliance.php>Indietro</a>';
 $lang['apply_cantbeadded'] = 'La richiesta non può essere inviata, riprovate!';
 
 $lang['exit_of_this_alliance'] = "Uscire da questa alleanza";

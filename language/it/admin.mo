@@ -16,12 +16,12 @@ $lang['welcome_to_fix_section'] = "Benvenuto nella sezione aggiornamento";
 $lang['there_is_not_need_fix']  = "L'aggiornamento non &agrave; stato inserito!";
 $lang['fix_welldone']           = "L'aggiornamento &egrave; stato inserito.";
 
-$lang['adm_pl_title'] = "Attivit&aacute; dei pianeti";
+$lang['adm_pl_title'] = "Attivit&agrave; dei pianeti";
 $lang['adm_pl_activ'] = "Pianeti attivi";
 $lang['adm_pl_name']  = "Nome dei Pianeti";
 $lang['adm_pl_posit'] = "Posizione";
 $lang['adm_pl_point'] = "Punti";
-$lang['adm_pl_since'] = "Attivit&aacute;";
+$lang['adm_pl_since'] = "Attivit&agrave;";
 $lang['adm_pl_they']  = "Ci sono ";
 $lang['adm_pl_apla']  = "pianeti attivi";
 

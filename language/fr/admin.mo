@@ -13,8 +13,8 @@ $lang['usr_current_page']               = "Page actuellement vision&eacute;e";
 
 $lang['oups_youre_banned']               = "Votre compte a &eacute;t&eacute;  suspendu!";
 $lang['user_is_banned_for']               = "Vous avez &eacute;t&eacute; banni pour la raison suivante : ";
-$lang['banned_until']               = "Vous avez &eacute;t&eacute; banni jusqu\'a ";
-$lang['who_has_banned']    = "Par l\'op&eacute;rateur suivant";
+$lang['banned_until']               = "Vous avez &eacute;t&eacute; banni jusqu'&agrave; ";
+$lang['who_has_banned']    = "Par l'op&eacute;rateur suivant";
 
 $lang['adm_ul_data_ip_reg']    = "IP a l'enregistrement";
 

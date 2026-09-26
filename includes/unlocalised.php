@@ -165,7 +165,7 @@ function pretty_time_hour ($seconds) {
 	$min = intdiv((int) floor((float) $seconds), 60) % 60; // entiers (modulo sur decimal deprecie)
 
 	$time = '';
-	if ($min != 0) { $time .= $min . 'min '; }
+	if ($min != 0) { $time .= $min . ' min'; } // galaxie : "(11 min)" (etait "(11min )")
 
 	return $time;
 }
