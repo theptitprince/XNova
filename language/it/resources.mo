@@ -3,9 +3,9 @@
 $lang['production_of_resources_in_the_planet'] = 'Produzione di materi prime sul pianeta "%s"';
 $lang['production_level_label'] = 'Livello di Produzione';
 $lang['basic_income'] = 'Risorse di base';
-$lang['quantity'] = 'Quantit&aacute;';
+$lang['quantity'] = 'Quantit&agrave;';
 $lang['level'] = 'Livello';
-$lang['stores_capacity'] = 'Capacit&aacute; dei depositi';
+$lang['stores_capacity'] = 'Capacit&agrave; dei depositi';
 $lang['widespread_production'] = 'Produzione stimata';
 $lang['daily'] = 'Giornaliera';
 $lang['weekly'] = 'Settimanale';

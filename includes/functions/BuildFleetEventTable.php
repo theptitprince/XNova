@@ -65,6 +65,9 @@ function BuildFleetEventTable ( $FleetRow, $Status, $Owner, $Label, $Record ) {
 	$StartType      = $FleetRow['fleet_start_type'];
 	$TargetPlanet   = doquery("SELECT `name` FROM {{table}} WHERE `galaxy` = '".$FleetRow['fleet_end_galaxy']."' AND `system` = '".$FleetRow['fleet_end_system']."' AND `planet` = '".$FleetRow['fleet_end_planet']."' AND `planet_type` = '".$FleetRow['fleet_end_type']."';", 'planets', true);
 	$TargetType     = $FleetRow['fleet_end_type'];
+	// XNova Renaissance : champ de debris, expedition, position vide ou lune detruite : pas de planete, nom vide
+	if (!$StartPlanet)  { $StartPlanet  = array('name' => ''); }
+	if (!$TargetPlanet) { $TargetPlanet = array('name' => ''); }
 
 	if       ($Status != 2) {
 		if       ($StartType == 1) {

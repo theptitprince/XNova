@@ -42,8 +42,8 @@ $lang['confirmed_with_password'] = 'Confermare con la password';
 
 
 //Cancellazione pianeta
-$lang['deletemessage_ok'] = 'La colonia &eacute; stata abbandonata';
-$lang['deletemessage_wrong'] = 'Il pianeta madre non pu&eacute; essere abbandonato!';
+$lang['deletemessage_ok'] = 'La colonia &egrave; stata abbandonata';
+$lang['deletemessage_wrong'] = 'Il pianeta madre non pu&ograve; essere abbandonato!';
 $lang['deletemessage_fail'] = 'Password incorretta!';
 
 // Divers
@@ -81,8 +81,8 @@ $lang['ov_une_o'] = "Una";
 $lang['ov_arrivant'] = "&agrave; il pianeta";
 
 $lang['ov_fleet_to'] = "Una %s proveniente  %s %s verso %s %s. La sua missione: %s.";
-$lang['ov_fleet_expe'] = "Una  %s proveniente %s %s &eacute; partita per la regione %s %s. La sua missione: %s.";
-$lang['ov_fleet_stay'] = "Una  %s proveniente %s %s stazionier&aacute; nell\'orbita attorno %s %s. La sua missione: %s.";
+$lang['ov_fleet_expe'] = "Una %s proveniente %s %s &egrave; partita per la regione %s %s. La sua missione: %s.";
+$lang['ov_fleet_stay'] = "Una %s proveniente %s %s stazioner&agrave; nell'orbita attorno %s %s. La sua missione: %s.";
 $lang['ov_fleet_from'] = "Una %s rientra %s %s  %s %s. La sua missione era: %s.";
 $lang['ov_fleet_from_expe'] = "Una %s proveniente dalla regione %s %s ritorna %s %s. La sua missione era: %s.";
 

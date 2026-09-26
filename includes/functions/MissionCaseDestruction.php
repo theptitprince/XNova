@@ -230,11 +230,12 @@ function MissionCaseDestruction($FleetRow) {
 
          }
 
+         $probalune = ''; $probarip = ''; $finmess = ''; $RipDetruites = false; // toujours definis (lune detruite : pas de $probarip)
          if ($FleetResult == "a") {
          //debut des probabilite de destruction
          //Nous y voila! l attaquant a gagne, nous allons voir ses chances de detruire la lune
             $destructionl1 = 100-sqrt($TargetPlanet['diameter']);
-            $destructionl21 = $destructionl1*sqrt($CurrentSet['214']['count']);
+            $destructionl21 = $destructionl1*sqrt($CurrentSet[214]['count'] ?? 0);
 
             $destructionl2 = $destructionl21/1;//ici c est la sensibilite de la destruction 1 c est l equivalent d ogame a 12 on a environ 2% pour 1000 rip
          //maintenant qu on sait quelle chance tantons la destruction, faites vos jeux croupier
@@ -295,7 +296,9 @@ function MissionCaseDestruction($FleetRow) {
 
                    $QryDetFleets1 .= "`fleet_start_system` = '". $FleetRow['fleet_end_system'] ."' AND ";
 
-                   $QryDetFleets1 .= "`fleet_start_planet` = '". $FleetRow['fleet_end_planet'] ."' ";
+                   $QryDetFleets1 .= "`fleet_start_planet` = '". $FleetRow['fleet_end_planet'] ."' AND ";
+
+                   $QryDetFleets1 .= "`fleet_start_type` = '3' "; // la lune seulement
 
                    $QryDetFleets1 .= ";";
 
@@ -311,7 +314,9 @@ function MissionCaseDestruction($FleetRow) {
 
                    $QryDetFleets2 .= "`fleet_end_system` = '". $FleetRow['fleet_end_system'] ."' AND ";
 
-                   $QryDetFleets2 .= "`fleet_end_planet` = '". $FleetRow['fleet_end_planet'] ."' ";
+                   $QryDetFleets2 .= "`fleet_end_planet` = '". $FleetRow['fleet_end_planet'] ."' AND ";
+
+                   $QryDetFleets2 .= "`fleet_end_type` = '3' "; // la lune seulement (pas les recycleurs du champ de debris)
 
                    $QryDetFleets2 .= ";";
 
@@ -360,6 +365,7 @@ function MissionCaseDestruction($FleetRow) {
                        if($tirage2 <= $chance2)   {
                                $resultat2 = ' detruite 1'; // RIP detruite
                      $finmess = $lang['sys_destruc_echec'];
+                     $RipDetruites = true;
                      doquery("DELETE FROM {{table}} WHERE `fleet_id` = '". $FleetRow["fleet_id"] ."';", 'fleets');
                   }
          else          {
@@ -836,7 +842,7 @@ function MissionCaseDestruction($FleetRow) {
 
          doquery ("DELETE FROM {{table}} WHERE `fleet_id` = " . $FleetRow["fleet_id"], 'fleets');
 
-         if (($FleetResult ?? '') != "w") {
+         if (($FleetResult ?? '') != "w" && empty($RipDetruites)) { // flotte detruite (combat perdu ou explosion) : rien ne rentre
 
             $QryUpdatePlanet  = "UPDATE {{table}} SET ";
 

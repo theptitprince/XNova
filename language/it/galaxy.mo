@@ -23,7 +23,7 @@ $lang['solar_system_at'] = 'Sistema solare';
 
 $lang['pos'] = 'Pos';
 $lang['planet_label'] = 'Pianeta';
-$lang['name_label'] = 'Nome (Attivit&aacute;)';
+$lang['name_label'] = 'Nome (Attivit&agrave;)';
 $lang['moon_label'] = 'Luna';
 $lang['debris_label'] = 'Detriti';
 $lang['caracters'] = "Caratteristiche";
