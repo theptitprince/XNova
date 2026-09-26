@@ -50,4 +50,8 @@ $lang['reg_welldone']      = 'Inscription termin&eacute;e !';
 // XNova Renaissance : textes manquants (ils s'affichaient vides)
 $lang['error_planetnum'] = 'Le nom de la plan&egrave;te ne doit contenir que des lettres, des chiffres, _ ou -.<br />';
 
+// XNova Renaissance 0.9h : verification en direct du pseudo et de l'e-mail (check_registration.php)
+$lang['reg_check_user_ok'] = 'Pseudo disponible';
+$lang['reg_check_mail_ok'] = 'Adresse e-mail valide';
+
 ?>

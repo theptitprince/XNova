@@ -51,4 +51,8 @@ $lang['subject_message_ig'] = 'Bienvenida';
 $lang['text_message_ig'] = 'Bienvenido a XNova. ¡Le deseamos que disfrute del juego y mucha suerte!';
 $lang['error_planetnum'] = 'El nombre del planeta solo puede contener letras, cifras, _ o -.<br />';
 
+// XNova Renaissance 0.9h : verification en direct du pseudo et de l'e-mail (check_registration.php)
+$lang['reg_check_user_ok'] = 'Nombre de jugador disponible';
+$lang['reg_check_mail_ok'] = 'Dirección de correo válida';
+
 ?>

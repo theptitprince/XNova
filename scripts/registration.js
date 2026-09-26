@@ -1,141 +1,84 @@
-var ajax = new sack();
+// XNova Renaissance : verification en direct du pseudo et de l'adresse e-mail pendant l'inscription.
+// Le script d'origine (repris d'OGame) visait un autre formulaire et appelait check_registration.php, jamais ecrit.
+// Les messages s'affichent sous chaque champ ; reg.php refait toutes les verifications a l'envoi.
+var ajaxUser = new sack("check_registration.php");
+var ajaxMail = new sack("check_registration.php");
 
-function showInfo(id) {
-	printMessage(id, 'infotext');
-	document.getElementById('statustext').innerHTML = "";
+function regField(name) {
+	return document.getElementsByName(name)[0];
 }
 
-function wait() {
-	return;
+// Valeurs encodees ici (sack coupe sur « & » et « = » : « abc&def » aurait ete verifie comme « abc »)
+function regRequest(ajax, action, name, value) {
+	ajax.encodeURIString = false;
+	ajax.URLString       = "action=" + action + "&" + name + "=" + encodeURIComponent(value);
+	if (typeof xnova_csrf != "undefined") {
+		ajax.URLString += "&csrf_token=" + xnova_csrf;
+	}
+	ajax.onCompletion = whenResponse;
+	ajax.runAJAX();
+}
+
+function showCheck(id, text) {
+	var el = document.getElementById(id);
+	if (el) {
+		el.innerHTML = text;
+	}
 }
 
 checkUsername.oldname = "";
-checkUsername.lastcheck = "103";
+checkUsername.timer   = null;
 function checkUsername() {
-	var username = document.forms[0].elements[0].value;
-	if (username.length > 2 && username.length < 20) {
-		if (username != checkUsername.oldname) {
-			checkUsername.oldname = username;
-			remoteCheckUsername();
-			return checkUsername.lastcheck;
-		} else {
-			return checkUsername.lastcheck;
+	clearTimeout(checkUsername.timer);
+	checkUsername.timer = setTimeout(function () {
+		var username = regField("character").value;
+		if (username == checkUsername.oldname) {
+			return;
 		}
-	} else {
-		checkUsername.lastcheck = "103";
-		return "103";
-	}
+		checkUsername.oldname = username;
+		if (username == "") {
+			showCheck("check_character", "");
+			return;
+		}
+		regRequest(ajaxUser, "check_username", "username", username);
+	}, 400);
 }
-
 
 checkEmail.oldmail = "";
-checkEmail.lastcheck = "104";
+checkEmail.timer   = null;
 function checkEmail() {
-	var email = document.forms[0].elements[1].value;
-	if (email.length >= 3 && email.length < 64) {
-		if (email != checkEmail.oldmail) {
-			checkEmail.oldmail = email;
-			m = email.match(/[a-zA-Z0-9]+@+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]{2,4}/);
-			if (m) {
-				remoteCheckEmail();
-			} else {
-				checkEmail.lastcheck = "104";
-				return checkEmail.lastcheck;
-			}
-		} else {
-			return checkEmail.lastcheck;
+	clearTimeout(checkEmail.timer);
+	checkEmail.timer = setTimeout(function () {
+		var email = regField("email").value;
+		if (email == checkEmail.oldmail) {
+			return;
 		}
-	} else {
-		checkEmail.lastcheck = "104";
-		return "104";
+		checkEmail.oldmail = email;
+		if (email == "") {
+			showCheck("check_email", "");
+			return;
+		}
+		regRequest(ajaxMail, "check_email", "email", email);
+	}, 400);
+}
+
+// Reponse : "1|ok|message" (pseudo) ou "2|ok|message" (e-mail) ; reponse perimee ignoree (champ modifie depuis)
+function whenResponse() {
+	var retVals = this.response.split("|");
+	if (retVals.length < 3) {
+		return;
 	}
-}
-
-function remoteCheckUsername() {
-	var username = document.forms[0].elements[0].value;
-	ajax.requestFile = "check_registration.php";
-
-	// turn on its execute flag
-    ajax.runResponse = whenResponse;
-    ajax.execute = true;
-
-    ajax.setVar("action", "check_username");
-    ajax.setVar("username", username);
-    ajax.runAJAX();
-}
-
-function remoteCheckEmail() {
-	var email = document.forms[0].elements[1].value;
-	ajax.requestFile = "check_registration.php";
-
-	// turn on its execute flag
-    ajax.runResponse = whenResponse;
-    ajax.execute = true;
-
-    ajax.setVar("action", "check_email");
-    ajax.setVar("email", email);
-    ajax.runAJAX();
-}
-
-function checkAGB() {
-	if (document.forms[0].elements[2].checked == true) {
-		return 0;
-	} else{
-		return 1;
-	}
-}
-
-function checkData() {
-	//document.getElementById('debug').innerHTML = checkUsername() + " " + checkEmail() + " " + checkAGB();
-	if (checkUsername.lastcheck == "0"
-		&& checkEmail.lastcheck == "0"
-		&& !checkAGB()) {
-		document.forms[0].elements[4].disabled = false;
-		
-	} else {
-		document.forms[0].elements[4].disabled = true;
-			//document.write(document.forms[0].elements[3].value);
-	}
-	
-}
-
-function pollUsername() {
-	pollUsername.interval = setInterval("printMessage(checkUsername())", 1000);
-	clearInterval(pollEmail.interval);
-}
-
-function stopPollingUsername() {
-	clearInterval(pollUsername.interval);
-}
-
-function pollEmail() {
-	pollEmail.interval = setInterval("printMessage(checkEmail())", 1000);
-	clearInterval(pollUsername.interval);
-}
-
-function stopPollingEmail() {
-	clearInterval(pollEmail.interval);
-}
-
-
-function whenLoading(){
-}
-      
-function whenLoaded(){
-}
-      
-function whenInteractive(){
-}
-
-function whenResponse(){
-	retVals = this.response.split(" ");
+	var text = '<font color="' + (retVals[1] == "1" ? "lime" : "red") + '">' + retVals.slice(2).join("|") + '</font>';
 	switch (retVals[0]) {
-		case "1": // check username
-			checkUsername.lastcheck = retVals[1];
+		case "1":
+			if (regField("character").value == checkUsername.oldname) {
+				showCheck("check_character", text);
+			}
 			break;
-		case "2": // check email
-			checkEmail.lastcheck = retVals[1];
-			//checkEmail();
+		case "2":
+			if (regField("email").value == checkEmail.oldmail) {
+				showCheck("check_email", text);
+			}
 			break;
 	}
 }
