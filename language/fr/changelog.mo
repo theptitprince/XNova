@@ -6,6 +6,7 @@ $lang['changelog']   = array(
 
 '0.9h Renaissance' => 'Fonctions inachev&eacute;es (theptitprince)
 - NEW : Administration : page &laquo; Supprimer un joueur &raquo; remise et termin&eacute;e (fiche du compte, confirmation, r&eacute;serv&eacute;e aux administrateurs) ; la liste des joueurs supprimait en un clic
+- NEW : Administration : liste des multi-comptes remise et termin&eacute;e (comptes regroup&eacute;s par adresse IP partag&eacute;e, d&eacute;clar&eacute;s ou non, bannis ou non, fiche et bannissement en un clic)
 - NEW : &laquo; Effacer le compte &raquo; (Options) : le compte est vraiment supprim&eacute; 7 jours apr&egrave;s la demande, annulable, rappel sur la vue g&eacute;n&eacute;rale
 - FIX : Suppression d\'un compte : flottes des autres joueurs vers ses plan&egrave;tes renvoy&eacute;es chez elles, missiles et d&eacute;clarations effac&eacute;s
 - FIX : Rappel d\'une flotte : dur&eacute;e du retour fausse (stationnement et aller en cours invers&eacute;s)

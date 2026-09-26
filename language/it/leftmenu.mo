@@ -102,4 +102,7 @@ $lang['change_pass'] = 'Cambia password giocatore';
 // XNova Renaissance 0.9h : pages remises dans le menu d'administration
 $lang['adm_delplayer'] = 'Cancellare un giocatore';
 
+// XNova Renaissance 0.9h : liste des multi-comptes remise
+$lang['adm_multi'] = 'Elenco dei multi-account';
+
 ?>

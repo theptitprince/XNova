@@ -7,7 +7,7 @@
 	<td class="c" colspan="2">{adm_bn_plto}</td>
 </tr><tr>
 	<th width="129">{adm_bn_name}</th>
-	<th width="268"><input name="name" type="text" size="25" /></th>
+	<th width="268"><input name="name" type="text" size="25" value="{adm_bn_prefill}" /></th>
 </tr><tr>
 	<th>{adm_bn_reas}</th>
 	<th><input name="why" type="text" value="" size="25" maxlength="50"></th>

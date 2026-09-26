@@ -28,6 +28,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$PageTpl   = gettemplate("admin/banned");
 
 		$parse     = $lang;
+		// Pseudo pre-rempli (lien « Bannir » de la liste des multi-comptes)
+		$parse['adm_bn_prefill'] = htmlspecialchars((string) ($_GET['name'] ?? ''), ENT_QUOTES, 'UTF-8');
 		if ($mode == 'banit') {
 			$name              = SqlEscape(($_POST['name'] ?? null));
 			$reas              = SqlEscape(SafeText(($_POST['why'] ?? null))); // affiche dans le pilori public
