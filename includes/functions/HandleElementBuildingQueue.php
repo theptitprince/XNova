@@ -35,6 +35,8 @@ function HandleElementBuildingQueue ( $CurrentUser, &$CurrentPlanet, $Production
 		// L'original ne s'arretait jamais : un element rapide place derriere un long (missiles derriere une
 		// etoile de la mort) etait construit tout de suite avec le temps accumule pour le premier, qui reculait.
 		$UnFinished = false;
+		// Officier Destructeur : 2 etoiles de la mort construites pour une commandee (sans effet dans l'original)
+		$Destroyer  = (intval($CurrentUser['rpg_destructeur'] ?? 0) >= 1);
 		foreach ( $BuildArray as $Node => $Item ) {
 			$Element   = $Item[0];
 			$Count     = $Item[1];
@@ -42,8 +44,9 @@ function HandleElementBuildingQueue ( $CurrentUser, &$CurrentPlanet, $Production
 			if (!$UnFinished) {
 				while ( $Count > 0 && $CurrentPlanet['b_hangar'] >= $BuildTime ) {
 					$CurrentPlanet['b_hangar'] -= $BuildTime;
-					$Builded[$Element] = ($Builded[$Element] ?? 0) + 1;
-					$CurrentPlanet[$resource[$Element]]++;
+					$Made = ($Element == 214 && $Destroyer) ? 2 : 1;
+					$Builded[$Element] = ($Builded[$Element] ?? 0) + $Made;
+					$CurrentPlanet[$resource[$Element]] += $Made;
 					$Count--;
 				}
 				if ( $Count > 0 ) {
