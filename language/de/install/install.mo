@@ -21,8 +21,8 @@ $lang['ins_tx_welco'] = 'Willkommen bei der Installation von XNova';
 $lang['ins_tx_intr1'] = 'Mit dem Projekt XNova lässt sich ein nahezu perfekter OGame-Klon installieren';
 $lang['ins_tx_intr2'] = 'Das Projekt XNova ist frei, kostenlos und Open Source. Bitte nicht kommerziell nutzen';
 $lang['ins_tx_intr3'] = 'Aus Respekt vor dem Entwicklerteam dieses Projekts bitte die Copyright-Hinweise in den Quelldateien nicht entfernen.';
-$lang['ins_tx_inst1'] = 'Die Datei config.php muss auf CHMOD 777 gesetzt sein';
-$lang['ins_tx_inst2'] = 'Eine MySQL-Datenbank wird benötigt';
+$lang['ins_tx_inst1'] = 'Die Datei config.php muss für den Webserver beschreibbar sein (Schreibrecht genügt, CHMOD 777 ist nicht nötig)';
+$lang['ins_tx_inst2'] = 'Eine MySQL- oder MariaDB-Datenbank wird benötigt';
 $lang['ins_tx_inst3'] = 'Um die Installation fortzusetzen, muss das folgende Formular korrekt ausgefüllt werden:';
 $lang['ins_tx_acc1'] = 'Es wird nun ein Administrator-Account erstellt';
 $lang['ins_tx_acc2'] = 'Bitte das folgende Formular mit den Account-Daten ausfüllen:';
@@ -58,7 +58,10 @@ $lang['ins_upg_from_version'] = 'Version der Datenbank vor dem Update: %s';
 $lang['ins_upg_applied'] = 'Angewendete Updates: %s';
 $lang['ins_upg_uptodate'] = 'Die Datenbank ist bereits auf dem neuesten Stand, keine Änderungen nötig.';
 $lang['ins_upg_noconfig'] = 'Das Spiel ist noch nicht installiert (config.php ist leer): Bitte den Modus „Installieren“ verwenden.';
-$lang['ins_error3'] = 'Alle Felder sind Pflichtfelder, und der Benutzername darf nur Buchstaben, Ziffern, _ oder - enthalten.';
+$lang['ins_error3'] = 'Alle Felder sind Pflichtfelder: Benutzername nur aus Buchstaben, Ziffern, _ oder -, Passwort mit mindestens 8 Zeichen und gültige E-Mail-Adresse.';
 $lang['ins_locked'] = 'Das Spiel ist bereits installiert: Installation und Transfer sind gesperrt (nur das Update ist noch möglich). Für eine Neuinstallation zuerst die Datei config.php leeren. Außerdem sollte der Ordner install vom Server gelöscht werden.';
+
+// XNova Renaissance 0.9g : titre de la page (« Installeur » ecrit en dur)
+$lang['ins_page_title'] = 'XNova-Installation';
 
 ?>

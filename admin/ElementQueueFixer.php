@@ -26,7 +26,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$QrySelectPlanet  = "SELECT `id`, `id_owner`, `b_hangar`, `b_hangar_id` ";
 		$QrySelectPlanet .= "FROM {{table}} ";
 		$QrySelectPlanet .= "WHERE ";
-		$QrySelectPlanet .= "`b_hangar_id` != '0';";
+		$QrySelectPlanet .= "`b_hangar_id` != '0' AND `b_hangar_id` != '';";
 		$AffectedPlanets  = doquery ($QrySelectPlanet, 'planets');
 		$DeletedQueues    = 0;
 		while ( $ActualPlanet = mysqli_fetch_assoc($AffectedPlanets) ) {
@@ -34,8 +34,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$bDelQueue   = false;
 			if (count($HangarQueue)) {
 				for ( $Queue = 0; $Queue < count($HangarQueue); $Queue++) {
+					// (file vide ou terminee par « ; » : element vide, avertissements PHP auparavant)
 					$InQueue = explode (",", $HangarQueue[$Queue]);
-					if ($InQueue[1] > MAX_FLEET_OR_DEFS_PER_ROW) {
+					if (isset($InQueue[1]) && $InQueue[1] > MAX_FLEET_OR_DEFS_PER_ROW) {
 						$bDelQueue = true;
 					}
 				}

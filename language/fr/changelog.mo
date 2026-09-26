@@ -66,7 +66,10 @@ $lang['changelog']   = array(
 - FIX : Fond d\'&eacute;cran : sur un grand &eacute;cran, l\'image couvre toute la fen&ecirc;tre au lieu de s\'arr&ecirc;ter net sur un aplat bleu
 - FIX : Liste d\'amis : demandes re&ccedil;ues invisibles (liens jamais affich&eacute;s depuis le passage &agrave; PHP 8), ami tout juste accept&eacute; supprim&eacute; par un double clic, alliance du mauvais joueur, lien retour inop&eacute;rant ; demande &agrave; soi-m&ecirc;me ou &agrave; un compte inexistant refus&eacute;e
 - FIX : Adresses incompl&egrave;tes : page blanche des petites annonces, avertissements de la fiche d\'information ; titres de la bo&icirc;te de r&eacute;ception et de l\'administration (erreurs, remise &agrave; z&eacute;ro)
-- MOD : 21 mod&egrave;les de pages inutilis&eacute;s supprim&eacute;s, balises cass&eacute;es de l\'arbre technologique et de la porte de saut r&eacute;par&eacute;es',
+- MOD : 21 mod&egrave;les de pages inutilis&eacute;s supprim&eacute;s, balises cass&eacute;es de l\'arbre technologique et de la porte de saut r&eacute;par&eacute;es
+- FIX : Installeur : bandeaux du haut harmonis&eacute;s (m&ecirc;me hauteur, &eacute;tape &agrave; droite), menu et contenu align&eacute;s ; verrou et erreurs affich&eacute;s dans le cadre de l\'installeur (formulaire conserv&eacute; sous l\'erreur) ; &laquo; Suivant &raquo; de la mise &agrave; jour ramenait &agrave; l\'&eacute;tape 1 ; param&egrave;tre recopi&eacute; tel quel dans la page (injection de code)
+- FIX : Installeur : mot de passe administrateur d\'au moins 8 caract&egrave;res et adresse e-mail valide, comme &agrave; l\'inscription ; conseil &laquo; CHMOD 777 &raquo; remplac&eacute; (le droit d\'&eacute;criture suffit) ; fautes du fran&ccedil;ais, titre de la page traduit
+- FIX : Administration : nettoyage de la file du chantier spatial (avertissements PHP sur les files vides)',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)

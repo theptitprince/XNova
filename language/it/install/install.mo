@@ -30,8 +30,8 @@ $lang['ins_tx_welco']     = 'Benvenuti nell\'installazione di XNova';
 $lang['ins_tx_intr1']     = 'Il progetto XNova vi permetterà di installare un clone di OGame quasi perfetto';
 $lang['ins_tx_intr2']     = 'Il progetto XNova è libero, gratuito e open source. Vi preghiamo di non farne un uso commerciale';
 $lang['ins_tx_intr3']     = 'Per rispetto verso il team di sviluppo di questo progetto, siete pregati di non rimuovere i copyright dai file sorgente.';
-$lang['ins_tx_inst1']     = 'Il file config.php deve avere i permessi CHMOD 777';
-$lang['ins_tx_inst2']     = 'Dovete disporre di un database MySQL';
+$lang['ins_tx_inst1']     = 'Il file config.php deve essere scrivibile dal server web (basta il permesso di scrittura, non serve CHMOD 777)';
+$lang['ins_tx_inst2']     = 'Dovete disporre di un database MySQL o MariaDB';
 $lang['ins_tx_inst3']     = 'Dovete compilare correttamente il modulo seguente per continuare l\'installazione:';
 $lang['ins_tx_acc1']      = 'State per creare un account amministratore';
 $lang['ins_tx_acc2']      = 'Compilate il modulo seguente con i dati dell\'account:';
@@ -82,6 +82,9 @@ $lang['ins_upg_noconfig'] = 'Il gioco non &egrave; ancora installato (config.php
 $lang['ins_locked'] = 'Il gioco &egrave; gi&agrave; installato: installazione e trasferimento sono bloccati (resta possibile solo l\'aggiornamento). Per reinstallare, svuotate prima il file config.php. Ricordate anche di eliminare la cartella install dal server.';
 
 // XNova Renaissance 0.9g : traductions
-$lang['ins_error3'] = 'Tutti i campi sono obbligatori e il nome utente deve contenere solo lettere, cifre, _ o -.';
+$lang['ins_error3'] = 'Tutti i campi sono obbligatori: nome utente con lettere, cifre, _ o -, password di almeno 8 caratteri e indirizzo e-mail valido.';
+
+// XNova Renaissance 0.9g : titre de la page (« Installeur » ecrit en dur)
+$lang['ins_page_title'] = 'Installazione di XNova';
 
 ?>
