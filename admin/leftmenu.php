@@ -28,6 +28,11 @@ includeLang('leftmenu');
 		$parse['dpath']        = $dpath;
 		$parse['xnova_release'] = VERSION .' '. VERSION_NAME;
 		$parse['servername']   = 'XNova';
+		// Messages signales par les joueurs : nombre a traiter a cote du lien
+		$Pending               = doquery("SELECT COUNT(*) AS `count` FROM {{table}} WHERE `is_done` = '0';", 'reports', true);
+		if ($Pending && $Pending['count'] > 0) {
+			$parse['adm_reports'] .= " (<font color=\"red\">". intval($Pending['count']) ."</font>)";
+		}
 		$Page                  = parsetemplate(gettemplate('admin/left_menu'), $parse);
 		display( $Page, "", false, '', true);
 	} else {

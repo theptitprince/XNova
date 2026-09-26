@@ -72,4 +72,15 @@ $lang['msg_bb_italic'] = 'Texto en cursiva';
 $lang['msg_bb_image'] = 'Una imagen';
 $lang['msg_bb_text'] = 'Texto';
 
+// XNova Renaissance 0.9h : bouton Signaler (reglement, article VIII)
+$lang['mess_report'] = 'Denunciar';
+$lang['mess_reported'] = 'Denunciado';
+$lang['mess_report_title'] = 'Denunciar un mensaje al equipo';
+$lang['mess_report_rule'] = 'El mensaje se enviará al equipo del juego. Está prohibido denunciar un mensaje que no contenga insultos ni infrinja las reglas (reglas, apartado VIII).';
+$lang['mess_report_send'] = 'Denunciar este mensaje';
+$lang['mess_report_cancel'] = 'Cancelar';
+$lang['mess_report_done'] = 'El mensaje ha sido denunciado al equipo. Gracias.';
+$lang['mess_report_already'] = 'Este mensaje ya ha sido denunciado.';
+$lang['mess_report_error'] = 'Este mensaje no se puede denunciar.';
+
 ?>

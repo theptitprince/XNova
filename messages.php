@@ -19,7 +19,20 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 include($xnova_root_path . 'includes/functions/BBcodeFunction.' . $phpEx);
-if($user['authlevel']!="1"&$user['authlevel']!="3"&$user['authlevel']!="0"){ header("Location: login.php");} 
+// (controle de rang d'origine retire : il renvoyait les operateurs, niveau 2, vers la page de connexion ; les
+// visiteurs sont deja refuses par common.php)
+
+// Lien « Signaler » (reglement, article VIII) : messages ecrits par un autre joueur (messages prives et d'alliance)
+function MessageReportLink ( $Message, $UserId, $Reported ) {
+	global $lang;
+	if (!in_array($Message['message_type'], array(1, 2)) || $Message['message_sender'] < 1 || $Message['message_sender'] == $UserId) {
+		return '';
+	}
+	if (isset($Reported[$Message['message_id']])) {
+		return " <font color=\"gray\">". $lang['mess_reported'] ."</font>";
+	}
+	return " <a href=\"messages.php?mode=report&amp;report=". $Message['message_id'] ."\">". $lang['mess_report'] ."</a>";
+}
 
 	includeLang('messages');
 
@@ -163,6 +176,12 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 			$MessCategory = intval(($_POST['category'] ?? null));
 
 		case 'show':
+			// Messages deja signales par ce joueur (« Signale » a la place du lien)
+			$Reported    = array();
+			$ReportedQry = doquery("SELECT `message_id` FROM {{table}} WHERE `reporter_id` = '". $user['id'] ."';", 'reports');
+			while ($ReportedRow = mysqli_fetch_assoc($ReportedQry)) {
+				$Reported[$ReportedRow['message_id']] = true;
+			}
 			// -------------------------------------------------------------------------------------------------------
 			// Affichage de la page des messages
 			$page  = "<script language=\"JavaScript\">\n";
@@ -225,10 +244,9 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 					$page .= "<th>". stripslashes( $CurMess['message_subject'] ) ." ";
 					if ($CurMess['message_type'] == 1) {
 						$page .= "<a href=\"messages.php?mode=write&amp;id=". $CurMess['message_sender'] ."&amp;subject=".$lang['mess_answer_prefix'] . urlencode(html_entity_decode($CurMess['message_subject'], ENT_QUOTES, 'UTF-8')) ."\">";
-						$page .= "<img src=\"". $dpath ."img/m.gif\" alt=\"".$lang['mess_answer']."\" border=\"0\"></a></th>";
-					} else {
-						$page .= "</th>";
+						$page .= "<img src=\"". $dpath ."img/m.gif\" alt=\"".$lang['mess_answer']."\" border=\"0\"></a>";
 					}
+					$page .= MessageReportLink($CurMess, $user['id'], $Reported) ."</th>";
 					$page .= "</tr><tr>";
 					$page .= "<td style=\"background-color: ".$BackGndColor[$CurMess['message_type']]."; background-image: none;\"; class=\"b\"> </td>";
 					$page .= "<td style=\"background-color: ".$BackGndColor[$CurMess['message_type']]."; background-image: none;\"; colspan=\"3\" class=\"b\">". stripslashes( nl2br( $CurMess['message_text'] ) ) ."</td>";
@@ -254,10 +272,9 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 						$page .= "<th>". stripslashes( $CurMess['message_subject'] ) ." ";
 						if ($CurMess['message_type'] == 1) {
 							$page .= "<a href=\"messages.php?mode=write&amp;id=". $CurMess['message_sender'] ."&amp;subject=".$lang['mess_answer_prefix'] . urlencode(html_entity_decode($CurMess['message_subject'], ENT_QUOTES, 'UTF-8')) ."\">";
-							$page .= "<img src=\"". $dpath ."img/m.gif\" alt=\"".$lang['mess_answer']."\" border=\"0\"></a></th>";
-						} else {
-							$page .= "</th>";
+							$page .= "<img src=\"". $dpath ."img/m.gif\" alt=\"".$lang['mess_answer']."\" border=\"0\"></a>";
 						}
+						$page .= MessageReportLink($CurMess, $user['id'], $Reported) ."</th>";
 						$page .= "</tr><tr>";
 						$page .= "<td class=\"b\"> </td>";
 						$page .= "<td colspan=\"3\" class=\"b\">". nl2br( stripslashes( $CurMess['message_text'] ) ) ."</td>";
@@ -289,6 +306,49 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 			$page .= "</form>";
 			$page .= "</td>";
 			$page .= "</table>\n";
+			$page .= "</center>";
+			break;
+
+		case 'report':
+			// Signalement d'un message au staff : seulement un message recu, ecrit par un autre joueur, une seule fois
+			$ReportId = intval($_POST['report'] ?? ($_GET['report'] ?? 0));
+			$ToReport = doquery("SELECT * FROM {{table}} WHERE `message_id` = '". $ReportId ."' AND `message_owner` = '". $user['id'] ."' LIMIT 1;", 'messages', true);
+			if (!$ToReport || MessageReportLink($ToReport, $user['id'], array()) == '') {
+				message($lang['mess_report_error'], $lang['mess_report_title'], 'messages.php', 3);
+			}
+			$BackUrl = 'messages.php?mode=show&messcat='. intval($ToReport['message_type']);
+			if (doquery("SELECT `id` FROM {{table}} WHERE `message_id` = '". $ReportId ."' LIMIT 1;", 'reports', true)) {
+				message($lang['mess_report_already'], $lang['mess_report_title'], $BackUrl, 3);
+			}
+			if (isset($_POST['confirm'])) {
+				$QryInsertReport  = "INSERT INTO {{table}} SET ";
+				$QryInsertReport .= "`time` = '". time() ."', ";
+				$QryInsertReport .= "`reporter_id` = '". intval($user['id']) ."', ";
+				$QryInsertReport .= "`reporter_name` = '". SqlEscape($user['username']) ."', ";
+				$QryInsertReport .= "`sender_id` = '". intval($ToReport['message_sender']) ."', ";
+				$QryInsertReport .= "`message_id` = '". $ReportId ."', ";
+				$QryInsertReport .= "`message_time` = '". intval($ToReport['message_time']) ."', ";
+				$QryInsertReport .= "`message_type` = '". intval($ToReport['message_type']) ."', ";
+				$QryInsertReport .= "`message_from` = '". SqlEscape($ToReport['message_from']) ."', ";
+				$QryInsertReport .= "`message_subject` = '". SqlEscape($ToReport['message_subject']) ."', ";
+				$QryInsertReport .= "`message_text` = '". SqlEscape($ToReport['message_text']) ."';";
+				doquery($QryInsertReport, 'reports');
+				message($lang['mess_report_done'], $lang['mess_report_title'], $BackUrl, 3);
+			}
+			$page  = "<br><center>";
+			$page .= "<form action=\"messages.php?mode=report\" method=\"post\">";
+			$page .= "<input type=\"hidden\" name=\"report\" value=\"". $ReportId ."\">";
+			$page .= "<table width=\"569\">";
+			$page .= "<tr><td class=\"c\" colspan=\"2\">". $lang['mess_report_title'] ."</td></tr>";
+			$page .= "<tr><th width=\"120\">". $lang['mess_date'] ."</th><th>". date("d/m H:i:s", $ToReport['message_time']) ."</th></tr>";
+			$page .= "<tr><th>". $lang['mess_from'] ."</th><th>". stripslashes($ToReport['message_from']) ."</th></tr>";
+			$page .= "<tr><th>". $lang['mess_subject'] ."</th><th>". stripslashes($ToReport['message_subject']) ."</th></tr>";
+			$page .= "<tr><td class=\"b\" colspan=\"2\">". nl2br(stripslashes($ToReport['message_text'])) ."</td></tr>";
+			$page .= "<tr><th colspan=\"2\">". $lang['mess_report_rule'] ."</th></tr>";
+			$page .= "<tr><th colspan=\"2\"><input type=\"submit\" name=\"confirm\" value=\"". $lang['mess_report_send'] ."\"> &nbsp; ";
+			$page .= "<a href=\"messages.php?mode=show&amp;messcat=". intval($ToReport['message_type']) ."\">". $lang['mess_report_cancel'] ."</a></th></tr>";
+			$page .= "</table>";
+			$page .= "</form>";
 			$page .= "</center>";
 			break;
 

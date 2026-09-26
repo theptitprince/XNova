@@ -72,4 +72,15 @@ $lang['msg_bb_italic'] = 'Kursiver Text';
 $lang['msg_bb_image'] = 'Ein Bild';
 $lang['msg_bb_text'] = 'Text';
 
+// XNova Renaissance 0.9h : bouton Signaler (reglement, article VIII)
+$lang['mess_report'] = 'Melden';
+$lang['mess_reported'] = 'Gemeldet';
+$lang['mess_report_title'] = 'Nachricht an das Team melden';
+$lang['mess_report_rule'] = 'Die Nachricht wird an das Spielteam weitergeleitet. Es ist verboten, eine Nachricht zu melden, die weder Beleidigungen enthält noch gegen die Regeln verstößt (Regeln, Abschnitt VIII).';
+$lang['mess_report_send'] = 'Diese Nachricht melden';
+$lang['mess_report_cancel'] = 'Abbrechen';
+$lang['mess_report_done'] = 'Die Nachricht wurde dem Team gemeldet. Danke.';
+$lang['mess_report_already'] = 'Diese Nachricht wurde bereits gemeldet.';
+$lang['mess_report_error'] = 'Diese Nachricht kann nicht gemeldet werden.';
+
 ?>

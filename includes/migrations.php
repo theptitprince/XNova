@@ -84,6 +84,23 @@ $RenaissanceMigrations = array(
 			MODIFY `message_subject` varchar(255) default NULL;",
 	),
 	'0.9h' => array(
+		// Bouton « Signaler » (reglement, article VIII) : copie du message signale, lue par le staff (admin/reports.php)
+		"CREATE TABLE IF NOT EXISTS `{{prefix}}reports` (
+			`id` int(11) NOT NULL auto_increment,
+			`time` int(11) NOT NULL default '0',
+			`reporter_id` int(11) NOT NULL default '0',
+			`reporter_name` varchar(64) NOT NULL default '',
+			`sender_id` int(11) NOT NULL default '0',
+			`message_id` bigint(11) NOT NULL default '0',
+			`message_time` int(11) NOT NULL default '0',
+			`message_type` int(11) NOT NULL default '0',
+			`message_from` varchar(255) default NULL,
+			`message_subject` varchar(255) default NULL,
+			`message_text` text,
+			`is_done` tinyint(1) NOT NULL default '0',
+			PRIMARY KEY (`id`),
+			UNIQUE KEY `message_id` (`message_id`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;",
 		// « Effacer le compte » (Options) : la case etait enregistree mais le compte n'etait jamais supprime. La colonne
 		// garde maintenant la date de suppression ; une demande deja faite part pour 7 jours a compter de la mise a jour
 		"ALTER TABLE `{{prefix}}users` MODIFY `db_deaktjava` int(11) NOT NULL default '0';",

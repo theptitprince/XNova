@@ -151,6 +151,7 @@ function CsrfGetAction () {
 		'admin/errors.php'       => array('delete', 'deleteall'),
 		'admin/paneladmina.php'  => array('authlvl'),          // changer le niveau d'un compte
 		'admin/contactlist.php'  => array('read', 'unread', 'delete'), // messages de contact
+		'admin/reports.php'      => array('done', 'undone', 'delete'), // messages signales
 	);
 	$Script = (defined('IN_ADMIN') ? 'admin/' : '') . basename($_SERVER['SCRIPT_NAME']);
 	if (!isset($Actions[$Script])) {
