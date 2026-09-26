@@ -72,7 +72,9 @@ $lang['changelog']   = array(
 - FIX : Administration : nettoyage de la file du chantier spatial (avertissements PHP sur les files vides)
 - FIX : Vue de l\'empire : &eacute;nergie restante fausse (consommation ajout&eacute;e au lieu d\'&ecirc;tre retir&eacute;e), cases maximum sans le terraformeur, titre de page vide, fautes des intitul&eacute;s
 - FIX : Administration du chat : messages affich&eacute;s sans &eacute;chappement (du code post&eacute; dans le chat s\'ex&eacute;cutait chez l\'administrateur) ; barres obliques inverses effac&eacute;es dans le chat, les messages priv&eacute;s et les d&eacute;clarations de multi-compte
-- FIX : Alliance : tri de la liste des membres par rang (le fondateur &eacute;tait class&eacute; parmi les novices) ; marchand : co&ucirc;t recalcul&eacute; aussi apr&egrave;s un collage',
+- FIX : Alliance : tri de la liste des membres par rang (le fondateur &eacute;tait class&eacute; parmi les novices) ; marchand : co&ucirc;t recalcul&eacute; aussi apr&egrave;s un collage
+- FIX : Mot de passe oubli&eacute; : conna&icirc;tre l\'adresse d\'un joueur suffisait pour changer son mot de passe. La demande envoie d&eacute;sormais un lien de confirmation (valable une heure, une demande toutes les 5 minutes au plus) ; le nouveau mot de passe part par e-mail apr&egrave;s le clic, comme avant
+- FIX : Messages : la confirmation &laquo; Message envoy&eacute; &raquo; et les erreurs (sujet ou texte manquant) ne s\'affichaient jamais',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)

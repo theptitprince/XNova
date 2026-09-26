@@ -72,6 +72,9 @@ if($user['authlevel']!="1"&$user['authlevel']!="3"&$user['authlevel']!="0"){ hea
 				message ($lang['mess_no_ownerpl'], $lang['mess_error']);
 			}
 
+			// Confirmation ou erreurs, affichees au-dessus du formulaire (le formulaire ecrasait $page : « Message
+			// envoye » et « sujet / texte manquant » ne s'affichaient jamais)
+			$page = '';
 			if ($_POST) {
 				$error = 0;
 				if (!($_POST["subject"] ?? null)) {
@@ -117,9 +120,9 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 			$parse['subject']      = (!isset($subject)) ? $lang['mess_no_subject'] : $subject ;
 			$parse['text']         = $text ?? '';
 			if($game_config['enable_bbcode'] == 1) {
-			$page                  = parsetemplate(gettemplate('messages_pm_form_bb'), $parse);
+			$page                 .= parsetemplate(gettemplate('messages_pm_form_bb'), $parse);
 			} else {
-						$page                  = parsetemplate(gettemplate('messages_pm_form'), $parse); }
+						$page                 .= parsetemplate(gettemplate('messages_pm_form'), $parse); }
 			break;
 
 		case 'delete':

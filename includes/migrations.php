@@ -68,6 +68,8 @@ $RenaissanceMigrations = array(
 		"UPDATE `{{prefix}}alliance` SET `ally_owner_range` = '' WHERE `ally_owner_range` = 'Leader';",
 		// Colonnes latin1 -> utf8mb4 (la connexion l'etait deja : un emoji faisait echouer la requete)
 		'RenaissanceConvertUtf8mb4',
+		// Mot de passe oublie : jeton du lien de confirmation (empreinte) et heure de la demande
+		'RenaissanceAddLostPasswordColumns',
 	),
 );
 
@@ -251,6 +253,24 @@ function RenaissanceConvertUtf8mb4 ( $Connection, $Prefix ) {
 		}
 		mysqli_query($Connection, "ALTER TABLE `". $Name ."` CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;")
 			or die("MySQL Error (0.9g, ". $Name ."): <b>". mysqli_error($Connection) ."</b>");
+	}
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+// 0.9g : mot de passe oublie avec lien de confirmation. Colonnes ajoutees seulement si elles manquent (MySQL 8 ne
+// connait pas ADD COLUMN IF NOT EXISTS) : on peut relancer la mise a jour sans erreur.
+function RenaissanceAddLostPasswordColumns ( $Connection, $Prefix ) {
+	$Columns = array(
+		'lostpw_hash' => "varchar(64) NOT NULL default '' AFTER `password`",
+		'lostpw_time' => "int(11) NOT NULL default '0' AFTER `lostpw_hash`",
+	);
+	foreach ($Columns as $Column => $Definition) {
+		$Exists = mysqli_query($Connection, "SHOW COLUMNS FROM `". $Prefix ."users` LIKE '". $Column ."';");
+		if ($Exists && mysqli_num_rows($Exists) > 0) {
+			continue;
+		}
+		mysqli_query($Connection, "ALTER TABLE `". $Prefix ."users` ADD `". $Column ."` ". $Definition .";")
+			or die("MySQL Error (0.9g, users.". $Column ."): <b>". mysqli_error($Connection) ."</b>");
 	}
 }
 

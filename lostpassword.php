@@ -24,16 +24,24 @@ include($xnova_root_path . 'common.' . $phpEx);
 	// Le formulaire envoie sur lostpassword.php?action=1 : jamais lu depuis la fin de extract(), l'envoi ne partait plus
 	$action = intval($_GET['action'] ?? 0);
 
+	// Lien de confirmation recu par mail (action=2) : le nouveau mot de passe part par mail
+	if ($action == 2) {
+		if (LostPasswordConfirm($_GET['id'] ?? 0, $_GET['token'] ?? '')) {
+			message($lang['lp_done'], $lang['reset_pass'], "login.php", 5);
+		}
+		message($lang['lp_invalid'], $lang['reset_pass']);
+	}
+
 	if ($action != 1 || empty($_POST['email'])) {
 		$parse               = $lang;
 		$parse['servername'] = $game_config['game_name'];
 		$page = parsetemplate(gettemplate('lostpassword'), $parse);
-		display($page, $lang['system'], false);
+		display($page, $lang['reset_pass'], false);
 	}
 	if ($action == 1) {
-		sendnewpassword($_POST['email'] ?? '');
+		LostPasswordSendLink($_POST['email'] ?? '');
 		// Meme message que l'adresse existe ou non
-		message($lang['lp_sent'], $lang['reset_pass'], "login.php", 5);
+		message($lang['lp_link_sent'], $lang['reset_pass'], "login.php", 8);
 	}
 
 // History version
