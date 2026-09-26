@@ -254,9 +254,9 @@ function MissionCaseDestruction($FleetRow) {
          //destruction de la lune dabord dans la liste des planetes puis dans la liste des lunes et enfin dans la galaxie
          doquery("DELETE FROM {{table}} WHERE `id` = '". $TargetPlanet['id'] ."';", 'planets');
 
-         $Qrydestructionlune  = "UPDATE {{table}} SET ";
-
-         $Qrydestructionlune .= "`destruyed` = '1' ";
+         // XNova Renaissance : ligne supprimee (marquee detruite, elle restait pour toujours : la lune reapparaissait
+         // dans la vue generale du joueur et une nouvelle lune a cette position pouvait reprendre cette ligne)
+         $Qrydestructionlune  = "DELETE FROM {{table}} ";
 
          $Qrydestructionlune .= "WHERE ";
 
@@ -265,8 +265,7 @@ function MissionCaseDestruction($FleetRow) {
          $Qrydestructionlune .= "`system` = '". $FleetRow['fleet_end_system'] ."' AND ";
          $Qrydestructionlune .= "`lunapos` = '". $FleetRow['fleet_end_planet'] ."' ";
 
-         $Qrydestructionlune .= "LIMIT 1 ;";
-         //$Qrydestructionlune .= ";";
+         $Qrydestructionlune .= ";";
 
          doquery( $Qrydestructionlune , 'lunas');
 

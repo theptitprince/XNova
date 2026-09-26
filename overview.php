@@ -360,6 +360,8 @@ switch ($mode) {
             if (!empty($lunarow['id'])) {
                 if ($planetrow['planet_type'] == 1) {
                     $lune = doquery ("SELECT * FROM {{table}} WHERE `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `planet` = '" . $planetrow['planet'] . "' AND `planet_type` = '3'", 'planets', true);
+                }
+                if ($planetrow['planet_type'] == 1 && $lune) { // la lune existe encore (detruite : plus de planete-lune)
                     $parse['moon_img'] = "<a href=\"?cp=" . $lune['id'] . "&re=0\" title=\"" . $lune['name'] . "\"><img src=\"" . $dpath . "planeten/" . $lune['image'] . ".jpg\" height=\"50\" width=\"50\"></a>";
                     $parse['moon'] = $lune['name'];
                 } else {

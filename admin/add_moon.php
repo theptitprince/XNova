@@ -36,6 +36,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$QrySelectPlanet .= "WHERE ";
 			$QrySelectPlanet .= "`id` = '". $PlanetID ."';";
 			$PlanetSelected = doquery ( $QrySelectPlanet, 'planets', true);
+			// XNova Renaissance : planete inconnue ou lune donnee a la place de la planete mere (etait « Ajout OK » sans rien creer)
+			if (!$PlanetSelected || $PlanetSelected['planet_type'] != 1) {
+				AdminMessage ( $lang['addm_noplanet'], $lang['addm_title'] );
+			}
 
 			$Galaxy    = $PlanetSelected['galaxy'];
 			$System    = $PlanetSelected['system'];
@@ -43,7 +47,10 @@ include($xnova_root_path . 'common.' . $phpEx);
             $Owner     = $PlanetSelected['id_owner'];
 			$MoonID    = time();
 
-			CreateOneMoonRecord ( $Galaxy, $System, $Planet, $Owner, $MoonID, $MoonName, 20 );
+			// Nom de la planete mere si la lune est creee, vide si la planete en a deja une
+			if (CreateOneMoonRecord ( $Galaxy, $System, $Planet, $Owner, $MoonID, $MoonName, 20 ) == '') {
+				AdminMessage ( $lang['addm_hasmoon'], $lang['addm_title'] );
+			}
 
 			AdminMessage ( $lang['addm_done'], $lang['addm_title'] );
 		}

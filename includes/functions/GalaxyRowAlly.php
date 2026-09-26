@@ -39,7 +39,7 @@ function GalaxyRowAlly ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 			$Result .= "<td><a href=stat.php?start=101&who=ally>".$lang['gl_stats']."</a></td>";
 			if ($allyquery["ally_web"] != "") {
 				$Result .= "</tr><tr>";
-				$Result .= "<td><a href=". $allyquery["ally_web"] ." target=_new>".$lang['gl_ally_web']."</td>";
+				$Result .= "<td><a href=". $allyquery["ally_web"] ." target=_new>".$lang['gl_ally_web']."</a></td>";
 			}
 			$Result .= "</tr>";
 			$Result .= "</table>";

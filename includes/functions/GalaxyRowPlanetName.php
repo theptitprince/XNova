@@ -66,7 +66,7 @@ function GalaxyRowPlanetName ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Ga
 			$GalaxyRowUser['id']            != $user['id']) {
 			if ($GalaxyRowPlanet['last_update']  > (time()-10 * 60) AND
 				$GalaxyRowUser['id']            != $user['id']) {
-				$Result .= "(*)";
+				$Result .= " (*)";
 			} else {
 				$Result .= " (".$Inactivity.")";
 			}

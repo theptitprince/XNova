@@ -12,4 +12,8 @@ $lang['addm_moondoit'] = 'Aggiungi';
 // XNova Renaissance 0.9g : traductions
 $lang['addm_done'] = 'Luna aggiunta';
 
+// XNova Renaissance 0.9g : erreurs de l'ajout de lune (etait « Ajout OK » sans rien creer)
+$lang['addm_noplanet'] = 'Nessun pianeta ha questo ID (una luna si aggiunge al suo pianeta madre).';
+$lang['addm_hasmoon'] = 'Questo pianeta ha già una luna.';
+
 ?>
