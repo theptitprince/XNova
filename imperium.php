@@ -58,13 +58,13 @@ foreach ($planet as $p) {
 	$data['text'] = '<a href="overview.php?cp=' . $p['id'] . '&amp;re=0"><img src="' . $dpath . 'planeten/small/s_' . $p['image'] . '.jpg" border="0" height="71" width="75"></a>';
 	$parse['file_images'] .= parsetemplate($row, $data);
 	// {file_names}
-	$data['text'] = $p['name'];
+	$data['text'] = htmlspecialchars($p['name'], ENT_QUOTES, 'UTF-8');
 	$parse['file_names'] .= parsetemplate($row2, $data);
 	// {file_coordinates}
 	$data['text'] = "[<a href=\"galaxy.php?mode=3&galaxy={$p['galaxy']}&system={$p['system']}\">{$p['galaxy']}:{$p['system']}:{$p['planet']}</a>]";
 	$parse['file_coordinates'] .= parsetemplate($row2, $data);
-	// {file_fields}
-	$data['text'] = $p['field_current'] . '/' . $p['field_max'];
+	// {file_fields} (maximum avec le terraformeur, comme la vue generale : field_max seul l'oubliait)
+	$data['text'] = $p['field_current'] . '/' . CalculateMaxPlanetFields($p);
 	$parse['file_fields'] .= parsetemplate($row2, $data);
 	// {file_metal}
 	$data['text'] = '<a href="resources.php?cp=' . $p['id'] . '&amp;re=0&amp;planettype=' . $p['planet_type'] . '">'. pretty_number($p['metal']) .'</a> / '. pretty_number($p['metal_perhour']);
@@ -75,8 +75,13 @@ foreach ($planet as $p) {
 	// {file_deuterium}
 	$data['text'] = '<a href="resources.php?cp=' . $p['id'] . '&amp;re=0&amp;planettype=' . $p['planet_type'] . '">'. pretty_number($p['deuterium']) .'</a> / '. pretty_number($p['deuterium_perhour']);
 	$parse['file_deuterium'] .= parsetemplate($row2, $data);
-	// {file_energy}
-	$data['text'] = pretty_number($p['energy_max'] - $p['energy_used']) . ' / ' . pretty_number($p['energy_max']);
+	// {file_energy} : energie restante / produite. energy_used est negatif (consommation) : l'original
+	// soustrayait et affichait plus d'energie que produite. En rouge si elle manque, comme le bandeau du haut.
+	$EnergyLeft   = $p['energy_max'] + $p['energy_used'];
+	$data['text'] = pretty_number($EnergyLeft) . ' / ' . pretty_number($p['energy_max']);
+	if ($EnergyLeft < 0) {
+		$data['text'] = colorRed($data['text']);
+	}
 	$parse['file_energy'] .= parsetemplate($row2, $data);
 
 	foreach ($resource as $i => $res) {
@@ -118,6 +123,6 @@ foreach ($reslist['defense'] as $a => $i) {
 
 $page = parsetemplate(gettemplate('imperium_table'), $parse);
 
-display($page, $lang['imperium'] ?? '', false);
+display($page, $lang['imperium_vision'], false);
 // Created by Perberos. All rights reserved (C) 2006
 ?>
