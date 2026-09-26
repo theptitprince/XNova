@@ -37,9 +37,9 @@
 			<td class="header" align="center" width="20%"><i><b><font color="#ffffff">{message_label}</font></b></i></td>
 		</tr>
 		<tr class="header">
-			<td class="header" align="center" width="20%"><font>{metal}</font></td>
-			<td class="header" align="center" width="20%"><font>{crystal}</font></td>
-			<td class="header" align="center" width="20%"><font>{deuterium}</font></td>
+			<td class="header" align="center" width="20%"><font id="res_metal">{metal}</font></td>
+			<td class="header" align="center" width="20%"><font id="res_crystal">{crystal}</font></td>
+			<td class="header" align="center" width="20%"><font id="res_deuterium">{deuterium}</font></td>
 			<td class="header" align="center" width="20%"><font>{energy}</font></td>
 			<td class="header" align="center" width="20%"><font>{message}</font></td>
 		</tr>
@@ -50,4 +50,5 @@
 </tbody>
 </table>
 </center>
+{resource_counter}
 </div>
