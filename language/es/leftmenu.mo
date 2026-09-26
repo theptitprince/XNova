@@ -106,4 +106,8 @@ $lang['adm_multi'] = 'Lista de multicuentas';
 // XNova Renaissance 0.9h : negociant intergalactique
 $lang['tradingscrapmetal_label'] = 'Comerciante';
 
+// XNova Renaissance 0.9h : messages signales, message a tous
+$lang['adm_reports'] = 'Mensajes denunciados';
+$lang['adm_messall'] = 'Mensaje a todos';
+
 ?>

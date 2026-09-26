@@ -48,6 +48,7 @@ function XNovaResetUnivers ( $CurrentUser ) {
 		doquery( "TRUNCATE TABLE {{table}}", 'iraks');
 		doquery( "TRUNCATE TABLE {{table}}", 'lunas');
 		doquery( "TRUNCATE TABLE {{table}}", 'messages');
+		doquery( "TRUNCATE TABLE {{table}}", 'reports');
 		doquery( "TRUNCATE TABLE {{table}}", 'notes');
 		doquery( "TRUNCATE TABLE {{table}}", 'rw');
 		doquery( "TRUNCATE TABLE {{table}}", 'statpoints');

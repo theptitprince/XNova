@@ -76,6 +76,8 @@ parent.frames['Hauptframe'].location.replace("overview.php");
 </tr><tr>
 	<td><div><a href="messagelist.php" accesskey="k" target="{mf}">{adm_msg}</a></div></td>
 </tr><tr>
+	<td><div><a href="messall.php" target="{mf}">{adm_messall}</a></div></td>
+</tr><tr>
 	<td><div><a href="md5enc.php" accesskey="p" target="{mf}">{adm_md5}</a></div></td>
 </tr><tr>
 	<td><div><a href="ElementQueueFixer.php" accesskey="p" target="{mf}">{adm_build}</a></div></td>
@@ -83,6 +85,8 @@ parent.frames['Hauptframe'].location.replace("overview.php");
 	<td style="background-color:#FFFFFF" height="1px"></td>
 </tr><tr>
 	<td><div><a href="contactlist.php" target="{mf}">{adm_contact}</a></div></td>
+</tr><tr>
+	<td><div><a href="reports.php" target="{mf}">{adm_reports}</a></div></td>
 </tr><tr>
 	<td><div><a href="errors.php" accesskey="e" target="{mf}">{adm_error}</a></div></td>
 </tr><tr>
