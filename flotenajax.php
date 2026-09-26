@@ -105,16 +105,17 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 	$QrySelectEnemy .= "`planet_type` = '". ($_POST['planettype'] ?? null) ."';";
 	$TargetRow = doquery( $QrySelectEnemy, 'planets', true);
 
-	if       ($TargetRow['id_owner'] == '') {
+	if       (empty($TargetRow['id_owner'])) {
 		$TargetUser = $user;
-	} elseif ($TargetRow['id_owner'] != '') {
+	} else {
 		$TargetUser = doquery("SELECT * FROM {{table}} WHERE `id` = '". $TargetRow['id_owner'] ."';", 'users', true);
 	}
 	$UserPoints    = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $user['id'] ."';", 'statpoints', true);
 	$User2Points   = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $TargetUser['id'] ."';", 'statpoints', true);
 
-	$CurrentPoints = $UserPoints['total_points'];
-	$TargetPoints  = $User2Points['total_points'];
+	// Pas encore de statistiques (partie neuve, avant le premier calcul) : 0 point (avertissements PHP auparavant)
+	$CurrentPoints = $UserPoints['total_points'] ?? 0;
+	$TargetPoints  = $User2Points['total_points'] ?? 0;
 	$TargetVacat   = $TargetUser['urlaubs_modus'];
 
 	// Test s'il y a un slot de libre au moins !

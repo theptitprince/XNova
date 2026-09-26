@@ -75,19 +75,19 @@ $lang['gl_destroyedplanet'] = "Plan&egrave;te d&eacute;truite";
 $lang['gl_phalanx'] = "Phalange";
 $lang['gl_ressource'] = "Ressources";
 $lang['gl_action'] = "Action";
-$lang['gs_c601'] = "Erreur, Aucune planete.";
-$lang['gs_c602'] = "Erreur, Donnees hors de l'Univers connu";
-$lang['gs_c603'] = "Erreur, Le joueur ne peut etre attaque a cause de la protection des joueurs tres faibles.";
-$lang['gs_c604'] = "Erreur, Le joueur ne peut etre attaque il est bien trop fort pour vous.";
-$lang['gs_c605'] = "Erreur, le joueur est en mode vacances";
-$lang['gs_c610a'] = "Erreur, avec ";
-$lang['gs_c610b'] = " sondes. Vous n'avez pas assez de sondes";
-$lang['gs_c611'] = "Erreur, Vous n'avez pas de vaisseaux disponibles.";
-$lang['gs_c612'] = "Erreur, Pas assez de slots de flotte.";
-$lang['gs_c613'] = "Erreur, Pas assez de deuterium disponible.";
+$lang['gs_c601'] = 'Erreur : aucune planète.';
+$lang['gs_c602'] = 'Erreur : coordonnées hors de l\'univers connu.';
+$lang['gs_c603'] = 'Erreur : ce joueur est protégé (protection des joueurs très faibles).';
+$lang['gs_c604'] = 'Erreur : ce joueur est bien trop fort pour vous.';
+$lang['gs_c605'] = 'Erreur : ce joueur est en mode vacances.';
+$lang['gs_c610a'] = 'Erreur : avec ';
+$lang['gs_c610b'] = ' sondes. Vous n\'avez pas assez de sondes.';
+$lang['gs_c611'] = 'Erreur : vous n\'avez pas de vaisseaux disponibles.';
+$lang['gs_c612'] = 'Erreur : pas assez d\'emplacements de flotte.';
+$lang['gs_c613'] = 'Erreur : pas assez de deutérium disponible.';
 $lang['gs_c616'] = "Erreur, Multialarm!";
-$lang['gs_c618'] = "Erreur, Vous essayez visiblement de vous attaquer vous meme!";
-$lang['gs_c619'] = "Erreur, Vous n'etes pas de taille!";
+$lang['gs_c618'] = 'Erreur : vous ne pouvez pas vous viser vous-même !';
+$lang['gs_c619'] = 'Erreur : vous n\'êtes pas de taille !';
 $lang['gs_sending'] = "Envoi de";
 $lang['gs_to'] = "vers";
 $lang['sending'] = 'Envoie';
@@ -108,5 +108,9 @@ $lang['gs_c620'] = 'Erreur, vous êtes en mode vacances';
 
 // XNova Renaissance 0.9g : pluriel des membres (galaxie)
 $lang['gl_membres'] = 'Membres';
+
+// XNova Renaissance 0.9g : resultat de l'envoi depuis la galaxie (etait « done » en anglais, meme en cas d'echec)
+$lang['gs_done'] = 'OK';
+$lang['gs_error'] = 'Échec';
 
 ?>

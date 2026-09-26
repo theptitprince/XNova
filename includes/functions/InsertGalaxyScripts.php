@@ -44,7 +44,8 @@ function InsertGalaxyScripts ( $CurrentPlanet ) {
 	$Script .= "	retVals   = Message.split(\";\");\n";
 	$Script .= "	CmdCode   = retVals[0];\n";
 	$Script .= "	strInfo   = retVals[1];\n";
-	$Script .= "	addToTable(\"done\", \"success\");\n";
+	// Resultat traduit, et « Echec » en rouge si le serveur refuse (l'original affichait « done » en vert dans tous les cas)
+	$Script .= "	if (CmdCode == 600) { addToTable(". json_encode($lang['gs_done'], JSON_UNESCAPED_UNICODE) .", \"success\"); } else { addToTable(". json_encode($lang['gs_error'], JSON_UNESCAPED_UNICODE) .", \"error\"); }\n";
 	$Script .= "	changeSlots( UsedSlots );\n";
 	$Script .= "	setShips(\"probes\", SpyProbes );\n";
 	$Script .= "	setShips(\"recyclers\", Recyclers );\n";

@@ -111,4 +111,8 @@ $lang['gs_c619'] = 'Fehler, diesem Gegner bist du nicht gewachsen!';
 // XNova Renaissance 0.9g : pluriel des membres (galaxie)
 $lang['gl_membres'] = 'Mitglieder';
 
+// XNova Renaissance 0.9g : resultat de l'envoi depuis la galaxie (etait « done » en anglais, meme en cas d'echec)
+$lang['gs_done'] = 'OK';
+$lang['gs_error'] = 'Fehlgeschlagen';
+
 ?>

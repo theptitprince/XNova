@@ -4,7 +4,7 @@ $lang['notes'] = 'Notes';
 
 $lang['createnote'] = 'Cr&eacute;er une note';
 $lang['make_new_note'] = 'Cr&eacute;er une nouvelle note';
-$lang['editnote'] = 'Editer note';
+$lang['editnote'] = 'Modifier la note';
 
 $lang['priority_label'] = 'Priorit&eacute;';
 

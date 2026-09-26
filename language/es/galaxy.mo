@@ -111,4 +111,8 @@ $lang['gs_c619'] = 'Error, ¡no está a la altura!';
 // XNova Renaissance 0.9g : pluriel des membres (galaxie)
 $lang['gl_membres'] = 'Miembros';
 
+// XNova Renaissance 0.9g : resultat de l'envoi depuis la galaxie (etait « done » en anglais, meme en cas d'echec)
+$lang['gs_done'] = 'OK';
+$lang['gs_error'] = 'Error';
+
 ?>
