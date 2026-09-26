@@ -86,4 +86,7 @@ $lang['lm_ifo_queue'] = 'Bauschleifen';
 // XNova Renaissance 0.9h : pages remises dans le menu d'administration
 $lang['adm_delplayer'] = 'Spieler löschen';
 
+// XNova Renaissance 0.9h : liste des multi-comptes remise
+$lang['adm_multi'] = 'Liste der Multi-Accounts';
+
 ?>

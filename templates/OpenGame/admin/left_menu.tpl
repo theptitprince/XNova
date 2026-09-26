@@ -52,6 +52,8 @@ parent.frames['Hauptframe'].location.replace("overview.php");
 </tr><tr>
 	<td><div><a href="declare_list.php" accesskey="k" target="{mf}">{multis_declared}</a></div></td>
 </tr><tr>
+	<td><div><a href="multi.php" target="{mf}">{adm_multi}</a></div></td>
+</tr><tr>
 	<td><div><a href="add_moon.php" accesskey="k" target="{mf}">{adm_addmoon}</a></div></td>
 </tr><tr>
 	<td style="background-color:#FFFFFF" height="1px"></td>
