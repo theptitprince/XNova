@@ -291,10 +291,12 @@ function display ($page, $title = '', $topnav = true, $metatags = '', $AdminPage
 // Entete de page
 //
 function StdUserHeader ($title = '', $metatags = '') {
-	global $user, $dpath, $langInfos;
+	global $user, $dpath, $langInfos, $xnova_root_path;
 
 	$parse             = $langInfos;
 	$parse['title']    = $title;
+	// Racine du jeu pour le script et l'icone : message() est aussi appele depuis admin/ (404 sur admin/scripts/...)
+	$parse['root']     = $xnova_root_path ?? './';
 	if ( defined('LOGIN') ) {
 		$parse['dpath']    = "skins/xnova/";
 		$parse['style_tags']  = "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/styles.css\">\n";
