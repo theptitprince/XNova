@@ -117,8 +117,9 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 | **0.9d** | Compatibilité PHP 8.4 / MariaDB, en-têtes et crédits, corrections de bugs d'origine | ✅ Terminée |
 | **0.9e** | Sécurité critique (injections SQL, mots de passe `password_hash`, cookies, privilèges), bug de production d'énergie, installeur « Mise à jour » | ✅ Terminée |
 | **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration, mise à jour depuis la 0.8e d'origine, partie complète testée jusqu'à la création de lune (bugs d'origine corrigés) | ✅ Terminée |
-| **0.9g** | D'abord les bugs restants, les avertissements PHP et l'affichage des colonies (vue générale) ; puis nettoyage : conventions de nommage, retouches visuelles, traductions | ⏳ Prochaine |
-| **0.9h** | Mise en page sans *frames* : menu intégré à chaque page, fond d'écran pleine largeur | 🔜 |
+| **0.9g** | Bugs restants, avertissements PHP et affichage des colonies ; traductions complètes (allemand, espagnol, italien), base en utf8mb4, installeur verrouillé et harmonisé, nettoyage (conventions de nommage, textes, pages) | ⏳ En cours |
+| **0.9h** | Attaque groupée : prévue dans la 0.8e mais jamais programmée (groupe, invitations, flottes synchronisées, moteur de combat à plusieurs attaquants) | 🔜 |
+| **0.9i** | Mise en page sans *frames* : menu intégré à chaque page, fond d'écran pleine largeur | 🔜 |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 
 ## Installation
