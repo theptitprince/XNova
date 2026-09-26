@@ -32,15 +32,14 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 		$Missiles[503] = $CurrentPlanet[ $resource[503] ];
 		$SiloSize      = $CurrentPlanet[ $resource[44] ];
 		$MaxMissiles   = $SiloSize * 10;
-		// On prend les missiles deja dans la queue de fabrication aussi (ca aide)
-		$BuildQueue    = $CurrentPlanet['b_hangar_id'];
-		$BuildArray    = explode (";", $BuildQueue);
-		for ($QElement = 0; $QElement < count($BuildArray); $QElement++) {
-			$ElmentArray = explode (",", $BuildArray[$QElement] );
-			if       ($ElmentArray[502] != 0) {
-				$Missiles[502] += $ElmentArray[502];
-			} elseif ($ElmentArray[503] != 0) {
-				$Missiles[503] += $ElmentArray[503];
+		// On prend les missiles deja dans la queue de fabrication aussi (ca aide). Chaque entree vaut
+		// « element,nombre » : l'original lisait les cases [502] et [503] (inexistantes), les missiles en
+		// attente n'etaient jamais comptes et le silo pouvait deborder.
+		$BuildArray    = explode (";", $CurrentPlanet['b_hangar_id']);
+		foreach ($BuildArray as $QueueItem) {
+			$ElmentArray = explode (",", $QueueItem);
+			if (count($ElmentArray) >= 2 && ($ElmentArray[0] == 502 || $ElmentArray[0] == 503)) {
+				$Missiles[intval($ElmentArray[0])] += intval($ElmentArray[1]);
 			}
 		}
 		foreach(($_POST['fmenge'] ?? null) as $Element => $Count) {
@@ -184,8 +183,10 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 		}
 	}
 
+	// Liste des constructions en cours (la file brute « 502,10;503,10; » s'y ajoutait apres un envoi du formulaire)
+	$BuildQueue = '';
 	if ($CurrentPlanet['b_hangar_id'] != '') {
-		$BuildQueue .= ElementBuildListBox( $CurrentUser, $CurrentPlanet );
+		$BuildQueue = ElementBuildListBox( $CurrentUser, $CurrentPlanet );
 	}
 
 	$parse = $lang;
@@ -194,7 +195,7 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 	// Et la liste de constructions en cours dans $BuildQueue;
 	$parse['buildinglist'] = $BuildQueue;
 	// fragmento de template
-	$page .= parsetemplate(gettemplate('buildings_defense'), $parse);
+	$page = parsetemplate(gettemplate('buildings_defense'), $parse);
 
 	display($page, $lang['defense_label']);
 

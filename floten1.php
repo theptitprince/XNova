@@ -260,12 +260,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	}
 
 	$page .= "</tr>";
-	$page .= "<tr height=\"20\">";
-	$page .= "<td colspan=\"2\" class=\"c\">". $lang['fl_grattack'] ."</td>";
-	$page .= "</tr>";
-	$page .= "<tr height=\"20\">";
-	$page .= "<th colspan=\"2\">-</th>";
-	$page .= "</tr>";
+	// (bloc « Attaques groupees » retire avec la mission, toujours vide : il reviendra avec l'attaque groupee en 0.9h)
 	$page .= "<tr height=\"20\">";
 	$page .= "<th colspan=\"2\"><input type=\"submit\" value=\"". $lang['fl_continue'] ."\" /></th>";
 	$page .= "</tr>";
