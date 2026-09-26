@@ -146,7 +146,9 @@ SanitizeNumericInput ( array('galaxy', 'system', 'planet', 'planettype', 'curren
 
 	$page  = InsertGalaxyScripts ( $CurrentPlanet );
 
-	$page .= "<body style=\"overflow: hidden;\" onUnload=\"\"><br><br>";
+	// (l'original ouvrait ici un second <body style="overflow: hidden;"> : sur un ecran peu haut, le bas de la
+	// galaxie - dernieres positions, missiles, recycleurs, legende - etait coupe, sans barre de defilement)
+	$page .= "<br><br>";
 	$page .= ShowGalaxySelector ( $galaxy, $system );
 
 	if ($mode == 2) {

@@ -21,31 +21,44 @@ include( $xnova_root_path . 'common.' . $phpEx );
 
 	includeLang('buddy');
 
-$a = intval( ($_GET['a'] ?? null) );
-$e = intval( ($_GET['e'] ?? null) );
-$s = intval( ($_GET['s'] ?? null) );
+// La page choisit la liste selon la presence des parametres (isset). Le portage en PHP 8 les convertissait en
+// entiers (0 si absents) : isset() toujours vrai, liens « Demandes » jamais affiches, demandes recues invisibles,
+// amis listes comme des demandes a supprimer.
+$a = isset($_GET['a']) ? intval($_GET['a']) : null;
+$e = isset($_GET['e']) ? intval($_GET['e']) : null;
+$s = isset($_GET['s']) ? intval($_GET['s']) : null;
 $u = intval( ($_GET['u'] ?? null) );
 
-if ( $s == 1 && isset( $_GET['bid'] ) ) {
-	// Effacer une entree de la liste d'amis
+if ( ($s == 1 || $s == 2) && isset( $_GET['bid'] ) ) {
+	// s=2 : accepter une demande recue ; s=1 : supprimer (ami, demande recue rejetee, demande envoyee annulee).
+	// L'original n'avait qu'un lien pour tout, l'action dependant de l'etat : un double clic ou un rechargement
+	// apres « Accepter » supprimait l'ami tout juste accepte.
 	$bid = intval( ($_GET['bid'] ?? null) );
 
 	$buddy = doquery( "SELECT * FROM {{table}} WHERE `id` = '".$bid."';", 'buddy', true );
-	if ( $buddy['owner'] == $user['id'] ) {
-		if ( $buddy['active'] == 0 && $a == 1 ) {
+	if ( $buddy && ($buddy['owner'] == $user['id'] || $buddy['sender'] == $user['id']) ) {
+		if ( $s == 2 ) {
+			if ( $buddy['owner'] == $user['id'] && $buddy['active'] == 0 ) {
+				doquery( "UPDATE {{table}} SET `active` = '1' WHERE `id` = '".$bid."';", 'buddy' );
+			}
+		} else {
 			doquery( "DELETE FROM {{table}} WHERE `id` = '".$bid."';", 'buddy' );
-		} elseif ( $buddy['active'] == 1 ) {
-			doquery( "DELETE FROM {{table}} WHERE `id` = '".$bid."';", 'buddy' );
-		} elseif ( $buddy['active'] == 0 ) {
-			doquery( "UPDATE {{table}} SET `active` = '1' WHERE `id` = '".$bid."';", 'buddy' );
 		}
-	} elseif ( $buddy['sender'] == $user['id'] ) {
-		doquery( "DELETE FROM {{table}} WHERE `id` = '".$bid."';", 'buddy' );
 	}
+	// Retour a la liste d'ou vient le clic, sans l'action dans l'adresse
+	header( "Location: buddy.php" . (isset($a) ? "?a=" . $a . (isset($e) ? "&e=" . $e : "") : "") );
+	die();
 } elseif ( ($_POST["s"] ?? null) == 3 && ($_POST["a"] ?? null) == 1 && ($_POST["e"] ?? null) == 1 && isset( $_POST["u"] ) ) {
 	// Traitement de l'enregistrement de la demande d'entree dans la liste d'amis
 	$uid = $user["id"];
 	$u = intval( ($_POST["u"] ?? null) );
+
+	// Destinataire controle ici aussi (le formulaire pouvait etre forge : demande a soi-meme ou a un compte absent)
+	if ( $u == $uid ) {
+		message( $lang['you_cannot_ask_yourself_for_a_request'], $lang['buddy_request_label'] );
+	} elseif ( !doquery( "SELECT `id` FROM {{table}} WHERE `id` = '".$u."';", 'users', true ) ) {
+		message( $lang['bud_player_not_found'], $lang['buddy_request_label'] );
+	}
 
 	$buddy = doquery( "SELECT * FROM {{table}} WHERE sender={$uid} AND owner={$u} OR sender={$u} AND owner={$uid}", 'buddy', true );
 
@@ -63,10 +76,12 @@ if ( $s == 1 && isset( $_GET['bid'] ) ) {
 
 $page = "<br>";
 
-if ( $a == 2 && isset( $u ) ) {
+if ( $a == 2 && $u > 0 ) {
 	// Saisie texte de demande d'entree dans la liste d'amis
 	$u = doquery( "SELECT * FROM {{table}} WHERE id='$u'", "users", true );
-	if ( isset( $u ) && $u["id"] != $user["id"] ) {
+	if ( !$u ) {
+		message( $lang['bud_player_not_found'], $lang['buddy_request_label'] );
+	} elseif ( $u["id"] != $user["id"] ) {
 		$page .= "
 		<script src=\"scripts/cntchar.js\" type=\"text/javascript\"></script>
 		<script src=\"scripts/win.js\" type=\"text/javascript\"></script>
@@ -81,20 +96,19 @@ if ( $a == 2 && isset( $u ) ) {
 				<td class=c colspan=2>{$lang['buddy_request_label']}</td>
 			</tr><tr>
 				<th>{$lang['player_label']}</th>
-				<th>" . $u["username"] . "</th>
+				<th>" . htmlspecialchars($u["username"], ENT_QUOTES, 'UTF-8') . "</th>
 			</tr><tr>
 				<th>{$lang['request_text_label']} (<span id=\"cntChars\">0</span> / 5000 {$lang['characters']})</th>
 				<th><textarea name=text cols=60 rows=10 onKeyUp=\"javascript:cntchar(5000)\"></textarea></th>
 			</tr><tr>
-				<td class=c><a href=\"javascript:back();\">{$lang['back']}</a></td>
+				<td class=c><a href=\"javascript:history.back();\">{$lang['back']}</a></td>
 				<td class=c><input type=submit value='{$lang['send_label']}'></td>
 			</tr>
 		</table></form>
-		</center>
-		</body>
-		</html>";
-		display( $page, 'buddy' );
-	} elseif ( $u["id"] == $user["id"] ) {
+		</center>";
+		// (lien retour : la fonction back() n'existait pas ; titre « buddy » ecrit en dur)
+		display( $page, $lang['buddy_request_label'] );
+	} else {
 		message( $lang['you_cannot_ask_yourself_for_a_request'], $lang['buddy_request_label'] );
 	}
 }
@@ -121,7 +135,7 @@ if ( !isset( $a ) ) {
 		<td class=c>{$lang['name_label']}</td>
 		<td class=c>{$lang['alliance_label']}</td>
 		<td class=c>{$lang['coordinates_label']}</td>
-		<td class=c>{$lang['position_label']}</td>
+		<td class=c>{$lang['bud_status_label']}</td>
 		<td class=c></td>
 	</tr>";
 }
@@ -133,9 +147,10 @@ if ( $a == 1 ) {
 }
 $buddyrow = doquery( "SELECT * FROM {{table}} " . $query, 'buddy' );
 
+$i = 0;
 while ( $b = mysqli_fetch_array( $buddyrow ) ) {
 	// para solicitudes
-	if ( !isset( $i ) && isset( $a ) ) {
+	if ( $i == 0 && isset( $a ) ) {
 		$page .= "
 		<tr>
 			<td class=c></td>
@@ -150,14 +165,15 @@ while ( $b = mysqli_fetch_array( $buddyrow ) ) {
 	$i++;
 	$uid = ( $b["owner"] == $user["id"] ) ? $b["sender"] : $b["owner"];
 	// query del user
-	$u = doquery( "SELECT id,username,galaxy,system,planet,onlinetime,ally_id,ally_name FROM {{table}} WHERE id=" . $uid, "users", true );
-	// $g = doquery("SELECT galaxy, system, planet FROM {{table}} WHERE id_planet=".$u["id_planet"],"galaxy",true);
-	// $a = doquery("SELECT * FROM {{table}} WHERE id=".$uid,"aliance",true);
-	if ( $u["ally_id"] != 0 ) { // Alianza
-		// $allyrow = doquery("SELECT id,ally_tag FROM {{table}} WHERE id=".$u["ally_id"],"alliance",true);
-		// if($allyrow){
-		$UserAlly .= "<a href=alliance.php?mode=ainfo&a=" . $u["id"] . ">" . $u["ally_name"] . "</a>";
-		// }
+	$u = doquery( "SELECT id,username,galaxy,system,planet,onlinetime,ally_id,ally_name FROM {{table}} WHERE id=" . intval($uid), "users", true );
+	if ( !$u ) {
+		$i--;
+		continue;
+	}
+	// Alliance de CE joueur (l'original accumulait les alliances d'une ligne a l'autre, avec l'id du joueur dans le lien)
+	$UserAlly = '';
+	if ( $u["ally_id"] != 0 ) {
+		$UserAlly = "<a href=alliance.php?mode=ainfo&a=" . $u["ally_id"] . ">" . htmlspecialchars($u["ally_name"], ENT_QUOTES, 'UTF-8') . "</a>";
 	}
 
 	if ( isset( $a ) ) {
@@ -175,10 +191,10 @@ while ( $b = mysqli_fetch_array( $buddyrow ) ) {
 	}
 
 	if ( isset( $a ) && isset( $e ) ) {
-		$UserCommand = "<a href=?s=1&bid=" . $b["id"] . ">{$lang['delete_request']}</a>";
+		$UserCommand = "<a href=?a=1&e=1&s=1&bid=" . $b["id"] . ">{$lang['delete_request']}</a>";
 	} elseif ( isset( $a ) ) {
-		$UserCommand = "<a href=?s=1&bid=" . $b["id"] . ">{$lang['ok']}</a><br/>";
-		$UserCommand .= "<a href=?a=1&s=1&bid=" . $b["id"] . ">{$lang['reject']}</a></a>";
+		$UserCommand = "<a href=?s=2&bid=" . $b["id"] . ">{$lang['ok']}</a><br/>";
+		$UserCommand .= "<a href=?a=1&s=1&bid=" . $b["id"] . ">{$lang['reject']}</a>";
 	} else {
 		$UserCommand = "<a href=?s=1&bid=" . $b["id"] . ">{$lang['delete_label']}</a>";
 	}
@@ -186,7 +202,7 @@ while ( $b = mysqli_fetch_array( $buddyrow ) ) {
 	$page .= "
 	<tr>
 		<th width=20>" . $i . "</th>
-		<th><a href=messages.php?mode=write&id=" . $u["id"] . ">" . $u["username"] . "</a></th>
+		<th><a href=messages.php?mode=write&id=" . $u["id"] . ">" . htmlspecialchars($u["username"], ENT_QUOTES, 'UTF-8') . "</a></th>
 		<th>{$UserAlly}</th>
 		<th><a href=\"galaxy.php?mode=3&galaxy=" . $u["galaxy"] . "&system=" . $u["system"] . "\">" . $u["galaxy"] . ":" . $u["system"] . ":" . $u["planet"] . "</a></th>
 		<th>{$LastOnline}</th>
@@ -194,10 +210,10 @@ while ( $b = mysqli_fetch_array( $buddyrow ) ) {
 	</tr>";
 }
 
-if ( !isset( $i ) ) {
+if ( $i == 0 ) {
 	$page .= "
 	<tr>
-		<th colspan=6>{$lang['there_is_no_request']}</th>
+		<th colspan=6>" . (isset($a) ? $lang['there_is_no_request'] : $lang['bud_no_buddy']) . "</th>
 	</tr>";
 }
 

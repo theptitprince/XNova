@@ -319,7 +319,8 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 			break;
 	}
 
-	display($page, $lang['mess_pagetitle']);
+	// « Envoyer un message » seulement pour l'ecriture (c'etait aussi le titre de la boite de reception)
+	display($page, ($MessPageMode == 'write') ? $lang['mess_pagetitle'] : $lang['messages']);
 
 // -----------------------------------------------------------------------------------------------------------
 // History version

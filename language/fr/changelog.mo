@@ -60,7 +60,13 @@ $lang['changelog']   = array(
 - FIX : Missiles : port&eacute;e contr&ocirc;l&eacute;e dans les deux sens, nombre n&eacute;gatif refus&eacute; (il cr&eacute;ait des missiles), rapport en fran&ccedil;ais
 - FIX : Porte de saut et bouton d\'abandon de colonie : avertissements et fautes
 - MOD : Convention de nommage : toutes les cl&eacute;s de langue et balises des templates en minuscules (a-z, 0-9, _), contr&ocirc;le ajout&eacute; au v&eacute;rificateur
-- FIX : Administration : liste des messages (le plus r&eacute;cent n\'apparaissait jamais), titre d\'erreur des Options',
+- FIX : Administration : liste des messages (le plus r&eacute;cent n\'apparaissait jamais), titre d\'erreur des Options
+- FIX : Galaxie : bas de page coup&eacute; sans barre de d&eacute;filement sur un &eacute;cran peu haut ; pied de page juste au singulier comme au pluriel (&laquo; Recycleurs disponibles : 0 &raquo;) ; lien &laquo; Espaces infinis &raquo; r&eacute;par&eacute;
+- FIX : Menu de gauche : R&egrave;gles, Contact, Options et D&eacute;connexion hors d\'atteinte sur un &eacute;cran peu haut (menu d&eacute;filant)
+- FIX : Fond d\'&eacute;cran : sur un grand &eacute;cran, l\'image couvre toute la fen&ecirc;tre au lieu de s\'arr&ecirc;ter net sur un aplat bleu
+- FIX : Liste d\'amis : demandes re&ccedil;ues invisibles (liens jamais affich&eacute;s depuis le passage &agrave; PHP 8), ami tout juste accept&eacute; supprim&eacute; par un double clic, alliance du mauvais joueur, lien retour inop&eacute;rant ; demande &agrave; soi-m&ecirc;me ou &agrave; un compte inexistant refus&eacute;e
+- FIX : Adresses incompl&egrave;tes : page blanche des petites annonces, avertissements de la fiche d\'information ; titres de la bo&icirc;te de r&eacute;ception et de l\'administration (erreurs, remise &agrave; z&eacute;ro)
+- MOD : 21 mod&egrave;les de pages inutilis&eacute;s supprim&eacute;s, balises cass&eacute;es de l\'arbre technologique et de la porte de saut r&eacute;par&eacute;es',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
 - FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)

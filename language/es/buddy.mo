@@ -36,4 +36,9 @@ $lang['anothers_requests'] = 'Peticiones recibidas';
 // XNova Renaissance 0.9g : demande d'ami trop longue
 $lang['bud_text_too_long'] = '¡El texto no debe superar los 5000 caracteres!';
 
+// XNova Renaissance 0.9g : joueur introuvable, liste d'amis vide, colonne du statut en ligne
+$lang['bud_player_not_found'] = 'Este jugador no existe.';
+$lang['bud_no_buddy'] = 'Todavía no tiene amigos';
+$lang['bud_status_label'] = 'Estado';
+
 ?>

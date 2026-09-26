@@ -28,6 +28,12 @@ if ($game_config['enable_announces'] != 1) {
 
 $actions = intval(($_GET['action'] ?? null));
 
+// Seul le formulaire (action=2) existe : toute autre adresse donnait une page blanche, sans fond
+if ($actions != 2) {
+	header('Location: annonce.php');
+	die();
+}
+
 if ($actions == 2) {
 	// Formulaire de publication : ressources a vendre, ressources souhaitees (textes de la langue du joueur)
 	$Rows = function ($Suffix) use ($lang) {

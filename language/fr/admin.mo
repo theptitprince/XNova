@@ -92,7 +92,7 @@ $lang['adm_bn_isbn']  = "a bien &eacute;t&eacute; banni!";
 $lang['adm_rz_ttle']  = "Remise &agrave; z&eacute;ro de l'univers";
 $lang['adm_rz_done']  = " Utilisateur(s) transf&eacute;r&eacute;(s)";
 $lang['adm_rz_conf']  = "Confirmation";
-$lang['adm_rz_text']  = "En appuyant sur Accepter, vous remettrez &agrave; z&eacute;ro votre Univers. Seul les comptes ne sont pas effac&eacute;es. Cette op&eacute;ration ne peut pas &ecirc;tre annul&eacute; par la suite, il est donc conseill&eacute; d'avoir une sauvegarde de votre base de donn&eacute;e!";
+$lang['adm_rz_text']  = 'En appuyant sur Accepter, vous remettrez votre univers à zéro. Seuls les comptes ne sont pas effacés. Cette opération ne peut pas être annulée : faites d\'abord une sauvegarde de votre base de données !';
 $lang['adm_rz_doit']  = "Accepter";
 
 $lang['adm_ch_ttle']  = "Administration du chat";

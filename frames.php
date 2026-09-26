@@ -39,14 +39,16 @@ include($xnova_root_path . 'common.'.$phpEx);
 	$page .= "</head>";
 
 	$page .= "<frameset framespacing=\"0\" border=\"0\" cols=\"190,*\" frameborder=\"0\">";
-	$page .= "<frame name=\"LeftMenu\" target=\"Mainframe\" src=\"leftmenu.php\" noresize scrolling=\"no\" marginwidth=\"0\" marginheight=\"0\">";
+	// Menu defilant si besoin (scrolling="no" d'origine : sur un ecran peu haut, Regles, Contact, Options et
+	// Deconnexion etaient hors d'atteinte)
+	$page .= "<frame name=\"LeftMenu\" target=\"Mainframe\" src=\"leftmenu.php\" noresize scrolling=\"auto\" marginwidth=\"0\" marginheight=\"0\">";
 	$page .= "<frame name=\"Hauptframe\" src=\"overview.php\">";
 	$page .= "<noframes>";
 	$page .= "<body>";
 	$page .= "<p>". ($lang['no_frames'] ?? '') ."</p>";
+	$page .= "</body>";
 	$page .= "</noframes>";
 	$page .= "</frameset>";
-      $page .= "</body>";
 	$page .= "</html>";
 
 	echo $page;

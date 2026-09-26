@@ -92,13 +92,13 @@ $lang['gs_sending'] = "Envoi de";
 $lang['gs_to'] = "vers";
 $lang['sending'] = 'Envoie';
 
-$lang['gf_cntmone'] = "Plan&egrave;tes conquises";
-$lang['gf_cntmnone'] = "Aucune Plan&egrave;te peupl&eacute;e.";
-$lang['gf_cntmsome'] = "Plan&egrave;tes peupl&eacute;es.";
-$lang['gf_mi_title'] = "Missiles Interplan&egrave;taires";
-$lang['gf_fleetslt'] = "Slots de Flottes utilis&eacute;";
-$lang['gf_rc_title'] = "Recycleur Disponibles";
-$lang['gf_sp_title'] = "Sondes D'espionnage Disponibles";
+$lang['gf_cntmone'] = 'planète peuplée';
+$lang['gf_cntmnone'] = 'Aucune planète peuplée';
+$lang['gf_cntmsome'] = 'planètes peuplées';
+$lang['gf_mi_title'] = 'Missiles interplanétaires :';
+$lang['gf_fleetslt'] = 'Emplacements de flotte utilisés :';
+$lang['gf_rc_title'] = 'Recycleurs disponibles :';
+$lang['gf_sp_title'] = 'Sondes d\'espionnage disponibles :';
 $lang['gf_unknowsp'] = "Espaces infinis";
 
 // Created by Perberos. All rights reversed (C) 2006

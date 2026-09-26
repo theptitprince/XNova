@@ -214,4 +214,7 @@ $lang['info'][614]['description'] = "L'empereur a rep&eacute;r&eacute; en vous d
 $lang['info'][615]['name']        = "Empereur";
 $lang['info'][615]['description'] = "Vous avez montr&eacute; que vous &ecirc;tiez le plus grand conqu&eacute;rant de l'univers. Il est tant pour vous de prendre la place qui vous revient.<br><br>D&eacute;blocage du Destructeur Plan&egrave;taire";
 
+// XNova Renaissance 0.9g : adresse d'information sans element valide
+$lang['nfo_unknown'] = 'Cet élément n\'existe pas.';
+
 ?>
