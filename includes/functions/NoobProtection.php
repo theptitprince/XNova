@@ -4,7 +4,7 @@
  * NoobProtection.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */

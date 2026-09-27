@@ -4,7 +4,7 @@
  * admin/contactlist.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * Messages recus par le formulaire de contact : lecture, lu / non lu, suppression.
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)

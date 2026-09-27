@@ -4,7 +4,7 @@
  * admin/reports.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * Messages signales par les joueurs (bouton « Signaler » des messages, reglement article VIII) : lecture, fiche
  * de l'auteur, bannissement, traite / a traiter, suppression.

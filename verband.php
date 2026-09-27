@@ -4,11 +4,8 @@
  * verband.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
- * Travail original :
- * @version 1.0
- * @copyright 2008 by XNova Team (auteur non identifié) for XNova
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 

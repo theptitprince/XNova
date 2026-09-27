@@ -4,7 +4,7 @@
  * tools/stats.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * Recalcul des statistiques (classements des joueurs et des alliances) en ligne de commande, pour une tache
  * planifiee. Meme calcul que le bouton « Statistiques » de l'administration (admin/statfunctions.php).

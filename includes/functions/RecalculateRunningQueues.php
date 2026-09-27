@@ -4,7 +4,7 @@
  * RecalculateRunningQueues.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * Changement des vitesses du serveur (Configuration) : ce qui est deja en cours suit la nouvelle vitesse (l'original
  * ne recalculait rien, seules les nouvelles actions en profitaient). Temps restant multiplie par ancienne vitesse /
