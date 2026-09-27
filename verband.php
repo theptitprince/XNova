@@ -108,7 +108,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Message = sprintf($lang['fl_acs_invite_text'], htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8'), htmlspecialchars($Group['name'], ENT_QUOTES, 'UTF-8'),
 			                   htmlspecialchars($Target['name'] ?? '', ENT_QUOTES, 'UTF-8'), intval($Group['galaxy']), intval($Group['system']), intval($Group['planet']),
 			                   date("d/m/Y H:i:s", $Group['ankunft']));
-			SendSimpleMessage($Guest['id'], $user['id'], time(), 1, $user['username'], $lang['fl_acs_invite_subject'], $Message);
+			// Expediteur comme dans un message de joueur (pseudo et position), la reponse part vers le chef
+			SendSimpleMessage($Guest['id'], $user['id'], time(), 1, $user['username'] ." [". $user['galaxy'] .":". $user['system'] .":". $user['planet'] ."]", $lang['fl_acs_invite_subject'], $Message);
 			$Info = sprintf($lang['fl_acs_invited_ok'], htmlspecialchars($Guest['username'], ENT_QUOTES, 'UTF-8'));
 		}
 	}
