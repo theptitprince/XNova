@@ -87,7 +87,7 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 	// On enregistre ce que l'on a eventuellement modifié dans users
 	BuildingSaveUserRecord ( $CurrentUser );
 
-	if ($Queue['lenght'] < MAX_BUILDING_QUEUE_SIZE) {
+	if ($Queue['lenght'] < BuildingQueueSize()) {
 		$CanBuildElement = true;
 	} else {
 		$CanBuildElement = false;

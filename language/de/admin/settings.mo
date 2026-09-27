@@ -60,4 +60,8 @@ $lang['enable_the_captcha'] = 'Captcha bei der Anmeldung';
 // XNova Renaissance 0.9h : recalcul de ce qui est en cours quand les vitesses changent
 $lang['adm_opt_recalc'] = 'Geschwindigkeiten geändert, Laufendes neu berechnet: %d Planet(en) mit Bauaufträgen, %d Forschung(en), %d Flotte(n), %d Raketenangriff(e).';
 
+// XNova Renaissance 0.9h : taille des files reglable
+$lang['adm_opt_building_queue'] = 'Länge der Bauliste<br>(Gebäude, 1 bis 99)';
+$lang['adm_opt_order_units'] = 'Einheiten pro Auftrag<br>(Schiffswerft und Verteidigung, 1 bis 1 000 000)';
+
 ?>

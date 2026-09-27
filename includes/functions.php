@@ -98,6 +98,18 @@ function SafeText ( $String ) {
 	return htmlspecialchars(trim((string) $String), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 }
 
+// Taille de la file de construction des batiments et unites par commande au chantier spatial et a la defense :
+// reglages de la Configuration (5 et 1 000 par defaut, les valeurs de l'original), dans les bornes de constants.php
+function BuildingQueueSize () {
+	global $game_config;
+	return max(1, min(MAX_BUILDING_QUEUE_LIMIT, intval($game_config['max_building_queue'] ?? MAX_BUILDING_QUEUE_SIZE)));
+}
+
+function OrderUnitsMax () {
+	global $game_config;
+	return max(1, min(MAX_ORDER_UNITS_LIMIT, intval($game_config['max_order_units'] ?? MAX_FLEET_OR_DEFS_PER_ROW)));
+}
+
 // Adresse web : uniquement http(s), sans espace ni guillemet (interdit javascript:, data:...). Sinon chaine vide.
 function SafeUrl ( $Url ) {
 	$Url = trim((string) $Url);

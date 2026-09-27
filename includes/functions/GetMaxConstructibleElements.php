@@ -57,7 +57,7 @@ function GetMaxConstructibleElements ($Element, $Ressources) {
 }
 
 // XNova Renaissance : lien « max. N » sous la quantite (chantier spatial, defense) ; le maximum est calcule par la page
-// avec les memes regles que la commande (ressources, MAX_FLEET_OR_DEFS_PER_ROW, boucliers, silo)
+// avec les memes regles que la commande (ressources, OrderUnitsMax(), boucliers, silo)
 function ElementMaxLink ( $Element, $Max ) {
 	global $lang;
 	if ($Max < 1) {

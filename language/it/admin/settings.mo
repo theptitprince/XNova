@@ -60,4 +60,8 @@ $lang['enable_the_captcha'] = 'Captcha all\'iscrizione';
 // XNova Renaissance 0.9h : recalcul de ce qui est en cours quand les vitesses changent
 $lang['adm_opt_recalc'] = 'Velocità modificate, ciò che è in corso è stato ricalcolato: %d pianeta/i con costruzioni, %d ricerca/he, %d flotta/e, %d attacco/hi di missili.';
 
+// XNova Renaissance 0.9h : taille des files reglable
+$lang['adm_opt_building_queue'] = 'Lunghezza della coda di costruzione<br>(edifici, da 1 a 99)';
+$lang['adm_opt_order_units'] = 'Unità per ordine<br>(cantiere spaziale e difesa, da 1 a 1 000 000)';
+
 ?>

@@ -46,7 +46,7 @@ function DefenseMissilesInSilo ( $CurrentPlanet ) {
 // Maximum commandable d'une defense (lien « max. N ») : memes limites que la commande
 function DefenseMaxElements ( $CurrentPlanet, $Element, $Missiles ) {
 	global $resource;
-	$Max = min(GetMaxConstructibleElements($Element, $CurrentPlanet), MAX_FLEET_OR_DEFS_PER_ROW);
+	$Max = min(GetMaxConstructibleElements($Element, $CurrentPlanet), OrderUnitsMax());
 	if ($Element == 407 || $Element == 408) {
 		$Max = min($Max, 1);
 	} elseif ($Element == 502 || $Element == 503) {
@@ -77,8 +77,8 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 
 			$Element = intval($Element);
 			$Count   = max(0, intval($Count)); // pas de quantite negative (sinon remboursement de ressources)
-			if ($Count > MAX_FLEET_OR_DEFS_PER_ROW) {
-				$Count = MAX_FLEET_OR_DEFS_PER_ROW;
+			if ($Count > OrderUnitsMax()) {
+				$Count = OrderUnitsMax();
 			}
 
 
@@ -185,7 +185,7 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 						$PageTable .= "<font color=\"red\">".$lang['only_one']."</font>";
 					} else {
 						$TabIndex++;
-						$PageTable .= "<input type=text name=fmenge[".$Element."] alt='".$lang['tech'][$Element]."' size=5 maxlength=5 value=0 tabindex=".$TabIndex.">";
+						$PageTable .= "<input type=text name=fmenge[".$Element."] alt='".$lang['tech'][$Element]."' size=5 maxlength=".strlen(OrderUnitsMax())." value=0 tabindex=".$TabIndex.">";
 						$PageTable .= ElementMaxLink($Element, DefenseMaxElements($CurrentPlanet, $Element, $Missiles));
 					}
 				}

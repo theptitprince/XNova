@@ -25,6 +25,12 @@
 	<th>{adm_opt_game_fspeed}</th>
 	<th><input name="fleet_speed" size="12" value="{fleet_speed}" type="text"></th>
 </tr><tr>
+	<th>{adm_opt_building_queue}</th>
+	<th><input name="max_building_queue" size="12" value="{max_building_queue}" type="text"></th>
+</tr><tr>
+	<th>{adm_opt_order_units}</th>
+	<th><input name="max_order_units" size="12" value="{max_order_units}" type="text"></th>
+</tr><tr>
 	<th>{adm_opt_noob}</th>
 	<th><input name="noobprotection"{noobprotection} type="checkbox"></th>
 </tr><tr>

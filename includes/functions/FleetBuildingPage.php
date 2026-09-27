@@ -33,8 +33,8 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 
 			$Element = intval($Element);
 			$Count   = max(0, intval($Count)); // pas de quantite negative (sinon remboursement de ressources)
-			if ($Count > MAX_FLEET_OR_DEFS_PER_ROW) {
-				$Count = MAX_FLEET_OR_DEFS_PER_ROW;
+			if ($Count > OrderUnitsMax()) {
+				$Count = OrderUnitsMax();
 			}
 
 			if ($Count != 0) {
@@ -107,8 +107,8 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 				// Si ... Et Seulement si je peux construire je mets la p'tite zone de saisie
 				if ($CanBuildOne) {
 					$TabIndex++;
-					$PageTable .= "<input type=text name=fmenge[".$Element."] alt='".$lang['tech'][$Element]."' size=5 maxlength=5 value=0 tabindex=".$TabIndex.">";
-					$PageTable .= ElementMaxLink($Element, min(GetMaxConstructibleElements($Element, $CurrentPlanet), MAX_FLEET_OR_DEFS_PER_ROW));
+					$PageTable .= "<input type=text name=fmenge[".$Element."] alt='".$lang['tech'][$Element]."' size=5 maxlength=".strlen(OrderUnitsMax())." value=0 tabindex=".$TabIndex.">";
+					$PageTable .= ElementMaxLink($Element, min(GetMaxConstructibleElements($Element, $CurrentPlanet), OrderUnitsMax()));
 				}
 				$PageTable .= "</th>";
 
