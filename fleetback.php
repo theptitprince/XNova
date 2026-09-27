@@ -43,10 +43,15 @@ define('INSTALL' , false);
 				$QryUpdateFleet .= "`fleet_end_stay` = '0', ";
 				$QryUpdateFleet .= "`fleet_end_time` = '". ($ReturnFlyingTime + 1) ."', ";
 				$QryUpdateFleet .= "`fleet_target_owner` = '". $user['id'] ."', ";
+				$QryUpdateFleet .= "`fleet_group` = '0', ";
 				$QryUpdateFleet .= "`fleet_mess` = '1' ";
 				$QryUpdateFleet .= "WHERE ";
 				$QryUpdateFleet .= "`fleet_id` = '" . $fleetid . "';";
 				doquery( $QryUpdateFleet, 'fleets');
+				// Attaque groupee (0.9i) : la flotte rappelee quitte son groupe, les autres continuent ; groupe vide supprime
+				if ($FleetRow['fleet_group'] > 0) {
+					AcsDeleteIfEmpty($FleetRow['fleet_group']);
+				}
 
 				$BoxTitle   = $lang['fl_sback'];
 				$TxtColor   = "lime";

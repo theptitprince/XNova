@@ -64,6 +64,8 @@ function DeleteSelectedUser ( $UserID ) {
 	doquery ( "DELETE FROM {{table}} WHERE `message_owner` = '" . $UserID . "';", 'messages' );
 	doquery ( "DELETE FROM {{table}} WHERE `owner` = '" . $UserID . "';", 'notes' );
 	doquery ( "DELETE FROM {{table}} WHERE `fleet_owner` = '" . $UserID . "';", 'fleets' );
+	// Attaques groupees restees sans flotte (0.9i)
+	doquery ( "DELETE a FROM {{table}}aks a LEFT JOIN {{table}}fleets f ON f.`fleet_group` = a.`id` WHERE f.`fleet_id` IS NULL;", '' );
 	doquery ( "DELETE FROM {{table}} WHERE `id_owner1` = '" . $UserID . "';", 'rw' );
 	doquery ( "DELETE FROM {{table}} WHERE `id_owner2` = '" . $UserID . "';", 'rw' );
 	doquery ( "DELETE FROM {{table}} WHERE `sender` = '" . $UserID . "';", 'buddy' );

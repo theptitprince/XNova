@@ -167,4 +167,34 @@ $lang['res']['fleet'][215] = 'Schlachtkreuzer';
 // XNova Renaissance 0.9h : protection des debutants, joueur qui envoie protege
 $lang['fl_noob_mess_s'] = 'Der Spieler ist zu stark für dich!';
 
+// XNova Renaissance 0.9i : Verbandsangriff, Seite des Verbands (verband.php)
+$lang['fl_acs_title'] = 'Kampfverband %s';
+$lang['fl_acs_target'] = 'Ziel';
+$lang['fl_acs_arrival'] = 'Ankunft';
+$lang['fl_acs_owner'] = 'Verbandsführer';
+$lang['fl_acs_rename'] = 'Verband umbenennen';
+$lang['fl_acs_fleets'] = 'Flotten des Verbands';
+$lang['fl_acs_player'] = 'Spieler';
+$lang['fl_acs_ships'] = 'Schiffe';
+$lang['fl_acs_from'] = 'Start';
+$lang['fl_acs_invited'] = 'Eingeladene Teilnehmer';
+$lang['fl_acs_invite'] = 'Teilnehmer einladen';
+$lang['fl_acs_invite_help'] = 'Deine Freunde und Allianzmitglieder: höchstens 4 Eingeladene (5 Spieler mit dir).';
+$lang['fl_acs_nobody'] = 'Noch niemand eingeladen.';
+$lang['fl_acs_join_help'] = 'Um teilzunehmen, schicke eine Flotte über die Flottenseite und wähle diesen Verband als Ziel.';
+$lang['fl_acs_back'] = 'Zurück zur Flottenseite';
+$lang['fl_acs_not_found'] = 'Dieser Verband existiert nicht (mehr).';
+$lang['fl_acs_bad_fleet'] = 'Nur ein Angriff, der noch unterwegs ist, kann einen Verband bilden.';
+$lang['fl_acs_name_bad'] = 'Name abgelehnt: 1 bis 20 Buchstaben, Ziffern, Leerzeichen, Punkte oder Bindestriche.';
+$lang['fl_acs_renamed'] = 'Der Verband heißt jetzt %s.';
+$lang['fl_acs_no_player'] = 'Dieser Spieler existiert nicht.';
+$lang['fl_acs_already'] = 'Dieser Spieler gehört bereits zum Verband.';
+$lang['fl_acs_not_ally'] = 'Du kannst nur deine Freunde und Allianzmitglieder einladen.';
+$lang['fl_acs_full'] = 'Der Verband ist voll (höchstens 5 Spieler).';
+$lang['fl_acs_invited_ok'] = '%s ist eingeladen.';
+$lang['fl_acs_invite_subject'] = 'Einladung zu einem Verbandsangriff';
+$lang['fl_acs_invite_text'] = '%s lädt dich zum Verbandsangriff %s auf %s [%s:%s:%s] ein, Ankunft am %s. Um teilzunehmen, schicke eine Flotte über die Flottenseite und wähle diesen Verband als Ziel.';
+$lang['fl_acs_moon'] = '(Mond)';
+$lang['fl_acs_deleted'] = '(Konto gelöscht)';
+
 ?>

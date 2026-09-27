@@ -79,7 +79,7 @@ $lang['fl_noob_mess_n'] = "Il giocatore è troppo debole!";
 $lang['fl_noenoughtgoods'] = "Troppe poche risorse!";
 $lang['fl_bad_planet01'] = "Questo pianeta è popolato!";
 $lang['fl_bad_planet02'] = "Questo pianeta è stato già occupato!";
-$lang['fl_dont_stay_here'] = "Nonp uoi stazionare la tua flotta da un nemico!";
+$lang['fl_dont_stay_here'] = "Non puoi stazionare la tua flotta da un nemico!";
 $lang['fl_no_allydeposit'] = "Nessuna base di appoggio su questo pianeta!";
 $lang['fl_no_self_attack'] = "Non puoi attaccare te stesso!";
 $lang['fl_no_self_spy'] = "Non puoi spiare te stesso!";
@@ -150,5 +150,35 @@ $lang['fs_not_found'] = 'Questa scorciatoia non esiste.';
 
 // XNova Renaissance 0.9h : protection des debutants, joueur qui envoie protege
 $lang['fl_noob_mess_s'] = 'Il giocatore è troppo forte per te!';
+
+// XNova Renaissance 0.9i : attacco di gruppo, pagina del gruppo (verband.php)
+$lang['fl_acs_title'] = 'Gruppo di flotte %s';
+$lang['fl_acs_target'] = 'Obiettivo';
+$lang['fl_acs_arrival'] = 'Arrivo';
+$lang['fl_acs_owner'] = 'Capo del gruppo';
+$lang['fl_acs_rename'] = 'Cambia il nome del gruppo';
+$lang['fl_acs_fleets'] = 'Flotte del gruppo';
+$lang['fl_acs_player'] = 'Giocatore';
+$lang['fl_acs_ships'] = 'Navi';
+$lang['fl_acs_from'] = 'Partenza';
+$lang['fl_acs_invited'] = 'Partecipanti invitati';
+$lang['fl_acs_invite'] = 'Invita partecipanti';
+$lang['fl_acs_invite_help'] = 'I tuoi amici e i membri della tua alleanza: al massimo 4 invitati (5 giocatori con te).';
+$lang['fl_acs_nobody'] = 'Nessuno è ancora invitato.';
+$lang['fl_acs_join_help'] = 'Per partecipare, invia una flotta dalla pagina Flotta e scegli questo gruppo come obiettivo.';
+$lang['fl_acs_back'] = 'Torna alla pagina Flotta';
+$lang['fl_acs_not_found'] = 'Questo attacco di gruppo non esiste (o non esiste più).';
+$lang['fl_acs_bad_fleet'] = 'Solo un attacco ancora in viaggio può formare un gruppo.';
+$lang['fl_acs_name_bad'] = 'Nome rifiutato: da 1 a 20 lettere, cifre, spazi, punti o trattini.';
+$lang['fl_acs_renamed'] = 'Il gruppo ora si chiama %s.';
+$lang['fl_acs_no_player'] = 'Questo giocatore non esiste.';
+$lang['fl_acs_already'] = 'Questo giocatore fa già parte del gruppo.';
+$lang['fl_acs_not_ally'] = 'Puoi invitare solo i tuoi amici e i membri della tua alleanza.';
+$lang['fl_acs_full'] = 'Il gruppo è al completo (al massimo 5 giocatori).';
+$lang['fl_acs_invited_ok'] = '%s è invitato.';
+$lang['fl_acs_invite_subject'] = 'Invito a un attacco di gruppo';
+$lang['fl_acs_invite_text'] = '%s ti invita all\'attacco di gruppo %s contro %s [%s:%s:%s], arrivo previsto il %s. Per partecipare, invia una flotta dalla pagina Flotta e scegli questo gruppo come obiettivo.';
+$lang['fl_acs_moon'] = '(Luna)';
+$lang['fl_acs_deleted'] = '(account eliminato)';
 
 ?>

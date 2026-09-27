@@ -20,17 +20,20 @@
 	
 	
 	
-	// Table aks
+	// Table aks : attaques groupees (0.9i, verband.php). Colonnes d'origine (noms allemands d'UGamela) : nom, arrivee
+	// commune (ankunft), cible (galaxy, system, planet), invites (eingeladen : numeros des joueurs separes par des
+	// virgules) ; ajoutees en 0.9i : chef du groupe (owner) et type de la cible (planet_type). Les flottes du groupe
+	// portent son numero (fleets.fleet_group) ; teilnehmer et flotten, jamais utilises, en sont deduits.
 	$QryTableAks         = "CREATE TABLE `{{table}}` ( ";
 	$QryTableAks        .= "`id` bigint(20) unsigned NOT NULL auto_increment, ";
 	$QryTableAks        .= "`name` varchar(50) default NULL, ";
-	$QryTableAks        .= "`teilnehmer` text, ";
-	$QryTableAks        .= "`flotten` text, ";
+	$QryTableAks        .= "`owner` int(11) NOT NULL default '0', ";
 	$QryTableAks        .= "`ankunft` int(32) default NULL, ";
 	$QryTableAks        .= "`galaxy` int(2) default NULL, ";
 	$QryTableAks        .= "`system` int(4) default NULL, ";
 	$QryTableAks        .= "`planet` int(2) default NULL, ";
-	$QryTableAks        .= "`eingeladen` int(11) default NULL, ";
+	$QryTableAks        .= "`planet_type` int(2) NOT NULL default '1', ";
+	$QryTableAks        .= "`eingeladen` text, ";
 	$QryTableAks        .= "PRIMARY KEY  (`id`) ";
 	$QryTableAks        .= ") ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 
