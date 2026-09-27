@@ -32,7 +32,7 @@
 	</tr>
 	<tr>
 	  <th>{main_page}</th>
-	  <th><a href="{ally_web}">{ally_web}</a></th>
+	  <th><a href="{ally_web}" target="_blank" rel="noopener">{ally_web}</a></th>
 	</tr>
 	<tr>
 	  <td class=c colspan=2>{inner_section}</th>

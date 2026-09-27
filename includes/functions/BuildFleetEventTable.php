@@ -138,7 +138,7 @@ function BuildFleetEventTable ( $FleetRow, $Status, $Owner, $Label, $Record ) {
 		$Rest         = $Time - time();
 		$EventString .= $lang['ov_vennant']; // ' venant '
 		$EventString .= $StartID;
-		$EventString .= $lang['ov_explo_stay']; // ' explore '
+		$EventString .= ($MissionType == 5) ? $lang['ov_hold_stay'] : $lang['ov_explo_stay']; // ' stationne sur ' / ' explore '
 		$EventString .= $TargetID;
 		$EventString .= $lang['ov_explo_mission']; // '. Elle a pour mission: '
 	} elseif ($Status == 2) {

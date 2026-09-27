@@ -158,7 +158,7 @@ if (($_GET['mode'] ?? null) == 'ainfo') {
 	if ($ally_web != "") {
 		$ally_web = "<tr>
 		<th>{$lang['initial_page']}</th>
-		<th><a href=\"{$ally_web}\">{$ally_web}</a></th>
+		<th><a href=\"{$ally_web}\" target=\"_blank\" rel=\"noopener\">{$ally_web}</a></th>
 		</tr>";
 	}
 
@@ -768,6 +768,7 @@ array(1 =>
 			$lang['text'] = $ally['ally_description'];
 		}
 		$lang['t'] = $t;
+		$lang['cnt_chars'] = mb_strlen(html_entity_decode((string) $lang['text'], ENT_QUOTES, 'UTF-8'), 'UTF-8');
 
 		$lang['ally_web'] = $ally['ally_web'];
 		$lang['ally_image'] = $ally['ally_image'];
