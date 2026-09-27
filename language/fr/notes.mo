@@ -34,10 +34,10 @@ $lang['there_is_no_note'] = 'Il n\'y a pas de notes';
 
 $lang['note_updated'] = 'La note a &eacute;t&eacute; r&eacute;actualis&eacute;e, <a href="notes.php"><blink>redirection...</blink></a>';
 
-$lang['note_added'] = 'La note a bien &eacute;t&eacute; cr&eacute;&eacute;e,<a href="notes.php"><blink>redirection...</blink></a>';
+$lang['note_added'] = 'La note a bien &eacute;t&eacute; cr&eacute;&eacute;e, <a href="notes.php"><blink>redirection...</blink></a>';
 
 $lang['note_deleted'] = 'La note a &eacute;t&eacute; supprim&eacute;e, <a href="notes.php"><blink>redirection...</blink></a>';
-$lang['note_deleteds'] = 'Les notes ont &eacute;t&eacute; supprim&eacute;, <a href="notes.php"><blink>redirection...</blink></a>';
+$lang['note_deleteds'] = 'Les notes ont &eacute;t&eacute; supprim&eacute;es, <a href="notes.php"><blink>redirection...</blink></a>';
 
 // Created by Perberos. All rights reversed (C) 2006 
 
