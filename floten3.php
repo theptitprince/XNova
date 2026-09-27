@@ -535,9 +535,6 @@ include($xnova_root_path . 'common.' . $phpEx);
 	}
 	$page .= "</tr></table></div></center>";
 
-	// Provisoire
-	sleep (1);
-
 	$planetrow = doquery ("SELECT * FROM {{table}} WHERE `id` = '". $CurrentPlanet['id'] ."';", 'planets', true);
 
 	display($page, $lang['fl_title']);

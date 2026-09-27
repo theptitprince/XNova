@@ -68,7 +68,6 @@ $lang['adm_unban'] = 'Entsperren';
 $lang['adm_chat'] = 'Chat-Verwaltung';
 $lang['adm_updpt'] = 'Punkte aktualisieren';
 $lang['adm_msg'] = 'Nachrichtenliste';
-$lang['adm_md5'] = 'Verschlüsselungs-Tool';
 $lang['adm_build'] = 'Bauschleife';
 $lang['adm_error'] = 'Fehler';
 $lang['adm_contact'] = 'Kontaktnachrichten';

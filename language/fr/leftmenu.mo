@@ -79,7 +79,6 @@ $lang['adm_unban']    = 'D&eacute;bannir';
 $lang['adm_chat']     = 'Administration chat';
 $lang['adm_updpt']    = 'Actualiser points';
 $lang['adm_msg']      = 'Liste des messages';
-$lang['adm_md5']      = 'Outil cryptage';
 $lang['adm_build']    = 'Queue fabrication';
 
 $lang['adm_error']    = 'Erreurs';

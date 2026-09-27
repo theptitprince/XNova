@@ -7,55 +7,6 @@ $lang['points_dispo'] = 'Verfügbare Offizierspunkte: ';
 $lang['maxlvl'] = 'Maximale Stufe erreicht!';
 $lang['officier_label'] = "Offiziere";
 
-$lang['officier1'] = 'Geologe';
-$lang['officier2'] = 'Admiral';
-$lang['officier3'] = 'Ingenieur';
-$lang['officier4'] = 'Technologe';
-$lang['officier5'] = 'Konstrukteur';
-$lang['officier6'] = 'Wissenschaftler';
-$lang['officier7'] = 'Lagermeister';
-$lang['officier8'] = 'Verteidiger';
-$lang['officier9'] = 'Bunker';
-$lang['officier10'] = 'Spion';
-$lang['officier11'] = 'Kommandant';
-$lang['officier12'] = 'Zerstörer';
-$lang['officier13'] = 'General';
-$lang['officier14'] = 'Raider';
-$lang['officier15'] = 'Imperator';
-
-$lang['link1'] = 'Geologen rekrutieren';
-$lang['link2'] = 'Admiral rekrutieren';
-$lang['link3'] = 'Ingenieur rekrutieren';
-$lang['link4'] = 'Technologen rekrutieren';
-$lang['link5'] = 'Konstrukteur rekrutieren';
-$lang['link6'] = 'Wissenschaftler rekrutieren';
-$lang['link7'] = 'Lagermeister rekrutieren';
-$lang['link8'] = 'Verteidiger rekrutieren';
-$lang['link9'] = 'Bunker werden';
-$lang['link10'] = 'Spion rekrutieren';
-$lang['link11'] = 'Kommandanten rekrutieren';
-$lang['link12'] = 'Zerstörer rekrutieren';
-$lang['link13'] = 'General rekrutieren';
-$lang['link14'] = 'Raider werden';
-$lang['link15'] = 'Imperator werden';
-
-
-$lang['desc_offi1'] = '<br><br>Der Geologe ist ein anerkannter Experte für Astromineralogie und Astrokristallografie. Mit seinem Team aus Metallurgen und Chemieingenieuren unterstützt er interplanetare Regierungen bei der Suche nach neuen Rohstoffquellen und optimiert deren Raffination.<br><br><font color="red">+5% Produktion. Max. Stufe: 20</font>';
-$lang['desc_offi2'] = '<br><br>Der Flottenadmiral ist ein Kriegsveteran und ein gefürchteter Stratege. Selbst in erbitterten Gefechten bewahrt er die nötige Kaltblütigkeit, um die Lage zu beherrschen, und steht in ständigem Kontakt mit den Admiralen unter seinem Kommando. Ein verantwortungsvoller Imperator kann bei der Koordination seiner Angriffe nicht auf den Flottenadmiral verzichten und vertraut ihm so sehr, dass er mehr Flotten in den Kampf schicken kann.<br><br><font color="red">+5% auf Schilde, Panzerung und Waffen der Schiffe. Max. Stufe: 20</font>';
-$lang['desc_offi3'] = '<br><br>Der Ingenieur ist ein Spezialist für Energiemanagement. In Friedenszeiten optimiert er die Effizienz der Energienetze der Kolonien.<br><br><font color="red">+5% Energie. Max. Stufe: 10</font>';
-$lang['desc_offi4'] = '<br><br>Die Gilden der Technologen bestehen aus Wissenschaftlern von anerkanntem Genie. Man findet sie überall dort, wo die Technik an ihre Grenzen stößt. Niemand wird je die Verschlüsselung eines Technologen knacken, und allein seine Anwesenheit inspiriert die Forscher des ganzen Imperiums.<br><br><font color="red">-5% Bauzeit für Schiffe. Max. Stufe: 10</font>';
-$lang['desc_offi5'] = '<br><br>Der Konstrukteur ist eine neue Art von Baumeister. Seine DNA wurde verändert, um ihm übermenschliche Kräfte zu verleihen. Ein einziger dieser „Männer“ kann eine ganze Stadt errichten.<br><br><font color="red">-10% Bauzeit. Max. Stufe: 3</font>';
-$lang['desc_offi6'] = '<br><br>Die Wissenschaftler gehören einer Gilde an, die mit der Gilde der Technologen konkurriert. Sie sind auf die Verbesserung von Technologien spezialisiert.<br><br><font color="red">-10% Forschungszeit. Max. Stufe: 3</font>';
-$lang['desc_offi7'] = '<br><br>Der Lagermeister gehört der alten Bruderschaft des Planeten Hsac an. Sein Leitspruch lautet, so viel wie möglich zu verdienen, doch dafür braucht er große Lagerflächen. Deshalb hat er mit Hilfe des Konstrukteurs eine neue Lagertechnik entwickelt.<br><br><font color="red">+50% Lagerkapazität. Max. Stufe: 2</font>';
-$lang['desc_offi8'] = '<br><br>Der Verteidiger ist Mitglied der imperialen Armee. Dank seines Arbeitseifers kann er in bedrohten Kolonien in kurzer Zeit eine gefürchtete Verteidigung errichten.<br><br><font color="red">-50% Bauzeit für Verteidigungsanlagen.</font>';
-$lang['desc_offi9'] = '<br><br>Der Imperator hat die beeindruckende Arbeit bemerkt, die du für sein Imperium geleistet hast. Als Dank bietet er dir die Chance, Bunker zu werden. Der Bunker ist die höchste Auszeichnung im Bergbauzweig der imperialen Armee.<br><br><font color="red">Schaltet den Planetenbeschützer frei</font> ';
-$lang['desc_offi10'] = '<br><br>Der Spion ist eine rätselhafte Person. Niemand hat je sein wahres Gesicht gesehen – es sei denn, er ist bereits tot.<br><br>+5 Stufen Spionagetechnik. Max. Stufe: 2<font color="red"></font>';
-$lang['desc_offi11'] = '<br><br>Der Kommandant der imperialen Armee ist ein Meister in der Kunst der Flottenführung. Sein Gehirn kann die Flugbahnen zahlreicher Flotten berechnen, weit mehr als das eines gewöhnlichen Menschen.<br><br>+3 Flottenslots. Max. Stufe: 2<font color="red"></font> ';
-$lang['desc_offi12'] = '<br><br>Der Zerstörer ist ein gnadenloser Offizier. Er hat ganze Planeten nur zu seinem Vergnügen ausgelöscht. Derzeit entwickelt er eine neue Produktionsmethode für Todessterne.<br><br>2 Todessterne statt einem gebaut. Max. Stufe: 1<font color="red"></font>';
-$lang['desc_offi13'] = '<br><br>Der General ist eine ehrwürdige Persönlichkeit, die viele Jahre in der Armee gedient hat. In seiner Gegenwart arbeiten die Schiffsbauer schneller.<br><br>+25% Schiffsgeschwindigkeit. Max. Stufe: 3<font color="red"></font>';
-$lang['desc_offi14'] = '<br><br>Der Imperator hat in dir unbestreitbare Qualitäten eines Eroberers erkannt. Er bietet dir an, Raider zu werden. Der Raider ist der höchste Rang im Raider-Zweig der imperialen Armee.<br><br>Schaltet die SuperNova frei<font color="red"></font>';
-$lang['descoffi15'] = '<br><br>Du hast gezeigt, dass du der größte Eroberer des Universums bist. Es ist Zeit, den Platz einzunehmen, der dir zusteht.<br><br>Schaltet den Planetenzerstörer frei<font color="red"></font>';
-
 // XNova Renaissance 0.9g : traductions
 $lang['off_tx_lvl'] = 'Aktuelle Stufe: ';
 $lang['off_points'] = 'Verfügbare Offizierspunkte: ';
