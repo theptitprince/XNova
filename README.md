@@ -1,10 +1,10 @@
 <div align="center">
 
-# XNova — 0.9h Renaissance
+# XNova — 0.9i Renaissance
 
 **Le jeu de stratégie spatiale XNova, repris là où l'équipe d'origine s'était arrêtée.**
 
-![Version](https://img.shields.io/badge/version-0.9h%20Renaissance-2ea44f)
+![Version](https://img.shields.io/badge/version-0.9i%20Renaissance-2ea44f)
 ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-10.6%2B-003545?logo=mariadb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8%2B-4479A1?logo=mysql&logoColor=white)
@@ -122,7 +122,7 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 | **0.9f** | Protection des formulaires (XSS, CSRF), formulaire de contact vers l'administration, mise à jour depuis la 0.8e d'origine, partie complète testée jusqu'à la création de lune (bugs d'origine corrigés) | ✅ Terminée |
 | **0.9g** | Bugs restants et avertissements PHP, mot de passe oublié par lien de confirmation, affichage des colonies ; traductions complètes (allemand, espagnol, italien), base en utf8mb4, installeur verrouillé et harmonisé, nettoyage (conventions de nommage, textes, pages) ; partie complète retestée (lune, missiles, alliance, administration) | ✅ Terminée |
 | **0.9h** | Fonctions laissées inachevées dans l'original : « Supprimer un joueur » et liste des multi-comptes, suppression de compte demandée par le joueur, officiers sans effet, heures d'arrivée des flottes, négociant, signalement ; compteur de ressources en direct, boutons « Max », captcha ; protection des débutants complétée, débris des combats corrigés ; partie complète retestée sur une installation neuve | ✅ Terminée |
-| **0.9i** | Attaque groupée : prévue dans la 0.8e mais jamais programmée (groupe, invitations, flottes synchronisées), nouveau moteur de combat à plusieurs attaquants donnant les mêmes résultats que l'original | 🔜 |
+| **0.9i** | Attaque groupée : prévue dans la 0.8e mais jamais programmée (groupe, invitations, flottes synchronisées) ; défense groupée par les flottes alliées en stationnement ; nouveau moteur de combat à plusieurs participants, mêmes résultats que l'original (prouvé sur 40 000 combats), tout le jeu sous AGPL ; Protection des vaisseaux enfin prise en compte ; partie complète retestée dans le navigateur | ✅ Terminée |
 | — | Mise en page sans *frames* (menu intégré à chaque page, fond d'écran pleine largeur) | ⏸️ En attente |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 
