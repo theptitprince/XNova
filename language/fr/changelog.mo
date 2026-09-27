@@ -14,6 +14,7 @@ $lang['changelog']   = array(
 - ADD : Heures d\'arriv&eacute;e et de retour &agrave; l\'envoi d\'une flotte
 - ADD : Boutons &laquo; max &raquo; au chantier spatial et &agrave; la d&eacute;fense
 - ADD : Administration : supprimer un joueur, multi-comptes, messages signal&eacute;s, message &agrave; tous
+- ADD : Changement de vitesse appliqu&eacute; aux constructions et flottes en cours
 - MOD : R&ocirc;les du staff, menu d\'administration selon le rang
 - FIX : Officiers Destructeur et G&eacute;n&eacute;ral
 - FIX : Production des ressources, chantier spatial, boucliers

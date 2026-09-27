@@ -92,5 +92,6 @@ include($xnova_root_path . 'includes/functions/BuildFleetEventTable.'.$phpEx);
 include($xnova_root_path . 'includes/functions/ResetThisFuckingCheater.'.$phpEx);
 include($xnova_root_path . 'includes/functions/IsVacationMode.'.$phpEx);
 include($xnova_root_path . 'includes/functions/RegistrationCaptcha.'.$phpEx);
+include($xnova_root_path . 'includes/functions/RecalculateRunningQueues.'.$phpEx);
 
 ?>
