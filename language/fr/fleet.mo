@@ -151,4 +151,34 @@ $lang['fs_not_found'] = 'Ce raccourci n\'existe pas.';
 // XNova Renaissance 0.9h : protection des debutants, joueur qui envoie protege
 $lang['fl_noob_mess_s'] = 'Le joueur est trop fort pour vous !';
 
+// XNova Renaissance 0.9i : attaque groupée, page du groupe (verband.php)
+$lang['fl_acs_title'] = 'Association de flotte %s';
+$lang['fl_acs_target'] = 'Cible';
+$lang['fl_acs_arrival'] = 'Arriv&eacute;e';
+$lang['fl_acs_owner'] = 'Chef du groupe';
+$lang['fl_acs_rename'] = 'Modifier le nom de l\'association';
+$lang['fl_acs_fleets'] = 'Flottes du groupe';
+$lang['fl_acs_player'] = 'Joueur';
+$lang['fl_acs_ships'] = 'Vaisseaux';
+$lang['fl_acs_from'] = 'D&eacute;part';
+$lang['fl_acs_invited'] = 'Invit&eacute;s participants';
+$lang['fl_acs_invite'] = 'Inviter des participants';
+$lang['fl_acs_invite_help'] = 'Vos amis et les membres de votre alliance : 4 invit&eacute;s au plus (5 joueurs avec vous).';
+$lang['fl_acs_nobody'] = 'Personne n\'est encore invit&eacute;.';
+$lang['fl_acs_join_help'] = 'Pour participer, envoyez une flotte depuis la page Flotte et choisissez ce groupe parmi les cibles.';
+$lang['fl_acs_back'] = 'Retour &agrave; la page Flotte';
+$lang['fl_acs_not_found'] = 'Cette attaque group&eacute;e n\'existe pas (ou plus).';
+$lang['fl_acs_bad_fleet'] = 'Seule une attaque encore en route peut former un groupe.';
+$lang['fl_acs_name_bad'] = 'Nom refus&eacute; : 1 &agrave; 20 lettres, chiffres, espaces, points ou tirets.';
+$lang['fl_acs_renamed'] = 'Le groupe s\'appelle maintenant %s.';
+$lang['fl_acs_no_player'] = 'Ce joueur n\'existe pas.';
+$lang['fl_acs_already'] = 'Ce joueur fait d&eacute;j&agrave; partie du groupe.';
+$lang['fl_acs_not_ally'] = 'Vous ne pouvez inviter que vos amis et les membres de votre alliance.';
+$lang['fl_acs_full'] = 'Le groupe est complet (5 joueurs au plus).';
+$lang['fl_acs_invited_ok'] = '%s est invit&eacute;.';
+$lang['fl_acs_invite_subject'] = 'Invitation &agrave; une attaque group&eacute;e';
+$lang['fl_acs_invite_text'] = '%s vous invite &agrave; l\'attaque group&eacute;e %s contre %s [%s:%s:%s], arriv&eacute;e pr&eacute;vue le %s. Pour y participer, envoyez une flotte depuis la page Flotte et choisissez ce groupe parmi les cibles.';
+$lang['fl_acs_moon'] = '(Lune)';
+$lang['fl_acs_deleted'] = '(compte supprim&eacute;)';
+
 ?>

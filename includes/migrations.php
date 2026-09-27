@@ -14,7 +14,7 @@
 if (!defined('INSIDE')) { die('attemp hacking'); }
 
 // Version du schema de base installee par cette version du jeu
-define('RENAISSANCE_DB_VERSION', '0.9h');
+define('RENAISSANCE_DB_VERSION', '0.9i');
 
 // Nom de la ligne de la table config qui memorise la version du schema
 define('RENAISSANCE_DB_VERSION_KEY', 'renaissance_db_version');
@@ -116,6 +116,25 @@ $RenaissanceMigrations = array(
 		// Protection des planetes (option du staff) reservee aux administrateurs : retiree aux autres comptes
 		"UPDATE `{{prefix}}planets` p, `{{prefix}}users` u SET p.`id_level` = 0
 			WHERE p.`id_owner` = u.`id` AND u.`authlevel` < 3 AND p.`id_level` > 0;",
+	),
+	'0.9i' => array(
+		// Attaque groupee (verband.php) : la table aks de la 0.8e n'avait jamais servi (la maquette d'origine y ecrivait
+		// des groupes sans suite, avec la position de depart au lieu de la cible). Recreee avec le chef du groupe, le type
+		// de la cible et la liste des invites ; flottes detachees des groupes laisses par la maquette.
+		"DROP TABLE IF EXISTS `{{prefix}}aks`;",
+		"CREATE TABLE `{{prefix}}aks` (
+			`id` bigint(20) unsigned NOT NULL auto_increment,
+			`name` varchar(50) default NULL,
+			`owner` int(11) NOT NULL default '0',
+			`ankunft` int(32) default NULL,
+			`galaxy` int(2) default NULL,
+			`system` int(4) default NULL,
+			`planet` int(2) default NULL,
+			`planet_type` int(2) NOT NULL default '1',
+			`eingeladen` text,
+			PRIMARY KEY (`id`)
+		) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
+		"UPDATE `{{prefix}}fleets` SET `fleet_group` = 0 WHERE `fleet_group` <> 0;",
 	),
 );
 

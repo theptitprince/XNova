@@ -167,4 +167,34 @@ $lang['res']['fleet'][215] = 'Acorazado';
 // XNova Renaissance 0.9h : protection des debutants, joueur qui envoie protege
 $lang['fl_noob_mess_s'] = '¡El jugador es demasiado fuerte para usted!';
 
+// XNova Renaissance 0.9i : ataque de confederación, página de la confederación (verband.php)
+$lang['fl_acs_title'] = 'Confederación de flotas %s';
+$lang['fl_acs_target'] = 'Objetivo';
+$lang['fl_acs_arrival'] = 'Llegada';
+$lang['fl_acs_owner'] = 'Jefe de la confederación';
+$lang['fl_acs_rename'] = 'Cambiar el nombre de la confederación';
+$lang['fl_acs_fleets'] = 'Flotas de la confederación';
+$lang['fl_acs_player'] = 'Jugador';
+$lang['fl_acs_ships'] = 'Naves';
+$lang['fl_acs_from'] = 'Salida';
+$lang['fl_acs_invited'] = 'Participantes invitados';
+$lang['fl_acs_invite'] = 'Invitar participantes';
+$lang['fl_acs_invite_help'] = 'Tus amigos y los miembros de tu alianza: 4 invitados como máximo (5 jugadores contigo).';
+$lang['fl_acs_nobody'] = 'Todavía no hay nadie invitado.';
+$lang['fl_acs_join_help'] = 'Para participar, envía una flota desde la página Flota y elige esta confederación como objetivo.';
+$lang['fl_acs_back'] = 'Volver a la página Flota';
+$lang['fl_acs_not_found'] = 'Esta confederación no existe (o ya no existe).';
+$lang['fl_acs_bad_fleet'] = 'Solo un ataque todavía en camino puede formar una confederación.';
+$lang['fl_acs_name_bad'] = 'Nombre rechazado: de 1 a 20 letras, cifras, espacios, puntos o guiones.';
+$lang['fl_acs_renamed'] = 'La confederación se llama ahora %s.';
+$lang['fl_acs_no_player'] = 'Este jugador no existe.';
+$lang['fl_acs_already'] = 'Este jugador ya forma parte de la confederación.';
+$lang['fl_acs_not_ally'] = 'Solo puedes invitar a tus amigos y a los miembros de tu alianza.';
+$lang['fl_acs_full'] = 'La confederación está completa (5 jugadores como máximo).';
+$lang['fl_acs_invited_ok'] = '%s está invitado.';
+$lang['fl_acs_invite_subject'] = 'Invitación a un ataque de confederación';
+$lang['fl_acs_invite_text'] = '%s te invita al ataque de confederación %s contra %s [%s:%s:%s], llegada prevista el %s. Para participar, envía una flota desde la página Flota y elige esta confederación como objetivo.';
+$lang['fl_acs_moon'] = '(Luna)';
+$lang['fl_acs_deleted'] = '(cuenta eliminada)';
+
 ?>

@@ -27,6 +27,14 @@ function DefinedKeys ( $Dir ) {
 	foreach ($Files as $File) {
 		if (!preg_match('/\.(mo|cfg|php)$/', $File->getFilename())) continue;
 		$Src = file_get_contents($File->getPathname());
+		// Fichier qui reprend un autre fichier de langue (0.9i : changelog de / es / it, historique du francais)
+		if (preg_match_all('#include\s*\(\s*__DIR__\s*\.\s*[\'"]([^\'"]+)[\'"]\s*\)#', $Src, $Inc)) {
+			foreach ($Inc[1] as $Rel) {
+				if (is_file(dirname($File->getPathname()) . $Rel)) {
+					$Src .= file_get_contents(dirname($File->getPathname()) . $Rel);
+				}
+			}
+		}
 		if (preg_match_all('/\$lang\s*\[\s*[\'"]([^\'"]+)[\'"]\s*\]/', $Src, $M)) {
 			foreach ($M[1] as $K) $Keys[$K][] = substr($File->getPathname(), strlen($Dir) + 1);
 		}

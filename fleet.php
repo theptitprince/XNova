@@ -155,7 +155,14 @@ include($xnova_root_path . 'common.' . $phpEx);
 				$page .= "<input name=\"fleetid\" value=\"". $f['fleet_id'] ."\" type=\"hidden\">";
 				$page .= "<input value=\" ".$lang['fl_back_to_ttl']." \" type=\"submit\" name=\"send\">";
 				$page .= "</form>";
-			// (bouton « Associer » vers verband.php retire : l'attaque groupee n'a jamais ete programmee)
+			// Attaque groupee (0.9i) : bouton « Associer » de l'original, sur une attaque encore en route (forme le
+			// groupe ou ouvre sa page) et sur une flotte qui a rejoint un groupe
+			if (in_array($f['fleet_mission'], array(1, 2)) && $f['fleet_mess'] == 0 && $f['fleet_start_time'] > time()) {
+				$page .= "<form action=\"verband.php\" method=\"post\">";
+				$page .= "<input name=\"fleetid\" value=\"". $f['fleet_id'] ."\" type=\"hidden\">";
+				$page .= "<input value=\" ".$lang['fl_associate']." \" type=\"submit\">";
+				$page .= "</form>";
+			}
 		} else {
 			$page .= "&nbsp;-&nbsp;";
 		}

@@ -97,5 +97,6 @@ include($xnova_root_path . 'includes/functions/NoobProtection.'.$phpEx);
 include($xnova_root_path . 'includes/functions/IsBuddyOrAllyMember.'.$phpEx);
 include($xnova_root_path . 'includes/functions/CombatEngine.'.$phpEx);
 include($xnova_root_path . 'includes/functions/CombatReport.'.$phpEx);
+include($xnova_root_path . 'includes/functions/AcsGroup.'.$phpEx);
 
 ?>
