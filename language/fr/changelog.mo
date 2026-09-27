@@ -16,10 +16,12 @@ $lang['changelog']   = array(
 - ADD : Administration : supprimer un joueur, multi-comptes, messages signal&eacute;s, message &agrave; tous
 - ADD : Changement de vitesse appliqu&eacute; aux constructions et flottes en cours
 - ADD : Taille des files d\'attente r&eacute;glable dans la configuration
+- ADD : Statistiques : lien vers l\'alliance de chaque joueur
 - MOD : R&ocirc;les du staff, menu d\'administration selon le rang
 - FIX : Officiers Destructeur et G&eacute;n&eacute;ral
 - FIX : R&eacute;seau de recherche intergalactique
 - FIX : Protection des d&eacute;butants (destruction de lune, missiles)
+- FIX : Liens vers les alliances et les joueurs (statistiques, recherche)
 - FIX : Production des ressources, chantier spatial, boucliers
 - FIX : Rappel de flotte, suppression de compte, bannissement
 - FIX : S&eacute;curit&eacute; du panneau d\'administration

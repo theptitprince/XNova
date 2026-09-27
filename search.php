@@ -74,7 +74,8 @@ if(isset($searchtext) && isset($type)){
 /*			$farray = mysqli_fetch_array($pquery);*/
 			$s['planet_name'] = $s['name'];
 			$s['username'] = $pquery['username'];
-			$s['ally_name'] = ($pquery['ally_name']!='')?"<a href=\"alliance.php?mode=ainfo&tag={$pquery['ally_name']}\">{$pquery['ally_name']}</a>":'';
+			$s['id'] = intval($pquery['id']);
+			$s['ally_name'] = (($pquery['ally_id'] ?? 0) > 0 && $pquery['ally_name'] != '') ? "<a href=\"alliance.php?mode=ainfo&amp;a=". intval($pquery['ally_id']) ."\">". htmlspecialchars($pquery['ally_name'], ENT_QUOTES, 'UTF-8') ."</a>" : '';
 			}else{
 			$pquery = doquery("SELECT name FROM {{table}} WHERE id = {$s['id_planet']}","planets",true);
 			$s['planet_name'] = $pquery['name'] ?? '';
@@ -83,7 +84,7 @@ if(isset($searchtext) && isset($type)){
 			if(($s['ally_id'] ?? 0)!=0&&($s['ally_request'] ?? 0)==0){
 				$aquery = doquery("SELECT ally_name FROM {{table}} WHERE id = ". intval($s['ally_id']),"alliance",true);
 			}
-			$s['ally_name'] = (($aquery['ally_name'] ?? '')!='')?"<a href=\"alliance.php?mode=ainfo&tag={$aquery['ally_name']}\">{$aquery['ally_name']}</a>":'';
+			$s['ally_name'] = (($aquery['ally_name'] ?? '')!='') ? "<a href=\"alliance.php?mode=ainfo&amp;a=". intval($s['ally_id']) ."\">". htmlspecialchars($aquery['ally_name'], ENT_QUOTES, 'UTF-8') ."</a>" : '';
 			}
 
 			// Rang au classement general (la table des joueurs n'a pas de colonne rank : la position etait vide)
@@ -104,7 +105,8 @@ if(isset($searchtext) && isset($type)){
 			$PointsRow = doquery("SELECT `total_points` FROM {{table}} WHERE `stat_type` = '2' AND `stat_code` = '1' AND `id_owner` = '". intval($s['id']) ."';", 'statpoints', true);
 			$s['ally_points'] = pretty_number($PointsRow['total_points'] ?? 0);
 
-			$s['ally_tag'] = "<a href=\"alliance.php?mode=ainfo&tag={$s['ally_tag']}\">{$s['ally_tag']}</a>";
+			$s['ally_tag'] = "<a href=\"alliance.php?mode=ainfo&amp;a=". intval($s['id']) ."\">". htmlspecialchars($s['ally_tag'], ENT_QUOTES, 'UTF-8') ."</a>";
+			$s['ally_name'] = htmlspecialchars($s['ally_name'], ENT_QUOTES, 'UTF-8');
 			$result_list .= parsetemplate($row, $s);
 		}
 	}
