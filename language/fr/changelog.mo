@@ -4,6 +4,9 @@ $lang['description_label'] = 'Description';
 $lang['changelog']   = array(
 
 
+'0.9i Renaissance' => 'Attaque group&eacute;e (theptitprince)
+- FIX : Stationner chez un alli&eacute;, compteur des raids perdus',
+
 '0.9h Renaissance' => 'Fonctions inachev&eacute;es (theptitprince)
 - NEW : Captcha &agrave; l\'inscription (theptitprince)
 - NEW : N&eacute;gociant intergalactique, bouton &laquo; Signaler &raquo; les messages

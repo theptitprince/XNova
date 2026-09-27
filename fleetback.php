@@ -31,7 +31,8 @@ define('INSTALL' , false);
 		$i = 0;
 
 		if ($FleetRow['fleet_owner'] == $user['id']) {
-			if ($FleetRow['fleet_mess'] == 0) {
+			// 0 : en route ; 2 : en stationnement chez un allie (0.9i)
+			if ($FleetRow['fleet_mess'] == 0 || $FleetRow['fleet_mess'] == 2) {
 				// Temps deja vole (conditions inversees dans l'original : voir FleetRecallFlyingTime)
 				$CurrentFlyingTime = FleetRecallFlyingTime( $FleetRow );
 				// Allez houste au bout du compte y a la maison !! (E.T. phone home.............)

@@ -51,7 +51,7 @@ function DeleteSelectedUser ( $UserID ) {
 	// positions, effaces avec elles), ou qui y stationnent : elles rentrent comme si elles avaient ete rappelees.
 	// Avant, elles arrivaient sur une planete disparue.
 	foreach ( $Positions as $Pos ) {
-		$Fleets = doquery ( "SELECT * FROM {{table}} WHERE `fleet_owner` <> '" . intval($UserID) . "' AND `fleet_mess` = '0' AND `fleet_end_galaxy` = '" . intval($Pos['galaxy']) . "' AND `fleet_end_system` = '" . intval($Pos['system']) . "' AND `fleet_end_planet` = '" . intval($Pos['planet']) . "';", 'fleets' );
+		$Fleets = doquery ( "SELECT * FROM {{table}} WHERE `fleet_owner` <> '" . intval($UserID) . "' AND `fleet_mess` IN ('0', '2') AND `fleet_end_galaxy` = '" . intval($Pos['galaxy']) . "' AND `fleet_end_system` = '" . intval($Pos['system']) . "' AND `fleet_end_planet` = '" . intval($Pos['planet']) . "';", 'fleets' );
 		while ( $Fleet = mysqli_fetch_assoc( $Fleets ) ) {
 			$Return = time() + max(1, FleetRecallFlyingTime( $Fleet )) + 1;
 			doquery ( "UPDATE {{table}} SET `fleet_start_time` = '" . (time() - 1) . "', `fleet_end_stay` = '0', `fleet_end_time` = '" . $Return . "', `fleet_target_owner` = '" . intval($Fleet['fleet_owner']) . "', `fleet_mess` = '1' WHERE `fleet_id` = '" . intval($Fleet['fleet_id']) . "';", 'fleets' );

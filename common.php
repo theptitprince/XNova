@@ -17,7 +17,7 @@ if (!defined('INSIDE')) {
 	die();
 }
 
-define('VERSION'     ,'0.9h');        // Version d'XNova utilisée...
+define('VERSION'     ,'0.9i');        // Version d'XNova utilisée...
 define('VERSION_NAME','Renaissance'); // Nom de la version (0.9 et suivantes)
 
 $phpEx = "php";
