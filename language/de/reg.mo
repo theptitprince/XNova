@@ -54,4 +54,9 @@ $lang['error_planetnum'] = 'Der Name des Planeten darf nur Buchstaben, Ziffern, 
 $lang['reg_check_user_ok'] = 'Spielername verfügbar';
 $lang['reg_check_mail_ok'] = 'E-Mail-Adresse gültig';
 
+// XNova Renaissance 0.9h : captcha a l'inscription (mod de theptitprince)
+$lang['reg_captcha'] = 'Sicherheitscode';
+$lang['reg_captcha_new'] = 'Anderer Code';
+$lang['error_captcha'] = 'Sicherheitscode falsch oder abgelaufen. Gehe zurück zum Formular: ein neuer Code wird angezeigt.';
+
 ?>

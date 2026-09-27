@@ -54,4 +54,9 @@ $lang['error_planetnum'] = 'Le nom de la plan&egrave;te ne doit contenir que des
 $lang['reg_check_user_ok'] = 'Pseudo disponible';
 $lang['reg_check_mail_ok'] = 'Adresse e-mail valide';
 
+// XNova Renaissance 0.9h : captcha a l'inscription (mod de theptitprince)
+$lang['reg_captcha'] = 'Code de v&eacute;rification';
+$lang['reg_captcha_new'] = 'Autre code';
+$lang['error_captcha'] = 'Code de v&eacute;rification incorrect ou expir&eacute;. Revenez au formulaire : un nouveau code s\'affiche.';
+
 ?>

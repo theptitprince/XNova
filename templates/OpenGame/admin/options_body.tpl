@@ -96,6 +96,9 @@
 	<th>{enable_the_notes}</th>
 	<th><input name="enable_notes_"{enable_notes} type="checkbox"></th>
 </tr><tr>
+	<th>{enable_the_captcha}</th>
+	<th><input name="reg_captcha_"{reg_captcha} type="checkbox"></th>
+</tr><tr>
 	<td class="c" colspan="2">{adm_opt_game_oth_info}</td>
 </tr><tr>
 	<th>{adm_opt_game_oth_bann}</th>
