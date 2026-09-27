@@ -71,7 +71,6 @@ $lang['adm_unban']    = 'Desbloquear';
 $lang['adm_chat']     = 'Administración del chat';
 $lang['adm_updpt']    = 'Actualizar puntos';
 $lang['adm_msg']      = 'Lista de mensajes';
-$lang['adm_md5']      = 'Herramienta de cifrado';
 $lang['adm_build']    = 'Colas de construcción';
 
 $lang['adm_error']    = 'Errores';

@@ -43,7 +43,7 @@ includeLang('leftmenu');
 			'activeplanet.php'  => 2, 'moonlist.php'          => 2, 'declare_list.php'      => 1, 'multi.php'        => 1,
 			'add_moon.php'      => 2, 'ShowFlyingFleets.php'  => 1, 'banned.php'            => 1, 'md5changepass.php' => 3,
 			'unbanned.php'      => 1, 'chat.php'              => 1, 'statbuilder.php'       => 1, 'messagelist.php'  => 2,
-			'messall.php'       => 1, 'md5enc.php'            => 3, 'ElementQueueFixer.php' => 1, 'contactlist.php'  => 1,
+			'messall.php'       => 1, 'ElementQueueFixer.php' => 1, 'contactlist.php'  => 1,
 			'reports.php'       => 1, 'errors.php'            => 3,
 		);
 		foreach ($PageLevels as $AdminPage => $Level) {

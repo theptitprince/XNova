@@ -7,7 +7,7 @@
  * Reprise et modernisation : theptitprince (2026)
  *
  * Travail original :
- * md5enc.php
+ * QueryExecute.php
  * @version 1
  * @copyright 2008 by Chlorel for XNova
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)

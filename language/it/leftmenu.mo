@@ -73,7 +73,6 @@ $lang['adm_unban']    = 'Revoca ban';
 $lang['adm_chat']     = 'Amministrazione chat';
 $lang['adm_updpt']    = 'Aggiorna punti';
 $lang['adm_msg']      = 'Lista dei messaggi';
-$lang['adm_md5']      = 'Strumento di cifratura';
 $lang['adm_build']    = 'Code di costruzione';
 
 $lang['adm_error']    = 'Errori';
