@@ -150,7 +150,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$page .= "<th><font color=\"lime\"><div id=\"time_0\"><font>". pretty_time(floor($f['fleet_end_time'] + 1 - time())) ."</font></th>";
 		// (10) Orders
 		$page .= "<th>";
-		if ($f['fleet_mess'] == 0) {
+		if ($f['fleet_mess'] == 0 || $f['fleet_mess'] == 2) { // 2 : en stationnement chez un allie
 				$page .= "<form action=\"fleetback.php\" method=\"post\">";
 				$page .= "<input name=\"fleetid\" value=\"". $f['fleet_id'] ."\" type=\"hidden\">";
 				$page .= "<input value=\" ".$lang['fl_back_to_ttl']." \" type=\"submit\" name=\"send\">";

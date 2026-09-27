@@ -94,5 +94,6 @@ include($xnova_root_path . 'includes/functions/IsVacationMode.'.$phpEx);
 include($xnova_root_path . 'includes/functions/RegistrationCaptcha.'.$phpEx);
 include($xnova_root_path . 'includes/functions/RecalculateRunningQueues.'.$phpEx);
 include($xnova_root_path . 'includes/functions/NoobProtection.'.$phpEx);
+include($xnova_root_path . 'includes/functions/IsBuddyOrAllyMember.'.$phpEx);
 
 ?>

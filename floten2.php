@@ -36,6 +36,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	// Test d'existance et de proprieté de la planete
 	$YourPlanet = false;
 	$UsedPlanet = false;
+	$TargetOwner = 0;
 	$select       = doquery("SELECT * FROM {{table}}", "planets");
 
 	while ($row = mysqli_fetch_array($select)) {
@@ -49,6 +50,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			} else {
 				$UsedPlanet = true;
 			}
+			$TargetOwner = $row['id_owner'];
 			break;
 		}
 	}
@@ -82,7 +84,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 				$missiontype[1] = $lang['type_mission'][1];
 			}
 			$missiontype[3] = $lang['type_mission'][3];
-			$missiontype[5] = $lang['type_mission'][5];
+			// Stationner chez un allie : amis et membres de son alliance seulement (0.9i ; l'original la proposait vers
+			// toute planete, ses propres planetes et celles d'un ennemi comprises)
+			if (!$YourPlanet && $UsedPlanet && IsBuddyOrAllyMember($user['id'], $TargetOwner)) {
+				$missiontype[5] = $lang['type_mission'][5];
+			}
 		}
 		// Recycleurs et vaisseaux de colonisation peuvent aussi transporter (regle d'origine jamais atteinte : elle etait hors de ce bloc)
 		if (($_POST['ship208'] ?? null) >= 1 || ($_POST['ship209'] ?? null) >= 1) {

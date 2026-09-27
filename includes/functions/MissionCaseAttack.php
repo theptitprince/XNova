@@ -379,7 +379,8 @@ function MissionCaseAttack ($FleetRow)
             } elseif ($FleetResult == "r" || $FleetResult == "w") {
                 $RaidsLoose = $CurrentUser['raidsloose'] + 1;
                 $QryUpdateRaidsCompteur = "UPDATE {{table}} SET ";
-                $QryUpdateRaidsCompteur .= "`raidswin` ='" . $RaidsLoose . "', ";
+                // (l'original ecrivait les raids perdus dans `raidswin`)
+                $QryUpdateRaidsCompteur .= "`raidsloose` ='" . $RaidsLoose . "', ";
                 $QryUpdateRaidsCompteur .= "`raids` ='" . $RaidsTotal . "' ";
                 $QryUpdateRaidsCompteur .= "WHERE id = '" . $CurrentUserID . "' ";
                 $QryUpdateRaidsCompteur .= "LIMIT 1 ;";
