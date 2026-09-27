@@ -87,7 +87,7 @@ $lang['adm_bn_mins']  = "Minutes";
 $lang['adm_bn_secs']  = "Secondes";
 $lang['adm_bn_bnbt']  = "Bannir";
 $lang['adm_bn_thpl']  = "Le joueur";
-$lang['adm_bn_isbn']  = "a bien &eacute;t&eacute; banni!";
+$lang['adm_bn_isbn']  = "a bien &eacute;t&eacute; banni !";
 
 $lang['adm_rz_ttle']  = "Remise &agrave; z&eacute;ro de l'univers";
 $lang['adm_rz_done']  = " Utilisateur(s) transf&eacute;r&eacute;(s)";
