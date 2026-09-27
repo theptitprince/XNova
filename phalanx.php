@@ -106,20 +106,21 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 					$Label = "fs";
 					if ($StartTime > time()) {
-						$fpage[$StartTime] = BuildFleetEventTable ( $FleetRow, 0, $FleetType, $Label, $Record );
+						// (heure, numero et type : deux flottes arrivant a la meme seconde s'ecrasaient)
+						$fpage[$StartTime * 1000000 + $Record * 10] = BuildFleetEventTable ( $FleetRow, 0, $FleetType, $Label, $Record );
 					}
 
 					if ($FleetRow['fleet_mission'] <> 4) {
 						$Label = "ft";
 						if ($StayTime > time()) {
-							$fpage[$StayTime] = BuildFleetEventTable ( $FleetRow, 1, $FleetType, $Label, $Record );
+							$fpage[$StayTime * 1000000 + $Record * 10 + 1] = BuildFleetEventTable ( $FleetRow, 1, $FleetType, $Label, $Record );
 						}
 
 						if ($FleetType == true) {
 							// On n'affiche les flottes en retour que pour les flottes du possesseur de la planete
 							$Label = "fe";
 							if ($EndTime > time()) {
-								$fpage[$EndTime]  = BuildFleetEventTable ( $FleetRow, 2, $FleetType, $Label, $Record );
+								$fpage[$EndTime * 1000000 + $Record * 10 + 2]  = BuildFleetEventTable ( $FleetRow, 2, $FleetType, $Label, $Record );
 							}
 						}
 					}
