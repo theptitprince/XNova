@@ -87,18 +87,18 @@ function DoFleetJump ( $CurrentUser, $CurrentPlanet ) {
 
 						$CurrentPlanet['last_jump_time'] = $JumpTime;
 						$RestString    = GetNextJumpWaitTime ( $CurrentPlanet );
-						$RetMessage    = $lang['gate_jump_done'] ." - ". $RestString['string'];
+						$RetMessage    = $lang['gate_jump_done'] . $RestString['string'];
 					} else {
 						$RetMessage = $lang['gate_wait_data'];
 					}
 				} else {
-					$RetMessage = $lang['gate_wait_dest'] ." - ". $RestString['string'];
+					$RetMessage = $lang['gate_wait_dest'] . $RestString['string'];
 				}
 			} else {
 				$RetMessage = $lang['gate_no_dest_g'];
 			}
 		} else {
-			$RetMessage = $lang['gate_wait_star'] ." - ". $RestString['string'];
+			$RetMessage = $lang['gate_wait_star'] . $RestString['string'];
 		}
 	} else {
 		$RetMessage = $lang['gate_wait_data'];
