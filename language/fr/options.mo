@@ -33,7 +33,7 @@ $lang['opt_lst_cla1'] = "décroissant";
 $lang['opt_chk_skin'] = "Utiliser le skin";
 
 // Admin Options
-$lang['opt_adm_title'] = "Options r&eacute;serv&eacute;es a l'administration";
+$lang['opt_adm_title'] = "Options r&eacute;serv&eacute;es &agrave; l'administration";
 $lang['opt_adm_planet_prot'] = "Protection des plan&egrave;tes";
 
 // General options
