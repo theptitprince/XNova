@@ -58,8 +58,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Bloc['adm_ov_wrtpm']        = $lang['adm_ov_wrtpm'];
 			$Bloc['adm_ov_data_id']      = $TheUser['id'];
 			$Bloc['adm_ov_data_name']    = $TheUser['username'];
-			$Bloc['adm_ov_data_agen']    = $TheUser['user_agent'];
-			$Bloc['current_page']    = $TheUser['current_page'];
+			// Navigateur et page : valeurs envoyees par le visiteur, echappees (script possible chez le staff)
+			$Bloc['adm_ov_data_agen']    = htmlspecialchars((string) $TheUser['user_agent'], ENT_QUOTES, 'UTF-8');
+			$Bloc['current_page']    = htmlspecialchars((string) $TheUser['current_page'], ENT_QUOTES, 'UTF-8');
 			$Bloc['usr_s_id']    = $TheUser['id'];
 
 			$Bloc['adm_ov_data_clip']    = $Color;
