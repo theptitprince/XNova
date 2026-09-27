@@ -80,6 +80,9 @@ function RecalculateRunningQueues ( $OldGameSpeed, $NewGameSpeed, $OldFleetSpeed
 			doquery("UPDATE {{table}} SET `fleet_start_time` = '". $Arrival ."', `fleet_end_stay` = '". $StayEnd ."', `fleet_end_time` = '". $Return ."' WHERE `fleet_id` = '". intval($Fleet['fleet_id']) ."';", 'fleets');
 			$Result['fleets']++;
 		}
+		// Attaques groupees (0.9i) : l'arrivee commune du groupe suit ses flottes (recalculees ensemble, elles arrivent
+		// toujours a la meme heure) ; sinon une flotte qui rejoint ensuite serait calee sur l'ancienne heure
+		doquery("UPDATE {{table}}aks a SET a.`ankunft` = (SELECT MIN(f.`fleet_start_time`) FROM {{table}}fleets f WHERE f.`fleet_group` = a.`id`) WHERE EXISTS (SELECT 1 FROM {{table}}fleets g WHERE g.`fleet_group` = a.`id`);", '');
 	}
 
 	return $Result;
