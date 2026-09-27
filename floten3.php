@@ -205,11 +205,12 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	$VacationMode = $HeDBRec['urlaubs_modus'];
 
-	// Protection des debutants : attaque, attaque groupee (chaque flotte qui rejoint le groupe, 0.9i), stationnement
-	// chez un allie, espionnage et destruction de lune (oubliee par l'original : un joueur bien plus fort pouvait
-	// detruire la lune d'un joueur protege). Message propre au cas ou c'est le joueur qui envoie qui est protege
-	// (l'original disait aussi « Le joueur est trop faible »).
-	if (in_array(intval($fleetmission), array(1, 2, 5, 6, 9)) && !empty($TargetPlanet['id_owner'])) {
+	// Protection des debutants : attaque, attaque groupee (chaque flotte qui rejoint le groupe, 0.9i), espionnage et
+	// destruction de lune (oubliee par l'original : un joueur bien plus fort pouvait detruire la lune d'un joueur
+	// protege). Message propre au cas ou c'est le joueur qui envoie qui est protege (l'original disait aussi « Le
+	// joueur est trop faible »). « Stationner chez un allie » n'y est plus soumise (0.9i, decision du 27/09/2026) :
+	// mission amicale, un joueur fort peut aider un debutant de son alliance a se defendre.
+	if (in_array(intval($fleetmission), array(1, 2, 6, 9)) && !empty($TargetPlanet['id_owner'])) {
 		$NoobStatus = NoobProtection($user['id'], $TargetPlanet['id_owner']);
 		if ($NoobStatus == 1) {
 			message("<font color=\"lime\"><b>".$lang['fl_noob_mess_n']."</b></font>", $lang['fl_noob_title'], "fleet." . $phpEx, 2);
