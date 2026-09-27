@@ -6,6 +6,7 @@ $lang['changelog']   = array(
 
 '0.9i Renaissance' => 'Attaque group&eacute;e (theptitprince)
 - NEW : Attaque group&eacute;e (5 joueurs, 16 flottes), d&eacute;fense group&eacute;e
+- ADD : Vue g&eacute;n&eacute;rale : flottes amies ou hostiles selon la mission
 - MOD : Moteur de combat r&eacute;&eacute;crit, m&ecirc;mes r&eacute;sultats, sous licence libre
 - FIX : Protection des vaisseaux enfin prise en compte au combat
 - FIX : Stationner chez un alli&eacute;, raids perdus, butin perdu au retour, flottes simultan&eacute;es

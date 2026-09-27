@@ -98,6 +98,7 @@ $lang['ov_back_moon']        = " &agrave; la lune ";
 
 $lang['ov_une_hostile']      = "Une ";
 $lang['ov_hostile']          = " hostile de ";
+$lang['ov_amie']             = " amie de ";
 $lang['ov_message']          = "Envoyer un message";
 
 // Created by Perberos. All rights reversed (C) 2006

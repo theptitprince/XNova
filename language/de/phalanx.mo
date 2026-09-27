@@ -29,6 +29,7 @@ $lang['ov_back_planet'] = ' zum Planeten ';
 $lang['ov_back_moon'] = ' zum Mond ';
 $lang['ov_une_hostile'] = 'Eine ';
 $lang['ov_hostile'] = ' des feindlichen Spielers ';
+$lang['ov_amie'] = ' des befreundeten Spielers ';
 $lang['ov_message'] = 'Nachricht senden';
 
 ?>
