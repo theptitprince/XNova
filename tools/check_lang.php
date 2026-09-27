@@ -4,7 +4,7 @@
  * tools/check_lang.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * Verificateur des cles de langue (outil de developpement, en ligne de commande uniquement) :
  *  1. cles $lang['...'] utilisees dans le code mais definies dans aucun fichier de langue (texte vide a l'ecran) ;

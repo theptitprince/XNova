@@ -4,7 +4,7 @@
  * check_registration.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * Verification en direct du pseudo et de l'adresse e-mail pendant l'inscription (scripts/registration.js).
  * Page appelee par le script mais jamais ecrite dans l'original. Memes regles que reg.php, qui reste seul juge.

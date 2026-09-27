@@ -4,7 +4,7 @@
  * RegistrationCaptcha.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * Captcha a l'inscription : mod de theptitprince (d'apres son tutoriel sur Britania), reecrit pour XNova Renaissance.
  * Code de 6 caracteres tire au hasard (random_int), garde en session PHP (seulement pour l'inscription), valable

@@ -4,7 +4,7 @@
  * includes/migrations.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * Mises a jour de la base de donnees, version par version (installeur : modes "Mise a jour" et "Transfere").
  * Les bases anterieures a XNova 0.9d Renaissance ne sont pas prises en charge.

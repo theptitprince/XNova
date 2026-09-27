@@ -4,7 +4,7 @@
  * tradingscrapmetal.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * Le negociant intergalactique : rachete les sondes d'espionnage de la planete contre du cristal.
  * Gabarit et textes livres avec la 0.8e, page jamais ecrite.

@@ -4,7 +4,7 @@
  * captcha.php
  *
  * XNova Renaissance
- * Reprise et modernisation : theptitprince (2026)
+ * Écrit par theptitprince (2026)
  *
  * Image du captcha de l'inscription (mod de theptitprince), voir includes/functions/RegistrationCaptcha.php.
  * Chaque affichage tire un nouveau code.
