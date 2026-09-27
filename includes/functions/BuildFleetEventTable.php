@@ -121,7 +121,9 @@ function BuildFleetEventTable ( $FleetRow, $Status, $Owner, $Label, $Record ) {
 	} else {
 		$EventString  = $lang['ov_une_hostile']; // 'Une '
 		$EventString .= $FleetContent;
-		$EventString .= $lang['ov_hostile'];	// ' hostile de '
+		// XNova Renaissance : transport et stationnement (chez soi ou chez un allie) : flotte amie. La 0.8e disait
+		// hostile pour toutes : rien n'y existait encore pour les allies (stationnement, defense groupee)
+		$EventString .= in_array($MissionType, array(3, 4, 5)) ? $lang['ov_amie'] : $lang['ov_hostile'];	// ' amie de ' / ' hostile de '
 		$EventString .= BuildHostileFleetPlayerLink ( $FleetRow );
 	}
 

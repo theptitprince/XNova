@@ -50,6 +50,7 @@ $lang['deletemessage_fail'] = '¡Contraseña incorrecta!';
 $lang['ov_une'] = 'Su ';
 $lang['ov_une_o'] = 'Una';
 $lang['ov_hostile'] = ' hostil de ';
+$lang['ov_amie'] = ' amiga de ';
 $lang['ov_vennant'] = ' procedente ';
 $lang['ov_atteint'] = ' alcanza ';
 $lang['ov_mission'] = '. Su misión era: ';

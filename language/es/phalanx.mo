@@ -29,6 +29,7 @@ $lang['ov_back_planet'] = ' al planeta ';
 $lang['ov_back_moon'] = ' a la luna ';
 $lang['ov_une_hostile'] = 'Una ';
 $lang['ov_hostile'] = ' hostil de ';
+$lang['ov_amie'] = ' amiga de ';
 $lang['ov_message'] = 'Enviar un mensaje';
 
 ?>

@@ -50,6 +50,7 @@ $lang['deletemessage_fail']         = 'Das Passwort ist falsch!';
 $lang['ov_une']                     = 'Deine ';
 $lang['ov_une_o']                   = 'Eine';
 $lang['ov_hostile']                 = ' des feindlichen Spielers ';
+$lang['ov_amie']                    = ' des befreundeten Spielers ';
 $lang['ov_vennant'] 			= ' vom ';
 $lang['ov_atteint'] 			= ' erreicht ';
 $lang['ov_mission'] 			= '. Ihr Auftrag lautete: ';
