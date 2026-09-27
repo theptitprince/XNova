@@ -191,6 +191,9 @@ switch ($mode) {
             }
             // -----------------------------------------------------------------------------------------------
             // --- Gestion des flottes personnelles ---------------------------------------------------------
+            // Evenements ranges par heure, puis numero d'ordre et type (aller, stationnement, retour, missiles) : dans
+            // l'original, la seule heure servait de cle et deux flottes arrivant a la meme seconde s'ecrasaient (une
+            // attaque groupee n'affichait qu'une flotte). Cle = heure * 1 000 000 + numero * 10 + type.
             // Toutes de vert vetues
             $OwnFleets = doquery("SELECT * FROM {{table}} WHERE `fleet_owner` = '" . $user['id'] . "';", 'fleets');
             $Record = 0;
@@ -203,19 +206,19 @@ switch ($mode) {
                 // Flotte a l'aller
                 $Label = "fs";
                 if ($StartTime > time()) {
-                    $fpage[$StartTime] = BuildFleetEventTable ($FleetRow, 0, true, $Label, $Record);
+                    $fpage[$StartTime * 1000000 + $Record * 10] = BuildFleetEventTable ($FleetRow, 0, true, $Label, $Record);
                 }
 
                 if ($FleetRow['fleet_mission'] <> 4) {
                     // Flotte en stationnement
                     $Label = "ft";
                     if ($StayTime > time()) {
-                        $fpage[$StayTime] = BuildFleetEventTable ($FleetRow, 1, true, $Label, $Record);
+                        $fpage[$StayTime * 1000000 + $Record * 10 + 1] = BuildFleetEventTable ($FleetRow, 1, true, $Label, $Record);
                     }
                     // Flotte au retour
                     $Label = "fe";
                     if ($EndTime > time()) {
-                        $fpage[$EndTime] = BuildFleetEventTable ($FleetRow, 2, true, $Label, $Record);
+                        $fpage[$EndTime * 1000000 + $Record * 10 + 2] = BuildFleetEventTable ($FleetRow, 2, true, $Label, $Record);
                     }
                 }
             } // End While
@@ -234,13 +237,13 @@ switch ($mode) {
 
                         if ($StartTime > time()) {
                             $Label = "ofs";
-                            $fpage[$StartTime] = BuildFleetEventTable ($FleetRow, 0, false, $Label, $Record);
+                            $fpage[$StartTime * 1000000 + $Record * 10] = BuildFleetEventTable ($FleetRow, 0, false, $Label, $Record);
                         }
                         if ($FleetRow['fleet_mission'] == 5) {
                             // Flotte en stationnement
                             $Label = "oft";
                             if ($StayTime > time()) {
-                                $fpage[$StayTime] = BuildFleetEventTable ($FleetRow, 1, false, $Label, $Record);
+                                $fpage[$StayTime * 1000000 + $Record * 10 + 1] = BuildFleetEventTable ($FleetRow, 1, false, $Label, $Record);
                             }
                         }
                     }
@@ -305,12 +308,13 @@ switch ($mode) {
             $Record = 4000;
             while ($irak = mysqli_fetch_array($iraks_query)) {
                 $Record++;
-                $fpage[$irak['zeit']] = '';
+                $Key = $irak['zeit'] * 1000000 + $Record * 10 + 3;
+                $fpage[$Key] = '';
 
                 if ($irak['zeit'] > time()) {
                     $time = $irak['zeit'] - time();
 
-                    $fpage[$irak['zeit']] .= InsertJavaScriptChronoApplet ("fm", $Record, $time, true);
+                    $fpage[$Key] .= InsertJavaScriptChronoApplet ("fm", $Record, $time, true);
 
                     $planet_start = doquery("SELECT * FROM {{table}} WHERE
 						galaxy = '" . $irak['galaxy'] . "' AND
@@ -329,11 +333,11 @@ switch ($mode) {
                     // Phrase dans la langue du joueur (elle etait ecrite en dur en francais)
                     $FromLink = '<a href="galaxy.php?mode=3&galaxy=' . $irak["galaxy_angreifer"] . '&system=' . $irak["system_angreifer"] . '&planet=' . $irak["planet_angreifer"] . '">[' . $irak["galaxy_angreifer"] . ':' . $irak["system_angreifer"] . ':' . $irak["planet_angreifer"] . ']</a>';
                     $ToLink   = '<a href="galaxy.php?mode=3&galaxy=' . $irak["galaxy"] . '&system=' . $irak["system"] . '&planet=' . $irak["planet"] . '">[' . $irak["galaxy"] . ':' . $irak["system"] . ':' . $irak["planet"] . ']</a>';
-                    $fpage[$irak['zeit']] .= "<tr><th><div id=\"bxxfs". $Record ."\" class=\"z\"></div><font color=\"lime\">" . date("H:i:s", $irak['zeit']) . "</font> </th><th colspan=\"3\"><font color=\"#0099FF\">";
-                    $fpage[$irak['zeit']] .= sprintf($lang['ov_missile_attack'], intval($irak['anzahl']), ($user_planet['name'] ?? ''), $FromLink, $planet['name'], $ToLink);
-                    $fpage[$irak['zeit']] .= '</font>';
-                    $fpage[$irak['zeit']] .= InsertJavaScriptChronoApplet ("fm", $Record, $time, false);
-                    $fpage[$irak['zeit']] .= "</th>";
+                    $fpage[$Key] .= "<tr><th><div id=\"bxxfs". $Record ."\" class=\"z\"></div><font color=\"lime\">" . date("H:i:s", $irak['zeit']) . "</font> </th><th colspan=\"3\"><font color=\"#0099FF\">";
+                    $fpage[$Key] .= sprintf($lang['ov_missile_attack'], intval($irak['anzahl']), ($user_planet['name'] ?? ''), $FromLink, $planet['name'], $ToLink);
+                    $fpage[$Key] .= '</font>';
+                    $fpage[$Key] .= InsertJavaScriptChronoApplet ("fm", $Record, $time, false);
+                    $fpage[$Key] .= "</th>";
                 }
             }
             // -----------------------------------------------------------------------------------------------
