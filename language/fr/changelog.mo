@@ -22,98 +22,47 @@ $lang['changelog']   = array(
 - FIX : Nombreuses petites erreurs (textes, affichage)',
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
-- FIX : Mot de passe oubli&eacute; : lien de confirmation avant tout changement (conna&icirc;tre l\'adresse d\'un joueur suffisait), injection SQL corrig&eacute;e, m&ecirc;me message que l\'adresse existe ou non
-- FIX : Mots de passe de 8 caract&egrave;res au moins : inscription, Options et compte administrateur de l\'installeur
-- FIX : Installeur verrouill&eacute; une fois le jeu install&eacute; (config.php pouvait &ecirc;tre r&eacute;&eacute;crit), code injectable dans son adresse
-- FIX : Phalange contr&ocirc;l&eacute;e par le serveur (port&eacute;e, pr&eacute;sence, cible) : une adresse forg&eacute;e scannait tout l\'univers
-- FIX : Chat : du code post&eacute; par un joueur s\'ex&eacute;cutait chez l\'administrateur ; &eacute;motic&ocirc;nes qui coupaient les mots et les liens
-- FIX : Alliance : plus d\'enr&ocirc;lement forc&eacute;, d\'exclusion ni de changement de rang hors de son alliance ; rang perdu en partant ; administration r&eacute;serv&eacute;e au droit pr&eacute;vu
-- FIX : Alliance : dissolution confirm&eacute;e (un simple lien ou une image suffisait), membres lib&eacute;r&eacute;s et pr&eacute;venus ; images des textes en http(s) seulement
-- FIX : Mode vacances : plus d\'envoi de flotte ni de missiles, refus&eacute; tant qu\'une flotte vole, pas de sortie avant 48 h, production et revenus r&eacute;tablis au retour
-- FIX : Annonces, marchand et notes d&eacute;sactiv&eacute;s par l\'administrateur : ferm&eacute;s aussi par leur adresse
-- FIX : Missiles : interception (stock de la cible vid&eacute;, puis n&eacute;gatif), temps de vol, tir sur une plan&egrave;te avec lune, port&eacute;e dans les deux sens, nombre n&eacute;gatif refus&eacute;, rapports traduits
-- FIX : Attaque group&eacute;e : la mission supprimait la flotte &agrave; l\'arriv&eacute;e (jamais programm&eacute;e) ; retir&eacute;e en attendant la 0.9i
-- FIX : Officier Amiral : bonus de combat enfin appliqu&eacute;, &agrave; l\'attaquant comme au d&eacute;fenseur
-- FIX : Espionnage (rapport de destruction invers&eacute;, vraie probabilit&eacute;) et exp&eacute;dition (trou noir, soutes, trouvaille vide)
-- FIX : Lune : d&eacute;truire la base lunaire augmentait son niveau ; base lunaire et terraformeur indestructibles, comme OGame ; mission &laquo; D&eacute;truire &raquo; (flottes du champ de d&eacute;bris d&eacute;tourn&eacute;es, lune d&eacute;truite encore affich&eacute;e, textes du rapport) ; ajout de lune par l\'administration : erreurs signal&eacute;es
-- FIX : Bannissements : dur&eacute;e respect&eacute;e (lev&eacute;e automatique), pseudos longs, un seul bannissement par joueur (robot anti-multi), page du banni traduite
-- FIX : Recyclage rapide sans flotte vide (emplacements, carburant) ; mission choisie dans la galaxie pr&eacute;s&eacute;lectionn&eacute;e
-- FIX : Page Flotte : heures d&eacute;cal&eacute;es, flotte rappel&eacute;e affich&eacute;e comme retour, erreurs JavaScript ; rapports et messages de retour
-- FIX : Petites annonces : page blanche apr&egrave;s publication, colonne cristal vide, suppression de ses annonces
-- FIX : Vue de l\'empire : &eacute;nergie restante et cases (terraformeur) justes, intitul&eacute;s corrig&eacute;s
-- FIX : Fiches de la centrale &agrave; fusion et de la phalange, porte de saut, abandon de colonie : erreurs et fautes
-- NEW : Statistiques recalculables par t&acirc;che planifi&eacute;e ; classement des alliances enfin calcul&eacute;
-- NEW : Alliance : cession &agrave; un membre &laquo; Main droite &raquo; (le bouton ne faisait rien) ; alliance transmise au plus ancien membre si le fondateur est supprim&eacute;
-- FIX : Alliance : candidatures (alliance ferm&eacute;e, r&eacute;ponses au candidat), liste des membres (rangs, tris, jours d\'inactivit&eacute;), page des droits, textes allemands
-- MOD : Vue g&eacute;n&eacute;rale : colonies &agrave; droite de la plan&egrave;te, deux par ligne, comme OGame classique ; annonces de niveaux, rang et fin de construction corrig&eacute;s
-- FIX : Galaxie : couleur et tag d\'alliance, port&eacute;e de phalange, bas de page coup&eacute; sur petit &eacute;cran, pied de page, dur&eacute;e d\'inactivit&eacute;, lien &laquo; Espaces infinis &raquo; ; vue g&eacute;n&eacute;rale d\'une lune
-- FIX : Petits et grands &eacute;crans : menu de gauche d&eacute;filant, fond d\'&eacute;cran couvrant toute la fen&ecirc;tre
-- FIX : Installeur : bandeaux harmonis&eacute;s, erreurs dans son cadre, &laquo; Suivant &raquo; de la mise &agrave; jour, conseil &laquo; CHMOD 777 &raquo; remplac&eacute;, fautes
-- FIX : Messagerie : confirmation d\'envoi et erreurs affich&eacute;es, cat&eacute;gorie administration, &eacute;motic&ocirc;nes (:cool:, :perdu:...), couleurs du BBCode, barres obliques conserv&eacute;es, sujet repris par &laquo; R&eacute;pondre &raquo;, compteur de caract&egrave;res (collage, notes)
-- FIX : Liste d\'amis : demandes re&ccedil;ues de nouveau visibles, ami supprim&eacute; par un double clic, alliance du bon joueur, demande &agrave; soi-m&ecirc;me refus&eacute;e
-- FIX : Recherche de joueurs (alliance d&eacute;cal&eacute;e, rang absent) et d\'alliances (points) ; records jamais affich&eacute;s ; liens vers le classement des alliances ; marchand : co&ucirc;t recalcul&eacute; apr&egrave;s un collage
-- FIX : Inscription : pseudos contenant &laquo; script &raquo; ou &laquo; http &raquo; inutilisables, noms de plan&egrave;te intacts, apostrophe gard&eacute;e dans les noms (plan&egrave;te, alliance, rang) ; e-mails valid&eacute;s (.paris, .app...)
-- FIX : D&eacute;claration de multi-compte : textes, confirmation, au moins un joueur exig&eacute;
-- FIX : Administration : message &agrave; tous (jamais envoy&eacute;, non &eacute;chapp&eacute;, sujet coup&eacute;), configuration lisible, vue g&eacute;n&eacute;rale sans d&eacute;filement, listes (messages, lunes, plan&egrave;tes, flottes en vol), file du chantier, titres
-- MOD : Administration : liste &laquo; multi-comptes &raquo; toujours vide et page &laquo; supprimer un joueur &raquo; inachev&eacute;e retir&eacute;es ; PhpInfo r&eacute;serv&eacute; &agrave; l\'administrateur
-- NEW : Langue au choix dans les Options ; allemand, espagnol et italien complets (1 800 textes ajout&eacute;s ou corrig&eacute;s)
-- FIX : Textes &eacute;crits en dur rendus traduisibles (flotte, annonces, messages, menu, horloge, cr&eacute;dits), Pilori traduit, nombreuses fautes corrig&eacute;es (dont les accents italiens)
-- MOD : Base de donn&eacute;es en utf8mb4 : un emoji dans un nom ou un message faisait &eacute;chouer la requ&ecirc;te
-- FIX : Aucun avertissement PHP sur les pages du jeu ; plus de page blanche sur une adresse incompl&egrave;te
-- MOD : Nettoyage : pages abandonn&eacute;es et 21 mod&egrave;les inutilis&eacute;s supprim&eacute;s, script du portail OGame (mot de passe en cookie) retir&eacute;, chemins UGamela, convention de nommage',
+- NEW : Langue au choix dans les Options, allemand, espagnol et italien complets
+- NEW : Alliance : cession &agrave; un membre, classement des alliances
+- NEW : Statistiques recalculables par t&acirc;che planifi&eacute;e
+- MOD : Vue g&eacute;n&eacute;rale : colonies &agrave; c&ocirc;t&eacute; de la plan&egrave;te, comme OGame classique
+- MOD : Attaque group&eacute;e retir&eacute;e en attendant la 0.9i (elle supprimait la flotte)
+- MOD : Base de donn&eacute;es en utf8mb4
+- FIX : S&eacute;curit&eacute; : mot de passe oubli&eacute;, installeur, phalange, chat, alliance
+- FIX : Mode vacances, missiles, espionnage, exp&eacute;dition, lunes
+- FIX : Officier Amiral, bannissements, recyclage rapide
+- FIX : Page Flotte, messagerie, liste d\'amis, recherche, petites annonces, vue de l\'empire
+- FIX : Administration : message &agrave; tous, configuration, listes
+- FIX : Plus aucun avertissement PHP, textes traduits, nombreuses fautes
+- DIV : Pages et mod&egrave;les inutilis&eacute;s supprim&eacute;s',
 
 '0.9f Renaissance' => 'Formulaires et contact (theptitprince)
-- FIX : Protection CSRF : un site ext&eacute;rieur ne peut plus faire agir un joueur connect&eacute; &agrave; son insu (formulaires et liens d\'action)
-- FIX : Protection XSS : noms de plan&egrave;te et d\'alliance, messages, textes d\'alliance, notes, recherches... ne peuvent plus contenir de code
-- FIX : Site et image d\'alliance, avatar, skin : adresses http(s) uniquement ; liens du BBCode s&eacute;curis&eacute;s
-- NEW : Formulaire de contact : plus aucune adresse e-mail affich&eacute;e, messages lus dans l\'administration (lu / non lu, suppression)
-- NEW : Anti-spam du formulaire de contact (champ pi&egrave;ge, d&eacute;lai minimal, 3 messages par heure)
-- NEW : Mise &agrave; jour possible depuis la XNova 0.8e d\'origine ; textes des anciennes bases nettoy&eacute;s
-- FIX : Chat : les caract&egrave;res + et &amp; cassaient l\'envoi ; lien automatique vers l\'ancien site xnova.fr retir&eacute;
-- FIX : Pages du jeu et de l\'administration inaccessibles sans &ecirc;tre connect&eacute; (seules les pages publiques restent ouvertes)
-- FIX : Triches de flotte : vitesse, dur&eacute;es de stationnement et d\'exp&eacute;dition, limite d\'exp&eacute;ditions ne sont plus lues dans le formulaire
-- FIX : Page orpheline qui effa&ccedil;ait les missiles de n\'importe quelle plan&egrave;te supprim&eacute;e ; annonces et phalange prot&eacute;g&eacute;es
-- FIX : Liens vers xnova.fr (domaine repris par des tiers) et vers un site tiers recevant l\'IP des joueurs retir&eacute;s
-- FIX : Mail d\'inscription sans mot de passe en clair ; erreur de connexion sur la page de connexion, sans r&eacute;v&eacute;ler si le pseudo existe
-- FIX : Le r&eacute;glage &laquo; jeu ferm&eacute; &raquo; ne fonctionnait pas (serveurs existants remis sur &laquo; ouvert &raquo;)
-- FIX : Heures au fuseau du serveur partout, format fran&ccedil;ais sur 24 h, horloge de la vue g&eacute;n&eacute;rale &agrave; l\'heure du serveur
-- FIX : Lunes : temp&eacute;ratures invers&eacute;es (lunes existantes r&eacute;par&eacute;es), nom choisi repris, lune d&eacute;j&agrave; pr&eacute;sente v&eacute;rifi&eacute;e
-- FIX : Recycleurs et vaisseaux de colonisation peuvent transporter ; message de retour de recyclage
-- FIX : Phalange et rapports de combat affich&eacute;s dans le jeu (plus de popups bloqu&eacute;es), rapport encadr&eacute; et centr&eacute;
-- NEW : Vue g&eacute;n&eacute;rale &agrave; dimensions fixes (bandeau &laquo; Autres plan&egrave;tes &raquo;), bandeau du haut sans d&eacute;filement horizontal
-- NEW : Technologies [i] : arbre complet des pr&eacute;requis (jamais termin&eacute; dans l\'original)
-- NEW : Administration : ajout de flotte r&eacute;par&eacute; et au menu, protection des d&eacute;butants r&eacute;glable, redirections r&eacute;par&eacute;es
-- FIX : Redirections apr&egrave;s un message (notes, options...) bloqu&eacute;es par les navigateurs actuels
-- FIX : Galaxie : compteur de flottes et de recycleurs ; statistiques : page courante pr&eacute;s&eacute;lectionn&eacute;e
-- FIX : Caract&egrave;res perdus retap&eacute;s, nombreux textes corrig&eacute;s, mail de bienvenue italien encore en polonais traduit',
+- NEW : Formulaire de contact lu dans l\'administration, avec anti-spam
+- NEW : Mise &agrave; jour possible depuis la XNova 0.8e d\'origine
+- NEW : Technologies : arbre complet des pr&eacute;requis
+- NEW : Administration : ajout de flotte, protection des d&eacute;butants r&eacute;glable
+- FIX : S&eacute;curit&eacute; : protections CSRF et XSS, pages du jeu ferm&eacute;es sans connexion
+- FIX : Triches de flotte, page qui effa&ccedil;ait les missiles
+- FIX : Liens vers xnova.fr et vers des sites tiers retir&eacute;s
+- FIX : Jeu ferm&eacute;, heures au fuseau du serveur, lunes, recyclage
+- FIX : Phalange et rapports de combat dans le jeu (plus de popups)
+- FIX : Nombreuses petites erreurs (textes, affichage)',
 
 '0.9e Renaissance' => 'S&eacute;curit&eacute; (theptitprince)
-- FIX : Injections SQL dans les pages du jeu et de l\'administration (mot de passe oubli&eacute;, cookie, alliance, messages...)
-- FIX : Suppression des extract($_GET) (dont la banni&egrave;re publique, qui permettait d\'&eacute;craser la configuration)
-- FIX : Un mod&eacute;rateur pouvait se promouvoir administrateur ou changer le mot de passe de n\'importe qui
-- FIX : Quantit&eacute;s n&eacute;gatives refus&eacute;es (chantier, d&eacute;fenses, porte de saut, envoi de flotte), missiles tir&eacute;s depuis sa propre plan&egrave;te uniquement
-- FIX : Donn&eacute;es de flotte et cookies du calculateur : plus de cr&eacute;ation d\'objets PHP (unserialize)
-- MOD : Mots de passe s&eacute;curis&eacute;s (password_hash), anciens mots de passe convertis &agrave; la connexion
-- MOD : Cookie de connexion sign&eacute; et prot&eacute;g&eacute; (HttpOnly, SameSite)
-- NEW : Installeur : mode Mise &agrave; jour (&agrave; partir de la 0.9d), mode Transf&egrave;re revu, config.php &eacute;crit de fa&ccedil;on s&ucirc;re
-- FIX : Production des mines au prorata de l\'&eacute;nergie disponible, production naturelle compt&eacute;e une seule fois
-- FIX : 32 textes qui s\'affichaient vides, pseudo modifiable sans contr&ocirc;le, options qui effa&ccedil;aient les couleurs
-- FIX : Statistiques des alliances, d&eacute;bannissement automatique (requ&ecirc;te erron&eacute;e)
-- MOD : Tout le code en UTF-8 (74 fichiers convertis) et fins de ligne unifi&eacute;es : textes espagnols, allemands, italiens et \'Erreur n&deg;\' enfin lisibles
-- FIX : Rapport de combat et calculateur d&eacute;claraient un encodage ISO ; nom des raccourcis de flotte ; pourcentage de production sans centrale (page Ressources)',
+- FIX : Injections SQL, extract($_GET), quantit&eacute;s n&eacute;gatives
+- FIX : Un mod&eacute;rateur pouvait se promouvoir administrateur
+- MOD : Mots de passe s&eacute;curis&eacute;s (password_hash), cookie de connexion sign&eacute;
+- NEW : Installeur : mode Mise &agrave; jour, mode Transf&egrave;re revu
+- FIX : Production des mines selon l\'&eacute;nergie disponible
+- MOD : Tout le code en UTF-8
+- FIX : Nombreuses petites erreurs (textes vides, statistiques, d&eacute;bannissement)',
 
 '0.9d Renaissance' => 'Passage &agrave; PHP 8 (theptitprince)
-- NEW : XNova 0.9d Renaissance, suite directe de XNova 0.8e (apr&egrave;s les versions communautaires 0.9a &agrave; 0.9c)
-- NEW : Nom de version affich&eacute; &agrave; c&ocirc;t&eacute; du num&eacute;ro (0.9d Renaissance)
-- NEW : Cr&eacute;dits de la reprise ajout&eacute;s (les cr&eacute;dits d\'origine sont conserv&eacute;s)
-- MOD : Compatible PHP 8.4 et MariaDB / MySQL r&eacute;cents (mysqli, fonctions supprim&eacute;es remplac&eacute;es)
-- MOD : Seule la derni&egrave;re version est affich&eacute;e en vert dans le changelog
-- MOD : Liste d\'amis dans le cadre principal, Notes et Chat dans une fen&ecirc;tre s&eacute;par&eacute;e
-- FIX : Liens Marchand et Annonces qui s\'ouvraient hors du cadre, lien Annonces mort, lien Notes cass&eacute;
-- FIX : Bouton de d&eacute;connexion des options (mauvais nom de cookie)
-- FIX : Robot anti-multicompte (nom de table cod&eacute; en dur)
-- FIX : Nom des ressources pill&eacute;es absent du rapport de combat
-- FIX : Evolution du classement dans les statistiques',
+- NEW : XNova 0.9d Renaissance, suite directe de XNova 0.8e
+- MOD : Compatible PHP 8.4 et MariaDB / MySQL r&eacute;cents
+- MOD : Cr&eacute;dits de la reprise, nom de version affich&eacute;
+- FIX : Liens du menu (marchand, annonces, notes), d&eacute;connexion, robot anti-multicompte
+- FIX : Rapport de combat, &eacute;volution du classement',
 
 '0.8e' => '- ADD : Fonction SecureArray() pour les variables POST et GET (Bono)
 - ADD : Les administrateurs choisissent desormais le fond de la baniere... (Bono)
