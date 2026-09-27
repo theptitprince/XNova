@@ -67,10 +67,14 @@ function CheckCookies ( $IsUserChecked ) {
 		if ($IsUserChecked == false) {
 			SetAuthCookie($NextCookie, $ExpireTime);
 		}
-		// Informations de connexion : toutes echappees (l'adresse de la page et le navigateur viennent du visiteur)
+		// Informations de connexion : toutes echappees (l'adresse de la page et le navigateur viennent du visiteur).
+		// Adresse de la page sans le jeton CSRF : elle est affichee au staff (vue generale de l'administration), un
+		// moderateur voyait le jeton d'un administrateur et pouvait lui faire valider une action (changer un rang...)
+		$CurrentPage    = preg_replace('/([?&])csrf_token=[^&]*(&|$)/', '$1', (string) $_SERVER['REQUEST_URI']);
+		$CurrentPage    = rtrim($CurrentPage, '?&');
 		$QryUpdateUser  = "UPDATE {{table}} SET ";
 		$QryUpdateUser .= "`onlinetime` = '". time() ."', ";
-		$QryUpdateUser .= "`current_page` = '". SqlEscape($_SERVER['REQUEST_URI']) ."', ";
+		$QryUpdateUser .= "`current_page` = '". SqlEscape($CurrentPage) ."', ";
 		$QryUpdateUser .= "`user_lastip` = '". SqlEscape($_SERVER['REMOTE_ADDR']) ."', ";
 		$QryUpdateUser .= "`user_agent` = '". SqlEscape(isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '') ."' ";
 		$QryUpdateUser .= "WHERE ";
