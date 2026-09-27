@@ -161,8 +161,19 @@ function MissionCaseDestruction($FleetRow) {
          $mtime        = $mtime[1] + $mtime[0];
          $starttime    = $mtime;
 
-         $Combat       = CombatEngine(array(array('fleet' => $AttackFleet, 'techno' => $CurrentTechno)),
-                                      array(array('fleet' => $TargetFleet, 'techno' => $TargetTechno)));
+         // Defense groupee (0.9i) : flottes alliees qui stationnent sur la lune, avec le proprietaire
+         $Defenders    = array(0 => array('fleet' => $TargetFleet, 'techno' => $TargetTechno));
+         $DefInfo      = array(0 => array('name' => $TargetUser['username'], 'galaxy' => $FleetRow['fleet_end_galaxy'], 'system' => $FleetRow['fleet_end_system'], 'planet' => $FleetRow['fleet_end_planet'], 'techno' => $TargetTechno));
+         $HoldRows     = array();
+         foreach (AcsHoldingFleets($FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet'], $FleetRow['fleet_end_type'], $FleetRow['fleet_start_time']) as $Row) {
+            $Owner         = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($Row['fleet_owner']) ."';", 'users', true);
+            $i             = count($Defenders);
+            $HoldRows[$i]  = $Row;
+            $Defenders[$i] = array('fleet' => MissionCaseAttackFleet($Row['fleet_array']), 'techno' => $Owner);
+            $DefInfo[$i]   = array('name' => $Owner['username'], 'galaxy' => $Row['fleet_start_galaxy'], 'system' => $Row['fleet_start_system'], 'planet' => $Row['fleet_start_planet'], 'techno' => $Owner);
+         }
+         $Combat       = CombatEngine(array(array('fleet' => $AttackFleet, 'techno' => $CurrentTechno)), $Defenders);
+         AcsUpdateHoldingFleets($HoldRows, $Combat['defenders']);
 
          // Calcul de la duree de traitement (calcul)
          $mtime        = microtime();
@@ -474,7 +485,7 @@ function MissionCaseDestruction($FleetRow) {
          // Tours du rapport (un cadre par joueur, voir CombatReport.php)
          $Rounds            = CombatReportRounds($Combat,
             array(array('name' => $CurrentUser['username'], 'galaxy' => $FleetRow['fleet_start_galaxy'], 'system' => $FleetRow['fleet_start_system'], 'planet' => $FleetRow['fleet_start_planet'], 'techno' => $CurrentTechno)),
-            array(array('name' => $TargetUser['username'], 'galaxy' => $FleetRow['fleet_end_galaxy'], 'system' => $FleetRow['fleet_end_system'], 'planet' => $FleetRow['fleet_end_planet'], 'techno' => $TargetTechno)));
+            $DefInfo);
          $raport           .= $Rounds['html'];
          $a_zestrzelona     = $Rounds['first_round'];
 
@@ -624,6 +635,14 @@ function MissionCaseDestruction($FleetRow) {
 
 
          SendSimpleMessage ( $TargetUserID, '', $FleetRow['fleet_start_time'], 3, $lang['sys_mess_tower'], $lang['sys_mess_destruc_report'], $raport2 );
+         // Joueurs qui stationnaient sur la lune (defense groupee, une fois chacun)
+         $Warned = array($TargetUserID => true);
+         foreach ($HoldRows as $Row) {
+            if (!isset($Warned[$Row['fleet_owner']])) {
+               $Warned[$Row['fleet_owner']] = true;
+               SendSimpleMessage ( $Row['fleet_owner'], '', $FleetRow['fleet_start_time'], 3, $lang['sys_mess_tower'], $lang['sys_mess_destruc_report'], $raport2 );
+            }
+         }
 
 
 

@@ -99,12 +99,7 @@ function MissionCaseAttackBattle ( $FleetRow ) {
     $Defenders  = array(0 => array('fleet' => $TargetFleet, 'techno' => $TargetUser));
     $DefInfo    = array(0 => array('name' => $TargetUser['username'], 'galaxy' => $FleetRow['fleet_end_galaxy'], 'system' => $FleetRow['fleet_end_system'], 'planet' => $FleetRow['fleet_end_planet'], 'techno' => $TargetUser));
     $HoldRows   = array();
-    $QryHolding  = "SELECT * FROM {{table}} WHERE `fleet_mission` = '5' AND `fleet_mess` IN ('0', '2') ";
-    $QryHolding .= "AND `fleet_end_galaxy` = '" . $FleetRow['fleet_end_galaxy'] . "' AND `fleet_end_system` = '" . $FleetRow['fleet_end_system'] . "' ";
-    $QryHolding .= "AND `fleet_end_planet` = '" . $FleetRow['fleet_end_planet'] . "' AND `fleet_end_type` = '" . $FleetRow['fleet_end_type'] . "' ";
-    $QryHolding .= "AND `fleet_start_time` <= '" . $Arrival . "' AND `fleet_end_stay` > '" . $Arrival . "' ORDER BY `fleet_id` ASC;";
-    $Query = doquery($QryHolding, 'fleets');
-    while ($Row = mysqli_fetch_assoc($Query)) {
+    foreach (AcsHoldingFleets($FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet'], $FleetRow['fleet_end_type'], $Arrival) as $Row) {
         if (!isset($Users[$Row['fleet_owner']])) {
             $Users[$Row['fleet_owner']] = doquery("SELECT * FROM {{table}} WHERE `id` = '" . $Row['fleet_owner'] . "';", 'users', true);
         }
@@ -220,19 +215,7 @@ function MissionCaseAttackBattle ( $FleetRow ) {
     doquery($QryUpdateTarget , 'planets');
 
     // Flottes alliees en stationnement : pertes (une flotte detruite disparait, les autres continuent de stationner)
-    foreach ($HoldRows as $i => $Row) {
-        $Array  = '';
-        $Amount = 0;
-        foreach ($Combat['defenders'][$i] as $Ship => $Count) {
-            $Array  .= $Ship . "," . $Count . ";";
-            $Amount += $Count;
-        }
-        if ($Amount <= 0) {
-            doquery("DELETE FROM {{table}} WHERE `fleet_id` = '" . $Row['fleet_id'] . "';", 'fleets');
-        } else {
-            doquery("UPDATE {{table}} SET `fleet_array` = '" . $Array . "', `fleet_amount` = '" . $Amount . "' WHERE `fleet_id` = '" . $Row['fleet_id'] . "';", 'fleets');
-        }
-    }
+    AcsUpdateHoldingFleets($HoldRows, $Combat['defenders']);
 
     // Mise a jour du champ de ruine devant la planete attaquée
     $QryUpdateGalaxy = "UPDATE {{table}} SET ";
