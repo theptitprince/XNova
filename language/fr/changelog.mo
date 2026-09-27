@@ -15,6 +15,7 @@ $lang['changelog']   = array(
 - NEW : Bouton &laquo; Signaler &raquo; sur les messages des joueurs (priv&eacute;s et d\'alliance), pr&eacute;vu par le r&egrave;glement (article VIII) mais jamais programm&eacute; : confirmation, copie du message pour le staff ; page d\'administration &laquo; Messages signal&eacute;s &raquo; (fiche de l\'auteur, bannissement, trait&eacute; / &agrave; traiter, suppression), nombre &agrave; traiter dans le menu
 - NEW : Administration : lien &laquo; Message &agrave; tous &raquo; dans le menu (la page existait sans lien)
 - NEW : R&ocirc;les du staff : le mod&eacute;rateur mod&egrave;re les relations entre joueurs (administration du chat, multi-comptes d&eacute;clar&eacute;s et d&eacute;bannissement en plus ; plus d\'ajout de flotte ni de plan&egrave;tes actives), l\'op&eacute;rateur g&egrave;re le jeu ; menu d\'administration limit&eacute; aux pages ouvertes au rang ; protection des plan&egrave;tes r&eacute;serv&eacute;e aux administrateurs
+- NEW : Chantier spatial et d&eacute;fense : lien &laquo; max. N &raquo; sous chaque quantit&eacute; (maximum commandable, m&ecirc;mes limites que la commande : ressources, 1 000 par ligne, un seul bouclier, place dans le silo)
 - NEW : Compteur de ressources en direct dans la barre du haut (m&eacute;tal, cristal, deut&eacute;rium) : m&ecirc;me calcul que le serveur, arr&ecirc;t au plafond des hangars, en rouge au-del&agrave; de leur capacit&eacute;
 - FIX : Suppression d\'un compte : flottes des autres joueurs vers ses plan&egrave;tes renvoy&eacute;es chez elles, missiles et d&eacute;clarations effac&eacute;s
 - FIX : Rappel d\'une flotte : dur&eacute;e du retour fausse (stationnement et aller en cours invers&eacute;s)
@@ -28,6 +29,7 @@ $lang['changelog']   = array(
 - FIX : Mode debug : d&eacute;tail des requ&ecirc;tes r&eacute;serv&eacute; aux op&eacute;rateurs et administrateurs (l\'original le montrait aux mod&eacute;rateurs et oubliait les op&eacute;rateurs)
 - FIX : S&eacute;curit&eacute; : la vue g&eacute;n&eacute;rale de l\'administration montrait au staff l\'adresse des pages avec le jeton de s&eacute;curit&eacute; de chaque joueur (un mod&eacute;rateur pouvait faire valider une action &agrave; un administrateur) ; navigateur et adresse affich&eacute;s sans &eacute;chappement (script possible chez le staff)
 - FIX : Bannissement : aucun bannissement d&eacute;finitif possible (dur&eacute;e nulle = lev&eacute; &agrave; la connexion suivante), un mod&eacute;rateur pouvait bannir un administrateur ou lui-m&ecirc;me, un nom inexistant cr&eacute;ait une entr&eacute;e au pilori, les bannissements successifs s\'y ajoutaient
+- FIX : Boucliers : le petit bouclier &eacute;tait test&eacute; pour les deux (grand bouclier bloqu&eacute; d&egrave;s que le petit existait, constructible &agrave; volont&eacute; sinon) et une demande pour un bouclier d&eacute;j&agrave; construit ou en file gardait sa quantit&eacute;
 - FIX : Texte &laquo; Vous n\'avez pas acc&eacute;s &raquo; (acc&egrave;s)',
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
