@@ -19,6 +19,7 @@ $lang['changelog']   = array(
 - MOD : R&ocirc;les du staff, menu d\'administration selon le rang
 - FIX : Officiers Destructeur et G&eacute;n&eacute;ral
 - FIX : R&eacute;seau de recherche intergalactique
+- FIX : Protection des d&eacute;butants (destruction de lune, missiles)
 - FIX : Production des ressources, chantier spatial, boucliers
 - FIX : Rappel de flotte, suppression de compte, bannissement
 - FIX : S&eacute;curit&eacute; du panneau d\'administration

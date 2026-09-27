@@ -148,4 +148,7 @@ $lang['fs_mark_debris'] = '(D)';
 $lang['fs_mark_moon'] = '(L)';
 $lang['fs_not_found'] = 'Questa scorciatoia non esiste.';
 
+// XNova Renaissance 0.9h : protection des debutants, joueur qui envoie protege
+$lang['fl_noob_mess_s'] = 'Il giocatore è troppo forte per te!';
+
 ?>

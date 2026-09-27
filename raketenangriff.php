@@ -94,6 +94,20 @@ $ziel_id = $planet['id_owner'];
 
 $select = doquery("SELECT * FROM {{table}} WHERE id = ".$ziel_id, 'users', true);
 
+// Memes protections que pour les flottes (absentes de l'original, qui laissait tirer sur un joueur en mode vacances,
+// sur une planete protegee par le staff ou sur un joueur protege par la protection des debutants)
+includeLang('galaxy');
+$NoobStatus = NoobProtection($user['id'], $ziel_id);
+if (!empty($select['urlaubs_modus'])) {
+	message($lang['gs_c605'], $lang['sys_error']);
+} elseif (intval($planet['id_level']) > intval($user['authlevel'])) {
+	message($lang['gs_c619'], $lang['sys_error']);
+} elseif ($NoobStatus == 1) {
+	message($lang['gs_c603'], $lang['sys_error']);
+} elseif ($NoobStatus == 2) {
+	message($lang['gs_c604'], $lang['sys_error']);
+}
+
 
 
 
