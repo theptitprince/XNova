@@ -85,6 +85,7 @@ $lang['ov_explo_to_target']  = "la position ";
 $lang['ov_mission']          = ". Elle avait pour mission : ";
 
 $lang['ov_explo_stay']       = " explore ";
+$lang['ov_hold_stay']        = " stationne sur ";
 $lang['ov_explo_mission']    = ". Elle a pour mission : ";
 
 $lang['ov_rentrant']         = " rentre ";

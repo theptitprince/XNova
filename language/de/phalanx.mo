@@ -18,6 +18,7 @@ $lang['ov_debris_to_target'] = 'das Trümmerfeld ';
 $lang['ov_explo_to_target'] = 'die Position ';
 $lang['ov_mission'] = '. Ihr Auftrag lautete: ';
 $lang['ov_explo_stay'] = ' erkundet ';
+$lang['ov_hold_stay'] = ' bewacht ';
 $lang['ov_explo_mission'] = '. Ihr Auftrag lautet: ';
 $lang['ov_rentrant'] = ' ist auf dem Rückflug ';
 $lang['ov_planet_from'] = 'vom Planeten ';

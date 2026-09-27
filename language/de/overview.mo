@@ -104,6 +104,7 @@ $lang['ov_moon_to_target'] = 'den Mond ';
 $lang['ov_debris_to_target'] = 'das Trümmerfeld ';
 $lang['ov_explo_to_target'] = 'die Position ';
 $lang['ov_explo_stay'] = ' erkundet ';
+$lang['ov_hold_stay'] = ' bewacht ';
 $lang['ov_explo_mission'] = '. Ihr Auftrag lautet: ';
 $lang['ov_explo_from'] = 'von der Position ';
 $lang['ov_back_planet'] = ' zum Planeten ';

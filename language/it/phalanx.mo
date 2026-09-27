@@ -18,6 +18,7 @@ $lang['ov_debris_to_target'] = 'il Campo di detriti ';
 $lang['ov_explo_to_target'] = 'la posizione ';
 $lang['ov_mission'] = '. La sua missione era: ';
 $lang['ov_explo_stay'] = ' esplora ';
+$lang['ov_hold_stay'] = ' staziona presso ';
 $lang['ov_explo_mission'] = '. La sua missione è: ';
 $lang['ov_rentrant'] = ' ritorna ';
 $lang['ov_planet_from'] = 'dal pianeta ';

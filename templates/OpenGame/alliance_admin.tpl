@@ -27,12 +27,12 @@
 	  <td class="c" colspan=3>{texts}</td>
 	</tr>
 	<tr>
-	  <th><a href="?mode=admin&edit=ally&t=1">{external_text}</a></th>
-	  <th><a href="?mode=admin&edit=ally&t=2">{internal_text}</a></th>
-	  <th><a href="?mode=admin&edit=ally&t=3">{request_text_label}</a></th>
+	  <th width="33%"><a href="?mode=admin&edit=ally&t=1">{external_text}</a></th>
+	  <th width="33%"><a href="?mode=admin&edit=ally&t=2">{internal_text}</a></th>
+	  <th width="33%"><a href="?mode=admin&edit=ally&t=3">{request_text_label}</a></th>
 	</tr>
 	<tr>
-	  <td class=c colspan=3>{request_type} (<span id="cntChars">0</span> / 5000 {characters})</td>
+	  <td class=c colspan=3>{request_type} (<span id="cntChars">{cnt_chars}</span> / 5000 {characters})</td>
 	</tr>
 	<tr>
 	  <th colspan=3><textarea name="text" cols=70 rows=15 oninput="cntchar(5000)">{text}</textarea>
