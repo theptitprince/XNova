@@ -20,7 +20,8 @@ $xnova_root_path = './../';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-	if ($user['authlevel'] >= "2") {
+	// Debannir : les moderateurs bannissent, ils peuvent aussi lever une sanction (niveau 2 dans l'original)
+	if ($user['authlevel'] >= 1) {
 
 		$parse = $lang;
 		$parse['dpath'] = $dpath;

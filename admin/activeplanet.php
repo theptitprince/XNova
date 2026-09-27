@@ -20,7 +20,8 @@ $xnova_root_path = './../';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-	if ($user['authlevel'] >= 1) {
+	// Planetes actives : outil technique, comme les listes de planetes (ouvert aux moderateurs dans l'original)
+	if ($user['authlevel'] >= 2) {
 		includeLang('admin');
 
 		$parse          = $lang;

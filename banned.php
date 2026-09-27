@@ -34,7 +34,7 @@ while($u = mysqli_fetch_assoc($query)){
 	"<tr><td class=b><center><b>".htmlspecialchars($u['who'], ENT_QUOTES, 'UTF-8')."</b></center></td>".
 	"<td class=b><center><b>".$u['theme']."</b></center></td>".
 	"<td class=b><center><b>".date("d/m/Y H:i:s",$u['time'])."</b></center></td>".
-	"<td class=b><center><b>".date("d/m/Y H:i:s",$u['longer'])."</b></center></td>".
+	"<td class=b><center><b>".(($u['longer'] > 0) ? date("d/m/Y H:i:s",$u['longer']) : $lang['ban_forever'])."</b></center></td>".
 	"<td class=b><center><b>".htmlspecialchars($u['author'], ENT_QUOTES, 'UTF-8')."</b></center></td></tr>";
 	$i++;
 }

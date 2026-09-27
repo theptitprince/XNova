@@ -14,6 +14,8 @@
 </tr><tr>
 	<td class="c" colspan="2">{adm_bn_time}</td>
 </tr><tr>
+	<th colspan="2" style="font-weight:normal">{adm_bn_forever_note}</th>
+</tr><tr>
 	<th>{adm_bn_days}</th>
 	<th><input name="days" type="text" value="0" size="5" /></th>
 </tr><tr>

@@ -167,4 +167,12 @@ $lang['adm_delplayer_title'] = 'Diesen Spieler löschen';
 // XNova Renaissance 0.9h : on ne modifie pas son propre acces (seul administrateur prive de ses droits)
 $lang['adm_usr_ownlevel'] = 'Du kannst deinen eigenen Zugang nicht ändern.';
 
+// XNova Renaissance 0.9h : bannissement (controles, definitif)
+$lang['adm_bn_notfound'] = 'Es gibt keinen Spieler mit diesem Namen.';
+$lang['adm_bn_self'] = 'Du kannst dich nicht selbst sperren.';
+$lang['adm_bn_rank'] = 'Du kannst keinen Account mit gleichem oder höherem Rang sperren.';
+$lang['adm_bn_forever_note'] = 'Dauer komplett auf 0: dauerhafte Sperre';
+$lang['adm_bn_until'] = '(bis %s)';
+$lang['adm_bn_forever'] = '(dauerhaft)';
+
 ?>

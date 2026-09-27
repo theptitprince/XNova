@@ -20,7 +20,8 @@ $xnova_root_path = './../';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-	if ($user['authlevel'] >= "1") {
+	// Outil de cryptage md5 : inutile depuis password_hash, reserve a l'administrateur
+	if ($user['authlevel'] >= 3) {
 		includeLang('admin/md5enc');
 
 		$parse   = $lang;

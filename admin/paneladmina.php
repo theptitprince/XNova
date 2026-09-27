@@ -124,6 +124,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 					}
 
 					$QryUpdate  = doquery("UPDATE {{table}} SET `authlevel` = '".$NewLvl."' WHERE `id` = '". intval($Target['id']) ."';", 'users');
+					// Protection des planetes reservee aux administrateurs : retiree si le compte ne l'est plus
+					if ($NewLvl < 3) {
+						doquery("UPDATE {{table}} SET `id_level` = '0' WHERE `id_owner` = '". intval($Target['id']) ."';", 'planets');
+					}
 					$Message    = $lang['adm_mess_lvl1']. " ". htmlspecialchars((string) ($_GET['player'] ?? ''), ENT_QUOTES, 'UTF-8') ." ".$lang['adm_mess_lvl2'];
 					$Message   .= "<font color=\"red\">".$lang['adm_usr_level'][ $NewLvl ]."</font>!";
 

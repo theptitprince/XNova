@@ -64,8 +64,9 @@
        $avatar = SqlEscape(SafeUrl(($_POST["avatar"] ?? null)));
        $dpath = SqlEscape(SafePath(($_POST["dpath"] ?? null)));
 
-       // Gestion des options speciales pour les admins
-       if ($user['authlevel'] > 0) {
+       // Protection des planetes (ni attaque ni espionnage par un rang inferieur) : administrateurs seulement ; un
+       // moderateur ou un operateur qui joue n'en profite pas
+       if ($user['authlevel'] >= 3) {
           if (($_POST['adm_pl_prot'] ?? null) == 'on') {
              doquery ("UPDATE {{table}} SET `id_level` = '".$user['authlevel']."' WHERE `id_owner` = '".$user['id']."';", 'planets');
           } else {
@@ -274,7 +275,7 @@
        $parse['opt_lst_cla_data']   = "<option value =\"0\"". (($user['planet_sort_order'] == 0) ? " selected": "") .">". $lang['opt_lst_cla0'] ."</option>";
        $parse['opt_lst_cla_data']  .= "<option value =\"1\"". (($user['planet_sort_order'] == 1) ? " selected": "") .">". $lang['opt_lst_cla1'] ."</option>";
 
-       if ($user['authlevel'] > 0) {
+       if ($user['authlevel'] >= 3) {
           $FrameTPL = gettemplate('options_admadd');
           $IsProtOn = doquery ("SELECT `id_level` FROM {{table}} WHERE `id_owner` = '".$user['id']."' LIMIT 1;", 'planets', true);
           $bloc['opt_adm_title']       = $lang['opt_adm_title'];

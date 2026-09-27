@@ -21,7 +21,8 @@ $xnova_root_path = './../';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-	if ($user['authlevel'] >= 2) {
+	// Multi-comptes declares : moderation, comme la liste des multi-comptes (niveau 2 dans l'original)
+	if ($user['authlevel'] >= 1) {
 		includeLang('admin');
 		// (Le lien « supprimer le joueur » copie de userlist.php a ete retire : il n'etait affiche nulle part)
 
