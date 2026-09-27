@@ -100,6 +100,11 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 	$QrySelectEnemy .= "`planet` = '". ($_POST['planet'] ?? null) ."' AND ";
 	$QrySelectEnemy .= "`planet_type` = '". ($_POST['planettype'] ?? null) ."';";
 	$TargetRow = doquery( $QrySelectEnemy, 'planets', true);
+	// Champ de debris (recyclage) : aucune ligne de planete a cette position (avertissements PHP a chaque envoi de
+	// recycleurs depuis la galaxie) ; meme valeur par defaut que floten3.php
+	if (!$TargetRow) {
+		$TargetRow = array('id_owner' => '', 'id_level' => 0);
+	}
 
 	if       (empty($TargetRow['id_owner'])) {
 		$TargetUser = $user;
