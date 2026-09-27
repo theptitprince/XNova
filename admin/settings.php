@@ -154,6 +154,8 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			$game_config['enable_marchand'] = isset($_POST['enable_marchand_']) ? '1' : '0';
 						// Activation -ou non- des notes
 			$game_config['enable_notes'] = isset($_POST['enable_notes_']) ? '1' : '0';
+			// Captcha a l'inscription (mod de theptitprince)
+			$game_config['reg_captcha'] = isset($_POST['reg_captcha_']) ? '1' : '0';
 									// Nom du bot antimulti
 									$game_config['bot_name'] = addslashes( ($_POST['name_bot'] ?? null));
 
@@ -229,6 +231,7 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
  			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['enable_announces'])    ."' WHERE `config_name` = 'enable_announces';", 'config');
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['enable_marchand'])    ."' WHERE `config_name` = 'enable_marchand';", 'config');
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['enable_notes'])    ."' WHERE `config_name` = 'enable_notes';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['reg_captcha'])    ."' WHERE `config_name` = 'reg_captcha';", 'config');
 			
 			// Mode Debug
 			doquery("UPDATE {{table}} SET `config_value` = '" .$game_config['debug']                  ."' WHERE `config_name` ='debug'", 'config');
@@ -259,6 +262,7 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			$parse['enable_announces']       = $Chk($game_config['enable_announces']);
 			$parse['enable_marchand']        = $Chk($game_config['enable_marchand']);
 			$parse['enable_notes']           = $Chk($game_config['enable_notes']);
+			$parse['reg_captcha']            = $Chk($game_config['reg_captcha'] ?? '0');
 			$parse['bot_name']               = $Esc(stripslashes($game_config['bot_name']));
 			$parse['bot_adress']             = $Esc(stripslashes($game_config['bot_adress']));
 			$parse['ban_duration']           = $Esc($game_config['ban_duration']);

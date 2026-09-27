@@ -40,6 +40,7 @@
 		<option value="F">{female}</option>
 		</select></th>
 </tr>
+{captcha_row}
 <tr>
   <td height="20" colspan="2"></td>
   </tr>

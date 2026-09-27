@@ -38,6 +38,12 @@ function sendpassemail($emailaddress, $username)
 // (mymail() est dans includes/functions/SendGameMail.php, commune avec le mot de passe oublie)
 
 if ($_POST) {
+    // Captcha (mod de theptitprince), verifie avant tout le reste : sans code valide, rien n'est revele (pseudo ou
+    // adresse deja pris) et un robot ne peut pas envoyer le formulaire en masse
+    if (CaptchaEnabled() && !CaptchaCheck($_POST['captcha'] ?? '')) {
+        message($lang['error_captcha'], $lang['register']);
+    }
+
     $errors = 0;
     $errorlist = "";
 
@@ -217,6 +223,12 @@ if ($_POST) {
     // Afficher le formulaire d'enregistrement
     $parse = $lang;
     $parse['servername'] = $game_config['game_name'];
+    // Captcha (mod de theptitprince) : image tiree a chaque affichage
+    $parse['captcha_row'] = '';
+    if (CaptchaEnabled()) {
+        $parse['captcha_rnd'] = time();
+        $parse['captcha_row'] = parsetemplate(gettemplate('registry_captcha'), $parse);
+    }
     $page = parsetemplate(gettemplate('registry_form'), $parse);
 
     display ($page, $lang['registry'], false);

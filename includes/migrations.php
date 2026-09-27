@@ -105,6 +105,9 @@ $RenaissanceMigrations = array(
 		// garde maintenant la date de suppression ; une demande deja faite part pour 7 jours a compter de la mise a jour
 		"ALTER TABLE `{{prefix}}users` MODIFY `db_deaktjava` int(11) NOT NULL default '0';",
 		"UPDATE `{{prefix}}users` SET `db_deaktjava` = UNIX_TIMESTAMP() + 604800 WHERE `db_deaktjava` = 1;",
+		// Captcha a l'inscription (mod de theptitprince) : reglage de l'administration, active
+		"INSERT INTO `{{prefix}}config` (`config_name`, `config_value`) SELECT 'reg_captcha', '1' FROM DUAL
+			WHERE NOT EXISTS (SELECT 1 FROM `{{prefix}}config` WHERE `config_name` = 'reg_captcha');",
 		// Protection des planetes (option du staff) reservee aux administrateurs : retiree aux autres comptes
 		"UPDATE `{{prefix}}planets` p, `{{prefix}}users` u SET p.`id_level` = 0
 			WHERE p.`id_owner` = u.`id` AND u.`authlevel` < 3 AND p.`id_level` > 0;",

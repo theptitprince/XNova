@@ -62,6 +62,23 @@ function checkEmail() {
 	}, 400);
 }
 
+// Captcha (mod de theptitprince) : autre image, champ vide
+function RefreshCaptcha() {
+	var img = document.getElementById("captcha_img");
+	if (img) {
+		img.src = "captcha.php?" + new Date().getTime();
+		regField("captcha").value = "";
+	}
+	return false;
+}
+
+// Retour sur le formulaire (bouton Precedent apres une erreur) : le code affiche a deja servi, un nouveau s'affiche
+window.addEventListener("pageshow", function (e) {
+	if (e.persisted) {
+		RefreshCaptcha();
+	}
+});
+
 // Reponse : "1|ok|message" (pseudo) ou "2|ok|message" (e-mail) ; reponse perimee ignoree (champ modifie depuis)
 function whenResponse() {
 	var retVals = this.response.split("|");

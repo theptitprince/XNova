@@ -54,4 +54,7 @@ $lang['banner_currently_installed'] = 'Banner attualmente installato';
 $lang['adm_opt_fields_unit'] = 'campi';
 $lang['adm_opt_per_hour'] = 'all\'ora';
 
+// XNova Renaissance 0.9h : captcha a l'inscription (mod de theptitprince)
+$lang['enable_the_captcha'] = 'Captcha all\'iscrizione';
+
 ?>

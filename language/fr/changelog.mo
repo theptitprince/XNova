@@ -5,32 +5,21 @@ $lang['changelog']   = array(
 
 
 '0.9h Renaissance' => 'Fonctions inachev&eacute;es (theptitprince)
-- NEW : Administration : page &laquo; Supprimer un joueur &raquo; remise et termin&eacute;e (fiche du compte, confirmation, r&eacute;serv&eacute;e aux administrateurs) ; la liste des joueurs supprimait en un clic
-- NEW : Administration : liste des multi-comptes remise et termin&eacute;e (comptes regroup&eacute;s par adresse IP partag&eacute;e, d&eacute;clar&eacute;s ou non, bannis ou non, fiche et bannissement en un clic)
-- NEW : &laquo; Effacer le compte &raquo; (Options) : le compte est vraiment supprim&eacute; 7 jours apr&egrave;s la demande, annulable, rappel sur la vue g&eacute;n&eacute;rale
-- NEW : Officiers Destructeur et G&eacute;n&eacute;ral : leurs effets sont enfin programm&eacute;s (2 &eacute;toiles de la mort construites pour une command&eacute;e ; +25 % de vitesse des vaisseaux par niveau)
-- NEW : Pr&eacute;paration d\'une flotte : heures d\'arriv&eacute;e (aller et retour) affich&eacute;es et mises &agrave; jour en direct, sur l\'horloge du serveur (laiss&eacute;es en commentaire dans l\'original)
-- NEW : Inscription : v&eacute;rification en direct du pseudo et de l\'adresse e-mail (disponible, d&eacute;j&agrave; pris, invalide), pr&eacute;vue dans l\'original (script jamais reli&eacute; au formulaire, check_registration.php jamais &eacute;crit)
-- NEW : N&eacute;gociant intergalactique : rach&egrave;te les sondes d\'espionnage de la plan&egrave;te contre du cristal (1k par sonde) ; gabarit et textes livr&eacute;s avec la 0.8e, page jamais &eacute;crite ; lien &laquo; N&eacute;gociant &raquo; sous le marchand
-- NEW : Bouton &laquo; Signaler &raquo; sur les messages des joueurs (priv&eacute;s et d\'alliance), pr&eacute;vu par le r&egrave;glement (article VIII) mais jamais programm&eacute; : confirmation, copie du message pour le staff ; page d\'administration &laquo; Messages signal&eacute;s &raquo; (fiche de l\'auteur, bannissement, trait&eacute; / &agrave; traiter, suppression), nombre &agrave; traiter dans le menu
-- NEW : Administration : lien &laquo; Message &agrave; tous &raquo; dans le menu (la page existait sans lien)
-- NEW : R&ocirc;les du staff : le mod&eacute;rateur mod&egrave;re les relations entre joueurs (administration du chat, multi-comptes d&eacute;clar&eacute;s et d&eacute;bannissement en plus ; plus d\'ajout de flotte ni de plan&egrave;tes actives), l\'op&eacute;rateur g&egrave;re le jeu ; menu d\'administration limit&eacute; aux pages ouvertes au rang ; protection des plan&egrave;tes r&eacute;serv&eacute;e aux administrateurs
-- NEW : Chantier spatial et d&eacute;fense : lien &laquo; max. N &raquo; sous chaque quantit&eacute; (maximum commandable, m&ecirc;mes limites que la commande : ressources, 1 000 par ligne, un seul bouclier, place dans le silo)
-- NEW : Compteur de ressources en direct dans la barre du haut (m&eacute;tal, cristal, deut&eacute;rium) : m&ecirc;me calcul que le serveur, arr&ecirc;t au plafond des hangars, en rouge au-del&agrave; de leur capacit&eacute;
-- FIX : Suppression d\'un compte : flottes des autres joueurs vers ses plan&egrave;tes renvoy&eacute;es chez elles, missiles et d&eacute;clarations effac&eacute;s
-- FIX : Rappel d\'une flotte : dur&eacute;e du retour fausse (stationnement et aller en cours invers&eacute;s)
-- FIX : Administration : fiche de chaque joueur depuis la liste, recherche par IP (ne trouvait jamais personne), joueur introuvable signal&eacute;, on ne modifie plus son propre acc&egrave;s
-- FIX : Officiers : niveau maximum du Commandant affich&eacute; 3 au lieu de 2, faute dans la description de l\'Espion
-- FIX : B&acirc;timents, recherche, chantier spatial et d&eacute;fense : page construite avant la mise &agrave; jour de la plan&egrave;te (vaisseaux termin&eacute;s et file du chantier p&eacute;rim&eacute;s au premier chargement) ; une commande du chantier profitait du temps &eacute;coul&eacute; depuis l\'ouverture de la page (construction gratuite)
-- FIX : Messagerie : les op&eacute;rateurs (niveau 2) &eacute;taient renvoy&eacute;s vers la page de connexion
-- FIX : Production des mines : le multiplicateur de ressources &eacute;tait appliqu&eacute; deux fois (gain r&eacute;el = multiplicateur &times; la production affich&eacute;e par la page Ressources ; sans effet avec le r&eacute;glage par d&eacute;faut)
-- FIX : Production de base : mise &agrave; jour d\'une lune, les plan&egrave;tes mises &agrave; jour ensuite dans la m&ecirc;me page perdaient leur revenu de base
-- FIX : Page de connexion : &laquo; Joueurs inscrits &raquo; pass&eacute; &agrave; la ligne (un pseudo long coupait la ligne n\'importe o&ugrave;), fautes &laquo; Dernier inscris / Joueurs inscris &raquo;
-- FIX : Mode debug : d&eacute;tail des requ&ecirc;tes r&eacute;serv&eacute; aux op&eacute;rateurs et administrateurs (l\'original le montrait aux mod&eacute;rateurs et oubliait les op&eacute;rateurs)
-- FIX : S&eacute;curit&eacute; : la vue g&eacute;n&eacute;rale de l\'administration montrait au staff l\'adresse des pages avec le jeton de s&eacute;curit&eacute; de chaque joueur (un mod&eacute;rateur pouvait faire valider une action &agrave; un administrateur) ; navigateur et adresse affich&eacute;s sans &eacute;chappement (script possible chez le staff)
-- FIX : Bannissement : aucun bannissement d&eacute;finitif possible (dur&eacute;e nulle = lev&eacute; &agrave; la connexion suivante), un mod&eacute;rateur pouvait bannir un administrateur ou lui-m&ecirc;me, un nom inexistant cr&eacute;ait une entr&eacute;e au pilori, les bannissements successifs s\'y ajoutaient
-- FIX : Boucliers : le petit bouclier &eacute;tait test&eacute; pour les deux (grand bouclier bloqu&eacute; d&egrave;s que le petit existait, constructible &agrave; volont&eacute; sinon) et une demande pour un bouclier d&eacute;j&agrave; construit ou en file gardait sa quantit&eacute;
-- FIX : Texte &laquo; Vous n\'avez pas acc&eacute;s &raquo; (acc&egrave;s)',
+- NEW : Captcha &agrave; l\'inscription (theptitprince)
+- NEW : N&eacute;gociant intergalactique
+- NEW : Bouton &laquo; Signaler &raquo; les messages
+- NEW : Compteur de ressources en direct
+- ADD : Effacer son compte (Options)
+- ADD : V&eacute;rification du pseudo et de l\'e-mail &agrave; l\'inscription
+- ADD : Heures d\'arriv&eacute;e et de retour &agrave; l\'envoi d\'une flotte
+- ADD : Boutons &laquo; max &raquo; au chantier spatial et &agrave; la d&eacute;fense
+- ADD : Administration : supprimer un joueur, multi-comptes, messages signal&eacute;s, message &agrave; tous
+- MOD : R&ocirc;les du staff, menu d\'administration selon le rang
+- FIX : Officiers Destructeur et G&eacute;n&eacute;ral
+- FIX : Production des ressources, chantier spatial, boucliers
+- FIX : Rappel de flotte, suppression de compte, bannissement
+- FIX : S&eacute;curit&eacute; du panneau d\'administration
+- FIX : Nombreuses petites erreurs (textes, affichage)',
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
 - FIX : Mot de passe oubli&eacute; : lien de confirmation avant tout changement (conna&icirc;tre l\'adresse d\'un joueur suffisait), injection SQL corrig&eacute;e, m&ecirc;me message que l\'adresse existe ou non

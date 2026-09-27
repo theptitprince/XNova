@@ -52,7 +52,7 @@ $lang['error_sex'] = 'Errore nella scelta del sesso!<br />';
 $lang['error_lang']        = 'Non avete scelto una lingua!<br />';
 $lang['error_mailsend']    = 'Errore nell\'invio della mail. Accedete con la password che avete scelto.';
 $lang['reg_welldone'] = 'Iscrizione terminata!';
-$lang['error_captcha']     = 'Non valido<br/>';
+$lang['error_captcha']     = 'Codice di verifica errato o scaduto. Torna al modulo: verrà mostrato un nuovo codice.'; // XNova Renaissance 0.9h (cle de la 0.8e jamais utilisee)
 $lang['error_v'] = 'Interdetto !<br />';
 
 // Created by Perberos. All rights reversed (C) 2006
@@ -67,5 +67,9 @@ $lang['error_planetnum'] = 'Il nome del pianeta deve contenere solo lettere, cif
 // XNova Renaissance 0.9h : verification en direct du pseudo et de l'e-mail (check_registration.php)
 $lang['reg_check_user_ok'] = 'Nome del giocatore disponibile';
 $lang['reg_check_mail_ok'] = 'Indirizzo e-mail valido';
+
+// XNova Renaissance 0.9h : captcha a l'inscription (mod de theptitprince)
+$lang['reg_captcha'] = 'Codice di verifica';
+$lang['reg_captcha_new'] = 'Altro codice';
 
 ?>
