@@ -43,7 +43,8 @@ function CreateOneMoonRecord ( $Galaxy, $System, $Planet, $Owner, $MoonID, $Moon
 
 			$maxtemp                = $MoonPlanet['temp_max'] - rand(10, 45);
 			$mintemp                = $MoonPlanet['temp_min'] - rand(10, 45);
-			$size                   = rand ($SizeMin, $SizeMax);
+			// Bornes entieres (la chance de lune est decimale sous 2 M de debris : conversion depreciee en PHP 8)
+			$size                   = rand (intval($SizeMin), intval($SizeMax));
 			$MoonNameSql            = SqlEscape( SafeName( ($MoonName == '') ? $lang['sys_moon'] : $MoonName ) );
 
 			$QryInsertMoonInLunas   = "INSERT INTO {{table}} SET ";

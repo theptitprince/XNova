@@ -12,6 +12,11 @@
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
+// Fichier inclus par les pages du jeu : ouvert directement, il ecrivait un avertissement PHP dans le journal
+if (!defined('INSIDE')) {
+	die();
+}
+
 define('VERSION'     ,'0.9h');        // Version d'XNova utilisée...
 define('VERSION_NAME','Renaissance'); // Nom de la version (0.9 et suivantes)
 
