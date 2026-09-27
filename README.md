@@ -101,7 +101,10 @@ Le reste des contributions de cette époque a disparu avec le forum. XNova Renai
 Les dérivés d'XNova ont presque tous suivi l'un de ces deux chemins : l'empilement de modifications jusqu'à
 l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissance fait le choix inverse :**
 
-- **on repart de la dernière version de l'équipe d'origine, XNova 0.8e**, et non d'un dérivé ;
+- **on repart de la dernière version de l'équipe d'origine, XNova 0.8e**, et non d'un dérivé. Le premier commit
+  de ce dépôt (tag `v0.8e`) est identique, fichier pour fichier, à l'archive
+  [xnova-legacies/xnova-0.8](https://github.com/xnova-legacies/xnova-0.8/tree/af4e32c45bb99e8c47f5317f143bacf041c988b2)
+  mise en ligne en 2016 ;
 - **on ne réécrit pas** : la structure du code, son style et le gameplay restent ceux de Chlorel et de son équipe ;
 - **on modernise et on sécurise pas à pas**. Chaque version reste jouable, et la numérotation reprend la logique
   d'origine (0.8e → 0.9d → 0.9e → 0.9f…).
