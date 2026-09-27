@@ -116,7 +116,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$bloc['mlst_id']      = $row['message_id'];
 			$bloc['mlst_from']    = $row['message_from'];
 			$bloc['mlst_to']      = $OwnerData['username'] ." ID:". $row['message_owner'];
-			$bloc['mlst_text']    = $row['message_text'];
+			// Emoticones enregistrees avec un chemin relatif au jeu (./images/...) : introuvables depuis le dossier admin
+			$bloc['mlst_text']    = str_replace('src="./images/', 'src="../images/', $row['message_text']);
 			$bloc['mlst_time']    = date ( "d/m/Y H:i:s", $row['message_time'] );
 
 			$parse['mlst_data_rows'] .= parsetemplate($RowsTpl , $bloc);

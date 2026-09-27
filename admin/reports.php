@@ -82,8 +82,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$bloc['author']   = $Author;
 			$bloc['reporter'] = $Reporter;
 			$bloc['kind']     = sprintf($lang['adm_rep_kind'], $lang['adm_rep_type'][$Row['message_type']] ?? '', date('d/m/Y H:i', $Row['message_time']));
-			// Texte tel qu'il s'affichait dans la messagerie du joueur (deja echappe a l'envoi)
-			$bloc['message']  = nl2br(stripslashes($Row['message_text']));
+			// Texte tel qu'il s'affichait dans la messagerie du joueur (deja echappe a l'envoi) ; emoticones enregistrees
+			// avec un chemin relatif au jeu (./images/...) : introuvables depuis le dossier admin
+			$bloc['message']  = str_replace('src="./images/', 'src="../images/', nl2br(stripslashes($Row['message_text'])));
 			$bloc['status']   = ($Row['is_done'] == 1) ? $lang['adm_rep_done'] : "<font color=\"red\">". $lang['adm_rep_new'] ."</font>";
 			$bloc['toggle']   = ($Row['is_done'] == 1)
 			                  ? "<a href=\"reports.php?undone=". $Row['id'] ."\">". $lang['adm_rep_mark_undone'] ."</a>"
