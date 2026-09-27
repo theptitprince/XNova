@@ -100,6 +100,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse['stat_date']   = $game_config['stats'] ?? '';
 		$parse['stat_values'] = "";
 		while ($StatRow = mysqli_fetch_assoc($query)) {
+			// Date du calcul, comme dans le classement des joueurs (l'original lisait un reglage inexistant : titre vide)
+			$parse['stat_date']       = date("d/m/Y - H:i:s", $StatRow['stat_date']);
 			$parse['ally_rank']       = $start;
 
 			$AllyRow                  = doquery("SELECT * FROM {{table}} WHERE `id` = '". $StatRow['id_owner'] ."';", 'alliance',true);
@@ -123,8 +125,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			if ($ranking > "0") {
 				$parse['ally_rankplus']   = "<font color=\"green\">+".$ranking."</font>";
 			}
-			$parse['ally_tag']        = $AllyRow['ally_tag'];
-			$parse['ally_name']       = $AllyRow['ally_name'];
+			$parse['ally_id']         = intval($AllyRow['id']);
+			$parse['ally_tag']        = htmlspecialchars($AllyRow['ally_tag'], ENT_QUOTES, 'UTF-8');
+			$parse['ally_name']       = htmlspecialchars($AllyRow['ally_name'], ENT_QUOTES, 'UTF-8');
 			$parse['ally_mes']        = '';
 			$parse['ally_members']    = $AllyRow['ally_members'];
 			$parse['ally_points']     = pretty_number( $StatRow[ $Order ] );
@@ -186,10 +189,14 @@ include($xnova_root_path . 'common.' . $phpEx);
 				$parse['player_name']     = $UsrRow['username'];
 			}
 			$parse['player_mes']      = "<a href=\"messages.php?mode=write&id=" . $UsrRow['id'] . "\"><img src=\"" . $dpath . "img/m.gif\" border=\"0\" alt=\"". $lang['ecrire'] ."\" /></a>";
-			if ($UsrRow['ally_name'] == $user['ally_name']) {
-				$parse['player_alliance'] = "<font color=\"#33CCFF\">".$UsrRow['ally_name']."</font>";
-			} else {
-				$parse['player_alliance'] = $UsrRow['ally_name'];
+			// Alliance du joueur : lien vers sa page (texte simple dans l'original), en bleu pour sa propre alliance
+			$parse['player_alliance'] = '';
+			if ($UsrRow['ally_id'] > 0 && $UsrRow['ally_name'] != '') {
+				$AllyName = htmlspecialchars($UsrRow['ally_name'], ENT_QUOTES, 'UTF-8');
+				if ($UsrRow['ally_id'] == $user['ally_id']) {
+					$AllyName = "<font color=\"#33CCFF\">". $AllyName ."</font>";
+				}
+				$parse['player_alliance'] = "<a href=\"alliance.php?mode=ainfo&amp;a=". intval($UsrRow['ally_id']) ."\">". $AllyName ."</a>";
 			}
 			$parse['player_points']   = pretty_number( $StatRow[ $Order ] );
 			$parse['stat_values']    .= parsetemplate(gettemplate('stat_playertable'), $parse);
