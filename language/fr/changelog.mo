@@ -20,7 +20,8 @@ $lang['changelog']   = array(
 - FIX : Production des ressources, chantier spatial, boucliers
 - FIX : Rappel de flotte, suppression de compte, bannissement
 - FIX : S&eacute;curit&eacute; du panneau d\'administration
-- FIX : Nombreuses petites erreurs (textes, affichage)',
+- FIX : Nombreuses petites erreurs (textes, affichage)
+- DIV : Scripts et outils inutilis&eacute;s retir&eacute;s',
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
 - NEW : Langue au choix dans les Options, allemand, espagnol et italien complets
