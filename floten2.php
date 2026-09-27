@@ -98,7 +98,21 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if ($YourPlanet)
 		$missiontype[4] = $lang['type_mission'][4];
 
-	// Mission 2 (attaque groupée) retirée : jamais programmée, la flotte disparaissait à l'arrivée
+	// Attaque groupee (0.9i) : groupe choisi a l'etape precedente (bloc « Attaques groupees »), vers sa cible, avec une
+	// flotte qui pourrait attaquer
+	$AcsGroup = false;
+	if (intval($_POST['acs'] ?? 0) > 0 && !empty($missiontype[1])) {
+		$AcsGroup = AcsGroupToJoin(intval($_POST['acs']), $user['id'], $galaxy, $system, $planet, $planettype);
+		if (is_array($AcsGroup)) {
+			$missiontype[2] = $lang['type_mission'][2];
+		} elseif ($AcsGroup != 'fl_acs_other_target') {
+			// Groupe choisi vers sa cible mais complet, parti ou quitte : on dit pourquoi (autre cible : simple envoi)
+			message ("<font color=\"red\"><b>". $lang[$AcsGroup] ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
+		} else {
+			$AcsGroup = false;
+		}
+	}
+
 	if ( ($_POST['planettype'] ?? null) == 3 &&
 	     ($_POST['ship214'] ?? null) >= 1    &&
            !$YourPlanet            &&
@@ -112,7 +126,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		header("Location: fleet.php");
 		exit();
 	}
-	$mission       = ($_POST['target_mission'] ?? null);
+	$mission       = ($AcsGroup) ? 2 : ($_POST['target_mission'] ?? null);
 	$SpeedFactor   = GetGameSpeedFactor (); // valeur du serveur, pas celle du formulaire
 	$AllFleetSpeed = GetFleetMaxSpeed ($fleetarray, 0, $user);
 	$GenFleetSpeed = ($_POST['speed'] ?? null);
@@ -184,6 +198,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "<input type=\"hidden\" name=\"usedfleet\"      value=\"". htmlspecialchars(($_POST["usedfleet"] ?? null), ENT_QUOTES) ."\" />\n";
 	$page .= "<input type=\"hidden\" name=\"maxepedition\"   value=\"". ($_POST['maxepedition'] ?? null) ."\" />\n";
 	$page .= "<input type=\"hidden\" name=\"curepedition\"   value=\"". ($_POST['curepedition'] ?? null) ."\" />\n";
+	$page .= "<input type=\"hidden\" name=\"acs\"            value=\"". (($AcsGroup) ? intval($AcsGroup['id']) : 0) ."\" />\n";
 	foreach ($fleetarray as $Ship => $Count) {
 		$page .= "<input type=\"hidden\" name=\"ship". $Ship ."\"        value=\"". $Count ."\" />\n";
 		$page .= "<input type=\"hidden\" name=\"capacity". $Ship ."\"    value=\"". $pricelist[$Ship]['capacity'] ."\" />\n";

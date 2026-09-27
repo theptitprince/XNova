@@ -196,5 +196,8 @@ $lang['fl_acs_invite_subject'] = 'Invitación a un ataque de confederación';
 $lang['fl_acs_invite_text'] = '%s te invita al ataque de confederación %s contra %s [%s:%s:%s], llegada prevista el %s. Para participar, envía una flota desde la página Flota y elige esta confederación como objetivo.';
 $lang['fl_acs_moon'] = '(Luna)';
 $lang['fl_acs_deleted'] = '(cuenta eliminada)';
+$lang['fl_acs_too_slow'] = 'Tu flota es demasiado lenta para esta confederación: la retrasaría más de un 30 % de su tiempo de vuelo restante.';
+$lang['fl_acs_fleets_full'] = 'Esta confederación ya tiene 16 flotas.';
+$lang['fl_acs_other_target'] = 'Esta confederación ataca otro objetivo.';
 
 ?>

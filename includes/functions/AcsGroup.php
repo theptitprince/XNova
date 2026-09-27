@@ -23,6 +23,37 @@ function AcsInvitedIds ( $Group ) {
 	return array_values(array_unique($Ids));
 }
 
+// Groupes qu'un joueur peut rejoindre : il en est le chef ou y est invite, et le groupe n'est pas encore arrive
+function AcsJoinableGroups ( $UserId ) {
+	$UserId = intval($UserId);
+	$Groups = array();
+	$Query  = doquery("SELECT * FROM {{table}} WHERE `ankunft` > '". time() ."' AND (`owner` = '". $UserId ."' OR FIND_IN_SET('". $UserId ."', `eingeladen`)) ORDER BY `ankunft`;", 'aks');
+	while ($Row = mysqli_fetch_assoc($Query)) {
+		$Groups[] = $Row;
+	}
+	return $Groups;
+}
+
+// Groupe que le joueur rejoint en envoyant une flotte vers cette cible (mission « Attaque groupee ») : la ligne du
+// groupe, ou la cle du message d'erreur (groupe introuvable, arrive, pas invite, autre cible, 16 flottes deja)
+function AcsGroupToJoin ( $GroupId, $UserId, $Galaxy, $System, $Planet, $PlanetType ) {
+	$Group = (intval($GroupId) > 0) ? doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($GroupId) ."';", 'aks', true) : false;
+	if (!$Group || $Group['ankunft'] <= time()) {
+		return 'fl_acs_not_found';
+	}
+	if ($Group['owner'] != $UserId && !in_array(intval($UserId), AcsInvitedIds($Group))) {
+		return 'fl_acs_not_found';
+	}
+	if ($Group['galaxy'] != $Galaxy || $Group['system'] != $System || $Group['planet'] != $Planet || $Group['planet_type'] != $PlanetType) {
+		return 'fl_acs_other_target';
+	}
+	$Fleets = doquery("SELECT COUNT(*) AS `n` FROM {{table}} WHERE `fleet_group` = '". intval($Group['id']) ."';", 'fleets', true);
+	if (intval($Fleets['n']) >= 16) {
+		return 'fl_acs_fleets_full';
+	}
+	return $Group;
+}
+
 // Groupe sans flotte (toutes rappelees, joueurs supprimes) : supprime
 function AcsDeleteIfEmpty ( $GroupId ) {
 	$GroupId = intval($GroupId);

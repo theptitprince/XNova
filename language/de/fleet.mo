@@ -196,5 +196,8 @@ $lang['fl_acs_invite_subject'] = 'Einladung zu einem Verbandsangriff';
 $lang['fl_acs_invite_text'] = '%s lädt dich zum Verbandsangriff %s auf %s [%s:%s:%s] ein, Ankunft am %s. Um teilzunehmen, schicke eine Flotte über die Flottenseite und wähle diesen Verband als Ziel.';
 $lang['fl_acs_moon'] = '(Mond)';
 $lang['fl_acs_deleted'] = '(Konto gelöscht)';
+$lang['fl_acs_too_slow'] = 'Deine Flotte ist zu langsam für diesen Verband: Sie würde ihn um mehr als 30 % seiner restlichen Flugzeit verzögern.';
+$lang['fl_acs_fleets_full'] = 'Dieser Verband hat bereits 16 Flotten.';
+$lang['fl_acs_other_target'] = 'Dieser Verband greift ein anderes Ziel an.';
 
 ?>

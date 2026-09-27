@@ -262,7 +262,21 @@ include($xnova_root_path . 'common.' . $phpEx);
 	}
 
 	$page .= "</tr>";
-	// (bloc « Attaques groupees » retire avec la mission, toujours vide : il reviendra avec l'attaque groupee en 0.9i)
+	// Attaques groupees (0.9i) : bloc de l'original, toujours vide dans la 0.8e. Groupes dont on est le chef ou ou l'on
+	// est invite ; un clic choisit leur cible et retient le groupe (mission « Attaque groupee » a l'etape suivante)
+	$page .= "<tr height=\"20\">";
+	$page .= "<td colspan=\"2\" class=\"c\">". $lang['fl_grattack'] ."</td>";
+	$page .= "</tr>";
+	$Groups = AcsJoinableGroups($user['id']);
+	if (count($Groups) == 0) {
+		$page .= "<tr height=\"20\"><th colspan=\"2\">-</th></tr>";
+	}
+	foreach ($Groups as $Group) {
+		$page .= "<tr height=\"20\"><th colspan=\"2\"><a href=\"javascript:setTarget(". intval($Group['galaxy']) .",". intval($Group['system']) .",". intval($Group['planet']) .",". intval($Group['planet_type']) .");";
+		$page .= " document.getElementsByName('acs')[0].value = ". intval($Group['id']) ."; shortInfo();\">";
+		$page .= htmlspecialchars($Group['name'], ENT_QUOTES, 'UTF-8') ." ". intval($Group['galaxy']) .":". intval($Group['system']) .":". intval($Group['planet']);
+		$page .= (($Group['planet_type'] == 3) ? " ". $lang['fl_shrtcup3'] : "") ." (". date("d/m H:i:s", $Group['ankunft']) .")</a></th></tr>";
+	}
 	$page .= "<tr height=\"20\">";
 	$page .= "<th colspan=\"2\"><input type=\"submit\" value=\"". $lang['fl_continue'] ."\" /></th>";
 	$page .= "</tr>";
@@ -271,6 +285,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "<input type=\"hidden\" name=\"maxepedition\" value=\"". ($_POST['maxepedition'] ?? null) ."\" />";
 	$page .= "<input type=\"hidden\" name=\"curepedition\" value=\"". ($_POST['curepedition'] ?? null) ."\" />";
 	$page .= "<input type=\"hidden\" name=\"target_mission\" value=\"". intval($_POST['target_mission'] ?? 0) ."\" />";
+	$page .= "<input type=\"hidden\" name=\"acs\" value=\"0\" />";
 	$page .= "</form>";
 	$page .= "<script>javascript:shortInfo(); setInterval(shortInfo, 1000); </script>";
 
