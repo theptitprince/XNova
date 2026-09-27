@@ -74,7 +74,8 @@ function MissionCaseSpy ( $FleetRow ) {
 						if ($TargetForce > 100) {
 							$TargetForce = 100;
 						}
-						$TargetChances = rand(0, $TargetForce);
+						// Borne entiere, comme le faisait PHP 5 sans le dire (PHP 8 : conversion depreciee, avertissement)
+						$TargetChances = rand(0, intval($TargetForce));
 						$SpyerChances  = rand(0, 100);
 						if ($TargetChances >= $SpyerChances) {
 							$DestProba = "<font color=\"red\">".$lang['sys_mess_spy_destroyed']."</font>";

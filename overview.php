@@ -92,7 +92,8 @@ switch ($mode) {
             $parse['galaxy_planet'] = $planetrow['planet'];
             $parse['planet_name'] = $planetrow['name'];
 
-            $page .= parsetemplate(gettemplate('overview_deleteplanet'), $parse);
+            // Page d'abandon seule ($page n'existait pas encore : avertissement PHP a chaque affichage)
+            $page = parsetemplate(gettemplate('overview_deleteplanet'), $parse);
             // On affiche la forme pour l'abandon de la colonie
             display($page, $lang['rename_and_abandon_planet']);
         } elseif (($_POST['kolonieloeschen'] ?? null) == 1 && ($_POST['deleteid'] ?? null) == $user['current_planet']) {
