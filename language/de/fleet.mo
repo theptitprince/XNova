@@ -164,4 +164,7 @@ $lang['res']['fleet'][212] = 'Solarsatellit';
 $lang['res']['fleet'][213] = 'Zerstörer';
 $lang['res']['fleet'][215] = 'Schlachtkreuzer';
 
+// XNova Renaissance 0.9h : protection des debutants, joueur qui envoie protege
+$lang['fl_noob_mess_s'] = 'Der Spieler ist zu stark für dich!';
+
 ?>

@@ -38,13 +38,6 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$TargetPlanet = array('id_owner' => '', 'ally_deposit' => 0, 'id_level' => 0);
 	}
 
-	$protection      = $game_config['noobprotection'];
-	$protectiontime  = $game_config['noobprotectiontime'];
-	$protectionmulti = $game_config['noobprotectionmulti'];
-	if ($protectiontime < 1) {
-		$protectiontime = 9999999999999999;
-	}
-
 	$fleetarray  = unserialize(base64_decode(str_rot13((string) ($_POST["usedfleet"] ?? ''))), array('allowed_classes' => false));
 
 	// La liste vient du navigateur : on ne garde que des vaisseaux existants en quantites positives
@@ -198,59 +191,18 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$HeDBRec = doquery("SELECT * FROM {{table}} WHERE `id` = '". $TargetPlanet['id_owner'] ."';", 'users', true);
 	}
 
-	$UserPoints    = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $MyDBRec['id'] ."';", 'statpoints', true);
-	$User2Points   = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $HeDBRec['id'] ."';", 'statpoints', true);
-
-	$MyGameLevel  = $UserPoints['total_points'] ?? 0;
-	$HeGameLevel  = $User2Points['total_points'] ?? 0;
 	$VacationMode = $HeDBRec['urlaubs_modus'];
 
-	if ($MyGameLevel > ($HeGameLevel * $protectionmulti) AND
-		$TargetPlanet['id_owner'] != '' AND
-		($_POST['mission'] ?? null)     == 1  AND
-		$protection           == 1  AND
-		$HeGameLevel < ($protectiontime * 1000)) {
-		message("<font color=\"lime\"><b>".$lang['fl_noob_mess_n']."</b></font>", $lang['fl_noob_title'], "fleet." . $phpEx, 2);
-	}
-
-	if ($MyGameLevel > ($HeGameLevel * $protectionmulti) AND
-		$TargetPlanet['id_owner'] != '' AND
-		($_POST['mission'] ?? null)     == 5  AND
-		$protection           == 1  AND
-		$HeGameLevel < ($protectiontime * 1000)) {
-		message("<font color=\"lime\"><b>".$lang['fl_noob_mess_n']."</b></font>", $lang['fl_noob_title'], "fleet." . $phpEx, 2);
-	}
-
-	if ($MyGameLevel > ($HeGameLevel * $protectionmulti) AND
-		$TargetPlanet['id_owner'] != '' AND
-		($_POST['mission'] ?? null)     == 6  AND
-		$protection           == 1  AND
-		$HeGameLevel < ($protectiontime * 1000)) {
-		message("<font color=\"lime\"><b>".$lang['fl_noob_mess_n']."</b></font>", $lang['fl_noob_title'], "fleet." . $phpEx, 2);
-	}
-
-	if (($MyGameLevel * $protectionmulti) < $HeGameLevel AND
-		$TargetPlanet['id_owner'] != '' AND
-		($_POST['mission'] ?? null)     == 1  AND
-		$protection           == 1  AND
-		$MyGameLevel < ($protectiontime * 1000)) {
-		message("<font color=\"lime\"><b>".$lang['fl_noob_mess_n']."</b></font>", $lang['fl_noob_title'], "fleet." . $phpEx, 2);
-	}
-
-	if (($MyGameLevel * $protectionmulti) < $HeGameLevel AND
-		$TargetPlanet['id_owner'] != '' AND
-		($_POST['mission'] ?? null)     == 5  AND
-		$protection           == 1  AND
-		$MyGameLevel < ($protectiontime * 1000)) {
-		message("<font color=\"lime\"><b>".$lang['fl_noob_mess_n']."</b></font>", $lang['fl_noob_title'], "fleet." . $phpEx, 2);
-	}
-
-	if (($MyGameLevel * $protectionmulti) < $HeGameLevel AND
-		$TargetPlanet['id_owner'] != '' AND
-		($_POST['mission'] ?? null)     == 6  AND
-		$protection           == 1  AND
-		$MyGameLevel < ($protectiontime * 1000)) {
-		message("<font color=\"lime\"><b>".$lang['fl_noob_mess_n']."</b></font>", $lang['fl_noob_title'], "fleet." . $phpEx, 2);
+	// Protection des debutants : attaque, stationnement chez un allie, espionnage et destruction de lune (oubliee
+	// par l'original : un joueur bien plus fort pouvait detruire la lune d'un joueur protege). Message propre au cas
+	// ou c'est le joueur qui envoie qui est protege (l'original disait aussi « Le joueur est trop faible »).
+	if (in_array(intval($fleetmission), array(1, 5, 6, 9)) && !empty($TargetPlanet['id_owner'])) {
+		$NoobStatus = NoobProtection($user['id'], $TargetPlanet['id_owner']);
+		if ($NoobStatus == 1) {
+			message("<font color=\"lime\"><b>".$lang['fl_noob_mess_n']."</b></font>", $lang['fl_noob_title'], "fleet." . $phpEx, 2);
+		} elseif ($NoobStatus == 2) {
+			message("<font color=\"lime\"><b>".$lang['fl_noob_mess_s']."</b></font>", $lang['fl_noob_title'], "fleet." . $phpEx, 2);
+		}
 	}
 
 	if ($VacationMode AND ($_POST['mission'] ?? null) != 8) {

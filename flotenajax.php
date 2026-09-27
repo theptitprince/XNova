@@ -72,10 +72,6 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 		}
 	}
 
-	$PrNoob      = $game_config['noobprotection'];
-	$PrNoobTime  = $game_config['noobprotectiontime'];
-	$PrNoobMulti = $game_config['noobprotectionmulti'];
-
 	// Petit Test de coherance
 	$galaxy          = intval(($_POST['galaxy'] ?? null));
 	if ($galaxy > 9 || $galaxy < 1) {
@@ -110,12 +106,6 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 	} else {
 		$TargetUser = doquery("SELECT * FROM {{table}} WHERE `id` = '". $TargetRow['id_owner'] ."';", 'users', true);
 	}
-	$UserPoints    = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $user['id'] ."';", 'statpoints', true);
-	$User2Points   = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $TargetUser['id'] ."';", 'statpoints', true);
-
-	// Pas encore de statistiques (partie neuve, avant le premier calcul) : 0 point (avertissements PHP auparavant)
-	$CurrentPoints = $UserPoints['total_points'] ?? 0;
-	$TargetPoints  = $User2Points['total_points'] ?? 0;
 	$TargetVacat   = $TargetUser['urlaubs_modus'];
 
 	// Test s'il y a un slot de libre au moins !
@@ -145,31 +135,21 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 		}
 	}
 
-	if ($PrNoobTime < 1) {
-		$PrNoobTime = 9999999999999999;
-	}
-
 	if ($TargetVacat && ($_POST['mission'] ?? null) != 8) {
 		$ResultMessage = "605;".$lang['gs_c605']."|".$CurrentFlyingFleets." ".$UserSpyProbes." ".$UserRecycles." ".$UserMissiles;
 		die ( $ResultMessage );
 	}
 
-	if ($CurrentPoints          > ($TargetPoints * $PrNoobMulti) AND
-		$TargetRow['id_owner'] != '' AND
-		($_POST['mission'] ?? null)      == 6  AND
-		$PrNoob                == 1  AND
-		$TargetPoints           < ($PrNoobTime * 1000)) {
-		$ResultMessage = "603;".$lang['gs_c603']."|".$CurrentFlyingFleets." ".$UserSpyProbes." ".$UserRecycles." ".$UserMissiles;
-		die ( $ResultMessage );
-	}
-
-	if ($TargetPoints           > ($CurrentPoints * $PrNoobMulti) AND
-		$TargetRow['id_owner'] != '' AND
-		($_POST['mission'] ?? null)      == 6  AND
-		$PrNoob                == 1  AND
-		$CurrentPoints          < ($PrNoobTime * 1000)) {
-		$ResultMessage = "604;".$lang['gs_c604']."|".$CurrentFlyingFleets." ".$UserSpyProbes." ".$UserRecycles." ".$UserMissiles;
-		die ( $ResultMessage );
+	// Protection des debutants : meme regle que l'envoi de flotte (NoobProtection)
+	if (($_POST['mission'] ?? null) == 6 && !empty($TargetRow['id_owner'])) {
+		$NoobStatus = NoobProtection($user['id'], $TargetRow['id_owner']);
+		if ($NoobStatus == 1) {
+			$ResultMessage = "603;".$lang['gs_c603']."|".$CurrentFlyingFleets." ".$UserSpyProbes." ".$UserRecycles." ".$UserMissiles;
+			die ( $ResultMessage );
+		} elseif ($NoobStatus == 2) {
+			$ResultMessage = "604;".$lang['gs_c604']."|".$CurrentFlyingFleets." ".$UserSpyProbes." ".$UserRecycles." ".$UserMissiles;
+			die ( $ResultMessage );
+		}
 	}
 
 	if ($TargetRow['id_owner'] == '' AND
