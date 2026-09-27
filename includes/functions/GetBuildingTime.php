@@ -32,23 +32,20 @@ function GetBuildingTime ($user, $planet, $Element) {
 		// Pour une recherche
 		$cost_metal   = floor($pricelist[$Element]['metal']   * pow($pricelist[$Element]['factor'], $level));
 		$cost_crystal = floor($pricelist[$Element]['crystal'] * pow($pricelist[$Element]['factor'], $level));
-		$intergal_lab = $user[$resource[123]];
-		if       ( $intergal_lab < "1" ) {
-			$lablevel = $planet[$resource['31']];
-		} elseif ( $intergal_lab >= "1" ) {
-			$empire = doquery("SELECT * FROM {{table}} WHERE id_owner='". $user['id'] ."';", 'planets');
-			$NbLabs = 0;
-			while ($colonie = mysqli_fetch_array($empire)) {
-				$techlevel[$NbLabs] = $colonie[$resource['31']];
-				$NbLabs++;
+		// Reseau de recherche intergalactique : le laboratoire de la planete de recherche, plus un laboratoire par niveau,
+		// les plus developpes des autres planetes (description du jeu). L'original triait sans effet (asort garde les
+		// cles) : il additionnait les premieres planetes de la base, lunes comprises, sans forcement compter celle de la
+		// recherche (au niveau 1, une recherche lancee depuis le plus gros laboratoire pouvait etre plus lente).
+		$lablevel     = intval($planet[$resource['31']] ?? 0);
+		$intergal_lab = intval($user[$resource[123]] ?? 0);
+		if ($intergal_lab >= 1) {
+			$OtherLabs = array();
+			$empire    = doquery("SELECT `". $resource['31'] ."` FROM {{table}} WHERE `id_owner` = '". intval($user['id']) ."' AND `id` <> '". intval($planet['id']) ."' AND `planet_type` = '1';", 'planets');
+			while ($colonie = mysqli_fetch_assoc($empire)) {
+				$OtherLabs[] = intval($colonie[$resource['31']]);
 			}
-			if ($intergal_lab >= "1") {
-				$lablevel = 0;
-				for ($lab = 1; $lab <= $intergal_lab; $lab++) {
-					asort($techlevel);
-					$lablevel += $techlevel[$lab - 1];
-				}
-			}
+			rsort($OtherLabs);
+			$lablevel += array_sum(array_slice($OtherLabs, 0, $intergal_lab));
 		}
 		$time         = (($cost_metal + $cost_crystal) / $game_config['game_speed']) / (($lablevel + 1) * 2);
 		$time         = floor(($time * 60 * 60) * (1 - (($user['rpg_scientifique']) * 0.1)));
