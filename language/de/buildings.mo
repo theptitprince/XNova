@@ -44,4 +44,7 @@ $lang['labo_on_update']   		= "Es ist nicht m&ouml;glich zu forschen, wenn ein F
 // XNova Renaissance 0.9g : traductions
 $lang['builds'] = 'Gebäude';
 
+// XNova Renaissance 0.9h : lien max du chantier spatial et de la defense
+$lang['bd_max'] = 'max. %s';
+
 ?>

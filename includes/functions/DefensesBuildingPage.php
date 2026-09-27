@@ -18,6 +18,45 @@
 //                   dans le programme appelant
 // $CurrentUser   -> Utilisateur qui a lancé la construction
 //
+// Petit et grand bouclier : un seul exemplaire (ni deja construit, ni deja dans la file). L'original testait le petit
+// bouclier pour les deux : grand bouclier bloque des que le petit existait, et constructible a volonte sinon.
+function DefenseShieldBuildable ( $CurrentPlanet, $Element ) {
+	global $resource;
+	if ($Element != 407 && $Element != 408) {
+		return true;
+	}
+	$InQueue = (strpos(';'. $CurrentPlanet['b_hangar_id'], ';'. $Element .',') !== false);
+	return (!$InQueue && $CurrentPlanet[$resource[$Element]] < 1);
+}
+
+// Missiles du silo, stock et file de fabrication. Chaque entree de la file vaut « element,nombre » : l'original lisait
+// les cases [502] et [503] (inexistantes), les missiles en attente n'etaient jamais comptes et le silo pouvait deborder.
+function DefenseMissilesInSilo ( $CurrentPlanet ) {
+	global $resource;
+	$Missiles = array(502 => $CurrentPlanet[ $resource[502] ], 503 => $CurrentPlanet[ $resource[503] ]);
+	foreach (explode(';', $CurrentPlanet['b_hangar_id']) as $QueueItem) {
+		$ElmentArray = explode(',', $QueueItem);
+		if (count($ElmentArray) >= 2 && ($ElmentArray[0] == 502 || $ElmentArray[0] == 503)) {
+			$Missiles[intval($ElmentArray[0])] += intval($ElmentArray[1]);
+		}
+	}
+	return $Missiles;
+}
+
+// Maximum commandable d'une defense (lien « max. N ») : memes limites que la commande
+function DefenseMaxElements ( $CurrentPlanet, $Element, $Missiles ) {
+	global $resource;
+	$Max = min(GetMaxConstructibleElements($Element, $CurrentPlanet), MAX_FLEET_OR_DEFS_PER_ROW);
+	if ($Element == 407 || $Element == 408) {
+		$Max = min($Max, 1);
+	} elseif ($Element == 502 || $Element == 503) {
+		// Un missile interplanetaire prend la place de deux missiles d'interception
+		$Space = ($CurrentPlanet[ $resource[44] ] * 10) - $Missiles[502] - (2 * $Missiles[503]);
+		$Max   = min($Max, ($Element == 502) ? $Space : floor($Space / 2));
+	}
+	return max(0, $Max);
+}
+
 function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
  	global $lang, $resource, $phpEx, $dpath, $_POST;
 
@@ -27,21 +66,10 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 		// Et y a une liste de doléances
 		// Ici, on sait precisement ce qu'on aimerait bien construire ...
 
-		// Gestion de la place disponible dans les silos !
-		$Missiles[502] = $CurrentPlanet[ $resource[502] ];
-		$Missiles[503] = $CurrentPlanet[ $resource[503] ];
+		// Gestion de la place disponible dans les silos (missiles en stock et deja dans la file)
+		$Missiles      = DefenseMissilesInSilo($CurrentPlanet);
 		$SiloSize      = $CurrentPlanet[ $resource[44] ];
 		$MaxMissiles   = $SiloSize * 10;
-		// On prend les missiles deja dans la queue de fabrication aussi (ca aide). Chaque entree vaut
-		// « element,nombre » : l'original lisait les cases [502] et [503] (inexistantes), les missiles en
-		// attente n'etaient jamais comptes et le silo pouvait deborder.
-		$BuildArray    = explode (";", $CurrentPlanet['b_hangar_id']);
-		foreach ($BuildArray as $QueueItem) {
-			$ElmentArray = explode (",", $QueueItem);
-			if (count($ElmentArray) >= 2 && ($ElmentArray[0] == 502 || $ElmentArray[0] == 503)) {
-				$Missiles[intval($ElmentArray[0])] += intval($ElmentArray[1]);
-			}
-		}
 		foreach(($_POST['fmenge'] ?? null) as $Element => $Count) {
 			// Construction d'Element recuperés sur la page de Flotte ...
 			// ATTENTION ! La file d'attente Flotte est Commune a celle des Defenses
@@ -55,14 +83,10 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 
 
 			if ($Count != 0) {
-				// Cas particulier (Petit Bouclier et Grand Bouclier
-				// ne peuvent exister qu'une seule et unique fois
-				$InQueue = strpos ( $CurrentPlanet['b_hangar_id'], $Element.",");
-				$IsBuild = ($CurrentPlanet[$resource[407]] >= 1) ? true : false;
+				// Petit et grand bouclier : un seul exemplaire (l'original laissait la quantite demandee quand le
+				// bouclier existait deja)
 				if ($Element == 407 || $Element == 408) {
-					if ($InQueue === false && !$IsBuild) {
-                        $Count = 1;
-					}
+					$Count = DefenseShieldBuildable($CurrentPlanet, $Element) ? 1 : 0;
 				}
 
 				// On verifie si on a les technologies necessaires a la construction de l'element
@@ -119,6 +143,7 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 	// Construction de la page du Chantier (car si j'arrive ici ... c'est que j'ai tout ce qu'il faut pour ...
 	$TabIndex  = 0;
 	$PageTable = "";
+	$Missiles  = DefenseMissilesInSilo($CurrentPlanet);
 	foreach($lang['tech'] as $Element => $ElementName) {
 		if ($Element > 400 && $Element <= 599) {
 			if (IsTechnologieAccessible($CurrentUser, $CurrentPlanet, $Element)) {
@@ -156,26 +181,16 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 				$PageTable .= "<th class=k>";
 				// Si ... Et Seulement si je peux construire je mets la p'tite zone de saisie
 				if ($CanBuildOne) {
-					$InQueue = strpos ( $CurrentPlanet['b_hangar_id'], $Element.",");
-					$IsBuild = ($CurrentPlanet[$resource[407]] >= 1) ? true : false;
-					$BuildIt = true;
-					if ($Element == 407 || $Element == 408) {
-                        $BuildIt = false;
-						if ( $InQueue === false && !$IsBuild) {
-							$BuildIt = true;
-						}
-					}
-
-					if ( !$BuildIt ) {
+					if ( !DefenseShieldBuildable($CurrentPlanet, $Element) ) {
 						$PageTable .= "<font color=\"red\">".$lang['only_one']."</font>";
 					} else {
 						$TabIndex++;
 						$PageTable .= "<input type=text name=fmenge[".$Element."] alt='".$lang['tech'][$Element]."' size=5 maxlength=5 value=0 tabindex=".$TabIndex.">";
-						$PageTable .= "</th>";
+						$PageTable .= ElementMaxLink($Element, DefenseMaxElements($CurrentPlanet, $Element, $Missiles));
 					}
-				} else {
-					$PageTable .= "</th>";
 				}
+				// (la case restait ouverte quand le bouclier etait deja construit)
+				$PageTable .= "</th>";
 
 				// Fin de ligne (les 3 cases sont construites !!
 				$PageTable .= "</tr>";

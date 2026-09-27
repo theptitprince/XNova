@@ -41,4 +41,7 @@ $lang['labo_on_update']   = "Impossible de rechercher quand le laboratoire est e
 // XNova Renaissance : textes manquants (ils s'affichaient vides)
 $lang['builds'] = 'B&acirc;timents';
 
+// XNova Renaissance 0.9h : lien max du chantier spatial et de la defense
+$lang['bd_max'] = 'max. %s';
+
 ?>

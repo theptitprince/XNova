@@ -55,6 +55,17 @@ function GetMaxConstructibleElements ($Element, $Ressources) {
 
 	return $MaxElements;
 }
+
+// XNova Renaissance : lien « max. N » sous la quantite (chantier spatial, defense) ; le maximum est calcule par la page
+// avec les memes regles que la commande (ressources, MAX_FLEET_OR_DEFS_PER_ROW, boucliers, silo)
+function ElementMaxLink ( $Element, $Max ) {
+	global $lang;
+	if ($Max < 1) {
+		return '';
+	}
+	return "<br><a href=\"#\" style=\"white-space:nowrap\" onclick=\"document.getElementsByName('fmenge[". intval($Element) ."]')[0].value = '". intval($Max) ."'; return false;\">"
+	     . sprintf($lang['bd_max'], pretty_number($Max)) ."</a>";
+}
 // Verion History
 // - 1.0 Version initiale (creation)
 // - 1.1 Correction bug ressources négatives ...

@@ -108,6 +108,7 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 				if ($CanBuildOne) {
 					$TabIndex++;
 					$PageTable .= "<input type=text name=fmenge[".$Element."] alt='".$lang['tech'][$Element]."' size=5 maxlength=5 value=0 tabindex=".$TabIndex.">";
+					$PageTable .= ElementMaxLink($Element, min(GetMaxConstructibleElements($Element, $CurrentPlanet), MAX_FLEET_OR_DEFS_PER_ROW));
 				}
 				$PageTable .= "</th>";
 
