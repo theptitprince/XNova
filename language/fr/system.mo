@@ -92,7 +92,7 @@ $lang['sys_perte_attaquant'] = "Perte Attaquant";
 $lang['sys_perte_defenseur'] = "Perte D&eacute;fenseur";
 $lang['sys_debris'] = "D&eacute;bris";
 $lang['sys_noaccess'] = "Acc&egrave;s refus&eacute;";
-$lang['sys_noalloaw'] = "Vous n'avez pas acc&eacute;s &agrave; cette page";
+$lang['sys_noalloaw'] = "Vous n'avez pas acc&egrave;s &agrave; cette page";
 $lang['sys_request_ok'] = "Votre requ&ecirc;te &agrave; bien &eacute;t&eacute; envoy&eacute;e !";
 $lang['sys_ok'] = "OK";
 

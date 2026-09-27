@@ -23,7 +23,8 @@ include($xnova_root_path . 'common.'.$phpEx);
 includeLang('admin');
 $parse = $lang;
 
-	if ($user['authlevel'] >= 3) {
+	// Moderation du chat : ouverte aux moderateurs (reservee a l'administrateur dans l'original)
+	if ($user['authlevel'] >= 1) {
 
 		// Système de suppression
 		// extract($_GET) remplace par des lectures explicites (il permettait d'ecraser n'importe quelle variable)

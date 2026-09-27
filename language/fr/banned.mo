@@ -10,4 +10,7 @@ $lang['ban_no']       = 'Il n\'y a aucun joueur banni.';
 $lang['ban_count']    = 'Il y a %d joueurs bannis.';
 $lang['ban_count_one'] = 'Il y a 1 joueur banni.';
 
+// XNova Renaissance 0.9h : bannissement definitif
+$lang['ban_forever'] = 'D&eacute;finitif';
+
 ?>

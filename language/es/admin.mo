@@ -162,4 +162,12 @@ $lang['adm_delplayer_title'] = 'Borrar a este jugador';
 // XNova Renaissance 0.9h : on ne modifie pas son propre acces (seul administrateur prive de ses droits)
 $lang['adm_usr_ownlevel'] = 'No puede modificar su propio acceso.';
 
+// XNova Renaissance 0.9h : bannissement (controles, definitif)
+$lang['adm_bn_notfound'] = 'Ningún jugador tiene ese nombre.';
+$lang['adm_bn_self'] = 'No puedes banearte a ti mismo.';
+$lang['adm_bn_rank'] = 'No puedes banear una cuenta de rango igual o superior al tuyo.';
+$lang['adm_bn_forever_note'] = 'Duración toda a 0: baneo definitivo';
+$lang['adm_bn_until'] = '(hasta el %s)';
+$lang['adm_bn_forever'] = '(definitivamente)';
+
 ?>

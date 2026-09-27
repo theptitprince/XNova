@@ -24,7 +24,8 @@ $xnova_root_path = './../';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.'.$phpEx);
 
-	if ($user['authlevel'] >= 1) {
+	// Ajout de flotte : gestion du jeu, comme l'ajout de ressources (ouvert aux moderateurs dans l'original)
+	if ($user['authlevel'] >= 2) {
 		includeLang('admin/add_fleet');
 
 		if ($_SERVER['REQUEST_METHOD'] == 'POST') {

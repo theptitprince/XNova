@@ -10,4 +10,7 @@ $lang['ban_no']       = 'Es ist kein Spieler gesperrt.';
 $lang['ban_count']    = 'Es sind %d Spieler gesperrt.';
 $lang['ban_count_one'] = 'Es ist 1 Spieler gesperrt.';
 
+// XNova Renaissance 0.9h : bannissement definitif
+$lang['ban_forever'] = 'Dauerhaft';
+
 ?>

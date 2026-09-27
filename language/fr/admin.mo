@@ -170,4 +170,12 @@ $lang['adm_delplayer_title'] = 'Supprimer ce joueur';
 // XNova Renaissance 0.9h : on ne modifie pas son propre acces (seul administrateur prive de ses droits)
 $lang['adm_usr_ownlevel'] = 'Vous ne pouvez pas modifier votre propre accès.';
 
+// XNova Renaissance 0.9h : bannissement (controles, definitif)
+$lang['adm_bn_notfound'] = 'Aucun joueur ne porte ce nom.';
+$lang['adm_bn_self'] = 'Vous ne pouvez pas vous bannir vous-m&ecirc;me.';
+$lang['adm_bn_rank'] = 'Vous ne pouvez pas bannir un compte de rang &eacute;gal ou sup&eacute;rieur au v&ocirc;tre.';
+$lang['adm_bn_forever_note'] = 'Dur&eacute;e enti&egrave;rement &agrave; 0 : bannissement d&eacute;finitif';
+$lang['adm_bn_until'] = '(jusqu\'au %s)';
+$lang['adm_bn_forever'] = '(d&eacute;finitivement)';
+
 ?>

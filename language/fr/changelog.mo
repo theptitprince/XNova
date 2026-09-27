@@ -14,6 +14,7 @@ $lang['changelog']   = array(
 - NEW : N&eacute;gociant intergalactique : rach&egrave;te les sondes d\'espionnage de la plan&egrave;te contre du cristal (1k par sonde) ; gabarit et textes livr&eacute;s avec la 0.8e, page jamais &eacute;crite ; lien &laquo; N&eacute;gociant &raquo; sous le marchand
 - NEW : Bouton &laquo; Signaler &raquo; sur les messages des joueurs (priv&eacute;s et d\'alliance), pr&eacute;vu par le r&egrave;glement (article VIII) mais jamais programm&eacute; : confirmation, copie du message pour le staff ; page d\'administration &laquo; Messages signal&eacute;s &raquo; (fiche de l\'auteur, bannissement, trait&eacute; / &agrave; traiter, suppression), nombre &agrave; traiter dans le menu
 - NEW : Administration : lien &laquo; Message &agrave; tous &raquo; dans le menu (la page existait sans lien)
+- NEW : R&ocirc;les du staff : le mod&eacute;rateur mod&egrave;re les relations entre joueurs (administration du chat, multi-comptes d&eacute;clar&eacute;s et d&eacute;bannissement en plus ; plus d\'ajout de flotte ni de plan&egrave;tes actives), l\'op&eacute;rateur g&egrave;re le jeu ; menu d\'administration limit&eacute; aux pages ouvertes au rang ; protection des plan&egrave;tes r&eacute;serv&eacute;e aux administrateurs
 - NEW : Compteur de ressources en direct dans la barre du haut (m&eacute;tal, cristal, deut&eacute;rium) : m&ecirc;me calcul que le serveur, arr&ecirc;t au plafond des hangars, en rouge au-del&agrave; de leur capacit&eacute;
 - FIX : Suppression d\'un compte : flottes des autres joueurs vers ses plan&egrave;tes renvoy&eacute;es chez elles, missiles et d&eacute;clarations effac&eacute;s
 - FIX : Rappel d\'une flotte : dur&eacute;e du retour fausse (stationnement et aller en cours invers&eacute;s)
@@ -24,7 +25,10 @@ $lang['changelog']   = array(
 - FIX : Production des mines : le multiplicateur de ressources &eacute;tait appliqu&eacute; deux fois (gain r&eacute;el = multiplicateur &times; la production affich&eacute;e par la page Ressources ; sans effet avec le r&eacute;glage par d&eacute;faut)
 - FIX : Production de base : mise &agrave; jour d\'une lune, les plan&egrave;tes mises &agrave; jour ensuite dans la m&ecirc;me page perdaient leur revenu de base
 - FIX : Page de connexion : &laquo; Joueurs inscrits &raquo; pass&eacute; &agrave; la ligne (un pseudo long coupait la ligne n\'importe o&ugrave;), fautes &laquo; Dernier inscris / Joueurs inscris &raquo;
-- FIX : Mode debug : les op&eacute;rateurs (niveau 2) ne voyaient pas le d&eacute;tail des requ&ecirc;tes, contrairement aux mod&eacute;rateurs et aux administrateurs',
+- FIX : Mode debug : d&eacute;tail des requ&ecirc;tes r&eacute;serv&eacute; aux op&eacute;rateurs et administrateurs (l\'original le montrait aux mod&eacute;rateurs et oubliait les op&eacute;rateurs)
+- FIX : S&eacute;curit&eacute; : la vue g&eacute;n&eacute;rale de l\'administration montrait au staff l\'adresse des pages avec le jeton de s&eacute;curit&eacute; de chaque joueur (un mod&eacute;rateur pouvait faire valider une action &agrave; un administrateur) ; navigateur et adresse affich&eacute;s sans &eacute;chappement (script possible chez le staff)
+- FIX : Bannissement : aucun bannissement d&eacute;finitif possible (dur&eacute;e nulle = lev&eacute; &agrave; la connexion suivante), un mod&eacute;rateur pouvait bannir un administrateur ou lui-m&ecirc;me, un nom inexistant cr&eacute;ait une entr&eacute;e au pilori, les bannissements successifs s\'y ajoutaient
+- FIX : Texte &laquo; Vous n\'avez pas acc&eacute;s &raquo; (acc&egrave;s)',
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
 - FIX : Mot de passe oubli&eacute; : lien de confirmation avant tout changement (conna&icirc;tre l\'adresse d\'un joueur suffisait), injection SQL corrig&eacute;e, m&ecirc;me message que l\'adresse existe ou non

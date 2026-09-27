@@ -61,7 +61,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Bloc['adm_ul_data_regd']   = date ( "d/m/Y H:i:s", $u['register_time'] );
 			// Jamais connecte : « - » (la date zero s'affichait 01/01/1970)
 			$Bloc['adm_ul_data_lconn']  = ($u['onlinetime'] > 0) ? date ( "d/m/Y H:i:s", $u['onlinetime'] ) : '-';
-			$Bloc['adm_ul_data_banna']  = ( $u['bana'] == 1 ) ? "<a href # title=\"". date ( "d/m/Y H:i:s", $u['banaday']) ."\">". $lang['adm_ul_yes'] ."</a>" : $lang['adm_ul_no'];
+			$Bloc['adm_ul_data_banna']  = ( $u['bana'] == 1 ) ? "<a href # title=\"". (($u['banaday'] > 0) ? date ( "d/m/Y H:i:s", $u['banaday']) : $lang['adm_bn_forever']) ."\">". $lang['adm_ul_yes'] ."</a>" : $lang['adm_ul_no'];
 			// Fiche du joueur (colonne vide dans l'original : « Lien vers une page de details genre Empire »)
 			$Bloc['adm_ul_data_detai']  = "<a href=\"paneladmina.php?result=usr_data&id=". $u['id'] ."\">". $lang['adm_ul_sheet'] ."</a>";
 			// Suppression : page de confirmation, pour les administrateurs et les comptes de rang inferieur
