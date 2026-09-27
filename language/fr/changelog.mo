@@ -6,26 +6,17 @@ $lang['changelog']   = array(
 
 '0.9h Renaissance' => 'Fonctions inachev&eacute;es (theptitprince)
 - NEW : Captcha &agrave; l\'inscription (theptitprince)
-- NEW : N&eacute;gociant intergalactique
-- NEW : Bouton &laquo; Signaler &raquo; les messages
-- NEW : Compteur de ressources en direct
-- ADD : Effacer son compte (Options)
-- ADD : V&eacute;rification du pseudo et de l\'e-mail &agrave; l\'inscription
-- ADD : Heures d\'arriv&eacute;e et de retour &agrave; l\'envoi d\'une flotte
-- ADD : Boutons &laquo; max &raquo; au chantier spatial et &agrave; la d&eacute;fense
-- ADD : Administration : supprimer un joueur, multi-comptes, messages signal&eacute;s, message &agrave; tous
-- ADD : Changement de vitesse appliqu&eacute; aux constructions et flottes en cours
-- ADD : Taille des files d\'attente r&eacute;glable dans la configuration
-- ADD : Statistiques : lien vers l\'alliance de chaque joueur
-- MOD : R&ocirc;les du staff, menu d\'administration selon le rang
-- FIX : Officiers Destructeur et G&eacute;n&eacute;ral
-- FIX : R&eacute;seau de recherche intergalactique
-- FIX : Protection des d&eacute;butants (destruction de lune, missiles)
-- FIX : Liens vers les alliances et les joueurs (statistiques, recherche)
-- FIX : Production des ressources, chantier spatial, boucliers
-- FIX : Rappel de flotte, suppression de compte, bannissement
-- FIX : S&eacute;curit&eacute; du panneau d\'administration
-- FIX : Nombreuses petites erreurs (textes, affichage)
+- NEW : N&eacute;gociant intergalactique, bouton &laquo; Signaler &raquo; les messages
+- NEW : Compteur de ressources en direct, boutons &laquo; max &raquo;
+- ADD : Pseudo et e-mail v&eacute;rifi&eacute;s &agrave; l\'inscription, effacer son compte
+- ADD : Flotte : heures d\'arriv&eacute;e et de retour
+- ADD : Statistiques : lien vers l\'alliance des joueurs
+- ADD : Administration : supprimer un joueur, multi-comptes, messages signal&eacute;s, taille des files
+- MOD : R&ocirc;les du staff
+- FIX : Officiers, r&eacute;seau de recherche, protection des d&eacute;butants
+- FIX : Production, chantier spatial, boucliers, d&eacute;bris des combats, sondes
+- FIX : Rappel de flotte, bannissement, changement de vitesse, liens des alliances
+- FIX : S&eacute;curit&eacute; de l\'administration, nombreuses petites erreurs
 - DIV : Scripts et outils inutilis&eacute;s retir&eacute;s',
 
 '0.9g Renaissance' => 'Nettoyage (theptitprince)
