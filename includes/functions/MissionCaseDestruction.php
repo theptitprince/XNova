@@ -145,59 +145,46 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
-         include_once($xnova_root_path . 'includes/ataki.' . $phpEx);
-
-
+         // Moteur de combat de Renaissance (0.9i) : memes resultats que l'original (includes/ataki.php, retire)
+         $AttackFleet  = array();
+         foreach ($CurrentSet as $Ship => $Data) {
+            $AttackFleet[$Ship] = $Data['count'];
+         }
+         $TargetFleet  = array();
+         foreach ($TargetSet as $Ship => $Data) {
+            $TargetFleet[$Ship] = $Data['count'];
+         }
 
          // Calcul de la duree de traitement (initialisation)
-
          $mtime        = microtime();
-
          $mtime        = explode(" ", $mtime);
-
          $mtime        = $mtime[1] + $mtime[0];
-
          $starttime    = $mtime;
 
-
-
-         $walka        = walka($CurrentSet, $TargetSet, $CurrentTechno, $TargetTechno);
-
-
+         $Combat       = CombatEngine(array(array('fleet' => $AttackFleet, 'techno' => $CurrentTechno)),
+                                      array(array('fleet' => $TargetFleet, 'techno' => $TargetTechno)));
 
          // Calcul de la duree de traitement (calcul)
-
          $mtime        = microtime();
-
          $mtime        = explode(" ", $mtime);
-
          $mtime        = $mtime[1] + $mtime[0];
-
          $endtime      = $mtime;
-
          $totaltime    = ($endtime - $starttime);
 
-
-
-         // Ce qu'il reste de l'attaquant
-
-         $CurrentSet   = $walka["atakujacy"];
-
-         // Ce qu'il reste de l'attaqué
-
-         $TargetSet    = $walka["wrog"];
-
+         // Ce qu'il reste de l'attaquant et de l'attaqué
+         $CurrentSet   = array();
+         foreach ($Combat['attackers'][0] as $Ship => $Count) {
+            $CurrentSet[$Ship]['count'] = $Count;
+         }
+         $TargetSet    = array();
+         foreach ($Combat['defenders'][0] as $Ship => $Count) {
+            $TargetSet[$Ship]['count'] = $Count;
+         }
          // Le resultat de la bataille
-
-         $FleetResult  = $walka["wygrana"];
-
-         // Rapport long (rapport de bataille detaillé)
-
-         $dane_do_rw   = $walka["dane_do_rw"];
-
+         $FleetResult  = $Combat['result'];
          // Rapport court (cdr + unités perdues)
-
-         $zlom         = $walka["zlom"];
+         $zlom         = array('metal' => $Combat['debris']['metal'], 'crystal' => $Combat['debris']['crystal'],
+                               'atakujacy' => $Combat['lost']['att'], 'wrog' => $Combat['lost']['def']);
 
 
 
@@ -484,173 +471,12 @@ function MissionCaseDestruction($FleetRow) {
 
          $raport            = "<center><table><tr><td>". $title ."<br />";
 
-         $zniszczony        = false;
-
-         $a_zestrzelona     = 0;
-
-         $AttackTechon['A'] = $CurrentTechno["military_tech"] * 10;
-
-         $AttackTechon['B'] = $CurrentTechno["defence_tech"] * 10;
-
-         $AttackTechon['C'] = $CurrentTechno["shield_tech"] * 10;
-
-         $AttackerData      = sprintf ($lang['sys_attack_attacker_pos'], $CurrentUser["username"], $FleetRow['fleet_start_galaxy'], $FleetRow['fleet_start_system'], $FleetRow['fleet_start_planet'] );
-
-         $AttackerTech      = sprintf ($lang['sys_attack_techologies'], $AttackTechon['A'], $AttackTechon['B'], $AttackTechon['C']);
-
-
-
-         $DefendTechon['A'] = $TargetTechno["military_tech"] * 10;
-
-         $DefendTechon['B'] = $TargetTechno["defence_tech"] * 10;
-
-         $DefendTechon['C'] = $TargetTechno["shield_tech"] * 10;
-
-         $DefenderData      = sprintf ($lang['sys_attack_defender_pos'], $TargetUser["username"], $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet'] );
-
-         $DefenderTech      = sprintf ($lang['sys_attack_techologies'], $DefendTechon['A'], $DefendTechon['B'], $DefendTechon['C']);
-
-
-
-         foreach ($dane_do_rw as $a => $b) {
-
-            $raport .= "<table border=1 width=100%><tr><th><br /><center>".$AttackerData."<br />".$AttackerTech."<table border=1>";
-
-            if ($b["atakujacy"]['count'] > 0) {
-
-               $raport1 = "<tr><th>".$lang['sys_ship_type']."</th>";
-
-               $raport2 = "<tr><th>".$lang['sys_ship_count']."</th>";
-
-               $raport3 = "<tr><th>".$lang['sys_ship_weapon']."</th>";
-
-               $raport4 = "<tr><th>".$lang['sys_ship_shield']."</th>";
-
-               $raport5 = "<tr><th>".$lang['sys_ship_armour']."</th>";
-
-               foreach ($b["atakujacy"] as $Ship => $Data) {
-
-                  if (is_numeric($Ship)) {
-
-                     if ($Data['count'] > 0) {
-
-                        $raport1 .= "<th>". $lang["tech_rc"][$Ship] ."</th>";
-
-                        $raport2 .= "<th>". $Data['count'] ."</th>";
-
-                        $raport3 .= "<th>". round($Data["atak"]   / $Data['count']) ."</th>";
-
-                        $raport4 .= "<th>". round($Data["tarcza"] / $Data['count']) ."</th>";
-
-                        $raport5 .= "<th>". round($Data["obrona"] / $Data['count']) ."</th>";
-
-                     }
-
-                  }
-
-               }
-
-               $raport1 .= "</tr>";
-
-               $raport2 .= "</tr>";
-
-               $raport3 .= "</tr>";
-
-               $raport4 .= "</tr>";
-
-               $raport5 .= "</tr>";
-
-               $raport .= $raport1 . $raport2 . $raport3 . $raport4 . $raport5;
-
-            } else {
-
-               if ($a == 2) {
-
-                  $a_zestrzelona = 1;
-
-               }
-
-               $zniszczony = true;
-
-               $raport .= "<br />". $lang['sys_destroyed'];
-
-            }
-
-
-
-            $raport .= "</table></center></th></tr></table>";
-
-            $raport .= "<table border=1 width=100%><tr><th><br /><center>".$DefenderData."<br />".$DefenderTech."<table border=1>";
-
-            if ($b["wrog"]['count'] > 0) {
-
-               $raport1 = "<tr><th>".$lang['sys_ship_type']."</th>";
-
-               $raport2 = "<tr><th>".$lang['sys_ship_count']."</th>";
-
-               $raport3 = "<tr><th>".$lang['sys_ship_weapon']."</th>";
-
-               $raport4 = "<tr><th>".$lang['sys_ship_shield']."</th>";
-
-               $raport5 = "<tr><th>".$lang['sys_ship_armour']."</th>";
-
-               foreach ($b["wrog"] as $Ship => $Data) {
-
-                  if (is_numeric($Ship)) {
-
-                     if ($Data['count'] > 0) {
-
-                        $raport1 .= "<th>". $lang["tech_rc"][$Ship] ."</th>";
-
-                        $raport2 .= "<th>". $Data['count'] ."</th>";
-
-                        $raport3 .= "<th>". round($Data["atak"]   / $Data['count']) ."</th>";
-
-                        $raport4 .= "<th>". round($Data["tarcza"] / $Data['count']) ."</th>";
-
-                        $raport5 .= "<th>". round($Data["obrona"] / $Data['count']) ."</th>";
-
-                     }
-
-                  }
-
-               }
-
-               $raport1 .= "</tr>";
-
-               $raport2 .= "</tr>";
-
-               $raport3 .= "</tr>";
-
-               $raport4 .= "</tr>";
-
-               $raport5 .= "</tr>";
-
-               $raport .= $raport1 . $raport2 . $raport3 . $raport4 . $raport5;
-
-            } else {
-
-               $zniszczony = true;
-
-               $raport .= "<br />". $lang['sys_destroyed'];
-
-            }
-
-            $raport .= "</table></center></th></tr></table>";
-
-
-
-            if (($zniszczony == false) and !($a == 8)) {
-
-               $AttackWaveStat    = sprintf ($lang['sys_attack_attack_wave'], floor($b["atakujacy"]["atak"]), floor($b["wrog"]["tarcza"]));
-
-               $DefendWavaStat    = sprintf ($lang['sys_attack_defend_wave'], floor($b["wrog"]["atak"]), floor($b["atakujacy"]["tarcza"]));
-
-               $raport           .= "<br /><center>".$AttackWaveStat."<br />".$DefendWavaStat."</center>";
-
-            }
-
-         }
+         // Tours du rapport (un cadre par joueur, voir CombatReport.php)
+         $Rounds            = CombatReportRounds($Combat,
+            array(array('name' => $CurrentUser['username'], 'galaxy' => $FleetRow['fleet_start_galaxy'], 'system' => $FleetRow['fleet_start_system'], 'planet' => $FleetRow['fleet_start_planet'], 'techno' => $CurrentTechno)),
+            array(array('name' => $TargetUser['username'], 'galaxy' => $FleetRow['fleet_end_galaxy'], 'system' => $FleetRow['fleet_end_system'], 'planet' => $FleetRow['fleet_end_planet'], 'techno' => $TargetTechno)));
+         $raport           .= $Rounds['html'];
+         $a_zestrzelona     = $Rounds['first_round'];
 
          switch ($FleetResult) {
 

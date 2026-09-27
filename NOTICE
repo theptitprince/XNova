@@ -16,9 +16,10 @@ Toute copie, modification ou version dérivée de ce programme doit conserver, d
      XNova d'origine et la mention « XNova Renaissance — theptitprince ».
 Les versions modifiées peuvent ajouter leurs propres crédits, mais pas retirer ceux-ci.
 
-Exception : fichier sous une autre licence
-------------------------------------------
-includes/ataki.php (moteur de combat), par jacekowski :
-Creative Commons Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 2.5
+Ancienne exception (jusqu'à la 0.9h) : moteur de combat sous une autre licence
+-------------------------------------------------------------------------------
+includes/ataki.php (moteur de combat), par jacekowski, était sous licence Creative Commons
+Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 2.5
 (CC BY-NC-SA 2.5) — http://creativecommons.org/licenses/by-nc-sa/2.5/
-Ce fichier interdit tout usage commercial.
+Depuis la 0.9i, il est remplacé par un moteur écrit pour XNova Renaissance
+(includes/functions/CombatEngine.php), sous la même licence que le reste du jeu.

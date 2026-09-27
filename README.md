@@ -209,9 +209,10 @@ En résumé :
 - conformément à la section 7(b) de la licence, vous devez **conserver les mentions d'auteur** : les en-têtes des fichiers
   et la page de crédits du jeu, qui citent l'équipe XNova d'origine et theptitprince (XNova Renaissance).
 
-**Exception : le moteur de combat** `includes/ataki.php` (jacekowski) reste sous sa licence d'origine,
-**Creative Commons BY-NC-SA 2.5**, qui **interdit tout usage commercial**. Pour un usage commercial du jeu,
-il faudrait remplacer ce fichier.
+Jusqu'à la 0.9h, le moteur de combat `includes/ataki.php` (jacekowski) était sous licence **Creative Commons
+BY-NC-SA 2.5**, qui interdit tout usage commercial. Depuis la 0.9i, il est remplacé par un moteur écrit pour
+Renaissance (`includes/functions/CombatEngine.php`), qui donne exactement les mêmes résultats : tout le jeu est
+désormais sous AGPL.
 
 XNova 0.8e était distribué sous GNU GPL sans numéro de version précis. La section 9 de la GPL v2 permet alors de choisir
 n'importe quelle version publiée par la Free Software Foundation. Le texte de la GPL v2 fourni à l'origine est conservé
