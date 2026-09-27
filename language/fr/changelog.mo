@@ -8,7 +8,7 @@ $lang['changelog']   = array(
 - NEW : Attaque group&eacute;e (5 joueurs, 16 flottes), d&eacute;fense group&eacute;e
 - MOD : Moteur de combat r&eacute;&eacute;crit, m&ecirc;mes r&eacute;sultats, sous licence libre
 - FIX : Protection des vaisseaux enfin prise en compte au combat
-- FIX : Stationner chez un alli&eacute;, compteur des raids perdus, butin perdu au retour',
+- FIX : Stationner chez un alli&eacute;, raids perdus, butin perdu au retour, flottes simultan&eacute;es',
 
 '0.9h Renaissance' => 'Fonctions inachev&eacute;es (theptitprince)
 - NEW : Captcha &agrave; l\'inscription (theptitprince)
