@@ -15,6 +15,7 @@ $lang['changelog']   = array(
 - ADD : Boutons &laquo; max &raquo; au chantier spatial et &agrave; la d&eacute;fense
 - ADD : Administration : supprimer un joueur, multi-comptes, messages signal&eacute;s, message &agrave; tous
 - ADD : Changement de vitesse appliqu&eacute; aux constructions et flottes en cours
+- ADD : Taille des files d\'attente r&eacute;glable dans la configuration
 - MOD : R&ocirc;les du staff, menu d\'administration selon le rang
 - FIX : Officiers Destructeur et G&eacute;n&eacute;ral
 - FIX : R&eacute;seau de recherche intergalactique

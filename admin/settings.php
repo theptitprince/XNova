@@ -110,6 +110,14 @@ function DisplayGameSettingsPage ( $CurrentUser ) {
 				$game_config['fleet_speed'] = ($_POST['fleet_speed'] ?? null);
 			}
 
+			// Taille de la file de construction et unites par commande (chantier, defense), dans leurs bornes
+			if (isset($_POST['max_building_queue']) && is_numeric($_POST['max_building_queue'])) {
+				$game_config['max_building_queue'] = max(1, min(MAX_BUILDING_QUEUE_LIMIT, intval($_POST['max_building_queue'])));
+			}
+			if (isset($_POST['max_order_units']) && is_numeric($_POST['max_order_units'])) {
+				$game_config['max_order_units'] = max(1, min(MAX_ORDER_UNITS_LIMIT, intval($_POST['max_order_units'])));
+			}
+
 			// Multiplicateur de Production
 			if (isset($_POST['resource_multiplier']) && is_numeric($_POST['resource_multiplier'])) {
 				$game_config['resource_multiplier'] = ($_POST['resource_multiplier'] ?? null);
@@ -192,6 +200,8 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['forum_url'])              ."' WHERE `config_name` = 'forum_url';", 'config');
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['game_speed'])             ."' WHERE `config_name` = 'game_speed';", 'config');
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['fleet_speed'])            ."' WHERE `config_name` = 'fleet_speed';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". BuildingQueueSize() ."' WHERE `config_name` = 'max_building_queue';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". OrderUnitsMax() ."' WHERE `config_name` = 'max_order_units';", 'config');
 			foreach (array('noobprotection', 'noobprotectiontime', 'noobprotectionmulti') as $NoobKey) {
 				doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config[$NoobKey]) ."' WHERE `config_name` = '". $NoobKey ."';", 'config');
 			}
@@ -256,6 +266,8 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			$parse['game_name']              = $Esc($game_config['game_name']);
 			$parse['game_speed']             = $game_config['game_speed'];
 			$parse['fleet_speed']            = $game_config['fleet_speed'];
+			$parse['max_building_queue']     = BuildingQueueSize();
+			$parse['max_order_units']        = OrderUnitsMax();
 			$parse['noobprotection']         = (!empty($game_config['noobprotection'])) ? " checked=\"checked\"" : "";
 			$parse['noobprotectiontime']     = intval($game_config['noobprotectiontime'] ?? 5000);
 			$parse['noobprotectionmulti']    = intval($game_config['noobprotectionmulti'] ?? 5);

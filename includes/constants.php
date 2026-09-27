@@ -30,10 +30,16 @@ if ( defined('INSIDE') ) {
 	define('FIELDS_BY_MOONBASIS_LEVEL', 4);
 	// Nombre maximum de colonie par joueur
 	define('MAX_PLAYER_PLANETS'       , 21);
-	// Nombre maximum d'element dans la liste de construction de batiments
+	// Nombre maximum d'element dans la liste de construction de batiments (valeur par defaut du reglage de la
+	// Configuration, voir BuildingQueueSize)
 	define('MAX_BUILDING_QUEUE_SIZE'  , 5);
-	// Nombre maximum d'element dans une ligne de liste de construction flotte et defenses
+	// Nombre maximum d'element dans une ligne de liste de construction flotte et defenses (valeur par defaut du
+	// reglage de la Configuration, voir OrderUnitsMax)
 	define('MAX_FLEET_OR_DEFS_PER_ROW', 1000);
+	// Bornes de ces reglages : la file est un texte sans limite ; au-dela d'un million d'unites par ligne, une seule
+	// mise a jour de la planete construirait les unites une par une trop longtemps
+	define('MAX_BUILDING_QUEUE_LIMIT' , 99);
+	define('MAX_ORDER_UNITS_LIMIT'    , 1000000);
 	// Taux de depassement possible dans l'espace de stockage des hangards ...
 	// 1.0 pour 100% - 1.1 pour 110% etc ...
 	define('MAX_OVERFLOW'             , 1.1);

@@ -152,6 +152,8 @@
 	$QryInsertConfig    .= "('enable_marchand'                 , '1'), ";
 	$QryInsertConfig    .= "('enable_notes'                 , '1'), ";
 	$QryInsertConfig    .= "('reg_captcha'                  , '1'), ";
+	$QryInsertConfig    .= "('max_building_queue'           , '5'), ";
+	$QryInsertConfig    .= "('max_order_units'              , '1000'), ";
 	$QryInsertConfig    .= "('bot_name'                 , 'XNoviana Reali'), ";
 	$QryInsertConfig    .= "('bot_adress'          , '' ), ";
 	$QryInsertConfig    .= "('banner_source_post'          , '../images/bann.png' ), ";

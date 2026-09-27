@@ -36,7 +36,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 				for ( $Queue = 0; $Queue < count($HangarQueue); $Queue++) {
 					// (file vide ou terminee par « ; » : element vide, avertissements PHP auparavant)
 					$InQueue = explode (",", $HangarQueue[$Queue]);
-					if (isset($InQueue[1]) && $InQueue[1] > MAX_FLEET_OR_DEFS_PER_ROW) {
+					// Au-dela de la borne technique seulement : une ligne commandee avant une baisse du reglage
+					// reste valable (l'effacer ferait perdre les ressources payees)
+					if (isset($InQueue[1]) && $InQueue[1] > MAX_ORDER_UNITS_LIMIT) {
 						$bDelQueue = true;
 					}
 				}
