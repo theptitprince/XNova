@@ -173,7 +173,16 @@ include($xnova_root_path . 'common.' . $phpEx);
 		if ($YourPlanet)
 			$missiontype[4] = $lang['type_mission'][4];
 
-		// Mission 2 (attaque groupée) refusée : jamais programmée, la flotte disparaissait à l'arrivée
+		// Attaque groupee (0.9i) : vers la cible du groupe choisi, avec une flotte qui pourrait attaquer
+		$AcsGroup = false;
+		if ($fleetmission == 2) {
+			$AcsGroup = (!empty($missiontype[1])) ? AcsGroupToJoin(intval($_POST['acs'] ?? 0), $user['id'], intval($_POST['galaxy'] ?? 0),
+			              intval($_POST['system'] ?? 0), intval($_POST['planet'] ?? 0), intval($_POST['planettype'] ?? 0)) : 'fl_acs_not_found';
+			if (!is_array($AcsGroup)) {
+				message ("<font color=\"red\"><b>". $lang[$AcsGroup] ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
+			}
+			$missiontype[2] = $lang['type_mission'][2];
+		}
         if ( ($_POST['planettype'] ?? null) == 3 &&
 	     ($_POST['ship214'] ?? null) >= 1    &&
            !$YourPlanet            &&
@@ -196,10 +205,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	$VacationMode = $HeDBRec['urlaubs_modus'];
 
-	// Protection des debutants : attaque, stationnement chez un allie, espionnage et destruction de lune (oubliee
-	// par l'original : un joueur bien plus fort pouvait detruire la lune d'un joueur protege). Message propre au cas
-	// ou c'est le joueur qui envoie qui est protege (l'original disait aussi « Le joueur est trop faible »).
-	if (in_array(intval($fleetmission), array(1, 5, 6, 9)) && !empty($TargetPlanet['id_owner'])) {
+	// Protection des debutants : attaque, attaque groupee (chaque flotte qui rejoint le groupe, 0.9i), stationnement
+	// chez un allie, espionnage et destruction de lune (oubliee par l'original : un joueur bien plus fort pouvait
+	// detruire la lune d'un joueur protege). Message propre au cas ou c'est le joueur qui envoie qui est protege
+	// (l'original disait aussi « Le joueur est trop faible »).
+	if (in_array(intval($fleetmission), array(1, 2, 5, 6, 9)) && !empty($TargetPlanet['id_owner'])) {
 		$NoobStatus = NoobProtection($user['id'], $TargetPlanet['id_owner']);
 		if ($NoobStatus == 1) {
 			message("<font color=\"lime\"><b>".$lang['fl_noob_mess_n']."</b></font>", $lang['fl_noob_title'], "fleet." . $phpEx, 2);
@@ -407,6 +417,25 @@ include($xnova_root_path . 'common.' . $phpEx);
 		}
 	}
 
+	// Attaque groupee (0.9i) : arrivee commune. Une flotte plus rapide que le groupe est ralentie pour arriver avec lui
+	// (retour a sa vitesse) ; une plus lente retarde tout le groupe, de 30 % au plus du temps de vol qui lui reste.
+	$FleetGroup = 0;
+	if ($fleetmission == 2 && is_array($AcsGroup)) {
+		$GroupArrival = intval($AcsGroup['ankunft']);
+		if ($fleet['start_time'] <= $GroupArrival) {
+			$fleet['start_time'] = $GroupArrival;
+			$fleet['end_time']   = $GroupArrival + $duration;
+		} else {
+			$Delay = $fleet['start_time'] - $GroupArrival;
+			if ($Delay > 0.3 * ($GroupArrival - time())) {
+				message ("<font color=\"red\"><b>". $lang['fl_acs_too_slow'] ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
+			}
+			doquery("UPDATE {{table}} SET `fleet_start_time` = '". $fleet['start_time'] ."', `fleet_end_time` = `fleet_end_time` + ". $Delay ." WHERE `fleet_group` = '". intval($AcsGroup['id']) ."';", 'fleets');
+			doquery("UPDATE {{table}} SET `ankunft` = '". $fleet['start_time'] ."' WHERE `id` = '". intval($AcsGroup['id']) ."';", 'aks');
+		}
+		$FleetGroup = intval($AcsGroup['id']);
+	}
+
 	// ecriture de l'enregistrement de flotte (a partir de là, y a quelque chose qui vole et c'est toujours sur la planete d'origine)
 	$QryInsertFleet  = "INSERT INTO {{table}} SET ";
 	$QryInsertFleet .= "`fleet_owner` = '". $user['id'] ."', ";
@@ -428,6 +457,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$QryInsertFleet .= "`fleet_resource_crystal` = '". $TransCrystal ."', ";
 	$QryInsertFleet .= "`fleet_resource_deuterium` = '". $TransDeuterium ."', ";
 	$QryInsertFleet .= "`fleet_target_owner` = '". intval($TargetPlanet['id_owner'] ?? 0) ."', ";
+	$QryInsertFleet .= "`fleet_group` = '". $FleetGroup ."', ";
 	$QryInsertFleet .= "`start_time` = '". time() ."';";
 	doquery( $QryInsertFleet, 'fleets');
 

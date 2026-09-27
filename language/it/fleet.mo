@@ -180,5 +180,8 @@ $lang['fl_acs_invite_subject'] = 'Invito a un attacco di gruppo';
 $lang['fl_acs_invite_text'] = '%s ti invita all\'attacco di gruppo %s contro %s [%s:%s:%s], arrivo previsto il %s. Per partecipare, invia una flotta dalla pagina Flotta e scegli questo gruppo come obiettivo.';
 $lang['fl_acs_moon'] = '(Luna)';
 $lang['fl_acs_deleted'] = '(account eliminato)';
+$lang['fl_acs_too_slow'] = 'La tua flotta è troppo lenta per questo gruppo: lo ritarderebbe di oltre il 30 % del suo tempo di volo rimanente.';
+$lang['fl_acs_fleets_full'] = 'Questo gruppo ha già 16 flotte.';
+$lang['fl_acs_other_target'] = 'Questo gruppo attacca un altro obiettivo.';
 
 ?>
