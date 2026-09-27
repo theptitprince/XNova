@@ -75,12 +75,15 @@ function MissionCaseSpy ( $FleetRow ) {
 							$TargetForce = 100;
 						}
 						// Borne entiere, comme le faisait PHP 5 sans le dire (PHP 8 : conversion depreciee, avertissement)
-						$TargetChances = rand(0, intval($TargetForce));
+						$TargetForce   = intval($TargetForce);
+						$TargetChances = rand(0, $TargetForce);
 						$SpyerChances  = rand(0, 100);
 						if ($TargetChances >= $SpyerChances) {
 							$DestProba = "<font color=\"red\">".$lang['sys_mess_spy_destroyed']."</font>";
 						} else {
-							$DestProba = sprintf( $lang['sys_mess_spy_lostproba'], round($TargetForce));
+							// Probabilite reelle de ce tirage (detruite si rand(0, T) >= rand(0, 100)) : (T + 2) / 202. La force T
+							// etait affichee : « 100 % » pour une sonde qui revenait une fois sur deux, 0 % pour 1 % de risque
+							$DestProba = sprintf( $lang['sys_mess_spy_lostproba'], round(($TargetForce + 2) / 202 * 100));
 						}
 						$AttackLink = "<center>";
 						$AttackLink .= "<a href=\"fleet.php?galaxy=". $FleetRow['fleet_end_galaxy'] ."&system=". $FleetRow['fleet_end_system'] ."";

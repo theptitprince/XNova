@@ -33,6 +33,7 @@ function walka ($CurrentSet, $TargetSet, $CurrentTechno, $TargetTechno) {
 	// Calcul des points de Structure du défenseur
 	$wrog_zlom_poczatek['metal']    = 0;
 	$wrog_zlom_poczatek['crystal'] = 0;
+	$wrog_zlom_poczatek_obrona     = array('metal' => 0, 'crystal' => 0);
 	$wrog_poczatek = $TargetSet;
 	if (!is_null($TargetSet)) {
 		foreach($TargetSet as $a => $b) {
@@ -219,6 +220,7 @@ function walka ($CurrentSet, $TargetSet, $CurrentTechno, $TargetTechno) {
 	}
 	$wrog_zlom_koniec['metal'] = 0;
 	$wrog_zlom_koniec['crystal'] = 0;
+	$wrog_zlom_koniec_obrona = array('metal' => 0, 'crystal' => 0);
 	if (!is_null($TargetSet)) {
 		foreach($TargetSet as $a => $b) {
 			if ($a < 300) {
@@ -248,8 +250,10 @@ function walka ($CurrentSet, $TargetSet, $CurrentTechno, $TargetTechno) {
 	$zlom['metal']    = ((($atakujacy_zlom_poczatek['metal']   - $atakujacy_zlom_koniec['metal'])   + ($wrog_zlom_poczatek['metal']   - $wrog_zlom_koniec['metal']))   * ($game_config['Fleet_Cdr'] / 100));
 	$zlom['crystal']  = ((($atakujacy_zlom_poczatek['crystal'] - $atakujacy_zlom_koniec['crystal']) + ($wrog_zlom_poczatek['crystal'] - $wrog_zlom_koniec['crystal'])) * ($game_config['Fleet_Cdr'] / 100));
 
-	$zlom['metal']   += ((($atakujacy_zlom_poczatek['metal']   - $atakujacy_zlom_koniec['metal'])   + ($wrog_zlom_poczatek['metal']   - $wrog_zlom_koniec['metal']))   * ($game_config['Defs_Cdr'] / 100));
-	$zlom['crystal'] += ((($atakujacy_zlom_poczatek['crystal'] - $atakujacy_zlom_koniec['crystal']) + ($wrog_zlom_poczatek['crystal'] - $wrog_zlom_koniec['crystal'])) * ($game_config['Defs_Cdr'] / 100));
+	// XNova Renaissance : defenses detruites au taux des defenses. L'original reprenait ici les pertes de la flotte
+	// (copier-coller) : 60 % des vaisseaux perdus en debris au lieu de 30 %, aucun debris pour les defenses
+	$zlom['metal']   += (($wrog_zlom_poczatek_obrona['metal']   - $wrog_zlom_koniec_obrona['metal'])   * ($game_config['Defs_Cdr'] / 100));
+	$zlom['crystal'] += (($wrog_zlom_poczatek_obrona['crystal'] - $wrog_zlom_koniec_obrona['crystal']) * ($game_config['Defs_Cdr'] / 100));
 
 	$zlom["atakujacy"] = (($atakujacy_zlom_poczatek['metal'] - $atakujacy_zlom_koniec['metal']) + ($atakujacy_zlom_poczatek['crystal'] - $atakujacy_zlom_koniec['crystal']));
 	$zlom["wrog"]      = (($wrog_zlom_poczatek['metal']      - $wrog_zlom_koniec['metal'])      + ($wrog_zlom_poczatek['crystal']      - $wrog_zlom_koniec['crystal']) + $straty_obrona_wrog);
