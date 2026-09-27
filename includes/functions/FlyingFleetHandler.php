@@ -15,7 +15,8 @@
 function FlyingFleetHandler (&$planet) {
 	global $resource;
 
-	doquery("LOCK TABLE {{table}}lunas WRITE, {{table}}rw WRITE, {{table}}errors WRITE, {{table}}messages WRITE, {{table}}fleets WRITE, {{table}}planets WRITE, {{table}}galaxy WRITE ,{{table}}users WRITE", "");
+	// (aks : attaques groupees, 0.9i)
+	doquery("LOCK TABLE {{table}}lunas WRITE, {{table}}rw WRITE, {{table}}errors WRITE, {{table}}messages WRITE, {{table}}fleets WRITE, {{table}}planets WRITE, {{table}}galaxy WRITE ,{{table}}users WRITE, {{table}}aks WRITE", "");
 
 	$QryFleet   = "SELECT * FROM {{table}} ";
 	$QryFleet  .= "WHERE (";
@@ -40,16 +41,9 @@ function FlyingFleetHandler (&$planet) {
 				break;
 
 			case 2:
-				// Attaque groupée : jamais programmée (la flotte était supprimée à l'arrivée, vaisseaux compris).
-				// Mission retirée du formulaire ; une flotte qui l'aurait reçue fait demi-tour avec son chargement.
-				if ($CurrentFleet['fleet_mess'] == 0) {
-					if ($CurrentFleet['fleet_start_time'] <= time()) {
-						doquery ("UPDATE {{table}} SET `fleet_mess` = '1' WHERE `fleet_id` = '". $CurrentFleet['fleet_id'] ."';", 'fleets');
-					}
-				} elseif ($CurrentFleet['fleet_end_time'] <= time()) {
-					RestoreFleetToPlanet ( $CurrentFleet, true );
-					doquery ("DELETE FROM {{table}} WHERE `fleet_id` = '". $CurrentFleet['fleet_id'] ."';", 'fleets');
-				}
+				// Attaque groupee (0.9i) : un seul combat pour tout le groupe, a l'arrivee de sa premiere flotte traitee
+				// (jamais programmee dans l'original : la flotte etait supprimee a l'arrivee, vaisseaux compris)
+				MissionCaseAttack ( $CurrentFleet );
 				break;
 
 			case 3:
