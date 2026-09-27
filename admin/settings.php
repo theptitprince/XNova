@@ -27,6 +27,10 @@ function DisplayGameSettingsPage ( $CurrentUser ) {
 
 	if ( $CurrentUser['authlevel'] >= 3 ) {
 		if (($_POST['opt_save'] ?? null) == "1") {
+			// Vitesses avant le changement : ce qui est en cours sera recalcule (voir plus bas)
+			$OldGameSpeed  = $game_config['game_speed'];
+			$OldFleetSpeed = $game_config['fleet_speed'];
+
 			// Jeu Ouvert ou Fermé !
 			if (isset($_POST['closed']) && ($_POST['closed'] ?? null) == 'on') {
 				$game_config['game_disable']         = "1";
@@ -87,7 +91,8 @@ function DisplayGameSettingsPage ( $CurrentUser ) {
 			}
 
 			// Vitesse du Jeu
-			if (isset($_POST['game_speed']) && is_numeric($_POST['game_speed'])) {
+			// (strictement positive : 0 faisait planter tous les calculs de duree, division par zero)
+			if (isset($_POST['game_speed']) && is_numeric($_POST['game_speed']) && $_POST['game_speed'] > 0) {
 				$game_config['game_speed'] = ($_POST['game_speed'] ?? null);
 			}
 
@@ -101,7 +106,7 @@ function DisplayGameSettingsPage ( $CurrentUser ) {
 				$game_config['noobprotectionmulti'] = max(1, intval($_POST['noobprotectionmulti']));
 			}
 
-			if (isset($_POST['fleet_speed']) && is_numeric($_POST['fleet_speed'])) {
+			if (isset($_POST['fleet_speed']) && is_numeric($_POST['fleet_speed']) && $_POST['fleet_speed'] > 0) {
 				$game_config['fleet_speed'] = ($_POST['fleet_speed'] ?? null);
 			}
 
@@ -235,7 +240,13 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			
 			// Mode Debug
 			doquery("UPDATE {{table}} SET `config_value` = '" .$game_config['debug']                  ."' WHERE `config_name` ='debug'", 'config');
-			AdminMessage ($lang['adm_opt_saved'], $lang['adm_opt_saved_title'], '?');
+			// Vitesses changees : constructions, recherches, missiles et flottes en cours suivent la nouvelle vitesse
+			$SavedMessage = $lang['adm_opt_saved'];
+			if ($OldGameSpeed != $game_config['game_speed'] || $OldFleetSpeed != $game_config['fleet_speed']) {
+				$Recalc        = RecalculateRunningQueues($OldGameSpeed, $game_config['game_speed'], $OldFleetSpeed, $game_config['fleet_speed']);
+				$SavedMessage .= "<br><br>". sprintf($lang['adm_opt_recalc'], $Recalc['buildings'], $Recalc['research'], $Recalc['fleets'], $Recalc['missiles']);
+			}
+			AdminMessage ($SavedMessage, $lang['adm_opt_saved_title'], '?');
 		} else {
 
 			// Valeurs affichees dans des attributs value="..." : echappees (un guillemet cassait le formulaire)

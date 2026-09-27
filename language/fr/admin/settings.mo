@@ -56,4 +56,7 @@ $lang['adm_opt_per_hour'] = 'par heure';
 // XNova Renaissance 0.9h : captcha a l'inscription (mod de theptitprince)
 $lang['enable_the_captcha'] = 'Captcha &agrave; l\'inscription';
 
+// XNova Renaissance 0.9h : recalcul de ce qui est en cours quand les vitesses changent
+$lang['adm_opt_recalc'] = 'Vitesses chang&eacute;es, en cours recalcul&eacute; : %d plan&egrave;te(s) avec constructions, %d recherche(s), %d flotte(s), %d attaque(s) de missiles.';
+
 ?>
