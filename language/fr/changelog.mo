@@ -6,6 +6,7 @@ $lang['changelog']   = array(
 
 '0.9i Renaissance' => 'Attaque group&eacute;e (theptitprince)
 - MOD : Moteur de combat r&eacute;&eacute;crit, m&ecirc;mes r&eacute;sultats, sous licence libre
+- FIX : Protection des vaisseaux enfin prise en compte au combat
 - FIX : Stationner chez un alli&eacute;, compteur des raids perdus',
 
 '0.9h Renaissance' => 'Fonctions inachev&eacute;es (theptitprince)

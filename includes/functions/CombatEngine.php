@@ -24,9 +24,10 @@
 //   un bouclier puis une attaque entre 80 et 120 %, avec les technologies de son joueur ; les attaquants d'abord,
 //   puis les defenseurs. Le combat s'arrete des qu'un camp n'a plus rien ;
 // - les tirs recus par un camp se repartissent sur tous ses groupes au prorata de leur nombre. Le bouclier du groupe
-//   absorbe d'abord, le reste detruit une unite par coque de base (prix / 10), au plus autant qu'il y a d'unites en
-//   face a proportion. Comme dans l'original, la technologie Protection et la coque de l'Amiral ne servent qu'a
-//   l'affichage (A : a corriger apres la preuve d'identite, decision du 27/09/2026) ;
+//   absorbe d'abord, le reste detruit une unite par coque (prix / 10, renforcee par la technologie Protection et
+//   l'Amiral), au plus autant qu'il y a d'unites en face a proportion. Dans l'original, la coque de base etait
+//   utilisee et la Protection ne servait qu'a l'affichage (A, corrige en 0.9i apres la preuve d'identite, decision du
+//   27/09/2026) : $OriginalHull = true rejoue l'original, pour la preuve seulement ;
 // - tir rapide : chaque type present dans un camp (meme detruit, quel que soit son nombre) retire 50 a 100 % de sa
 //   valeur de tir rapide a chaque type present en face ; pertes reparties entre les joueurs qui ont ce type ;
 // - apres le combat, 60 a 80 % des defenses detruites sont reconstruites ; debris : vaisseaux au taux de la flotte
@@ -37,7 +38,7 @@
 // (pour le rapport : a chaque tour, nombre, attaque, bouclier et protection de chaque groupe, attaque et unites de
 // chaque camp, tirs absorbes par les boucliers de chaque camp), 'debris' (metal, cristal), 'lost' (valeur perdue
 // par camp) et 'lost_by' (par participant).
-function CombatEngine ( $Attackers, $Defenders ) {
+function CombatEngine ( $Attackers, $Defenders, $OriginalHull = false ) {
 	global $pricelist, $CombatCaps, $game_config;
 
 	$Fleets = array('att' => array(), 'def' => array());
@@ -101,7 +102,12 @@ function CombatEngine ( $Attackers, $Defenders ) {
 						$MaxLoss  = floor($Count * $Units[$Enemy] / $Units[$Side]);
 						$Received = $Received - $Shield;
 						$Absorbed[$Side] = $Absorbed[$Side] + $Shield;
-						$Loss     = floor(($Received / (($pricelist[$Type]['metal'] + $pricelist[$Type]['crystal']) / 10)));
+						$Hull     = ($pricelist[$Type]['metal'] + $pricelist[$Type]['crystal']) / 10;
+						if (!$OriginalHull) {
+							// Coque renforcee par la Protection et l'Amiral, comme la valeur affichee dans le rapport
+							$Hull = $Hull * (1 + (0.1 * ($Techno[$Side][$Id]['defence_tech']) + (0.05 * ($Techno[$Side][$Id]['rpg_amiral'] ?? 0))));
+						}
+						$Loss     = floor(($Received / $Hull));
 						if ($Loss > $MaxLoss) {
 							$Loss = $MaxLoss;
 						}
