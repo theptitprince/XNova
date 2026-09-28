@@ -18,17 +18,20 @@ function raketenangriff($verteidiger_panzerung, $angreifer_waffen, $iraks, $def,
 	$temp2 = '';
 
 	$def[10] = $iraks;
+	// Index 12 : Protecteur planetaire (0.9j), cible comme les autres defenses (dans OGame, toutes les defenses le sont)
+	$def[12] = $def[12] ?? 0;
 
-	$metall     = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-	$kristall   = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-	$deut       = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-	$verblieben = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	$metall     = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	$kristall   = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	$deut       = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	$verblieben = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 	for($temp = 0; $temp < 11; $temp++) {
 		$verblieben[$temp] = $def[$temp];
 	}
+	$verblieben[12] = $def[12];
 
-	$kaputt = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+	$kaputt = Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
 	$hull = Array();
 
@@ -41,43 +44,24 @@ function raketenangriff($verteidiger_panzerung, $angreifer_waffen, $iraks, $def,
 	$hull[6] = 2000 * (1 + ($verteidiger_panzerung / 10));
 	$hull[7] = $hull[5];
 	$hull[8] = 1500 * (1 + ($verteidiger_panzerung / 10));
+	$hull[12] = 400000 * (1 + ($verteidiger_panzerung / 10));
 
 	$metall_cost_tab   = Array( 2, 1.5, 6, 20, 2, 50, 10, 50, 12.5, 8);
 	$kristall_cost_tab = Array( 0, 0.5, 2, 15, 6, 50, 10, 50,  2.5, 0);
 	$deut_cost_tab     = Array( 0,   0, 0,  2, 0, 30,  0,  0, 10.0, 2);
+	$metall_cost_tab[12]   = 2000;
+	$kristall_cost_tab[12] = 2000;
+	$deut_cost_tab[12]     = 1000;
 
 	$schaden = floor(($def[10] - $def[9]) * (12000 * (1 + ($angreifer_waffen / 10))));
 	if ($schaden < 0)
 		$schaden = 0;
 
-	switch ($primaerziel) {
-		case 0:
-			$beschussreihenfolge = Array(0, 1, 2, 3, 4, 5, 6, 7, 8);
-			break;
-		case 1:
-			$beschussreihenfolge = Array(1, 0, 2, 3, 4, 5, 6, 7, 8);
-			break;
-		case 2:
-			$beschussreihenfolge = Array(2, 0, 1, 3, 4, 5, 6, 7, 8);
-			break;
-		case 3:
-			$beschussreihenfolge = Array(3, 0, 1, 2, 4, 5, 6, 7, 8);
-			break;
-		case 4:
-			$beschussreihenfolge = Array(4, 0, 1, 2, 3, 5, 6, 7, 8);
-			break;
-		case 5:
-			$beschussreihenfolge = Array(5, 0, 1, 2, 3, 4, 6, 7, 8);
-			break;
-		case 6:
-			$beschussreihenfolge = Array(6, 0, 1, 2, 3, 4, 5, 7, 8);
-			break;
-		case 7:
-			$beschussreihenfolge = Array(7, 0, 1, 2, 3, 4, 5, 6, 8);
-			break;
-		case 8:
-			$beschussreihenfolge = Array(0, 1, 2, 3, 4, 5, 6, 7, 8);
-			break;
+	// Ordre de tir : la cible choisie d'abord, puis les autres dans l'ordre (0 ou 8 : ordre normal, comme l'original) ;
+	// le Protecteur planetaire (12) apres le Grand bouclier
+	$beschussreihenfolge = Array(0, 1, 2, 3, 4, 5, 6, 7, 12, 8);
+	if (in_array(intval($primaerziel), array(1, 2, 3, 4, 5, 6, 7, 12))) {
+		$beschussreihenfolge = array_merge(array(intval($primaerziel)), array_values(array_diff($beschussreihenfolge, array(intval($primaerziel)))));
 	}
 	// Simulation
 	// das Einfachste: I-Raks und Abfangraks ausrechnen...
@@ -100,7 +84,7 @@ function raketenangriff($verteidiger_panzerung, $angreifer_waffen, $iraks, $def,
 	$kristall[11] += $kristall[9];
 	$deut[11] += $deut[9];
 	// und jetzt der Reihe nach alles ABKNALLEN!!!
-	for($temp = 0; $temp < 9; $temp++) {
+	for($temp = 0; $temp < count($beschussreihenfolge); $temp++) {
 		if ($schaden >= ($hull[$beschussreihenfolge[$temp]] * $def[$beschussreihenfolge[$temp]])) {
 			$kaputt[$beschussreihenfolge[$temp]] += $def[$beschussreihenfolge[$temp]];
 

@@ -234,11 +234,23 @@ function ExpeditionBattle ( $FleetRow, $Fleet, $Aliens ) {
 	                   'shield_tech'   => max(0, $Tech['shield_tech'] + $Shift),   'rpg_amiral'   => 0);
 	$Ships = array();
 	$Enemy = array();
+	// Nombre d'ennemis arrondi vers le bas, sans vaisseau impose par type : avec les tirs rapides de XNova (un nombre fixe
+	// d'unites abattues par tour et par type present), un seul croiseur ennemi decimait une petite flotte. Pertes
+	// moyennes simulees : pirates 20 a 30 %, aliens 63 a 75 %, proches des 34 et 67 % des pertes sans combat de la 0.8e
 	foreach ($Fleet as $Ship => $Count) {
 		if (intval($Count) > 0) {
 			$Ships[$Ship] = intval($Count);
-			$Enemy[$Ship] = max(1, (int) ceil($Count * ($Aliens ? rand(40, 90) : rand(30, 60)) / 100));
+			$Number = (int) floor($Count * ($Aliens ? rand(40, 90) : rand(30, 60)) / 100);
+			if ($Number > 0) {
+				$Enemy[$Ship] = $Number;
+			}
 		}
+	}
+	// Toute petite flotte : un vaisseau ennemi du type le plus nombreux de la flotte
+	if (!$Enemy && $Ships) {
+		arsort($Ships);
+		$Enemy[array_key_first($Ships)] = 1;
+		ksort($Ships);
 	}
 	$Result = CombatEngine(array(array('fleet' => $Enemy, 'techno' => $EnemyTech)), array(array('fleet' => $Ships, 'techno' => $Tech)));
 

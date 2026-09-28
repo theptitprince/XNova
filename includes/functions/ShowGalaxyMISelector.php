@@ -36,6 +36,7 @@ function ShowGalaxyMISelector ( $Galaxy, $System, $Planet, $Current, $MICount ) 
 	$Result .= "<option value=\"5\">".$lang['tech'][406]."</option>";
 	$Result .= "<option value=\"6\">".$lang['tech'][407]."</option>";
 	$Result .= "<option value=\"7\">".$lang['tech'][408]."</option>";
+	$Result .= "<option value=\"12\">".$lang['tech'][409]."</option>"; // Protecteur planetaire (0.9j)
 	$Result .= "</select>";
 	$Result .= "</td>";
 	$Result .= "</tr>";

@@ -72,7 +72,8 @@ if (isset($resource) && !empty($resource[401])) {
 					6 => 407,
 					7 => 408,
 					8 => 503,
-					9 => 502
+					9 => 502,
+					12 => 409
 					);
 
 				$def =
@@ -86,6 +87,7 @@ if (isset($resource) && !empty($resource[401])) {
 					7 => $planet['big_protection_shield'], // Große Schildkuppel
 					8 => $planet['interplanetary_misil'], // Interplanetarrakete
 					9 => $planet['interceptor_misil'], // Abfangrakete
+					12 => $planet['planet_protector'], // Protecteur planetaire (0.9j)
 					);
 
 				// Rapport : noms des defenses de tech.mo (l'ancienne liste en dur etait fausse : « Canon Magnetique »
@@ -112,7 +114,7 @@ if (isset($resource) && !empty($resource[401])) {
 					foreach ($irak['zerstoert'] as $id => $anzahl) {
 						// Index 9 (missiles d'interception consommes) : deja mis a 0 juste au-dessus (ils etaient
 						// retires une seconde fois : stock negatif)
-						if (!empty($anzahl) && $id < 9) {
+						if (!empty($anzahl) && ($id < 9 || $id == 12)) {
 							$message .= $lang['tech'][$ids[$id]] . " (- " . $anzahl . ")<br>";
 
 							$x = $resource[$ids[$id]];
