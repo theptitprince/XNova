@@ -7,6 +7,7 @@ $lang['changelog']   = array(
 '0.9j Renaissance' => 'Derniers officiers (theptitprince)
 - NEW : D&eacute;p&ocirc;t de ravitaillement : prolonger le stationnement des flottes alli&eacute;es
 - ADD : Exp&eacute;ditions : pirates, aliens, retour retard&eacute; ou anticip&eacute;
+- MOD : Page de connexion : joueurs inscrits et dernier inscrit, puis joueurs en ligne
 - FIX : Technologies Bouclier et Protection invers&eacute;es au combat et contre les missiles
 - FIX : Grand bouclier, petit transporteur, satellite solaire : valeurs d\'OGame',
 

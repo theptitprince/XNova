@@ -41,10 +41,10 @@
 <div id="register" class="bigbutton" onclick="document.location.href='reg.php';"><font color="#cc0000">{log_toreg}</font></div>
 <div id="text2">
 <div id="text3">
-<center><b><font color="#00cc00">{log_online}: </font>
-<font color="#c6c7c6">{online_users}</font> - <font color="#00cc00">{log_lastreg}: </font>
-<font color="#c6c7c6">{last_user}</font><br><font color="#00cc00">{log_numbreg}:</font> <font color="#c6c7c6">{users_amount}</font>
-</b></center>
+<center><div style="display: inline-block; text-align: left;"><b>
+<font color="#00cc00">{log_numbreg}:</font> <font color="#c6c7c6">{users_amount}</font> - <font color="#00cc00">{log_lastreg}: </font>
+<font color="#c6c7c6">{last_user}</font><br><font color="#00cc00">{log_online}: </font> <font color="#c6c7c6">{online_users}</font>
+</b></div></center>
 </div>
 </div>
 </center>
