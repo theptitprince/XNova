@@ -162,4 +162,15 @@ $lang['sys_expe_fleet_lost'] = "Votre flotte d'exp&eacute;dition a &eacute;t&eac
 $lang['sys_expe_delay'] = "Une avarie des propulseurs retarde votre flotte d'exp&eacute;dition. Retour pr&eacute;vu le %s.";
 $lang['sys_expe_early'] = "Vos explorateurs ont d&eacute;couvert un raccourci : la flotte d'exp&eacute;dition rentre plus t&ocirc;t que pr&eacute;vu, le %s.";
 
+// XNova Renaissance 0.9j : destruction d'une colonie par le Destructeur planetaire
+$lang['sys_destruc_planet_title'] = "Tentative de destruction plan&eacute;taire du %s :";
+$lang['sys_destruc_planet'] = "La probabilit&eacute; de destruction de la plan&egrave;te est de : %d %% ";
+$lang['sys_destruc_pd'] = "La probabilit&eacute; de destruction de la flotte de destructeurs plan&eacute;taires est de : %d %% ";
+$lang['sys_destruc_planet_stop'] = "Le d&eacute;fenseur a r&eacute;ussi &agrave; bloquer la tentative de destruction de la plan&egrave;te";
+$lang['sys_destruc_planet_mess1'] = "Cette flotte de destructeurs plan&eacute;taires concentre ses canons &agrave; gravitons sur cette plan&egrave;te";
+$lang['sys_destruc_planet_mess'] = "Une flotte de la plan&egrave;te %s [%d:%d:%d] atteint la plan&egrave;te en [%d:%d:%d]";
+$lang['sys_destruc_planet_echec'] = ". La cro&ucirc;te de la plan&egrave;te se fissure, mais le noyau r&eacute;siste et l'onde de choc se retourne contre la flotte : les destructeurs plan&eacute;taires explosent en millions de fragments !";
+$lang['sys_destruc_planet_reussi'] = ", qui se fissure puis vole en &eacute;clats. B&acirc;timents, d&eacute;fenses et vaisseaux sont an&eacute;antis - Mission accomplie ! La plan&egrave;te est d&eacute;truite ! La flotte rentre &agrave; la plan&egrave;te de d&eacute;part.";
+$lang['sys_destruc_planet_null'] = ", visiblement la flotte ne d&eacute;veloppe pas la puissance n&eacute;cessaire - &Eacute;chec de la mission ! La flotte rentre &agrave; la plan&egrave;te de d&eacute;part.";
+
 ?>

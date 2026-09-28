@@ -155,7 +155,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 				($_POST['ship211'] ?? null) >= 1 ||
 				($_POST['ship213'] ?? null) >= 1 ||
 				($_POST['ship214'] ?? null) >= 1 ||
-				($_POST['ship215'] ?? null) >= 1) {
+				($_POST['ship215'] ?? null) >= 1 ||
+				($_POST['ship216'] ?? null) >= 1 ||
+				($_POST['ship217'] ?? null) >= 1) {
 				if (!$YourPlanet) {
 					$missiontype[1] = $lang['type_mission'][1];
 				}
@@ -189,6 +191,11 @@ include($xnova_root_path . 'common.' . $phpEx);
            $UsedPlanet) {
           $missiontype[9] = $lang['type_mission'][9];
         }
+		// Destruction d'une colonie par le Destructeur planetaire (0.9j) : jamais la planete mere d'un joueur
+		if (($_POST['planettype'] ?? null) == 1 && ($_POST['ship217'] ?? null) >= 1 && !$YourPlanet && $UsedPlanet &&
+		    !PlanetIsHome($select['id'] ?? 0, $select['id_owner'] ?? 0)) {
+			$missiontype[9] = $lang['type_mission'][9];
+		}
 	}
 
 	if (empty($missiontype[$fleetmission])) {

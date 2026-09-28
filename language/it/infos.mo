@@ -302,6 +302,10 @@ Fuoco rapido contro il Cargo pesante: <font color="lime">3</font>
 Fuoco rapido contro il Caccia pesante: <font color="lime">4</font>
 Fuoco rapido contro l\'Incrociatore: <font color="lime">4</font>
 Fuoco rapido contro la Nave da battaglia: <font color="lime">7</font>';
+$lang['info'][216]['name'] = 'SuperNova';
+$lang['info'][216]['description'] = 'Orgoglio del ramo dei predoni dell\'esercito imperiale, la SuperNova viene affidata solo ai giocatori promossi Predone. Veloce grazie alla propulsione iperspaziale, trasporta quanto due cargo pesanti e colpisce come più distruttori: l\'arma ideale per le razzie.';
+$lang['info'][217]['name'] = 'Distruttore planetario';
+$lang['info'][217]['description'] = 'Riservato all\'Imperatore, il distruttore planetario è la nave più potente mai costruita. I suoi cannoni a gravitoni possono ridurre una colonia in polvere (missione Distruggi), ma mai il pianeta madre di un giocatore. Se il pianeta resiste, l\'onda d\'urto può annientare la flotta.';
 
 // ----------------------------------------------------------------------------------------------------------
 // Defenses !
@@ -353,6 +357,8 @@ Chiaramente solo una di ciascuna cupola-scudo pu&o essere costruita su un pianet
 
 $lang['info'][408]['name'] = 'Cupola scudo potenziata';
 $lang['info'][408]['description'] = 'Questa &egrave; una versione avanzata della cupola scudo e la sua principale carattestica &egrave; la maggiore capacit&agrave; di assorbimento d energia. Si basa sulla stessa conoscenza tecnologica delle cupole pi&ugrave; piccole. I generatori sono inoltre meno rumorosi quando in azione.';
+$lang['info'][409]['name'] = 'Protettore planetario';
+$lang['info'][409]['description'] = 'Progettato dal ramo minerario dell\'esercito imperiale e riservato ai giocatori promossi Bunker, il protettore planetario avvolge il pianeta in uno scudo colossale. Finché resiste, l\'attaccante non può vincere. Uno solo per pianeta.';
 
 $lang['info'][502]['name'] = 'Missili anti-balistici';
 $lang['info'][502]['description'] = 'I missili anti-missili distruggono i missili attaccanti. Ogni missile anti-missile distrugge un missile interplanetario.';

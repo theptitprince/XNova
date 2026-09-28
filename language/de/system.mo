@@ -155,4 +155,15 @@ $lang['sys_expe_fleet_lost'] = 'Deine Expeditionsflotte wurde vollständig zerst
 $lang['sys_expe_delay'] = 'Ein Triebwerksschaden verzögert deine Expeditionsflotte. Voraussichtliche Rückkehr am %s.';
 $lang['sys_expe_early'] = 'Deine Forscher haben eine Abkürzung entdeckt: Die Expeditionsflotte kehrt früher als geplant zurück, am %s.';
 
+// XNova Renaissance 0.9j : destruction d'une colonie par le Destructeur planetaire
+$lang['sys_destruc_planet_title'] = 'Versuch der Planetenzerstörung am %s:';
+$lang['sys_destruc_planet'] = 'Die Wahrscheinlichkeit der Zerstörung des Planeten beträgt: %d %% ';
+$lang['sys_destruc_pd'] = 'Die Wahrscheinlichkeit der Zerstörung der Planetenzerstörer-Flotte beträgt: %d %% ';
+$lang['sys_destruc_planet_stop'] = 'Der Verteidiger konnte den Versuch der Planetenzerstörung abwehren';
+$lang['sys_destruc_planet_mess1'] = 'Diese Flotte von Planetenzerstörern richtet ihre Gravitonkanonen auf diesen Planeten';
+$lang['sys_destruc_planet_mess'] = 'Eine Flotte vom Planeten %s [%d:%d:%d] erreicht den Planeten bei [%d:%d:%d]';
+$lang['sys_destruc_planet_echec'] = '. Die Kruste des Planeten bricht auf, doch der Kern hält stand und die Schockwelle trifft die Flotte: Die Planetenzerstörer zerbersten in Millionen Stücke!';
+$lang['sys_destruc_planet_reussi'] = ', der aufbricht und dann zerbirst. Gebäude, Verteidigungsanlagen und Schiffe sind vernichtet – Mission erfüllt! Der Planet ist zerstört! Die Flotte kehrt zum Ausgangsplaneten zurück.';
+$lang['sys_destruc_planet_null'] = ', offensichtlich entwickelt die Flotte nicht die nötige Kraft – Mission gescheitert! Die Flotte kehrt zum Ausgangsplaneten zurück.';
+
 ?>

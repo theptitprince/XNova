@@ -43,6 +43,8 @@ $lang['tech_rc'] = array (
 213 => 'Corazzata',
 214 => 'Morte Nera',
 215 => 'Incrociatore Pesante',
+216 => 'SuperNova',
+217 => 'Distr.Pl.',
 
 401 => 'Missile',
 402 => 'L.Leggero',
@@ -52,6 +54,7 @@ $lang['tech_rc'] = array (
 406 => 'Can.Plasma',
 407 => 'C.Scudo',
 408 => 'C.Scudo Pesante',
+409 => 'Prot.Pl.',
 );
 
 $lang['tech'] = array(
@@ -105,6 +108,8 @@ $lang['tech'] = array(
 213 => "Corazzata",
 214 => "Morte nera",
 215 => "Incrociatore pesante",
+216 => "SuperNova",
+217 => "Distruttore planetario",
 //Difese
 400 => "Strutture di difesa",
 401 => "Lanciamissili",
@@ -115,6 +120,7 @@ $lang['tech'] = array(
 406 => "Cannone al plasma",
 407 => "Cupola scudo",
 408 => "Cupola scudo potenziata",
+409 => "Protettore planetario",
 502 => "Missili anti-balistici",
 503 => "Missili interplanetari",
 //Costruzioni speciali
@@ -190,6 +196,8 @@ $lang['res']['descriptions'] = array(
 213 => "La corazzata &egrave; la nave stellare più pesante mai vista e ha una potenza di fuoco mai eguagliata in precedenza grazie alla massiccia presenza di cannoni laser e cannoni Gauss ",
 214 => "La Morte Nera &egrave; una vera stazione spaziale dalle dimensioni di una luna, grazie al suo raggio gravitonico &egrave; capace di spazzare via lune e flotte intere.",
 215 => "Questa nave &egrave; l'ultimo gioiello della tecnologia, pu&ograve; essere molto pericolosa qualora arrivi per distruggere le flotte attaccanti.",
+216 => "La SuperNova, orgoglio dei predoni, unisce velocità, una grande stiva e una potenza di fuoco temibile.",
+217 => "Il distruttore planetario, riservato all'Imperatore, può ridurre una colonia in polvere.",
 //Naves
 401 => "Il lanciamissili &egrave; un semplice ma indispensabile sistema di difesa.",
 402 => "Con l'utilizzo di un raggio laser concentrato si possono causare pi&ugrave; danni che attraverso normali armi missilistiche. ",
@@ -199,6 +207,7 @@ $lang['res']['descriptions'] = array(
 406 => "Il Cannone al Plasma &egrave; la combinazione tra gli sviluppi delle ricerche dei laser e ioniche, il risultato &egrave una grossa palla al plasma capace di creare danni ingenti",
 407 => "La cupola scudo copre il pianeta con un sottile campo di scudi che assorbono i danni. ",
 408 => "La cupola scudo potenziata &egrave; una versione migliorata della cupola normale che assorbe ancor più danni prima di collassare. ",
+409 => "Il protettore planetario avvolge il pianeta in uno scudo colossale. Uno solo per pianeta.",
 502 => "I missili anti-antibalistici distruggono i missili attaccanti. ",
 503 => "I Missili interplanetari distruggono le difese erette nei pianeti",
 

@@ -14,7 +14,7 @@
 if (!defined('INSIDE')) { die('attemp hacking'); }
 
 // Version du schema de base installee par cette version du jeu
-define('RENAISSANCE_DB_VERSION', '0.9i');
+define('RENAISSANCE_DB_VERSION', '0.9j');
 
 // Nom de la ligne de la table config qui memorise la version du schema
 define('RENAISSANCE_DB_VERSION_KEY', 'renaissance_db_version');
@@ -135,6 +135,14 @@ $RenaissanceMigrations = array(
 			PRIMARY KEY (`id`)
 		) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;",
 		"UPDATE `{{prefix}}fleets` SET `fleet_group` = 0 WHERE `fleet_group` <> 0;",
+	),
+	'0.9j' => array(
+		// Unites des derniers officiers : SuperNova (Raideur), Destructeur planetaire (Empereur), Protecteur planetaire
+		// (Bunker). Les officiers se recrutaient sans effet : leurs unites n'existaient pas
+		"ALTER TABLE `{{prefix}}planets`
+			ADD COLUMN IF NOT EXISTS `supernova` bigint(11) NOT NULL default '0' AFTER `battleship`,
+			ADD COLUMN IF NOT EXISTS `planet_destroyer` bigint(11) NOT NULL default '0' AFTER `supernova`,
+			ADD COLUMN IF NOT EXISTS `planet_protector` int(11) NOT NULL default '0' AFTER `big_protection_shield`;",
 	),
 );
 

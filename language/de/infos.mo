@@ -154,6 +154,10 @@ $lang['info'][214]['name']        = "Todesstern";
 $lang['info'][214]['description'] = "Der Todesstern ist mit einer riesigen Gravitonkanone bewaffnet, die Schiffe so gro&szlig; wie Zerst&ouml;rer oder sogar Monde zerst&ouml;ren kann. Da daf&uuml;r eine hohe Menge an Energie ben&ouml;tigt wird, besteht er fast nur aus Generatoren. Lediglich riesige Sternenreiche k&ouml;nnen &uuml;berhaupt die Ressourcen und Arbeiter aufbringen, um dieses mondgro&szlig;e Schiff zu bauen.";
 $lang['info'][215]['name']        = 'Schlachtkreuzer';
 $lang['info'][215]['description'] = "Dieses filigrane Schiff eignet sich hervorragend zum Zerst&ouml;ren feindlicher Flottenverb&auml;nde. Mit seinen hochentwickelten Lasergesch&uuml;tzen ist es in der Lage, eine grosse Zahl angreifender Schiffe gleichzeitig zu bek&auml;mpfen. Durch seine schlanke Bauform und die starken Bewaffnung ist die Ladekapazit&auml;t begrenzt. Dies wird jedoch durch den verbrauchsarmen Hyperraumantrieb wieder ausgeglichen.";
+$lang['info'][216]['name']        = "SuperNova";
+$lang['info'][216]['description'] = "Der Stolz des Raider-Zweigs der imperialen Armee: Die SuperNova wird nur Spielern anvertraut, die zum Raider befördert wurden. Dank Hyperraumantrieb schnell, trägt sie so viel wie zwei große Transporter und schlägt zu wie mehrere Zerstörer: die ideale Waffe für Raubzüge.";
+$lang['info'][217]['name']        = "Planetenzerstörer";
+$lang['info'][217]['description'] = "Der Planetenzerstörer ist dem Imperator vorbehalten und das mächtigste Schiff, das je gebaut wurde. Seine Gravitonkanonen können eine Kolonie in Staub verwandeln (Auftrag Zerstören), niemals aber den Heimatplaneten eines Spielers. Hält der Planet stand, kann die Schockwelle die Flotte vernichten.";
 
 // ----------------------------------------------------------------------------------------------------------
 // Defenses !
@@ -173,6 +177,8 @@ $lang['info'][407]['name']        = "Kleine Schildkuppel";
 $lang['info'][407]['description'] = "Lange bevor die Schildgeneratoren klein genug waren, um auf Schiffen Einsatz zu finden, existierten bereits riesige Generatoren auf der Oberfl&auml;che von Planeten. Diese umh&uuml;llen den ganzen Planeten mit einem Kraftfeld, welches ungeheuere Mengen an Energie absorbieren kann, bevor es zusammenbricht. Kleinere Angriffsflotten scheitern immer wieder an diesen Schildkuppeln. Mit zunehmender technologischer Entwicklung k&ouml;nnen diese Schilde noch verst&auml;rkt werden. Sp&auml;ter kann man sogar eine gro&szlig;e Schildkuppel bauen, die noch st&auml;rker ist. Pro Planet kann nur eine einzige kleine Schildkuppel gebaut werden.";
 $lang['info'][408]['name']        = 'Große Schildkuppel';
 $lang['info'][408]['description'] = "Die Weiterentwicklung der kleinen Schildkuppel. Sie basiert auf den gleichen Technologien kann aber wesentlich mehr Energie einsetzen um feindliche Angriffe abzuhalten.";
+$lang['info'][409]['name']        = "Planetenbeschützer";
+$lang['info'][409]['description'] = "Der Planetenbeschützer wurde vom Bergbauzweig der imperialen Armee entwickelt und ist Spielern vorbehalten, die zum Bunker befördert wurden. Er hüllt den Planeten in einen gewaltigen Schild. Solange er hält, kann der Angreifer nicht gewinnen. Nur einer pro Planet.";
 
 // ----------------------------------------------------------------------------------------------------------
 // Missiles !

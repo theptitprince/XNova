@@ -37,6 +37,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$YourPlanet = false;
 	$UsedPlanet = false;
 	$TargetOwner = 0;
+	$TargetPlanetId = 0;
 	$select       = doquery("SELECT * FROM {{table}}", "planets");
 
 	while ($row = mysqli_fetch_array($select)) {
@@ -51,6 +52,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 				$UsedPlanet = true;
 			}
 			$TargetOwner = $row['id_owner'];
+			$TargetPlanetId = $row['id'];
 			break;
 		}
 	}
@@ -79,7 +81,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			($_POST['ship211'] ?? null) >= 1 ||
 			($_POST['ship213'] ?? null) >= 1 ||
 			($_POST['ship214'] ?? null) >= 1 ||
-			($_POST['ship215'] ?? null) >= 1) {
+			($_POST['ship215'] ?? null) >= 1 ||
+			($_POST['ship216'] ?? null) >= 1 ||
+			($_POST['ship217'] ?? null) >= 1) {
 			if (!$YourPlanet) {
 				$missiontype[1] = $lang['type_mission'][1];
 			}
@@ -119,6 +123,10 @@ include($xnova_root_path . 'common.' . $phpEx);
            $UsedPlanet) {
           $missiontype[9] = $lang['type_mission'][9];
    }
+	// Destruction d'une colonie par le Destructeur planetaire (0.9j) : jamais la planete mere d'un joueur
+	if ($planettype == 1 && ($_POST['ship217'] ?? null) >= 1 && !$YourPlanet && $UsedPlanet && !PlanetIsHome($TargetPlanetId, $TargetOwner)) {
+		$missiontype[9] = $lang['type_mission'][9];
+	}
 
 	$fleetarray    = unserialize(base64_decode(str_rot13((string) ($_POST["usedfleet"] ?? ''))), array('allowed_classes' => false));
 	if (!is_array($fleetarray) || !$fleetarray) {

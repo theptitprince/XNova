@@ -158,6 +158,10 @@ $lang['info'][214]['name']        = 'Estrella de la muerte';
 $lang['info'][214]['description'] = 'La estrella de la muerte está equipada con una gigantesca artillería de gravitones capaz de destruir naves del tamaño de los destructores e incluso lunas. Como esto requiere una cantidad de energía gigantesca, está compuesta casi por completo de generadores. Una nave de este tamaño y de esta potencia necesita una cantidad gigantesca de recursos y de obreros que solo pueden aportar los grandes imperios espaciales.';
 $lang['info'][215]['name']        = 'Acorazado';
 $lang['info'][215]['description'] = 'Esta nave de fuselaje estilizado es ideal para destruir convoyes enemigos. Su armamento láser de nueva generación le permite enfrentarse a un gran número de naves al mismo tiempo. Debido a su estrecho fuselaje y a su potente armamento, la capacidad disponible para transportar recursos es muy limitada. Esto se compensa con el uso de propulsores hiperespaciales, que consumen poco combustible.';
+$lang['info'][216]['name']        = 'SuperNova';
+$lang['info'][216]['description'] = 'Orgullo de la rama de los saqueadores del ejército imperial, la SuperNova solo se confía a los jugadores ascendidos a Saqueador. Rápida gracias a su propulsión hiperespacial, carga tanto como dos naves grandes de carga y golpea como varios destructores: el arma ideal para los saqueos.';
+$lang['info'][217]['name']        = 'Destructor planetario';
+$lang['info'][217]['description'] = 'Reservado al Emperador, el destructor planetario es la nave más poderosa jamás construida. Sus cañones de gravitones pueden reducir una colonia a polvo (misión Destruir), pero nunca el planeta principal de un jugador. Si el planeta resiste, la onda de choque puede aniquilar la flota.';
 
 // ----------------------------------------------------------------------------------------------------------
 // Defenses !
@@ -177,6 +181,8 @@ $lang['info'][407]['name']        = 'Cúpula pequeña de protección';
 $lang['info'][407]['description'] = 'Mucho antes de que se instalaran generadores de escudo en las naves, ya existían generadores gigantes en la superficie de los planetas. Estos permitían cubrir los planetas con campos infranqueables capaces de absorber enormes cantidades de energía antes de colapsar. Las pequeñas flotas de ataque suelen fracasar contra estas cúpulas. Estas cúpulas pueden mejorarse: más adelante se puede construir incluso una cúpula grande, aún más potente. En cada planeta solo se puede construir una cúpula de este tipo.';
 $lang['info'][408]['name']        = 'Cúpula grande de protección';
 $lang['info'][408]['description'] = 'Versión mejorada de la cúpula pequeña de protección. Se basa en la misma tecnología, pero puede utilizar mucha más energía para defenderse.';
+$lang['info'][409]['name']        = 'Protector planetario';
+$lang['info'][409]['description'] = 'Diseñado por la rama minera del ejército imperial y reservado a los jugadores ascendidos a Búnker, el protector planetario envuelve el planeta en un escudo colosal. Mientras resista, el atacante no puede ganar. Solo uno por planeta.';
 
 // ----------------------------------------------------------------------------------------------------------
 // Missiles !

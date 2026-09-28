@@ -160,4 +160,15 @@ $lang['sys_expe_fleet_lost'] = "La vostra flotta di spedizione è stata completa
 $lang['sys_expe_delay'] = "Un guasto ai propulsori ritarda la vostra flotta di spedizione. Ritorno previsto il %s.";
 $lang['sys_expe_early'] = "I vostri esploratori hanno scoperto una scorciatoia: la flotta di spedizione rientra prima del previsto, il %s.";
 
+// XNova Renaissance 0.9j : destruction d'une colonie par le Destructeur planetaire
+$lang['sys_destruc_planet_title'] = 'Tentativo di distruzione planetaria del %s:';
+$lang['sys_destruc_planet'] = 'La probabilità di distruzione del pianeta è di: %d %% ';
+$lang['sys_destruc_pd'] = 'La probabilità di distruzione della flotta di distruttori planetari è di: %d %% ';
+$lang['sys_destruc_planet_stop'] = 'Il difensore è riuscito a bloccare il tentativo di distruzione del pianeta';
+$lang['sys_destruc_planet_mess1'] = 'Questa flotta di distruttori planetari concentra i suoi cannoni a gravitoni su questo pianeta';
+$lang['sys_destruc_planet_mess'] = 'Una flotta dal pianeta %s [%d:%d:%d] raggiunge il pianeta in [%d:%d:%d]';
+$lang['sys_destruc_planet_echec'] = '. La crosta del pianeta si spacca, ma il nucleo resiste e l\'onda d\'urto si ritorce contro la flotta: i distruttori planetari esplodono in milioni di frammenti!';
+$lang['sys_destruc_planet_reussi'] = ', che si spacca e poi esplode. Strutture, difese e navi sono annientate - Missione compiuta! Il pianeta è distrutto! La flotta ritorna al pianeta di partenza.';
+$lang['sys_destruc_planet_null'] = ', evidentemente la flotta non sviluppa la potenza necessaria - Missione fallita! La flotta ritorna al pianeta di partenza.';
+
 ?>
