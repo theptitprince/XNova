@@ -221,4 +221,24 @@ $lang['info'][615]['description'] = 'Ha demostrado que es el mayor conquistador 
 // XNova Renaissance 0.9g : adresse d'information sans element valide
 $lang['nfo_unknown'] = 'Este elemento no existe.';
 
+// XNova Renaissance 0.9j : depot de ravitaillement (flottes alliees en orbite, livraison de deuterium)
+$lang['depot_title'] = 'Flotas aliadas en órbita';
+$lang['depot_rules'] = 'Cada entrega: %s de deuterio como máximo (depósito de la alianza nivel %s); estacionamiento limitado a 32 h';
+$lang['depot_owner'] = 'Jugador';
+$lang['depot_ships'] = 'Naves';
+$lang['depot_end'] = 'Fin del estacionamiento';
+$lang['depot_cost'] = 'Coste por hora';
+$lang['depot_supply'] = 'Abastecer';
+$lang['depot_hours'] = 'hora(s), máx. %s';
+$lang['depot_none'] = 'Ninguna flota aliada estacionada en este planeta.';
+$lang['depot_done'] = 'Flota de %s abastecida: %s hora(s) más por %s de deuterio. Fin del estacionamiento: %s.';
+$lang['depot_err_level'] = 'Hace falta un depósito de la alianza en este planeta.';
+$lang['depot_err_fleet'] = 'Esta flota no está estacionada en este planeta.';
+$lang['depot_err_hours'] = 'Número de horas no válido.';
+$lang['depot_err_capacity'] = 'El depósito no puede entregar tanto deuterio de una vez (%s como máximo).';
+$lang['depot_err_stay'] = 'El estacionamiento no puede superar las 32 horas.';
+$lang['depot_err_deut'] = 'No hay suficiente deuterio en el planeta.';
+$lang['depot_msg_title'] = 'Abastecimiento';
+$lang['depot_msg'] = 'Su flota estacionada en el planeta %s %s ha sido abastecida por %s: %s hora(s) más. Fin del estacionamiento: %s.';
+
 ?>

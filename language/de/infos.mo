@@ -216,4 +216,24 @@ $lang['info'][615]['description'] = 'Du hast gezeigt, dass du der größte Erobe
 // XNova Renaissance 0.9g : adresse d'information sans element valide
 $lang['nfo_unknown'] = 'Dieses Element existiert nicht.';
 
+// XNova Renaissance 0.9j : depot de ravitaillement (flottes alliees en orbite, livraison de deuterium)
+$lang['depot_title'] = 'Verbündete Flotten im Orbit';
+$lang['depot_rules'] = 'Pro Lieferung höchstens %s Deuterium (Allianzdepot Stufe %s); Stationierung auf 32 Std. begrenzt';
+$lang['depot_owner'] = 'Spieler';
+$lang['depot_ships'] = 'Schiffe';
+$lang['depot_end'] = 'Ende der Stationierung';
+$lang['depot_cost'] = 'Kosten pro Stunde';
+$lang['depot_supply'] = 'Versorgen';
+$lang['depot_hours'] = 'Stunde(n), max. %s';
+$lang['depot_none'] = 'Keine verbündete Flotte ist auf diesem Planeten stationiert.';
+$lang['depot_done'] = 'Flotte von %s versorgt: %s Stunde(n) mehr für %s Deuterium. Ende der Stationierung: %s.';
+$lang['depot_err_level'] = 'Auf diesem Planeten wird ein Allianzdepot benötigt.';
+$lang['depot_err_fleet'] = 'Diese Flotte ist nicht auf diesem Planeten stationiert.';
+$lang['depot_err_hours'] = 'Ungültige Anzahl von Stunden.';
+$lang['depot_err_capacity'] = 'Das Depot kann nicht so viel Deuterium auf einmal liefern (höchstens %s).';
+$lang['depot_err_stay'] = 'Die Stationierung darf 32 Stunden nicht überschreiten.';
+$lang['depot_err_deut'] = 'Nicht genug Deuterium auf dem Planeten.';
+$lang['depot_msg_title'] = 'Versorgung';
+$lang['depot_msg'] = 'Deine auf dem Planeten %s %s stationierte Flotte wurde von %s versorgt: %s Stunde(n) mehr. Ende der Stationierung: %s.';
+
 ?>
