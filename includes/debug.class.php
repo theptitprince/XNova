@@ -44,7 +44,7 @@ class debug
 	function error($message,$title)
 	{
 		global $link,$game_config;
-		if($game_config['debug']==1){
+		if(($game_config['debug'] ?? 0)==1){
 			echo "<h2>$title</h2><br><font color=red>$message</font><br><hr>";
 			echo  "<table>".$this->log."</table>";
 		}
@@ -55,7 +55,7 @@ class debug
 			include($xnova_root_path . 'config.'.$phpEx);
 			if(!$link) die('La base de donn&eacute;es MySQL est indisponible pour le moment, merci de r&eacute;essayer plus tard.');
 			$query = "INSERT INTO {{table}} SET
-				`error_sender` = '{$user['id']}' ,
+				`error_sender` = '".intval($user['id'] ?? 0)."' ,
 				`error_time` = '".time()."' ,
 				`error_type` = '{$title}' ,
 				`error_text` = '".SqlEscape($message)."';";

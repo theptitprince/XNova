@@ -150,4 +150,14 @@ $lang['sys_banned_forever'] = 'Siete bannati definitivamente.';
 $lang['sys_account_deleted_title'] = 'Account cancellato';
 $lang['sys_account_deleted'] = 'Il tuo account è stato cancellato, come richiesto nelle Opzioni.';
 
+// XNova Renaissance 0.9j : expeditions completes (pirates, aliens, retour retarde ou anticipe)
+$lang['sys_expe_pirates_name'] = "Pirati";
+$lang['sys_expe_aliens_name'] = "Alieni";
+$lang['sys_expe_pirates'] = "Dei pirati spaziali hanno attaccato la vostra flotta di spedizione!";
+$lang['sys_expe_aliens'] = "Una flotta aliena sconosciuta ha attaccato la vostra flotta di spedizione!";
+$lang['sys_expe_battle_losses'] = "Perdite della vostra flotta: %s nave/i, per un valore di %s.";
+$lang['sys_expe_fleet_lost'] = "La vostra flotta di spedizione è stata completamente distrutta.";
+$lang['sys_expe_delay'] = "Un guasto ai propulsori ritarda la vostra flotta di spedizione. Ritorno previsto il %s.";
+$lang['sys_expe_early'] = "I vostri esploratori hanno scoperto una scorciatoia: la flotta di spedizione rientra prima del previsto, il %s.";
+
 ?>

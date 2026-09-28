@@ -152,4 +152,14 @@ $lang['sys_banned_forever'] = 'Vous &ecirc;tes banni d&eacute;finitivement.';
 $lang['sys_account_deleted_title'] = 'Compte effacé';
 $lang['sys_account_deleted'] = 'Votre compte a été effacé, comme vous l\'aviez demandé dans les Options.';
 
+// XNova Renaissance 0.9j : expeditions completes (pirates, aliens, retour retarde ou anticipe)
+$lang['sys_expe_pirates_name'] = "Pirates";
+$lang['sys_expe_aliens_name'] = "Aliens";
+$lang['sys_expe_pirates'] = "Des pirates de l'espace ont attaqu&eacute; votre flotte d'exp&eacute;dition !";
+$lang['sys_expe_aliens'] = "Une flotte extraterrestre inconnue a attaqu&eacute; votre flotte d'exp&eacute;dition !";
+$lang['sys_expe_battle_losses'] = "Pertes de votre flotte : %s vaisseau(x), d'une valeur de %s.";
+$lang['sys_expe_fleet_lost'] = "Votre flotte d'exp&eacute;dition a &eacute;t&eacute; enti&egrave;rement d&eacute;truite.";
+$lang['sys_expe_delay'] = "Une avarie des propulseurs retarde votre flotte d'exp&eacute;dition. Retour pr&eacute;vu le %s.";
+$lang['sys_expe_early'] = "Vos explorateurs ont d&eacute;couvert un raccourci : la flotte d'exp&eacute;dition rentre plus t&ocirc;t que pr&eacute;vu, le %s.";
+
 ?>

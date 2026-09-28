@@ -152,4 +152,14 @@ $lang['sys_banned_forever'] = 'Está sancionado de forma definitiva.';
 $lang['sys_account_deleted_title'] = 'Cuenta borrada';
 $lang['sys_account_deleted'] = 'Su cuenta ha sido borrada, como lo solicitó en las Opciones.';
 
+// XNova Renaissance 0.9j : expeditions completes (pirates, aliens, retour retarde ou anticipe)
+$lang['sys_expe_pirates_name'] = 'Piratas';
+$lang['sys_expe_aliens_name'] = 'Alienígenas';
+$lang['sys_expe_pirates'] = '¡Unos piratas espaciales han atacado su flota de expedición!';
+$lang['sys_expe_aliens'] = '¡Una flota alienígena desconocida ha atacado su flota de expedición!';
+$lang['sys_expe_battle_losses'] = 'Pérdidas de su flota: %s nave(s), por un valor de %s.';
+$lang['sys_expe_fleet_lost'] = 'Su flota de expedición ha sido destruida por completo.';
+$lang['sys_expe_delay'] = 'Una avería en los propulsores retrasa su flota de expedición. Regreso previsto el %s.';
+$lang['sys_expe_early'] = 'Sus exploradores han descubierto un atajo: la flota de expedición regresa antes de lo previsto, el %s.';
+
 ?>
