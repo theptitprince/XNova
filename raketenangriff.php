@@ -65,7 +65,7 @@ elseif (mysqli_num_rows($tempvar3) != 1) {
 elseif ($anz < 1 || $anz > $iraks) {
 	$error = 1;
 }
-elseif ((!is_numeric($pziel) && $pziel != "all") OR ($pziel != "all" && (intval($pziel) < 0 || intval($pziel) > 7))) {
+elseif ((!is_numeric($pziel) && $pziel != "all") OR ($pziel != "all" && (intval($pziel) < 0 || intval($pziel) > 7) && intval($pziel) != 12)) {
 	$error = 1;
 }
 
@@ -127,7 +127,7 @@ if (!empty($select['urlaubs_modus'])) {
 			7 => $planet['big_protection_shield'], // Große Schildkuppel
 			8 => $planet['interplanetary_misil'], // Interplanetarrakete
 			9 => $planet['interceptor_misil'], // Abfangrakete
-
+			12 => $planet['planet_protector'], // Protecteur planetaire (0.9j)
 		);
 
 
