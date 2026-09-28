@@ -44,6 +44,8 @@ $lang['tech_rc'] = array (
 213 => 'Destr.',
 214 => 'Rip',
 215 => 'Traqueur',
+216 => 'SuperNova',
+217 => 'Destr.pl.',
 
 401 => 'Missile',
 402 => 'L.pequeño',
@@ -53,6 +55,7 @@ $lang['tech_rc'] = array (
 406 => 'Lanc.plasma',
 407 => 'P.bouclier',
 408 => 'G.bouclier',
+409 => 'Prot.pl.',
 );
 
 $lang['tech'] = array(
@@ -113,6 +116,8 @@ $lang['tech'] = array(
 213 => 'Destructor',
 214 => 'Estrella de la muerte',
 215 => 'Acorazado',
+216 => 'SuperNova',
+217 => 'Destructor planetario',
 
 400 => 'Sistemas de defensa',
 401 => 'Lanzamisiles',
@@ -123,6 +128,7 @@ $lang['tech'] = array(
 406 => 'Cañón de plasma',
 407 => 'Cúpula pequeña de protección',
 408 => 'Cúpula grande de protección',
+409 => 'Protector planetario',
 502 => 'Misil de intercepción',
 503 => 'Misil interplanetario',
 
@@ -196,6 +202,8 @@ $lang['res']['descriptions'] = array(
 213 => 'El destructor es el rey de las naves de guerra.',
 214 => 'El poder destructivo de la estrella de la muerte es insuperable.',
 215 => 'El acorazado está especializado en la interceptación de flotas enemigas.',
+216 => 'La SuperNova, orgullo de los saqueadores, combina velocidad, una gran bodega y una potencia de fuego temible.',
+217 => 'El destructor planetario, reservado al Emperador, puede reducir una colonia a polvo.',
 
 401 => 'El lanzamisiles es una forma sencilla y económica de defenderse.',
 402 => 'El bombardeo concentrado de fotones puede causar daños mucho mayores que las armas balísticas habituales.',
@@ -205,6 +213,7 @@ $lang['res']['descriptions'] = array(
 406 => 'Los cañones de plasma disponen de la potencia de una erupción solar y por ello pueden ser más destructivos que los propios destructores.',
 407 => 'La cúpula pequeña de protección cubre todo un planeta con un campo infranqueable capaz de absorber una enorme cantidad de energía.',
 408 => 'La versión mejorada de la cúpula pequeña de protección puede utilizar mucha más energía para defenderse.',
+409 => 'El protector planetario envuelve el planeta en un escudo colosal. Solo uno por planeta.',
 502 => 'El misil de intercepción destruye los misiles enemigos.',
 503 => 'Los misiles interplanetarios destruyen la defensa enemiga.',
 

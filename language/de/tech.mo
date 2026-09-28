@@ -42,6 +42,8 @@ $lang['tech_rc'] = array (
 213 => "Zerst&ouml;rer",
 214 => "Rip",
 215 => "Schlachtkreuzer",
+216 => "SuperNova",
+217 => "Pl.zerst.",
 
 401 => 'Missile',
 402 => 'L.Laser',
@@ -51,6 +53,7 @@ $lang['tech_rc'] = array (
 406 => 'Lanc.plasma',
 407 => 'P.bouclier',
 408 => 'G.bouclier',
+409 => 'Pl.besch.',
 );
 
 $lang['tech'] = array(
@@ -112,6 +115,8 @@ $lang['tech'] = array(
 213 => "Zerst&ouml;rer",
 214 => "Todesstern",
 215 => "Schlachtkreuzer",
+216 => "SuperNova",
+217 => "Planetenzerstörer",
 
 400 => 'Verteidigungsanlagen',
 401 => "Raketenwerfer",
@@ -122,6 +127,7 @@ $lang['tech'] = array(
 406 => "Plasmawerfer",
 407 => "Kleine Schildkuppel",
 408 => "Gro&szlig;e Schildkuppel",
+409 => "Planetenbeschützer",
 502 => 'Bodenluft Abfangrakete',
 503 => 'Intercontinental Rakete',
 
@@ -194,6 +200,8 @@ $lang['res']['descriptions'] = array(
 213 => "Der Zerst&ouml;rer ist der K&ouml;nig unter den Kriegsschiffen.",
 214 => "Die Zerst&ouml;rungskraft des Todessterns ist un&uuml;bertroffen.",
 215 => "Der Schlachtkreuzer ist auf das Abfangen feindlicher Flotten spezialisiert.",
+216 => "Die SuperNova, der Stolz der Raider, vereint Geschwindigkeit, einen großen Frachtraum und gewaltige Feuerkraft.",
+217 => "Der Planetenzerstörer, dem Imperator vorbehalten, kann eine Kolonie in Staub verwandeln.",
 
 401 => "Der Raketenwerfer ist eine einfache aber kosteng&uuml;nstige Verteidigungsm&ouml;glichkeit.",
 402 => "Durch den konzentrierten Beschuss eines Ziels mit Photonen kann eine wesentlich gr&ouml;&szlig;ere Schadenswirkung erzielt werden, als mit gew&ouml;hnlichen ballistischen Waffen.",
@@ -203,6 +211,7 @@ $lang['res']['descriptions'] = array(
 406 => "Plasmagesch&uuml;tze setzen die Kraft einer Sonneneruption frei und &uuml;bertreffen in ihrer zerst&ouml;rerischen Wirkung sogar den Zerst&ouml;rer.",
 407 => "Die kleine Schildkuppel umh&uuml;llt den ganzen Planeten mit einem Feld, welches ungeheuere Mengen an Energie absorbieren kann.",
 408 => "Die Weiterentwicklung der kleinen Schildkuppel kann wesentlich mehr Energie einsetzen um Angriffe abzuhalten.",
+409 => "Der Planetenbeschützer hüllt den Planeten in einen gewaltigen Schild. Nur einer pro Planet.",
 502 => "Abfangraketen zerst&ouml;ren angreifende Interplanetarraketen.",
 503 => "Interplanetarraketen zerst&ouml;ren die gegnerische Verteidigung.",
 

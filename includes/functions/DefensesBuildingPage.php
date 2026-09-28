@@ -18,11 +18,11 @@
 //                   dans le programme appelant
 // $CurrentUser   -> Utilisateur qui a lancé la construction
 //
-// Petit et grand bouclier : un seul exemplaire (ni deja construit, ni deja dans la file). L'original testait le petit
+// Petit et grand bouclier, Protecteur planetaire (0.9j) : un seul exemplaire (ni deja construit, ni deja dans la file). L'original testait le petit
 // bouclier pour les deux : grand bouclier bloque des que le petit existait, et constructible a volonte sinon.
 function DefenseShieldBuildable ( $CurrentPlanet, $Element ) {
 	global $resource;
-	if ($Element != 407 && $Element != 408) {
+	if ($Element != 407 && $Element != 408 && $Element != 409) {
 		return true;
 	}
 	$InQueue = (strpos(';'. $CurrentPlanet['b_hangar_id'], ';'. $Element .',') !== false);
@@ -47,7 +47,7 @@ function DefenseMissilesInSilo ( $CurrentPlanet ) {
 function DefenseMaxElements ( $CurrentPlanet, $Element, $Missiles ) {
 	global $resource;
 	$Max = min(GetMaxConstructibleElements($Element, $CurrentPlanet), OrderUnitsMax());
-	if ($Element == 407 || $Element == 408) {
+	if ($Element == 407 || $Element == 408 || $Element == 409) {
 		$Max = min($Max, 1);
 	} elseif ($Element == 502 || $Element == 503) {
 		// Un missile interplanetaire prend la place de deux missiles d'interception
@@ -85,7 +85,7 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 			if ($Count != 0) {
 				// Petit et grand bouclier : un seul exemplaire (l'original laissait la quantite demandee quand le
 				// bouclier existait deja)
-				if ($Element == 407 || $Element == 408) {
+				if ($Element == 407 || $Element == 408 || $Element == 409) {
 					$Count = DefenseShieldBuildable($CurrentPlanet, $Element) ? 1 : 0;
 				}
 

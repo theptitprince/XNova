@@ -44,6 +44,8 @@ $lang['tech_rc'] = array (
 213 => 'Destr.',
 214 => 'Rip',
 215 => 'Traqueur',
+216 => 'SuperNova',
+217 => 'Destr.pl.',
 
 401 => 'Missile',
 402 => 'L.l&eacute;ger.',
@@ -53,6 +55,7 @@ $lang['tech_rc'] = array (
 406 => 'Lanc.plasma',
 407 => 'P.bouclier',
 408 => 'G.bouclier',
+409 => 'Protect.pl.',
 );
 
 $lang['tech'] = array(
@@ -113,6 +116,8 @@ $lang['tech'] = array(
 213 => 'Destructeur',
 214 => 'Étoile de la mort',
 215 => 'Traqueur',
+216 => 'SuperNova',
+217 => 'Destructeur plan&eacute;taire',
 
 400 => 'D&eacute;fense',
 401 => 'Lanceur de missiles',
@@ -123,6 +128,7 @@ $lang['tech'] = array(
 406 => 'Lanceur de plasma',
 407 => 'Petit bouclier',
 408 => 'Grand bouclier',
+409 => 'Protecteur plan&eacute;taire',
 502 => 'Missile Interception',
 503 => 'Missile Interplan&eacute;taire',
 
@@ -196,6 +202,8 @@ $lang['res']['descriptions'] = array(
 213 => "Le destructeur est le roi des vaisseaux de guerre.",
 214 => "La puissance de destruction de l'&eacute;toile de la mort est imbattable.",
 215 => "Le traqueur est sp&eacute;cialis&eacute; dans l'interception de flottes ennemies.",
+216 => "La SuperNova, fiert&eacute; de la branche des raideurs, allie la vitesse, une grande soute et une puissance de feu redoutable.",
+217 => "Le destructeur plan&eacute;taire, r&eacute;serv&eacute; &agrave; l'Empereur, peut r&eacute;duire une colonie en poussi&egrave;re.",
 
 401 => "Le lanceur de missiles est une fa&ccedil;on simple et bon march&eacute; de se d&eacute;fendre.",
 402 => "Le bombardement concentr&eacute; de photons peut causer des d&eacute;g&acirc;ts nettement plus important que les armes balistiques habituelles.",
@@ -205,6 +213,7 @@ $lang['res']['descriptions'] = array(
 406 => "Les lanceurs de plasma disposent de la puissance d'une &eacute;ruption solaire et peuvent donc &ecirc;tre plus destructeurs que les destructeurs eux-m&ecirc;mes.",
 407 => "Le petit bouclier couvre toute une plan&egrave;te avec un champ infranchissable qui peut absorber une quantit&eacute; &eacute;norme d'&eacute;nergie.",
 408 => "L'am&eacute;lioration du petit bouclier peut se servir de nettement plus d'&eacute;nergie pour se d&eacute;fendre.",
+409 => "Le protecteur plan&eacute;taire enveloppe la plan&egrave;te d'un bouclier colossal. Un seul par plan&egrave;te.",
 502 => "Le missile interception d&eacute;truit les missiles adverses.",
 503 => "Les missiles interplan&eacute;taires d&eacute;truisent la d&eacute;fense adverse.",
 

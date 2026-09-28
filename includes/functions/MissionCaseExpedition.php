@@ -39,6 +39,8 @@ function MissionCaseExpedition ( $FleetRow ) {
 				213 => 3.5,  // 'Destructeur'
 				214 => 5.0,  // 'Etoile de la mort'
 				215 => 3.2,  // 'Traqueur'
+				216 => 4.0,  // 'SuperNova' (0.9j)
+				217 => 8.0,  // 'Destructeur planetaire' (0.9j)
 			);
 
 			// Table de ratio de gains en nombre par type de vaisseau
@@ -57,6 +59,8 @@ function MissionCaseExpedition ( $FleetRow ) {
 				213 => 0.0625,  // 'Destructeur'
 				214 => 0.03125, // 'Etoile de la mort'
 				215 => 0.0625,  // 'Traqueur'
+				216 => 0.0625,  // 'SuperNova' (0.9j)
+				217 => 0.03125, // 'Destructeur planetaire' (0.9j)
 			);
 
 			$FleetStayDuration = ($FleetRow['fleet_end_stay'] - $FleetRow['fleet_start_time']) / 3600;
@@ -144,7 +148,7 @@ function MissionCaseExpedition ( $FleetRow ) {
 				// Gain de vaisseaux
 				$FoundChance = $FleetPoints / $FleetCount;
 				$FoundShip = array();
-				for ($Ship = 202; $Ship < 216; $Ship++) {
+				for ($Ship = 202; $Ship < 218; $Ship++) {
 					if (($LaFlotte[$Ship] ?? 0) != 0) {
 						$FoundShip[$Ship] = round($LaFlotte[$Ship] * ($RatioGain[$Ship] ?? 0));
 						if ($FoundShip[$Ship] > 0) {

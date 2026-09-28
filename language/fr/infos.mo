@@ -154,6 +154,10 @@ $lang['info'][214]['name']        = "&Eacute;toile de la mort";
 $lang['info'][214]['description'] = "L'&eacute;toile de la mort est &eacute;quip&eacute;e d'une artillerie g&eacute;ante de gravitons qui permet de d&eacute;truire des vaisseaux de la taille des Destructeurs ou m&ecirc;me d'une lune. Comme ceci &agrave; besoin d'une quantit&eacute; d'&eacute;nergie gigantesque elle se compose presque enti&egrave;rement de g&eacute;n&eacute;rateurs. Un vaisseau de cette taille et de cette puissance a besoin d'une gigantesque quantit&eacute; de ressources et d'ouvriers qui ne peuvent &ecirc;tre fournis que par des empires spatiaux important.";
 $lang['info'][215]['name']        = "Traqueur";
 $lang['info'][215]['description'] = "Ce vaisseau au fuselage filiforme est ideal pour detruire des convois ennemis. Ses Armements laser nouvelle generation le rendent capable d'affronter un grand nombre de vaisseaux en meme temps. A cause de son fuselage etroit et de son armement important, les capacites disponibles pour le transport de ressources sont tres limitees. Ceci est compense par l'utilisation de reacteurs propulsion hyperespace, peu gourmands en carburant.";
+$lang['info'][216]['name']        = "SuperNova";
+$lang['info'][216]['description'] = "Fiert&eacute; de la branche des raideurs de l'arm&eacute;e imp&eacute;riale, la SuperNova n'est confi&eacute;e qu'aux joueurs promus Raideur. Rapide gr&acirc;ce &agrave; sa propulsion hyperespace, elle emporte autant que deux grands transporteurs et frappe comme plusieurs destructeurs : l'arme id&eacute;ale des raids.";
+$lang['info'][217]['name']        = "Destructeur plan&eacute;taire";
+$lang['info'][217]['description'] = "R&eacute;serv&eacute; &agrave; l'Empereur, le destructeur plan&eacute;taire est le vaisseau le plus puissant jamais construit. Ses canons &agrave; gravitons peuvent r&eacute;duire une colonie en poussi&egrave;re (mission D&eacute;truire), jamais la plan&egrave;te m&egrave;re d'un joueur. Si la plan&egrave;te r&eacute;siste, l'onde de choc peut an&eacute;antir la flotte.";
 
 // ----------------------------------------------------------------------------------------------------------
 // Defenses !
@@ -173,6 +177,8 @@ $lang['info'][407]['name']        = "Petit bouclier";
 $lang['info'][407]['description'] = "Longtemps avant l'installation des g&eacute;n&eacute;rateurs de bouclier sur des vaisseaux, existaient d&eacute;j&agrave; des g&eacute;n&eacute;rateurs g&eacute;ants sur la surface des plan&egrave;tes. Ceux-ci permettaient de couvrir les plan&egrave;tes avec des champs infranchissables qui pouvaient absorber des quantit&eacute;s &eacute;normes avant de s'effondrer. Des petites flottes d'attaques &eacute;chouent souvent contre ces boucliers. Ces boucliers peuvent &ecirc;tre am&eacute;lior&eacute;s. Apr&egrave;s, on peut m&ecirc;me construire un grand bouclier qui est encore plus puissant. Pour chaque plan&egrave;te on ne peut construire qu'un seul bouclier.";
 $lang['info'][408]['name']        = "Grand bouclier";
 $lang['info'][408]['description'] = "L'am&eacute;lioration du petit bouclier. Il est bas&eacute; sur la m&ecirc;me technologie mais peut se servir de nettement plus d'&eacute;nergie pour se d&eacute;fendre.";
+$lang['info'][409]['name']        = "Protecteur plan&eacute;taire";
+$lang['info'][409]['description'] = "Con&ccedil;u par la branche mini&egrave;re de l'arm&eacute;e imp&eacute;riale et r&eacute;serv&eacute; aux joueurs promus Bunker, le protecteur plan&eacute;taire enveloppe la plan&egrave;te d'un bouclier colossal. Tant qu'il tient, l'attaquant ne peut pas l'emporter. Un seul par plan&egrave;te.";
 
 // ----------------------------------------------------------------------------------------------------------
 // Missiles !

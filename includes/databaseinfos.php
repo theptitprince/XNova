@@ -357,6 +357,8 @@
 	$QryTablePlanets    .= "`destructor` bigint(11) NOT NULL default '0', ";
 	$QryTablePlanets    .= "`dearth_star` bigint(11) NOT NULL default '0', ";
 	$QryTablePlanets    .= "`battleship` bigint(11) NOT NULL default '0', ";
+	$QryTablePlanets    .= "`supernova` bigint(11) NOT NULL default '0', ";        // 0.9j : SuperNova (officier Raideur)
+	$QryTablePlanets    .= "`planet_destroyer` bigint(11) NOT NULL default '0', "; // 0.9j : Destructeur planetaire (Empereur)
 	$QryTablePlanets    .= "`misil_launcher` bigint(11) NOT NULL default '0', ";
 	$QryTablePlanets    .= "`small_laser` bigint(11) NOT NULL default '0', ";
 	$QryTablePlanets    .= "`big_laser` bigint(11) NOT NULL default '0', ";
@@ -365,6 +367,7 @@
 	$QryTablePlanets    .= "`buster_canyon` bigint(11) NOT NULL default '0', ";
 	$QryTablePlanets    .= "`small_protection_shield` int(11) NOT NULL default '0', ";
 	$QryTablePlanets    .= "`big_protection_shield` int(11) NOT NULL default '0', ";
+	$QryTablePlanets    .= "`planet_protector` int(11) NOT NULL default '0', ";    // 0.9j : Protecteur planetaire (Bunker)
 	$QryTablePlanets    .= "`interceptor_misil` int(11) NOT NULL default '0', ";
 	$QryTablePlanets    .= "`interplanetary_misil` int(11) NOT NULL default '0', ";
 	$QryTablePlanets    .= "`metal_mine_porcent` int(11) NOT NULL default '10', ";

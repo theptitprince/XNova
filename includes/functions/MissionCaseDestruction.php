@@ -45,6 +45,11 @@ function MissionCaseDestruction($FleetRow) {
 
          $TargetUserID     = $TargetPlanet['id_owner'];
 
+         // XNova Renaissance 0.9j : cible de type planete = destruction d'une colonie par le Destructeur planetaire
+         // (217, officier Empereur, voir PlanetDestruction.php) ; sinon destruction de lune par l'etoile de la mort
+         $PlanetMode       = ($FleetRow['fleet_end_type'] == 1);
+         $PlanetDestroyed  = false;
+
          $QryDepPlanet  = "SELECT * FROM {{table}} ";
 
          $QryDepPlanet .= "WHERE ";
@@ -229,7 +234,29 @@ function MissionCaseDestruction($FleetRow) {
          }
 
          $probalune = ''; $probarip = ''; $finmess = ''; $RipDetruites = false; // toujours definis (lune detruite : pas de $probarip)
-         if ($FleetResult == "a") {
+         if ($FleetResult == "a" && $PlanetMode) {
+            // Colonie (0.9j) : racine(nombre de Destructeurs planetaires) x max(10, 150 - racine(diametre)) / 10 %, jamais la
+            // planete mere ; si elle resiste, les Destructeurs risquent d'exploser (racine(diametre) / 2 %, comme pour la lune)
+            $chance    = PlanetIsHome($TargetPlanet['id'], $TargetUserID) ? 0 : PlanetDestructionChance($CurrentSet[217]['count'] ?? 0, $TargetPlanet['diameter']);
+            $tirage    = mt_rand(0, 100);
+            $probalune = sprintf ($lang['sys_destruc_planet'], $chance);
+            if ($chance > 0 && $tirage <= $chance) {
+               $finmess         = $lang['sys_destruc_planet_reussi'];
+               $PlanetDestroyed = true;
+               PlanetDestroy ( $TargetPlanet );
+            } else {
+               $chance2  = round(sqrt($TargetPlanet['diameter']) / 2);
+               $tirage2  = mt_rand(0, 100);
+               $probarip = sprintf ($lang['sys_destruc_pd'], $chance2);
+               if ($tirage2 <= $chance2) {
+                  $finmess      = $lang['sys_destruc_planet_echec'];
+                  $RipDetruites = true;
+                  doquery("DELETE FROM {{table}} WHERE `fleet_id` = '". $FleetRow["fleet_id"] ."';", 'fleets');
+               } else {
+                  $finmess = $lang['sys_destruc_planet_null'];
+               }
+            }
+         } elseif ($FleetResult == "a") {
          //debut des probabilite de destruction
          //Nous y voila! l attaquant a gagne, nous allons voir ses chances de detruire la lune
             $destructionl1 = 100-sqrt($TargetPlanet['diameter']);
@@ -372,7 +399,7 @@ function MissionCaseDestruction($FleetRow) {
          //fin 
          }
 
-         $introdestruc       = sprintf ($lang['sys_destruc_mess'], $DepName , $FleetRow['fleet_start_galaxy'], $FleetRow['fleet_start_system'], $FleetRow['fleet_start_planet'], $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet']);
+         $introdestruc       = sprintf ($lang[$PlanetMode ? 'sys_destruc_planet_mess' : 'sys_destruc_mess'], $DepName , $FleetRow['fleet_start_galaxy'], $FleetRow['fleet_start_system'], $FleetRow['fleet_start_planet'], $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet']);
 
          // Mise a jour de l'enregistrement de la planete attaquée
 
@@ -462,7 +489,7 @@ function MissionCaseDestruction($FleetRow) {
 
          // Lune deja presente ? ($galenemyrow n'etait jamais defini dans l'original)
          $galenemyrow = doquery("SELECT `id_luna` FROM {{table}} WHERE `galaxy` = '". intval($FleetRow['fleet_end_galaxy']) ."' AND `system` = '". intval($FleetRow['fleet_end_system']) ."' AND `planet` = '". intval($FleetRow['fleet_end_planet']) ."';", 'galaxy', true);
-         if (($UserChance > 0) and ($UserChance <= $MoonChance) and empty($galenemyrow['id_luna'])) {
+         if (($UserChance > 0) and ($UserChance <= $MoonChance) and empty($galenemyrow['id_luna']) and !$PlanetDestroyed) {
 
             $TargetPlanetName = CreateOneMoonRecord ( $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet'], $TargetUserID, $FleetRow['fleet_start_time'], '', $MoonChance );
 
@@ -478,7 +505,7 @@ function MissionCaseDestruction($FleetRow) {
 
          $AttackDate        = date("d/m/Y H:i:s", $FleetRow["fleet_start_time"]);
 
-         $title             = sprintf ($lang['sys_destruc_title'], $AttackDate);
+         $title             = sprintf ($lang[$PlanetMode ? 'sys_destruc_planet_title' : 'sys_destruc_title'], $AttackDate);
 
          $raport            = "<center><table><tr><td>". $title ."<br />";
 
@@ -497,7 +524,7 @@ function MissionCaseDestruction($FleetRow) {
 
                $raport           .= $DebrisField ."<br />";
                $raport           .= $introdestruc ."<br />";
-               $raport           .= $lang['sys_destruc_mess1'];
+               $raport           .= $lang[$PlanetMode ? 'sys_destruc_planet_mess1' : 'sys_destruc_mess1'];
                $raport           .= $finmess ."<br />";
 
                $raport           .= $probalune ."<br />";
@@ -513,7 +540,7 @@ function MissionCaseDestruction($FleetRow) {
                $raport           .= $DebrisField ."<br />";
                $raport           .= $introdestruc ."<br />";
 
-               $raport           .= $lang['sys_destruc_stop'] ."<br />";
+               $raport           .= $lang[$PlanetMode ? 'sys_destruc_planet_stop' : 'sys_destruc_stop'] ."<br />";
 
                break;
 
@@ -524,7 +551,7 @@ function MissionCaseDestruction($FleetRow) {
                $raport           .= $DebrisField ."<br />";
                $raport           .= $introdestruc ."<br />";
 
-               $raport           .= $lang['sys_destruc_stop'] ."<br />";
+               $raport           .= $lang[$PlanetMode ? 'sys_destruc_planet_stop' : 'sys_destruc_stop'] ."<br />";
 
                doquery("DELETE FROM {{table}} WHERE `fleet_id` = '". $FleetRow["fleet_id"] ."';", 'fleets');
 
@@ -542,7 +569,7 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
-         $dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
+         // ($dpath, calcule ici et jamais utilise, a ete retire en 0.9j : avertissement PHP quand aucun joueur n'etait connecte)
 
          $rid   = md5($raport);
 
