@@ -111,7 +111,7 @@ if (!empty($select['urlaubs_modus'])) {
 
 
 
- $verteidiger_panzerung = $select['defence_tech'];
+ $verteidiger_panzerung = $select['shield_tech']; // Protection (111), pas Bouclier (110) : voir rak.php
  $angreifer_waffen = $user['military_tech'];
  $primaerziel = $pziel;
  $iraks = $anz;
