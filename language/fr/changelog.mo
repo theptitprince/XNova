@@ -4,7 +4,11 @@ $lang['description_label'] = 'Description';
 $lang['changelog']   = array(
 
 
-'0.9i Renaissance' => 'Attaque group&eacute;e (theptitprince)
+'0.9j Renaissance' => 'Derniers officiers (theptitprince)
+- FIX : Technologies Bouclier et Protection invers&eacute;es au combat et contre les missiles
+- FIX : Grand bouclier, petit transporteur, satellite solaire : valeurs d\'OGame',
+
+'0.9i Renaissance' =>'Attaque group&eacute;e (theptitprince)
 - NEW : Attaque group&eacute;e (5 joueurs, 16 flottes), d&eacute;fense group&eacute;e
 - ADD : Vue g&eacute;n&eacute;rale : flottes amies ou hostiles selon la mission
 - MOD : Moteur de combat r&eacute;&eacute;crit, m&ecirc;mes r&eacute;sultats, sous licence libre

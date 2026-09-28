@@ -45,7 +45,9 @@ if (isset($resource) && !empty($resource[401])) {
 								planet = '" . $selected_row['planet'] . "' AND
 								planet_type = '1'", 'planets');
 
-			$select_ziel = doquery("SELECT defence_tech FROM {{table}} WHERE
+			// Blindage des defenses : technologie Protection (111, colonne shield_tech) ; l'original prenait la
+			// technologie Bouclier (110, colonne defence_tech), meme inversion que dans les combats (corrige en 0.9j)
+			$select_ziel = doquery("SELECT shield_tech FROM {{table}} WHERE
 								id = '" . $selected_row['zielid'] . "'", 'users');
 
 			$select_owner = doquery("SELECT military_tech FROM {{table}} WHERE
@@ -88,7 +90,7 @@ if (isset($resource) && !empty($resource[401])) {
 
 				// Rapport : noms des defenses de tech.mo (l'ancienne liste en dur etait fausse : « Canon Magnetique »
 				// pour l'artillerie laser legere...) et phrases de system.mo, dans la langue chargee
-				$irak = raketenangriff($verteidiger['defence_tech'], $angreifer['military_tech'], $selected_row['anzahl'], $def, $selected_row['primaer']);
+				$irak = raketenangriff($verteidiger['shield_tech'], $angreifer['military_tech'], $selected_row['anzahl'], $def, $selected_row['primaer']);
 
 				$message = '';
 
