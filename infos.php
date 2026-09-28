@@ -64,6 +64,44 @@ function BuildJumpableMoonCombo ( $CurrentUser, $CurrentPlanet ) {
 }
 
 // ----------------------------------------------------------------------------------------------------------
+// XNova Renaissance 0.9j : depot de ravitaillement, flottes alliees en stationnement sur la planete et formulaire de
+// livraison de deuterium (traitee par allydeposit.php, regles dans includes/functions/AllyDeposit.php)
+//
+function ShowAllyDepositTable ( $CurrentPlanet ) {
+	global $lang, $resource;
+
+	$Level  = intval($CurrentPlanet[$resource[34]]);
+	$parse  = $lang;
+	$parse['depot_rules_text'] = sprintf($lang['depot_rules'], pretty_number(ALLY_DEPOSIT_PER_LEVEL * $Level), $Level);
+	$RowTPL = gettemplate('ally_deposit_row');
+	$Rows   = '';
+	foreach (AllyDepositFleets($CurrentPlanet) as $Fleet) {
+		$Ships = array();
+		foreach (AllyDepositShips($Fleet['fleet_array']) as $Ship => $Count) {
+			$Ships[] = $lang['tech'][$Ship] ." ". pretty_number($Count);
+		}
+		$Max  = AllyDepositMaxHours($Fleet, $Level, $CurrentPlanet['deuterium']);
+		$bloc = array(
+			'owner'        => htmlspecialchars($Fleet['username'] ?? '', ENT_QUOTES, 'UTF-8'),
+			'ships'        => implode('<br>', $Ships),
+			'end'          => date("d/m/Y H:i:s", $Fleet['fleet_end_stay']),
+			'cost'         => pretty_number(AllyDepositHourCost($Fleet['fleet_array'])),
+			'fleet_id'     => intval($Fleet['fleet_id']),
+			'hours'        => min(1, $Max),
+			'hours_label'  => sprintf($lang['depot_hours'], $Max),
+			'depot_supply' => $lang['depot_supply'],
+			'disabled'     => ($Max < 1) ? ' disabled' : '',
+		);
+		$Rows .= parsetemplate($RowTPL, $bloc);
+	}
+	if ($Rows == '') {
+		$Rows = "<tr><th colspan=\"5\">". $lang['depot_none'] ."</th></tr>";
+	}
+	$parse['depot_rows'] = $Rows;
+	return parsetemplate(gettemplate('ally_deposit_table'), $parse);
+}
+
+// ----------------------------------------------------------------------------------------------------------
 // Creation du tableau de production de ressources
 // Tient compte du parametrage de la planete (si la production n'est pas affectée a 100% par exemple
 // Tient compte aussi du multiplicateur de ressources
@@ -316,6 +354,11 @@ function ShowBuildingInfoPage ($CurrentUser, $CurrentPlanet, $BuildID) {
 			$parse['gate_fleet_rows'] = BuildFleetListRows ( $CurrentPlanet );
 			$page .= parsetemplate($GateTPL, $parse);
 		}
+	}
+
+	// XNova Renaissance 0.9j : flottes alliees en stationnement, ravitaillement
+	if ($BuildID == 34 && $CurrentPlanet[$resource[34]] > 0) {
+		$page .= ShowAllyDepositTable ( $CurrentPlanet );
 	}
 
 	if ($DestroyTPL != '') {

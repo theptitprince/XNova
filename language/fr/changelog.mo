@@ -5,6 +5,7 @@ $lang['changelog']   = array(
 
 
 '0.9j Renaissance' => 'Derniers officiers (theptitprince)
+- NEW : D&eacute;p&ocirc;t de ravitaillement : prolonger le stationnement des flottes alli&eacute;es
 - FIX : Technologies Bouclier et Protection invers&eacute;es au combat et contre les missiles
 - FIX : Grand bouclier, petit transporteur, satellite solaire : valeurs d\'OGame',
 

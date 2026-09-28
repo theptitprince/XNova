@@ -75,7 +75,7 @@ $lang['info'][31]['description']  = "Le centre de recherche est n&eacute;cessair
 $lang['info'][33]['name']         = "Terraformeur";
 $lang['info'][33]['description']  = "Le d&eacute;veloppement continu des plan&egrave;tes a soulev&eacute; rapidement la question de la limitation de l'espace vital. Les m&eacute;thodes de construction souterraine et en surface se sont aver&eacute;es insuffisantes. Un petit groupe compos&eacute; de physiciens en &eacute;nergie et d'ing&eacute;nieurs en technologie de nanites a finalement trouv&eacute; la solution: la terraformation.<br>Le terraformeur peut rendre habitable des contr&eacute;es entieres ou m&ecirc;me des continents en utilisant de gigantesques quantit&eacute;s d'&eacute;nergie. Des nanites specialement d&eacute;velopp&eacute;es, assurant une qualit&eacute; constante du sol, sont produites continuellement dans ce bâtiment.<br><br>Une fois construit, le terraformeur ne peut &ecirc;tre d&eacute;truit.";
 $lang['info'][34]['name']         = "D&eacute;p&ocirc;t de ravitaillement";
-$lang['info'][34]['description']  = "Le d&eacute;p&ocirc;t de ravitaillement permet le stationnement prolong&eacute; des flottes d'autres membres de l'alliance ou des flottes de membres de votre liste d'amis pour augmenter la d&eacute;fense d'une plan&egrave;te. Les flottes restent en orbite et recoivent le carburant n&eacute;cessaire. Chaque niveau du d&eacute;p&ocirc;t permet de livrer 10.000 unit&eacute;s de deut&eacute;rium suppl&eacute;mentaire aux vaisseaux en orbite.";
+$lang['info'][34]['description']  = "Le d&eacute;p&ocirc;t de ravitaillement permet le stationnement prolong&eacute; des flottes d'autres membres de l'alliance ou des flottes de membres de votre liste d'amis pour augmenter la d&eacute;fense d'une plan&egrave;te. Les flottes restent en orbite et re&ccedil;oivent le carburant n&eacute;cessaire. Chaque niveau du d&eacute;p&ocirc;t permet de livrer 10.000 unit&eacute;s de deut&eacute;rium suppl&eacute;mentaires aux vaisseaux en orbite.";
 
 // ----------------------------------------------------------------------------------------------------------
 // Batiments Lune!
@@ -216,5 +216,25 @@ $lang['info'][615]['description'] = "Vous avez montr&eacute; que vous &ecirc;tie
 
 // XNova Renaissance 0.9g : adresse d'information sans element valide
 $lang['nfo_unknown'] = 'Cet élément n\'existe pas.';
+
+// XNova Renaissance 0.9j : depot de ravitaillement (flottes alliees en orbite, livraison de deuterium)
+$lang['depot_title'] = "Flottes alli&eacute;es en orbite";
+$lang['depot_rules'] = "Chaque livraison : %s de deut&eacute;rium au plus (d&eacute;p&ocirc;t niveau %s) ; stationnement limit&eacute; &agrave; 32 h";
+$lang['depot_owner'] = "Joueur";
+$lang['depot_ships'] = "Vaisseaux";
+$lang['depot_end'] = "Fin du stationnement";
+$lang['depot_cost'] = "Co&ucirc;t par heure";
+$lang['depot_supply'] = "Ravitailler";
+$lang['depot_hours'] = "heure(s), max. %s";
+$lang['depot_none'] = "Aucune flotte alli&eacute;e en stationnement sur cette plan&egrave;te.";
+$lang['depot_done'] = "Flotte de %s ravitaill&eacute;e : %s heure(s) de plus pour %s de deut&eacute;rium. Fin du stationnement : %s.";
+$lang['depot_err_level'] = "Il faut un d&eacute;p&ocirc;t de ravitaillement sur cette plan&egrave;te.";
+$lang['depot_err_fleet'] = "Cette flotte n'est pas en stationnement sur cette plan&egrave;te.";
+$lang['depot_err_hours'] = "Nombre d'heures invalide.";
+$lang['depot_err_capacity'] = "Le d&eacute;p&ocirc;t ne peut pas livrer autant de deut&eacute;rium en une fois (%s au plus).";
+$lang['depot_err_stay'] = "Le stationnement ne peut pas d&eacute;passer 32 heures.";
+$lang['depot_err_deut'] = "Pas assez de deut&eacute;rium sur la plan&egrave;te.";
+$lang['depot_msg_title'] = "Ravitaillement";
+$lang['depot_msg'] = "Votre flotte stationn&eacute;e sur la plan&egrave;te %s %s a &eacute;t&eacute; ravitaill&eacute;e par %s : %s heure(s) de plus. Fin du stationnement : %s.";
 
 ?>
