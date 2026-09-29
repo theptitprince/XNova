@@ -44,4 +44,7 @@ $lang['builds'] = 'B&acirc;timents';
 // XNova Renaissance 0.9h : lien max du chantier spatial et de la defense
 $lang['bd_max'] = 'max. %s';
 
+// 0.9k (jeu-a)
+$lang['bld_not_allowed'] = "Ce b&acirc;timent ne peut pas &ecirc;tre construit sur cette plan&egrave;te (la plan&egrave;te choisie a peut-&ecirc;tre chang&eacute; dans un autre onglet).";
+
 ?>

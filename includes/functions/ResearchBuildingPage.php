@@ -49,49 +49,82 @@ function ResearchBuildingPage (&$CurrentPlanet, $CurrentUser, $InResearch, $TheP
 				}
 				switch($TheCommand){
 					case 'cancel':
-						if ($ThePlanet['b_tech_id'] == $Techno) {
+						// Pas de recherche en cours : $ThePlanet est vide (erreur fatale de PHP 8 avant la 0.9k)
+						if (is_array($ThePlanet) && $ThePlanet['b_tech_id'] == $Techno) {
 							$costs                        = GetBuildingPrice($CurrentUser, $WorkingPlanet, $Techno);
-							$WorkingPlanet['metal']      += $costs['metal'];
-							$WorkingPlanet['crystal']    += $costs['crystal'];
-							$WorkingPlanet['deuterium']  += $costs['deuterium'];
-							$WorkingPlanet['b_tech_id']   = 0;
-							$WorkingPlanet["b_tech"]      = 0;
-							$CurrentUser['b_tech_planet'] = 0;
-							$UpdateData                   = true;
-							$InResearch                   = false;
+							// Remboursement en plus et sous condition (0.9k) : une seule fois, meme avec des requetes
+							// simultanees (avant : ressources lues au debut de la page reecrites en valeurs absolues)
+							$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+							$QryUpdatePlanet .= "`b_tech_id` = '0', ";
+							$QryUpdatePlanet .= "`b_tech` = '0', ";
+							$QryUpdatePlanet .= "`metal` = `metal` + '".         floatval($costs['metal'])     ."', ";
+							$QryUpdatePlanet .= "`crystal` = `crystal` + '".     floatval($costs['crystal'])   ."', ";
+							$QryUpdatePlanet .= "`deuterium` = `deuterium` + '". floatval($costs['deuterium']) ."' ";
+							$QryUpdatePlanet .= "WHERE ";
+							$QryUpdatePlanet .= "`id` = '".                      intval($WorkingPlanet['id'])  ."' AND ";
+							$QryUpdatePlanet .= "`b_tech_id` = '".               intval($Techno)               ."';";
+							doquery( $QryUpdatePlanet, 'planets');
+							if (mysqli_affected_rows(DbConnect()) == 1) {
+								$WorkingPlanet['metal']      += $costs['metal'];
+								$WorkingPlanet['crystal']    += $costs['crystal'];
+								$WorkingPlanet['deuterium']  += $costs['deuterium'];
+								$WorkingPlanet['b_tech_id']   = 0;
+								$WorkingPlanet["b_tech"]      = 0;
+								$CurrentUser['b_tech_planet'] = 0;
+								$InResearch                   = false;
+								doquery("UPDATE {{table}} SET `b_tech_planet` = '0' WHERE `id` = '". intval($CurrentUser['id']) ."';", 'users');
+								// Recherche sur la planete courante : sa copie en memoire est remboursee aussi (la barre des
+								// ressources reecrivait ensuite les ressources d'avant le remboursement, perdu)
+								if ($WorkingPlanet['id'] == $CurrentPlanet['id']) {
+									$CurrentPlanet['metal']      += $costs['metal'];
+									$CurrentPlanet['crystal']    += $costs['crystal'];
+									$CurrentPlanet['deuterium']  += $costs['deuterium'];
+									$CurrentPlanet['b_tech_id']   = 0;
+									$CurrentPlanet["b_tech"]      = 0;
+								}
+							}
 						}
 						break;
 					case 'search':
-						if ( IsTechnologieAccessible($CurrentUser, $WorkingPlanet, $Techno) &&
+						// Memes regles que les liens de la page (0.9k) : aucune recherche en cours (elle etait remplacee et
+						// son cout perdu), laboratoire pas en travaux (reglage BuildLabWhileRun)
+						if ( $bContinue && !$InResearch &&
+							 IsTechnologieAccessible($CurrentUser, $WorkingPlanet, $Techno) &&
 							 IsElementBuyable($CurrentUser, $WorkingPlanet, $Techno) ) {
 							$costs                        = GetBuildingPrice($CurrentUser, $WorkingPlanet, $Techno);
-							$WorkingPlanet['metal']      -= $costs['metal'];
-							$WorkingPlanet['crystal']    -= $costs['crystal'];
-							$WorkingPlanet['deuterium']  -= $costs['deuterium'];
-							$WorkingPlanet["b_tech_id"]   = $Techno;
-							$WorkingPlanet["b_tech"]      = time() + GetBuildingTime($CurrentUser, $WorkingPlanet, $Techno);
-							$CurrentUser["b_tech_planet"] = $WorkingPlanet["id"];
-							$UpdateData                   = true;
-							$InResearch                   = true;
+							$EndTime                      = time() + GetBuildingTime($CurrentUser, $WorkingPlanet, $Techno);
+							// Recherche reservee sur le compte, puis debit atomique et conditionnel (0.9k) : deux requetes
+							// simultanees ne lancent plus deux recherches, ni ne depensent deux fois le meme stock
+							doquery("UPDATE {{table}} SET `b_tech_planet` = '". intval($WorkingPlanet['id']) ."' WHERE `id` = '". intval($CurrentUser['id']) ."' AND `b_tech_planet` = '0';", 'users');
+							if (mysqli_affected_rows(DbConnect()) == 1) {
+								$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+								$QryUpdatePlanet .= "`b_tech_id` = '".               intval($Techno)               ."', ";
+								$QryUpdatePlanet .= "`b_tech` = '".                  floatval($EndTime)            ."', ";
+								$QryUpdatePlanet .= "`metal` = `metal` - '".         floatval($costs['metal'])     ."', ";
+								$QryUpdatePlanet .= "`crystal` = `crystal` - '".     floatval($costs['crystal'])   ."', ";
+								$QryUpdatePlanet .= "`deuterium` = `deuterium` - '". floatval($costs['deuterium']) ."' ";
+								$QryUpdatePlanet .= "WHERE ";
+								$QryUpdatePlanet .= "`id` = '".                      intval($WorkingPlanet['id'])  ."' AND ";
+								$QryUpdatePlanet .= "`b_tech_id` = '0' AND ";
+								$QryUpdatePlanet .= "`metal` >= '".                  floatval($costs['metal'])     ."' AND ";
+								$QryUpdatePlanet .= "`crystal` >= '".                floatval($costs['crystal'])   ."' AND ";
+								$QryUpdatePlanet .= "`deuterium` >= '".              floatval($costs['deuterium']) ."';";
+								doquery( $QryUpdatePlanet, 'planets');
+								if (mysqli_affected_rows(DbConnect()) == 1) {
+									$WorkingPlanet['metal']      -= $costs['metal'];
+									$WorkingPlanet['crystal']    -= $costs['crystal'];
+									$WorkingPlanet['deuterium']  -= $costs['deuterium'];
+									$WorkingPlanet["b_tech_id"]   = $Techno;
+									$WorkingPlanet["b_tech"]      = $EndTime;
+									$CurrentUser["b_tech_planet"] = $WorkingPlanet["id"];
+									$InResearch                   = true;
+								} else {
+									// Ressources depensees entre-temps : reservation rendue
+									doquery("UPDATE {{table}} SET `b_tech_planet` = '0' WHERE `id` = '". intval($CurrentUser['id']) ."' AND `b_tech_planet` = '". intval($WorkingPlanet['id']) ."';", 'users');
+								}
+							}
 						}
 						break;
-				}
-				if ($UpdateData == true) {
-					$QryUpdatePlanet  = "UPDATE {{table}} SET ";
-					$QryUpdatePlanet .= "`b_tech_id` = '".   $WorkingPlanet['b_tech_id']   ."', ";
-					$QryUpdatePlanet .= "`b_tech` = '".      $WorkingPlanet['b_tech']      ."', ";
-					$QryUpdatePlanet .= "`metal` = '".       $WorkingPlanet['metal']       ."', ";
-					$QryUpdatePlanet .= "`crystal` = '".     $WorkingPlanet['crystal']     ."', ";
-					$QryUpdatePlanet .= "`deuterium` = '".   $WorkingPlanet['deuterium']   ."' ";
-					$QryUpdatePlanet .= "WHERE ";
-					$QryUpdatePlanet .= "`id` = '".          $WorkingPlanet['id']          ."';";
-					doquery( $QryUpdatePlanet, 'planets');
-
-					$QryUpdateUser  = "UPDATE {{table}} SET ";
-					$QryUpdateUser .= "`b_tech_planet` = '". $CurrentUser['b_tech_planet'] ."' ";
-					$QryUpdateUser .= "WHERE ";
-					$QryUpdateUser .= "`id` = '".            $CurrentUser['id']            ."';";
-					doquery( $QryUpdateUser, 'users');
 				}
 				if ( is_array ($ThePlanet) ) {
 					$ThePlanet     = $WorkingPlanet;
