@@ -150,13 +150,12 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 			if       ($DeleteWhat == 'deleteall') {
 				doquery("DELETE FROM {{table}} WHERE `message_owner` = '". $user['id'] ."';", 'messages');
 			} elseif ($DeleteWhat == 'deletemarked') {
+				// Suppression limitee aux messages du joueur : le test d'origine (doquery sans fetch) etait toujours
+				// vrai et effacait les messages de n'importe quel joueur
 				foreach($_POST as $Message => $Answer) {
 					if (preg_match("/delmes/i", $Message) && $Answer == 'on') {
 						$MessId   = intval(str_replace("delmes", "", $Message));
-						$MessHere = doquery("SELECT * FROM {{table}} WHERE `message_id` = '". $MessId ."' AND `message_owner` = '". $user['id'] ."';", 'messages');
-						if ($MessHere) {
-							doquery("DELETE FROM {{table}} WHERE `message_id` = '".$MessId."';", 'messages');
-						}
+						doquery("DELETE FROM {{table}} WHERE `message_id` = '".$MessId."' AND `message_owner` = '". intval($user['id']) ."';", 'messages');
 					}
 				}
 			} elseif ($DeleteWhat == 'deleteunmarked') {
@@ -166,10 +165,7 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 					$Selected   = "delmes".$MessId;
 					$IsSelected = ($_POST[ $Selected ] ?? null);
 					if (preg_match("/showmes/i", $Message) && !isset($IsSelected)) {
-						$MessHere = doquery("SELECT * FROM {{table}} WHERE `message_id` = '". $MessId ."' AND `message_owner` = '". $user['id'] ."';", 'messages');
-						if ($MessHere) {
-							doquery("DELETE FROM {{table}} WHERE `message_id` = '".$MessId."';", 'messages');
-						}
+						doquery("DELETE FROM {{table}} WHERE `message_id` = '".$MessId."' AND `message_owner` = '". intval($user['id']) ."';", 'messages');
 					}
 				}
 			}
@@ -254,7 +250,8 @@ $Message = trim ( nl2br ( SafeText ( ($_POST['text'] ?? null) ) ) ); }
 				}
 			} else {
 				$UsrMess       = doquery("SELECT * FROM {{table}} WHERE `message_owner` = '".$user['id']."' AND `message_type` = '".$MessCategory."' ORDER BY `message_time` DESC;", 'messages');
-				if ($WaitingMess[$MessCategory] <> '') {
+				// Categorie inconnue (messcat hors liste) : pas de compteur a remettre a zero (avertissement PHP avant)
+				if (($WaitingMess[$MessCategory] ?? '') <> '') {
 					$QryUpdateUser  = "UPDATE {{table}} SET ";
 					$QryUpdateUser .= "`".$messfields[$MessCategory]."` = '0', ";
 					$QryUpdateUser .= "`".$messfields[100]."` = `".$messfields[100]."` - '".$WaitingMess[$MessCategory]."' ";
