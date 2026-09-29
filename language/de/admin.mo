@@ -175,4 +175,9 @@ $lang['adm_bn_forever_note'] = 'Dauer komplett auf 0: dauerhafte Sperre';
 $lang['adm_bn_until'] = '(bis %s)';
 $lang['adm_bn_forever'] = '(dauerhaft)';
 
+// 0.9k (Administration)
+$lang['adm_hidden_data'] = '(verborgen)';
+$lang['adm_cleaner_intro'] = 'Löscht die Aufträge der Schiffswerft und der Verteidigung, die die technische Grenze der Einheiten pro Auftrag überschreiten (blockierte Schleifen).';
+$lang['adm_cleaner_run'] = 'Bereinigung starten';
+
 ?>

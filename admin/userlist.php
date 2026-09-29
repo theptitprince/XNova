@@ -41,7 +41,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$Color                 = "lime";
 		$PrevIP = '';
 		while ($u = mysqli_fetch_assoc($query) ) {
-			if ($PrevIP != "") {
+			// IP et e-mail d'un compte de rang superieur (administrateur vu par un operateur) : masques
+			$Hidden = ($u['authlevel'] > $user['authlevel']);
+			if ($PrevIP != "" && !$Hidden) {
 				if ($PrevIP == $u['user_lastip']) {
 					$Color = "red";
 				} else {
@@ -55,9 +57,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			
 			$Bloc['adm_ul_data_id']     = $u['id'];
 			$Bloc['adm_ul_data_name']   = $u['username'];
-			$Bloc['adm_ul_data_mail']   = $u['email'];
-			$Bloc['ip_adress_at_register']   = $u['ip_at_reg'];
-			$Bloc['adm_ul_data_adip']   = "<font color=\"".$Color."\">". $u['user_lastip'] ."</font>";
+			$Bloc['adm_ul_data_mail']   = $Hidden ? $lang['adm_hidden_data'] : $u['email'];
+			$Bloc['ip_adress_at_register']   = $Hidden ? $lang['adm_hidden_data'] : $u['ip_at_reg'];
+			$Bloc['adm_ul_data_adip']   = $Hidden ? $lang['adm_hidden_data'] : "<font color=\"".$Color."\">". $u['user_lastip'] ."</font>";
 			$Bloc['adm_ul_data_regd']   = date ( "d/m/Y H:i:s", $u['register_time'] );
 			// Jamais connecte : « - » (la date zero s'affichait 01/01/1970)
 			$Bloc['adm_ul_data_lconn']  = ($u['onlinetime'] > 0) ? date ( "d/m/Y H:i:s", $u['onlinetime'] ) : '-';
@@ -68,7 +70,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Bloc['adm_ul_data_actio']  = ($user['authlevel'] >= 3 && $u['authlevel'] < $user['authlevel'] && $u['id'] != $user['id']) ? "<a href=\"deletuser.php?id=". $u['id'] ."\" title=\"". $lang['adm_delplayer_title'] ."\"><img src=\"../images/r1.png\" border=\"0\"></a>" : "";
 
 
-			$PrevIP                     = $u['user_lastip'];
+			if (!$Hidden) {
+				$PrevIP                 = $u['user_lastip'];
+			}
 			$parse['adm_ul_table']     .= parsetemplate( $RowsTPL, $Bloc );
 			$i++;
 		}

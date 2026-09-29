@@ -170,4 +170,9 @@ $lang['adm_bn_forever_note'] = 'Duración toda a 0: baneo definitivo';
 $lang['adm_bn_until'] = '(hasta el %s)';
 $lang['adm_bn_forever'] = '(definitivamente)';
 
+// 0.9k (Administration)
+$lang['adm_hidden_data'] = '(oculto)';
+$lang['adm_cleaner_intro'] = 'Elimina los pedidos del hangar y de la defensa que superan el l&iacute;mite t&eacute;cnico de unidades por pedido (colas bloqueadas).';
+$lang['adm_cleaner_run'] = 'Iniciar la limpieza';
+
 ?>

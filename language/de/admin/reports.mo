@@ -21,4 +21,8 @@ $lang['adm_rep_deleted'] = 'Account gelöscht';
 $lang['adm_rep_type'][1] = 'Private Nachricht';
 $lang['adm_rep_type'][2] = 'Allianznachricht';
 
+// 0.9k (Administration)
+$lang['adm_rep_own'] = 'Diese Meldung betrifft eine Ihrer Nachrichten: Ein anderes Teammitglied muss sie bearbeiten.';
+$lang['adm_rep_own_short'] = 'Betrifft Sie: einem anderen Teammitglied überlassen';
+
 ?>

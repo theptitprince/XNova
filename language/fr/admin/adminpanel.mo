@@ -36,4 +36,8 @@ $lang['adm_moon']      = "Lune";
 $lang['adm_technos']   = "Recherche et d&eacute;veloppement";
 $lang['adm_bt_search'] = "Chercher";
 $lang['adm_bt_change'] = "Changer";
+
+// 0.9k (Administration)
+$lang['adm_hidden_data'] = '(masqu&eacute;)';
+
 ?>

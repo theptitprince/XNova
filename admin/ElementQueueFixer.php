@@ -23,6 +23,17 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if ($user['authlevel'] >= 1) {
 		includeLang('admin');
 
+		// Nettoyage : formulaire POST seulement (jeton verifie par common.php). Il partait a la simple ouverture de la
+		// page, donc aussi depuis une image placee ailleurs et vue par un membre du staff
+		if ($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_POST['run'])) {
+			$Page  = "<br><br><h2>". $lang['adm_cleaner_title'] ."</h2>";
+			$Page .= "<form action=\"ElementQueueFixer.php\" method=\"post\"><input type=\"hidden\" name=\"run\" value=\"1\">";
+			$Page .= "<table width=\"519\"><tr><td class=\"c\">". $lang['adm_cleaner_title'] ."</td></tr>";
+			$Page .= "<tr><th>". $lang['adm_cleaner_intro'] ."</th></tr>";
+			$Page .= "<tr><th><input type=\"submit\" value=\"". $lang['adm_cleaner_run'] ."\"></th></tr></table></form>";
+			display ($Page, $lang['adm_cleaner_title'], false, '', true);
+		}
+
 		$QrySelectPlanet  = "SELECT `id`, `id_owner`, `b_hangar`, `b_hangar_id` ";
 		$QrySelectPlanet .= "FROM {{table}} ";
 		$QrySelectPlanet .= "WHERE ";

@@ -21,4 +21,8 @@ $lang['adm_rep_deleted'] = 'account eliminato';
 $lang['adm_rep_type'][1] = 'Messaggio privato';
 $lang['adm_rep_type'][2] = 'Messaggio d\'alleanza';
 
+// 0.9k (Administration)
+$lang['adm_rep_own'] = 'Questa segnalazione riguarda uno dei vostri messaggi: deve trattarla un altro membro dello staff.';
+$lang['adm_rep_own_short'] = 'Vi riguarda: lasciata a un altro membro dello staff';
+
 ?>

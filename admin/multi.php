@@ -36,6 +36,10 @@ include($xnova_root_path . 'common.' . $phpEx);
 		while ($Row = mysqli_fetch_assoc($Query)) {
 			$Users[$Row['id']] = $Row;
 			$Names[mb_strtolower($Row['username'], 'UTF-8')] = $Row['id'];
+			// Adresses d'un compte de rang superieur : jamais montrees (un moderateur y lisait l'IP d'un administrateur)
+			if ($Row['authlevel'] > $user['authlevel']) {
+				continue;
+			}
 			foreach (array('last' => $Row['user_lastip'], 'reg' => $Row['ip_at_reg']) as $Kind => $Ip) {
 				$Ip = trim((string) $Ip);
 				if ($Ip != '') {
