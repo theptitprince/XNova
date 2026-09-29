@@ -173,4 +173,8 @@ $lang['sys_destruc_planet_echec'] = ". La cro&ucirc;te de la plan&egrave;te se f
 $lang['sys_destruc_planet_reussi'] = ", qui se fissure puis vole en &eacute;clats. B&acirc;timents, d&eacute;fenses et vaisseaux sont an&eacute;antis - Mission accomplie ! La plan&egrave;te est d&eacute;truite ! La flotte rentre &agrave; la plan&egrave;te de d&eacute;part.";
 $lang['sys_destruc_planet_null'] = ", visiblement la flotte ne d&eacute;veloppe pas la puissance n&eacute;cessaire - &Eacute;chec de la mission ! La flotte rentre &agrave; la plan&egrave;te de d&eacute;part.";
 
+// 0.9k (Flottes)
+$lang['sys_user_busy_title'] = 'Page en cours';
+$lang['sys_user_busy'] = 'Une autre page de votre compte est encore en cours de traitement. Patientez quelques secondes puis recommencez.';
+
 ?>

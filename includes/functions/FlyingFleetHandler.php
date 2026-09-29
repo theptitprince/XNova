@@ -13,10 +13,13 @@
  */
 
 function FlyingFleetHandler (&$planet) {
-	global $resource;
+	global $resource, $FleetHandlerLocked;
 
 	// (aks : attaques groupees, 0.9i)
 	doquery("LOCK TABLE {{table}}lunas WRITE, {{table}}rw WRITE, {{table}}errors WRITE, {{table}}messages WRITE, {{table}}fleets WRITE, {{table}}planets WRITE, {{table}}galaxy WRITE ,{{table}}users WRITE, {{table}}aks WRITE", "");
+	// Tables verrouillees (0.9k) : un LOCK TABLE pose pendant le traitement liberait tout le verrou des flottes
+	// (voir PlanetResourceUpdate)
+	$FleetHandlerLocked = true;
 
 	$QryFleet   = "SELECT * FROM {{table}} ";
 	$QryFleet  .= "WHERE (";
@@ -33,7 +36,24 @@ function FlyingFleetHandler (&$planet) {
 	$QryFleet  .= "( `fleet_start_time` < '". time() ."' OR `fleet_end_time` < '". time() ."' );";
 	$fleetquery = doquery( $QryFleet, 'fleets' );
 
-	while ($CurrentFleet = mysqli_fetch_array($fleetquery)) {
+	// XNova Renaissance (0.9k) : chaque flotte est relue juste avant d'etre traitee, dans le meme ordre. La liste etait
+	// lue d'un coup : une flotte deja traitee par une ligne precedente gardait son ancien etat. Une attaque groupee
+	// etait jouee deux fois (deux flottes du groupe parties de la meme planete, ou une flotte partie de la cible), une
+	// flotte detruite en defense groupee livrait encore son chargement, une flotte renvoyee par la destruction d'une
+	// planete ou d'une lune etait traitee avec ses anciennes coordonnees.
+	$FleetRows = array();
+	while ($Row = mysqli_fetch_array($fleetquery)) {
+		$FleetRows[] = $Row;
+	}
+
+	foreach ($FleetRows as $FleetIndex => $CurrentFleet) {
+		if ($FleetIndex > 0) {
+			$CurrentFleet = doquery("SELECT * FROM {{table}} WHERE `fleet_id` = '". intval($CurrentFleet['fleet_id']) ."';", 'fleets', true);
+			if (!$CurrentFleet) {
+				// Supprimee entre-temps (combat, defense groupee, retour deja traite)
+				continue;
+			}
+		}
 		switch ($CurrentFleet["fleet_mission"]) {
 			case 1:
 				// Attaquer
@@ -97,6 +117,7 @@ function FlyingFleetHandler (&$planet) {
 		}
 	}
 
+	$FleetHandlerLocked = false;
 	doquery("UNLOCK TABLES", "");
 }
 
