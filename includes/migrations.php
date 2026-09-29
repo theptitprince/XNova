@@ -444,6 +444,12 @@ function RenaissanceMigration09kJeu ( $Connection, $Prefix ) {
 
 // Pages : notes, messages, marchand, officiers, alliance, options...
 function RenaissanceMigration09kPages ( $Connection, $Prefix ) {
+	// Tri des planetes hors de la liste des Options (enregistre sans controle avant la 0.9k) : erreur SQL dans la
+	// vue de l'empire et la vue generale. Remis a l'ordre de colonisation, croissant ; relancable.
+	mysqli_query($Connection, "UPDATE `". $Prefix ."users` SET `planet_sort` = '0' WHERE `planet_sort` NOT IN (0, 1, 2);")
+		or die("MySQL Error (0.9k, users.planet_sort): <b>". mysqli_error($Connection) ."</b>");
+	mysqli_query($Connection, "UPDATE `". $Prefix ."users` SET `planet_sort_order` = '0' WHERE `planet_sort_order` NOT IN (0, 1);")
+		or die("MySQL Error (0.9k, users.planet_sort_order): <b>". mysqli_error($Connection) ."</b>");
 }
 
 

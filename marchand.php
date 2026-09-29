@@ -19,6 +19,30 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
+// Quantite maximale d'un echange (1 million de milliards)
+define('MARCHAND_MAX_AMOUNT', 1000000000000000);
+
+// Quantite demandee : nombre entier, borne (les chaines recues passaient telles quelles dans les calculs). Une
+// quantite negative reste une tentative de triche, comme dans l'original.
+function MarchandAmount ( $Value, &$CheatTry ) {
+	$Value = (is_array($Value) || $Value === null) ? 0 : floor(floatval($Value));
+	if ($Value < 0) {
+		$Value    *= -1;
+		$CheatTry  = true;
+	}
+	return min($Value, MARCHAND_MAX_AMOUNT);
+}
+
+// Ressources de la planete relues apres l'echange (la barre du haut les enregistre ensuite)
+function MarchandReloadPlanet ( &$CurrentPlanet ) {
+	$Fresh = doquery("SELECT `metal`, `crystal`, `deuterium`, `last_update` FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+	if ($Fresh) {
+		foreach (array('metal', 'crystal', 'deuterium', 'last_update') as $Field) {
+			$CurrentPlanet[$Field] = $Fresh[$Field];
+		}
+	}
+}
+
 function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 	global $lang, $_POST, $game_config;
 
@@ -31,76 +55,65 @@ function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 
 	$parse   = $lang;
 
-	if (($_POST['ress'] ?? null) != '') {
+	// Ressource vendue : metal, cristal ou deuterium seulement (une autre valeur creditait tout gratuitement)
+	$Sold    = array('metal' => 'metal', 'cristal' => 'crystal', 'deuterium' => 'deuterium');
+	$Ress    = $_POST['ress'] ?? '';
+	if (is_string($Ress) && isset($Sold[$Ress])) {
 		$PageTPL   = gettemplate('message_body');
 		$Error     = false;
 		$CheatTry  = false;
-		$Metal     = ($_POST['metal'] ?? null);
-		$Crystal   = ($_POST['cristal'] ?? null);
-		$Deuterium = ($_POST['deut'] ?? null);
-		if ($Metal < 0) {
-			$Metal     *= -1;
-			$CheatTry   = true;
-		}
-		if ($Crystal < 0) {
-			$Crystal   *= -1;
-			$CheatTry   = true;
-		}
-		if ($Deuterium < 0) {
-			$Deuterium *= -1;
-			$CheatTry   = true;
-		}
+		$Metal     = MarchandAmount($_POST['metal'] ?? null, $CheatTry);
+		$Crystal   = MarchandAmount($_POST['cristal'] ?? null, $CheatTry);
+		$Deuterium = MarchandAmount($_POST['deut'] ?? null, $CheatTry);
 		if ($CheatTry  == false) {
-			switch (($_POST['ress'] ?? null)) {
+			// La ressource vendue n'est pas achetee en meme temps (elle etait creditee en plus)
+			switch ($Ress) {
 				case 'metal':
+					$Metal        = 0;
 					$Necessaire   = (( $Crystal * 2) + ( $Deuterium * 4));
-					if ($CurrentPlanet['metal'] > $Necessaire) {
-						$CurrentPlanet['metal'] -= $Necessaire;
-					} else {
-						$Message = $lang['mod_ma_noten'] ." ". $lang['metal_label'] ."! ";
-						$Error   = true;
-					}
 					break;
 
 				case 'cristal':
+					$Crystal      = 0;
 					$Necessaire   = (( $Metal * 0.5) + ( $Deuterium * 2));
-					if ($CurrentPlanet['crystal'] > $Necessaire) {
-						$CurrentPlanet['crystal'] -= $Necessaire;
-					} else {
-						$Message = $lang['mod_ma_noten'] ." ". $lang['crystal_label'] ."! ";
-						$Error   = true;
-					}
 					break;
 
 				case 'deuterium':
+					$Deuterium    = 0;
 					$Necessaire   = (( $Metal * 0.25) + ( $Crystal * 0.5));
-					if ($CurrentPlanet['deuterium'] > $Necessaire) {
-						$CurrentPlanet['deuterium'] -= $Necessaire;
-					} else {
-						$Message = $lang['mod_ma_noten'] ." ". $lang['deuterium_label'] ."! ";
-						$Error   = true;
-					}
 					break;
+			}
+			$Column = $Sold[$Ress];
+			if ($Metal + $Crystal + $Deuterium == 0) {
+				// Rien a acheter : meme reponse que l'original, sans requete
+				$Error = !($CurrentPlanet[$Column] > 0);
+			} else {
+				// Paiement et livraison en une seule requete, seulement si le stock suffit encore : des requetes
+				// simultanees ne paient plus deux fois avec le meme stock
+				$Delta           = array('metal' => $Metal, 'crystal' => $Crystal, 'deuterium' => $Deuterium);
+				$Delta[$Column]  = -$Necessaire;
+				$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+				$QryUpdatePlanet .= "`metal` = `metal` + ".         sprintf('%.2F', $Delta['metal'])     .", ";
+				$QryUpdatePlanet .= "`crystal` = `crystal` + ".     sprintf('%.2F', $Delta['crystal'])   .", ";
+				$QryUpdatePlanet .= "`deuterium` = `deuterium` + ". sprintf('%.2F', $Delta['deuterium']) ." ";
+				$QryUpdatePlanet .= "WHERE ";
+				$QryUpdatePlanet .= "`id` = '". intval($CurrentPlanet['id']) ."' AND `". $Column ."` > ". sprintf('%.2F', $Necessaire) .";";
+				doquery ( $QryUpdatePlanet , 'planets');
+				$Error = (mysqli_affected_rows(DbConnect()) < 1);
+				MarchandReloadPlanet($CurrentPlanet);
+			}
+			if ($Error) {
+				$Label   = array('metal' => 'metal_label', 'cristal' => 'crystal_label', 'deuterium' => 'deuterium_label');
+				$Message = $lang['mod_ma_noten'] ." ". $lang[$Label[$Ress]] ."! ";
 			}
 		}
 		if ($Error == false) {
 			if ($CheatTry == true) {
+				doquery ( "UPDATE {{table}} SET `metal` = '0', `crystal` = '0', `deuterium` = '0' WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets');
 				$CurrentPlanet['metal']      = 0;
 				$CurrentPlanet['crystal']    = 0;
 				$CurrentPlanet['deuterium']  = 0;
-			} else {
-				$CurrentPlanet['metal']     += $Metal;
-				$CurrentPlanet['crystal']   += $Crystal;
-				$CurrentPlanet['deuterium'] += $Deuterium;
 			}
-
-			$QryUpdatePlanet  = "UPDATE {{table}} SET ";
-			$QryUpdatePlanet .= "`metal` = '".     $CurrentPlanet['metal']     ."', ";
-			$QryUpdatePlanet .= "`crystal` = '".   $CurrentPlanet['crystal']   ."', ";
-			$QryUpdatePlanet .= "`deuterium` = '". $CurrentPlanet['deuterium'] ."' ";
-			$QryUpdatePlanet .= "WHERE ";
-			$QryUpdatePlanet .= "`id` = '".        $CurrentPlanet['id']        ."';";
-			doquery ( $QryUpdatePlanet , 'planets');
 			$Message = $lang['mod_ma_done'];
 		}
 		if ($Error == true) {
@@ -130,6 +143,9 @@ function ModuleMarchand ( $CurrentUser, &$CurrentPlanet ) {
 					$parse['mod_ma_res_a'] = "0.25";
 					$parse['mod_ma_res_b'] = "0.5";
 					break;
+				default:
+					// Choix inconnu : retour au menu (page vide et avertissement PHP avant)
+					$PageTPL = gettemplate('marchand_main');
 			}
 		}
 	}

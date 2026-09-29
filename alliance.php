@@ -66,6 +66,17 @@ function AllyRanks ( $Ally ) {
 	return is_array($Ranks) ? $Ranks : array();
 }
 
+// Rang qu'un membre qui n'est pas le fondateur peut donner ou retirer : aucun droit qu'il n'a pas lui-meme, ni
+// dissoudre ni exclure (droits accordes par le fondateur seul, comme dans l'administration des droits)
+function AllyRankAllowed ( $Rank, $MyRank ) {
+	foreach (array('mails', 'delete', 'kick', 'bewerbungen', 'administrieren', 'bewerbungenbearbeiten', 'memberlist', 'onlinestatus', 'rechtehand') as $Right) {
+		if (($Rank[$Right] ?? 0) == 1 && (($MyRank[$Right] ?? 0) != 1 || $Right == 'delete' || $Right == 'kick')) {
+			return false;
+		}
+	}
+	return true;
+}
+
 // Balises des textes d'alliance : [fc]couleur[/fc]texte[/f] et [img]adresse[/img].
 // Images : adresses http(s) uniquement, une adresse du jeu declencherait une action chez le lecteur.
 function AllyBBCode ( $Text ) {
@@ -497,7 +508,9 @@ array(1 =>
 			message($lang['denied_access'], $lang['send_circular_mail_label']);
 		}
 
-		if ($sendmail == 1) {
+		// Envoi par le formulaire seulement (POST, jeton CSRF verifie par common.php) : un simple lien ou une image
+		// envoyait un message vide a toute l'alliance au nom du lecteur
+		if ($sendmail == 1 && $_SERVER['REQUEST_METHOD'] == 'POST') {
 			$_POST['r'] = intval(($_POST['r'] ?? null));
 			$_POST['text'] = SqlEscape(SafeText(($_POST['text'] ?? null)));
 
@@ -811,9 +824,15 @@ array(1 =>
 		} elseif (isset($_POST['newrang']) && isset($id)) {
 			// Nouveau rang : membre de cette alliance, jamais le fondateur, rang existant ou novice (0)
 			$NewRank = intval($_POST['newrang']);
-			$q = doquery("SELECT id,ally_id FROM {{table}} WHERE id='" . intval($id) . "' LIMIT 1", 'users', true);
+			$q = doquery("SELECT id,ally_id,ally_rank_id FROM {{table}} WHERE id='" . intval($id) . "' LIMIT 1", 'users', true);
 
 			if ($q && $q['ally_id'] == $ally['id'] && $q['id'] != $ally['ally_owner'] && ($NewRank == 0 || isset($ally_ranks[$NewRank - 1]))) {
+				// Hors fondateur : ni son propre rang, ni le rang d'un membre qui a des droits qu'on n'a pas, ni un rang
+				// qui donne plus de droits que les siens (un membre qui pouvait exclure se donnait le droit de dissoudre)
+				if (!$IsOwner && ($q['id'] == $user['id'] || !AllyRankAllowed($ally_ranks[$q['ally_rank_id'] - 1] ?? array(), $MyRank) ||
+				    !AllyRankAllowed($ally_ranks[$NewRank - 1] ?? array(), $MyRank))) {
+					message($lang['denied_access'], $lang['members_administrate']);
+				}
 				doquery("UPDATE {{table}} SET `ally_rank_id`='{$NewRank}' WHERE `id`='" . intval($id) . "'", 'users');
 			}
 		}
@@ -843,11 +862,14 @@ array(1 =>
 			} else {
 				$ally_range = $ally_ranks[$u['ally_rank_id']-1]['name'];
 			}
+			// Formulaire du rang : seulement les changements permis (memes regles que l'enregistrement)
+			$CanSetRank = $IsOwner || ($u['id'] != $user['id'] && AllyRankAllowed($ally_ranks[$u['ally_rank_id'] - 1] ?? array(), $MyRank));
+			$Editing    = ($rank == $u['id'] && $CanSetRank);
 
 			/*
 		  Aca viene la parte jodida...
 		*/
-			if ($ally['ally_owner'] == $u['id'] || $rank == $u['id']) {
+			if ($ally['ally_owner'] == $u['id'] || $Editing) {
 				$u["functions"] = '';
 			} elseif ($user_can_kick) {
 				// Textes places dans du JavaScript (infobulle, confirmation) : apostrophes echappees
@@ -862,19 +884,22 @@ array(1 =>
 			}
 			$u["dpath"] = $dpath;
 			// por el formulario...
-			if ($rank != $u['id']) {
+			if (!$Editing) {
 				$u['ally_range'] = $ally_range;
 			} else {
 				$u['ally_range'] = '';
 			}
 			$u['ally_register_time'] = ($u['ally_register_time'] > 0) ? date("d/m/Y H:i:s", $u['ally_register_time']) : '-';
 			$page_list .= parsetemplate($template, $u);
-			if ($rank == $u['id']) {
+			if ($Editing) {
 				$r = array();
 				$r['rank_for'] = str_replace("%s", $u['username'], $lang['rank_for']);
 				$r['options'] = "<option value=\"0\">{$lang['novate']}</option>";
 
 				foreach($ally_ranks as $a => $b) {
+					if (!$IsOwner && !AllyRankAllowed($b, $MyRank)) {
+						continue;
+					}
 					$r['options'] .= "<option value=\"" . ($a + 1) . "\"";
 					if ($u['ally_rank_id']-1 == $a) {
 						$r['options'] .= ' selected=selected';

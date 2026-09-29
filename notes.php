@@ -38,7 +38,8 @@ $lang['php_self'] = 'notes.'.$phpEx;
 if(($_POST["s"] ?? null) == 1 || ($_POST["s"] ?? null) == 2){//Edicion y agregar notas
 
 	$time = time();
-	$priority = intval(($_POST["u"] ?? null));
+	// Priorite : 0, 1 ou 2 (les seules valeurs du formulaire et de la liste)
+	$priority = min(2, max(0, intval(($_POST["u"] ?? null))));
 	$title = (($_POST["title"] ?? null)) ? SqlEscape(SafeText(($_POST["title"] ?? null))) : $lang['no_title'];
 	$text = (($_POST["text"] ?? null)) ? SqlEscape(SafeText(($_POST["text"] ?? null))) : $lang['no_text'];
 
@@ -50,31 +51,33 @@ if(($_POST["s"] ?? null) == 1 || ($_POST["s"] ?? null) == 2){//Edicion y agregar
 		  pequeño query para averiguar si la nota que se edita es del propio jugador
 		*/
 		$id = intval(($_POST["n"] ?? null));
-		$note_query = doquery("SELECT * FROM {{table}} WHERE id=$id AND owner=".$user["id"],"notes");
+		// Note d'un autre joueur : refusee (sans fetch, doquery renvoyait un resultat toujours vrai, et error()
+		// n'existe pas)
+		$note_query = doquery("SELECT `id` FROM {{table}} WHERE id=$id AND owner=".intval($user["id"]),"notes",true);
 
-		if(!$note_query){ error($lang['notpossiblethisway'],$lang['notes']); }
+		if(!$note_query){ message($lang['notpossiblethisway'],$lang['notes']); }
 
-		doquery("UPDATE {{table}} SET time=$time, priority=$priority, title='$title', text='$text' WHERE id=$id","notes");
+		doquery("UPDATE {{table}} SET time=$time, priority=$priority, title='$title', text='$text' WHERE id=$id AND owner=".intval($user["id"]),"notes");
 		message($lang['note_updated'], $lang['please_wait_label'], 'notes.'.$phpEx, "3");
 	}
 
 }
 elseif($_POST){//Borrar
 
+	$deleted = 0;
 	foreach($_POST as $a => $b){
 		/*
 		  Los checkbox marcados tienen la palabra delmes seguido del id.
 		  Y cada array contiene el valor "y" para compro
 		*/
-		if(preg_match("/delmes/i",$a) && $b == "y"){
+		// Nom du champ : delmes suivi d'un numero uniquement (il etait colle tel quel dans la requete : injection SQL)
+		if(preg_match("/^delmes([0-9]+)$/",$a,$match) && $b == "y"){
 
-			$id = str_replace("delmes","",$a);
-			$note_query = doquery("SELECT * FROM {{table}} WHERE id=$id AND owner={$user['id']}","notes");
-			$deleted = $deleted ?? 0;
-			//comprobamos,
-			if($note_query){
+			$id = intval($match[1]);
+			// Seulement ses propres notes (le test de propriete d'origine etait toujours vrai)
+			doquery("DELETE FROM {{table}} WHERE `id`=$id AND `owner`=".intval($user['id']).";","notes");// y borramos
+			if(mysqli_affected_rows(DbConnect()) > 0){
 				$deleted++;
-				doquery("DELETE FROM {{table}} WHERE `id`=$id;","notes");// y borramos
 			}
 		}
 	}
