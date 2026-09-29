@@ -165,6 +165,10 @@ check_urlaubmodus($user);
 	if (mysqli_affected_rows(DbConnect()) != 1) {
 		// Une autre requete est passee avant : planete relue (la barre du haut reecrit ses ressources)
 		$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($planetrow['id']) ."';", 'planets', true);
+		// Carburant depense entre-temps : le message du carburant, sinon celui des recycleurs
+		if (is_array($planetrow) && $planetrow['deuterium'] < $consumption) {
+			message ("<font color=\"red\"><b>". $lang['fl_noressources'] . pretty_number($consumption) ."</b></font>", $lang['fl_error'], "overview.php", 2);
+		}
 		message ("<font color=\"red\"><b>". $lang['fl_noenought'] ."</b></font>", $lang['fl_error'], "overview.php", 2);
 	}
 

@@ -121,7 +121,12 @@ function ResearchBuildingPage (&$CurrentPlanet, $CurrentUser, $InResearch, $TheP
 								} else {
 									// Ressources depensees entre-temps : reservation rendue
 									doquery("UPDATE {{table}} SET `b_tech_planet` = '0' WHERE `id` = '". intval($CurrentUser['id']) ."' AND `b_tech_planet` = '". intval($WorkingPlanet['id']) ."';", 'users');
+									// Ressources relues : la barre du haut reecrivait sinon l'ancien stock (valeurs absolues)
+									BuildingQueueReload ( $WorkingPlanet );
 								}
+							} else {
+								// Recherche lancee entre-temps par une autre requete : ressources relues aussi
+								BuildingQueueReload ( $WorkingPlanet );
 							}
 						}
 						break;

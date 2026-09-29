@@ -25,6 +25,7 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 		// On vient de Cliquer ' Construire '
 		// Et y a une liste de doléances
 		$AddedInQueue                     = false;
+		$Refused                          = false;
 		// Ici, on sait precisement ce qu'on aimerait bien construire ...
 		foreach(($_POST['fmenge'] ?? null) as $Element => $Count) {
 			// Construction d'Element recuperés sur la page de Flotte ...
@@ -55,10 +56,16 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 					$BuildTime = GetBuildingTime($CurrentUser, $CurrentPlanet, $Element);
 					if ($Count >= 1) {
 						// Ressources et file enregistrees d'un coup, sous condition (requetes simultanees)
-						ShipyardQueueAdd ( $CurrentPlanet, $Element, $Count, $Ressource );
+						if (!ShipyardQueueAdd ( $CurrentPlanet, $Element, $Count, $Ressource )) {
+							$Refused = true;
+						}
 					}
 				}
 			}
+		}
+		// Commande refusee (une autre requete est passee avant) : ressources et file relues pour l'affichage
+		if ($Refused) {
+			ShipyardQueueReload ( $CurrentPlanet );
 		}
 	}
 

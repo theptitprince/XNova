@@ -46,7 +46,11 @@ function SetNextQueueElementOnTop ( &$CurrentPlanet, $CurrentUser ) {
 					$Needed                        = GetBuildingPrice ($CurrentUser, $CurrentPlanet, $Element, true, $ForDestroy);
 					$CurrentTime                   = time();
 					$BuildEndTime                  = $BuildEndTime;
-					$NewQueue                      = implode ( ";", $QueueArray );
+					// Arrondi comme la colonne entiere b_building (0.9k) : une demolition dure un temps divise par 2
+					// (fin en ,5). La copie en memoire differait de la base et les ecritures conditionnelles qui
+					// suivent (interruption, enregistrement de la page) ne trouvaient plus la ligne
+					$BuildEndTime                  = round(floatval($BuildEndTime));
+					$NewQueue                     = implode ( ";", $QueueArray );
 					if ($NewQueue == "") {
 						$NewQueue                      = '0';
 					}
