@@ -70,10 +70,10 @@ if (INSTALL != true) {
 	// Pages d'un meme joueur traitees l'une apres l'autre (0.9k, decide par theptitprince) : deux pages envoyees en
 	// meme temps lisaient le meme etat et ecrivaient chacune le leur (ressources, vaisseaux, missiles, officiers
 	// dupliques). Verrou nomme de MySQL, libere a la fermeture de la connexion en fin de page ; nom avec le prefixe des
-	// tables et la base (deux jeux sur un meme serveur MySQL). Sans verrou : le sondage du chat (lecture seule, toutes
-	// les 3 secondes) et l'administration (pages longues comme le calcul des statistiques, qui bloqueraient le jeu de
-	// l'administrateur).
-	if (is_array($user) && !empty($user['id']) && !defined('IN_ADMIN') && basename($_SERVER['SCRIPT_NAME']) != 'chat_msg.php') {
+	// tables et la base (deux jeux sur un meme serveur MySQL). Sans verrou : les pages en lecture seule (sondage du
+	// chat toutes les 3 secondes, cadres et menu charges avec la vue generale) et l'administration (pages longues comme
+	// le calcul des statistiques, qui bloqueraient le jeu de l'administrateur).
+	if (is_array($user) && !empty($user['id']) && !defined('IN_ADMIN') && !in_array(basename($_SERVER['SCRIPT_NAME']), array('chat_msg.php', 'frames.php', 'leftmenu.php'))) {
 		// {{table}} devient ici le prefixe des tables suivi de « user_ »
 		$UserLock = doquery("SELECT GET_LOCK(LEFT(CONCAT('{{table}}". intval($user['id']) ."@', IFNULL(DATABASE(), '')), 64), 15) AS `ok`;", 'user_', true);
 		if (empty($UserLock['ok'])) {
