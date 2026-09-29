@@ -15,6 +15,9 @@
 
 define('INSIDE'  , true);
 define('INSTALL' , false);
+// Cadres seuls : ni flottes ni missiles traites ici, la vue generale chargee dans le cadre s'en charge (0.9k,
+// performances)
+define('NO_FLEET_PASS', true);
 
 $InLogin = false;
 
