@@ -18,4 +18,8 @@ $lang['total_label'] = 'Totale';
 
 // Created by Perberos. All rights reserved (C) 2006
 // Complet by XNova Team. All rights reversed (C) 2008
+
+// 0.9k (jeu-b) : mode vacances, production arretee (page Ressources)
+$lang['res_vacation_mode'] = 'Siete in modalit&agrave; vacanza: la produzione resta ferma fino al vostro ritorno.';
+
 ?>

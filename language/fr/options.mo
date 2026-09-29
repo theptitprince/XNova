@@ -94,4 +94,9 @@ $lang['opt_password_short'] = 'Le nouveau mot de passe doit contenir au moins 8 
 $lang['opt_delac_pending'] = 'Suppression prévue le %s : décochez la case puis sauvegardez pour l\'annuler.';
 $lang['opt_delac_admin'] = 'Un compte d\'administration ne peut pas être effacé depuis les Options.';
 
+// 0.9k (jeu-b) : nouvelle adresse e-mail avec le mot de passe actuel et libre ; vacances refusees avec des missiles en vol
+$lang['opt_email_password'] = 'Pour changer d\'adresse e-mail, indiquez votre mot de passe actuel : rien n\'a &eacute;t&eacute; modifi&eacute;.';
+$lang['opt_email_used'] = 'Cette adresse e-mail est d&eacute;j&agrave; utilis&eacute;e par un autre compte : rien n\'a &eacute;t&eacute; modifi&eacute;.';
+$lang['vacation_missiles_flying'] = 'Impossible de partir en vacances tant que vos missiles sont en vol : attendez leur impact.';
+
 ?>
