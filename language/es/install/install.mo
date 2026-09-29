@@ -71,7 +71,7 @@ $lang['ins_upg_uptodate'] = 'La base ya est&aacute; actualizada, no hace falta n
 $lang['ins_upg_noconfig'] = 'El juego a&uacute;n no est&aacute; instalado (config.php est&aacute; vac&iacute;o): utilice el modo Instalar.';
 
 // XNova Renaissance 0.9g : verrou de l'installeur
-$lang['ins_locked'] = 'El juego ya est&aacute; instalado: la instalaci&oacute;n y la transferencia est&aacute;n bloqueadas (solo queda la actualizaci&oacute;n). Para reinstalar, vac&iacute;e primero el archivo config.php. Recuerde tambi&eacute;n borrar la carpeta install del servidor.';
+$lang['ins_locked'] = 'El juego ya est&aacute; instalado: la instalaci&oacute;n est&aacute; bloqueada (la actualizaci&oacute;n y la transferencia est&aacute;n reservadas a un administrador conectado al juego). Para reinstalar, vac&iacute;e primero el archivo config.php. Recuerde tambi&eacute;n borrar la carpeta install del servidor.';
 
 // XNova Renaissance 0.9g : traductions
 $lang['ins_btn_login'] = 'Conectarse';
@@ -84,5 +84,12 @@ $lang['ins_error3'] = 'Todos los campos son obligatorios: nombre de usuario con 
 
 // XNova Renaissance 0.9g : titre de la page (« Installeur » ecrit en dur)
 $lang['ins_page_title'] = 'Instalación de XNova';
+
+// 0.9k (Administration)
+$lang['ins_admin_only'] = 'Instalador bloqueado: el juego est&aacute; instalado, la actualizaci&oacute;n y la transferencia est&aacute;n reservadas a un administrador conectado al juego. Con&eacute;ctese primero con una cuenta de administrador (<a href="../login.php" target="_top">p&aacute;gina de conexi&oacute;n</a>) y vuelva despu&eacute;s a esta p&aacute;gina.';
+$lang['ins_csrf_error'] = 'Formulario caducado o enviado desde otro sitio: vuelva a empezar desde el men&uacute; del instalador.';
+$lang['ins_upg_running'] = 'Ya hay una actualizaci&oacute;n en curso: espere unos instantes y vuelva a cargar la p&aacute;gina.';
+$lang['ins_upg_secret'] = 'La palabra secreta de config.php ven&iacute;a de una versi&oacute;n antigua (0.8e / 0.9d) y era demasiado d&eacute;bil: se ha sustituido por una palabra secreta aleatoria. Todos los jugadores, usted incluido, deben volver a conectarse una vez.';
+$lang['ins_upg_secret_fail'] = 'La palabra secreta de config.php viene de una versi&oacute;n antigua (0.8e / 0.9d) y es demasiado d&eacute;bil, pero el archivo no se ha podido reescribir: haga que config.php sea modificable por el servidor web y vuelva a lanzar la actualizaci&oacute;n.';
 
 ?>
