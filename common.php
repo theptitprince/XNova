@@ -17,6 +17,11 @@ if (!defined('INSIDE')) {
 	die();
 }
 
+// Erreurs PHP jamais affichees aux visiteurs (chemins, traces, debut des hash), seulement ecrites dans le journal
+// du serveur : sans php.ini, PHP les affiche. Avant tout include, pour couvrir aussi le chargement des fichiers
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+
 define('VERSION'     ,'0.9k');        // Version d'XNova utilisée...
 define('VERSION_NAME','Renaissance'); // Nom de la version (0.9 et suivantes)
 
@@ -43,6 +48,14 @@ include($xnova_root_path . 'includes/functions.'.$phpEx);
 include($xnova_root_path . 'includes/unlocalised.'.$phpEx);
 include($xnova_root_path . 'includes/todofleetcontrol.'.$phpEx);
 include($xnova_root_path . 'language/'. DEFAULT_LANG .'/lang_info.cfg');
+
+// En-tetes de securite : l'adresse des pages (avec le jeton CSRF des liens) n'est jamais envoyee a un autre site,
+// pas de devinette du type des fichiers, pages affichables seulement dans les cadres du jeu lui-meme
+if (!headers_sent()) {
+	header('Referrer-Policy: same-origin');
+	header('X-Content-Type-Options: nosniff');
+	header('X-Frame-Options: SAMEORIGIN');
+}
 
 // Jeu pas encore installe (config.php vide) : quelle que soit la page demandee, direction l'installeur
 if (INSTALL != true && (!file_exists($xnova_root_path . 'config.php') || filesize($xnova_root_path . 'config.php') == 0)) {

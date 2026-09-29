@@ -59,4 +59,7 @@ $lang['reg_captcha'] = 'Sicherheitscode';
 $lang['reg_captcha_new'] = 'Anderer Code';
 $lang['error_captcha'] = 'Sicherheitscode falsch oder abgelaufen. Gehe zurück zum Formular: ein neuer Code wird angezeigt.';
 
+// 0.9k (Securite)
+$lang['error_charlength'] = 'Der Name darf höchstens 64 Zeichen lang sein!<br />';
+
 ?>
