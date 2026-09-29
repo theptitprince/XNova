@@ -421,6 +421,69 @@ function RenaissanceMigration09kPages ( $Connection, $Prefix ) {
 
 // Securite : connexion, jetons, en-tetes
 function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
+	// Essais de connexion (login.php) : un essai par ligne, efface a la connexion reussie ou apres 30 minutes
+	mysqli_query($Connection, "CREATE TABLE IF NOT EXISTS `". $Prefix ."login_attempts` (
+			`id` int(11) unsigned NOT NULL auto_increment,
+			`username` varchar(64) NOT NULL default '',
+			`ip` varchar(45) NOT NULL default '',
+			`time` int(11) NOT NULL default '0',
+			PRIMARY KEY (`id`),
+			KEY `username_ip` (`username`, `ip`, `time`),
+			KEY `time` (`time`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;")
+		or die("MySQL Error (login_attempts): <b>". mysqli_error($Connection) ."</b>");
+
+	// Avertissement pour l'administrateur (Administration > Erreurs), ecrit une seule fois. Texte UTF-8 sans entites
+	// HTML (lisible que la page l'echappe ou non) ; pseudos et adresse echappes, la page l'affiche aujourd'hui tel quel
+	$Notice = function ($Text) use ($Connection, $Prefix) {
+		$Text = mysqli_real_escape_string($Connection, $Text);
+		$Seen = mysqli_query($Connection, "SELECT 1 FROM `". $Prefix ."errors` WHERE `error_type` = 'Mise a jour 0.9k' AND `error_text` = '". $Text ."' LIMIT 1;");
+		if ($Seen && mysqli_num_rows($Seen) == 0) {
+			mysqli_query($Connection, "INSERT INTO `". $Prefix ."errors` SET `error_sender` = '0', `error_time` = '". time() ."', `error_type` = 'Mise a jour 0.9k', `error_text` = '". $Text ."';");
+		}
+	};
+
+	// Pseudo unique : index ajoute seulement si la base n'a pas deja deux comptes du meme nom (majuscules et accents
+	// confondus). Sinon l'administrateur est prevenu : a regler a la main (l'inscription verifie de toute facon le
+	// pseudo sous verrou)
+	$Double = mysqli_query($Connection, "SELECT `username` FROM `". $Prefix ."users` GROUP BY `username` HAVING COUNT(*) > 1 LIMIT 20;");
+	if ($Double && mysqli_num_rows($Double) == 0) {
+		RenaissanceAddIndexes($Connection, $Prefix, 'users', array('username' => "UNIQUE KEY `username` (`username`)"));
+	} elseif ($Double) {
+		$Names = array();
+		while ($Row = mysqli_fetch_assoc($Double)) {
+			$Names[] = htmlspecialchars($Row['username'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+		}
+		$Notice("Pseudo unique : index non créé, plusieurs comptes portent le même pseudo (majuscules et accents confondus) : ".
+		        implode(', ', $Names) .". Renommez-les, puis ajoutez l'index : ALTER TABLE `". htmlspecialchars($Prefix) ."users` ADD UNIQUE KEY `username` (`username`);");
+	}
+
+	// Messages de joueurs pieges avant la 0.9k (gestionnaire d'evenement glisse dans une balise par le BBCode, voir
+	// bbattr) : ils restaient actifs dans la boite du destinataire et dans les messages signales lus par le staff.
+	// Reduits au texte comme par le nettoyage de la 0.9f ; seulement les messages prives (type 1), les rapports du jeu
+	// contiennent du HTML voulu. Piege = balise produite par le BBCode a l'interieur d'un attribut (seule facon de
+	// fermer ses guillemets : [img] dans un [url]...), ou attribut on...= juste apres des guillemets. Un lien normal
+	// (adresse « /online=1 », titre « one=1 ») n'est pas touche.
+	$Trap = "`message_type` = '1' AND (`message_text` REGEXP '=\"[^\"]*<[a-z]+[[:space:]/]' OR `message_text` REGEXP '\"[[:space:]/]+on[a-z]+[[:space:]]*=')";
+	RenaissanceCleanColumns($Connection, $Prefix .'messages', array('message_text' => 'html'), $Trap);
+	RenaissanceCleanColumns($Connection, $Prefix .'reports',  array('message_text' => 'html'), $Trap);
+
+	// Adresse du jeu pour les liens des mails (voir GameUrl) : celle de l'installeur sans le dossier install/, vide
+	// hors d'une page web (le jeu reprend alors l'adresse de la page en cours). Sur un jeu installe, la mise a jour
+	// et le transfert sont reserves a l'administrateur (0.9k, partie Administration) : c'est son adresse, pas celle
+	// d'un visiteur. Une valeur deja reglee n'est jamais changee ; restee vide (installation par un script), elle est
+	// remplie a la mise a jour suivante.
+	$GameUrl = !empty($_SERVER['HTTP_HOST']) ? SafeUrl(RequestGameUrl(2)) : '';
+	RenaissanceAddConfig($Connection, $Prefix, array('game_url' => $GameUrl));
+	if ($GameUrl != '') {
+		mysqli_query($Connection, "UPDATE `". $Prefix ."config` SET `config_value` = '". mysqli_real_escape_string($Connection, $GameUrl) ."' WHERE `config_name` = 'game_url' AND `config_value` = '';");
+	} elseif (!empty($_SERVER['HTTP_HOST'])) {
+		// Adresse refusee (hote IPv6 entre crochets...) : l'administrateur est prevenu, les mails reprennent l'adresse
+		// de la page en cours tant que game_url est vide
+		$Notice("Adresse du jeu (game_url) non réglée : adresse de l'installation refusée (".
+		        htmlspecialchars(RequestGameUrl(2), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ."). Les liens des mails reprennent l'adresse de la page en cours : ".
+		        "indiquez l'adresse publique du jeu dans la ligne game_url de la table ". htmlspecialchars($Prefix) ."config.");
+	}
 }
 
 

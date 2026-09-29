@@ -60,4 +60,7 @@ $lang['reg_captcha'] = 'Código de verificación';
 $lang['reg_captcha_new'] = 'Otro código';
 $lang['error_captcha'] = 'Código de verificación incorrecto o caducado. Vuelve al formulario: se mostrará un código nuevo.';
 
+// 0.9k (Securite)
+$lang['error_charlength'] = '¡El nombre de usuario no puede superar los 64 caracteres!<br />';
+
 ?>

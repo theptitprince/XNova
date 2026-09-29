@@ -27,4 +27,7 @@ $lang['log_welcome'] = 'Bienvenue sur';
 
 $lang['password_lost'] = 'Vous avez oubli&eacute; votre mot de passe ?';
 
+// 0.9k (Securite)
+$lang['login_blocked'] = 'Trop d\'essais rat&eacute;s : connexion avec ce pseudo bloqu&eacute;e pendant 15 minutes.';
+
 ?>

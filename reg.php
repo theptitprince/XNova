@@ -26,7 +26,8 @@ function sendpassemail($emailaddress, $username)
 {
     global $lang;
 
-    $parse['gameurl']  = GAMEURL;
+    // Adresse du jeu reglee (game_url), pas l'en-tete Host envoye par le visiteur
+    $parse['gameurl']  = GameUrl();
     $parse['username'] = $username;
     $email = parsetemplate($lang['mail_welcome'], $parse);
     // Mail en texte brut : vrais retours a la ligne (les \n des textes etaient envoyes tels quels) et accents decodes
@@ -40,12 +41,16 @@ function sendpassemail($emailaddress, $username)
 if ($_POST) {
     // Captcha (mod de theptitprince), verifie avant tout le reste : sans code valide, rien n'est revele (pseudo ou
     // adresse deja pris) et un robot ne peut pas envoyer le formulaire en masse
-    if (CaptchaEnabled() && !CaptchaCheck($_POST['captcha'] ?? '')) {
+    if (CaptchaEnabled() && !CaptchaCheck(is_string($_POST['captcha'] ?? null) ? $_POST['captcha'] : '')) {
         message($lang['error_captcha'], $lang['register']);
     }
 
     $errors = 0;
     $errorlist = "";
+    // Champs recus en texte seulement (un tableau faisait une erreur fatale dans strip_tags, preg_match...)
+    foreach (array('character', 'email', 'passwrd', 'planet', 'hplanet', 'sex', 'rgt') as $Field) {
+        $_POST[$Field] = is_string($_POST[$Field] ?? null) ? $_POST[$Field] : '';
+    }
 
     $_POST['email'] = strip_tags(($_POST['email'] ?? null));
     if (!is_email(($_POST['email'] ?? null))) {
@@ -79,10 +84,20 @@ if ($_POST) {
         $errors++;
     }
 
+    // Longueur maximale : celle de la colonne username (au-dela, pseudo tronque, compte sans planete mere)
+    if (strlen($_POST['character']) > USERNAME_MAX_LENGTH) {
+        $errorlist .= $lang['error_charlength'];
+        $errors++;
+    }
+
     if (($_POST['rgt'] ?? null) != 'on') {
         $errorlist .= $lang['error_rgt'];
         $errors++;
     }
+    // Deux inscriptions simultanees du meme pseudo : verrou nomme (propre a cette base) du controle jusqu'a la
+    // creation du compte, libere a la fin de la page ; l'index unique de la 0.9k protege aussi la table. Nom hache
+    // (SHA1) : MySQL refuse un nom de verrou de plus de 64 caracteres (nom de base long chez un hebergeur)
+    doquery("SELECT GET_LOCK(SHA1(CONCAT(DATABASE(), '.{{table}}.reg')), 10);", 'users');
     // Le meilleur moyen de voir si un nom d'utilisateur est pris c'est d'essayer de l'appeler !!
     $ExistUser = doquery("SELECT `username` FROM {{table}} WHERE `username` = '" . SqlEscape(($_POST['character'] ?? null)) . "' LIMIT 1;", 'users', true);
     if ($ExistUser) {
@@ -114,19 +129,25 @@ if ($_POST) {
 
         $md5newpass = PasswordHash($newpass);
         // Creation de l'utilisateur
-        $QryInsertUser = "INSERT INTO {{table}} SET ";
+        // INSERT IGNORE : pseudo pris entre-temps (index unique) = aucune ligne creee, refus normal
+        $QryInsertUser = "INSERT IGNORE INTO {{table}} SET ";
         $QryInsertUser .= "`username` = '" . SqlEscape(strip_tags($UserName)) . "', ";
         $QryInsertUser .= "`email` = '" . SqlEscape($UserEmail) . "', ";
         $QryInsertUser .= "`email_2` = '" . SqlEscape($UserEmail) . "', ";
         $QryInsertUser .= "`sex` = '" . SqlEscape(($_POST['sex'] ?? null)) . "', ";
-		$QryInsertUser .= "`ip_at_reg` = '" . $_SERVER["REMOTE_ADDR"] . "', ";
+		$QryInsertUser .= "`ip_at_reg` = '" . SqlEscape($_SERVER["REMOTE_ADDR"] ?? '') . "', ";
         $QryInsertUser .= "`id_planet` = '0', ";
         $QryInsertUser .= "`register_time` = '" . time() . "', ";
         $QryInsertUser .= "`password`='" . SqlEscape($md5newpass) . "';";
         doquery($QryInsertUser, 'users');
-        // On cherche le numero d'enregistrement de l'utilisateur fraichement créé
-        $NewUser = doquery("SELECT `id` FROM {{table}} WHERE `username` = '" . SqlEscape(($_POST['character'] ?? null)) . "' LIMIT 1;", 'users', true);
+        if (mysqli_affected_rows(DbConnect()) != 1) {
+            message ($lang['error_userexist'], $lang['register']);
+        }
+        // Numero d'enregistrement de l'utilisateur fraichement cree (avant : relu par le pseudo, rien trouve si le
+        // pseudo avait ete tronque, et la planete etait creee sans proprietaire)
+        $NewUser = array('id' => mysqli_insert_id(DbConnect()));
         $iduser = $NewUser['id'];
+        doquery("SELECT RELEASE_LOCK(SHA1(CONCAT(DATABASE(), '.{{table}}.reg')));", 'users');
         // Recherche d'une place libre !
         $LastSettedGalaxyPos = $game_config['LastSettedGalaxyPos'];
         $LastSettedSystemPos = $game_config['LastSettedSystemPos'];

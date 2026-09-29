@@ -43,6 +43,9 @@ function PasswordCheck ( $Password, &$UserRow ) {
 	$Stored = $UserRow['password'];
 	if (preg_match('/^[a-f0-9]{32}$/i', $Stored)) {
 		if (!hash_equals(strtolower($Stored), md5($Password))) {
+			// Meme temps de calcul qu'un echec sur un hash moderne ou qu'un pseudo inconnu (login.php) : un compte encore
+			// en md5 (0.8e / 0.9d, pas reconnecte depuis) se reperait a sa reponse immediate
+			PasswordHash($Password);
 			return false;
 		}
 		$NeedUpdate = true;
@@ -59,11 +62,25 @@ function PasswordCheck ( $Password, &$UserRow ) {
 	return true;
 }
 
-// Jeton du cookie : signature HMAC de l'id et du hash du mot de passe (change si le mot de passe change)
-function AuthCookieToken ( $UserRow ) {
+// Duree de validite du cookie de connexion, verifiee par le serveur grace a la date de connexion signee : 365 jours
+// apres la connexion avec « se souvenir de moi » (comme l'original), 1 jour sans activite sinon (date remise a
+// l'heure au plus une fois par heure tant que le joueur joue, voir CheckCookies). Avant, une copie du cookie restait
+// valable pour toujours, meme apres la deconnexion (seul un changement de mot de passe l'annulait).
+define('AUTH_COOKIE_REMEMBER', 31536000);
+define('AUTH_COOKIE_SESSION', 86400);
+define('AUTH_COOKIE_RENEW', 3600);
+
+// Jeton du cookie : signature HMAC de l'id, du hash du mot de passe (change si le mot de passe change), de
+// « se souvenir de moi » et de la date de connexion
+function AuthCookieToken ( $UserRow, $RememberMe, $IssueTime ) {
 	global $xnova_root_path;
 	include($xnova_root_path . 'config.php');
-	return hash_hmac('sha256', intval($UserRow['id']) .'|'. $UserRow['password'], $dbsettings['secretword']);
+	return hash_hmac('sha256', intval($UserRow['id']) .'|'. $UserRow['password'] .'|'. intval($RememberMe) .'|'. intval($IssueTime), $dbsettings['secretword']);
+}
+
+// Valeur du cookie de connexion : id/%/pseudo/%/jeton/%/se souvenir de moi/%/date de connexion
+function AuthCookieValue ( $UserRow, $RememberMe, $IssueTime ) {
+	return intval($UserRow['id']) .'/%/'. $UserRow['username'] .'/%/'. AuthCookieToken($UserRow, $RememberMe, $IssueTime) .'/%/'. intval($RememberMe) .'/%/'. intval($IssueTime);
 }
 
 // Pose (ou efface avec $Value = '') le cookie de connexion : inaccessible au JavaScript, envoye seulement par ce site
@@ -117,6 +134,35 @@ function SafeUrl ( $Url ) {
 		return '';
 	}
 	return $Url;
+}
+
+// Adresse du jeu pour les liens des mails (mot de passe oublie, bienvenue) : reglage game_url, rempli a
+// l'installation ou a la mise a jour avec l'adresse utilisee par l'administrateur. Vide : adresse de la page en
+// cours, d'apres l'en-tete Host envoye par le visiteur (ancien comportement : un visiteur pouvait y mettre le
+// domaine de son choix, et le mail authentique du jeu contenait alors un lien vers ce domaine).
+// L'administrateur doit garder game_url egale a l'adresse publique du jeu (changement de domaine, passage en https,
+// demenagement) : ligne game_url de la table config, en attendant son champ dans les parametres de l'administration.
+function GameUrl () {
+	global $game_config;
+	$Url = SafeUrl($game_config['game_url'] ?? '');
+	if ($Url != '') {
+		return rtrim($Url, '/') . '/';
+	}
+	return RequestGameUrl(1);
+}
+
+// Adresse du jeu d'apres la page en cours (en-tete Host), $Up dossiers au-dessus de la page : 1 pour une page du jeu,
+// 2 pour install/index.php. Dossier encode : un jeu installe dans « XNova Renaissance/ » (espace, accents) donnait
+// une adresse refusee par SafeUrl.
+function RequestGameUrl ( $Up = 1 ) {
+	$Scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
+	$Host   = preg_replace('/[^A-Za-z0-9.\-:\[\]]/', '', (string) ($_SERVER['HTTP_HOST'] ?? 'localhost'));
+	$Dir    = (string) ($_SERVER['SCRIPT_NAME'] ?? '/');
+	for ($i = 0; $i < $Up; $i++) {
+		$Dir = dirname($Dir);
+	}
+	$Dir    = rtrim(str_replace('\\', '/', $Dir), '/');
+	return $Scheme . $Host . implode('/', array_map('rawurlencode', explode('/', $Dir))) . '/';
 }
 
 // Chemin de skin : vide, chemin relatif simple ou adresse http(s)
@@ -188,12 +234,22 @@ function CsrfInject ( $Html ) {
 	// Jeton aussi disponible en JavaScript, pour les liens fabriques par les comptes a rebours (annulation)
 	$Script = '<script type="text/javascript">var xnova_csrf = "' . $Token . '";</script>';
 	$Html   = (stripos($Html, '</head>') !== false) ? preg_replace('#</head>#i', $Script . '</head>', $Html, 1) : $Script . $Html;
-	// Liens internes vers une page .php avec parametres (ou "?..."), hors adresses externes
-	$Html  = preg_replace_callback('/(href\s*=\s*)(["\']?)((?!https?:|\/\/|javascript:|mailto:|#)[A-Za-z0-9_\-.\/]*\.php\?[^"\'\s>]*|\?[^"\'\s>]*)\2/i', function ($m) use ($Token) {
-		if (strpos($m[3], 'csrf_token=') !== false) {
-			return $m[0];
-		}
-		return $m[1] . $m[2] . $m[3] . '&amp;csrf_token=' . $Token . $m[2];
+	// Liens internes vers une page .php avec parametres (ou "?..."), hors adresses externes. Seulement le vrai
+	// attribut href des balises a, area et link : avant, tout « href= » de la page etait pris, meme au milieu de
+	// l'adresse d'une image exterieure, qui recevait alors le jeton du joueur
+	$Html  = preg_replace_callback('/<(?:a|area|link)\b[^>]*>/i', function ($Tag) use ($Token) {
+		return preg_replace_callback('/(\s)([^\s=>"\'\/]+)(\s*=\s*)("[^"]*"|\'[^\']*\'|[^\s>"\']+)/', function ($m) use ($Token) {
+			if (strtolower($m[2]) != 'href') {
+				return $m[0];
+			}
+			$Quote = ($m[4][0] == '"' || $m[4][0] == "'") ? $m[4][0] : '';
+			$Value = ($Quote != '') ? substr($m[4], 1, -1) : $m[4];
+			if (strpos($Value, 'csrf_token=') !== false ||
+			    !preg_match('/^(?:[A-Za-z0-9_\-.\/]*\.php\?[^"\'\s>]*|\?[^"\'\s>]*)$/', $Value) || strpos($Value, '//') === 0) {
+				return $m[0];
+			}
+			return $m[1] . $m[2] . $m[3] . $Quote . $Value . '&amp;csrf_token=' . $Token . $Quote;
+		}, $Tag[0]);
 	}, $Html);
 	return $Html;
 }
@@ -228,6 +284,10 @@ function is_email($email) {
 	}
 	return (strpos(substr(strrchr($email, '@'), 1), '.') !== false);
 }
+
+// Pseudo : 64 caracteres au plus, taille de la colonne username. Au-dela, MySQL tronquait sans erreur a
+// l'inscription : compte cree sans planete mere et planete sans proprietaire.
+define('USERNAME_MAX_LENGTH', 64);
 
 // ----------------------------------------------------------------------------------------------------------------
 //
@@ -281,10 +341,10 @@ function display ($page, $title = '', $topnav = true, $metatags = '', $AdminPage
 		$DisplayPage .= ShowTopNavigationBar( $user, $planetrow );
 	}
 	$DisplayPage .= "<center>\n". $page ."\n</center>\n";
-	// Affichage du Debug si necessaire : outil technique, operateurs et administrateurs (l'original le montrait aux
-	// moderateurs et l'oubliait pour les operateurs)
-	if (is_array($user) && isset($user['authlevel']) && $user['authlevel'] >= 2) {
-		if (!empty($game_config['debug'])) $debug->echo_log();
+	// Affichage du Debug si necessaire : outil technique, administrateurs seulement (0.9k, comme les erreurs SQL de
+	// debug->error() : le journal contient les requetes des autres joueurs), sous la page au lieu de la remplacer
+	if (is_array($user) && isset($user['authlevel']) && $user['authlevel'] >= 3) {
+		if (!empty($game_config['debug'])) $DisplayPage .= $debug->echo_log();
 	}
 
 	$DisplayPage .= StdFooter();
