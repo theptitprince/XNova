@@ -72,4 +72,7 @@ $lang['reg_check_mail_ok'] = 'Indirizzo e-mail valido';
 $lang['reg_captcha'] = 'Codice di verifica';
 $lang['reg_captcha_new'] = 'Altro codice';
 
+// 0.9k (Securite)
+$lang['error_charlength'] = 'Il nome del giocatore non deve superare i 64 caratteri!<br />';
+
 ?>
