@@ -23,7 +23,7 @@ function bbcode($string) {
         '/\[s\](.*?)\[\/s\]/is'                  => '<span style="text-decoration: line-through;">\1</span>',
         '/\[del\](.*?)\[\/del\]/is'              => '<span style="text-decoration: line-through;">\1</span>',
         '/\[url=(.*?)\](.*?)\[\/url\]/is'        => function ($m) { return urlfix($m[1], $m[2]); },
-        '/\[email=(.*?)\](.*?)\[\/email\]/is'    => '<a href="mailto:\1" title="\1">\2</a>',
+        '/\[email=(.*?)\](.*?)\[\/email\]/is'    => function ($m) { return '<a href="mailto:' . bbattr($m[1]) . '" title="' . bbattr($m[1]) . '">' . $m[2] . '</a>'; },
         '/\[img](.*?)\[\/img\]/is'               => function ($m) { return imagefix($m[1]); },
         // Couleur : un nom ou un code #rgb / #rrggbb seulement (avant : n'importe quel style CSS)
         '/\[color=([a-z]{3,20}|#[0-9a-f]{3}|#[0-9a-f]{6})\](.*?)\[\/color\]/is' => '<span style="color: \1;">\2</span>',
@@ -78,22 +78,32 @@ function sList($string) {
     return '<ul>' . $out . '</ul>';
 }
 
+// XNova Renaissance 0.9k : valeur d'un attribut HTML produit par une balise BBCode. Texte seul (balises deja
+// converties retirees), guillemets echappes, et crochets encodes : une balise traitee ensuite ([img], [color]...)
+// ne peut plus rien reecrire a l'interieur de l'attribut. Avant, un [img] place dans le titre d'un [url] y
+// remettait des guillemets et fermait l'attribut title : le reste devenait des attributs de la balise <a> (XSS).
+function bbattr($value) {
+    $value = htmlspecialchars(strip_tags((string) $value), ENT_QUOTES, 'UTF-8', false);
+    return str_replace(array('[', ']'), array('&#91;', '&#93;'), $value);
+}
+
 function imagefix($img) {
     // XNova Renaissance : adresse http(s) propre, ou image locale sans caractere dangereux
     $img = html_entity_decode($img, ENT_QUOTES, 'UTF-8');
     if (SafeUrl($img) == '') {
         $img = './images/' . preg_replace('#[^A-Za-z0-9_./\-]#', '', str_replace('..', '', $img));
     }
-    $img = htmlspecialchars($img, ENT_QUOTES, 'UTF-8');
     // Emoticone : infobulle « :cool: » plutot que le chemin de l'image
     $alt = preg_match('#^\./images/emoticones/([A-Za-z]+)\.png$#', $img, $m) ? ':' . $m[1] . ':' : $img;
+    $img = bbattr($img);
+    $alt = bbattr($alt);
     return '<img src="' . $img . '" alt="' . $alt . '" title="' . $alt . '" />';
 }
 
 function urlfix($url, $title) {
     // XNova Renaissance : liens http(s) uniquement (pas de javascript:)
-    $url   = htmlspecialchars(SafeUrl(html_entity_decode($url, ENT_QUOTES, 'UTF-8')), ENT_QUOTES, 'UTF-8');
+    $url   = bbattr(SafeUrl(html_entity_decode($url, ENT_QUOTES, 'UTF-8')));
     $title = stripslashes($title);
-    return '<a href="' . $url . '" title="' . $title . '">' . $title . '</a>';
+    return '<a href="' . $url . '" title="' . bbattr($title) . '">' . $title . '</a>';
 }
 ?>
