@@ -431,6 +431,13 @@ function RenaissanceMigration09kAdministration ( $Connection, $Prefix ) {
 
 // Flottes : traitement des flottes et des missiles
 function RenaissanceMigration09kFlottes ( $Connection, $Prefix ) {
+	// Total de ce que les flottes ont apporte (+) ou pris (-) sur chaque planete : une page ouverte pendant le
+	// traitement d'une flotte ajoute la difference a ses ressources au lieu de l'effacer (PlanetResourceUpdate)
+	RenaissanceAddColumns($Connection, $Prefix, 'planets', array(
+		'metal_fleets'     => "double(132,8) NOT NULL default '0.00000000' AFTER `metal_max`",
+		'crystal_fleets'   => "double(132,8) NOT NULL default '0.00000000' AFTER `crystal_max`",
+		'deuterium_fleets' => "double(132,8) NOT NULL default '0.00000000' AFTER `deuterium_max`",
+	));
 }
 
 
