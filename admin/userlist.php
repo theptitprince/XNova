@@ -33,7 +33,13 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$PageTPL = gettemplate('admin/userlist_body');
 		$RowsTPL = gettemplate('admin/userlist_rows');
 
-		$query   = doquery("SELECT * FROM {{table}} ORDER BY `". $TypeSort ."` ASC", 'users');
+		// Tri sur une donnee masquee (e-mail, IP) : comptes de rang superieur a part, en fin de liste (leur place dans
+		// le tri revelait leur IP ou leur e-mail)
+		$OrderBy = "`". $TypeSort ."` ASC";
+		if (in_array($TypeSort, array('email', 'email_2', 'user_lastip', 'ip_at_reg', 'password'), true)) {
+			$OrderBy = "(`authlevel` > '". intval($user['authlevel']) ."') ASC, ". $OrderBy;
+		}
+		$query   = doquery("SELECT * FROM {{table}} ORDER BY ". $OrderBy, 'users');
 
 		$parse                 = $lang;
 		$parse['adm_ul_table'] = "";
