@@ -323,10 +323,10 @@ function display ($page, $title = '', $topnav = true, $metatags = '', $AdminPage
 		$DisplayPage .= ShowTopNavigationBar( $user, $planetrow );
 	}
 	$DisplayPage .= "<center>\n". $page ."\n</center>\n";
-	// Affichage du Debug si necessaire : outil technique, operateurs et administrateurs (l'original le montrait aux
-	// moderateurs et l'oubliait pour les operateurs)
-	if (is_array($user) && isset($user['authlevel']) && $user['authlevel'] >= 2) {
-		if (!empty($game_config['debug'])) $debug->echo_log();
+	// Affichage du Debug si necessaire : outil technique, administrateurs seulement (0.9k, comme les erreurs SQL de
+	// debug->error() : le journal contient les requetes des autres joueurs), sous la page au lieu de la remplacer
+	if (is_array($user) && isset($user['authlevel']) && $user['authlevel'] >= 3) {
+		if (!empty($game_config['debug'])) $DisplayPage .= $debug->echo_log();
 	}
 
 	$DisplayPage .= StdFooter();

@@ -40,10 +40,11 @@ class debug
 		$this->numqueries++;
 	}
 
+	// Journal des requetes de la page, renvoye pour etre ajoute sous la page par display(). Avant : affiche seul puis
+	// die(), en mode debug l'administrateur ne voyait plus aucune page, pas meme les parametres pour couper ce mode
 	function echo_log()
 	{	global $xnova_root_path;
-		echo  "<br><table><tr><td class=k colspan=4><a href=".$xnova_root_path."admin/settings.php>Debug Log</a>:</td></tr>".$this->log."</table>";
-		die();
+		return "<br><table><tr><td class=k colspan=4><a href=".$xnova_root_path."admin/settings.php>Debug Log</a>:</td></tr>".$this->log."</table>";
 	}
 	
 	function error($message,$title)
