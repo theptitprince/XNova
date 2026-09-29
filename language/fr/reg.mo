@@ -59,4 +59,7 @@ $lang['reg_captcha'] = 'Code de v&eacute;rification';
 $lang['reg_captcha_new'] = 'Autre code';
 $lang['error_captcha'] = 'Code de v&eacute;rification incorrect ou expir&eacute;. Revenez au formulaire : un nouveau code s\'affiche.';
 
+// 0.9k (Securite)
+$lang['error_charlength'] = 'Le pseudo ne doit pas d&eacute;passer 64 caract&egrave;res !<br />';
+
 ?>

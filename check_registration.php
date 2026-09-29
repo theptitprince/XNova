@@ -39,6 +39,9 @@ if ($Action == 'check_username') {
 	if (preg_match("/[^A-Za-z0-9_\-]/", $Name) == 1) {
 		CheckRegistrationAnswer(1, false, $lang['error_charalpha']);
 	}
+	if (strlen($Name) > USERNAME_MAX_LENGTH) {
+		CheckRegistrationAnswer(1, false, $lang['error_charlength']);
+	}
 	$ExistUser = doquery("SELECT `username` FROM {{table}} WHERE `username` = '" . SqlEscape($Name) . "' LIMIT 1;", 'users', true);
 	if ($ExistUser) {
 		CheckRegistrationAnswer(1, false, $lang['error_userexist']);
@@ -49,10 +52,8 @@ if ($Action == 'check_username') {
 	if (!is_email($Mail)) {
 		CheckRegistrationAnswer(2, false, $lang['error_mail']);
 	}
-	$ExistMail = doquery("SELECT `email` FROM {{table}} WHERE `email` = '" . SqlEscape($Mail) . "' LIMIT 1;", 'users', true);
-	if ($ExistMail) {
-		CheckRegistrationAnswer(2, false, $lang['error_emailexist']);
-	}
+	// Syntaxe seulement (0.9k) : cette page publique, sans captcha ni limite, disait si une adresse etait inscrite.
+	// reg.php refuse toujours une adresse deja utilisee, apres le captcha.
 	CheckRegistrationAnswer(2, true, $lang['reg_check_mail_ok']);
 }
 
