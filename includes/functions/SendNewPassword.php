@@ -18,13 +18,11 @@
 define('LOSTPW_LINK_LIFETIME', 3600);
 define('LOSTPW_REQUEST_DELAY', 300);
 
-// Adresse de la page Mot de passe oublie, dossier du jeu compris, pour le lien du mail. Le nouveau mot de passe
-// n'etant jamais affiche a l'ecran, un lien detourne (en-tete Host falsifie) ne donne pas acces au compte.
+// Adresse de la page Mot de passe oublie, dossier du jeu compris, pour le lien du mail. 0.9k : adresse du jeu
+// reglee (game_url, voir GameUrl) et non plus celle de l'en-tete Host envoye par le visiteur : avec un Host
+// falsifie, la victime recevait du jeu un lien valide vers le domaine de l'attaquant, qui recuperait le jeton.
 function LostPasswordPageUrl () {
-	$Scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
-	$Host   = preg_replace('/[^A-Za-z0-9.\-:\[\]]/', '', (string) ($_SERVER['HTTP_HOST'] ?? 'localhost'));
-	$Dir    = rtrim(str_replace('\\', '/', dirname((string) ($_SERVER['SCRIPT_NAME'] ?? '/'))), '/');
-	return $Scheme . $Host . $Dir . '/lostpassword.php';
+	return GameUrl() . 'lostpassword.php';
 }
 
 // Texte d'un mail : {cles} remplacees, entites HTML des fichiers de langue decodees (mail en texte brut)
@@ -36,7 +34,8 @@ function LostPasswordMailText ($Template, $Values) {
 function LostPasswordSendLink ($mail) {
 	global $lang, $game_config;
 
-	$mail = trim((string) $mail);
+	// Texte seulement (un tableau envoye par le formulaire ecrivait un avertissement)
+	$mail = is_string($mail) ? trim($mail) : '';
 	if ($mail == '') {
 		return false;
 	}
@@ -61,7 +60,7 @@ function LostPasswordSendLink ($mail) {
 function LostPasswordConfirm ($UserId, $Token) {
 	global $lang, $game_config;
 
-	$Token = (string) $Token;
+	$Token = is_string($Token) ? $Token : '';
 	if (!preg_match('/^[0-9a-f]{64}$/', $Token)) {
 		return false;
 	}
