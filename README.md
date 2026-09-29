@@ -125,7 +125,6 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 | **0.9i** | Attaque groupée : prévue dans la 0.8e mais jamais programmée (groupe, invitations, flottes synchronisées) ; défense groupée par les flottes alliées en stationnement ; nouveau moteur de combat à plusieurs participants, mêmes résultats que l'original (prouvé sur 40 000 combats), tout le jeu sous AGPL ; Protection des vaisseaux enfin prise en compte ; partie complète retestée dans le navigateur | ✅ Terminée |
 | **0.9j** | Derniers officiers (Bunker, Raideur, Empereur) enfin utiles et leurs unités : Protecteur planétaire, SuperNova, Destructeur planétaire, avec la destruction de colonies ; dépôt de ravitaillement terminé comme dans OGame ; expéditions complètes (pirates, aliens, retours retardés ou anticipés) ; valeurs d'OGame (Grand bouclier, petit transporteur, satellite solaire) ; technologies Bouclier et Protection remises à leur place au combat | ✅ Terminée |
 | **0.9k** | Performances (index de la base, traitement des flottes allégé, requêtes en double) et audit de sécurité complet ; chat désactivable, informations du serveur dans l'administration, statistiques recalculées automatiquement | 🔜 Prochaine |
-| — | Mise en page sans *frames* (menu intégré à chaque page, fond d'écran pleine largeur) | ⏸️ En attente |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 
 ## Installation
