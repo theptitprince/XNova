@@ -143,7 +143,7 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
    a écrit `config.php` peut créer ce compte, et plus aucun ne peut l'être une fois l'installation terminée.
 6. **Supprimez ou protégez le dossier `install/`** une fois l'installation terminée. L'installeur se verrouille de
    lui-même dès que `config.php` est rempli : depuis la 0.9k, la mise à jour et le transfert sont réservés à un
-   administrateur connecté au jeu.
+   administrateur du jeu, qui saisit son pseudo et son mot de passe dans l'installeur.
 
 Pour développer en local :
 ```bash
@@ -173,8 +173,10 @@ Les autres bases (UGamela, versions communautaires 0.9a à 0.9c, Legacies et aut
 Faites toujours une sauvegarde de votre base avant une mise à jour. Si les accents d'une très ancienne base
 s'affichent mal (encodage mal déclaré à l'époque), signalez-le : une mise à jour de réparation reste possible.
 
-Depuis la 0.9k, sur un jeu installé (`config.php` rempli), ces deux modes sont réservés à un **administrateur connecté
-au jeu** : connectez-vous d'abord avec votre compte administrateur, puis ouvrez `install/`. Le transfert vers un
+Depuis la 0.9k, sur un jeu installé (`config.php` rempli), ces deux modes sont réservés à un **administrateur du
+jeu** : ouvrez `install/` et saisissez le pseudo et le mot de passe de votre compte administrateur dans le formulaire
+de l'installeur. Inutile de vous connecter au jeu : après la copie des nouveaux fichiers, n'ouvrez ses pages qu'une
+fois la base mise à jour (le code de la nouvelle version n'est pas fait pour l'ancienne base). Le transfert vers un
 nouveau serveur, dont le `config.php` est encore vide, reste ouvert comme l'installation. La mise à jour remplace
 aussi le mot secret faible écrit par les installeurs de la 0.8e et de la 0.9d (il signe les cookies de connexion) par
 un mot secret aléatoire : chacun, administrateur compris, se reconnecte une fois.
