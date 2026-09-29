@@ -19,12 +19,26 @@ if(window.XMLHttpRequest){
 	alert('AJAX Error');
 return;
 }
-	x_object.open("POST","chat_add.php",true); 
+	x_object.open("POST","chat_add.php",true);
 	x_object.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	// XNova Renaissance 0.9k : message refuse (chat desactive, messages trop rapproches) : texte du serveur affiche
+	// et message remis dans la zone de saisie. Texte simple de chat_add.php seulement : une page HTML (session
+	// expiree, jeton refuse) n'est pas montree brute dans l'alerte
+	var sent = msg.value;
+	x_object.onreadystatechange = function(){
+		if(x_object.readyState==4 && x_object.status==200){
+			if(x_object.responseText.replace(/\s+/g, "") != "" && x_object.responseText.indexOf("<") == -1){
+				var text = document.createElement("div");
+				text.innerHTML = x_object.responseText;
+				alert(text.textContent || text.innerText);
+				if(msg.value == "") msg.value = sent;
+			}
+			showMessage();
+		}
+	}
 	// XNova Renaissance : message encode (les + et & cassaient l'envoi) et jeton CSRF
 	x_object.send("nick="+encodeURIComponent(nick)+"&msg="+encodeURIComponent(msg.value)+"&csrf_token="+encodeURIComponent(document.getElementById("csrf_token").value));
 	msg.value = "";
-	showMessage();
 }
 
 // Affichage des messages

@@ -139,9 +139,11 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 2. Créez une base de données vide et un utilisateur MySQL qui y a tous les droits.
 3. Rendez le fichier `config.php` accessible en écriture au serveur web.
 4. Ouvrez le site dans un navigateur : vous êtes redirigé vers l'installeur (`install/`).
-5. Renseignez la connexion à la base, puis créez le compte administrateur.
-6. **Supprimez ou protégez le dossier `install/`** une fois l'installation terminée. Depuis la 0.9g, l'installeur
-   se verrouille de lui-même dès que `config.php` est rempli (seule la mise à jour reste ouverte).
+5. Renseignez la connexion à la base, puis créez le compte administrateur, dans le même navigateur : seul celui qui
+   a écrit `config.php` peut créer ce compte, et plus aucun ne peut l'être une fois l'installation terminée.
+6. **Supprimez ou protégez le dossier `install/`** une fois l'installation terminée. L'installeur se verrouille de
+   lui-même dès que `config.php` est rempli : depuis la 0.9k, la mise à jour et le transfert sont réservés à un
+   administrateur du jeu, qui saisit son pseudo et son mot de passe dans l'installeur.
 
 Pour développer en local :
 ```bash
@@ -151,9 +153,15 @@ php -S 127.0.0.1:8080
 ### Statistiques automatiques
 Le classement des joueurs et des alliances se recalcule depuis l'administration (« Statistiques »), ou
 automatiquement par une tâche planifiée qui lance `php tools/stats.php` depuis la racine du jeu :
-- Linux (cron, toutes les heures) : `0 * * * * cd /chemin/du/jeu && php tools/stats.php >> stats.log`
+- Linux (cron, toutes les heures) : `0 * * * * cd /chemin/du/jeu && php tools/stats.php >> /var/log/xnova-stats.log`
+  (journal hors de la racine du site) ;
 - Windows (Planificateur de tâches) : programme `php.exe`, argument `tools\stats.php`, dossier de démarrage
   = la racine du jeu.
+
+Sans tâche planifiée, le jeu peut aussi recalculer les statistiques de lui-même, au passage d'un joueur, quand le
+dernier calcul date de plus de N heures (0.9k : page « Statistiques » de l'administration, réglage des opérateurs et
+des administrateurs, désactivé par défaut). Un seul calcul tourne à la fois. Le joueur qui le déclenche attend qu'il
+se termine : sur un gros univers, préférez la tâche planifiée.
 
 ### Mise à jour et transfert
 Les modes « Mise à jour » et « Transfère » de l'installeur prennent en charge :
@@ -164,6 +172,50 @@ Les modes « Mise à jour » et « Transfère » de l'installeur prennent en cha
 Les autres bases (UGamela, versions communautaires 0.9a à 0.9c, Legacies et autres dérivés) ne sont pas migrées.
 Faites toujours une sauvegarde de votre base avant une mise à jour. Si les accents d'une très ancienne base
 s'affichent mal (encodage mal déclaré à l'époque), signalez-le : une mise à jour de réparation reste possible.
+
+Depuis la 0.9k, sur un jeu installé (`config.php` rempli), ces deux modes sont réservés à un **administrateur du
+jeu** : ouvrez `install/` et saisissez le pseudo et le mot de passe de votre compte administrateur dans le formulaire
+de l'installeur. Inutile de vous connecter au jeu : après la copie des nouveaux fichiers, n'ouvrez ses pages qu'une
+fois la base mise à jour (le code de la nouvelle version n'est pas fait pour l'ancienne base). Comme sur la page de
+connexion, 5 essais ratés pour un même pseudo depuis une même adresse bloquent ce pseudo 15 minutes. Le transfert
+vers un nouveau serveur, dont le `config.php` est encore vide, reste ouvert comme l'installation : si vous avez copié
+tout le site, ancien `config.php` compris, videz d'abord ce fichier. La mise à jour remplace aussi le mot secret
+faible écrit par les installeurs de la 0.8e et de la 0.9d (il signe les cookies de connexion) par un mot secret
+aléatoire : chacun, administrateur compris, se reconnecte une fois.
+
+### Hébergement : OPcache
+OPcache, livré avec PHP, garde en mémoire les fichiers PHP déjà compilés : sans lui, chaque page recompile une
+centaine de fichiers (fonctions du jeu, textes, `config.php`). Le jeu fonctionne avec ou sans ; il est conseillé en
+production. Réglages conseillés dans `php.ini` :
+```ini
+zend_extension=opcache
+opcache.enable=1
+opcache.memory_consumption=128
+opcache.max_accelerated_files=10000
+opcache.validate_timestamps=1
+opcache.revalidate_freq=2
+```
+Avec `validate_timestamps=1`, un fichier modifié (nouvelle version du jeu) est relu au plus tard `revalidate_freq`
+secondes après. Avec `validate_timestamps=0` (un peu plus rapide), videz le cache, en redémarrant PHP, après chaque
+copie de nouveaux fichiers ; l'installeur invalide de lui-même la copie de `config.php` qu'il vient d'écrire.
+OPcache n'accélère que la compilation : le nombre de requêtes SQL et le traitement des flottes ne changent pas.
+Son état (mémoire utilisée, taux de réussite) est affiché dans l'administration, page « Informations du serveur ».
+
+### Mise en production
+- **Ne publiez que le jeu** : ni `.git/`, ni `TRAVAUX.md`, ni sauvegardes (`*.sql`, `*.bak`, `config.php~`…) dans
+  la racine du site. Un site installé par `git clone` doit interdire l'accès à `.git/` (Apache :
+  `RedirectMatch 404 /\.git`, Nginx : `location ~ /\.git { deny all; }`).
+- **`config.php`** (connexion à la base et mot secret) : modifiable par le serveur web seulement pendant
+  l'installation, puis en lecture seule (par exemple `chmod 440`, lisible par le groupe du serveur web). Rendez-le
+  modifiable le temps d'une mise à jour depuis une 0.8e ou une 0.9d (renouvellement du mot secret). Lors d'une mise à
+  jour des fichiers, ne le remplacez jamais par le `config.php` vide du dépôt : le jeu repartirait vers l'installeur.
+- **Dossier `install/`** : supprimez-le, ou limitez son accès à votre adresse IP, une fois l'installation terminée ;
+  remettez-le seulement le temps d'une mise à jour. La page « Informations du serveur » de l'administration signale
+  un `config.php` modifiable et un dossier `install/` encore présent.
+- **Base de données** : un utilisateur MySQL limité à la base du jeu, sans le privilège `FILE`.
+- **PHP** : `display_errors = Off` (les erreurs vont dans le journal du serveur) et `expose_php = Off` ; HTTPS
+  conseillé (le cookie de connexion est alors réservé aux pages chiffrées). Le dossier `tools/` ne sert qu'en ligne de
+  commande (il refuse les visites).
 
 ## Organisation du code
 

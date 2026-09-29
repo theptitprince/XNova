@@ -21,4 +21,8 @@ $lang['adm_rep_deleted'] = 'compte supprim&eacute;';
 $lang['adm_rep_type'][1] = 'Message priv&eacute;';
 $lang['adm_rep_type'][2] = 'Message d\'alliance';
 
+// 0.9k (Administration)
+$lang['adm_rep_own'] = 'Ce signalement concerne un de vos messages : un autre membre du staff doit le traiter.';
+$lang['adm_rep_own_short'] = 'Vous concerne : laiss&eacute; &agrave; un autre membre du staff';
+
 ?>

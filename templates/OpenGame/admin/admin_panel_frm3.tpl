@@ -1,7 +1,7 @@
 <br >
 <center>
 <table width="300">
-<form action="" method="get">
+<form action="paneladmina.php?result=usr_level" method="post">
 	<tr>
 	  <td class="c" colspan="6">{adm_mod_level}</td>
 	</tr>
@@ -15,7 +15,6 @@
 	<tr>
 	  <th colspan="2"><input type="submit" value="{adm_bt_change}"></th>
 	  </tr>
-<input type="hidden" name="result" value="usr_level">
 </form>
 </table>
 </center>

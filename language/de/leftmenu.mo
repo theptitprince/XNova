@@ -95,4 +95,7 @@ $lang['tradingscrapmetal_label'] = 'Schrotth&auml;ndler';
 $lang['adm_reports'] = 'Gemeldete Nachrichten';
 $lang['adm_messall'] = 'Nachricht an alle';
 
+// 0.9k (Administration)
+$lang['adm_serverinfo'] = 'Serverinformationen';
+
 ?>

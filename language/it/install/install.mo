@@ -79,12 +79,22 @@ $lang['ins_upg_uptodate'] = 'La base &egrave; gi&agrave; aggiornata, nessuna mod
 $lang['ins_upg_noconfig'] = 'Il gioco non &egrave; ancora installato (config.php &egrave; vuoto): usate la modalit&agrave; Installa.';
 
 // XNova Renaissance 0.9g : verrou de l'installeur
-$lang['ins_locked'] = 'Il gioco &egrave; gi&agrave; installato: installazione e trasferimento sono bloccati (resta possibile solo l\'aggiornamento). Per reinstallare, svuotate prima il file config.php. Ricordate anche di eliminare la cartella install dal server.';
+$lang['ins_locked'] = 'Il gioco &egrave; gi&agrave; installato: l\'installazione &egrave; bloccata (aggiornamento e trasferimento sono riservati a un amministratore del gioco, che inserisce il suo nome utente e la sua password). Per reinstallare, svuotate prima il file config.php. Ricordate anche di eliminare la cartella install dal server.';
 
 // XNova Renaissance 0.9g : traductions
 $lang['ins_error3'] = 'Tutti i campi sono obbligatori: nome utente con lettere, cifre, _ o -, password di almeno 8 caratteri e indirizzo e-mail valido.';
 
 // XNova Renaissance 0.9g : titre de la page (« Installeur » ecrit en dur)
 $lang['ins_page_title'] = 'Installazione di XNova';
+
+// 0.9k (Administration)
+$lang['ins_admin_only'] = 'Installatore bloccato: il gioco &egrave; installato, aggiornamento e trasferimento sono riservati a un amministratore del gioco. Nome utente o password errati, oppure questo account non &egrave; amministratore.';
+$lang['ins_adm_auth'] = 'Amministratore del gioco';
+$lang['ins_adm_auth_txt'] = 'Il gioco &egrave; installato: solo un amministratore pu&ograve; avviare questa operazione. Inserite il nome utente e la password del vostro account amministratore (non serve accedere al gioco: aprite le sue pagine solo dopo l\'aggiornamento della base).';
+$lang['ins_upg_running'] = 'Un aggiornamento &egrave; gi&agrave; in corso: attendete qualche istante, poi ricaricate la pagina.';
+$lang['ins_upg_secret'] = 'La parola segreta di config.php proveniva da una vecchia versione (0.8e / 0.9d) ed era troppo debole: &egrave; stata sostituita da una parola segreta casuale. Tutti i giocatori, voi compresi, devono riconnettersi una volta.';
+$lang['ins_upg_secret_fail'] = 'La parola segreta di config.php proviene da una vecchia versione (0.8e / 0.9d) ed &egrave; troppo debole, ma non &egrave; stato possibile riscrivere il file: rendete config.php modificabile dal server web, poi rilanciate l\'aggiornamento.';
+$lang['ins_admin_nodb'] = 'Impossibile verificare l\'account amministratore: il database indicato in config.php non &egrave; raggiungibile. Controllate config.php. Per trasferire il gioco su un nuovo server, svuotate prima config.php: il trasferimento &egrave; allora aperto, come l\'installazione.';
+$lang['ins_admin_blocked'] = 'Troppi tentativi falliti per questo nome utente dal vostro indirizzo: riprovate tra 15 minuti.';
 
 ?>

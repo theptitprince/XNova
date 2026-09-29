@@ -36,6 +36,21 @@ $parse = $lang;
 			doquery("DELETE FROM {{table}}", 'chat');
 		}
 
+		// Chat active ou desactive (reglage chat_enabled) : interrupteur des operateurs et des administrateurs,
+		// formulaire POST (jeton verifie par common.php)
+		if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['chat_enabled']) && $user['authlevel'] >= 2) {
+			$game_config['chat_enabled'] = (intval($_POST['chat_enabled']) == 1) ? '1' : '0';
+			doquery("UPDATE {{table}} SET `config_value` = '". $game_config['chat_enabled'] ."' WHERE `config_name` = 'chat_enabled';", 'config');
+		}
+		$ChatOn                = (($game_config['chat_enabled'] ?? '1') != '0');
+		$parse['chat_state']   = $ChatOn ? "<font color=\"lime\">". $lang['adm_ch_on'] ."</font>" : "<font color=\"red\">". $lang['adm_ch_off'] ."</font>";
+		if ($user['authlevel'] >= 2) {
+			$parse['chat_switch'] = "<form action=\"chat.php\" method=\"post\" style=\"margin:0\"><input type=\"hidden\" name=\"chat_enabled\" value=\"". ($ChatOn ? 0 : 1) ."\">"
+			                      . "<input type=\"submit\" value=\"". ($ChatOn ? $lang['adm_ch_disable'] : $lang['adm_ch_enable']) ."\"></form>";
+		} else {
+			$parse['chat_switch'] = $lang['adm_ch_switch_level'];
+		}
+
 		// Affichage des messages
 		$query = doquery("SELECT * FROM {{table}} ORDER BY messageid DESC LIMIT 25", 'chat');
 		$i = 0;

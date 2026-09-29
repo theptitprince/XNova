@@ -5,7 +5,7 @@
 	<th>{adm_ov_data_ally}</th>
 	<th>{adm_ov_data_point}</th>
 	<th>{adm_ov_data_activ}</th>
-	<th style="word-break:break-all;"><a href="mailto:{usr_email}">{usr_email}</a></th>
+	<th style="word-break:break-all;">{usr_email}</th>
 	<th>{usr_xp_raid}</th>
 	<th>{usr_xp_min}</th>
 	<th>{state_vacancy}</th>

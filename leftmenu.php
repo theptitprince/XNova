@@ -90,6 +90,14 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	} else {
 		$parse['notes_link']  = "";
 	}
+	// Chat : lien retire quand il est desactive dans l'administration (reglage chat_enabled)
+	if (($game_config['chat_enabled'] ?? '1') != '0') {
+		$parse['chat_link']  = "<tr>
+	<td colspan=\"2\"><div><a href=\"chat.php\" accesskey=\"a\" onClick=\"f('chat.php', 'Chat', 700, 550); return false;\">".$lang['chat']."</a></div></td>
+</tr>";
+	} else {
+		$parse['chat_link']  = "";
+	}
 	$parse['servername']   = $game_config['game_name'];
 	$Menu                  = parsetemplate( $MenuTPL, $parse);
 
