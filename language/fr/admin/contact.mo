@@ -15,4 +15,7 @@ $lang['adm_ctc_mark_unread']  = "Marquer comme non lu";
 $lang['adm_ctc_delete']       = "Supprimer";
 $lang['adm_ctc_confirm']      = "Supprimer ce message ?";
 
+// 0.9k (Administration)
+$lang['adm_hidden_data'] = '(masqu&eacute;)';
+
 ?>
