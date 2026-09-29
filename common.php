@@ -134,29 +134,45 @@ if (INSTALL != true) {
 	}
 
 	if ( isset ($user) ) {
-		$_fleets = doquery("SELECT * FROM {{table}} WHERE `fleet_start_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
-		while ($row = mysqli_fetch_array($_fleets)) {
-			$array                = array();
-			$array['galaxy']      = $row['fleet_start_galaxy'];
-			$array['system']      = $row['fleet_start_system'];
-			$array['planet']      = $row['fleet_start_planet'];
-			$array['planet_type'] = $row['fleet_start_type'];
+		// Pages de sondage (chat, captcha, verification de l'inscription) et cadres (frames, menu) : ni flottes ni
+		// missiles, laisses a la page suivante (0.9k, performances)
+		if (!defined('NO_FLEET_PASS')) {
+			// Une seule lecture legere quand aucune flotte n'a rien a faire (0.9k, performances) : les boucles appelaient
+			// le gestionnaire pour chaque flotte arrivee, retours et stationnements compris. Sinon, boucles d'origine
+			// (parcours de toute la table dans son ordre physique, qui decide de l'ordre de traitement).
+			$FleetPassNow = time();
+			$FleetPassDue = false;
+			$_fleets = doquery("SELECT `fleet_mission`, `fleet_mess`, `fleet_start_time`, `fleet_end_stay`, `fleet_end_time` FROM {{table}} WHERE `fleet_start_time` < '". $FleetPassNow ."' OR `fleet_end_time` < '". $FleetPassNow ."';", 'fleets');
+			while (!$FleetPassDue && ($FleetPassRow = mysqli_fetch_assoc($_fleets))) {
+				$FleetPassDue = FleetRowIsDue($FleetPassRow, $FleetPassNow);
+			}
+			unset($FleetPassNow, $FleetPassRow);
 
-			$temp = FlyingFleetHandler ($array);
+			if ($FleetPassDue) {
+				$_fleets = doquery("SELECT `fleet_start_galaxy`, `fleet_start_system`, `fleet_start_planet`, `fleet_start_type` FROM {{table}} USE INDEX () WHERE `fleet_start_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
+				while ($row = mysqli_fetch_array($_fleets)) {
+					$array                = array();
+					$array['galaxy']      = $row['fleet_start_galaxy'];
+					$array['system']      = $row['fleet_start_system'];
+					$array['planet']      = $row['fleet_start_planet'];
+					$array['planet_type'] = $row['fleet_start_type'];
+
+					$temp = FlyingFleetHandler ($array);
+				}
+
+				$_fleets = doquery("SELECT `fleet_end_galaxy`, `fleet_end_system`, `fleet_end_planet`, `fleet_end_type` FROM {{table}} USE INDEX () WHERE `fleet_end_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
+				while ($row = mysqli_fetch_array($_fleets)) {
+					$array                = array();
+					$array['galaxy']      = $row['fleet_end_galaxy'];
+					$array['system']      = $row['fleet_end_system'];
+					$array['planet']      = $row['fleet_end_planet'];
+					$array['planet_type'] = $row['fleet_end_type'];
+
+					$temp = FlyingFleetHandler ($array);
+				}
+			}
+			unset($_fleets, $FleetPassDue);
 		}
-
-		$_fleets = doquery("SELECT * FROM {{table}} WHERE `fleet_end_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
-		while ($row = mysqli_fetch_array($_fleets)) {
-			$array                = array();
-			$array['galaxy']      = $row['fleet_end_galaxy'];
-			$array['system']      = $row['fleet_end_system'];
-			$array['planet']      = $row['fleet_end_planet'];
-			$array['planet_type'] = $row['fleet_end_type'];
-
-			$temp = FlyingFleetHandler ($array);
-		}
-
-		unset($_fleets);
 
 		// Comptes dont la suppression demandee dans les Options arrive a echeance (ACCOUNT_DELETE_DELAY apres la demande)
 		$Expired = doquery("SELECT `id` FROM {{table}} WHERE `db_deaktjava` > 0 AND `db_deaktjava` <= '". time() ."' LIMIT 10;", 'users');
@@ -170,7 +186,9 @@ if (INSTALL != true) {
 			message($lang['sys_account_deleted'], $lang['sys_account_deleted_title'], 'login.php', 5);
 		}
 
-		include($xnova_root_path . 'rak.'.$phpEx);
+		if (!defined('NO_FLEET_PASS')) {
+			include($xnova_root_path . 'rak.'.$phpEx);
+		}
 		if ( defined('IN_ADMIN') ) {
 			$UserSkin  = $user['dpath'] ?? '';
 			$local     = stristr ( $UserSkin, "http:");
