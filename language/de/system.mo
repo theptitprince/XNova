@@ -170,4 +170,8 @@ $lang['sys_destruc_planet_null'] = ', offensichtlich entwickelt die Flotte nicht
 $lang['sys_user_busy_title'] = 'Seite wird bearbeitet';
 $lang['sys_user_busy'] = 'Eine andere Seite deines Accounts wird noch bearbeitet. Warte einige Sekunden und versuche es dann noch einmal.';
 
+// 0.9k (jeu-a)
+$lang['sys_colo_noship'] = ', aber die Flotte hat kein Kolonieschiff dabei. Sie kehrt um.';
+$lang['sys_irak_no_target'] = 'Abschuss unmöglich: Dieser Planet gehört keinem anderen Spieler.';
+
 ?>

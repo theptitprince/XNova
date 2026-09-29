@@ -242,4 +242,7 @@ $lang['depot_err_deut'] = 'Nicht genug Deuterium auf dem Planeten.';
 $lang['depot_msg_title'] = 'Versorgung';
 $lang['depot_msg'] = 'Deine auf dem Planeten %s %s stationierte Flotte wurde von %s versorgt: %s Stunde(n) mehr. Ende der Stationierung: %s.';
 
+// 0.9k (jeu-a)
+$lang['gate_no_start_g'] = 'Auf dem Startmond gibt es kein Sprungtor!';
+
 ?>

@@ -26,7 +26,9 @@ function CheckLabSettingsInQueue ( $CurrentPlanet ) {
 			$CurrentBuilding = $BuildQueue;
 		}
 
-		if ($CurrentBuilding == 31 && $game_config['BuildLabWhileRun'] != 1) {
+		// Numero de l'element seul (0.9k) : sous PHP 8, « 31,4,600,...,build » == 31 est faux, le laboratoire en
+		// travaux ne bloquait plus aucune recherche
+		if (intval(explode(",", $CurrentBuilding)[0]) == 31 && $game_config['BuildLabWhileRun'] != 1) {
 			$return = false;
 		} else {
 			$return = true;

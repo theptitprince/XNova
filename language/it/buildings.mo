@@ -43,4 +43,7 @@ $lang['builds'] = 'Strutture';
 // XNova Renaissance 0.9h : lien max du chantier spatial et de la defense
 $lang['bd_max'] = 'max. %s';
 
+// 0.9k (jeu-a)
+$lang['bld_not_allowed'] = 'Questa struttura non può essere costruita su questo pianeta (forse il pianeta scelto è cambiato in un\'altra scheda).';
+
 ?>

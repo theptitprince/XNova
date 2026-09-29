@@ -177,4 +177,8 @@ $lang['sys_destruc_planet_null'] = ', visiblemente la flota no desarrolla la pot
 $lang['sys_user_busy_title'] = 'Página en curso';
 $lang['sys_user_busy'] = 'Otra página de su cuenta todavía se está procesando. Espere unos segundos y vuelva a intentarlo.';
 
+// 0.9k (jeu-a)
+$lang['sys_colo_noship'] = ', pero la flota no lleva ningún colonizador. Da media vuelta.';
+$lang['sys_irak_no_target'] = 'Lanzamiento imposible: este planeta no pertenece a ningún otro jugador.';
+
 ?>

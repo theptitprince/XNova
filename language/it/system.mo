@@ -175,4 +175,8 @@ $lang['sys_destruc_planet_null'] = ', evidentemente la flotta non sviluppa la po
 $lang['sys_user_busy_title'] = 'Pagina in corso';
 $lang['sys_user_busy'] = 'Un\'altra pagina del vostro account è ancora in elaborazione. Attendete qualche secondo e riprovate.';
 
+// 0.9k (jeu-a)
+$lang['sys_colo_noship'] = ', ma la flotta non ha nessuna colonizzatrice. Torna indietro.';
+$lang['sys_irak_no_target'] = 'Lancio impossibile: questo pianeta non appartiene a nessun altro giocatore.';
+
 ?>

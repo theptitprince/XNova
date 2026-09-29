@@ -32,10 +32,11 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 		$Element        = ($_GET['building'] ?? null);
 		$ListID         = ($_GET['listid'] ?? null);
 		if       ( isset ( $Element )) {
-			if ( !strchr ( $Element, " ") ) {
+			if ( is_string ( $Element ) && !strchr ( $Element, " ") ) {
 				if ( !strchr ( $Element, ",") ) {
 					if (in_array( trim($Element), $PlanetAllowed)) {
 						$bDoItNow = true;
+						$Element  = intval(trim($Element)); // « 1.0 » ou « 1e0 » passaient la liste et faussaient la file
 					} else {
 						$bThisIsCheated = true;
 					}
@@ -48,11 +49,34 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 		} elseif ( isset ( $ListID )) {
 			$bDoItNow = true;
 		}
+		// Lien d'interruption ou de retrait venu d'une autre planete (autre onglet) : ignore, au lieu d'agir sur la file
+		// de la planete courante
+		if (isset($ListID) && isset($_GET['planet']) && intval($_GET['planet']) != $CurrentPlanet['id']) {
+			$bDoItNow = false;
+		}
 		if ($bDoItNow == true) {
 			switch($TheCommand){
 				case 'cancel':
 					// Interrompre le premier batiment de la queue
+					// Remboursement enregistre tout de suite, en plus et sous condition (0.9k) : il passait par
+					// l'ecriture des ressources en valeurs absolues de SetNextQueueElementOnTop, qui ne les ecrit plus
+					$Before = $CurrentPlanet;
 					CancelBuildingFromQueue ( $CurrentPlanet, $CurrentUser );
+					$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+					$QryUpdatePlanet .= "`metal` = `metal` + '".         floatval($CurrentPlanet['metal'] - $Before['metal'])         ."', ";
+					$QryUpdatePlanet .= "`crystal` = `crystal` + '".     floatval($CurrentPlanet['crystal'] - $Before['crystal'])     ."', ";
+					$QryUpdatePlanet .= "`deuterium` = `deuterium` + '". floatval($CurrentPlanet['deuterium'] - $Before['deuterium']) ."', ";
+					$QryUpdatePlanet .= "`b_building` = '".              floatval($CurrentPlanet['b_building'])                        ."', ";
+					$QryUpdatePlanet .= "`b_building_id` = '".           SqlEscape($CurrentPlanet['b_building_id'])                    ."' ";
+					$QryUpdatePlanet .= "WHERE ";
+					$QryUpdatePlanet .= "`id` = '".                      intval($CurrentPlanet['id'])                                  ."' AND ";
+					$QryUpdatePlanet .= "`b_building` = '".              floatval($Before['b_building'])                               ."' AND ";
+					$QryUpdatePlanet .= "`b_building_id` = '".           SqlEscape($Before['b_building_id'])                           ."';";
+					doquery( $QryUpdatePlanet, 'planets');
+					if (mysqli_affected_rows(DbConnect()) != 1) {
+						// Deja interrompu par une autre requete (ou file changee) : pas de second remboursement
+						BuildingQueueReload ( $CurrentPlanet );
+					}
 					break;
 				case 'remove':
 					// Supprimer un element de la queue (mais pas le premier)
@@ -61,12 +85,24 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 					break;
 				case 'insert':
 					// Insere un element dans la queue
-					AddBuildingToQueue ( $CurrentPlanet, $CurrentUser, $Element, true );
+					// Memes regles que les liens de la page (0.9k) : technologies requises, case libre (file comprise),
+					// laboratoire pendant une recherche. La commande forgee passait outre.
+					// Batiment verifie obligatoire : « listid » sans « building » mettait un element vide dans la file
+					if (!is_int($Element)) {
+						break;
+					}
+					$QueueLength = (!empty($CurrentPlanet['b_building_id'])) ? count(explode(';', $CurrentPlanet['b_building_id'])) : 0;
+					$RoomIsOk    = ($CurrentPlanet['field_current'] < (CalculateMaxPlanetFields($CurrentPlanet) - $QueueLength));
+					$LabIsBusy   = ($Element == 31 && $CurrentUser['b_tech_planet'] != 0 && $game_config['BuildLabWhileRun'] != 1);
+					if (IsTechnologieAccessible($CurrentUser, $CurrentPlanet, $Element) && $RoomIsOk && !$LabIsBusy) {
+						AddBuildingToQueue ( $CurrentPlanet, $CurrentUser, $Element, true );
+					}
 					break;
 				case 'destroy':
 					// Detruit un batiment deja construit sur la planete !
 					// Terraformeur et base lunaire : jamais detruits (comme OGame ; la page d'info ne le propose pas)
-					if (!in_array(intval($Element), array(33, 41))) {
+					// Batiment verifie obligatoire, comme pour « insert »
+					if (is_int($Element) && !in_array($Element, array(33, 41))) {
 						AddBuildingToQueue ( $CurrentPlanet, $CurrentUser, $Element, false );
 					}
 					break;
@@ -74,7 +110,10 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 					break;
 			} // switch
 		} elseif ($bThisIsCheated == true) {
-			ResetThisFuckingCheater ( $CurrentUser['id'] );
+			// Batiment impossible sur ce type de planete : simple refus (0.9k, decision de theptitprince). L'original
+			// effacait et recreait tout le compte (ResetThisFuckingCheater), meme pour un lien perime d'un autre
+			// onglet ouvert sur une autre planete.
+			message ($lang['bld_not_allowed'], $lang['builds'], "buildings.php", 3);
 		}
 	}
 
@@ -83,7 +122,16 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 	$Queue = ShowBuildingQueue ( $CurrentPlanet, $CurrentUser );
 
 	// On enregistre ce que l'on a modifié dans planet !
-	BuildingSavePlanetRecord ( $CurrentPlanet );
+	// Sous condition (0.9k, a la place de BuildingSavePlanetRecord) : l'element en cours dans la base est toujours
+	// celui que cette page connait. Une file perimee (une autre requete a interrompu et rembourse l'element) n'est plus
+	// reecrite par-dessus, ce qui relancait gratuitement l'element rembourse.
+	$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+	$QryUpdatePlanet .= "`b_building_id` = '". SqlEscape($CurrentPlanet['b_building_id']) ."', ";
+	$QryUpdatePlanet .= "`b_building` = '".    floatval($CurrentPlanet['b_building'])     ."' ";
+	$QryUpdatePlanet .= "WHERE ";
+	$QryUpdatePlanet .= "`id` = '".            intval($CurrentPlanet['id'])               ."' AND ";
+	$QryUpdatePlanet .= "`b_building` = '".    floatval($CurrentPlanet['b_building'])     ."';";
+	doquery( $QryUpdatePlanet, 'planets');
 	// On enregistre ce que l'on a eventuellement modifié dans users
 	BuildingSaveUserRecord ( $CurrentUser );
 
