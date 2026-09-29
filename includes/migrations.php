@@ -433,6 +433,12 @@ function RenaissanceMigration09kJeu ( $Connection, $Prefix ) {
 				or die("MySQL Error (0.9k, planets.b_hangar_id): <b>". mysqli_error($Connection) ."</b>");
 		}
 	}
+
+	// Porte de saut : un joueur prenait la main sur la lune d'un autre (planete courante). Planete courante qui n'est
+	// pas au joueur : retour a sa planete mere ; relancable
+	mysqli_query($Connection, "UPDATE `". $Prefix ."users` AS u INNER JOIN `". $Prefix ."planets` AS p ON p.`id` = u.`current_planet` " .
+	                          "SET u.`current_planet` = u.`id_planet` WHERE p.`id_owner` <> u.`id`;")
+		or die("MySQL Error (0.9k, users.current_planet): <b>". mysqli_error($Connection) ."</b>");
 }
 
 
