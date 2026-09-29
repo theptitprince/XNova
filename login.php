@@ -33,15 +33,14 @@ include($xnova_root_path . 'common.' . $phpEx);
 		if ($login) {
 			if (PasswordCheck(($_POST['password'] ?? null), $login)) {
 				if (isset($_POST["rememberme"])) {
-					$expiretime = time() + 31536000;
+					$expiretime = time() + AUTH_COOKIE_REMEMBER;
 					$rememberme = 1;
 				} else {
 					$expiretime = 0;
 					$rememberme = 0;
 				}
 
-				$cookie = $login["id"] . "/%/" . $login["username"] . "/%/" . AuthCookieToken($login) . "/%/" . $rememberme;
-				SetAuthCookie($cookie, $expiretime);
+				SetAuthCookie(AuthCookieValue($login, $rememberme, time()), $expiretime);
 				header("Location: ./frames.php");
 				exit;
 			} else {
