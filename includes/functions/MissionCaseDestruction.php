@@ -17,7 +17,7 @@
 function MissionCaseDestruction($FleetRow) {
    global $user, $phpEx, $xnova_root_path, $pricelist, $lang, $resource, $CombatCaps;
 
-   includeLang('system');
+   // (includeLang('system') retire en 0.9k : deja charge par common.php, le recharger ne changeait rien)
 
    if ($FleetRow['fleet_start_time'] <= time()) {
 
@@ -90,33 +90,11 @@ function MissionCaseDestruction($FleetRow) {
 
 
 
-         $QryTargetTech    = "SELECT ";
+         // Technologies des deux joueurs : les lignes lues juste au-dessus (0.9k, performances ; elles etaient relues
+         // pour ces 4 colonnes, seules utilisees par le combat et le rapport)
+         $TargetTechno     = $TargetUser;
 
-         $QryTargetTech   .= "`military_tech`, `defence_tech`, `shield_tech`, `rpg_amiral` ";
-
-         $QryTargetTech   .= "FROM {{table}} ";
-
-         $QryTargetTech   .= "WHERE ";
-
-         $QryTargetTech   .= "`id` = '". $TargetUserID ."';";
-
-
-
-         $TargetTechno     = doquery($QryTargetTech, 'users', true);
-
-
-
-         $QryCurrentTech   = "SELECT ";
-
-         $QryCurrentTech  .= "`military_tech`, `defence_tech`, `shield_tech`, `rpg_amiral` ";
-
-         $QryCurrentTech  .= "FROM {{table}} ";
-
-         $QryCurrentTech  .= "WHERE ";
-
-         $QryCurrentTech  .= "`id` = '". $CurrentUserID ."';";
-
-         $CurrentTechno    = doquery($QryCurrentTech, 'users', true);
+         $CurrentTechno    = $CurrentUser;
 
 
 
@@ -170,8 +148,13 @@ function MissionCaseDestruction($FleetRow) {
          $Defenders    = array(0 => array('fleet' => $TargetFleet, 'techno' => $TargetTechno));
          $DefInfo      = array(0 => array('name' => $TargetUser['username'], 'galaxy' => $FleetRow['fleet_end_galaxy'], 'system' => $FleetRow['fleet_end_system'], 'planet' => $FleetRow['fleet_end_planet'], 'techno' => $TargetTechno));
          $HoldRows     = array();
+         $HoldUsers    = array();
          foreach (AcsHoldingFleets($FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet'], $FleetRow['fleet_end_type'], $FleetRow['fleet_start_time']) as $Row) {
-            $Owner         = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($Row['fleet_owner']) ."';", 'users', true);
+            // Joueur lu une fois par combat (0.9k, performances), comme dans MissionCaseAttack
+            if (!isset($HoldUsers[$Row['fleet_owner']])) {
+               $HoldUsers[$Row['fleet_owner']] = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($Row['fleet_owner']) ."';", 'users', true);
+            }
+            $Owner         = $HoldUsers[$Row['fleet_owner']];
             $i             = count($Defenders);
             $HoldRows[$i]  = $Row;
             $Defenders[$i] = array('fleet' => MissionCaseAttackFleet($Row['fleet_array']), 'techno' => $Owner);

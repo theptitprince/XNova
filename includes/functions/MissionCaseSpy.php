@@ -19,20 +19,6 @@ function MissionCaseSpy ( $FleetRow ) {
 	global $lang, $resource;
 
 	if ($FleetRow['fleet_start_time'] <= time()) {
-		$CurrentUser         = doquery("SELECT * FROM {{table}} WHERE `id` = '".$FleetRow['fleet_owner']."';", 'users', true);
-		$CurrentUserID       = $FleetRow['fleet_owner'];
-		$QryGetTargetPlanet  = "SELECT * FROM {{table}} ";
-		$QryGetTargetPlanet .= "WHERE ";
-		$QryGetTargetPlanet .= "`galaxy` = '". $FleetRow['fleet_end_galaxy'] ."' AND ";
-		$QryGetTargetPlanet .= "`system` = '". $FleetRow['fleet_end_system'] ."' AND ";
-		$QryGetTargetPlanet .= "`planet` = '". $FleetRow['fleet_end_planet'] ."' AND ";
-		$QryGetTargetPlanet .= "`planet_type` = '". $FleetRow['fleet_end_type'] ."';";
-		$TargetPlanet        = doquery( $QryGetTargetPlanet, 'planets', true);
-		$TargetUserID        = $TargetPlanet['id_owner'];
-		$CurrentPlanet       = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '".$FleetRow['fleet_start_galaxy']."' AND `system` = '".$FleetRow['fleet_start_system']."' AND `planet` = '".$FleetRow['fleet_start_planet']."';", 'planets', true);
-		$CurrentSpyLvl       = $CurrentUser['spy_tech'];
-		$TargetUser          = doquery("SELECT * FROM {{table}} WHERE `id` = '".$TargetUserID."';", 'users', true);
-		$TargetSpyLvl        = $TargetUser['spy_tech'];
 		$fleet               = explode(";", $FleetRow['fleet_array']);
 		$fquery              = "";
 		// Sondes de la flotte (0.9k) : la flotte est traitee une seule fois. L'original refaisait tout pour chaque type de
@@ -50,16 +36,27 @@ function MissionCaseSpy ( $FleetRow ) {
 		}
 		$Destroyed = false;
 		if ($FleetRow["fleet_mess"] != "1") {
+			// Joueurs et planetes lus seulement a l'arrivee (0.9k, performances) : le retour des sondes n'en a pas besoin
+			$CurrentUser         = doquery("SELECT `spy_tech` FROM {{table}} WHERE `id` = '".$FleetRow['fleet_owner']."';", 'users', true);
+			$CurrentUserID       = $FleetRow['fleet_owner'];
+			$QryGetTargetPlanet  = "SELECT * FROM {{table}} ";
+			$QryGetTargetPlanet .= "WHERE ";
+			$QryGetTargetPlanet .= "`galaxy` = '". $FleetRow['fleet_end_galaxy'] ."' AND ";
+			$QryGetTargetPlanet .= "`system` = '". $FleetRow['fleet_end_system'] ."' AND ";
+			$QryGetTargetPlanet .= "`planet` = '". $FleetRow['fleet_end_planet'] ."' AND ";
+			$QryGetTargetPlanet .= "`planet_type` = '". $FleetRow['fleet_end_type'] ."';";
+			$TargetPlanet        = doquery( $QryGetTargetPlanet, 'planets', true);
+			$TargetUserID        = $TargetPlanet['id_owner'];
+			// Sans le type : planete ou lune, la premiere dans l'ordre de la table (USE INDEX () : pas l'ordre de l'index)
+			$CurrentPlanet       = doquery("SELECT * FROM {{table}} USE INDEX () WHERE `galaxy` = '".$FleetRow['fleet_start_galaxy']."' AND `system` = '".$FleetRow['fleet_start_system']."' AND `planet` = '".$FleetRow['fleet_start_planet']."';", 'planets', true);
+			$CurrentSpyLvl       = $CurrentUser['spy_tech'];
+			$TargetUser          = doquery("SELECT * FROM {{table}} WHERE `id` = '".$TargetUserID."';", 'users', true);
+			$TargetSpyLvl        = $TargetUser['spy_tech'];
 			// Flotte sans sonde : pas de rapport, elle rentre
 			$TargetChances = 0;
 			$SpyerChances  = 1;
 			if ($LS > 0) {
-				$QryTargetGalaxy  = "SELECT * FROM {{table}} WHERE ";
-				$QryTargetGalaxy .= "`galaxy` = '". $FleetRow['fleet_end_galaxy'] ."' AND ";
-				$QryTargetGalaxy .= "`system` = '". $FleetRow['fleet_end_system'] ."' AND ";
-				$QryTargetGalaxy .= "`planet` = '". $FleetRow['fleet_end_planet'] ."';";
-				$TargetGalaxy     = doquery( $QryTargetGalaxy, 'galaxy', true);
-				$CristalDebris    = $TargetGalaxy['crystal'];
+				// (ligne de galaxie lue ici pour rien, retiree en 0.9k)
 				$SpyToolDebris    = $LS * 300;
 
 				$MaterialsInfo    = SpyTarget ( $TargetPlanet, 0, $lang['sys_spy_maretials'] );
