@@ -485,8 +485,10 @@ function MissionCaseDestruction($FleetRow) {
 
             $GottenMoon       = sprintf ($lang['sys_moonbuilt'], $TargetPlanetName, $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet']);
 
-         } elseif ($UserChance == 0 or $UserChance > $MoonChance) {
+         } else {
 
+            // Aussi quand la lune existe deja ou que la planete est detruite (variable non definie avant : avertissement
+            // PHP, meme rapport)
             $GottenMoon = "";
 
          }
