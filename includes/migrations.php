@@ -433,11 +433,28 @@ function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;")
 		or die("MySQL Error (login_attempts): <b>". mysqli_error($Connection) ."</b>");
 
-	// Pseudo unique : index ajoute seulement si la base n'a pas deja deux comptes du meme nom (a regler a la main
-	// par l'administrateur ; l'inscription verifie de toute facon le pseudo sous verrou)
-	$Double = mysqli_query($Connection, "SELECT `username` FROM `". $Prefix ."users` GROUP BY `username` HAVING COUNT(*) > 1 LIMIT 1;");
+	// Avertissement pour l'administrateur (Administration > Erreurs, texte affiche en HTML), ecrit une seule fois
+	$Notice = function ($Text) use ($Connection, $Prefix) {
+		$Text = mysqli_real_escape_string($Connection, $Text);
+		$Seen = mysqli_query($Connection, "SELECT 1 FROM `". $Prefix ."errors` WHERE `error_type` = 'Mise a jour 0.9k' AND `error_text` = '". $Text ."' LIMIT 1;");
+		if ($Seen && mysqli_num_rows($Seen) == 0) {
+			mysqli_query($Connection, "INSERT INTO `". $Prefix ."errors` SET `error_sender` = '0', `error_time` = '". time() ."', `error_type` = 'Mise a jour 0.9k', `error_text` = '". $Text ."';");
+		}
+	};
+
+	// Pseudo unique : index ajoute seulement si la base n'a pas deja deux comptes du meme nom (majuscules et accents
+	// confondus). Sinon l'administrateur est prevenu : a regler a la main (l'inscription verifie de toute facon le
+	// pseudo sous verrou)
+	$Double = mysqli_query($Connection, "SELECT `username` FROM `". $Prefix ."users` GROUP BY `username` HAVING COUNT(*) > 1 LIMIT 20;");
 	if ($Double && mysqli_num_rows($Double) == 0) {
 		RenaissanceAddIndexes($Connection, $Prefix, 'users', array('username' => "UNIQUE KEY `username` (`username`)"));
+	} elseif ($Double) {
+		$Names = array();
+		while ($Row = mysqli_fetch_assoc($Double)) {
+			$Names[] = htmlspecialchars($Row['username'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+		}
+		$Notice("Pseudo unique : index non cr&eacute;&eacute;, plusieurs comptes portent le m&ecirc;me pseudo (majuscules et accents confondus) : ".
+		        implode(', ', $Names) .". Renommez-les, puis ajoutez l'index : ALTER TABLE `". htmlspecialchars($Prefix) ."users` ADD UNIQUE KEY `username` (`username`);");
 	}
 
 	// Messages de joueurs pieges avant la 0.9k (gestionnaire d'evenement glisse dans une balise par le BBCode, voir
@@ -453,15 +470,19 @@ function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
 	// Adresse du jeu pour les liens des mails (voir GameUrl) : celle de l'installeur sans le dossier install/, vide
 	// hors d'une page web (le jeu reprend alors l'adresse de la page en cours). Sur un jeu installe, la mise a jour
 	// et le transfert sont reserves a l'administrateur (0.9k, partie Administration) : c'est son adresse, pas celle
-	// d'un visiteur. Une valeur deja reglee n'est jamais changee.
-	$GameUrl = '';
-	if (PHP_SAPI != 'cli' && !empty($_SERVER['HTTP_HOST'])) {
-		$Scheme  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
-		$Host    = preg_replace('/[^A-Za-z0-9.\-:\[\]]/', '', (string) $_SERVER['HTTP_HOST']);
-		$Dir     = rtrim(str_replace('\\', '/', dirname(dirname((string) ($_SERVER['SCRIPT_NAME'] ?? '/install/index.php')))), '/');
-		$GameUrl = SafeUrl($Scheme . $Host . $Dir . '/');
-	}
+	// d'un visiteur. Une valeur deja reglee n'est jamais changee ; restee vide (installation par un script), elle est
+	// remplie a la mise a jour suivante.
+	$GameUrl = !empty($_SERVER['HTTP_HOST']) ? SafeUrl(RequestGameUrl(2)) : '';
 	RenaissanceAddConfig($Connection, $Prefix, array('game_url' => $GameUrl));
+	if ($GameUrl != '') {
+		mysqli_query($Connection, "UPDATE `". $Prefix ."config` SET `config_value` = '". mysqli_real_escape_string($Connection, $GameUrl) ."' WHERE `config_name` = 'game_url' AND `config_value` = '';");
+	} elseif (!empty($_SERVER['HTTP_HOST'])) {
+		// Adresse refusee (hote IPv6 entre crochets...) : l'administrateur est prevenu, les mails reprennent l'adresse
+		// de la page en cours tant que game_url est vide
+		$Notice("Adresse du jeu (game_url) non r&eacute;gl&eacute;e : adresse de l'installation refus&eacute;e (".
+		        htmlspecialchars(RequestGameUrl(2), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ."). Les liens des mails reprennent l'adresse de la page en cours : ".
+		        "indiquez l'adresse publique du jeu dans la ligne game_url de la table ". htmlspecialchars($Prefix) ."config.");
+	}
 }
 
 

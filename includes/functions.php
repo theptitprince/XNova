@@ -134,17 +134,30 @@ function SafeUrl ( $Url ) {
 // Adresse du jeu pour les liens des mails (mot de passe oublie, bienvenue) : reglage game_url, rempli a
 // l'installation ou a la mise a jour avec l'adresse utilisee par l'administrateur. Vide : adresse de la page en
 // cours, d'apres l'en-tete Host envoye par le visiteur (ancien comportement : un visiteur pouvait y mettre le
-// domaine de son choix, et le mail authentique du jeu contenait alors un lien vers ce domaine)
+// domaine de son choix, et le mail authentique du jeu contenait alors un lien vers ce domaine).
+// L'administrateur doit garder game_url egale a l'adresse publique du jeu (changement de domaine, passage en https,
+// demenagement) : ligne game_url de la table config, en attendant son champ dans les parametres de l'administration.
 function GameUrl () {
 	global $game_config;
 	$Url = SafeUrl($game_config['game_url'] ?? '');
 	if ($Url != '') {
 		return rtrim($Url, '/') . '/';
 	}
+	return RequestGameUrl(1);
+}
+
+// Adresse du jeu d'apres la page en cours (en-tete Host), $Up dossiers au-dessus de la page : 1 pour une page du jeu,
+// 2 pour install/index.php. Dossier encode : un jeu installe dans « XNova Renaissance/ » (espace, accents) donnait
+// une adresse refusee par SafeUrl.
+function RequestGameUrl ( $Up = 1 ) {
 	$Scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
 	$Host   = preg_replace('/[^A-Za-z0-9.\-:\[\]]/', '', (string) ($_SERVER['HTTP_HOST'] ?? 'localhost'));
-	$Dir    = rtrim(str_replace('\\', '/', dirname((string) ($_SERVER['SCRIPT_NAME'] ?? '/'))), '/');
-	return $Scheme . $Host . $Dir . '/';
+	$Dir    = (string) ($_SERVER['SCRIPT_NAME'] ?? '/');
+	for ($i = 0; $i < $Up; $i++) {
+		$Dir = dirname($Dir);
+	}
+	$Dir    = rtrim(str_replace('\\', '/', $Dir), '/');
+	return $Scheme . $Host . implode('/', array_map('rawurlencode', explode('/', $Dir))) . '/';
 }
 
 // Chemin de skin : vide, chemin relatif simple ou adresse http(s)
