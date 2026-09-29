@@ -23,7 +23,21 @@ function MissionCaseColonisation ( $FleetRow ) {
 		// Déjà, sommes nous a l'aller ??
 		$iGalaxyPlace = mysqli_fetch_row(doquery ("SELECT count(*) FROM {{table}} WHERE `galaxy` = '". $FleetRow['fleet_end_galaxy']."' AND `system` = '". $FleetRow['fleet_end_system']."' AND `planet` = '". $FleetRow['fleet_end_planet']."';", 'galaxy'))[0];
 		$TargetAdress = sprintf ($lang['sys_adress_planet'], $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet']);
-		if ($iGalaxyPlace == 0) {
+		// Vaisseaux de colonisation de la flotte (0.9k) : l'envoi se fiait aux champs du formulaire, une flotte sans
+		// vaisseau de colonisation colonisait
+		$ColonyShips  = 0;
+		foreach (explode(";", $FleetRow['fleet_array']) as $Group) {
+			$Class = explode(",", $Group);
+			if (count($Class) >= 2 && intval($Class[0]) == 208) {
+				$ColonyShips += intval($Class[1]);
+			}
+		}
+		if ($ColonyShips < 1 || $FleetRow['fleet_end_planet'] > MAX_PLANET_IN_SYSTEM) {
+			// Pas de vaisseau de colonisation, ou position 16 (reservee aux expeditions) : la flotte rentre
+			$TheMessage = $lang['sys_colo_arrival'] . $TargetAdress . (($ColonyShips < 1) ? $lang['sys_colo_noship'] : $lang['sys_colo_badpos']);
+			SendSimpleMessage ( $FleetRow['fleet_owner'], '', $FleetRow['fleet_start_time'], 0, $lang['sys_colo_mess_from'], $lang['sys_colo_mess_report'], $TheMessage);
+			doquery("UPDATE {{table}} SET `fleet_mess` = '1' WHERE `fleet_id` = ". $FleetRow["fleet_id"], 'fleets');
+		} elseif ($iGalaxyPlace == 0) {
 			// Y a personne qui s'y est mis avant que je ne debarque !
 			if ($iPlanetCount >= MAX_PLAYER_PLANETS) {
 				$TheMessage = $lang['sys_colo_arrival'] . $TargetAdress . $lang['sys_colo_maxcolo'] . MAX_PLAYER_PLANETS . $lang['sys_colo_planet'];
@@ -35,6 +49,8 @@ function MissionCaseColonisation ( $FleetRow ) {
 					$TheMessage = $lang['sys_colo_arrival'] . $TargetAdress . $lang['sys_colo_allisok'];
 					SendSimpleMessage ( $FleetRow['fleet_owner'], '', $FleetRow['fleet_start_time'], 0, $lang['sys_colo_mess_from'], $lang['sys_colo_mess_report'], $TheMessage);
 					// Verifier ce que contient fleet_array (et le cas et cheant retirer un element '208'
+					// Un seul vaisseau de colonisation reste sur la colonie ; flotte d'un seul vaisseau (le vaisseau de
+					// colonisation, verifie plus haut) : elle disparait
 					if ($FleetRow['fleet_amount'] == 1) {
 						doquery("DELETE FROM {{table}} WHERE fleet_id=" . $FleetRow["fleet_id"], 'fleets');
 					} else {
@@ -75,8 +91,9 @@ function MissionCaseColonisation ( $FleetRow ) {
 			doquery("UPDATE {{table}} SET `fleet_mess` = '1' WHERE `fleet_id` = ". $FleetRow["fleet_id"], 'fleets');
 
 		}
-	} else {
-		// Retour de flotte
+	} elseif ($FleetRow['fleet_end_time'] <= time()) {
+		// Retour de flotte, a son heure (0.9k) : comme pour les autres missions. Apres un echec, la flotte rentrait
+		// aussitot (bug de la 0.8e : la flotte est traitee des que son heure d'arrivee est passee)
 		RestoreFleetToPlanet ( $FleetRow, true );
 		doquery("DELETE FROM {{table}} WHERE fleet_id=" . $FleetRow["fleet_id"], 'fleets');
 	}

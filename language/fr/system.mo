@@ -177,4 +177,8 @@ $lang['sys_destruc_planet_null'] = ", visiblement la flotte ne d&eacute;veloppe 
 $lang['sys_user_busy_title'] = 'Page en cours';
 $lang['sys_user_busy'] = 'Une autre page de votre compte est encore en cours de traitement. Patientez quelques secondes puis recommencez.';
 
+// 0.9k (jeu-a)
+$lang['sys_colo_noship'] = ", mais la flotte ne compte aucun vaisseau de colonisation. Elle rebrousse chemin.";
+$lang['sys_irak_no_target'] = "Tir impossible : cette plan&egrave;te n'appartient &agrave; aucun autre joueur.";
+
 ?>

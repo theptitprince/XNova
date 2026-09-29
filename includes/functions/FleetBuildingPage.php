@@ -19,12 +19,13 @@
 // $CurrentUser   -> Utilisateur qui a lancé la construction
 //
 function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
- 	global $lang, $resource, $phpEx, $dpath, $_POST;
+ 	global $lang, $resource, $reslist, $phpEx, $dpath, $_POST;
 
-	if (isset($_POST['fmenge'])) {
+	if (isset($_POST['fmenge']) && is_array($_POST['fmenge'])) {
 		// On vient de Cliquer ' Construire '
 		// Et y a une liste de doléances
 		$AddedInQueue                     = false;
+		$Refused                          = false;
 		// Ici, on sait precisement ce qu'on aimerait bien construire ...
 		foreach(($_POST['fmenge'] ?? null) as $Element => $Count) {
 			// Construction d'Element recuperés sur la page de Flotte ...
@@ -32,6 +33,11 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 			// Dans fmenge, on devrait trouver un tableau des elements constructibles et du nombre d'elements souhaités
 
 			$Element = intval($Element);
+			// Vaisseaux seulement (avant : n'importe quel identifiant, niveaux de batiments achetes au prix de base,
+			// boucliers et missiles commandes sans leurs limites)
+			if (!in_array($Element, $reslist['fleet'])) {
+				continue;
+			}
 			$Count   = max(0, intval($Count)); // pas de quantite negative (sinon remboursement de ressources)
 			if ($Count > OrderUnitsMax()) {
 				$Count = OrderUnitsMax();
@@ -49,13 +55,17 @@ function FleetBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 					$Ressource = GetElementRessources ( $Element, $Count );
 					$BuildTime = GetBuildingTime($CurrentUser, $CurrentPlanet, $Element);
 					if ($Count >= 1) {
-						$CurrentPlanet['metal']          -= $Ressource['metal'];
-						$CurrentPlanet['crystal']        -= $Ressource['crystal'];
-						$CurrentPlanet['deuterium']      -= $Ressource['deuterium'];
-						$CurrentPlanet['b_hangar_id']    .= "". $Element .",". $Count .";";
+						// Ressources et file enregistrees d'un coup, sous condition (requetes simultanees)
+						if (!ShipyardQueueAdd ( $CurrentPlanet, $Element, $Count, $Ressource )) {
+							$Refused = true;
+						}
 					}
 				}
 			}
+		}
+		// Commande refusee (une autre requete est passee avant) : ressources et file relues pour l'affichage
+		if ($Refused) {
+			ShipyardQueueReload ( $CurrentPlanet );
 		}
 	}
 

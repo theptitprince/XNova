@@ -44,17 +44,48 @@ function SetNextQueueElementOnTop ( &$CurrentPlanet, $CurrentUser ) {
 				}
 				if ( $HaveRessources == true ) {
 					$Needed                        = GetBuildingPrice ($CurrentUser, $CurrentPlanet, $Element, true, $ForDestroy);
-					$CurrentPlanet['metal']       -= $Needed['metal'];
-					$CurrentPlanet['crystal']     -= $Needed['crystal'];
-					$CurrentPlanet['deuterium']   -= $Needed['deuterium'];
 					$CurrentTime                   = time();
 					$BuildEndTime                  = $BuildEndTime;
-					$NewQueue                      = implode ( ";", $QueueArray );
+					// Arrondi comme la colonne entiere b_building (0.9k) : une demolition dure un temps divise par 2
+					// (fin en ,5). La copie en memoire differait de la base et les ecritures conditionnelles qui
+					// suivent (interruption, enregistrement de la page) ne trouvaient plus la ligne
+					$BuildEndTime                  = round(floatval($BuildEndTime));
+					$NewQueue                     = implode ( ";", $QueueArray );
 					if ($NewQueue == "") {
 						$NewQueue                      = '0';
 					}
-					$Loop                          = false;
-				} else {
+					// Debit atomique et conditionnel (0.9k) : l'element ne demarre que si aucun autre n'a demarre
+					// entre-temps et si les ressources suffisent encore. Avant, les ressources lues au debut de la page
+					// etaient reecrites en valeurs absolues : deux requetes simultanees depensaient deux fois le meme stock.
+					$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+					$QryUpdatePlanet .= "`metal` = `metal` - '".         floatval($Needed['metal'])     ."', ";
+					$QryUpdatePlanet .= "`crystal` = `crystal` - '".     floatval($Needed['crystal'])   ."', ";
+					$QryUpdatePlanet .= "`deuterium` = `deuterium` - '". floatval($Needed['deuterium']) ."', ";
+					$QryUpdatePlanet .= "`b_building` = '".              floatval($BuildEndTime)        ."', ";
+					$QryUpdatePlanet .= "`b_building_id` = '".           SqlEscape($NewQueue)           ."' ";
+					$QryUpdatePlanet .= "WHERE ";
+					$QryUpdatePlanet .= "`id` = '".                      intval($CurrentPlanet['id'])   ."' AND ";
+					$QryUpdatePlanet .= "`b_building` = '0' AND ";
+					$QryUpdatePlanet .= "`metal` >= '".                  floatval($Needed['metal'])     ."' AND ";
+					$QryUpdatePlanet .= "`crystal` >= '".                floatval($Needed['crystal'])   ."' AND ";
+					$QryUpdatePlanet .= "`deuterium` >= '".              floatval($Needed['deuterium']) ."';";
+					doquery( $QryUpdatePlanet, 'planets');
+					if (mysqli_affected_rows(DbConnect()) == 1) {
+						$CurrentPlanet['metal']         -= $Needed['metal'];
+						$CurrentPlanet['crystal']       -= $Needed['crystal'];
+						$CurrentPlanet['deuterium']     -= $Needed['deuterium'];
+						$CurrentPlanet['b_building']     = $BuildEndTime;
+						$CurrentPlanet['b_building_id']  = $NewQueue;
+						return;
+					}
+					// Refuse : on reprend l'etat de la base. Planete disparue, ou file deja demarree par une autre requete :
+					// rien a faire ; sinon les ressources ont ete depensees entre-temps et l'element est refuse (ci-dessous)
+					if (!BuildingQueueReload ( $CurrentPlanet ) || $CurrentPlanet['b_building'] != 0) {
+						return;
+					}
+					$HaveRessources = false;
+				}
+				if ( $HaveRessources == false ) {
 					$ElementName = $lang['tech'][$Element];
 					if ($HaveNoMoreLevel == true) {
 						$Message     = sprintf ($lang['sys_nomore_level'], $ElementName );
@@ -85,23 +116,34 @@ function SetNextQueueElementOnTop ( &$CurrentPlanet, $CurrentUser ) {
 			$NewQueue      = '0';
 		}
 
-		// Ecriture de la mise a jour dans la BDD
+		// Ecriture de la mise a jour dans la BDD : file videe, rien n'etait achetable. Les ressources n'ont pas change
+		// et ne sont plus reecrites (valeurs absolues) ; rien ne s'ecrit si un element a demarre entre-temps
 		$CurrentPlanet['b_building']    = $BuildEndTime;
 		$CurrentPlanet['b_building_id'] = $NewQueue;
 
 		$QryUpdatePlanet  = "UPDATE {{table}} SET ";
-		$QryUpdatePlanet .= "`metal` = '".         $CurrentPlanet['metal']         ."' , ";
-		$QryUpdatePlanet .= "`crystal` = '".       $CurrentPlanet['crystal']       ."' , ";
-		$QryUpdatePlanet .= "`deuterium` = '".     $CurrentPlanet['deuterium']     ."' , ";
 		$QryUpdatePlanet .= "`b_building` = '".    $CurrentPlanet['b_building']    ."' , ";
 		$QryUpdatePlanet .= "`b_building_id` = '". $CurrentPlanet['b_building_id'] ."' ";
 		$QryUpdatePlanet .= "WHERE ";
-		$QryUpdatePlanet .= "`id` = '" .           $CurrentPlanet['id']            . "';";
+		$QryUpdatePlanet .= "`id` = '" .           $CurrentPlanet['id']            . "' AND `b_building` = '0';";
 		doquery( $QryUpdatePlanet, 'planets');
 
 	}
 
 	return;
+}
+
+// Relit dans la base les ressources et la file de construction de la planete (0.9k), apres un debit ou un
+// remboursement refuse parce qu'une autre requete est passee avant. Retourne faux si la planete n'existe plus.
+function BuildingQueueReload ( &$CurrentPlanet ) {
+	$Fresh = doquery("SELECT `metal`, `crystal`, `deuterium`, `b_building`, `b_building_id` FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+	if (!$Fresh) {
+		return false;
+	}
+	foreach (array('metal', 'crystal', 'deuterium', 'b_building', 'b_building_id') as $Field) {
+		$CurrentPlanet[$Field] = $Fresh[$Field];
+	}
+	return true;
 }
 
 ?>

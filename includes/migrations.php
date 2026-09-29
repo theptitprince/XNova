@@ -411,6 +411,34 @@ function RenaissanceAddUnitColumns ( $Connection, $Prefix ) {
 
 // Jeu : triches et controles des pages du jeu
 function RenaissanceMigration09kJeu ( $Connection, $Prefix ) {
+	// Files du chantier spatial : seulement des vaisseaux et des defenses (listes $reslist['fleet'] et
+	// $reslist['defense'] de includes/vars.php, non chargees par l'installeur). Un batiment commande au chantier par un
+	// formulaire forge (niveaux au prix de base) est retire de la file, sans remboursement ; relancable
+	$Units  = array(202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217,
+	                401, 402, 403, 404, 405, 406, 407, 408, 409, 502, 503);
+	$Result = @mysqli_query($Connection, "SELECT `id`, `b_hangar_id` FROM `". $Prefix ."planets` WHERE `b_hangar_id` <> '';");
+	if (!$Result) {
+		return;
+	}
+	while ($Row = mysqli_fetch_assoc($Result)) {
+		$Queue = '';
+		foreach (explode(';', $Row['b_hangar_id']) as $Item) {
+			$Parts = explode(',', $Item);
+			if (count($Parts) >= 2 && in_array(intval($Parts[0]), $Units) && intval($Parts[1]) > 0) {
+				$Queue .= intval($Parts[0]) .",". intval($Parts[1]) .";";
+			}
+		}
+		if ($Queue !== $Row['b_hangar_id']) {
+			mysqli_query($Connection, "UPDATE `". $Prefix ."planets` SET `b_hangar_id` = '". mysqli_real_escape_string($Connection, $Queue) ."' WHERE `id` = '". intval($Row['id']) ."';")
+				or die("MySQL Error (0.9k, planets.b_hangar_id): <b>". mysqli_error($Connection) ."</b>");
+		}
+	}
+
+	// Porte de saut : un joueur prenait la main sur la lune d'un autre (planete courante). Planete courante qui n'est
+	// pas au joueur : retour a sa planete mere ; relancable
+	mysqli_query($Connection, "UPDATE `". $Prefix ."users` AS u INNER JOIN `". $Prefix ."planets` AS p ON p.`id` = u.`current_planet` " .
+	                          "SET u.`current_planet` = u.`id_planet` WHERE p.`id_owner` <> u.`id`;")
+		or die("MySQL Error (0.9k, users.current_planet): <b>". mysqli_error($Connection) ."</b>");
 }
 
 

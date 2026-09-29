@@ -243,4 +243,7 @@ $lang['depot_err_deut'] = "Pas assez de deut&eacute;rium sur la plan&egrave;te."
 $lang['depot_msg_title'] = "Ravitaillement";
 $lang['depot_msg'] = "Votre flotte stationn&eacute;e sur la plan&egrave;te %s %s a &eacute;t&eacute; ravitaill&eacute;e par %s : %s heure(s) de plus. Fin du stationnement : %s.";
 
+// 0.9k (jeu-a)
+$lang['gate_no_start_g'] = "Il n'y a pas de porte de saut sur la lune de d&eacute;part !";
+
 ?>
