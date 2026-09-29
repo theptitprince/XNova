@@ -254,7 +254,8 @@ function MissionCaseAttackBattle ( $FleetRow ) {
     if (($UserChance > 0) and ($UserChance <= $MoonChance) and empty($galenemyrow['id_luna'])) {
         $TargetPlanetName = CreateOneMoonRecord ($FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet'], $TargetUserID, $FleetRow['fleet_start_time'], '', $MoonChance);
         $GottenMoon = sprintf ($lang['sys_moonbuilt'], $TargetPlanetName, $FleetRow['fleet_end_galaxy'], $FleetRow['fleet_end_system'], $FleetRow['fleet_end_planet']);
-    } elseif ($UserChance == 0 or $UserChance > $MoonChance) {
+    } else {
+        // Aussi quand la lune existe deja (variable non definie avant : avertissement PHP, meme rapport)
         $GottenMoon = "";
     }
 
