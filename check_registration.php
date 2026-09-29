@@ -29,10 +29,11 @@ function CheckRegistrationAnswer ( $Field, $Ok, $Message ) {
 	exit();
 }
 
-$Action = (string) ($_POST['action'] ?? '');
+// Champs recus en texte seulement (un tableau ecrivait « Array to string conversion » dans le journal)
+$Action = is_string($_POST['action'] ?? null) ? $_POST['action'] : '';
 
 if ($Action == 'check_username') {
-	$Name = (string) ($_POST['username'] ?? '');
+	$Name = is_string($_POST['username'] ?? null) ? $_POST['username'] : '';
 	if ($Name == '') {
 		CheckRegistrationAnswer(1, false, $lang['error_character']);
 	}
@@ -48,7 +49,7 @@ if ($Action == 'check_username') {
 	}
 	CheckRegistrationAnswer(1, true, $lang['reg_check_user_ok']);
 } elseif ($Action == 'check_email') {
-	$Mail = strip_tags((string) ($_POST['email'] ?? ''));
+	$Mail = strip_tags(is_string($_POST['email'] ?? null) ? $_POST['email'] : '');
 	if (!is_email($Mail)) {
 		CheckRegistrationAnswer(2, false, $lang['error_mail']);
 	}
