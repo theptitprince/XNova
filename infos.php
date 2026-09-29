@@ -126,11 +126,13 @@ function ShowProductionTable ($CurrentUser, $CurrentPlanet, $BuildID, $Template)
 	$BuildTemp        = $CurrentPlanet[ 'temp_max' ];
 	$CurrentBuildtLvl = $CurrentPlanet[ $resource[$BuildID] ];
 
+	// Formules compilees une fois par requete (0.9k, voir ProdGridFormula)
+	$Formula          = ProdGridFormula ( $BuildID );
 	$BuildLevel       = ($CurrentBuildtLvl > 0) ? $CurrentBuildtLvl : 1;
-	$Prod[1]          = (floor(eval($ProdGrid[$BuildID]['formule']['metal'])     * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
-	$Prod[2]          = (floor(eval($ProdGrid[$BuildID]['formule']['crystal'])   * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
-	$Prod[3]          = (floor(eval($ProdGrid[$BuildID]['formule']['deuterium']) * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
-	$Prod[4]          = (floor(eval($ProdGrid[$BuildID]['formule']['energy'])    * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_ingenieur'] * 0.05)));
+	$Prod[1]          = (floor($Formula['metal']    ($BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet) * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
+	$Prod[2]          = (floor($Formula['crystal']  ($BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet) * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
+	$Prod[3]          = (floor($Formula['deuterium']($BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet) * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
+	$Prod[4]          = (floor($Formula['energy']   ($BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet) * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_ingenieur'] * 0.05)));
 	$BuildLevel       = "";
 
 	// Centrale a fusion : elle produit de l'energie ($Prod[4]) et consomme du deuterium ($Prod[3])
@@ -149,10 +151,10 @@ function ShowProductionTable ($CurrentUser, $CurrentPlanet, $BuildID, $Template)
 	$ProdFirst = 0;
 	for ( $BuildLevel = $BuildStartLvl; $BuildLevel < $BuildStartLvl + 10; $BuildLevel++ ) {
 		if ($BuildID != 42) {
-			$Prod[1] = (floor(eval($ProdGrid[$BuildID]['formule']['metal'])     * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
-			$Prod[2] = (floor(eval($ProdGrid[$BuildID]['formule']['crystal'])   * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
-			$Prod[3] = (floor(eval($ProdGrid[$BuildID]['formule']['deuterium']) * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
-			$Prod[4] = (floor(eval($ProdGrid[$BuildID]['formule']['energy'])    * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_ingenieur'] * 0.05)));
+			$Prod[1] = (floor($Formula['metal']    ($BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet) * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
+			$Prod[2] = (floor($Formula['crystal']  ($BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet) * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
+			$Prod[3] = (floor($Formula['deuterium']($BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet) * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_geologue']  * 0.05)));
+			$Prod[4] = (floor($Formula['energy']   ($BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet) * $game_config['resource_multiplier']) * (1 + ($CurrentUser['rpg_ingenieur'] * 0.05)));
 
 			$bloc['build_lvl']       = ($CurrentBuildtLvl == $BuildLevel) ? "<font color=\"#ff0000\">".$BuildLevel."</font>" : $BuildLevel;
 			if ($ProdFirst > 0) {
