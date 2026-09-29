@@ -28,8 +28,16 @@ function CheckCookies ( $IsUserChecked ) {
 		// Cookie envoye sous forme de tableau : erreur fatale dans explode() auparavant
 		$TheCookie  = is_string($_COOKIE[$game_config['COOKIE_NAME']]) ? explode("/%/", $_COOKIE[$game_config['COOKIE_NAME']]) : array();
 
-		// Cookie mal forme (ou ancien format, sans date de connexion, d'avant la 0.9k) : on l'efface, il faudra se
-		// reconnecter
+		// Ancien format (4 champs, sans date de connexion, d'avant la 0.9k) : cookie efface sans page d'erreur, le
+		// joueur est simplement renvoye vers la page de connexion (une seule reconnexion apres la mise a jour)
+		if (count($TheCookie) == 4) {
+			SetAuthCookie('', time() - 100000);
+			$Return['state']  = false;
+			$Return['record'] = array();
+			return $Return;
+		}
+
+		// Cookie mal forme : on l'efface, il faudra se reconnecter
 		if (count($TheCookie) != 5) {
 			SetAuthCookie('', time() - 100000);
 			message( $lang['cookies']['Error3'] );
