@@ -18,7 +18,6 @@
 function MissionCaseColonisation ( $FleetRow ) {
 	global $lang, $resource;
 
-	$iPlanetCount = mysqli_fetch_row(doquery ("SELECT count(*) FROM {{table}} WHERE `id_owner` = '". $FleetRow['fleet_owner'] ."' AND `planet_type` = '1'", 'planets'))[0];
 	if ($FleetRow['fleet_mess'] == 0) {
 		// Déjà, sommes nous a l'aller ??
 		$iGalaxyPlace = mysqli_fetch_row(doquery ("SELECT count(*) FROM {{table}} WHERE `galaxy` = '". $FleetRow['fleet_end_galaxy']."' AND `system` = '". $FleetRow['fleet_end_system']."' AND `planet` = '". $FleetRow['fleet_end_planet']."';", 'galaxy'))[0];
@@ -39,6 +38,8 @@ function MissionCaseColonisation ( $FleetRow ) {
 			doquery("UPDATE {{table}} SET `fleet_mess` = '1' WHERE `fleet_id` = ". $FleetRow["fleet_id"], 'fleets');
 		} elseif ($iGalaxyPlace == 0) {
 			// Y a personne qui s'y est mis avant que je ne debarque !
+			// Planetes du joueur comptees seulement ici, ou elles servent (0.9k, performances : a chaque passage avant)
+			$iPlanetCount = mysqli_fetch_row(doquery ("SELECT count(*) FROM {{table}} WHERE `id_owner` = '". $FleetRow['fleet_owner'] ."' AND `planet_type` = '1'", 'planets'))[0];
 			if ($iPlanetCount >= MAX_PLAYER_PLANETS) {
 				$TheMessage = $lang['sys_colo_arrival'] . $TargetAdress . $lang['sys_colo_maxcolo'] . MAX_PLAYER_PLANETS . $lang['sys_colo_planet'];
 				SendSimpleMessage ( $FleetRow['fleet_owner'], '', $FleetRow['fleet_start_time'], 0, $lang['sys_colo_mess_from'], $lang['sys_colo_mess_report'], $TheMessage);
