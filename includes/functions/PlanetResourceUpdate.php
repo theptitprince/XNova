@@ -13,7 +13,13 @@
  */
 
 function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Simul = false ) {
-	global $ProdGrid, $resource, $reslist, $game_config;
+	global $ProdGrid, $resource, $reslist, $game_config, $FleetHandlerLocked;
+	// Unites terminees par les ecritures precedentes de la page, par planete et par colonne :
+	// debut de la periode calculee (last_update de la copie ecrite) => nombre termine (voir l'enregistrement plus bas)
+	static $PageUnits = array();
+
+	// Planete telle qu'elle arrive (avant production et chantier)
+	$PlanetBefore = $CurrentPlanet;
 
 	// Mise a jour de l'espace de stockage
 	$CurrentPlanet['metal_max']     = (floor (BASE_STORAGE_SIZE * pow (1.5, $CurrentPlanet[ $resource[22] ] ))) * (1 + ($CurrentUser['rpg_stockeur'] * 0.5));
@@ -133,6 +139,67 @@ function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Sim
 	if ($Simul == false) {
 		// Gestion de l'eventuelle queue de fabrication d'elements
 		$Builded          = HandleElementBuildingQueue ( $CurrentUser, $CurrentPlanet, $ProductionTime );
+		// Unites terminees par ce calcul (avant d'y ajouter ce que d'autres pages ont change)
+		$PlanetId         = intval($CurrentPlanet['id'] ?? 0);
+		$OwnUnits         = array();
+		if ( $Builded != '' ) {
+			foreach ( $Builded as $Element => $Count ) {
+				if ($Element <> '') {
+					$OwnUnits[$resource[$Element]] = $CurrentPlanet[$resource[$Element]] - $PlanetBefore[$resource[$Element]];
+				}
+			}
+		}
+
+		// XNova Renaissance (0.9k) : ressources et unites sont ecrites en valeurs absolues, calculees sur la planete lue
+		// en debut de page. Une flotte traitee entre-temps par une autre page (livraison, pillage, retour, pertes d'un
+		// combat, missiles) etait effacee par cette ecriture. Sous verrou, on relit la planete et on ajoute ces
+		// changements aux valeurs ecrites ; sans changement, la meme ecriture qu'avant.
+		// Pas de LOCK TABLE pendant le traitement des flottes : il libererait tout leur verrou (tables deja verrouillees)
+		if (empty($FleetHandlerLocked)) {
+			doquery("LOCK TABLE {{table}} WRITE", 'planets');
+		}
+		$FreshColumns = array();
+		foreach (array('metal', 'crystal', 'deuterium') as $Res) {
+			if (isset($CurrentPlanet[$Res .'_fleets'])) {
+				$FreshColumns[] = "`". $Res ."_fleets`";
+			}
+		}
+		if ( $Builded != '' ) {
+			foreach ( $Builded as $Element => $Count ) {
+				if ($Element <> '') {
+					$FreshColumns[] = "`". $resource[$Element] ."`";
+				}
+			}
+		}
+		$FreshPlanet = (count($FreshColumns) > 0 && !empty($CurrentPlanet['id'])) ? doquery("SELECT ". implode(", ", $FreshColumns) ." FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true) : null;
+		if ($FreshPlanet) {
+			// Ressources : les flottes tiennent le compte de ce qu'elles apportent ou prennent (colonnes *_fleets) ;
+			// la difference avec la valeur lue avec la planete est ce qui a change depuis
+			foreach (array('metal', 'crystal', 'deuterium') as $Res) {
+				if (isset($FreshPlanet[$Res .'_fleets'])) {
+					$Moved = $FreshPlanet[$Res .'_fleets'] - $CurrentPlanet[$Res .'_fleets'];
+					if ($Moved != 0) {
+						$CurrentPlanet[$Res] = max(0, $CurrentPlanet[$Res] + $Moved);
+					}
+					$CurrentPlanet[$Res .'_fleets'] = $FreshPlanet[$Res .'_fleets'];
+				}
+			}
+			// Unites terminees : difference avec la valeur lue, plus ce que la page a deja termine et ecrit apres la
+			// lecture de cette copie (copie plus ancienne de la meme planete, comme celle de la vue generale : elle
+			// termine a nouveau les memes unites). Le reste vient d'autres pages (flotte rentree, pertes d'un combat).
+			foreach ( $OwnUnits as $Column => $Own ) {
+				$Known  = $PlanetBefore[$Column];
+				foreach ( $PageUnits[$PlanetId][$Column] ?? array() as $From => $Done ) {
+					if ($From >= $PlanetBefore['last_update']) {
+						$Known += $Done;
+					}
+				}
+				$Moved  = $FreshPlanet[$Column] - $Known;
+				if ($Moved != 0) {
+					$CurrentPlanet[$Column] = max(0, $CurrentPlanet[$Column] + $Moved);
+				}
+			}
+		}
 
 		// On enregistre la planete !
 		$QryUpdatePlanet  = "UPDATE {{table}} SET ";
@@ -158,9 +225,21 @@ function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Sim
 		$QryUpdatePlanet .= "WHERE ";
 		$QryUpdatePlanet .= "`id` = '". $CurrentPlanet['id'] ."';";
 
-		doquery("LOCK TABLE {{table}} WRITE", 'planets');
 		doquery($QryUpdatePlanet, 'planets');
-		doquery("UNLOCK TABLES", '');
+		if (empty($FleetHandlerLocked)) {
+			doquery("UNLOCK TABLES", '');
+		}
+		// Periodes recalculees par cette copie : remplacees par la sienne
+		foreach ( $OwnUnits as $Column => $Own ) {
+			foreach ( array_keys($PageUnits[$PlanetId][$Column] ?? array()) as $From ) {
+				if ($From >= $PlanetBefore['last_update']) {
+					unset($PageUnits[$PlanetId][$Column][$From]);
+				}
+			}
+			if ($Own != 0) {
+				$PageUnits[$PlanetId][$Column][intval($PlanetBefore['last_update'])] = $Own;
+			}
+		}
 	}
 
 }

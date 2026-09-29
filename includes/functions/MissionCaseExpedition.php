@@ -199,7 +199,11 @@ function MissionCaseExpedition ( $FleetRow ) {
 			$QryUpdatePlanet .= $FleetAutoQuery;
 			$QryUpdatePlanet .= "`metal` = `metal` + ". $FleetRow['fleet_resource_metal'] .", ";
 			$QryUpdatePlanet .= "`crystal` = `crystal` + ". $FleetRow['fleet_resource_crystal'] .", ";
-			$QryUpdatePlanet .= "`deuterium` = `deuterium` + ". $FleetRow['fleet_resource_deuterium'] ." ";
+			$QryUpdatePlanet .= "`deuterium` = `deuterium` + ". $FleetRow['fleet_resource_deuterium'] .", ";
+			// Compte des flottes (0.9k, voir PlanetResourceUpdate)
+			$QryUpdatePlanet .= "`metal_fleets` = `metal_fleets` + ". $FleetRow['fleet_resource_metal'] .", ";
+			$QryUpdatePlanet .= "`crystal_fleets` = `crystal_fleets` + ". $FleetRow['fleet_resource_crystal'] .", ";
+			$QryUpdatePlanet .= "`deuterium_fleets` = `deuterium_fleets` + ". $FleetRow['fleet_resource_deuterium'] ." ";
 			$QryUpdatePlanet .= "WHERE ";
 			$QryUpdatePlanet .= "`galaxy` = '". $FleetRow['fleet_start_galaxy'] ."' AND ";
 			$QryUpdatePlanet .= "`system` = '". $FleetRow['fleet_start_system'] ."' AND ";

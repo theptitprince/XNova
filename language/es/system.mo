@@ -173,4 +173,8 @@ $lang['sys_destruc_planet_echec'] = '. La corteza del planeta se agrieta, pero e
 $lang['sys_destruc_planet_reussi'] = ', que se agrieta y después estalla. Edificios, defensas y naves quedan aniquilados - ¡Misión cumplida! ¡El planeta ha sido destruido! La flota regresa al planeta de origen.';
 $lang['sys_destruc_planet_null'] = ', visiblemente la flota no desarrolla la potencia necesaria - ¡Misión fallida! La flota regresa al planeta de origen.';
 
+// 0.9k (Flottes)
+$lang['sys_user_busy_title'] = 'Página en curso';
+$lang['sys_user_busy'] = 'Otra página de su cuenta todavía se está procesando. Espere unos segundos y vuelva a intentarlo.';
+
 ?>

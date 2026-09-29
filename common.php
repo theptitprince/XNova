@@ -67,6 +67,28 @@ if (INSTALL != true) {
 		$user          = $Result['record'];
 	}
 
+	// Pages d'un meme joueur traitees l'une apres l'autre (0.9k, decide par theptitprince) : deux pages envoyees en
+	// meme temps lisaient le meme etat et ecrivaient chacune le leur (ressources, vaisseaux, missiles, officiers
+	// dupliques). Verrou nomme de MySQL, libere a la fermeture de la connexion en fin de page ; nom avec le prefixe des
+	// tables et la base (deux jeux sur un meme serveur MySQL). Sans verrou : les pages en lecture seule (sondage du
+	// chat toutes les 3 secondes, cadres et menu charges avec la vue generale) et l'administration (pages longues comme
+	// le calcul des statistiques, qui bloqueraient le jeu de l'administrateur).
+	if (is_array($user) && !empty($user['id']) && !defined('IN_ADMIN') && !in_array(basename($_SERVER['SCRIPT_NAME']), array('chat_msg.php', 'frames.php', 'leftmenu.php'))) {
+		// {{table}} devient ici le prefixe des tables suivi de « user_ »
+		$UserLock = doquery("SELECT GET_LOCK(LEFT(CONCAT('{{table}}". intval($user['id']) ."@', IFNULL(DATABASE(), '')), 64), 15) AS `ok`;", 'user_', true);
+		if (empty($UserLock['ok'])) {
+			// Toujours occupe apres 15 secondes : on n'attend pas plus, le joueur recommence
+			includeLang('system');
+			$dpath = empty($user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
+			message($lang['sys_user_busy'], $lang['sys_user_busy_title']);
+		}
+		// Le joueur a pu changer pendant l'attente (page precedente du meme joueur) : relu
+		$user = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($user['id']) ."';", 'users', true);
+		if (!$user) {
+			$user = array();
+		}
+	}
+
 	includeLang ("system");
 	includeLang ('tech');
 

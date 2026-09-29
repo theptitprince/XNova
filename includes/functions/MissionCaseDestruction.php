@@ -411,7 +411,14 @@ function MissionCaseDestruction($FleetRow) {
 
          $QryUpdateTarget .= "`crystal` = `crystal` - '". $Mining['crystal'] ."', ";
 
-         $QryUpdateTarget .= "`deuterium` = `deuterium` - '". $Mining['deuter'] ."' ";
+         $QryUpdateTarget .= "`deuterium` = `deuterium` - '". $Mining['deuter'] ."', ";
+
+         // Compte des flottes (0.9k, voir PlanetResourceUpdate)
+         $QryUpdateTarget .= "`metal_fleets` = `metal_fleets` - '". $Mining['metal'] ."', ";
+
+         $QryUpdateTarget .= "`crystal_fleets` = `crystal_fleets` - '". $Mining['crystal'] ."', ";
+
+         $QryUpdateTarget .= "`deuterium_fleets` = `deuterium_fleets` - '". $Mining['deuter'] ."' ";
 
          $QryUpdateTarget .= "WHERE ";
 
@@ -723,7 +730,14 @@ function MissionCaseDestruction($FleetRow) {
 
             $QryUpdatePlanet .= "`crystal` = `crystal` + ". $FleetRow['fleet_resource_crystal'] .", ";
 
-            $QryUpdatePlanet .= "`deuterium` = `deuterium` + ". $FleetRow['fleet_resource_deuterium'] ." ";
+            $QryUpdatePlanet .= "`deuterium` = `deuterium` + ". $FleetRow['fleet_resource_deuterium'] .", ";
+
+            // Compte des flottes (0.9k, voir PlanetResourceUpdate)
+            $QryUpdatePlanet .= "`metal_fleets` = `metal_fleets` + ". $FleetRow['fleet_resource_metal'] .", ";
+
+            $QryUpdatePlanet .= "`crystal_fleets` = `crystal_fleets` + ". $FleetRow['fleet_resource_crystal'] .", ";
+
+            $QryUpdatePlanet .= "`deuterium_fleets` = `deuterium_fleets` + ". $FleetRow['fleet_resource_deuterium'] ." ";
 
             $QryUpdatePlanet .= "WHERE ";
 
