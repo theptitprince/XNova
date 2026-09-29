@@ -178,4 +178,9 @@ $lang['adm_bn_forever_note'] = 'Durata tutta a 0: ban definitivo';
 $lang['adm_bn_until'] = '(fino al %s)';
 $lang['adm_bn_forever'] = '(definitivamente)';
 
+// 0.9k (Administration)
+$lang['adm_hidden_data'] = '(nascosto)';
+$lang['adm_cleaner_intro'] = 'Elimina gli ordini del cantiere spaziale e della difesa che superano il limite tecnico di unit&agrave; per ordine (liste bloccate).';
+$lang['adm_cleaner_run'] = 'Avvia la pulizia';
+
 ?>

@@ -84,7 +84,7 @@ function f(target_url,win_name,win_w,win_h) {
 </tr>
 	{added_link}
 <tr>
-	<td colspan="2"><div><a href="javascript:top.location.href='logout.php'" accesskey="s" style="color:red">{logout}</a></div></td>
+	<td colspan="2"><div><form action="logout.php" method="post" target="_top" style="margin:0"><a href="logout.php" target="_top" onclick="this.parentNode.submit(); return false;" accesskey="s" style="color:red">{logout}</a></form></div></td>
 </tr><tr>
 	<td colspan="2" background="{dpath}img/bg1.gif"><center>{infog}</center></td>
 </tr>

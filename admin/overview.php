@@ -44,7 +44,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$Count      = 0;
 		$Color      = "lime";
 		while ( $TheUser = mysqli_fetch_array($Last15Mins) ) {
-			if ($PrevIP != "") {
+			// IP et e-mail d'un compte de rang superieur : masques (un moderateur voyait ceux des administrateurs)
+			$Hidden = ($TheUser['authlevel'] > $user['authlevel']);
+			if ($PrevIP != "" && !$Hidden) {
 				if ($PrevIP == $TheUser['user_lastip']) {
 					$Color = "red";
 				} else {
@@ -63,16 +65,18 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Bloc['current_page']    = htmlspecialchars((string) $TheUser['current_page'], ENT_QUOTES, 'UTF-8');
 			$Bloc['usr_s_id']    = $TheUser['id'];
 
-			$Bloc['adm_ov_data_clip']    = $Color;
-			$Bloc['adm_ov_data_adip']    = $TheUser['user_lastip'];
+			$Bloc['adm_ov_data_clip']    = $Hidden ? "white" : $Color;
+			$Bloc['adm_ov_data_adip']    = $Hidden ? $lang['adm_hidden_data'] : $TheUser['user_lastip'];
 			$Bloc['adm_ov_data_ally']    = $TheUser['ally_name'];
 			$Bloc['adm_ov_data_point']   = pretty_number ( $UserPoints['total_points'] ?? 0 ); // pas encore classe : 0
 			$Bloc['adm_ov_data_activ']   = pretty_time ( time() - $TheUser['onlinetime'] );
 			$Bloc['adm_ov_data_pict']    = "m.gif";
-			$PrevIP                      = $TheUser['user_lastip'];
-			
-			//Tweaks vue générale 
-						$Bloc['usr_email']    = $TheUser['email'];
+			if (!$Hidden) {
+				$PrevIP                  = $TheUser['user_lastip'];
+			}
+
+			//Tweaks vue générale
+						$Bloc['usr_email']    = $Hidden ? $lang['adm_hidden_data'] : "<a href=\"mailto:". $TheUser['email'] ."\">". $TheUser['email'] ."</a>";
 									$Bloc['usr_xp_raid']    = $TheUser['xpraid'];
 									$Bloc['usr_xp_min']    = $TheUser['xpminier'];
 									

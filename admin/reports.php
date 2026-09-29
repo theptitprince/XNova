@@ -23,7 +23,15 @@ include($xnova_root_path . 'common.' . $phpEx);
 	includeLang('leftmenu');
 
 	if ($user['authlevel'] >= 1) {
-		// Actions (liens proteges par le jeton CSRF, voir CsrfGetAction)
+		// Actions (liens proteges par le jeton CSRF, voir CsrfGetAction). Un signalement d'un de ses propres messages
+		// est laisse aux autres membres du staff : un moderateur pouvait effacer ceux qui le visaient
+		$Target = intval($_GET['done'] ?? ($_GET['undone'] ?? ($_GET['delete'] ?? 0)));
+		if ($Target > 0) {
+			$Concerned = doquery("SELECT `sender_id` FROM {{table}} WHERE `id` = '". $Target ."';", 'reports', true);
+			if ($Concerned && $Concerned['sender_id'] == $user['id']) {
+				AdminMessage($lang['adm_rep_own'], $lang['adm_rep_title'], 'reports.php', 3);
+			}
+		}
 		if (isset($_GET['done'])) {
 			doquery("UPDATE {{table}} SET `is_done` = '1' WHERE `id` = '". intval($_GET['done']) ."';", 'reports');
 		} elseif (isset($_GET['undone'])) {
@@ -90,6 +98,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 			                  ? "<a href=\"reports.php?undone=". $Row['id'] ."\">". $lang['adm_rep_mark_undone'] ."</a>"
 			                  : "<a href=\"reports.php?done=". $Row['id'] ."\">". $lang['adm_rep_mark_done'] ."</a>";
 			$bloc['delete']   = "<a href=\"reports.php?delete=". $Row['id'] ."\" onclick=\"return confirm('". $lang['adm_rep_confirm'] ."');\">". $lang['adm_rep_delete'] ."</a>";
+			// Signalement d'un de ses messages : pas d'action (voir plus haut)
+			if ($Row['sender_id'] == $user['id']) {
+				$bloc['toggle'] = $lang['adm_rep_own_short'];
+				$bloc['delete'] = '-';
+			}
 			$List            .= parsetemplate($RowsTPL, $bloc);
 			if ($Row['is_done'] == 0) {
 				$Pending++;

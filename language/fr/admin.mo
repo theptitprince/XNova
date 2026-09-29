@@ -178,4 +178,9 @@ $lang['adm_bn_forever_note'] = 'Dur&eacute;e enti&egrave;rement &agrave; 0 : ban
 $lang['adm_bn_until'] = '(jusqu\'au %s)';
 $lang['adm_bn_forever'] = '(d&eacute;finitivement)';
 
+// 0.9k (Administration)
+$lang['adm_hidden_data'] = '(masqu&eacute;)';
+$lang['adm_cleaner_intro'] = 'Supprime les commandes du chantier spatial et de la d&eacute;fense qui d&eacute;passent la limite technique d\'unit&eacute;s par commande (files bloqu&eacute;es).';
+$lang['adm_cleaner_run'] = 'Lancer le nettoyage';
+
 ?>
