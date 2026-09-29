@@ -111,4 +111,7 @@ $lang['tradingscrapmetal_label'] = 'N&eacute;gociant';
 $lang['adm_reports'] = 'Messages signal&eacute;s';
 $lang['adm_messall'] = 'Message &agrave; tous';
 
+// 0.9k (Administration)
+$lang['adm_serverinfo'] = 'Informations du serveur';
+
 ?>

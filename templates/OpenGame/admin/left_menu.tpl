@@ -36,6 +36,8 @@ parent.frames['Hauptframe'].location.replace("overview.php");
 </tr><tr>
 	<td><div><a href="variables.php" accesskey="k" target="{mf}">PhpInfo</a></div></td>
 </tr><tr>
+	<td><div><a href="serverinfo.php" target="{mf}">{adm_serverinfo}</a></div></td>
+</tr><tr>
 	<td><div><a href="add_money.php" accesskey="k" target="{mf}">{adm_addres}</a></div></td>
 </tr><tr>
 	<td><div><a href="add_fleet.php" accesskey="k" target="{mf}">{adm_addfleet}</a></div></td>

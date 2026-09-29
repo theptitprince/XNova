@@ -109,4 +109,7 @@ $lang['tradingscrapmetal_label'] = 'Comerciante';
 $lang['adm_reports'] = 'Mensajes denunciados';
 $lang['adm_messall'] = 'Mensaje a todos';
 
+// 0.9k (Administration)
+$lang['adm_serverinfo'] = 'Informaci&oacute;n del servidor';
+
 ?>
