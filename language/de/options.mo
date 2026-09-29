@@ -91,4 +91,9 @@ $lang['opt_password_short'] = 'Das neue Passwort muss mindestens 8 Zeichen lang 
 $lang['opt_delac_pending'] = 'Löschung geplant am %s: Häkchen entfernen und speichern, um sie abzubrechen.';
 $lang['opt_delac_admin'] = 'Ein Administratorkonto kann nicht über die Einstellungen gelöscht werden.';
 
+// 0.9k (jeu-b) : nouvelle adresse e-mail avec le mot de passe actuel et libre ; vacances refusees avec des missiles en vol
+$lang['opt_email_password'] = 'Um die E-Mail-Adresse zu ändern, gib dein aktuelles Passwort ein: Es wurde nichts geändert.';
+$lang['opt_email_used'] = 'Diese E-Mail-Adresse wird bereits von einem anderen Konto verwendet: Es wurde nichts geändert.';
+$lang['vacation_missiles_flying'] = 'Du kannst nicht in den Urlaubsmodus wechseln, solange deine Raketen unterwegs sind.';
+
 ?>
