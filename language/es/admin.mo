@@ -172,6 +172,19 @@ $lang['adm_bn_forever'] = '(definitivamente)';
 
 // 0.9k (Administration)
 $lang['adm_hidden_data'] = '(oculto)';
+$lang['adm_stat_build'] = 'C&aacute;lculo de las estad&iacute;sticas';
+$lang['adm_stat_last'] = '&Uacute;ltimo c&aacute;lculo';
+$lang['adm_stat_never'] = 'nunca';
+$lang['adm_stat_run'] = 'Recalcular ahora';
+$lang['adm_stat_running'] = 'Ya hay un c&aacute;lculo de las estad&iacute;sticas en curso: vuelva a intentarlo dentro de unos instantes.';
+$lang['adm_stat_auto_title'] = 'C&aacute;lculo autom&aacute;tico';
+$lang['adm_stat_auto'] = 'Recalcular cuando un jugador carga una p&aacute;gina';
+$lang['adm_stat_auto_hours'] = 'si el &uacute;ltimo c&aacute;lculo tiene m&aacute;s de';
+$lang['adm_stat_hours'] = 'hora(s)';
+$lang['adm_stat_auto_note'] = 'El jugador cuya p&aacute;gina lanza el c&aacute;lculo espera a que termine. En un universo grande, es preferible la tarea programada (tools/stats.php, v&eacute;ase el README).';
+$lang['adm_stat_save'] = 'Guardar';
+$lang['adm_stat_saved'] = 'Ajustes del c&aacute;lculo autom&aacute;tico guardados.';
+$lang['adm_stat_level'] = 'Ajustes reservados a los operadores y administradores.';
 $lang['adm_cleaner_intro'] = 'Elimina los pedidos del hangar y de la defensa que superan el l&iacute;mite t&eacute;cnico de unidades por pedido (colas bloqueadas).';
 $lang['adm_cleaner_run'] = 'Iniciar la limpieza';
 $lang['adm_ch_state'] = 'Estado del chat';

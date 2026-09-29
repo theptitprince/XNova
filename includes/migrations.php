@@ -430,8 +430,14 @@ function RenaissanceMigration09kAdministration ( $Connection, $Prefix ) {
 	RenaissanceAddColumns($Connection, $Prefix, 'users', array(
 		'chat_last' => "bigint(20) NOT NULL default '0'",
 	));
+	// Date du dernier calcul des statistiques : reprise des statistiques deja calculees (0 si aucune)
+	$Last = @mysqli_query($Connection, "SELECT MAX(`stat_date`) FROM `". $Prefix ."statpoints`;");
+	$Last = $Last ? mysqli_fetch_row($Last) : null;
 	RenaissanceAddConfig($Connection, $Prefix, array(
 		'chat_enabled'    => '1',  // chat active (interrupteur de admin/chat.php)
+		'stat_auto'       => '0',  // statistiques recalculees au passage d'un joueur (admin/statbuilder.php)
+		'stat_auto_hours' => '6',  // ... quand le dernier calcul date de plus de N heures
+		'stat_last'       => (string) intval($Last[0] ?? 0),
 	));
 }
 

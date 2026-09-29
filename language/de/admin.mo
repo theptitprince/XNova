@@ -177,6 +177,19 @@ $lang['adm_bn_forever'] = '(dauerhaft)';
 
 // 0.9k (Administration)
 $lang['adm_hidden_data'] = '(verborgen)';
+$lang['adm_stat_build'] = 'Berechnung der Statistik';
+$lang['adm_stat_last'] = 'Letzte Berechnung';
+$lang['adm_stat_never'] = 'nie';
+$lang['adm_stat_run'] = 'Jetzt neu berechnen';
+$lang['adm_stat_running'] = 'Eine Berechnung der Statistik läuft bereits: Versuchen Sie es in einigen Augenblicken erneut.';
+$lang['adm_stat_auto_title'] = 'Automatische Berechnung';
+$lang['adm_stat_auto'] = 'Beim Seitenaufruf eines Spielers neu berechnen';
+$lang['adm_stat_auto_hours'] = 'wenn die letzte Berechnung älter ist als';
+$lang['adm_stat_hours'] = 'Stunde(n)';
+$lang['adm_stat_auto_note'] = 'Der Spieler, dessen Seite die Berechnung auslöst, wartet, bis sie beendet ist. Bei einem großen Universum ist die geplante Aufgabe vorzuziehen (tools/stats.php, siehe README).';
+$lang['adm_stat_save'] = 'Speichern';
+$lang['adm_stat_saved'] = 'Einstellungen der automatischen Berechnung gespeichert.';
+$lang['adm_stat_level'] = 'Einstellungen nur für Operatoren und Administratoren.';
 $lang['adm_cleaner_intro'] = 'Löscht die Aufträge der Schiffswerft und der Verteidigung, die die technische Grenze der Einheiten pro Auftrag überschreiten (blockierte Schleifen).';
 $lang['adm_cleaner_run'] = 'Bereinigung starten';
 $lang['adm_ch_state'] = 'Status des Chats';
