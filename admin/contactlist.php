@@ -35,15 +35,23 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$List     = '';
 		$Unread   = 0;
 		$Messages = doquery("SELECT * FROM {{table}} ORDER BY `is_read` ASC, `time` DESC;", 'contact');
+		// Niveau des joueurs connectes qui ont ecrit : e-mail et IP d'un rang superieur masques (un administrateur
+		// qui ecrivait connecte donnait son e-mail et son IP aux moderateurs)
+		$Levels = array();
+		$Staff  = doquery("SELECT `id`, `authlevel` FROM {{table}} WHERE `authlevel` > '". intval($user['authlevel']) ."';", 'users');
+		while ($Member = mysqli_fetch_assoc($Staff)) {
+			$Levels[$Member['id']] = $Member['authlevel'];
+		}
 		while ($Row = mysqli_fetch_assoc($Messages)) {
 			// Les textes ont ete echappes a l'enregistrement (formulaire de contact)
+			$Hidden               = isset($Levels[$Row['user_id']]);
 			$bloc                 = $lang;
 			$bloc['id']           = $Row['id'];
 			$bloc['date']         = date('d/m/Y H:i', $Row['time']);
 			$bloc['name']         = SafeText($Row['name']);
-			$bloc['email']        = SafeText($Row['email']);
+			$bloc['email']        = $Hidden ? $lang['adm_hidden_data'] : SafeText($Row['email']);
 			$bloc['player']       = ($Row['user_id'] > 0) ? $lang['adm_ctc_player'] .' #'. intval($Row['user_id']) : $lang['adm_ctc_visitor'];
-			$bloc['ip']           = SafeText($Row['ip']);
+			$bloc['ip']           = $Hidden ? $lang['adm_hidden_data'] : SafeText($Row['ip']);
 			$bloc['subject']      = $Row['subject'];
 			$bloc['message']      = nl2br($Row['message']);
 			$bloc['status']       = ($Row['is_read'] == 1) ? $lang['adm_ctc_read'] : "<font color=\"lime\">". $lang['adm_ctc_new'] ."</font>";

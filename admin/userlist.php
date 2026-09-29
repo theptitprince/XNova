@@ -33,7 +33,13 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$PageTPL = gettemplate('admin/userlist_body');
 		$RowsTPL = gettemplate('admin/userlist_rows');
 
-		$query   = doquery("SELECT * FROM {{table}} ORDER BY `". $TypeSort ."` ASC", 'users');
+		// Tri sur une donnee masquee (e-mail, IP) : comptes de rang superieur a part, en fin de liste (leur place dans
+		// le tri revelait leur IP ou leur e-mail)
+		$OrderBy = "`". $TypeSort ."` ASC";
+		if (in_array($TypeSort, array('email', 'email_2', 'user_lastip', 'ip_at_reg', 'password'), true)) {
+			$OrderBy = "(`authlevel` > '". intval($user['authlevel']) ."') ASC, ". $OrderBy;
+		}
+		$query   = doquery("SELECT * FROM {{table}} ORDER BY ". $OrderBy, 'users');
 
 		$parse                 = $lang;
 		$parse['adm_ul_table'] = "";
@@ -41,7 +47,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$Color                 = "lime";
 		$PrevIP = '';
 		while ($u = mysqli_fetch_assoc($query) ) {
-			if ($PrevIP != "") {
+			// IP et e-mail d'un compte de rang superieur (administrateur vu par un operateur) : masques
+			$Hidden = ($u['authlevel'] > $user['authlevel']);
+			if ($PrevIP != "" && !$Hidden) {
 				if ($PrevIP == $u['user_lastip']) {
 					$Color = "red";
 				} else {
@@ -55,9 +63,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			
 			$Bloc['adm_ul_data_id']     = $u['id'];
 			$Bloc['adm_ul_data_name']   = $u['username'];
-			$Bloc['adm_ul_data_mail']   = $u['email'];
-			$Bloc['ip_adress_at_register']   = $u['ip_at_reg'];
-			$Bloc['adm_ul_data_adip']   = "<font color=\"".$Color."\">". $u['user_lastip'] ."</font>";
+			$Bloc['adm_ul_data_mail']   = $Hidden ? $lang['adm_hidden_data'] : $u['email'];
+			$Bloc['ip_adress_at_register']   = $Hidden ? $lang['adm_hidden_data'] : $u['ip_at_reg'];
+			$Bloc['adm_ul_data_adip']   = $Hidden ? $lang['adm_hidden_data'] : "<font color=\"".$Color."\">". $u['user_lastip'] ."</font>";
 			$Bloc['adm_ul_data_regd']   = date ( "d/m/Y H:i:s", $u['register_time'] );
 			// Jamais connecte : « - » (la date zero s'affichait 01/01/1970)
 			$Bloc['adm_ul_data_lconn']  = ($u['onlinetime'] > 0) ? date ( "d/m/Y H:i:s", $u['onlinetime'] ) : '-';
@@ -68,7 +76,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$Bloc['adm_ul_data_actio']  = ($user['authlevel'] >= 3 && $u['authlevel'] < $user['authlevel'] && $u['id'] != $user['id']) ? "<a href=\"deletuser.php?id=". $u['id'] ."\" title=\"". $lang['adm_delplayer_title'] ."\"><img src=\"../images/r1.png\" border=\"0\"></a>" : "";
 
 
-			$PrevIP                     = $u['user_lastip'];
+			if (!$Hidden) {
+				$PrevIP                 = $u['user_lastip'];
+			}
 			$parse['adm_ul_table']     .= parsetemplate( $RowsTPL, $Bloc );
 			$i++;
 		}

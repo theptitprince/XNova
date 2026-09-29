@@ -60,7 +60,8 @@ include($xnova_root_path . 'common.' . $phpEx);
                 $ViewPage = $MaxPage;
             }
         } elseif ($DelSel == true) {
-            foreach(($_POST['sele'] ?? null) as $MessId => $Value) {
+            // Aucune case cochee : sele est la valeur du champ cache (pas un tableau), avertissement PHP auparavant
+            foreach((is_array($_POST['sele'] ?? null) ? $_POST['sele'] : array()) as $MessId => $Value) {
                 if ($Value = "on") {
                     doquery ( "DELETE FROM {{table}} WHERE `message_id` = '". intval($MessId) ."';", 'messages');
                 }
@@ -127,7 +128,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 		if (isset($_POST['delit'])) {
 			doquery ("DELETE FROM {{table}} WHERE `message_id` = '". intval($_POST['delit']) ."';", 'messages');
-			AdminMessage ( $lang['mlst_mess_del'] ." ( ". $_POST['delit'] ." )", $lang['mlst_title'], "./messagelist.".$phpEx, 3);
+			// Numero reaffiche tel que supprime (la valeur envoyee etait recopiee telle quelle dans la page)
+			AdminMessage ( $lang['mlst_mess_del'] ." ( ". intval($_POST['delit']) ." )", $lang['mlst_title'], "./messagelist.".$phpEx, 3);
 		}
 		display ($display, $lang['mlst_title'], false, '', true);
 	} else {

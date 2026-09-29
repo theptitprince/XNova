@@ -41,12 +41,14 @@ include($xnova_root_path . 'common.' . $phpEx);
 						break;
 					}
 					$UsrMain = doquery("SELECT `name` FROM {{table}} WHERE `id` = '". $SelUser['id_planet'] ."';", 'planets', true);
+					// IP et e-mail d'un compte de rang superieur : masques (un moderateur voyait ceux des administrateurs)
+					$Hidden                 = ($SelUser['authlevel'] > $user['authlevel']);
 
 					$bloc                   = $lang;
 					$bloc['answer1']        = $SelUser['id'];
 					$bloc['answer2']        = $SelUser['username'];
-					$bloc['answer3']        = $SelUser['user_lastip'];
-					$bloc['answer4']        = $SelUser['email'];
+					$bloc['answer3']        = $Hidden ? $lang['adm_hidden_data'] : $SelUser['user_lastip'];
+					$bloc['answer4']        = $Hidden ? $lang['adm_hidden_data'] : $SelUser['email'];
 					$bloc['answer5']        = $lang['adm_usr_level'][ $SelUser['authlevel'] ];
 					$bloc['answer6']        = $lang['adm_usr_genre'][ $SelUser['sex'] ];
 					$bloc['answer7']        = "[".$SelUser['id_planet']."] ".$UsrMain['name'];
@@ -70,12 +72,14 @@ include($xnova_root_path . 'common.' . $phpEx);
 						break;
 					}
 					$UsrMain = doquery("SELECT `name` FROM {{table}} WHERE `id` = '". $SelUser['id_planet'] ."';", 'planets', true);
+					// IP et e-mail d'un compte de rang superieur : masques
+					$Hidden                  = ($SelUser['authlevel'] > $user['authlevel']);
 
 					$bloc                    = $lang;
 					$bloc['answer1']         = $SelUser['id'];
 					$bloc['answer2']         = $SelUser['username'];
-					$bloc['answer3']         = $SelUser['user_lastip'];
-					$bloc['answer4']         = $SelUser['email'];
+					$bloc['answer3']         = $Hidden ? $lang['adm_hidden_data'] : $SelUser['user_lastip'];
+					$bloc['answer4']         = $Hidden ? $lang['adm_hidden_data'] : $SelUser['email'];
 					$bloc['answer5']         = $lang['adm_usr_level'][ $SelUser['authlevel'] ];
 					$bloc['answer6']         = $lang['adm_usr_genre'][ $SelUser['sex'] ];
 					$bloc['answer7']         = "[".$SelUser['id_planet']."] ".$UsrMain['name'];
@@ -112,8 +116,13 @@ include($xnova_root_path . 'common.' . $phpEx);
 					if ($user['authlevel'] < 3) {
 						message($lang['sys_noalloaw'], $lang['sys_noaccess']);
 					}
-					$Player     = SqlEscape(($_GET['player'] ?? null));
-					$NewLvl     = max(0, min(3, intval(($_GET['authlvl'] ?? null))));
+					// Formulaire POST seulement (jeton verifie par common.php) : un simple lien sans le parametre authlvl
+					// echappait au controle CSRF et remettait le compte vise au niveau 0
+					if ($_SERVER['REQUEST_METHOD'] != 'POST' || !isset($_POST['authlvl'])) {
+						message($lang['sys_csrf_error'], $lang['sys_noaccess']);
+					}
+					$Player     = SqlEscape(($_POST['player'] ?? null));
+					$NewLvl     = max(0, min(3, intval(($_POST['authlvl'] ?? null))));
 					// Compte introuvable : message (le changement etait annonce quand meme) ; pas son propre acces
 					$Target     = doquery("SELECT `id` FROM {{table}} WHERE `username` = '".$Player."' LIMIT 1;", 'users', true);
 					if (!$Target) {
@@ -128,7 +137,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 					if ($NewLvl < 3) {
 						doquery("UPDATE {{table}} SET `id_level` = '0' WHERE `id_owner` = '". intval($Target['id']) ."';", 'planets');
 					}
-					$Message    = $lang['adm_mess_lvl1']. " ". htmlspecialchars((string) ($_GET['player'] ?? ''), ENT_QUOTES, 'UTF-8') ." ".$lang['adm_mess_lvl2'];
+					$Message    = $lang['adm_mess_lvl1']. " ". htmlspecialchars((string) ($_POST['player'] ?? ''), ENT_QUOTES, 'UTF-8') ." ".$lang['adm_mess_lvl2'];
 					$Message   .= "<font color=\"red\">".$lang['adm_usr_level'][ $NewLvl ]."</font>!";
 
 					AdminMessage ( $Message, $lang['adm_mod_level'] );
@@ -137,7 +146,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 				case 'ip_search':
 					// L'adresse cherchee etait une variable inexistante ($ip) : la recherche ne trouvait jamais personne
 					$Pattern    = SqlEscape(trim((string) ($_GET['ip'] ?? '')));
-					$SelUser    = doquery("SELECT * FROM {{table}} WHERE `user_lastip` = '". $Pattern ."' OR `ip_at_reg` = '". $Pattern ."' LIMIT 50;", 'users');
+					// Comptes de rang superieur exclus : leur IP ne se devine pas par la recherche
+					$SelUser    = doquery("SELECT * FROM {{table}} WHERE (`user_lastip` = '". $Pattern ."' OR `ip_at_reg` = '". $Pattern ."') AND `authlevel` <= '". intval($user['authlevel']) ."' LIMIT 50;", 'users');
 					$bloc                   = $lang;
 					$bloc['adm_this_ip']    = htmlspecialchars((string) ($_GET['ip'] ?? ''), ENT_QUOTES, 'UTF-8');
 					$bloc['adm_plyer_lst']  = '';

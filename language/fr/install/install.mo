@@ -83,9 +83,19 @@ $lang['ins_upg_noconfig'] = 'Le jeu n\'est pas encore install&eacute; (config.ph
 $lang['ins_error3'] = 'Tous les champs sont obligatoires : pseudo en lettres, chiffres, _ ou -, mot de passe d\'au moins 8 caractères et adresse e-mail valide.';
 
 // XNova Renaissance 0.9g : verrou de l'installeur
-$lang['ins_locked'] = 'Le jeu est d&eacute;j&agrave; install&eacute; : installation et transfert sont verrouill&eacute;s (seule la mise &agrave; jour reste possible). Pour r&eacute;installer, videz d\'abord le fichier config.php. Pensez aussi &agrave; supprimer le dossier install du serveur.';
+$lang['ins_locked'] = 'Le jeu est d&eacute;j&agrave; install&eacute; : l\'installation est verrouill&eacute;e (la mise &agrave; jour et le transfert sont r&eacute;serv&eacute;s &agrave; un administrateur du jeu, qui saisit son pseudo et son mot de passe). Pour r&eacute;installer, videz d\'abord le fichier config.php. Pensez aussi &agrave; supprimer le dossier install du serveur.';
 
 // XNova Renaissance 0.9g : titre de la page (« Installeur » ecrit en dur)
 $lang['ins_page_title'] = 'Installation de XNova';
+
+// 0.9k (Administration)
+$lang['ins_admin_only'] = 'Installeur verrouill&eacute; : le jeu est install&eacute;, la mise &agrave; jour et le transfert sont r&eacute;serv&eacute;s &agrave; un administrateur du jeu. Pseudo ou mot de passe incorrect, ou ce compte n\'est pas administrateur.';
+$lang['ins_adm_auth'] = 'Administrateur du jeu';
+$lang['ins_adm_auth_txt'] = 'Le jeu est install&eacute; : seul un administrateur peut lancer cette op&eacute;ration. Saisissez le pseudo et le mot de passe de votre compte administrateur (inutile de vous connecter au jeu : ouvrez ses pages seulement apr&egrave;s la mise &agrave; jour de la base).';
+$lang['ins_upg_running'] = 'Une mise &agrave; jour est d&eacute;j&agrave; en cours : patientez quelques instants, puis rechargez la page.';
+$lang['ins_upg_secret'] = 'Le mot secret de config.php venait d\'une ancienne version (0.8e / 0.9d) et &eacute;tait trop faible : il a &eacute;t&eacute; remplac&eacute; par un mot secret al&eacute;atoire. Tous les joueurs, vous compris, doivent se reconnecter une fois.';
+$lang['ins_upg_secret_fail'] = 'Le mot secret de config.php vient d\'une ancienne version (0.8e / 0.9d) et il est trop faible, mais le fichier n\'a pas pu &ecirc;tre r&eacute;&eacute;crit : rendez config.php modifiable par le serveur web, puis relancez la mise &agrave; jour.';
+$lang['ins_admin_nodb'] = 'Impossible de v&eacute;rifier le compte administrateur : la base de donn&eacute;es indiqu&eacute;e dans config.php est injoignable. V&eacute;rifiez config.php. Pour transf&eacute;rer le jeu vers un nouveau serveur, videz d\'abord config.php : le transfert est alors ouvert, comme l\'installation.';
+$lang['ins_admin_blocked'] = 'Trop d\'essais rat&eacute;s pour ce pseudo depuis votre adresse : r&eacute;essayez dans 15 minutes.';
 
 ?>

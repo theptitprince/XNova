@@ -44,7 +44,7 @@ includeLang('leftmenu');
 			'add_moon.php'      => 2, 'ShowFlyingFleets.php'  => 1, 'banned.php'            => 1, 'md5changepass.php' => 3,
 			'unbanned.php'      => 1, 'chat.php'              => 1, 'statbuilder.php'       => 1, 'messagelist.php'  => 2,
 			'messall.php'       => 1, 'ElementQueueFixer.php' => 1, 'contactlist.php'  => 1,
-			'reports.php'       => 1, 'errors.php'            => 3,
+			'reports.php'       => 1, 'errors.php'            => 3, 'serverinfo.php'        => 2,
 		);
 		foreach ($PageLevels as $AdminPage => $Level) {
 			if ($user['authlevel'] < $Level) {

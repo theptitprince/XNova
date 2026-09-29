@@ -104,11 +104,37 @@ function StatComputeRanks ( $StatType ) {
 }
 
 // Recalcul complet des statistiques (joueurs puis alliances). Appele par admin/statbuilder.php (bouton de
-// l'administration) et par tools/stats.php (ligne de commande : tache planifiee, cron). Retourne les compteurs.
-function BuildStatistics () {
+// l'administration), par tools/stats.php (ligne de commande : tache planifiee, cron) et par le calcul automatique
+// au passage des joueurs (common.php, avec $IfOlderThan en secondes). Retourne les compteurs, ou false si un calcul
+// est deja en cours (ou, pour le calcul automatique, si le dernier est trop recent).
+function BuildStatistics ( $IfOlderThan = 0 ) {
 	global $game_config;
 
+	// Un seul calcul a la fois : verrou nomme de MySQL, pris sans attendre (deux calculs simultanes decalaient ou
+	// vidaient les classements)
+	$Lock = doquery("SELECT GET_LOCK(LEFT(CONCAT(DATABASE(), '.{{table}}'), 64), 0) AS `locked`;", 'statistics', true);
+	if (empty($Lock['locked'])) {
+		return false;
+	}
+	// Calcul automatique : date relue sous le verrou (une autre page a pu faire le calcul depuis la lecture des reglages)
+	if ($IfOlderThan > 0) {
+		$Last = doquery("SELECT `config_value` FROM {{table}} WHERE `config_name` = 'stat_last';", 'config', true);
+		if ($Last && time() - intval($Last['config_value']) < $IfOlderThan) {
+			doquery("DO RELEASE_LOCK(LEFT(CONCAT(DATABASE(), '.{{table}}'), 64));", 'statistics');
+			return false;
+		}
+	}
+	// Plus de 30 s possibles sur un gros univers : ni la limite de PHP ni un joueur qui quitte la page ne coupent le calcul
+	ignore_user_abort(true);
+	if (function_exists('set_time_limit')) {
+		@set_time_limit(0);
+	}
+
 	$StatDate   = time();
+	// Date du dernier calcul (page Statistiques de l'administration, calcul automatique), enregistree des le debut :
+	// un calcul interrompu n'est pas relance a chaque page
+	doquery("UPDATE {{table}} SET `config_value` = '". $StatDate ."' WHERE `config_name` = 'stat_last';", 'config');
+	$game_config['stat_last'] = $StatDate;
 	$Divider    = max(1, floatval($game_config['stat_settings']));
 	$UserCount  = 0;
 	$AllyCount  = 0;
@@ -270,6 +296,7 @@ function BuildStatistics () {
 	// Classement des alliances : il n'etait jamais calcule (rangs toujours a 0)
 	StatComputeRanks(2);
 
+	doquery("DO RELEASE_LOCK(LEFT(CONCAT(DATABASE(), '.{{table}}'), 64));", 'statistics');
 	return array('users' => $UserCount, 'allys' => $AllyCount, 'date' => $StatDate);
 }
 ?>
