@@ -28,4 +28,7 @@ $lang['log_welcome'] = 'Willkommen bei';
 // XNova Renaissance 0.9g : traductions
 $lang['password_lost'] = 'Passwort vergessen?';
 
+// 0.9k (Securite)
+$lang['login_blocked'] = 'Zu viele Fehlversuche: Anmeldung mit diesem Namen für 15 Minuten gesperrt.';
+
 ?>
