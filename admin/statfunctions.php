@@ -140,6 +140,7 @@ function StatReadOld ( $StatType, &$OldCount ) {
 		}
 		$OldCount[$OldRow['id_owner']]++;
 	}
+	mysqli_free_result($OldQry);
 	// Lignes en double (rare) : premiere ligne de la requete d'origine, faite par proprietaire (son ordre peut suivre
 	// un index)
 	foreach ($OldCount as $Owner => $Count) {
@@ -309,6 +310,8 @@ function BuildStatistics ( $IfOlderThan = 0 ) {
 		$Users[$CurUser['id']] = array('id' => $CurUser['id'], 'ally_id' => $CurUser['ally_id'], 'TechCount' => $Points['TechCount'],
 		                               'TechPoint' => ($Points['TechPoint'] / $Divider));
 	}
+	// Memoire : resultats lus liberes des qu'ils ne servent plus (gros univers)
+	mysqli_free_result($GameUsers);
 
 	// Planetes lues en une seule fois (une requete par joueur parcourait toute la table) : dans l'ordre de la table,
 	// donc pour chaque joueur dans l'ordre de la requete d'origine (memes sommes, dans le meme ordre)
@@ -323,6 +326,7 @@ function BuildStatistics ( $IfOlderThan = 0 ) {
 			                                              $Defense['DefensePoint'], $Fleet['FleetCount'], $Fleet['FleetPoint']);
 		}
 	}
+	mysqli_free_result($GamePlanets);
 
 	$StatRows   = array();
 	$PlanetRows = array();
@@ -376,6 +380,7 @@ function BuildStatistics ( $IfOlderThan = 0 ) {
 				$GPoints         += $PlanetPoints;
 				$PlanetRows[]     = array($CurPlanet[0], $PlanetPoints);
 			}
+			unset($UsrPlanets[$CurUser['id']]);
 		}
 
 		$StatRows[] = array(
@@ -402,7 +407,9 @@ function BuildStatistics ( $IfOlderThan = 0 ) {
 		$UserCount++;
 	}
 	StatUpdatePlanets($PlanetRows);
+	unset($PlanetRows);
 	StatWriteRows(1, $StatRows, $OldCount, $InPlace);
+	unset($StatRows);
 
 	StatComputeRanks(1);
 
