@@ -117,8 +117,19 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$parse['login_error']  = ($LoginError != '') ? "<tr><td style=\"padding-right: 4px; color: #ff5050; font-weight: bold;\">". $LoginError ."</td></tr>" : "";
 		$parse['login_username'] = htmlspecialchars($LoginName, ENT_QUOTES, 'UTF-8');
 		$Count                 = doquery('SELECT COUNT(*) as `players` FROM {{table}} WHERE 1', 'users', true);
-		$LastPlayer            = doquery('SELECT `username` FROM {{table}} ORDER BY `register_time` DESC', 'users', true);
-		$parse['last_user']    = $LastPlayer['username'];
+		// Dernier inscrit : les deux plus recents suffisent (avant : tous les joueurs tries et transferes pour en lire
+		// un). Deux inscrits dans la meme seconde : la requete d'origine decide, pour garder le meme joueur
+		$LastPlayers           = array();
+		$LastPlayer            = doquery('SELECT `username`, `register_time` FROM {{table}} ORDER BY `register_time` DESC LIMIT 2', 'users');
+		while ($LastRow = mysqli_fetch_assoc($LastPlayer)) {
+			$LastPlayers[] = $LastRow;
+		}
+		if (count($LastPlayers) == 2 && $LastPlayers[0]['register_time'] == $LastPlayers[1]['register_time']) {
+			$LastPlayer        = doquery('SELECT `username` FROM {{table}} ORDER BY `register_time` DESC', 'users', true);
+			$parse['last_user'] = $LastPlayer['username'];
+		} else {
+			$parse['last_user'] = $LastPlayers[0]['username'] ?? null;
+		}
 		$PlayersOnline         = doquery("SELECT COUNT(DISTINCT(id)) as `onlinenow` FROM {{table}} WHERE `onlinetime` > '" . (time()-900) ."';", 'users', true);
 		$parse['online_users'] = $PlayersOnline['onlinenow'];
 		$parse['users_amount'] = $Count['players'];

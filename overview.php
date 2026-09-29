@@ -20,7 +20,8 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-$lunarow = doquery("SELECT * FROM {{table}} WHERE `id_owner` = '" . $planetrow['id_owner'] . "' AND `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `lunapos` = '" . $planetrow['planet'] . "';", 'lunas', true);
+// (seul l'id de la lune sert, plus bas)
+$lunarow = doquery("SELECT `id` FROM {{table}} WHERE `id_owner` = '" . $planetrow['id_owner'] . "' AND `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `lunapos` = '" . $planetrow['planet'] . "';", 'lunas', true);
 
 // (CheckPlanetUsedFields($lunarow) retire : $lunarow vient de la table des lunes, sans batiments ni cases)
 
@@ -40,7 +41,7 @@ $time = time();
 $duree = $time + (intval($game_config['ban_duration']) * 86400);
 $op = stripslashes($game_config['bot_name']);
 $mail = stripslashes($game_config['bot_adress']);
-$sql = doquery("SELECT * FROM {{table}} WHERE `user_lastip`='{$ip}'", 'users');
+$sql = doquery("SELECT `username` FROM {{table}} WHERE `user_lastip`='{$ip}'", 'users');
 $boucle = 0;
 $Names = array();
    while($m = mysqli_fetch_array($sql)){
@@ -325,13 +326,14 @@ switch ($mode) {
 
                     $fpage[$Key] .= InsertJavaScriptChronoApplet ("fm", $Record, $time, true);
 
-                    $planet_start = doquery("SELECT * FROM {{table}} WHERE
+                    // (seul le nom sert)
+                    $planet_start = doquery("SELECT `name` FROM {{table}} WHERE
 						galaxy = '" . $irak['galaxy'] . "' AND
 						system = '" . $irak['system'] . "' AND
 						planet = '" . $irak['planet'] . "' AND
 						planet_type = '1'", 'planets');
 
-                    $user_planet = doquery("SELECT * FROM {{table}} WHERE
+                    $user_planet = doquery("SELECT `name` FROM {{table}} WHERE
 						galaxy = '" . $irak['galaxy_angreifer'] . "' AND
 						system = '" . $irak['system_angreifer'] . "' AND
 						planet = '" . $irak['planet_angreifer'] . "' AND
@@ -475,10 +477,23 @@ switch ($mode) {
             } else {
                 $parse['building'] = $lang['free'];
             }
-            $query = doquery('SELECT username FROM {{table}} ORDER BY register_time DESC', 'users', true);
-            $parse['last_user'] = $query['username'];
-            $query = doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE onlinetime>" . (time()-900), 'users', true);
-            $parse['online_users'] = $query[0];
+            // Dernier inscrit : les deux plus recents suffisent (avant : tous les joueurs tries et transferes pour en
+            // lire un). Deux inscrits dans la meme seconde : la requete d'origine decide, pour garder le meme joueur
+            $LastUsers = array();
+            $query = doquery('SELECT username, register_time FROM {{table}} ORDER BY register_time DESC LIMIT 2', 'users');
+            while ($LastUser = mysqli_fetch_assoc($query)) {
+                $LastUsers[] = $LastUser;
+            }
+            if (count($LastUsers) == 2 && $LastUsers[0]['register_time'] == $LastUsers[1]['register_time']) {
+                $query = doquery('SELECT username FROM {{table}} ORDER BY register_time DESC', 'users', true);
+                $parse['last_user'] = $query['username'];
+            } else {
+                $parse['last_user'] = $LastUsers[0]['username'] ?? null;
+            }
+            // Joueurs en ligne : les deux compteurs de la page (plus bas : >= il y a 15 minutes) en une seule lecture
+            $OnlineTime  = time() - 900;
+            $OnlineCount = doquery("SELECT COALESCE(SUM(onlinetime>" . $OnlineTime . "), 0), COUNT(*) FROM {{table}} WHERE onlinetime>='" . $OnlineTime . "'", 'users', true);
+            $parse['online_users'] = $OnlineCount[0];
             // $count = doquery(","users",true);
             $parse['users_amount'] = $game_config['users_amount'];
             // Rajout d'une barre pourcentage
@@ -516,8 +531,7 @@ switch ($mode) {
             $parse['raidswin'] = intval($user['raidswin']);
             $parse['raidsloose'] = intval($user['raidsloose']); // NULL tant qu'aucun raid n'est perdu
             // Compteur de Membres en ligne
-            $OnlineUsers = doquery("SELECT COUNT(*) FROM {{table}} WHERE onlinetime>='" . (time()-15 * 60) . "'", 'users', 'true');
-            $parse['number_members_online'] = $OnlineUsers[0];
+            $parse['number_members_online'] = $OnlineCount[1];
 
             $page = parsetemplate(gettemplate('overview_body'), $parse);
 
