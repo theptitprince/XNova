@@ -38,6 +38,12 @@ if (isset($resource) && !empty($resource[401])) {
 	$iraks = doquery("SELECT * FROM {{table}} WHERE zeit <= '" . time() . "'", 'iraks');
 
 	while ($selected_row = mysqli_fetch_array($iraks)) {
+		// Missile reserve avant d'etre traite (0.9k) : deux pages chargees en meme temps traitaient le meme impact
+		// (degats doubles, deux rapports). Seule la page qui l'efface le traite.
+		doquery("DELETE FROM {{table}} WHERE id = '" . intval($selected_row['id']) . "'", 'iraks');
+		if (mysqli_affected_rows(DbConnect()) != 1) {
+			continue;
+		}
 		if ($selected_row['zeit'] != '' && $selected_row['galaxy'] != '' && $selected_row['system'] != '' && $selected_row['planet'] != '' && is_numeric($selected_row['owner']) && is_numeric($selected_row['zielid']) && is_numeric($selected_row['anzahl']) && !empty($selected_row['anzahl'])) {
 			$planetrow = doquery("SELECT * FROM {{table}} WHERE
 								galaxy = '" . $selected_row['galaxy'] . "' AND
@@ -53,9 +59,8 @@ if (isset($resource) && !empty($resource[401])) {
 			$select_owner = doquery("SELECT military_tech FROM {{table}} WHERE
 								id = '" . $selected_row['owner'] . "'", 'users');
 
-			if (mysqli_num_rows($planetrow) != 1 OR mysqli_num_rows($select_ziel) != 1) {
-				doquery("DELETE FROM {{table}} WHERE id = '" . $selected_row['id'] . "'", 'iraks');
-			} else {
+			// Cible disparue : missile perdu (deja efface)
+			if (mysqli_num_rows($planetrow) == 1 AND mysqli_num_rows($select_ziel) == 1) {
 				$verteidiger = mysqli_fetch_array($select_ziel);
 				$angreifer = mysqli_fetch_array($select_owner);
 				$planet = mysqli_fetch_array($planetrow);
@@ -111,13 +116,15 @@ if (isset($resource) && !empty($resource[401])) {
 						$message = sprintf($lang['sys_irak_some_intercepted'], intval($planet['interceptor_misil'])) . "<br>";
 					}
 
-					foreach ($irak['zerstoert'] as $id => $anzahl) {
+					// ($DefIndex et non $id : rak.php tourne au milieu de common.php, et alliance.php lit $id avant de
+					// l'inclure ; un impact pendant sa page changeait le membre ou le rang vise)
+					foreach ($irak['zerstoert'] as $DefIndex => $anzahl) {
 						// Index 9 (missiles d'interception consommes) : deja mis a 0 juste au-dessus (ils etaient
 						// retires une seconde fois : stock negatif)
-						if (!empty($anzahl) && ($id < 9 || $id == 12)) {
-							$message .= $lang['tech'][$ids[$id]] . " (- " . $anzahl . ")<br>";
+						if (!empty($anzahl) && ($DefIndex < 9 || $DefIndex == 12)) {
+							$message .= $lang['tech'][$ids[$DefIndex]] . " (- " . $anzahl . ")<br>";
 
-							$x = $resource[$ids[$id]];
+							$x = $resource[$ids[$DefIndex]];
 
 							doquery("UPDATE {{table}} SET " . $x . " = GREATEST(" . $x . " - " . intval($anzahl) . ", 0) WHERE id = " . $planet['id'], 'planets');
 						}
@@ -138,17 +145,8 @@ if (isset($resource) && !empty($resource[401])) {
 					$name = $array['name'];
 				}
 
-				$planet_2 = doquery("SELECT * FROM {{table}} WHERE
-								galaxy = '" . $selected_row['galaxy'] . "' AND
-								system = '" . $selected_row['system'] . "' AND
-								planet = '" . $selected_row['planet'] . "' AND
-								planet_type = '1'", 'planets');
-
-				if (mysqli_num_rows($planet_2) == 1) {
-					$array = mysqli_fetch_array($planet_2);
-
-					$name_deffer = $array['name'];
-				}
+				// Nom de la cible : deja lu plus haut (la meme requete etait refaite)
+				$name_deffer = $planet['name'];
 
 				$FromLink = '<a href="galaxy.php?mode=3&galaxy=' . $selected_row['galaxy_angreifer'] . '&system=' . $selected_row['system_angreifer'] . '&planet=' . $selected_row['planet_angreifer'] . '">[' . $selected_row['galaxy_angreifer'] . ':' . $selected_row['system_angreifer'] . ':' . $selected_row['planet_angreifer'] . ']</a>';
 				$ToLink   = '<a href="galaxy.php?mode=3&galaxy=' . $selected_row['galaxy'] . '&system=' . $selected_row['system'] . '&planet=' . $selected_row['planet'] . '">[' . $selected_row['galaxy'] . ':' . $selected_row['system'] . ':' . $selected_row['planet'] . ']</a>';
@@ -158,11 +156,7 @@ if (isset($resource) && !empty($resource[401])) {
 					$message = $lang['sys_irak_no_defense'];
 
 				SendSimpleMessage ( $selected_row['zielid'], '', time(), 3, $lang['sys_irak_sender'], $lang['sys_irak_subject'], $message_vorlage . $message );
-
-				doquery("DELETE FROM {{table}} WHERE id = '" . $selected_row['id'] . "'", 'iraks');
 			}
-		} else {
-			doquery("DELETE FROM {{table}} WHERE id = '" . $selected_row['id'] . "'", 'iraks');
 		}
 	}
 }
