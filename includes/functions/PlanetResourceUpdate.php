@@ -13,7 +13,12 @@
  */
 
 function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Simul = false ) {
-	global $ProdGrid, $resource, $reslist, $game_config;
+	global $ProdGrid, $resource, $reslist, $game_config, $FleetHandlerLocked;
+	// Unites ecrites par cette fonction pendant la page, par planete (voir l'enregistrement plus bas)
+	static $WrittenUnits = array();
+
+	// Planete telle qu'elle arrive (avant production et chantier)
+	$PlanetBefore = $CurrentPlanet;
 
 	// Mise a jour de l'espace de stockage
 	$CurrentPlanet['metal_max']     = (floor (BASE_STORAGE_SIZE * pow (1.5, $CurrentPlanet[ $resource[22] ] ))) * (1 + ($CurrentUser['rpg_stockeur'] * 0.5));
@@ -134,6 +139,56 @@ function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Sim
 		// Gestion de l'eventuelle queue de fabrication d'elements
 		$Builded          = HandleElementBuildingQueue ( $CurrentUser, $CurrentPlanet, $ProductionTime );
 
+		// XNova Renaissance (0.9k) : ressources et unites sont ecrites en valeurs absolues, calculees sur la planete lue
+		// en debut de page. Une flotte traitee entre-temps par une autre page (livraison, pillage, retour, pertes d'un
+		// combat, missiles) etait effacee par cette ecriture. Sous verrou, on relit la planete et on ajoute ces
+		// changements aux valeurs ecrites ; sans changement, la meme ecriture qu'avant.
+		// Pas de LOCK TABLE pendant le traitement des flottes : il libererait tout leur verrou (tables deja verrouillees)
+		if (empty($FleetHandlerLocked)) {
+			doquery("LOCK TABLE {{table}} WRITE", 'planets');
+		}
+		$FreshColumns = array();
+		foreach (array('metal', 'crystal', 'deuterium') as $Res) {
+			if (isset($CurrentPlanet[$Res .'_fleets'])) {
+				$FreshColumns[] = "`". $Res ."_fleets`";
+			}
+		}
+		if ( $Builded != '' ) {
+			foreach ( $Builded as $Element => $Count ) {
+				if ($Element <> '') {
+					$FreshColumns[] = "`". $resource[$Element] ."`";
+				}
+			}
+		}
+		$FreshPlanet = (count($FreshColumns) > 0 && !empty($CurrentPlanet['id'])) ? doquery("SELECT ". implode(", ", $FreshColumns) ." FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true) : null;
+		if ($FreshPlanet) {
+			// Ressources : les flottes tiennent le compte de ce qu'elles apportent ou prennent (colonnes *_fleets) ;
+			// la difference avec la valeur lue avec la planete est ce qui a change depuis
+			foreach (array('metal', 'crystal', 'deuterium') as $Res) {
+				if (isset($FreshPlanet[$Res .'_fleets'])) {
+					$Moved = $FreshPlanet[$Res .'_fleets'] - $CurrentPlanet[$Res .'_fleets'];
+					if ($Moved != 0) {
+						$CurrentPlanet[$Res] = max(0, $CurrentPlanet[$Res] + $Moved);
+					}
+					$CurrentPlanet[$Res .'_fleets'] = $FreshPlanet[$Res .'_fleets'];
+				}
+			}
+			// Unites terminees : difference avec la valeur lue (ou deja ecrite ici pendant la page : une copie plus
+			// ancienne de la meme planete, comme celle de la vue generale, reecrit le meme total)
+			if ( $Builded != '' ) {
+				foreach ( $Builded as $Element => $Count ) {
+					if ($Element <> '') {
+						$Column = $resource[$Element];
+						$Known  = $WrittenUnits[$CurrentPlanet['id']][$Column] ?? $PlanetBefore[$Column];
+						$Moved  = $FreshPlanet[$Column] - $Known;
+						if ($Moved != 0) {
+							$CurrentPlanet[$Column] = max(0, $CurrentPlanet[$Column] + $Moved);
+						}
+					}
+				}
+			}
+		}
+
 		// On enregistre la planete !
 		$QryUpdatePlanet  = "UPDATE {{table}} SET ";
 		$QryUpdatePlanet .= "`metal` = '"            . $CurrentPlanet['metal']             ."', ";
@@ -158,9 +213,17 @@ function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Sim
 		$QryUpdatePlanet .= "WHERE ";
 		$QryUpdatePlanet .= "`id` = '". $CurrentPlanet['id'] ."';";
 
-		doquery("LOCK TABLE {{table}} WRITE", 'planets');
 		doquery($QryUpdatePlanet, 'planets');
-		doquery("UNLOCK TABLES", '');
+		if (empty($FleetHandlerLocked)) {
+			doquery("UNLOCK TABLES", '');
+		}
+		if ( $Builded != '' ) {
+			foreach ( $Builded as $Element => $Count ) {
+				if ($Element <> '') {
+					$WrittenUnits[$CurrentPlanet['id']][$resource[$Element]] = $CurrentPlanet[$resource[$Element]];
+				}
+			}
+		}
 	}
 
 }

@@ -205,7 +205,11 @@ function MissionCaseAttackBattle ( $FleetRow ) {
     $QryUpdateTarget .= $TargetPlanetUpd;
     $QryUpdateTarget .= "`metal` = `metal` - '" . $Mining['metal'] . "', ";
     $QryUpdateTarget .= "`crystal` = `crystal` - '" . $Mining['crystal'] . "', ";
-    $QryUpdateTarget .= "`deuterium` = `deuterium` - '" . $Mining['deuter'] . "' ";
+    $QryUpdateTarget .= "`deuterium` = `deuterium` - '" . $Mining['deuter'] . "', ";
+    // Compte des flottes (0.9k, voir PlanetResourceUpdate)
+    $QryUpdateTarget .= "`metal_fleets` = `metal_fleets` - '" . $Mining['metal'] . "', ";
+    $QryUpdateTarget .= "`crystal_fleets` = `crystal_fleets` - '" . $Mining['crystal'] . "', ";
+    $QryUpdateTarget .= "`deuterium_fleets` = `deuterium_fleets` - '" . $Mining['deuter'] . "' ";
     $QryUpdateTarget .= "WHERE ";
     $QryUpdateTarget .= "`galaxy` = '" . $FleetRow['fleet_end_galaxy'] . "' AND ";
     $QryUpdateTarget .= "`system` = '" . $FleetRow['fleet_end_system'] . "' AND ";
