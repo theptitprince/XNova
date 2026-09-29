@@ -174,5 +174,11 @@ $lang['adm_bn_forever'] = '(definitivamente)';
 $lang['adm_hidden_data'] = '(oculto)';
 $lang['adm_cleaner_intro'] = 'Elimina los pedidos del hangar y de la defensa que superan el l&iacute;mite t&eacute;cnico de unidades por pedido (colas bloqueadas).';
 $lang['adm_cleaner_run'] = 'Iniciar la limpieza';
+$lang['adm_ch_state'] = 'Estado del chat';
+$lang['adm_ch_on'] = 'Chat activado';
+$lang['adm_ch_off'] = 'Chat desactivado: enlace retirado del men&uacute; de los jugadores';
+$lang['adm_ch_enable'] = 'Activar el chat';
+$lang['adm_ch_disable'] = 'Desactivar el chat';
+$lang['adm_ch_switch_level'] = 'Reservado a los operadores y administradores';
 
 ?>

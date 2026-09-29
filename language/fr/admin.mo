@@ -182,5 +182,11 @@ $lang['adm_bn_forever'] = '(d&eacute;finitivement)';
 $lang['adm_hidden_data'] = '(masqu&eacute;)';
 $lang['adm_cleaner_intro'] = 'Supprime les commandes du chantier spatial et de la d&eacute;fense qui d&eacute;passent la limite technique d\'unit&eacute;s par commande (files bloqu&eacute;es).';
 $lang['adm_cleaner_run'] = 'Lancer le nettoyage';
+$lang['adm_ch_state'] = '&Eacute;tat du chat';
+$lang['adm_ch_on'] = 'Chat activ&eacute;';
+$lang['adm_ch_off'] = 'Chat d&eacute;sactiv&eacute; : lien retir&eacute; du menu des joueurs';
+$lang['adm_ch_enable'] = 'Activer le chat';
+$lang['adm_ch_disable'] = 'D&eacute;sactiver le chat';
+$lang['adm_ch_switch_level'] = 'R&eacute;serv&eacute; aux op&eacute;rateurs et aux administrateurs';
 
 ?>

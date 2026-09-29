@@ -20,6 +20,10 @@ include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
 	includeLang('chat');
+	// Chat desactive dans l'administration (reglage chat_enabled)
+	if (($game_config['chat_enabled'] ?? '1') == '0') {
+		message($lang['chat_disabled'], $lang['chat']);
+	}
 	$BodyTPL = gettemplate('chat_body');
 
 	$nick = $user['username'];

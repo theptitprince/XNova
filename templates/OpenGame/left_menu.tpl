@@ -68,9 +68,7 @@ function f(target_url,win_name,win_w,win_h) {
 	<td colspan="2" background="{dpath}img/bg1.gif"><center>{commun}</center></td>
 	</tr><tr>
 	<td colspan="2"><div><a href="buddy.php" accesskey="c" target="{mf}">{buddylist}</a></div></td>
-</tr></tr>{notes_link}<tr><tr>
-	<td colspan="2"><div><a href="chat.php" accesskey="a" onClick="f('chat.php', 'Chat', 700, 550); return false;">{chat}</a></div></td>
-</tr>{forum_link}<tr>
+</tr></tr>{notes_link}{chat_link}{forum_link}<tr>
 	<td colspan="2"><div><a href="add_declare.php" accesskey="1" target="{mf}">{multi}</a></div></td>
 </tr><tr>
 	<td colspan="2"><div><a href="rules.php"  accesskey="c" target="{mf}">{rules_label}</a></div></td>
