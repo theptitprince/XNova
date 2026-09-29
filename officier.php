@@ -20,7 +20,7 @@ include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
 function ShowOfficierPage ( &$CurrentUser ) {
-	global $lang, $resource, $reslist, $_GET;
+	global $lang, $resource, $reslist, $pricelist, $_GET;
 
 	includeLang('officier');
 
@@ -31,28 +31,41 @@ function ShowOfficierPage ( &$CurrentUser ) {
 
 	// Si recrutement d'un officier
 	if (($_GET['mode'] ?? null) == 2) {
+		$Message = '';
 		if ($CurrentUser['rpg_points'] > 0) {
 			$Selected    = intval(($_GET['offi'] ?? null));
 			if ( in_array($Selected, $reslist['officier']) ) {
 				$Result = IsOfficierAccessible ( $CurrentUser, $Selected );
 				if ( $Result == 1 ) {
-					$CurrentUser[$resource[$Selected]] += 1;
-					$CurrentUser['rpg_points']         -= 1;
-					if       ($Selected == 610) {
-						$CurrentUser['spy_tech']      += 5;
-					} elseif ($Selected == 611) {
-						$CurrentUser['computer_tech'] += 3;
-					}
-
+					// Point depense et niveau ajoute en une seule requete, seulement s'il reste un point et que le
+					// niveau maximum n'est pas atteint : des requetes simultanees donnaient plusieurs niveaux (ou
+					// plusieurs officiers) pour un seul point
+					$Field          = $resource[$Selected];
 					$QryUpdateUser  = "UPDATE {{table}} SET ";
-					$QryUpdateUser .= "`rpg_points` = '". $CurrentUser['rpg_points'] ."', ";
-					$QryUpdateUser .= "`spy_tech` = '". $CurrentUser['spy_tech'] ."', ";
-					$QryUpdateUser .= "`computer_tech` = '". $CurrentUser['computer_tech'] ."', ";
-					$QryUpdateUser .= "`".$resource[$Selected]."` = '". $CurrentUser[$resource[$Selected]] ."' ";
+					$QryUpdateUser .= "`rpg_points` = `rpg_points` - 1, ";
+					if       ($Selected == 610) {
+						$QryUpdateUser .= "`spy_tech` = `spy_tech` + 5, ";
+					} elseif ($Selected == 611) {
+						$QryUpdateUser .= "`computer_tech` = `computer_tech` + 3, ";
+					}
+					$QryUpdateUser .= "`".$Field."` = `".$Field."` + 1 ";
 					$QryUpdateUser .= "WHERE ";
-					$QryUpdateUser .= "`id` = '". $CurrentUser['id'] ."';";
+					$QryUpdateUser .= "`id` = '". intval($CurrentUser['id']) ."' AND `rpg_points` >= 1 AND `".$Field."` < '". intval($pricelist[$Selected]['max']) ."';";
 					doquery( $QryUpdateUser, 'users' );
-					$Message = $lang['offi_recrute'];
+					if (mysqli_affected_rows(DbConnect()) == 1) {
+						$CurrentUser[$Field]               += 1;
+						$CurrentUser['rpg_points']         -= 1;
+						if       ($Selected == 610) {
+							$CurrentUser['spy_tech']      += 5;
+						} elseif ($Selected == 611) {
+							$CurrentUser['computer_tech'] += 3;
+						}
+						$Message = $lang['offi_recrute'];
+					} else {
+						// Point deja depense ou niveau maximum atteint entre-temps (autre page ouverte en meme temps)
+						$Now     = doquery("SELECT `rpg_points`, `".$Field."` FROM {{table}} WHERE `id` = '". intval($CurrentUser['id']) ."';", 'users', true);
+						$Message = ($Now && $Now[$Field] >= $pricelist[$Selected]['max']) ? $lang['maxlvl'] : $lang['no_points'];
+					}
 				} elseif ( $Result == -1 ) {
 					$Message = $lang['maxlvl'];
 				} elseif ( $Result == 0 ) {
