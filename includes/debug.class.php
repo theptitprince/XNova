@@ -31,20 +31,31 @@ class debug
 
 	function add($mes)
 	{
-		// Ligne du journal ecrite par doquery() : texte de la requete echappe (il contient les textes des joueurs,
-		// affiches sinon tels quels a l'administrateur en mode debug)
-		if (preg_match('#^<tr><th>(Query [0-9]*: )</th><th>(.*)</th><th>([^<]*)</th><th>([^<]*)</th></tr>$#s', $mes, $m)) {
-			$mes = "<tr><th>". $m[1] ."</th><th>". htmlspecialchars($m[2], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ."</th><th>". htmlspecialchars($m[3]) ."</th><th>". htmlspecialchars($m[4]) ."</th></tr>";
-		}
 		$this->log .= $mes;
 		$this->numqueries++;
+	}
+
+	// Journal echappe au moment de l'afficher (pas a chaque requete : doquery() remplit le journal meme hors mode
+	// debug). Le texte des requetes contient les textes des joueurs, affiches sinon tels quels a l'administrateur.
+	// Une ligne qui n'a pas la forme ecrite par doquery() est echappee en entier.
+	function log_html()
+	{
+		$Html = '';
+		foreach (preg_split('#(?=<tr><th>Query [0-9]*: </th><th>)#', (string) $this->log, -1, PREG_SPLIT_NO_EMPTY) as $Row) {
+			if (preg_match('#^<tr><th>(Query [0-9]*: )</th><th>(.*)</th><th>([^<]*)</th><th>([^<]*)</th></tr>$#s', $Row, $m)) {
+				$Html .= "<tr><th>". $m[1] ."</th><th>". htmlspecialchars($m[2], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ."</th><th>". htmlspecialchars($m[3]) ."</th><th>". htmlspecialchars($m[4]) ."</th></tr>";
+			} else {
+				$Html .= "<tr><th colspan=4>". htmlspecialchars($Row, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ."</th></tr>";
+			}
+		}
+		return $Html;
 	}
 
 	// Journal des requetes de la page, renvoye pour etre ajoute sous la page par display(). Avant : affiche seul puis
 	// die(), en mode debug l'administrateur ne voyait plus aucune page, pas meme les parametres pour couper ce mode
 	function echo_log()
 	{	global $xnova_root_path;
-		return "<br><table><tr><td class=k colspan=4><a href=".$xnova_root_path."admin/settings.php>Debug Log</a>:</td></tr>".$this->log."</table>";
+		return "<br><table><tr><td class=k colspan=4><a href=".$xnova_root_path."admin/settings.php>Debug Log</a>:</td></tr>".$this->log_html()."</table>";
 	}
 	
 	function error($message,$title)
@@ -57,7 +68,7 @@ class debug
 		if(($game_config['debug'] ?? 0)==1 && is_array($user) && ($user['authlevel'] ?? 0) >= 3){
 			$Detail = htmlspecialchars(str_replace('<br />', "\n", $message), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 			echo "<h2>". htmlspecialchars($title) ."</h2><br><font color=red>". nl2br($Detail) ."</font><br><hr>";
-			echo  "<table>".$this->log."</table>";
+			echo  "<table>".$this->log_html()."</table>";
 		}
 		//else{
 			//A futuro, se creara una tabla especial, para almacenar

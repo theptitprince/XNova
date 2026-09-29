@@ -143,7 +143,7 @@ if ($_POST) {
         if (mysqli_affected_rows(DbConnect()) != 1) {
             message ($lang['error_userexist'], $lang['register']);
         }
-        // Numero d'enregistrement de l'utilisateur fraichement créé (avant : relu par le pseudo, rien trouve si le
+        // Numero d'enregistrement de l'utilisateur fraichement cree (avant : relu par le pseudo, rien trouve si le
         // pseudo avait ete tronque, et la planete etait creee sans proprietaire)
         $NewUser = array('id' => mysqli_insert_id(DbConnect()));
         $iduser = $NewUser['id'];
