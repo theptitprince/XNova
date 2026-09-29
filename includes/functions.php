@@ -43,6 +43,9 @@ function PasswordCheck ( $Password, &$UserRow ) {
 	$Stored = $UserRow['password'];
 	if (preg_match('/^[a-f0-9]{32}$/i', $Stored)) {
 		if (!hash_equals(strtolower($Stored), md5($Password))) {
+			// Meme temps de calcul qu'un echec sur un hash moderne ou qu'un pseudo inconnu (login.php) : un compte encore
+			// en md5 (0.8e / 0.9d, pas reconnecte depuis) se reperait a sa reponse immediate
+			PasswordHash($Password);
 			return false;
 		}
 		$NeedUpdate = true;
