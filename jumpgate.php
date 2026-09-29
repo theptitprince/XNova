@@ -87,6 +87,11 @@ function DoFleetJump ( $CurrentUser, $CurrentPlanet ) {
 						doquery ( $QryUpdateOri, 'planets');
 						if (mysqli_affected_rows(DbConnect()) != 1) {
 							$planetrow = doquery ( "SELECT * FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+							// Porte utilisee entre-temps : temps d'attente affiche ; sinon vaisseaux partis entre-temps
+							$RestString = is_array($planetrow) ? GetNextJumpWaitTime ( $planetrow ) : array('value' => 0, 'string' => '');
+							if ($RestString['value'] > 0) {
+								return $lang['gate_wait_star'] . $RestString['string'];
+							}
 							return $lang['gate_wait_data'];
 						}
 
@@ -110,7 +115,13 @@ function DoFleetJump ( $CurrentUser, $CurrentPlanet ) {
 							$QryUpdateOri .= "`id` = '". intval($CurrentPlanet['id']) ."';";
 							doquery ( $QryUpdateOri, 'planets');
 							$planetrow = doquery ( "SELECT * FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
-							return $lang['gate_wait_dest'];
+							// Porte d'arrivee utilisee entre-temps : son temps d'attente ; sinon elle n'est plus disponible
+							$TargetGate = doquery ( "SELECT `id`, `sprungtor`, `last_jump_time` FROM {{table}} WHERE `id` = '". intval($TargetGate['id']) ."' AND `id_owner` = '". intval($CurrentUser['id']) ."' AND `planet_type` = '3';", 'planets', true);
+							$RestString = is_array($TargetGate) ? GetNextJumpWaitTime ( $TargetGate ) : array('value' => 0, 'string' => '');
+							if ($RestString['value'] > 0) {
+								return $lang['gate_wait_dest'] . $RestString['string'];
+							}
+							return $lang['gate_no_dest_g'];
 						}
 
 						// Deplacement vers la lune d'arrivée

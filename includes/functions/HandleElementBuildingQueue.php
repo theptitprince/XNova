@@ -99,4 +99,18 @@ function ShipyardQueueAdd ( &$CurrentPlanet, $Element, $Count, $Ressource ) {
 	$CurrentPlanet['b_hangar_id'] .= $Item;
 	return true;
 }
+
+// Relit dans la base les ressources et la file du chantier de la planete (0.9k), apres une commande refusee parce
+// qu'une autre requete est passee avant : la barre du haut reecrivait sinon l'ancien stock et l'ancienne file (valeurs
+// absolues), ce qui annulait le debit et la commande de l'autre requete
+function ShipyardQueueReload ( &$CurrentPlanet ) {
+	$Fresh = doquery("SELECT `metal`, `crystal`, `deuterium`, `b_hangar_id`, `b_hangar` FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+	if (!$Fresh) {
+		return false;
+	}
+	foreach (array('metal', 'crystal', 'deuterium', 'b_hangar_id', 'b_hangar') as $Field) {
+		$CurrentPlanet[$Field] = $Fresh[$Field];
+	}
+	return true;
+}
 ?>
