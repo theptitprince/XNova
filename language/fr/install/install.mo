@@ -83,9 +83,16 @@ $lang['ins_upg_noconfig'] = 'Le jeu n\'est pas encore install&eacute; (config.ph
 $lang['ins_error3'] = 'Tous les champs sont obligatoires : pseudo en lettres, chiffres, _ ou -, mot de passe d\'au moins 8 caractères et adresse e-mail valide.';
 
 // XNova Renaissance 0.9g : verrou de l'installeur
-$lang['ins_locked'] = 'Le jeu est d&eacute;j&agrave; install&eacute; : installation et transfert sont verrouill&eacute;s (seule la mise &agrave; jour reste possible). Pour r&eacute;installer, videz d\'abord le fichier config.php. Pensez aussi &agrave; supprimer le dossier install du serveur.';
+$lang['ins_locked'] = 'Le jeu est d&eacute;j&agrave; install&eacute; : l\'installation est verrouill&eacute;e (la mise &agrave; jour et le transfert sont r&eacute;serv&eacute;s &agrave; un administrateur connect&eacute; au jeu). Pour r&eacute;installer, videz d\'abord le fichier config.php. Pensez aussi &agrave; supprimer le dossier install du serveur.';
 
 // XNova Renaissance 0.9g : titre de la page (« Installeur » ecrit en dur)
 $lang['ins_page_title'] = 'Installation de XNova';
+
+// 0.9k (Administration)
+$lang['ins_admin_only'] = 'Installeur verrouill&eacute; : le jeu est install&eacute;, la mise &agrave; jour et le transfert sont r&eacute;serv&eacute;s &agrave; un administrateur connect&eacute; au jeu. Connectez-vous d\'abord avec un compte administrateur (<a href="../login.php" target="_top">page de connexion</a>), puis revenez sur cette page.';
+$lang['ins_csrf_error'] = 'Formulaire p&eacute;rim&eacute; ou envoy&eacute; depuis un autre site : reprenez depuis le menu de l\'installeur.';
+$lang['ins_upg_running'] = 'Une mise &agrave; jour est d&eacute;j&agrave; en cours : patientez quelques instants, puis rechargez la page.';
+$lang['ins_upg_secret'] = 'Le mot secret de config.php venait d\'une ancienne version (0.8e / 0.9d) et &eacute;tait trop faible : il a &eacute;t&eacute; remplac&eacute; par un mot secret al&eacute;atoire. Tous les joueurs, vous compris, doivent se reconnecter une fois.';
+$lang['ins_upg_secret_fail'] = 'Le mot secret de config.php vient d\'une ancienne version (0.8e / 0.9d) et il est trop faible, mais le fichier n\'a pas pu &ecirc;tre r&eacute;&eacute;crit : rendez config.php modifiable par le serveur web, puis relancez la mise &agrave; jour.';
 
 ?>

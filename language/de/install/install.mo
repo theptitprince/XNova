@@ -59,9 +59,16 @@ $lang['ins_upg_applied'] = 'Angewendete Updates: %s';
 $lang['ins_upg_uptodate'] = 'Die Datenbank ist bereits auf dem neuesten Stand, keine Änderungen nötig.';
 $lang['ins_upg_noconfig'] = 'Das Spiel ist noch nicht installiert (config.php ist leer): Bitte den Modus „Installieren“ verwenden.';
 $lang['ins_error3'] = 'Alle Felder sind Pflichtfelder: Benutzername nur aus Buchstaben, Ziffern, _ oder -, Passwort mit mindestens 8 Zeichen und gültige E-Mail-Adresse.';
-$lang['ins_locked'] = 'Das Spiel ist bereits installiert: Installation und Transfer sind gesperrt (nur das Update ist noch möglich). Für eine Neuinstallation zuerst die Datei config.php leeren. Außerdem sollte der Ordner install vom Server gelöscht werden.';
+$lang['ins_locked'] = 'Das Spiel ist bereits installiert: Die Installation ist gesperrt (Update und Transfer sind einem im Spiel angemeldeten Administrator vorbehalten). Für eine Neuinstallation zuerst die Datei config.php leeren. Außerdem sollte der Ordner install vom Server gelöscht werden.';
 
 // XNova Renaissance 0.9g : titre de la page (« Installeur » ecrit en dur)
 $lang['ins_page_title'] = 'XNova-Installation';
+
+// 0.9k (Administration)
+$lang['ins_admin_only'] = 'Installationsprogramm gesperrt: Das Spiel ist installiert, Update und Transfer sind einem im Spiel angemeldeten Administrator vorbehalten. Melden Sie sich zuerst mit einem Administratorkonto an (<a href="../login.php" target="_top">Anmeldeseite</a>) und kehren Sie dann auf diese Seite zurück.';
+$lang['ins_csrf_error'] = 'Formular abgelaufen oder von einer anderen Website gesendet: Beginnen Sie erneut über das Menü des Installationsprogramms.';
+$lang['ins_upg_running'] = 'Ein Update läuft bereits: Warten Sie einen Moment und laden Sie die Seite dann neu.';
+$lang['ins_upg_secret'] = 'Das Geheimwort in config.php stammte aus einer alten Version (0.8e / 0.9d) und war zu schwach: Es wurde durch ein zufälliges Geheimwort ersetzt. Alle Spieler, Sie eingeschlossen, müssen sich einmal neu anmelden.';
+$lang['ins_upg_secret_fail'] = 'Das Geheimwort in config.php stammt aus einer alten Version (0.8e / 0.9d) und ist zu schwach, aber die Datei konnte nicht neu geschrieben werden: Machen Sie config.php für den Webserver beschreibbar und starten Sie das Update erneut.';
 
 ?>

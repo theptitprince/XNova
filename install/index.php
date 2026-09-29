@@ -34,9 +34,27 @@ function InstallConnect ( $Host, $User, $Pass, $Db ) {
 	return $Connection;
 }
 
+// Cookie de la cle d'une installation neuve (etape 2, voir InstallKeyValid)
+define('INSTALL_KEY_COOKIE', 'xnova_install');
+
+// Ecrit config.php avec les reglages donnes (valeurs exportees proprement). OPcache : la copie compilee de
+// config.php est invalidee aussitot, sinon l'ancien fichier (vide a l'installation) pouvait rester en cache
+function InstallSaveConfig ( $Settings ) {
+	$Content  = "<?php\n";
+	$Content .= "if(!defined(\"INSIDE\")){ die(\"attemp hacking\"); }\n";
+	$Content .= "\$dbsettings = ". var_export($Settings, true) .";\n";
+	$Content .= "?>";
+	$Written  = (@file_put_contents("../config.php", $Content) !== false);
+	if ($Written && function_exists('opcache_invalidate')) {
+		@opcache_invalidate((realpath("../config.php") ?: "../config.php"), true);
+	}
+	return $Written;
+}
+
 // Ecrit config.php : valeurs exportees proprement (plus d'injection de code possible par le formulaire)
-// et mot secret aleatoire (il signe les cookies de connexion)
-function InstallWriteConfig ( $Host, $User, $Pass, $Db, $Prefix ) {
+// et mot secret aleatoire (il signe les cookies de connexion). $InstallKey : cle d'une installation neuve, dont
+// l'empreinte reste dans config.php jusqu'a la creation du compte administrateur
+function InstallWriteConfig ( $Host, $User, $Pass, $Db, $Prefix, $InstallKey = '' ) {
 	$Settings = array(
 		'server'     => $Host,
 		'user'       => $User,
@@ -45,11 +63,20 @@ function InstallWriteConfig ( $Host, $User, $Pass, $Db, $Prefix ) {
 		'prefix'     => $Prefix,
 		'secretword' => bin2hex(random_bytes(32)),
 	);
-	$Content  = "<?php\n";
-	$Content .= "if(!defined(\"INSIDE\")){ die(\"attemp hacking\"); }\n";
-	$Content .= "\$dbsettings = ". var_export($Settings, true) .";\n";
-	$Content .= "?>";
-	return (@file_put_contents("../config.php", $Content) !== false);
+	if ($InstallKey != '') {
+		$Settings['install_key'] = hash('sha256', $InstallKey);
+	}
+	return InstallSaveConfig($Settings);
+}
+
+// Pose (ou efface) le cookie de la cle d'installation : dossier install seulement, inaccessible au JavaScript
+function InstallKeyCookie ( $Value, $Expire ) {
+	setcookie(INSTALL_KEY_COOKIE, $Value, array(
+		'expires'  => $Expire,
+		'secure'   => !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off',
+		'httponly' => true,
+		'samesite' => 'Strict',
+	));
 }
 
 // Prefixe des tables : lettres, chiffres et _ uniquement (il entre dans le nom des tables)
@@ -66,7 +93,8 @@ function InstallConfigWritten () {
 	return (is_file($File) && trim((string) file_get_contents($File)) != '');
 }
 
-// Un compte administrateur existe deja dans la base de config.php : l'installation est terminee
+// Un compte administrateur existe deja dans la base de config.php : l'installation est terminee. Au moindre doute
+// (prefixe invalide, connexion ou requete en echec), la reponse est oui : le verrou reste ferme (il s'ouvrait)
 function InstallHasAdmin () {
 	global $xnova_root_path;
 	if (!InstallConfigWritten()) {
@@ -75,15 +103,63 @@ function InstallHasAdmin () {
 	$dbsettings = array();
 	include($xnova_root_path . 'config.php');
 	if (!InstallValidPrefix($dbsettings['prefix'] ?? '')) {
+		return true;
+	}
+	$Connection = InstallConnect($dbsettings['server'] ?? '', $dbsettings['user'] ?? '', $dbsettings['pass'] ?? '', $dbsettings['name'] ?? '');
+	if (!$Connection) {
+		return true;
+	}
+	$Result = @mysqli_query($Connection, "SELECT COUNT(*) FROM `" . $dbsettings['prefix'] . "users` WHERE `authlevel` >= 3");
+	$Row    = $Result ? mysqli_fetch_row($Result) : null;
+	return (!$Row || $Row[0] > 0);
+}
+
+// Installation neuve en cours dans ce navigateur : cle posee en cookie a l'etape 2 (ecriture de config.php), son
+// empreinte gardee dans config.php jusqu'a la creation du compte administrateur. Sans elle, n'importe quel visiteur
+// pouvait creer l'administrateur pendant l'installation, ou plus tard des que la base n'en montrait plus aucun
+function InstallKeyValid () {
+	global $xnova_root_path;
+	if (!InstallConfigWritten() || !isset($_COOKIE[INSTALL_KEY_COOKIE]) || !is_string($_COOKIE[INSTALL_KEY_COOKIE])) {
+		return false;
+	}
+	$dbsettings = array();
+	include($xnova_root_path . 'config.php');
+	$Hash = (string) ($dbsettings['install_key'] ?? '');
+	return ($Hash != '' && hash_equals($Hash, hash('sha256', $_COOKIE[INSTALL_KEY_COOKIE])));
+}
+
+// Administrateur connecte au jeu (cookie de connexion, memes controles que CheckCookies) : sa fiche, sinon false.
+// Une fois le jeu installe, lui seul peut lancer la mise a jour ou le transfert (ils etaient ouverts a tous)
+function InstallLoggedAdmin () {
+	global $xnova_root_path;
+	if (!InstallConfigWritten()) {
+		return false;
+	}
+	$dbsettings = array();
+	include($xnova_root_path . 'config.php');
+	$Prefix = $dbsettings['prefix'] ?? '';
+	if (!InstallValidPrefix($Prefix) || empty($dbsettings['secretword'])) {
 		return false;
 	}
 	$Connection = InstallConnect($dbsettings['server'] ?? '', $dbsettings['user'] ?? '', $dbsettings['pass'] ?? '', $dbsettings['name'] ?? '');
 	if (!$Connection) {
 		return false;
 	}
-	$Result = @mysqli_query($Connection, "SELECT COUNT(*) FROM `" . $dbsettings['prefix'] . "users` WHERE `authlevel` >= 3");
+	$Result = @mysqli_query($Connection, "SELECT `config_value` FROM `". $Prefix ."config` WHERE `config_name` = 'COOKIE_NAME' LIMIT 1;");
 	$Row    = $Result ? mysqli_fetch_row($Result) : null;
-	return ($Row && $Row[0] > 0);
+	if (!$Row || $Row[0] == '' || !isset($_COOKIE[$Row[0]]) || !is_string($_COOKIE[$Row[0]])) {
+		return false;
+	}
+	$TheCookie = explode("/%/", $_COOKIE[$Row[0]]);
+	if (count($TheCookie) != 4) {
+		return false;
+	}
+	$Result  = @mysqli_query($Connection, "SELECT * FROM `". $Prefix ."users` WHERE `id` = '". intval($TheCookie[0]) ."' LIMIT 1;");
+	$UserRow = $Result ? mysqli_fetch_assoc($Result) : null;
+	if (!$UserRow || $UserRow['username'] !== $TheCookie[1] || !hash_equals(AuthCookieToken($UserRow), (string) $TheCookie[2])) {
+		return false;
+	}
+	return (intval($UserRow['authlevel']) >= 3) ? $UserRow : false;
 }
 
 // Ligne d'erreur placee au-dessus du contenu de l'etape (le formulaire reste affiche en dessous)
@@ -119,13 +195,27 @@ $phpself  = $_SERVER['PHP_SELF'];
 	$MainTPL = gettemplate('install/ins_body');
 	includeLang('install/install');
 
-	// Verrou : Installer (pages 1-2) et Transfere reecrivent config.php, donc seulement s'il est vide ;
-	// le compte administrateur (pages 3-4) seulement s'il n'en existe aucun. La mise a jour reste possible.
-	if ((($Mode == 'ins' && $Page <= 2) || $Mode == 'goto') && InstallConfigWritten()) {
+	// Verrou : Installer (pages 1-2) reecrit config.php et cree les tables, donc seulement s'il est vide
+	$Installed = InstallConfigWritten();
+	if ($Mode == 'ins' && $Page <= 2 && $Installed) {
 		InstallMessage ($lang['ins_locked']);
 	}
-	if ($Mode == 'ins' && $Page >= 3 && InstallHasAdmin()) {
+	// Compte administrateur (pages 3-4) : seulement pendant une installation neuve, dans le navigateur qui a ecrit
+	// config.php (cle de l'etape 2), et jamais s'il existe deja un administrateur
+	if ($Mode == 'ins' && $Page >= 3 && (!InstallKeyValid() || InstallHasAdmin())) {
 		InstallMessage ($lang['ins_locked']);
+	}
+	// Jeu installe : mise a jour et transfert reserves a un administrateur connecte au jeu. L'etape qui modifie la
+	// base ou config.php exige en plus un formulaire portant son jeton CSRF (ajoute par display, $user etant rempli)
+	if (($Mode == 'upg' || $Mode == 'goto') && $Installed) {
+		$user = InstallLoggedAdmin();
+		if (!$user) {
+			$user = array();
+			InstallMessage ($lang['ins_admin_only']);
+		}
+		if ((($Mode == 'upg' && $Page >= 2) || ($Mode == 'goto' && $Page >= 3)) && ($_SERVER['REQUEST_METHOD'] != 'POST' || !CsrfValid())) {
+			InstallMessage ($lang['ins_csrf_error']);
+		}
 	}
 
 	switch ($Mode) {
@@ -161,10 +251,13 @@ $phpself  = $_SERVER['PHP_SELF'];
 					exit();
 				}
 
-				if (!InstallWriteConfig($host, $user, $pass, $db, $prefix)) {
+				// Cle de cette installation : seul ce navigateur pourra creer le compte administrateur (pages 3-4)
+				$InstallKey = bin2hex(random_bytes(32));
+				if (!InstallWriteConfig($host, $user, $pass, $db, $prefix, $InstallKey)) {
 					header("Location: ?mode=ins&page=1&error=2");
 					exit();
 				}
+				InstallKeyCookie($InstallKey, time() + 86400);
 
 				function doquery ($InQry, $TblName) {
 					global $prefix, $connection;
@@ -329,6 +422,12 @@ $phpself  = $_SERVER['PHP_SELF'];
 				doquery("UPDATE {{table}} SET `config_value` = '1' WHERE `config_name` = 'LastSettedPlanetPos';", 'config');
 				doquery("UPDATE {{table}} SET `config_value` = `config_value` + '1' WHERE `config_name` = 'users_amount' LIMIT 1;", 'config');
 
+				// Installation terminee : cle retiree de config.php (l'installeur ne creera plus jamais de compte
+				// administrateur) et cookie efface
+				unset($dbsettings['install_key']);
+				InstallSaveConfig($dbsettings);
+				InstallKeyCookie('', time() - 3600);
+
 				$SubTPL = gettemplate ('install/ins_acc_done');
 				$bloc   = $lang;
 				$frame  = parsetemplate ( $SubTPL, $bloc );
@@ -407,6 +506,12 @@ $phpself  = $_SERVER['PHP_SELF'];
 				if (!$connection) {
 					InstallMessage ($lang['ins_error1']);
 				}
+				// Une seule mise a jour a la fois (double clic, deux onglets) : verrou nomme de MySQL, pris sans attendre
+				$Lock = @mysqli_query($connection, "SELECT GET_LOCK(LEFT(CONCAT(DATABASE(), '.". $dbsettings['prefix'] ."upgrade'), 64), 0);");
+				$Lock = $Lock ? mysqli_fetch_row($Lock) : null;
+				if (!$Lock || $Lock[0] != 1) {
+					InstallMessage ($lang['ins_upg_running']);
+				}
 				$FromVersion = RenaissanceSchemaVersion($connection, $dbsettings['prefix']);
 				if ($FromVersion === false) {
 					InstallMessage ($lang['ins_goto_err_version']);
@@ -416,6 +521,13 @@ $phpself  = $_SERVER['PHP_SELF'];
 				$bloc                     = $lang;
 				$bloc['ins_upg_from']     = str_replace('%s', RenaissanceVersionLabel($FromVersion), $lang['ins_upg_from_version']);
 				$bloc['ins_upg_result']   = (count($Applied) > 0) ? str_replace('%s', implode(', ', $Applied), $lang['ins_upg_applied']) : $lang['ins_upg_uptodate'];
+				// Mot secret faible herite de la 0.8e / 0.9d ("XNova" suivi d'un nombre, retrouvable hors ligne a partir de
+				// la signature du formulaire de contact) : remplace par un mot secret aleatoire, comme a l'installation.
+				// Cookies et jetons en dependent : chacun se reconnecte une fois
+				if (!preg_match('/^[0-9a-f]{64}$/', (string) ($dbsettings['secretword'] ?? ''))) {
+					$dbsettings['secretword']  = bin2hex(random_bytes(32));
+					$bloc['ins_upg_result']   .= '<br>' . (InstallSaveConfig($dbsettings) ? $lang['ins_upg_secret'] : $lang['ins_upg_secret_fail']);
+				}
 				$SubTPL = gettemplate ('install/ins_upg_done');
 				$frame  = parsetemplate ( $SubTPL, $bloc );
 			}
