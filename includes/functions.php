@@ -60,10 +60,12 @@ function PasswordCheck ( $Password, &$UserRow ) {
 }
 
 // Duree de validite du cookie de connexion, verifiee par le serveur grace a la date de connexion signee : 365 jours
-// avec « se souvenir de moi » (comme l'original), 1 jour sinon. Avant, une copie du cookie restait valable pour
-// toujours, meme apres la deconnexion (seul un changement de mot de passe l'annulait).
+// apres la connexion avec « se souvenir de moi » (comme l'original), 1 jour sans activite sinon (date remise a
+// l'heure au plus une fois par heure tant que le joueur joue, voir CheckCookies). Avant, une copie du cookie restait
+// valable pour toujours, meme apres la deconnexion (seul un changement de mot de passe l'annulait).
 define('AUTH_COOKIE_REMEMBER', 31536000);
 define('AUTH_COOKIE_SESSION', 86400);
+define('AUTH_COOKIE_RENEW', 3600);
 
 // Jeton du cookie : signature HMAC de l'id, du hash du mot de passe (change si le mot de passe change), de
 // « se souvenir de moi » et de la date de connexion

@@ -15,7 +15,7 @@
 // TheCookie[1] = `username`
 // TheCookie[2] = jeton HMAC (id + hash du mot de passe + TheCookie[3] + TheCookie[4], signe avec le mot secret)
 // TheCookie[3] = se souvenir de moi (1 = 365 jours)
-// TheCookie[4] = date de connexion (0.9k) : le cookie est refuse une fois sa duree de validite passee
+// TheCookie[4] = date de connexion (0.9k, renouvelee sans « se souvenir ») : cookie refuse, sa validite passee
 
 function CheckCookies ( $IsUserChecked ) {
 	global $lang, $game_config, $xnova_root_path, $phpEx;
@@ -76,6 +76,11 @@ function CheckCookies ( $IsUserChecked ) {
 		}
 
 		$NextCookie = implode("/%/", $TheCookie);
+		// Sans « se souvenir de moi » : date de connexion remise a l'heure (cookie signe a nouveau) au plus une fois par
+		// heure tant que le joueur joue. Le cookie expire apres 1 jour sans activite, jamais au milieu d'une partie
+		if ($TheCookie[3] != 1 && intval($TheCookie[4]) < time() - AUTH_COOKIE_RENEW) {
+			$NextCookie = AuthCookieValue($UserRow, 0, time());
+		}
 		// Se souvenir de moi : le cookie du navigateur dure jusqu'a la fin de sa validite (365 jours apres la connexion)
 		if ($TheCookie[3] == 1) {
 			$ExpireTime = intval($TheCookie[4]) + AUTH_COOKIE_REMEMBER;
