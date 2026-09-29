@@ -31,7 +31,9 @@ function HandleElementBuildingQueue ( $CurrentUser, &$CurrentPlanet, $Production
 					continue;
 				}
 				// On stocke sous forme Element, Nombre, Duree de fab
-				$BuildArray[$Node] = array($Item[0], $Item[1], GetBuildingTime ($CurrentUser, $CurrentPlanet, $Item[0]));
+				// (numeros entiers : « 0204 » passait la liste sans exister dans les tables, tout etait construit
+				// d'un coup et l'enregistrement de la planete echouait)
+				$BuildArray[$Node] = array(intval($Item[0]), intval($Item[1]), GetBuildingTime ($CurrentUser, $CurrentPlanet, intval($Item[0])));
 			}
 		}
 
@@ -66,6 +68,8 @@ function HandleElementBuildingQueue ( $CurrentUser, &$CurrentPlanet, $Production
 	} else {
 		$Builded                   = '';
 		$CurrentPlanet['b_hangar'] = 0;
+		// File vide : « 0 » (ecrit par admin/ElementQueueFixer.php) remis a vide, il etait affiche comme un element
+		$CurrentPlanet['b_hangar_id'] = '';
 	}
 
 	return $Builded;
@@ -78,14 +82,24 @@ function HandleElementBuildingQueue ( $CurrentUser, &$CurrentPlanet, $Production
 // Retourne vrai si la commande est enregistree ($CurrentPlanet est alors mis a jour comme avant).
 function ShipyardQueueAdd ( &$CurrentPlanet, $Element, $Count, $Ressource ) {
 	$Item             = intval($Element) .",". intval($Count) .";";
+	// File vide, ou « 0 » (admin/ElementQueueFixer.php) : la commande la remplace au lieu de s'ajouter derriere le « 0 »
+	$Empty            = in_array(strval($CurrentPlanet['b_hangar_id'] ?? ''), array('', '0'), true);
 	$QryUpdatePlanet  = "UPDATE {{table}} SET ";
 	$QryUpdatePlanet .= "`metal` = `metal` - '".         floatval($Ressource['metal'])     ."', ";
 	$QryUpdatePlanet .= "`crystal` = `crystal` - '".     floatval($Ressource['crystal'])   ."', ";
 	$QryUpdatePlanet .= "`deuterium` = `deuterium` - '". floatval($Ressource['deuterium']) ."', ";
-	$QryUpdatePlanet .= "`b_hangar_id` = CONCAT(`b_hangar_id`, '". $Item ."') ";
+	if ($Empty) {
+		$QryUpdatePlanet .= "`b_hangar_id` = '". $Item ."' ";
+	} else {
+		$QryUpdatePlanet .= "`b_hangar_id` = CONCAT(`b_hangar_id`, '". $Item ."') ";
+	}
 	$QryUpdatePlanet .= "WHERE ";
 	$QryUpdatePlanet .= "`id` = '".                      intval($CurrentPlanet['id'])      ."' AND ";
-	$QryUpdatePlanet .= "`b_hangar_id` = '".             SqlEscape($CurrentPlanet['b_hangar_id']) ."' AND ";
+	if ($Empty) {
+		$QryUpdatePlanet .= "`b_hangar_id` IN ('', '0') AND ";
+	} else {
+		$QryUpdatePlanet .= "`b_hangar_id` = '".         SqlEscape($CurrentPlanet['b_hangar_id']) ."' AND ";
+	}
 	$QryUpdatePlanet .= "`metal` >= '".                  floatval($Ressource['metal'])     ."' AND ";
 	$QryUpdatePlanet .= "`crystal` >= '".                floatval($Ressource['crystal'])   ."' AND ";
 	$QryUpdatePlanet .= "`deuterium` >= '".              floatval($Ressource['deuterium']) ."';";
@@ -96,7 +110,7 @@ function ShipyardQueueAdd ( &$CurrentPlanet, $Element, $Count, $Ressource ) {
 	$CurrentPlanet['metal']       -= $Ressource['metal'];
 	$CurrentPlanet['crystal']     -= $Ressource['crystal'];
 	$CurrentPlanet['deuterium']   -= $Ressource['deuterium'];
-	$CurrentPlanet['b_hangar_id'] .= $Item;
+	$CurrentPlanet['b_hangar_id']  = ($Empty) ? $Item : $CurrentPlanet['b_hangar_id'] . $Item;
 	return true;
 }
 

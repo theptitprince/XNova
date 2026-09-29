@@ -87,6 +87,10 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 					// Insere un element dans la queue
 					// Memes regles que les liens de la page (0.9k) : technologies requises, case libre (file comprise),
 					// laboratoire pendant une recherche. La commande forgee passait outre.
+					// Batiment verifie obligatoire : « listid » sans « building » mettait un element vide dans la file
+					if (!is_int($Element)) {
+						break;
+					}
 					$QueueLength = (!empty($CurrentPlanet['b_building_id'])) ? count(explode(';', $CurrentPlanet['b_building_id'])) : 0;
 					$RoomIsOk    = ($CurrentPlanet['field_current'] < (CalculateMaxPlanetFields($CurrentPlanet) - $QueueLength));
 					$LabIsBusy   = ($Element == 31 && $CurrentUser['b_tech_planet'] != 0 && $game_config['BuildLabWhileRun'] != 1);
@@ -97,7 +101,8 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 				case 'destroy':
 					// Detruit un batiment deja construit sur la planete !
 					// Terraformeur et base lunaire : jamais detruits (comme OGame ; la page d'info ne le propose pas)
-					if (!in_array(intval($Element), array(33, 41))) {
+					// Batiment verifie obligatoire, comme pour « insert »
+					if (is_int($Element) && !in_array($Element, array(33, 41))) {
 						AddBuildingToQueue ( $CurrentPlanet, $CurrentUser, $Element, false );
 					}
 					break;

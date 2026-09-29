@@ -42,6 +42,9 @@ function ResearchBuildingPage (&$CurrentPlanet, $CurrentUser, $InResearch, $TheP
 		if ( is_numeric($Techno) ) {
 			if ( in_array($Techno, $reslist['tech']) ) {
 				// Bon quand on arrive ici ... On sait deja qu'on a une technologie valide
+				// Numero entier (0.9k) : « 199.0 » ou « 1.99e2 » passaient la liste sans exister dans les tables des
+				// prix et des prerequis (recherche gratuite, instantanee, sans technologies requises)
+				$Techno = intval($Techno);
 				if ( is_array ($ThePlanet) ) {
 					$WorkingPlanet = $ThePlanet;
 				} else {
