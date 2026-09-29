@@ -180,6 +180,19 @@ $lang['adm_bn_forever'] = '(definitivamente)';
 
 // 0.9k (Administration)
 $lang['adm_hidden_data'] = '(nascosto)';
+$lang['adm_stat_build'] = 'Calcolo delle statistiche';
+$lang['adm_stat_last'] = 'Ultimo calcolo';
+$lang['adm_stat_never'] = 'mai';
+$lang['adm_stat_run'] = 'Ricalcola ora';
+$lang['adm_stat_running'] = 'Un calcolo delle statistiche &egrave; gi&agrave; in corso: riprovate tra qualche istante.';
+$lang['adm_stat_auto_title'] = 'Calcolo automatico';
+$lang['adm_stat_auto'] = 'Ricalcolare quando un giocatore carica una pagina';
+$lang['adm_stat_auto_hours'] = 'se l\'ultimo calcolo risale a pi&ugrave; di';
+$lang['adm_stat_hours'] = 'ora/e';
+$lang['adm_stat_auto_note'] = 'Il giocatore la cui pagina avvia il calcolo attende che sia terminato. Su un universo grande &egrave; preferibile l\'attivit&agrave; pianificata (tools/stats.php, vedere il README).';
+$lang['adm_stat_save'] = 'Salva';
+$lang['adm_stat_saved'] = 'Impostazioni del calcolo automatico salvate.';
+$lang['adm_stat_level'] = 'Impostazioni riservate agli operatori e agli amministratori.';
 $lang['adm_cleaner_intro'] = 'Elimina gli ordini del cantiere spaziale e della difesa che superano il limite tecnico di unit&agrave; per ordine (liste bloccate).';
 $lang['adm_cleaner_run'] = 'Avvia la pulizia';
 $lang['adm_ch_state'] = 'Stato della chat';

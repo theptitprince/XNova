@@ -161,6 +161,14 @@ if (INSTALL != true) {
 			$galaxyrow = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '". intval($planetrow['galaxy'] ?? 0) ."' AND `system` = '". intval($planetrow['system'] ?? 0) ."' AND `planet` = '". intval($planetrow['planet'] ?? 0) ."';", 'galaxy', true);
 
 			CheckPlanetUsedFields($planetrow);
+
+			// Statistiques recalculees au passage d'un joueur quand le dernier calcul date de plus de N heures (reglages
+			// stat_auto et stat_auto_hours de l'administration) ; verrou et date relue dans BuildStatistics
+			$StatAge = 3600 * max(1, intval($game_config['stat_auto_hours'] ?? 6));
+			if (!empty($game_config['stat_auto']) && time() - intval($game_config['stat_last'] ?? 0) >= $StatAge) {
+				include_once($xnova_root_path . 'admin/statfunctions.' . $phpEx);
+				BuildStatistics($StatAge);
+			}
 		} else {
 			$planetrow = null;
 			$galaxyrow = null;

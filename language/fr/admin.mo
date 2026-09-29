@@ -180,6 +180,19 @@ $lang['adm_bn_forever'] = '(d&eacute;finitivement)';
 
 // 0.9k (Administration)
 $lang['adm_hidden_data'] = '(masqu&eacute;)';
+$lang['adm_stat_build'] = 'Calcul des statistiques';
+$lang['adm_stat_last'] = 'Dernier calcul';
+$lang['adm_stat_never'] = 'jamais';
+$lang['adm_stat_run'] = 'Recalculer maintenant';
+$lang['adm_stat_running'] = 'Un calcul des statistiques est d&eacute;j&agrave; en cours : r&eacute;essayez dans quelques instants.';
+$lang['adm_stat_auto_title'] = 'Calcul automatique';
+$lang['adm_stat_auto'] = 'Recalculer au passage d\'un joueur';
+$lang['adm_stat_auto_hours'] = 'quand le dernier calcul date de plus de';
+$lang['adm_stat_hours'] = 'heure(s)';
+$lang['adm_stat_auto_note'] = 'Le joueur dont la page lance le calcul attend qu\'il soit termin&eacute;. Sur un gros univers, pr&eacute;f&eacute;rez la t&acirc;che planifi&eacute;e (tools/stats.php, voir le README).';
+$lang['adm_stat_save'] = 'Enregistrer';
+$lang['adm_stat_saved'] = 'R&eacute;glages du calcul automatique enregistr&eacute;s.';
+$lang['adm_stat_level'] = 'R&eacute;glages r&eacute;serv&eacute;s aux op&eacute;rateurs et aux administrateurs.';
 $lang['adm_cleaner_intro'] = 'Supprime les commandes du chantier spatial et de la d&eacute;fense qui d&eacute;passent la limite technique d\'unit&eacute;s par commande (files bloqu&eacute;es).';
 $lang['adm_cleaner_run'] = 'Lancer le nettoyage';
 $lang['adm_ch_state'] = '&Eacute;tat du chat';
