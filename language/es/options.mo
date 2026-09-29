@@ -90,4 +90,9 @@ $lang['opt_password_short'] = 'La nueva contraseña debe tener al menos 8 caract
 $lang['opt_delac_pending'] = 'Borrado previsto el %s: desmarque la casilla y guarde para cancelarlo.';
 $lang['opt_delac_admin'] = 'Una cuenta de administración no puede borrarse desde las Opciones.';
 
+// 0.9k (jeu-b) : nouvelle adresse e-mail avec le mot de passe actuel et libre ; vacances refusees avec des missiles en vol
+$lang['opt_email_password'] = 'Para cambiar la dirección de correo, indique su contraseña actual: no se ha modificado nada.';
+$lang['opt_email_used'] = 'Esta dirección de correo ya la utiliza otra cuenta: no se ha modificado nada.';
+$lang['vacation_missiles_flying'] = 'No puede activar el modo vacaciones mientras sus misiles estén en vuelo.';
+
 ?>

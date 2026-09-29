@@ -61,6 +61,19 @@
     }
     if ($_POST && $mode == "change") { // Array ( [db_character]
        $iduser = $user["id"];
+       // Nouvelle adresse e-mail (decision de theptitprince, 29/09/2026) : avec le mot de passe actuel, et libre (le
+       // mot de passe oublie est envoye a cette adresse : sans ces controles, une session volee prenait le compte).
+       // Controle fait avant tout enregistrement : rien n'est change en cas de refus.
+       $NewMail = is_string($_POST["db_email"] ?? null) ? trim($_POST["db_email"]) : '';
+       if ($NewMail != '' && is_email($NewMail) && $NewMail !== $user['email']) {
+          if (!is_string($_POST["db_password"] ?? null) || $_POST["db_password"] == '' || !PasswordCheck($_POST["db_password"], $user)) {
+             message($lang['opt_email_password'], $lang['options_label'], "options.php", 5);
+          }
+          $MailUsed = doquery("SELECT `id` FROM {{table}} WHERE (`email` = '". SqlEscape($NewMail) ."' OR `email_2` = '". SqlEscape($NewMail) ."') AND `id` <> '". intval($user['id']) ."' LIMIT 1;", 'users', true);
+          if ($MailUsed) {
+             message($lang['opt_email_used'], $lang['options_label'], "options.php", 5);
+          }
+       }
        $avatar = SqlEscape(SafeUrl(($_POST["avatar"] ?? null)));
        $dpath = SqlEscape(SafePath(($_POST["dpath"] ?? null)));
 
@@ -94,8 +107,8 @@
           $username = $user['username'];
        }
        // Adresse e-Mail
-       if (isset($_POST["db_email"]) && ($_POST["db_email"] ?? null) != '') {
-          $db_email = SqlEscape(is_email($_POST['db_email']) ? ($_POST['db_email'] ?? null) : $user['email']); // adresse valide uniquement
+       if ($NewMail != '') {
+          $db_email = SqlEscape(is_email($NewMail) ? $NewMail : $user['email']); // adresse valide uniquement (controlee plus haut)
        } else {
           $db_email = SqlEscape($user['email']);
        }
@@ -163,6 +176,11 @@
           if ($Flying['number'] > 0) {
              message($lang['vacation_fleets_flying'], $lang['options_label'], "options.php", 5);
           }
+          // Missiles interplanetaires en vol : meme refus (ils frappaient pendant l'immunite)
+          $Missiles = doquery("SELECT COUNT(*) AS `number` FROM {{table}} WHERE `owner` = '".intval($user['id'])."'", 'iraks', true);
+          if ($Missiles['number'] > 0) {
+             message($lang['vacation_missiles_flying'], $lang['options_label'], "options.php", 5);
+          }
           $urlaubs_modus = "1";
           $time = time() + 172800;
           doquery("UPDATE {{table}} SET   
@@ -199,8 +217,10 @@
        } else {
           $db_deaktjava = 0;
        }
+       // Tri des planetes : seulement les valeurs de la liste (une autre valeur cassait la vue generale et l'empire)
        $SetSort  = intval(($_POST['settings_sort'] ?? null));
-       $SetOrder = intval(($_POST['settings_order'] ?? null));
+       $SetSort  = in_array($SetSort, array(0, 1, 2), true) ? $SetSort : 0;
+       $SetOrder = (intval(($_POST['settings_order'] ?? null)) == 1) ? 1 : 0;
        // Langue : uniquement une langue installee (le code sert de nom de dossier)
        $UserLang = array_key_exists(($_POST['lang'] ?? ''), OptionsLanguages()) ? $_POST['lang'] : $user['lang'];
        $UserLang = SqlEscape($UserLang);

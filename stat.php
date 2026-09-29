@@ -23,11 +23,12 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	$parse = $lang;
 	$who   = intval((isset($_POST['who']))   ? ($_POST['who'] ?? null)   : ($_GET['who'] ?? null));
-	if ($who < 1) {
+	if ($who < 1 || $who > 2) {
 		$who   = 1;
 	}
 	$type  = intval((isset($_POST['type']))  ? ($_POST['type'] ?? null)  : ($_GET['type'] ?? null));
-	if ($type < 1) {
+	// Types 1 a 5 seulement : au-dela, tri vide et erreur SQL enregistree a chaque appel
+	if ($type < 1 || $type > 5) {
 		$type  = 1;
 	}
 	$range = (isset($_POST['range'])) ? ($_POST['range'] ?? null) : ($_GET['range'] ?? null);
