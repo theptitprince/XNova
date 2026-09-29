@@ -38,6 +38,10 @@ function BuildRessourcePage ( $CurrentUser, $CurrentPlanet ) {
 	$ValidList['percent'] = array (  0,  10,  20,  30,  40,  50,  60,  70,  80,  90, 100 );
 	$SubQry               = "";
 	if ($_POST) {
+		// Mode vacances : production arretee (options.php la met a 0) ; elle ne se remet pas a 100 % d'ici
+		if ($CurrentUser['urlaubs_modus'] == 1) {
+			message($lang['res_vacation_mode'], $lang['sys_vacation_title'], "resources.php", 3);
+		}
 		foreach($_POST as $Field => $Value) {
 			$FieldName = $Field."_porcent";
 			if ( isset( $CurrentPlanet[ $FieldName ] ) ) {
