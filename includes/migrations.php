@@ -440,9 +440,18 @@ function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
 		RenaissanceAddIndexes($Connection, $Prefix, 'users', array('username' => "UNIQUE KEY `username` (`username`)"));
 	}
 
-	// Adresse du jeu pour les liens des mails (voir GameUrl) : celle de l'installeur, utilise par l'administrateur,
-	// sans le dossier install/ ; vide hors d'une page web (le jeu reprend alors l'adresse de la page en cours).
-	// Une valeur deja reglee n'est jamais changee.
+	// Messages de joueurs pieges avant la 0.9k (gestionnaire d'evenement glisse dans une balise par le BBCode, voir
+	// bbattr) : ils restaient actifs dans la boite du destinataire et dans les messages signales lus par le staff.
+	// Reduits au texte comme par le nettoyage de la 0.9f ; seulement les messages prives (type 1), les rapports du jeu
+	// contiennent du HTML voulu
+	$Trap = "`message_type` = '1' AND `message_text` REGEXP '<[^>]*[[:space:]/\"'']on[a-z]+[[:space:]]*='";
+	RenaissanceCleanColumns($Connection, $Prefix .'messages', array('message_text' => 'html'), $Trap);
+	RenaissanceCleanColumns($Connection, $Prefix .'reports',  array('message_text' => 'html'), $Trap);
+
+	// Adresse du jeu pour les liens des mails (voir GameUrl) : celle de l'installeur sans le dossier install/, vide
+	// hors d'une page web (le jeu reprend alors l'adresse de la page en cours). Sur un jeu installe, la mise a jour
+	// et le transfert sont reserves a l'administrateur (0.9k, partie Administration) : c'est son adresse, pas celle
+	// d'un visiteur. Une valeur deja reglee n'est jamais changee.
 	$GameUrl = '';
 	if (PHP_SAPI != 'cli' && !empty($_SERVER['HTTP_HOST'])) {
 		$Scheme  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
