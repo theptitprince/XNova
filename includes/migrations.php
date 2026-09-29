@@ -14,7 +14,7 @@
 if (!defined('INSIDE')) { die('attemp hacking'); }
 
 // Version du schema de base installee par cette version du jeu
-define('RENAISSANCE_DB_VERSION', '0.9j');
+define('RENAISSANCE_DB_VERSION', '0.9k');
 
 // Nom de la ligne de la table config qui memorise la version du schema
 define('RENAISSANCE_DB_VERSION_KEY', 'renaissance_db_version');
@@ -139,10 +139,16 @@ $RenaissanceMigrations = array(
 	'0.9j' => array(
 		// Unites des derniers officiers : SuperNova (Raideur), Destructeur planetaire (Empereur), Protecteur planetaire
 		// (Bunker). Les officiers se recrutaient sans effet : leurs unites n'existaient pas
-		"ALTER TABLE `{{prefix}}planets`
-			ADD COLUMN IF NOT EXISTS `supernova` bigint(11) NOT NULL default '0' AFTER `battleship`,
-			ADD COLUMN IF NOT EXISTS `planet_destroyer` bigint(11) NOT NULL default '0' AFTER `supernova`,
-			ADD COLUMN IF NOT EXISTS `planet_protector` int(11) NOT NULL default '0' AFTER `big_protection_shield`;",
+		'RenaissanceAddUnitColumns',
+	),
+	'0.9k' => array(
+		// Chaque partie de la 0.9k a sa fonction (fin du fichier) ; toutes peuvent etre relancees sans erreur, et
+		// l'installation neuve les appelle aussi (install/index.php)
+		'RenaissanceMigration09kJeu',
+		'RenaissanceMigration09kSecurite',
+		'RenaissanceMigration09kAdministration',
+		'RenaissanceMigration09kFlottes',
+		'RenaissanceMigration09kPerformances',
 	),
 );
 
@@ -345,6 +351,85 @@ function RenaissanceAddLostPasswordColumns ( $Connection, $Prefix ) {
 		mysqli_query($Connection, "ALTER TABLE `". $Prefix ."users` ADD `". $Column ."` ". $Definition .";")
 			or die("MySQL Error (0.9g, users.". $Column ."): <b>". mysqli_error($Connection) ."</b>");
 	}
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+// 0.9k : outils communs des mises a jour, sans syntaxe propre a MariaDB (MySQL 8 ne connait ni ADD COLUMN IF NOT
+// EXISTS ni ADD INDEX IF NOT EXISTS). Chacun verifie avant d'agir : on peut relancer sans erreur.
+
+// Colonnes ajoutees a une table si elles manquent : array('colonne' => "definition AFTER `autre`")
+function RenaissanceAddColumns ( $Connection, $Prefix, $Table, $Columns ) {
+	foreach ($Columns as $Column => $Definition) {
+		$Exists = mysqli_query($Connection, "SHOW COLUMNS FROM `". $Prefix . $Table ."` LIKE '". $Column ."';");
+		if ($Exists && mysqli_num_rows($Exists) > 0) {
+			continue;
+		}
+		mysqli_query($Connection, "ALTER TABLE `". $Prefix . $Table ."` ADD `". $Column ."` ". $Definition .";")
+			or die("MySQL Error (". $Table .".". $Column ."): <b>". mysqli_error($Connection) ."</b>");
+	}
+}
+
+// Index ajoutes a une table s'ils manquent : array('nom' => "KEY `nom` (`col1`, `col2`)") ; tout index portant deja ce
+// nom est garde tel quel
+function RenaissanceAddIndexes ( $Connection, $Prefix, $Table, $Indexes ) {
+	foreach ($Indexes as $Name => $Definition) {
+		$Exists = mysqli_query($Connection, "SHOW INDEX FROM `". $Prefix . $Table ."` WHERE `Key_name` = '". $Name ."';");
+		if ($Exists && mysqli_num_rows($Exists) > 0) {
+			continue;
+		}
+		mysqli_query($Connection, "ALTER TABLE `". $Prefix . $Table ."` ADD ". $Definition .";")
+			or die("MySQL Error (". $Table .", index ". $Name ."): <b>". mysqli_error($Connection) ."</b>");
+	}
+}
+
+// Lignes de la table config ajoutees si elles manquent (une valeur deja reglee n'est jamais ecrasee)
+function RenaissanceAddConfig ( $Connection, $Prefix, $Values ) {
+	foreach ($Values as $Name => $Value) {
+		$Name   = mysqli_real_escape_string($Connection, $Name);
+		$Exists = mysqli_query($Connection, "SELECT 1 FROM `". $Prefix ."config` WHERE `config_name` = '". $Name ."' LIMIT 1;");
+		if ($Exists && mysqli_num_rows($Exists) > 0) {
+			continue;
+		}
+		mysqli_query($Connection, "INSERT INTO `". $Prefix ."config` (`config_name`, `config_value`) VALUES ('". $Name ."', '". mysqli_real_escape_string($Connection, $Value) ."');")
+			or die("MySQL Error (config ". $Name ."): <b>". mysqli_error($Connection) ."</b>");
+	}
+}
+
+// 0.9j : colonnes des unites des derniers officiers (la 0.9j publiee utilisait ADD COLUMN IF NOT EXISTS, que MySQL 8
+// refuse ; les bases deja passees en 0.9j sous MariaDB ne sont pas concernees)
+function RenaissanceAddUnitColumns ( $Connection, $Prefix ) {
+	RenaissanceAddColumns($Connection, $Prefix, 'planets', array(
+		'supernova'        => "bigint(11) NOT NULL default '0' AFTER `battleship`",
+		'planet_destroyer' => "bigint(11) NOT NULL default '0' AFTER `supernova`",
+		'planet_protector' => "int(11) NOT NULL default '0' AFTER `big_protection_shield`",
+	));
+}
+
+// ----------------------------------------------------------------------------------------------------------------
+// 0.9k, une fonction par partie (voir la liste '0.9k' en tete de fichier)
+
+// Jeu : triches et controles des pages du jeu
+function RenaissanceMigration09kJeu ( $Connection, $Prefix ) {
+}
+
+
+// Securite : connexion, jetons, en-tetes
+function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
+}
+
+
+// Administration : chat desactivable, informations du serveur, statistiques automatiques
+function RenaissanceMigration09kAdministration ( $Connection, $Prefix ) {
+}
+
+
+// Flottes : traitement des flottes et des missiles
+function RenaissanceMigration09kFlottes ( $Connection, $Prefix ) {
+}
+
+
+// Performances : index
+function RenaissanceMigration09kPerformances ( $Connection, $Prefix ) {
 }
 
 ?>
