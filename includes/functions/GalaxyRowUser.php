@@ -14,15 +14,31 @@
 
 function GalaxyRowUser ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, $System, $Planet, $PlanetType ) {
 	global $lang, $user;
+	// Reglages et points lus une seule fois par page (0.9k ; avant : 5 requetes par joueur affiche) : memes
+	// requetes, rien ne modifie ces tables pendant l'affichage de la galaxie
+	static $Read = array();
 
 	// Joueur
 	$Result  = "<th width=150>";
 	if ($GalaxyRowUser && $GalaxyRowPlanet["destruyed"] == 0) {
-		$NoobProt      = doquery("SELECT * FROM {{table}} WHERE `config_name` = 'noobprotection';", 'config', true);
-		$NoobTime      = doquery("SELECT * FROM {{table}} WHERE `config_name` = 'noobprotectiontime';", 'config', true);
-		$NoobMulti     = doquery("SELECT * FROM {{table}} WHERE `config_name` = 'noobprotectionmulti';", 'config', true);
-		$UserPoints    = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $user['id'] ."';", 'statpoints', true);
-		$User2Points   = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $GalaxyRowUser['id'] ."';", 'statpoints', true);
+		if (!array_key_exists('noob', $Read)) {
+			$Read['noob'] = array(
+				doquery("SELECT * FROM {{table}} WHERE `config_name` = 'noobprotection';", 'config', true),
+				doquery("SELECT * FROM {{table}} WHERE `config_name` = 'noobprotectiontime';", 'config', true),
+				doquery("SELECT * FROM {{table}} WHERE `config_name` = 'noobprotectionmulti';", 'config', true),
+			);
+		}
+		list($NoobProt, $NoobTime, $NoobMulti) = $Read['noob'];
+		$PointsKey = 'p:'. $user['id'];
+		if (!array_key_exists($PointsKey, $Read)) {
+			$Read[$PointsKey] = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $user['id'] ."';", 'statpoints', true);
+		}
+		$UserPoints    = $Read[$PointsKey];
+		$PointsKey = 'p:'. $GalaxyRowUser['id'];
+		if (!array_key_exists($PointsKey, $Read)) {
+			$Read[$PointsKey] = doquery("SELECT * FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $GalaxyRowUser['id'] ."';", 'statpoints', true);
+		}
+		$User2Points   = $Read[$PointsKey];
 		$CurrentPoints = $UserPoints['total_points'] ?? 0;
 		$RowUserPoints = $User2Points['total_points'] ?? 0;
 		$CurrentLevel  = $CurrentPoints * $NoobMulti['config_value'];
