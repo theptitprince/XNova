@@ -553,6 +553,53 @@ function RenaissanceMigration09kFlottes ( $Connection, $Prefix ) {
 
 // Performances : index
 function RenaissanceMigration09kPerformances ( $Connection, $Prefix ) {
+	// Index des recherches refaites a chaque page (planetes d'un joueur, par coordonnees, flottes d'une position...),
+	// qui parcouraient toute la table. Aucun resultat ne change : un index cherche par egalite sur toutes ses colonnes
+	// rend les lignes dans l'ordre de la table, comme le parcours complet (ex aequo des tris compris) ; d'ou les
+	// coordonnees sans le type (planete et lune ensemble). Pas d'index sur les heures des flottes et des missiles
+	// (ordre de traitement), ni sur onlinetime et register_time (ordre des ex aequo des joueurs en ligne, du dernier
+	// inscrit). Les requetes dont un intervalle changerait l'ordre gardent le parcours complet (USE INDEX ()).
+	RenaissanceAddIndexes($Connection, $Prefix, 'planets', array(
+		'id_owner' => "KEY `id_owner` (`id_owner`)",
+		'coords'   => "KEY `coords` (`galaxy`, `system`, `planet`)",
+	));
+	RenaissanceAddIndexes($Connection, $Prefix, 'users', array(
+		'db_deaktjava' => "KEY `db_deaktjava` (`db_deaktjava`)",
+		'ally_id'      => "KEY `ally_id` (`ally_id`)",
+		'ally_request' => "KEY `ally_request` (`ally_request`)",
+		'email'        => "KEY `email` (`email`)",
+	));
+	RenaissanceAddIndexes($Connection, $Prefix, 'statpoints', array(
+		'id_owner' => "KEY `id_owner` (`id_owner`)",
+		'id_ally'  => "KEY `id_ally` (`id_ally`)",
+	));
+	RenaissanceAddIndexes($Connection, $Prefix, 'messages', array(
+		'message_owner' => "KEY `message_owner` (`message_owner`)",
+	));
+	RenaissanceAddIndexes($Connection, $Prefix, 'fleets', array(
+		'fleet_owner'        => "KEY `fleet_owner` (`fleet_owner`)",
+		'fleet_target_owner' => "KEY `fleet_target_owner` (`fleet_target_owner`)",
+		'fleet_group'        => "KEY `fleet_group` (`fleet_group`)",
+		'start_coords'       => "KEY `start_coords` (`fleet_start_galaxy`, `fleet_start_system`, `fleet_start_planet`)",
+		'end_coords'         => "KEY `end_coords` (`fleet_end_galaxy`, `fleet_end_system`, `fleet_end_planet`)",
+	));
+	RenaissanceAddIndexes($Connection, $Prefix, 'galaxy', array(
+		'coords'    => "KEY `coords` (`galaxy`, `system`, `planet`)",
+		'id_planet' => "KEY `id_planet` (`id_planet`)",
+	));
+	RenaissanceAddIndexes($Connection, $Prefix, 'lunas', array(
+		'coords' => "KEY `coords` (`galaxy`, `system`, `lunapos`)",
+	));
+	RenaissanceAddIndexes($Connection, $Prefix, 'buddy', array(
+		'sender' => "KEY `sender` (`sender`)",
+		'owner'  => "KEY `owner` (`owner`)",
+	));
+	RenaissanceAddIndexes($Connection, $Prefix, 'notes', array(
+		'owner' => "KEY `owner` (`owner`)",
+	));
+	RenaissanceAddIndexes($Connection, $Prefix, 'reports', array(
+		'reporter_id' => "KEY `reporter_id` (`reporter_id`)",
+	));
 }
 
 ?>

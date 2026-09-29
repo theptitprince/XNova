@@ -175,7 +175,12 @@ if (INSTALL != true) {
 		}
 
 		// Comptes dont la suppression demandee dans les Options arrive a echeance (ACCOUNT_DELETE_DELAY apres la demande)
-		$Expired = doquery("SELECT `id` FROM {{table}} WHERE `db_deaktjava` > 0 AND `db_deaktjava` <= '". time() ."' LIMIT 10;", 'users');
+		// Recherche par l'index d'abord (0.9k, performances) ; s'il y a un compte a supprimer, requete d'origine, qui
+		// parcourt toute la table dans son ordre physique (ordre des suppressions)
+		$Expired = doquery("SELECT `id` FROM {{table}} WHERE `db_deaktjava` > 0 AND `db_deaktjava` <= '". time() ."' LIMIT 1;", 'users');
+		if (mysqli_num_rows($Expired) > 0) {
+			$Expired = doquery("SELECT `id` FROM {{table}} USE INDEX () WHERE `db_deaktjava` > 0 AND `db_deaktjava` <= '". time() ."' LIMIT 10;", 'users');
+		}
 		$SelfDeleted = false;
 		while ($ExpiredRow = mysqli_fetch_assoc($Expired)) {
 			DeleteSelectedUser(intval($ExpiredRow['id']));
