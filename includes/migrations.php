@@ -421,6 +421,36 @@ function RenaissanceMigration09kPages ( $Connection, $Prefix ) {
 
 // Securite : connexion, jetons, en-tetes
 function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
+	// Essais de connexion (login.php) : un essai par ligne, efface a la connexion reussie ou apres 30 minutes
+	mysqli_query($Connection, "CREATE TABLE IF NOT EXISTS `". $Prefix ."login_attempts` (
+			`id` int(11) unsigned NOT NULL auto_increment,
+			`username` varchar(64) NOT NULL default '',
+			`ip` varchar(45) NOT NULL default '',
+			`time` int(11) NOT NULL default '0',
+			PRIMARY KEY (`id`),
+			KEY `username_ip` (`username`, `ip`, `time`),
+			KEY `time` (`time`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;")
+		or die("MySQL Error (login_attempts): <b>". mysqli_error($Connection) ."</b>");
+
+	// Pseudo unique : index ajoute seulement si la base n'a pas deja deux comptes du meme nom (a regler a la main
+	// par l'administrateur ; l'inscription verifie de toute facon le pseudo sous verrou)
+	$Double = mysqli_query($Connection, "SELECT `username` FROM `". $Prefix ."users` GROUP BY `username` HAVING COUNT(*) > 1 LIMIT 1;");
+	if ($Double && mysqli_num_rows($Double) == 0) {
+		RenaissanceAddIndexes($Connection, $Prefix, 'users', array('username' => "UNIQUE KEY `username` (`username`)"));
+	}
+
+	// Adresse du jeu pour les liens des mails (voir GameUrl) : celle de l'installeur, utilise par l'administrateur,
+	// sans le dossier install/ ; vide hors d'une page web (le jeu reprend alors l'adresse de la page en cours).
+	// Une valeur deja reglee n'est jamais changee.
+	$GameUrl = '';
+	if (PHP_SAPI != 'cli' && !empty($_SERVER['HTTP_HOST'])) {
+		$Scheme  = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
+		$Host    = preg_replace('/[^A-Za-z0-9.\-:\[\]]/', '', (string) $_SERVER['HTTP_HOST']);
+		$Dir     = rtrim(str_replace('\\', '/', dirname(dirname((string) ($_SERVER['SCRIPT_NAME'] ?? '/install/index.php')))), '/');
+		$GameUrl = SafeUrl($Scheme . $Host . $Dir . '/');
+	}
+	RenaissanceAddConfig($Connection, $Prefix, array('game_url' => $GameUrl));
 }
 
 
