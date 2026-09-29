@@ -17,6 +17,16 @@ function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Sim
 	// Unites terminees par les ecritures precedentes de la page, par planete et par colonne :
 	// debut de la periode calculee (last_update de la copie ecrite) => nombre termine (voir l'enregistrement plus bas)
 	static $PageUnits = array();
+	// Elements producteurs (0.9k) : ceux de la boucle d'origine sur 0..299, dans le meme ordre, cherches une fois par requete
+	static $ProdIDs = null;
+	if ($ProdIDs === null) {
+		$ProdIDs = array();
+		for ( $ProdID = 0; $ProdID < 300; $ProdID++ ) {
+			if ( in_array( $ProdID, $reslist['prod']) ) {
+				$ProdIDs[] = $ProdID;
+			}
+		}
+	}
 
 	// Planete telle qu'elle arrive (avant production et chantier)
 	$PlanetBefore = $CurrentPlanet;
@@ -35,17 +45,20 @@ function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Sim
 	$Caps             = array('metal_perhour' => 0, 'crystal_perhour' => 0, 'deuterium_perhour' => 0, 'energy_used' => 0, 'energy_max' => 0);
 	$BuildTemp        = $CurrentPlanet[ 'temp_max' ];
 
-	for ( $ProdID = 0; $ProdID < 300; $ProdID++ ) {
-		if ( in_array( $ProdID, $reslist['prod']) ) {
+	// Formules compilees une fois par requete (ProdGridFormula) au lieu d'un eval() par formule et par planete ; rien a
+	// calculer sur une lune, dont la production est remise a 0 plus bas (0.9k)
+	if ($CurrentPlanet['planet_type'] != 3) {
+		foreach ( $ProdIDs as $ProdID ) {
 			$BuildLevelFactor = $CurrentPlanet[ $resource[$ProdID]."_porcent" ];
 			$BuildLevel       = $CurrentPlanet[ $resource[$ProdID] ];
-			$Caps['metal_perhour']     +=  floor( eval  ( $ProdGrid[$ProdID]['formule']['metal']     ) * ( $game_config['resource_multiplier'] ) * ( 1 + ( $CurrentUser['rpg_geologue']  * 0.05 ) ) );
-			$Caps['crystal_perhour']   +=  floor( eval  ( $ProdGrid[$ProdID]['formule']['crystal']   ) * ( $game_config['resource_multiplier'] ) * ( 1 + ( $CurrentUser['rpg_geologue']  * 0.05 ) ) );
-			$Caps['deuterium_perhour'] +=  floor( eval  ( $ProdGrid[$ProdID]['formule']['deuterium'] ) * ( $game_config['resource_multiplier'] ) * ( 1 + ( $CurrentUser['rpg_geologue']  * 0.05 ) ) );
+			$Formula          = ProdGridFormula ( $ProdID );
+			$Caps['metal_perhour']     +=  floor( $Formula['metal']     ( $BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet ) * ( $game_config['resource_multiplier'] ) * ( 1 + ( $CurrentUser['rpg_geologue']  * 0.05 ) ) );
+			$Caps['crystal_perhour']   +=  floor( $Formula['crystal']   ( $BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet ) * ( $game_config['resource_multiplier'] ) * ( 1 + ( $CurrentUser['rpg_geologue']  * 0.05 ) ) );
+			$Caps['deuterium_perhour'] +=  floor( $Formula['deuterium'] ( $BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet ) * ( $game_config['resource_multiplier'] ) * ( 1 + ( $CurrentUser['rpg_geologue']  * 0.05 ) ) );
 			if ($ProdID < 4) {
-				$Caps['energy_used']   +=  floor( eval  ( $ProdGrid[$ProdID]['formule']['energy']    ) * ( $game_config['resource_multiplier'] ) * ( 1 + ( $CurrentUser['rpg_ingenieur'] * 0.05 ) ) );
+				$Caps['energy_used']   +=  floor( $Formula['energy']    ( $BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet ) * ( $game_config['resource_multiplier'] ) * ( 1 + ( $CurrentUser['rpg_ingenieur'] * 0.05 ) ) );
 			} elseif ($ProdID >= 4 ) {
-				$Caps['energy_max']    +=  floor( eval  ( $ProdGrid[$ProdID]['formule']['energy']    ) * ( $game_config['resource_multiplier'] ) * ( 1 + ( $CurrentUser['rpg_ingenieur'] * 0.05 ) ) );
+				$Caps['energy_max']    +=  floor( $Formula['energy']    ( $BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet ) * ( $game_config['resource_multiplier'] ) * ( 1 + ( $CurrentUser['rpg_ingenieur'] * 0.05 ) ) );
 			}
 		}
 	}
@@ -242,6 +255,26 @@ function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Sim
 		}
 	}
 
+}
+
+// Formules de production de $ProdGrid (includes/vars.php) d'un element, compilees une seule fois par requete (0.9k) :
+// eval() recompilait le texte de chaque formule a chaque appel (24 par planete mise a jour, 44 par fiche de mine).
+// Le texte de vars.php reste la seule source. La formule garde les variables communes aux trois appels d'origine
+// (PlanetResourceUpdate, resources.php, infos.php) : niveau, pourcentage, temperature, joueur, planete, $game_config,
+// $resource et $ProdGrid. Resultat identique au bit pres.
+function ProdGridFormula ( $ProdID ) {
+	global $ProdGrid;
+	static $Compiled = array();
+
+	$Formula = array();
+	foreach ( $ProdGrid[$ProdID]['formule'] as $Res => $Code ) {
+		if (!isset($Compiled[$Code])) {
+			// (retour a la ligne avant la fin : une formule terminee par un commentaire // reste valide)
+			$Compiled[$Code] = eval('return function ($BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet) { global $ProdGrid, $resource, $game_config; '. $Code ."\n};");
+		}
+		$Formula[$Res] = $Compiled[$Code];
+	}
+	return $Formula;
 }
 
 // Revision History
