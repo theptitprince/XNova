@@ -64,4 +64,7 @@ $lang['adm_opt_recalc'] = 'Geschwindigkeiten geändert, Laufendes neu berechnet:
 $lang['adm_opt_building_queue'] = 'Länge der Bauliste<br>(Gebäude, 1 bis 99)';
 $lang['adm_opt_order_units'] = 'Einheiten pro Auftrag<br>(Schiffswerft und Verteidigung, 1 bis 1 000 000)';
 
+// 0.9k (fusion)
+$lang['adm_opt_game_url'] = 'Adresse des Spiels (Links in E-Mails, z. B. https://beispiel.de/xnova/)';
+
 ?>

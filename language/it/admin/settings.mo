@@ -64,4 +64,7 @@ $lang['adm_opt_recalc'] = 'Velocità modificate, ciò che è in corso è stato r
 $lang['adm_opt_building_queue'] = 'Lunghezza della coda di costruzione<br>(edifici, da 1 a 99)';
 $lang['adm_opt_order_units'] = 'Unità per ordine<br>(cantiere spaziale e difesa, da 1 a 1 000 000)';
 
+// 0.9k (fusion)
+$lang['adm_opt_game_url'] = 'Indirizzo del gioco (link nelle e-mail, es. https://esempio.it/xnova/)';
+
 ?>

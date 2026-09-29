@@ -63,4 +63,7 @@ $lang['adm_opt_recalc'] = 'Vitesses chang&eacute;es, en cours recalcul&eacute; :
 $lang['adm_opt_building_queue'] = 'Taille de la file de construction<br>(b&acirc;timents, de 1 &agrave; 99)';
 $lang['adm_opt_order_units'] = 'Unit&eacute;s par commande<br>(chantier spatial et d&eacute;fense, de 1 &agrave; 1 000 000)';
 
+// 0.9k (fusion)
+$lang['adm_opt_game_url'] = "Adresse du jeu (liens des mails, ex. https://exemple.fr/xnova/)";
+
 ?>

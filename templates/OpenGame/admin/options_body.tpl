@@ -49,6 +49,9 @@
 	<th>{adm_opt_game_forum}</th>
 	<th><input name="forum_url" size="40" maxlength="254" value="{forum_url}" type="text"></th>
 </tr><tr>
+	<th>{adm_opt_game_url}</th>
+	<th><input name="game_url" size="40" maxlength="254" value="{game_url}" type="text"></th>
+</tr><tr>
 	<th>{adm_opt_game_online}</th>
 	<th><input name="closed"{closed} type="checkbox"></th>
 </tr><tr>

@@ -44,10 +44,10 @@ $parse = $lang;
 			$i++;
 			$parse['errors_list'] .= "
 			<tr><td width=\"25\" class=n>". $u['error_id'] ."</td>
-			<td width=\"170\" class=n>". $u['error_type'] ."</td>
+			<td width=\"170\" class=n>". htmlspecialchars($u['error_type']) ."</td>
 			<td width=\"230\" class=n>". date('d/m/Y H:i:s', $u['error_time']) ."</td>
 			<td width=\"95\" class=n><a href=\"?delete=". $u['error_id'] ."\"><img src=\"../images/r1.png\"></a></td></tr>
-			<tr><td colspan=\"4\" class=b>".  nl2br($u['error_text'])."</td></tr>";
+			<tr><td colspan=\"4\" class=b>".  nl2br(htmlspecialchars(str_replace('<br />', "\n", $u['error_text']), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'))."</td></tr>";
 		}
 		$parse['errors_list'] .= "<tr>
 			<th class=b colspan=5>". $i ." ". $lang['adm_er_nbs'] ."</th>
