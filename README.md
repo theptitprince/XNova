@@ -176,10 +176,12 @@ s'affichent mal (encodage mal déclaré à l'époque), signalez-le : une mise à
 Depuis la 0.9k, sur un jeu installé (`config.php` rempli), ces deux modes sont réservés à un **administrateur du
 jeu** : ouvrez `install/` et saisissez le pseudo et le mot de passe de votre compte administrateur dans le formulaire
 de l'installeur. Inutile de vous connecter au jeu : après la copie des nouveaux fichiers, n'ouvrez ses pages qu'une
-fois la base mise à jour (le code de la nouvelle version n'est pas fait pour l'ancienne base). Le transfert vers un
-nouveau serveur, dont le `config.php` est encore vide, reste ouvert comme l'installation. La mise à jour remplace
-aussi le mot secret faible écrit par les installeurs de la 0.8e et de la 0.9d (il signe les cookies de connexion) par
-un mot secret aléatoire : chacun, administrateur compris, se reconnecte une fois.
+fois la base mise à jour (le code de la nouvelle version n'est pas fait pour l'ancienne base). Comme sur la page de
+connexion, 5 essais ratés pour un même pseudo depuis une même adresse bloquent ce pseudo 15 minutes. Le transfert
+vers un nouveau serveur, dont le `config.php` est encore vide, reste ouvert comme l'installation : si vous avez copié
+tout le site, ancien `config.php` compris, videz d'abord ce fichier. La mise à jour remplace aussi le mot secret
+faible écrit par les installeurs de la 0.8e et de la 0.9d (il signe les cookies de connexion) par un mot secret
+aléatoire : chacun, administrateur compris, se reconnecte une fois.
 
 ### Hébergement : OPcache
 OPcache, livré avec PHP, garde en mémoire les fichiers PHP déjà compilés : sans lui, chaque page recompile une

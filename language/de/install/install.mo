@@ -71,5 +71,7 @@ $lang['ins_adm_auth_txt'] = 'Das Spiel ist installiert: Nur ein Administrator ka
 $lang['ins_upg_running'] = 'Ein Update läuft bereits: Warten Sie einen Moment und laden Sie die Seite dann neu.';
 $lang['ins_upg_secret'] = 'Das Geheimwort in config.php stammte aus einer alten Version (0.8e / 0.9d) und war zu schwach: Es wurde durch ein zufälliges Geheimwort ersetzt. Alle Spieler, Sie eingeschlossen, müssen sich einmal neu anmelden.';
 $lang['ins_upg_secret_fail'] = 'Das Geheimwort in config.php stammt aus einer alten Version (0.8e / 0.9d) und ist zu schwach, aber die Datei konnte nicht neu geschrieben werden: Machen Sie config.php für den Webserver beschreibbar und starten Sie das Update erneut.';
+$lang['ins_admin_nodb'] = 'Das Administratorkonto kann nicht überprüft werden: Die in config.php angegebene Datenbank ist nicht erreichbar. Prüfen Sie config.php. Um das Spiel auf einen neuen Server zu übertragen, leeren Sie zuerst config.php: Der Transfer ist dann wie die Installation offen.';
+$lang['ins_admin_blocked'] = 'Zu viele fehlgeschlagene Versuche für diesen Benutzernamen von Ihrer Adresse: Versuchen Sie es in 15 Minuten erneut.';
 
 ?>

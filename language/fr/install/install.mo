@@ -95,5 +95,7 @@ $lang['ins_adm_auth_txt'] = 'Le jeu est install&eacute; : seul un administrateur
 $lang['ins_upg_running'] = 'Une mise &agrave; jour est d&eacute;j&agrave; en cours : patientez quelques instants, puis rechargez la page.';
 $lang['ins_upg_secret'] = 'Le mot secret de config.php venait d\'une ancienne version (0.8e / 0.9d) et &eacute;tait trop faible : il a &eacute;t&eacute; remplac&eacute; par un mot secret al&eacute;atoire. Tous les joueurs, vous compris, doivent se reconnecter une fois.';
 $lang['ins_upg_secret_fail'] = 'Le mot secret de config.php vient d\'une ancienne version (0.8e / 0.9d) et il est trop faible, mais le fichier n\'a pas pu &ecirc;tre r&eacute;&eacute;crit : rendez config.php modifiable par le serveur web, puis relancez la mise &agrave; jour.';
+$lang['ins_admin_nodb'] = 'Impossible de v&eacute;rifier le compte administrateur : la base de donn&eacute;es indiqu&eacute;e dans config.php est injoignable. V&eacute;rifiez config.php. Pour transf&eacute;rer le jeu vers un nouveau serveur, videz d\'abord config.php : le transfert est alors ouvert, comme l\'installation.';
+$lang['ins_admin_blocked'] = 'Trop d\'essais rat&eacute;s pour ce pseudo depuis votre adresse : r&eacute;essayez dans 15 minutes.';
 
 ?>

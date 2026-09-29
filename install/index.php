@@ -128,52 +128,123 @@ function InstallKeyValid () {
 	return ($Hash != '' && hash_equals($Hash, hash('sha256', $_COOKIE[INSTALL_KEY_COOKIE])));
 }
 
+// Essais de mot de passe de l'installeur : meme regle que login.php (partie Securite), dans la meme table. Apres
+// 5 essais rates pour un meme pseudo depuis une meme adresse, refus pendant 15 minutes
+define('INSTALL_LOGIN_MAX_FAILURES', 5);
+define('INSTALL_LOGIN_BLOCK_TIME', 900);
+
+// Adresse comptee pour la limite : meme regle que LoginAttemptIp (login.php), IPv6 regroupee par /64 et adresse
+// IPv4 vue en IPv6 ramenee a l'adresse IPv4
+function InstallAttemptIp ( $Ip ) {
+	$Ip = (string) $Ip;
+	if (filter_var($Ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false) {
+		$Bin = inet_pton($Ip);
+		if (substr($Bin, 0, 12) == str_repeat(chr(0), 10) . chr(255) . chr(255)) {
+			return inet_ntop(substr($Bin, 12));
+		}
+		return inet_ntop(substr($Bin, 0, 8) . str_repeat(chr(0), 8)) . '/64';
+	}
+	return substr($Ip, 0, 45);
+}
+
+// Essais rates dans les 15 minutes qui precedent le dernier essai rate ; 0 si ce dernier a plus de 15 minutes (comme
+// LoginFailures de login.php). false si la table ne repond pas
+function InstallLoginFailures ( $Connection, $Prefix, $Name, $Ip ) {
+	$Where  = "`username` = '". mysqli_real_escape_string($Connection, $Name) ."' AND `ip` = '". mysqli_real_escape_string($Connection, $Ip) ."'";
+	$Result = @mysqli_query($Connection, "SELECT MAX(`time`) FROM `". $Prefix ."login_attempts` WHERE ". $Where .";");
+	$Last   = $Result ? mysqli_fetch_row($Result) : null;
+	if (!$Last) {
+		return false;
+	}
+	if (empty($Last[0]) || $Last[0] <= time() - INSTALL_LOGIN_BLOCK_TIME) {
+		return 0;
+	}
+	$Result = @mysqli_query($Connection, "SELECT COUNT(*) FROM `". $Prefix ."login_attempts` WHERE ". $Where ." AND `time` > '". (intval($Last[0]) - INSTALL_LOGIN_BLOCK_TIME) ."';");
+	$Count  = $Result ? mysqli_fetch_row($Result) : null;
+	return $Count ? intval($Count[0]) : false;
+}
+
 // Administrateur du jeu installe, identifie dans l'installeur par son pseudo et son mot de passe (champs adm_login et
-// adm_password, envoyes en POST) : sa fiche, sinon false. Une fois le jeu installe, lui seul peut lancer la mise a jour
-// ou le transfert (ils etaient ouverts a tous). Aucun code du jeu ne tourne : la base peut encore etre celle d'une
-// version plus ancienne (passer par login.php lancait les flottes et les suppressions de comptes du nouveau code sur
-// l'ancienne base), et le format du cookie de connexion peut changer d'une version a l'autre
+// adm_password, envoyes en POST) : sa fiche, sinon la raison du refus ('get' : page ouverte sans le formulaire,
+// 'fail' : identifiants incorrects, 'blocked' : trop d'essais rates, 'db' : base de config.php injoignable). Une fois le
+// jeu installe, lui seul peut lancer la mise a jour ou le transfert (ils etaient ouverts a tous). Aucun code du jeu ne
+// tourne : la base peut encore etre celle d'une version plus ancienne (passer par login.php lancait les flottes et les
+// suppressions de comptes du nouveau code sur l'ancienne base), et le format du cookie de connexion peut changer
 function InstallAdminLogin () {
 	global $xnova_root_path;
+	if ($_SERVER['REQUEST_METHOD'] != 'POST' || !InstallConfigWritten()) {
+		return 'get';
+	}
 	$Login    = $_POST['adm_login'] ?? '';
 	$Password = $_POST['adm_password'] ?? '';
-	if ($_SERVER['REQUEST_METHOD'] != 'POST' || !is_string($Login) || !is_string($Password) || $Login == '' || $Password == '' || !InstallConfigWritten()) {
-		return false;
+	if (!is_string($Login) || !is_string($Password) || $Login == '' || $Password == '') {
+		return 'fail';
 	}
 	$dbsettings = array();
 	include($xnova_root_path . 'config.php');
 	$Prefix = $dbsettings['prefix'] ?? '';
 	if (!InstallValidPrefix($Prefix)) {
-		return false;
+		return 'db';
 	}
 	$Connection = InstallConnect($dbsettings['server'] ?? '', $dbsettings['user'] ?? '', $dbsettings['pass'] ?? '', $dbsettings['name'] ?? '');
 	if (!$Connection) {
-		return false;
+		return 'db';
 	}
-	// Un essai a la fois pour tout le serveur, et 3 secondes d'attente apres un echec : le mot de passe ne peut pas etre
-	// cherche par essais successifs (la limite des essais de login.php ne s'applique pas ici)
-	$LockName = "LEFT(CONCAT(DATABASE(), '.". $Prefix ."install_login'), 64)";
-	$Lock     = @mysqli_query($Connection, "SELECT GET_LOCK(". $LockName .", 30);");
-	$Lock     = $Lock ? mysqli_fetch_row($Lock) : null;
-	if (!$Lock || $Lock[0] != 1) {
-		return false;
+	// Table des essais de login.php, creee ici si la base n'est pas encore a la 0.9k (meme definition que
+	// RenaissanceMigration09kSecurite, includes/migrations.php) : la limite vaut aussitot pour l'installeur et login.php.
+	// Avant : un essai toutes les 3 s pour tout le serveur, sans blocage, et un verrou garde pendant l'attente
+	// (quelques requetes simultanees occupaient les processus PHP et bloquaient l'administrateur)
+	$Table = @mysqli_query($Connection, "CREATE TABLE IF NOT EXISTS `". $Prefix ."login_attempts` (
+			`id` int(11) unsigned NOT NULL auto_increment,
+			`username` varchar(64) NOT NULL default '',
+			`ip` varchar(45) NOT NULL default '',
+			`time` int(11) NOT NULL default '0',
+			PRIMARY KEY (`id`),
+			KEY `username_ip` (`username`, `ip`, `time`),
+			KEY `time` (`time`)
+		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
+	$Name     = mb_substr($Login, 0, 64, 'UTF-8');
+	$Ip       = InstallAttemptIp($_SERVER['REMOTE_ADDR'] ?? '');
+	$Failures = $Table ? InstallLoginFailures($Connection, $Prefix, $Name, $Ip) : false;
+	if ($Failures === false) {
+		return 'db';
+	}
+	if ($Failures >= INSTALL_LOGIN_MAX_FAILURES) {
+		return 'blocked';
+	}
+	// Essai enregistre avant de verifier le mot de passe : des requetes simultanees ne depassent pas la limite
+	@mysqli_query($Connection, "DELETE FROM `". $Prefix ."login_attempts` WHERE `time` < '". (time() - 2 * INSTALL_LOGIN_BLOCK_TIME) ."';");
+	$Saved = @mysqli_query($Connection, "INSERT INTO `". $Prefix ."login_attempts` SET `username` = '". mysqli_real_escape_string($Connection, $Name) ."', `ip` = '". mysqli_real_escape_string($Connection, $Ip) ."', `time` = '". time() ."';");
+	if (!$Saved) {
+		return 'db';
+	}
+	$AttemptId = mysqli_insert_id($Connection);
+	if (InstallLoginFailures($Connection, $Prefix, $Name, $Ip) > INSTALL_LOGIN_MAX_FAILURES) {
+		@mysqli_query($Connection, "DELETE FROM `". $Prefix ."login_attempts` WHERE `id` = '". intval($AttemptId) ."';");
+		return 'blocked';
 	}
 	$Result  = @mysqli_query($Connection, "SELECT `id`, `username`, `password`, `authlevel` FROM `". $Prefix ."users` WHERE `username` = '". mysqli_real_escape_string($Connection, $Login) ."' LIMIT 1;");
-	$UserRow = $Result ? mysqli_fetch_assoc($Result) : null;
+	if (!$Result) {
+		return 'db';
+	}
+	$UserRow = mysqli_fetch_assoc($Result);
 	// Meme controle que PasswordCheck (hash md5 de la 0.8e / 0.9d ou password_hash), sans reecrire le hash : le jeu le
-	// convertit a la connexion suivante
+	// convertit a la connexion suivante. Pseudo inconnu : meme temps de calcul qu'un vrai essai
 	$Stored  = (string) ($UserRow['password'] ?? '');
 	if (preg_match('/^[a-f0-9]{32}$/i', $Stored)) {
 		$Valid = hash_equals(strtolower($Stored), md5($Password));
+	} elseif ($Stored != '') {
+		$Valid = password_verify($Password, $Stored);
 	} else {
-		$Valid = ($Stored != '' && password_verify($Password, $Stored));
+		PasswordHash($Password);
+		$Valid = false;
 	}
-	$Valid = ($Valid && intval($UserRow['authlevel']) >= 3);
-	if (!$Valid) {
-		sleep(3);
+	if (!$Valid || intval($UserRow['authlevel']) < 3) {
+		return 'fail';
 	}
-	@mysqli_query($Connection, "DO RELEASE_LOCK(". $LockName .");");
-	return $Valid ? $UserRow : false;
+	// Reussite : les essais rates de ce pseudo depuis cette adresse sont oublies
+	@mysqli_query($Connection, "DELETE FROM `". $Prefix ."login_attempts` WHERE `username` = '". mysqli_real_escape_string($Connection, $Name) ."' AND `ip` = '". mysqli_real_escape_string($Connection, $Ip) ."';");
+	return $UserRow;
 }
 
 // Champs d'identification de l'administrateur (jeu installe), places en tete du formulaire de l'etape
@@ -231,10 +302,15 @@ $phpself  = $_SERVER['PHP_SELF'];
 		InstallMessage ($lang['ins_locked']);
 	}
 	// Jeu installe : mise a jour et transfert reserves a un administrateur du jeu. L'etape qui modifie la base ou
-	// config.php exige son pseudo et son mot de passe, saisis dans le formulaire de l'etape precedente
-	if ((($Mode == 'upg' && $Page >= 2) || ($Mode == 'goto' && $Page >= 3)) && $Installed && !InstallAdminLogin()) {
-		header("Location: ?mode=". $Mode ."&page=". (($Mode == 'upg') ? 1 : 2) ."&error=5");
-		exit();
+	// config.php exige son pseudo et son mot de passe, saisis dans le formulaire de l'etape precedente. Refus : retour
+	// au formulaire, avec la raison (rien pour une page ouverte sans le formulaire, un ancien favori par exemple)
+	if ((($Mode == 'upg' && $Page >= 2) || ($Mode == 'goto' && $Page >= 3)) && $Installed) {
+		$AdminLogin = InstallAdminLogin();
+		if (!is_array($AdminLogin)) {
+			$Errors = array('get' => '', 'fail' => '&error=5', 'db' => '&error=6', 'blocked' => '&error=7');
+			header("Location: ?mode=". $Mode ."&page=". (($Mode == 'upg') ? 1 : 2) . $Errors[$AdminLogin]);
+			exit();
+		}
 	}
 
 	switch ($Mode) {
@@ -472,6 +548,12 @@ $phpself  = $_SERVER['PHP_SELF'];
 				elseif (($_GET['error'] ?? null) == 5) {
 					$ErrorRow = InstallErrorRow($lang['ins_admin_only']);
 				}
+				elseif (($_GET['error'] ?? null) == 6) {
+					$ErrorRow = InstallErrorRow($lang['ins_admin_nodb']);
+				}
+				elseif (($_GET['error'] ?? null) == 7) {
+					$ErrorRow = InstallErrorRow($lang['ins_admin_blocked']);
+				}
 
 				$SubTPL = gettemplate ('install/ins_goto_form');
 				$bloc   = $lang;
@@ -491,6 +573,13 @@ $phpself  = $_SERVER['PHP_SELF'];
 					exit();
 				}
 
+				// Une seule operation a la fois sur cette base (double clic, deux onglets, mise a jour lancee en meme temps) :
+				// meme verrou nomme que la mise a jour, pris sans attendre
+				$Lock = @mysqli_query($connection, "SELECT GET_LOCK(LEFT(CONCAT(DATABASE(), '.". $prefix ."upgrade'), 64), 0);");
+				$Lock = $Lock ? mysqli_fetch_row($Lock) : null;
+				if (!$Lock || $Lock[0] != 1) {
+					InstallMessage ($lang['ins_upg_running']);
+				}
 				$FromVersion = RenaissanceSchemaVersion($connection, $prefix);
 				if ($FromVersion === false) {
 					header("Location: ?mode=goto&page=2&error=4");
@@ -515,7 +604,9 @@ $phpself  = $_SERVER['PHP_SELF'];
 		case 'upg':
 			// Mise a jour : applique a la base du jeu installe les modifications des versions plus recentes
 			if ($Page == 1) {
-				$ErrorRow = (($_GET['error'] ?? null) == 5) ? InstallErrorRow($lang['ins_admin_only']) : '';
+				$AdminErrors = array(5 => 'ins_admin_only', 6 => 'ins_admin_nodb', 7 => 'ins_admin_blocked');
+				$Error       = intval($_GET['error'] ?? 0);
+				$ErrorRow    = isset($AdminErrors[$Error]) ? InstallErrorRow($lang[$AdminErrors[$Error]]) : '';
 				$SubTPL   = gettemplate ('install/ins_upg_intro');
 				$bloc     = $lang;
 				$frame    = $ErrorRow . ($Installed ? InstallAdminRows() : '') . parsetemplate ( $SubTPL, $bloc );

@@ -94,5 +94,7 @@ $lang['ins_adm_auth_txt'] = 'Il gioco &egrave; installato: solo un amministrator
 $lang['ins_upg_running'] = 'Un aggiornamento &egrave; gi&agrave; in corso: attendete qualche istante, poi ricaricate la pagina.';
 $lang['ins_upg_secret'] = 'La parola segreta di config.php proveniva da una vecchia versione (0.8e / 0.9d) ed era troppo debole: &egrave; stata sostituita da una parola segreta casuale. Tutti i giocatori, voi compresi, devono riconnettersi una volta.';
 $lang['ins_upg_secret_fail'] = 'La parola segreta di config.php proviene da una vecchia versione (0.8e / 0.9d) ed &egrave; troppo debole, ma non &egrave; stato possibile riscrivere il file: rendete config.php modificabile dal server web, poi rilanciate l\'aggiornamento.';
+$lang['ins_admin_nodb'] = 'Impossibile verificare l\'account amministratore: il database indicato in config.php non &egrave; raggiungibile. Controllate config.php. Per trasferire il gioco su un nuovo server, svuotate prima config.php: il trasferimento &egrave; allora aperto, come l\'installazione.';
+$lang['ins_admin_blocked'] = 'Troppi tentativi falliti per questo nome utente dal vostro indirizzo: riprovate tra 15 minuti.';
 
 ?>
