@@ -128,38 +128,63 @@ function InstallKeyValid () {
 	return ($Hash != '' && hash_equals($Hash, hash('sha256', $_COOKIE[INSTALL_KEY_COOKIE])));
 }
 
-// Administrateur connecte au jeu (cookie de connexion, memes controles que CheckCookies) : sa fiche, sinon false.
-// Une fois le jeu installe, lui seul peut lancer la mise a jour ou le transfert (ils etaient ouverts a tous)
-function InstallLoggedAdmin () {
+// Administrateur du jeu installe, identifie dans l'installeur par son pseudo et son mot de passe (champs adm_login et
+// adm_password, envoyes en POST) : sa fiche, sinon false. Une fois le jeu installe, lui seul peut lancer la mise a jour
+// ou le transfert (ils etaient ouverts a tous). Aucun code du jeu ne tourne : la base peut encore etre celle d'une
+// version plus ancienne (passer par login.php lancait les flottes et les suppressions de comptes du nouveau code sur
+// l'ancienne base), et le format du cookie de connexion peut changer d'une version a l'autre
+function InstallAdminLogin () {
 	global $xnova_root_path;
-	if (!InstallConfigWritten()) {
+	$Login    = $_POST['adm_login'] ?? '';
+	$Password = $_POST['adm_password'] ?? '';
+	if ($_SERVER['REQUEST_METHOD'] != 'POST' || !is_string($Login) || !is_string($Password) || $Login == '' || $Password == '' || !InstallConfigWritten()) {
 		return false;
 	}
 	$dbsettings = array();
 	include($xnova_root_path . 'config.php');
 	$Prefix = $dbsettings['prefix'] ?? '';
-	if (!InstallValidPrefix($Prefix) || empty($dbsettings['secretword'])) {
+	if (!InstallValidPrefix($Prefix)) {
 		return false;
 	}
 	$Connection = InstallConnect($dbsettings['server'] ?? '', $dbsettings['user'] ?? '', $dbsettings['pass'] ?? '', $dbsettings['name'] ?? '');
 	if (!$Connection) {
 		return false;
 	}
-	$Result = @mysqli_query($Connection, "SELECT `config_value` FROM `". $Prefix ."config` WHERE `config_name` = 'COOKIE_NAME' LIMIT 1;");
-	$Row    = $Result ? mysqli_fetch_row($Result) : null;
-	if (!$Row || $Row[0] == '' || !isset($_COOKIE[$Row[0]]) || !is_string($_COOKIE[$Row[0]])) {
+	// Un essai a la fois pour tout le serveur, et 3 secondes d'attente apres un echec : le mot de passe ne peut pas etre
+	// cherche par essais successifs (la limite des essais de login.php ne s'applique pas ici)
+	$LockName = "LEFT(CONCAT(DATABASE(), '.". $Prefix ."install_login'), 64)";
+	$Lock     = @mysqli_query($Connection, "SELECT GET_LOCK(". $LockName .", 30);");
+	$Lock     = $Lock ? mysqli_fetch_row($Lock) : null;
+	if (!$Lock || $Lock[0] != 1) {
 		return false;
 	}
-	$TheCookie = explode("/%/", $_COOKIE[$Row[0]]);
-	if (count($TheCookie) != 4) {
-		return false;
-	}
-	$Result  = @mysqli_query($Connection, "SELECT * FROM `". $Prefix ."users` WHERE `id` = '". intval($TheCookie[0]) ."' LIMIT 1;");
+	$Result  = @mysqli_query($Connection, "SELECT `id`, `username`, `password`, `authlevel` FROM `". $Prefix ."users` WHERE `username` = '". mysqli_real_escape_string($Connection, $Login) ."' LIMIT 1;");
 	$UserRow = $Result ? mysqli_fetch_assoc($Result) : null;
-	if (!$UserRow || $UserRow['username'] !== $TheCookie[1] || !hash_equals(AuthCookieToken($UserRow), (string) $TheCookie[2])) {
-		return false;
+	// Meme controle que PasswordCheck (hash md5 de la 0.8e / 0.9d ou password_hash), sans reecrire le hash : le jeu le
+	// convertit a la connexion suivante
+	$Stored  = (string) ($UserRow['password'] ?? '');
+	if (preg_match('/^[a-f0-9]{32}$/i', $Stored)) {
+		$Valid = hash_equals(strtolower($Stored), md5($Password));
+	} else {
+		$Valid = ($Stored != '' && password_verify($Password, $Stored));
 	}
-	return (intval($UserRow['authlevel']) >= 3) ? $UserRow : false;
+	$Valid = ($Valid && intval($UserRow['authlevel']) >= 3);
+	if (!$Valid) {
+		sleep(3);
+	}
+	@mysqli_query($Connection, "DO RELEASE_LOCK(". $LockName .");");
+	return $Valid ? $UserRow : false;
+}
+
+// Champs d'identification de l'administrateur (jeu installe), places en tete du formulaire de l'etape
+function InstallAdminRows () {
+	global $lang;
+	return "<tr><td class=\"c\" colspan=\"2\">". $lang['ins_adm_auth'] ."</td></tr>"
+	     . "<tr><th colspan=\"2\"><br>". $lang['ins_adm_auth_txt'] ."<br><br>"
+	     . "<table width=\"270\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">"
+	     . "<tr><td>". $lang['ins_acc_user'] .":</td><td><input type=\"text\" name=\"adm_login\" value=\"\" size=\"20\"></td></tr>"
+	     . "<tr><td>". $lang['ins_acc_pass'] .":</td><td><input type=\"password\" name=\"adm_password\" value=\"\" size=\"20\"></td></tr>"
+	     . "</table><br></th></tr>";
 }
 
 // Ligne d'erreur placee au-dessus du contenu de l'etape (le formulaire reste affiche en dessous)
@@ -205,17 +230,11 @@ $phpself  = $_SERVER['PHP_SELF'];
 	if ($Mode == 'ins' && $Page >= 3 && (!InstallKeyValid() || InstallHasAdmin())) {
 		InstallMessage ($lang['ins_locked']);
 	}
-	// Jeu installe : mise a jour et transfert reserves a un administrateur connecte au jeu. L'etape qui modifie la
-	// base ou config.php exige en plus un formulaire portant son jeton CSRF (ajoute par display, $user etant rempli)
-	if (($Mode == 'upg' || $Mode == 'goto') && $Installed) {
-		$user = InstallLoggedAdmin();
-		if (!$user) {
-			$user = array();
-			InstallMessage ($lang['ins_admin_only']);
-		}
-		if ((($Mode == 'upg' && $Page >= 2) || ($Mode == 'goto' && $Page >= 3)) && ($_SERVER['REQUEST_METHOD'] != 'POST' || !CsrfValid())) {
-			InstallMessage ($lang['ins_csrf_error']);
-		}
+	// Jeu installe : mise a jour et transfert reserves a un administrateur du jeu. L'etape qui modifie la base ou
+	// config.php exige son pseudo et son mot de passe, saisis dans le formulaire de l'etape precedente
+	if ((($Mode == 'upg' && $Page >= 2) || ($Mode == 'goto' && $Page >= 3)) && $Installed && !InstallAdminLogin()) {
+		header("Location: ?mode=". $Mode ."&page=". (($Mode == 'upg') ? 1 : 2) ."&error=5");
+		exit();
 	}
 
 	switch ($Mode) {
@@ -450,10 +469,13 @@ $phpself  = $_SERVER['PHP_SELF'];
 				elseif (($_GET['error'] ?? null) == 4) {
 					$ErrorRow = InstallErrorRow($lang['ins_goto_err_version']);
 				}
+				elseif (($_GET['error'] ?? null) == 5) {
+					$ErrorRow = InstallErrorRow($lang['ins_admin_only']);
+				}
 
 				$SubTPL = gettemplate ('install/ins_goto_form');
 				$bloc   = $lang;
-				$frame  = $ErrorRow . parsetemplate ( $SubTPL, $bloc );
+				$frame  = $ErrorRow . ($Installed ? InstallAdminRows() : '') . parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 3) {
 				// Transfere : reprise d'une base XNova Renaissance existante (0.9d ou plus recente) sur un nouveau serveur
@@ -493,9 +515,10 @@ $phpself  = $_SERVER['PHP_SELF'];
 		case 'upg':
 			// Mise a jour : applique a la base du jeu installe les modifications des versions plus recentes
 			if ($Page == 1) {
-				$SubTPL = gettemplate ('install/ins_upg_intro');
-				$bloc   = $lang;
-				$frame  = parsetemplate ( $SubTPL, $bloc );
+				$ErrorRow = (($_GET['error'] ?? null) == 5) ? InstallErrorRow($lang['ins_admin_only']) : '';
+				$SubTPL   = gettemplate ('install/ins_upg_intro');
+				$bloc     = $lang;
+				$frame    = $ErrorRow . ($Installed ? InstallAdminRows() : '') . parsetemplate ( $SubTPL, $bloc );
 			}
 			elseif ($Page == 2) {
 				if (!file_exists($xnova_root_path.'config.php') || filesize($xnova_root_path.'config.php') == 0) {
