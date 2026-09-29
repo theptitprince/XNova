@@ -145,6 +145,7 @@ $RenaissanceMigrations = array(
 		// Chaque partie de la 0.9k a sa fonction (fin du fichier) ; toutes peuvent etre relancees sans erreur, et
 		// l'installation neuve les appelle aussi (install/index.php)
 		'RenaissanceMigration09kJeu',
+		'RenaissanceMigration09kPages',
 		'RenaissanceMigration09kSecurite',
 		'RenaissanceMigration09kAdministration',
 		'RenaissanceMigration09kFlottes',
@@ -410,6 +411,11 @@ function RenaissanceAddUnitColumns ( $Connection, $Prefix ) {
 
 // Jeu : triches et controles des pages du jeu
 function RenaissanceMigration09kJeu ( $Connection, $Prefix ) {
+}
+
+
+// Pages : notes, messages, marchand, officiers, alliance, options...
+function RenaissanceMigration09kPages ( $Connection, $Prefix ) {
 }
 
 
