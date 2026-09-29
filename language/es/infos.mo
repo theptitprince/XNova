@@ -247,4 +247,7 @@ $lang['depot_err_deut'] = 'No hay suficiente deuterio en el planeta.';
 $lang['depot_msg_title'] = 'Abastecimiento';
 $lang['depot_msg'] = 'Su flota estacionada en el planeta %s %s ha sido abastecida por %s: %s hora(s) más. Fin del estacionamiento: %s.';
 
+// 0.9k (jeu-a)
+$lang['gate_no_start_g'] = '¡No hay ningún salto cuántico en la luna de origen!';
+
 ?>

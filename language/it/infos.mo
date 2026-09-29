@@ -454,4 +454,7 @@ $lang['depot_err_deut'] = 'Deuterio insufficiente sul pianeta.';
 $lang['depot_msg_title'] = 'Rifornimento';
 $lang['depot_msg'] = 'La vostra flotta stazionata sul pianeta %s %s è stata rifornita da %s: %s ora/e in più. Fine dello stazionamento: %s.';
 
+// 0.9k (jeu-a)
+$lang['gate_no_start_g'] = 'Non c\'è alcun portale iperspaziale sulla luna di partenza!';
+
 ?>

@@ -20,21 +20,28 @@ include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
 function DoFleetJump ( $CurrentUser, $CurrentPlanet ) {
-	global $lang, $resource;
+	global $lang, $resource, $planetrow;
 
 	includeLang ('infos');
 
 	if ($_POST) {
+		// Depart : une lune du joueur equipee d'une porte de saut (0.9k). Avant, n'importe quelle planete convenait,
+		// l'attente d'une porte de niveau 0 valant 0
+		if ($CurrentPlanet['id_owner'] != $CurrentUser['id'] || $CurrentPlanet['planet_type'] != 3 || $CurrentPlanet[ $resource[43] ] < 1) {
+			return $lang['gate_no_start_g'];
+		}
 		$RestString   = GetNextJumpWaitTime ( $CurrentPlanet );
 		$NextJumpTime = $RestString['value'];
 		$JumpTime     = time();
 		// Dit monsieur, j'ai le droit de sauter ???
 		if ( $NextJumpTime == 0 ) {
 			// Dit monsieur, ou je veux aller ca existe ???
+			// Une autre lune du joueur (0.9k) : la cible etait lue par son seul numero, le joueur prenait la main sur la
+			// lune d'un autre (planete courante)
 			$TargetPlanet = intval(($_POST['jmpto'] ?? null));
-			$TargetGate   = doquery ( "SELECT `id`, `sprungtor`, `last_jump_time` FROM {{table}} WHERE `id` = '". $TargetPlanet ."';", 'planets', true);
+			$TargetGate   = doquery ( "SELECT `id`, `sprungtor`, `last_jump_time` FROM {{table}} WHERE `id` = '". $TargetPlanet ."' AND `id_owner` = '". intval($CurrentUser['id']) ."' AND `planet_type` = '3' AND `id` <> '". intval($CurrentPlanet['id']) ."';", 'planets', true);
 			// Dit monsieur, ou je veux aller y a une porte de saut ???
-			if ($TargetGate['sprungtor'] > 0) {
+			if (($TargetGate['sprungtor'] ?? 0) > 0) {
 				$RestString   = GetNextJumpWaitTime ( $TargetGate );
 				$NextDestTime = $RestString['value'];
 				// Dit monsieur, chez toi aussi peut y avoir un saut ???
@@ -43,6 +50,7 @@ function DoFleetJump ( $CurrentUser, $CurrentPlanet ) {
 					$ShipArray   = array();
 					$SubQueryOri = "";
 					$SubQueryDes = "";
+					$SubQueryChk = "";
 					for ( $Ship = 200; $Ship < 300; $Ship++ ) {
 						if (empty($resource[ $Ship ])) {
 							continue; // numero sans vaisseau
@@ -58,32 +66,62 @@ function DoFleetJump ( $CurrentUser, $CurrentPlanet ) {
 						if ($ShipArray[ $Ship ] <> 0) {
 							$SubQueryOri .= "`". $resource[ $Ship ] ."` = `". $resource[ $Ship ] ."` - '". $ShipArray[ $Ship ] ."', ";
 							$SubQueryDes .= "`". $resource[ $Ship ] ."` = `". $resource[ $Ship ] ."` + '". $ShipArray[ $Ship ] ."', ";
+							$SubQueryChk .= "`". $resource[ $Ship ] ."` >= '". $ShipArray[ $Ship ] ."' AND ";
 						}
 					}
 					// Dit monsieur, y avait quelque chose a envoyer ???
 					if ($SubQueryOri != "") {
 						// Soustraction de la lune de depart !
+						// Sous condition (0.9k) : vaisseaux encore presents et porte pas utilisee entre-temps (des sauts
+						// simultanes multipliaient les vaisseaux)
 						$QryUpdateOri  = "UPDATE {{table}} SET ";
 						$QryUpdateOri .= $SubQueryOri;
 						$QryUpdateOri .= "`last_jump_time` = '". $JumpTime ."' ";
 						$QryUpdateOri .= "WHERE ";
-						$QryUpdateOri .= "`id` = '". $CurrentPlanet['id'] ."';";
+						$QryUpdateOri .= "`id` = '". intval($CurrentPlanet['id']) ."' AND ";
+						$QryUpdateOri .= "`id_owner` = '". intval($CurrentUser['id']) ."' AND ";
+						$QryUpdateOri .= "`planet_type` = '3' AND ";
+						$QryUpdateOri .= "`sprungtor` > 0 AND ";
+						$QryUpdateOri .= $SubQueryChk;
+						$QryUpdateOri .= "`last_jump_time` = '". intval($CurrentPlanet['last_jump_time']) ."';";
 						doquery ( $QryUpdateOri, 'planets');
+						if (mysqli_affected_rows(DbConnect()) != 1) {
+							$planetrow = doquery ( "SELECT * FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+							return $lang['gate_wait_data'];
+						}
 
 						// Addition à la lune d'arrivée !
+						// Sous condition aussi : porte d'arrivee pas utilisee entre-temps, sinon les vaisseaux restent
 						$QryUpdateDes  = "UPDATE {{table}} SET ";
 						$QryUpdateDes .= $SubQueryDes;
 						$QryUpdateDes .= "`last_jump_time` = '". $JumpTime ."' ";
 						$QryUpdateDes .= "WHERE ";
-						$QryUpdateDes .= "`id` = '". $TargetGate['id'] ."';";
+						$QryUpdateDes .= "`id` = '". intval($TargetGate['id']) ."' AND ";
+						$QryUpdateDes .= "`id_owner` = '". intval($CurrentUser['id']) ."' AND ";
+						$QryUpdateDes .= "`planet_type` = '3' AND ";
+						$QryUpdateDes .= "`sprungtor` > 0 AND ";
+						$QryUpdateDes .= "`last_jump_time` = '". intval($TargetGate['last_jump_time']) ."';";
 						doquery ( $QryUpdateDes, 'planets');
+						if (mysqli_affected_rows(DbConnect()) != 1) {
+							$QryUpdateOri  = "UPDATE {{table}} SET ";
+							$QryUpdateOri .= str_replace("` - '", "` + '", $SubQueryOri);
+							$QryUpdateOri .= "`last_jump_time` = '". intval($CurrentPlanet['last_jump_time']) ."' ";
+							$QryUpdateOri .= "WHERE ";
+							$QryUpdateOri .= "`id` = '". intval($CurrentPlanet['id']) ."';";
+							doquery ( $QryUpdateOri, 'planets');
+							$planetrow = doquery ( "SELECT * FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+							return $lang['gate_wait_dest'];
+						}
 
 						// Deplacement vers la lune d'arrivée
 						$QryUpdateUsr  = "UPDATE {{table}} SET ";
-						$QryUpdateUsr .= "`current_planet` = '". $TargetGate['id'] ."' ";
+						$QryUpdateUsr .= "`current_planet` = '". intval($TargetGate['id']) ."' ";
 						$QryUpdateUsr .= "WHERE ";
 						$QryUpdateUsr .= "`id` = '". $CurrentUser['id'] ."';";
 						doquery ( $QryUpdateUsr, 'users');
+
+						// Lune de depart relue : la barre du haut du message reecrit ses ressources et ses vaisseaux construits
+						$planetrow = doquery ( "SELECT * FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
 
 						$CurrentPlanet['last_jump_time'] = $JumpTime;
 						$RestString    = GetNextJumpWaitTime ( $CurrentPlanet );

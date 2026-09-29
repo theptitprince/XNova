@@ -92,6 +92,11 @@ $planet = doquery("SELECT * FROM {{table}} WHERE galaxy = ".$g." AND
 
 $ziel_id = $planet['id_owner'];
 
+// Planete sans proprietaire (planete detruite) ou planete du joueur : pas de cible (0.9k)
+if (intval($ziel_id) == 0 || $ziel_id == $user['id']) {
+	message($lang['sys_irak_no_target'], $lang['sys_error']);
+}
+
 $select = doquery("SELECT * FROM {{table}} WHERE id = ".$ziel_id, 'users', true);
 
 // Memes protections que pour les flottes (absentes de l'original, qui laissait tirer sur un joueur en mode vacances,
@@ -139,6 +144,12 @@ if (!empty($select['urlaubs_modus'])) {
 
 $flugzeit = round(((30 + (60 * $tempvar1)) * 2500) / $game_config['game_speed']);
 
+// Missiles retires du silo avant le depart, d'un coup et sous condition (0.9k) : le stock lu au debut de la page etait
+// reecrit en valeur absolue apres coup, des tirs simultanes lancaient plusieurs fois les memes missiles
+doquery("UPDATE {{table}} SET interplanetary_misil = interplanetary_misil - ". intval($anz) ." WHERE id = '". intval($user['current_planet']) ."' AND interplanetary_misil >= ". intval($anz), 'planets');
+if (mysqli_affected_rows(DbConnect()) != 1) {
+	message($lang['sys_irak_launch_error'], $lang['sys_error']);
+}
 
 
 
@@ -155,8 +166,6 @@ doquery("INSERT INTO {{table}} SET
 		`anzahl` = '".$anz."',
 		`primaer` = '".$primaerziel."'", 'iraks');
 
-
-doquery("UPDATE {{table}} SET interplanetary_misil = '".($iraks_anzahl - $anz)."' WHERE id = '".$user['current_planet']."'", 'planets');
 
 	$dpath = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 
