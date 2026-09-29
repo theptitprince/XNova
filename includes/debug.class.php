@@ -31,6 +31,11 @@ class debug
 
 	function add($mes)
 	{
+		// Ligne du journal ecrite par doquery() : texte de la requete echappe (il contient les textes des joueurs,
+		// affiches sinon tels quels a l'administrateur en mode debug)
+		if (preg_match('#^<tr><th>(Query [0-9]*: )</th><th>(.*)</th><th>([^<]*)</th><th>([^<]*)</th></tr>$#s', $mes, $m)) {
+			$mes = "<tr><th>". $m[1] ."</th><th>". htmlspecialchars($m[2], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ."</th><th>". htmlspecialchars($m[3]) ."</th><th>". htmlspecialchars($m[4]) ."</th></tr>";
+		}
 		$this->log .= $mes;
 		$this->numqueries++;
 	}
@@ -44,8 +49,13 @@ class debug
 	function error($message,$title)
 	{
 		global $link,$game_config;
-		if(($game_config['debug'] ?? 0)==1){
-			echo "<h2>$title</h2><br><font color=red>$message</font><br><hr>";
+		// Mode debug : erreur SQL complete et journal des requetes reserves aux administrateurs (avant : affiches a
+		// n'importe quel visiteur, avec les requetes des flottes des autres joueurs). Les autres voient le message
+		// d'erreur habituel, le detail reste enregistre dans la table errors.
+		global $user;
+		if(($game_config['debug'] ?? 0)==1 && is_array($user) && ($user['authlevel'] ?? 0) >= 3){
+			$Detail = htmlspecialchars(str_replace('<br />', "\n", $message), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+			echo "<h2>". htmlspecialchars($title) ."</h2><br><font color=red>". nl2br($Detail) ."</font><br><hr>";
 			echo  "<table>".$this->log."</table>";
 		}
 		//else{
