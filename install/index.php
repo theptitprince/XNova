@@ -198,6 +198,10 @@ $phpself  = $_SERVER['PHP_SELF'];
 				mysqli_query($connection, str_replace('{{prefix}}', $prefix, $RenaissanceMigrations['0.9f'][0])) or die("MySQL Error: <b>". mysqli_error($connection) ."</b>");
 				// Messages signales (bouton « Signaler ») : meme definition que la mise a jour 0.9h
 				mysqli_query($connection, str_replace('{{prefix}}', $prefix, $RenaissanceMigrations['0.9h'][0])) or die("MySQL Error: <b>". mysqli_error($connection) ."</b>");
+				// 0.9k : tables, index et reglages ajoutes par les fonctions de la mise a jour (relancables), memes definitions
+				foreach ($RenaissanceMigrations['0.9k'] as $Step) {
+					$Step($connection, $prefix);
+				}
 
 				// Nouvelle base : directement a la version courante du schema
 				RenaissanceSetSchemaVersion($connection, $prefix, RENAISSANCE_DB_VERSION);
