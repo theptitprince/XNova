@@ -179,5 +179,11 @@ $lang['adm_bn_forever'] = '(dauerhaft)';
 $lang['adm_hidden_data'] = '(verborgen)';
 $lang['adm_cleaner_intro'] = 'Löscht die Aufträge der Schiffswerft und der Verteidigung, die die technische Grenze der Einheiten pro Auftrag überschreiten (blockierte Schleifen).';
 $lang['adm_cleaner_run'] = 'Bereinigung starten';
+$lang['adm_ch_state'] = 'Status des Chats';
+$lang['adm_ch_on'] = 'Chat aktiviert';
+$lang['adm_ch_off'] = 'Chat deaktiviert: Link aus dem Menü der Spieler entfernt';
+$lang['adm_ch_enable'] = 'Chat aktivieren';
+$lang['adm_ch_disable'] = 'Chat deaktivieren';
+$lang['adm_ch_switch_level'] = 'Nur für Operatoren und Administratoren';
 
 ?>

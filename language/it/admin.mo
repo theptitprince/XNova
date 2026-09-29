@@ -182,5 +182,11 @@ $lang['adm_bn_forever'] = '(definitivamente)';
 $lang['adm_hidden_data'] = '(nascosto)';
 $lang['adm_cleaner_intro'] = 'Elimina gli ordini del cantiere spaziale e della difesa che superano il limite tecnico di unit&agrave; per ordine (liste bloccate).';
 $lang['adm_cleaner_run'] = 'Avvia la pulizia';
+$lang['adm_ch_state'] = 'Stato della chat';
+$lang['adm_ch_on'] = 'Chat attivata';
+$lang['adm_ch_off'] = 'Chat disattivata: link rimosso dal menu dei giocatori';
+$lang['adm_ch_enable'] = 'Attiva la chat';
+$lang['adm_ch_disable'] = 'Disattiva la chat';
+$lang['adm_ch_switch_level'] = 'Riservato agli operatori e agli amministratori';
 
 ?>

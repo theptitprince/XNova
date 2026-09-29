@@ -19,12 +19,19 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
+// Chat desactive dans l'administration : le texte s'affiche a la place des messages
+if (($game_config['chat_enabled'] ?? '1') == '0') {
+	includeLang('chat');
+	die($lang['chat_disabled']);
+}
+
 // On efface les anciens messages
 $timemoment=time();
 $time_1h=$timemoment - 3600;
 
-// On selectionne les messages présents dans la base de donnée
-$query = doquery("SELECT * FROM {{table}} ORDER BY messageid ASC", "chat");
+// On selectionne les messages présents dans la base de donnée : les 50 derniers, remis dans l'ordre (toute la table
+// etait renvoyee a chaque client toutes les 3 s)
+$query = doquery("SELECT * FROM (SELECT * FROM {{table}} ORDER BY messageid DESC LIMIT 50) AS `last` ORDER BY messageid ASC", "chat");
 while($v=mysqli_fetch_object($query)){
 	$nick=htmlentities($v->user);
 	$msg=htmlentities($v->message);

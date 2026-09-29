@@ -426,6 +426,13 @@ function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
 
 // Administration : chat desactivable, informations du serveur, statistiques automatiques
 function RenaissanceMigration09kAdministration ( $Connection, $Prefix ) {
+	// Chat : heure du dernier message de chaque joueur, en millisecondes (un message toutes les 2 secondes au plus)
+	RenaissanceAddColumns($Connection, $Prefix, 'users', array(
+		'chat_last' => "bigint(20) NOT NULL default '0'",
+	));
+	RenaissanceAddConfig($Connection, $Prefix, array(
+		'chat_enabled'    => '1',  // chat active (interrupteur de admin/chat.php)
+	));
 }
 
 
