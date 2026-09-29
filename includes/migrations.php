@@ -433,7 +433,8 @@ function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
 		) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;")
 		or die("MySQL Error (login_attempts): <b>". mysqli_error($Connection) ."</b>");
 
-	// Avertissement pour l'administrateur (Administration > Erreurs, texte affiche en HTML), ecrit une seule fois
+	// Avertissement pour l'administrateur (Administration > Erreurs), ecrit une seule fois. Texte UTF-8 sans entites
+	// HTML (lisible que la page l'echappe ou non) ; pseudos et adresse echappes, la page l'affiche aujourd'hui tel quel
 	$Notice = function ($Text) use ($Connection, $Prefix) {
 		$Text = mysqli_real_escape_string($Connection, $Text);
 		$Seen = mysqli_query($Connection, "SELECT 1 FROM `". $Prefix ."errors` WHERE `error_type` = 'Mise a jour 0.9k' AND `error_text` = '". $Text ."' LIMIT 1;");
@@ -453,7 +454,7 @@ function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
 		while ($Row = mysqli_fetch_assoc($Double)) {
 			$Names[] = htmlspecialchars($Row['username'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 		}
-		$Notice("Pseudo unique : index non cr&eacute;&eacute;, plusieurs comptes portent le m&ecirc;me pseudo (majuscules et accents confondus) : ".
+		$Notice("Pseudo unique : index non créé, plusieurs comptes portent le même pseudo (majuscules et accents confondus) : ".
 		        implode(', ', $Names) .". Renommez-les, puis ajoutez l'index : ALTER TABLE `". htmlspecialchars($Prefix) ."users` ADD UNIQUE KEY `username` (`username`);");
 	}
 
@@ -479,7 +480,7 @@ function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
 	} elseif (!empty($_SERVER['HTTP_HOST'])) {
 		// Adresse refusee (hote IPv6 entre crochets...) : l'administrateur est prevenu, les mails reprennent l'adresse
 		// de la page en cours tant que game_url est vide
-		$Notice("Adresse du jeu (game_url) non r&eacute;gl&eacute;e : adresse de l'installation refus&eacute;e (".
+		$Notice("Adresse du jeu (game_url) non réglée : adresse de l'installation refusée (".
 		        htmlspecialchars(RequestGameUrl(2), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ."). Les liens des mails reprennent l'adresse de la page en cours : ".
 		        "indiquez l'adresse publique du jeu dans la ligne game_url de la table ". htmlspecialchars($Prefix) ."config.");
 	}
