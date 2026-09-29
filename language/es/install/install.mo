@@ -92,5 +92,7 @@ $lang['ins_adm_auth_txt'] = 'El juego est&aacute; instalado: solo un administrad
 $lang['ins_upg_running'] = 'Ya hay una actualizaci&oacute;n en curso: espere unos instantes y vuelva a cargar la p&aacute;gina.';
 $lang['ins_upg_secret'] = 'La palabra secreta de config.php ven&iacute;a de una versi&oacute;n antigua (0.8e / 0.9d) y era demasiado d&eacute;bil: se ha sustituido por una palabra secreta aleatoria. Todos los jugadores, usted incluido, deben volver a conectarse una vez.';
 $lang['ins_upg_secret_fail'] = 'La palabra secreta de config.php viene de una versi&oacute;n antigua (0.8e / 0.9d) y es demasiado d&eacute;bil, pero el archivo no se ha podido reescribir: haga que config.php sea modificable por el servidor web y vuelva a lanzar la actualizaci&oacute;n.';
+$lang['ins_admin_nodb'] = 'No se puede comprobar la cuenta de administrador: la base de datos indicada en config.php no responde. Revise config.php. Para transferir el juego a un nuevo servidor, vac&iacute;e primero config.php: la transferencia queda entonces abierta, como la instalaci&oacute;n.';
+$lang['ins_admin_blocked'] = 'Demasiados intentos fallidos para este nombre de usuario desde su direcci&oacute;n: vuelva a intentarlo dentro de 15 minutos.';
 
 ?>
