@@ -14,14 +14,21 @@
 
 function GalaxyRowAlly ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, $System, $Planet, $PlanetType ) {
 	global $lang, $user;
+	// Alliance et nombre de ses membres lus une seule fois par alliance et par page (0.9k) : memes requetes, rien ne
+	// modifie ces tables pendant l'affichage de la galaxie
+	static $Allys = array();
 
 	// Alliances
 	$Result  = "<th width=80>";
 	if (!empty($GalaxyRowUser['ally_id'])) {
-		$allyquery = doquery("SELECT * FROM {{table}} WHERE id=" . $GalaxyRowUser['ally_id'], "alliance", true);
+		$AllyKey = (string) $GalaxyRowUser['ally_id'];
+		if (!array_key_exists($AllyKey, $Allys)) {
+			$allyquery = doquery("SELECT * FROM {{table}} WHERE id=" . $GalaxyRowUser['ally_id'], "alliance", true);
+			$members_count = ($allyquery) ? doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE ally_id=" . $allyquery['id'] . ";", "users", true) : null;
+			$Allys[$AllyKey] = array($allyquery, $members_count);
+		}
+		list($allyquery, $members_count) = $Allys[$AllyKey];
 		if ($allyquery) {
-			$members_count = doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE ally_id=" . $allyquery['id'] . ";", "users", true);
-
 			// Pluriel dans la langue du joueur (un « s » francais etait ajoute au mot, en toute langue)
 			$MembersLabel = ($members_count[0] > 1) ? $lang['gl_membres'] : $lang['gl_membre'];
 
