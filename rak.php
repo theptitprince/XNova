@@ -44,6 +44,9 @@ if (isset($resource) && !empty($resource[401])) {
 		if (mysqli_affected_rows(DbConnect()) != 1) {
 			continue;
 		}
+		// Deux salves sur une meme planete traitees en meme temps par deux pages lisaient le meme stock de missiles
+		// d'interception (utilises deux fois, stock negatif) : planete lue et modifiee sous verrou, salve par salve
+		doquery("LOCK TABLE {{table}}planets WRITE, {{table}}users WRITE, {{table}}messages WRITE, {{table}}errors WRITE", "");
 		if ($selected_row['zeit'] != '' && $selected_row['galaxy'] != '' && $selected_row['system'] != '' && $selected_row['planet'] != '' && is_numeric($selected_row['owner']) && is_numeric($selected_row['zielid']) && is_numeric($selected_row['anzahl']) && !empty($selected_row['anzahl'])) {
 			$planetrow = doquery("SELECT * FROM {{table}} WHERE
 								galaxy = '" . $selected_row['galaxy'] . "' AND
@@ -158,6 +161,7 @@ if (isset($resource) && !empty($resource[401])) {
 				SendSimpleMessage ( $selected_row['zielid'], '', time(), 3, $lang['sys_irak_sender'], $lang['sys_irak_subject'], $message_vorlage . $message );
 			}
 		}
+		doquery("UNLOCK TABLES", "");
 	}
 }
 
