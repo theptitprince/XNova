@@ -171,4 +171,8 @@ $lang['sys_destruc_planet_echec'] = '. La crosta del pianeta si spacca, ma il nu
 $lang['sys_destruc_planet_reussi'] = ', che si spacca e poi esplode. Strutture, difese e navi sono annientate - Missione compiuta! Il pianeta è distrutto! La flotta ritorna al pianeta di partenza.';
 $lang['sys_destruc_planet_null'] = ', evidentemente la flotta non sviluppa la potenza necessaria - Missione fallita! La flotta ritorna al pianeta di partenza.';
 
+// 0.9k (Flottes)
+$lang['sys_user_busy_title'] = 'Pagina in corso';
+$lang['sys_user_busy'] = 'Un\'altra pagina del vostro account è ancora in elaborazione. Attendete qualche secondo e riprovate.';
+
 ?>
