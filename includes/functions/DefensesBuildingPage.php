@@ -58,9 +58,9 @@ function DefenseMaxElements ( $CurrentPlanet, $Element, $Missiles ) {
 }
 
 function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
- 	global $lang, $resource, $phpEx, $dpath, $_POST;
+ 	global $lang, $resource, $reslist, $phpEx, $dpath, $_POST;
 
-	if (isset($_POST['fmenge'])) {
+	if (isset($_POST['fmenge']) && is_array($_POST['fmenge'])) {
 		// On vient de Cliquer ' Construire '
 
 		// Et y a une liste de doléances
@@ -76,6 +76,11 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 			// Dans fmenge, on devrait trouver un tableau des elements constructibles etdu nombre d'elements souhaités
 
 			$Element = intval($Element);
+			// Defenses et missiles seulement (avant : n'importe quel identifiant, niveaux de batiments achetes au prix
+			// de base)
+			if (!in_array($Element, $reslist['defense'])) {
+				continue;
+			}
 			$Count   = max(0, intval($Count)); // pas de quantite negative (sinon remboursement de ressources)
 			if ($Count > OrderUnitsMax()) {
 				$Count = OrderUnitsMax();
@@ -111,7 +116,6 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 						if ($Count > $MaxElements) {
 							$Count = $MaxElements;
 						}
-						$Missiles[$Element] += $Count;
 					} else {
 						// Si pas assez de ressources, on ajuste le nombre d'elements
 						if ($Count > $MaxElements) {
@@ -122,10 +126,11 @@ function DefensesBuildingPage ( &$CurrentPlanet, $CurrentUser ) {
 					$Ressource = GetElementRessources ( $Element, $Count );
 					$BuildTime = GetBuildingTime($CurrentUser, $CurrentPlanet, $Element);
 					if ($Count >= 1) {
-						$CurrentPlanet['metal']           -= $Ressource['metal'];
-						$CurrentPlanet['crystal']         -= $Ressource['crystal'];
-						$CurrentPlanet['deuterium']       -= $Ressource['deuterium'];
-						$CurrentPlanet['b_hangar_id']     .= "". $Element .",". $Count .";";
+						// Ressources et file enregistrees d'un coup, sous condition : la file lue au debut de la page
+						// n'a pas change (requetes simultanees : un seul bouclier, silo jamais deborde)
+						if (ShipyardQueueAdd ( $CurrentPlanet, $Element, $Count, $Ressource ) && ($Element == 502 || $Element == 503)) {
+							$Missiles[$Element] += $Count;
+						}
 					}
 				}
 			}
