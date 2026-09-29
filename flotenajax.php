@@ -47,9 +47,13 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 	$PartialFleet   = false; // 610
 	$PartialCount   = 0;
 
+	// Espionnage avec des sondes, recyclage avec des recycleurs, rien d'autre (0.9k : tout vaisseau du formulaire
+	// partait, une flotte entiere pouvait se mettre a l'abri sans carburant)
+	$MissionShip    = (($_POST['mission'] ?? null) == 6) ? 210 : ((($_POST['mission'] ?? null) == 8) ? 209 : 0);
+
 	foreach ($reslist['fleet'] as $Node => $ShipID) {
 		$TName = "ship".$ShipID;
-		if ($ShipID > 200 && $ShipID < 300 && ($_POST[$TName] ?? null) > 0) {
+		if ($ShipID == $MissionShip && ($_POST[$TName] ?? null) > 0) {
 			if (($_POST[$TName] ?? null) > $planetrow[$resource[$ShipID]]) {
 				$fleet['fleetarray'][$ShipID]   = $planetrow[$resource[$ShipID]];
 				$fleet['fleetlist']            .= $ShipID .",". $planetrow[$resource[$ShipID]] .";";
@@ -120,7 +124,7 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 	}
 
 	// Y a une flotte dans la variable ??
-	if (!is_array($FleetArray)) {
+	if (!is_array($FleetArray) || count($FleetArray) == 0) {
 		$ResultMessage = "618;".$lang['gs_c618']."|".$CurrentFlyingFleets." ".$UserSpyProbes." ".$UserRecycles." ".$UserMissiles;
 		die ( $ResultMessage );
 	}
@@ -202,6 +206,12 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 	}
 	$consumption = round($consumption) + 1;
 
+	// Carburant (0.9k) : jamais verifie, le deuterium de la planete devenait negatif
+	if ($planetrow['deuterium'] < $consumption) {
+		$ResultMessage = "613;".$lang['gs_c613']."|".$CurrentFlyingFleets." ".$UserSpyProbes." ".$UserRecycles." ".$UserMissiles;
+		die ( $ResultMessage );
+	}
+
 	if ($TargetRow['id_level'] > $user['authlevel']) {
 		$Allowed = true;
 		switch (($_POST['mission'] ?? null)){
@@ -226,6 +236,25 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 		}
 	}
 
+	// Vaisseaux et carburant debites d'un coup et sous condition, avant l'enregistrement de la flotte (0.9k) : des
+	// envois simultanes passaient les controles sur la meme lecture de la planete (deuterium ecrit en valeur absolue)
+	$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+	$QryUpdatePlanet .= $FleetSubQRY;
+	$QryUpdatePlanet .= "`deuterium` = `deuterium` - '". floatval($consumption) ."' ";
+	$QryUpdatePlanet .= "WHERE ";
+	$QryUpdatePlanet .= "`id` = '". intval($planetrow['id']) ."' AND ";
+	foreach ($FleetArray as $Ship => $Count) {
+		$QryUpdatePlanet .= "`". $resource[$Ship] ."` >= '". intval($Count) ."' AND ";
+	}
+	$QryUpdatePlanet .= "`deuterium` >= '". floatval($consumption) ."';";
+	doquery( $QryUpdatePlanet, 'planets');
+	if (mysqli_affected_rows(DbConnect()) != 1) {
+		$planetrow     = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($planetrow['id']) ."';", 'planets', true);
+		$Code          = (($planetrow['deuterium'] ?? 0) < $consumption) ? "613" : "611";
+		$ResultMessage = $Code .";".$lang['gs_c'. $Code]."|".$CurrentFlyingFleets." ".($planetrow['spy_sonde'] ?? 0)." ".($planetrow['recycler'] ?? 0)." ".($planetrow['interplanetary_misil'] ?? 0);
+		die ( $ResultMessage );
+	}
+
 	$QryInsertFleet  = "INSERT INTO {{table}} SET ";
 	$QryInsertFleet .= "`fleet_owner` = '". $user['id'] ."', ";
 	$QryInsertFleet .= "`fleet_mission` = '". intval(($_POST['mission'] ?? null)) ."', ";
@@ -244,16 +273,23 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 	$QryInsertFleet .= "`fleet_target_owner` = '". $TargetRow['id_owner'] ."', ";
 	$QryInsertFleet .= "`start_time` = '" . time() . "';";
 	doquery( $QryInsertFleet, 'fleets');
+	$NewFleetId = intval(mysqli_insert_id(DbConnect()));
 
-	$UserDeuterium   -= $consumption;
-	$QryUpdatePlanet  = "UPDATE {{table}} SET ";
-	$QryUpdatePlanet .= $FleetSubQRY;
-	$QryUpdatePlanet .= "`deuterium` = '".$UserDeuterium."' " ;
-	$QryUpdatePlanet .= "WHERE ";
-	$QryUpdatePlanet .= "`id` = '". $planetrow['id'] ."';";
-	doquery( $QryUpdatePlanet, 'planets');
-
-	$CurrentFlyingFleets++;
+	// Emplacements recomptes une fois la flotte enregistree (0.9k, envois simultanes) : en trop, flotte retiree et
+	// vaisseaux et carburant rendus
+	$CurrentFlyingFleets = doquery("SELECT COUNT(fleet_id) AS `Nbre` FROM {{table}} WHERE `fleet_owner` = '". intval($user['id']) ."';", 'fleets', true);
+	$CurrentFlyingFleets = intval($CurrentFlyingFleets["Nbre"]);
+	if ($CurrentFlyingFleets > ($user[$resource[108]] + 1)) {
+		doquery("DELETE FROM {{table}} WHERE `fleet_id` = '". $NewFleetId ."';", 'fleets');
+		$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+		$QryUpdatePlanet .= str_replace("` - ", "` + ", $FleetSubQRY);
+		$QryUpdatePlanet .= "`deuterium` = `deuterium` + '". floatval($consumption) ."' ";
+		$QryUpdatePlanet .= "WHERE ";
+		$QryUpdatePlanet .= "`id` = '". intval($planetrow['id']) ."';";
+		doquery( $QryUpdatePlanet, 'planets');
+		$ResultMessage = "612;".$lang['gs_c612']."|".($CurrentFlyingFleets - 1)." ".$UserSpyProbes." ".$UserRecycles." ".$UserMissiles;
+		die ( $ResultMessage );
+	}
 
 	$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '". $user['current_planet'] ."';", 'planets', true);
 	$ResultMessage  = "600;". $lang['gs_sending'] ." ". $FleetShipCount  ." ". $lang['tech'][$Ship] ." ". $lang['gs_to'] ." ". ($_POST['galaxy'] ?? null) .":". ($_POST['system'] ?? null) .":". ($_POST['planet'] ?? null) ."...|";

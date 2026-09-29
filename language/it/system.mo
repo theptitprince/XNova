@@ -171,4 +171,8 @@ $lang['sys_destruc_planet_echec'] = '. La crosta del pianeta si spacca, ma il nu
 $lang['sys_destruc_planet_reussi'] = ', che si spacca e poi esplode. Strutture, difese e navi sono annientate - Missione compiuta! Il pianeta è distrutto! La flotta ritorna al pianeta di partenza.';
 $lang['sys_destruc_planet_null'] = ', evidentemente la flotta non sviluppa la potenza necessaria - Missione fallita! La flotta ritorna al pianeta di partenza.';
 
+// 0.9k (jeu-a)
+$lang['sys_colo_noship'] = ', ma la flotta non ha nessuna colonizzatrice. Torna indietro.';
+$lang['sys_irak_no_target'] = 'Lancio impossibile: questo pianeta non appartiene a nessun altro giocatore.';
+
 ?>

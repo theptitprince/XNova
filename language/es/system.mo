@@ -173,4 +173,8 @@ $lang['sys_destruc_planet_echec'] = '. La corteza del planeta se agrieta, pero e
 $lang['sys_destruc_planet_reussi'] = ', que se agrieta y después estalla. Edificios, defensas y naves quedan aniquilados - ¡Misión cumplida! ¡El planeta ha sido destruido! La flota regresa al planeta de origen.';
 $lang['sys_destruc_planet_null'] = ', visiblemente la flota no desarrolla la potencia necesaria - ¡Misión fallida! La flota regresa al planeta de origen.';
 
+// 0.9k (jeu-a)
+$lang['sys_colo_noship'] = ', pero la flota no lleva ningún colonizador. Da media vuelta.';
+$lang['sys_irak_no_target'] = 'Lanzamiento imposible: este planeta no pertenece a ningún otro jugador.';
+
 ?>

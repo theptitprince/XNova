@@ -166,4 +166,8 @@ $lang['sys_destruc_planet_echec'] = '. Die Kruste des Planeten bricht auf, doch 
 $lang['sys_destruc_planet_reussi'] = ', der aufbricht und dann zerbirst. Gebäude, Verteidigungsanlagen und Schiffe sind vernichtet – Mission erfüllt! Der Planet ist zerstört! Die Flotte kehrt zum Ausgangsplaneten zurück.';
 $lang['sys_destruc_planet_null'] = ', offensichtlich entwickelt die Flotte nicht die nötige Kraft – Mission gescheitert! Die Flotte kehrt zum Ausgangsplaneten zurück.';
 
+// 0.9k (jeu-a)
+$lang['sys_colo_noship'] = ', aber die Flotte hat kein Kolonieschiff dabei. Sie kehrt um.';
+$lang['sys_irak_no_target'] = 'Abschuss unmöglich: Dieser Planet gehört keinem anderen Spieler.';
+
 ?>

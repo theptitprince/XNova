@@ -128,36 +128,40 @@ include($xnova_root_path . 'common.' . $phpEx);
 	}
 
 	// Determinons les type de missions possibles par rapport a la planete cible
+	// D'apres la flotte reellement envoyee ($fleetarray, 0.9k) : les champs shipNNN du formulaire sont libres (une
+	// sonde colonisait avec ship208=1)
 	if ($fleetmission == 15) {
 		// Gestion des Expéditions
 		$missiontype = array(15 => $lang['type_mission'][15]);
 	} else {
 		if (($_POST['planettype'] ?? null) == "2") {
-			if (($_POST['ship209'] ?? null) >= 1) {
+			if (($fleetarray[209] ?? 0) >= 1) {
 				$missiontype = array(8 => $lang['type_mission'][8]);
 			} else {
 				$missiontype = array();
 			}
 		} elseif (($_POST['planettype'] ?? null) == "1" || ($_POST['planettype'] ?? null) == "3") {
-			if (($_POST['ship208'] ?? null) >= 1 && !$UsedPlanet) {
+			// Colonisation : jamais en position 16, reservee aux expeditions (0.9k)
+			if (($fleetarray[208] ?? 0) >= 1 && !$UsedPlanet && $planet <= MAX_PLANET_IN_SYSTEM) {
 				$missiontype = array(7 => $lang['type_mission'][7]);
-			} elseif (($_POST['ship210'] ?? null) >= 1 && !$YourPlanet) {
+			} elseif (($fleetarray[210] ?? 0) >= 1 && count($fleetarray) == 1 && !$YourPlanet) {
+				// Espionnage avec des sondes seulement, comme dans OGame (0.9k)
 				$missiontype = array(6 => $lang['type_mission'][6]);
 			}
 
-			if (($_POST['ship202'] ?? null) >= 1 ||
-				($_POST['ship203'] ?? null) >= 1 ||
-				($_POST['ship204'] ?? null) >= 1 ||
-				($_POST['ship205'] ?? null) >= 1 ||
-				($_POST['ship206'] ?? null) >= 1 ||
-				($_POST['ship207'] ?? null) >= 1 ||
-				($_POST['ship210'] ?? null) >= 1 ||
-				($_POST['ship211'] ?? null) >= 1 ||
-				($_POST['ship213'] ?? null) >= 1 ||
-				($_POST['ship214'] ?? null) >= 1 ||
-				($_POST['ship215'] ?? null) >= 1 ||
-				($_POST['ship216'] ?? null) >= 1 ||
-				($_POST['ship217'] ?? null) >= 1) {
+			if (($fleetarray[202] ?? 0) >= 1 ||
+				($fleetarray[203] ?? 0) >= 1 ||
+				($fleetarray[204] ?? 0) >= 1 ||
+				($fleetarray[205] ?? 0) >= 1 ||
+				($fleetarray[206] ?? 0) >= 1 ||
+				($fleetarray[207] ?? 0) >= 1 ||
+				($fleetarray[210] ?? 0) >= 1 ||
+				($fleetarray[211] ?? 0) >= 1 ||
+				($fleetarray[213] ?? 0) >= 1 ||
+				($fleetarray[214] ?? 0) >= 1 ||
+				($fleetarray[215] ?? 0) >= 1 ||
+				($fleetarray[216] ?? 0) >= 1 ||
+				($fleetarray[217] ?? 0) >= 1) {
 				if (!$YourPlanet) {
 					$missiontype[1] = $lang['type_mission'][1];
 				}
@@ -168,7 +172,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 				}
 			}
 			// Recycleurs et vaisseaux de colonisation peuvent aussi transporter (regle d'origine jamais atteinte : elle etait hors de ce bloc)
-			if (($_POST['ship208'] ?? null) >= 1 || ($_POST['ship209'] ?? null) >= 1) {
+			if (($fleetarray[208] ?? 0) >= 1 || ($fleetarray[209] ?? 0) >= 1) {
 				$missiontype[3] = $lang['type_mission'][3];
 			}
 		}
@@ -186,13 +190,13 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$missiontype[2] = $lang['type_mission'][2];
 		}
         if ( ($_POST['planettype'] ?? null) == 3 &&
-	     ($_POST['ship214'] ?? null) >= 1    &&
+	     ($fleetarray[214] ?? 0) >= 1    &&
            !$YourPlanet            &&
            $UsedPlanet) {
           $missiontype[9] = $lang['type_mission'][9];
         }
 		// Destruction d'une colonie par le Destructeur planetaire (0.9j) : jamais la planete mere d'un joueur
-		if (($_POST['planettype'] ?? null) == 1 && ($_POST['ship217'] ?? null) >= 1 && !$YourPlanet && $UsedPlanet &&
+		if (($_POST['planettype'] ?? null) == 1 && ($fleetarray[217] ?? 0) >= 1 && !$YourPlanet && $UsedPlanet &&
 		    !PlanetIsHome($select['id'] ?? 0, $select['id_owner'] ?? 0)) {
 			$missiontype[9] = $lang['type_mission'][9];
 		}
@@ -352,12 +356,14 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$FleetShipCount      = 0;
 	$fleet_array         = "";
 	$FleetSubQRY         = "";
+	$FleetCondQRY        = "";
 
 	foreach ($fleetarray as $Ship => $Count) {
 		$FleetStorage    += $pricelist[$Ship]["capacity"] * $Count;
 		$FleetShipCount  += $Count;
 		$fleet_array     .= $Ship .",". $Count .";";
 		$FleetSubQRY     .= "`".$resource[$Ship] . "` = `" . $resource[$Ship] . "` - " . $Count . " , ";
+		$FleetCondQRY    .= "`".$resource[$Ship] . "` >= " . $Count . " AND ";
 	}
 
 	$FleetStorage        -= $consumption;
@@ -438,10 +444,38 @@ include($xnova_root_path . 'common.' . $phpEx);
 			if ($Delay > 0.3 * ($GroupArrival - time())) {
 				message ("<font color=\"red\"><b>". $lang['fl_acs_too_slow'] ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
 			}
-			doquery("UPDATE {{table}} SET `fleet_start_time` = '". $fleet['start_time'] ."', `fleet_end_time` = `fleet_end_time` + ". $Delay ." WHERE `fleet_group` = '". intval($AcsGroup['id']) ."';", 'fleets');
-			doquery("UPDATE {{table}} SET `ankunft` = '". $fleet['start_time'] ."' WHERE `id` = '". intval($AcsGroup['id']) ."';", 'aks');
+			$GroupDelay = $Delay;
 		}
 		$FleetGroup = intval($AcsGroup['id']);
+	}
+
+	// Depart debite d'un coup et sous condition, avant l'enregistrement de la flotte (0.9k) : vaisseaux, ressources
+	// chargees et carburant. Avant, les controles portaient sur une lecture de la planete, les vaisseaux etaient retires
+	// apres coup et les ressources ecrites en valeurs absolues : des envois simultanes dupliquaient ressources et
+	// vaisseaux (vaisseaux negatifs sur la planete de depart).
+	$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+	$QryUpdatePlanet .= $FleetSubQRY;
+	$QryUpdatePlanet .= "`metal` = `metal` - '".         floatval($TransMetal)                   ."', ";
+	$QryUpdatePlanet .= "`crystal` = `crystal` - '".     floatval($TransCrystal)                 ."', ";
+	$QryUpdatePlanet .= "`deuterium` = `deuterium` - '". floatval($TransDeuterium + $consumption) ."' ";
+	$QryUpdatePlanet .= "WHERE ";
+	$QryUpdatePlanet .= "`id` = '". intval($CurrentPlanet['id']) ."' AND ";
+	$QryUpdatePlanet .= $FleetCondQRY;
+	$QryUpdatePlanet .= "`metal` >= '".                  floatval($TransMetal)                   ."' AND ";
+	$QryUpdatePlanet .= "`crystal` >= '".                floatval($TransCrystal)                 ."' AND ";
+	$QryUpdatePlanet .= "`deuterium` >= '".              floatval($TransDeuterium + $consumption) ."';";
+	doquery ($QryUpdatePlanet, "planets");
+	if (mysqli_affected_rows(DbConnect()) != 1) {
+		// Une autre requete est passee avant : vaisseaux ou ressources manquent maintenant. Planete relue (la barre du
+		// haut du message reecrit les ressources de $planetrow)
+		$CurrentPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+		$planetrow     = $CurrentPlanet;
+		foreach ($fleetarray as $Ship => $Count) {
+			if ($Count > ($CurrentPlanet[$resource[$Ship]] ?? 0)) {
+				message ("<font color=\"red\"><b>". $lang['fl_fleet_err'] ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
+			}
+		}
+		message ("<font color=\"red\"><b>". $lang['fl_noressources'] . pretty_number($consumption) ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
 	}
 
 	// ecriture de l'enregistrement de flotte (a partir de là, y a quelque chose qui vole et c'est toujours sur la planete d'origine)
@@ -468,26 +502,35 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$QryInsertFleet .= "`fleet_group` = '". $FleetGroup ."', ";
 	$QryInsertFleet .= "`start_time` = '". time() ."';";
 	doquery( $QryInsertFleet, 'fleets');
+	$NewFleetId = intval(mysqli_insert_id(DbConnect()));
 
+	// Emplacements de flotte et expeditions recomptes une fois la flotte enregistree (0.9k) : des envois simultanes
+	// passaient tous le controle fait plus haut. En trop : flotte retiree, depart rendu a la planete.
+	$FlyingFleets = mysqli_fetch_assoc(doquery("SELECT COUNT(fleet_id) as number FROM {{table}} WHERE `fleet_owner`='". intval($user['id']) ."'", 'fleets'));
+	$TooMany      = ($FlyingFleets["number"] > ($user[$resource[108]] + 1)) ? 'fl_noslotfree' : '';
+	if ($TooMany == '' && ($_POST['mission'] ?? null) == 15) {
+		$ExpeCount = doquery("SELECT COUNT(fleet_owner) AS `expedi` FROM {{table}} WHERE `fleet_owner` = '". intval($user['id']) ."' AND `fleet_mission` = '15';", 'fleets', true);
+		$TooMany   = (intval($ExpeCount['expedi']) > $EnvoiMaxExpedition) ? 'fl_expe_max' : '';
+	}
+	if ($TooMany != '') {
+		doquery("DELETE FROM {{table}} WHERE `fleet_id` = '". $NewFleetId ."';", 'fleets');
+		$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+		$QryUpdatePlanet .= str_replace("` - ", "` + ", $FleetSubQRY);
+		$QryUpdatePlanet .= "`metal` = `metal` + '".         floatval($TransMetal)                   ."', ";
+		$QryUpdatePlanet .= "`crystal` = `crystal` + '".     floatval($TransCrystal)                 ."', ";
+		$QryUpdatePlanet .= "`deuterium` = `deuterium` + '". floatval($TransDeuterium + $consumption) ."' ";
+		$QryUpdatePlanet .= "WHERE ";
+		$QryUpdatePlanet .= "`id` = '". intval($CurrentPlanet['id']) ."';";
+		doquery ($QryUpdatePlanet, "planets");
+		$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+		message ("<font color=\"red\"><b>". $lang[$TooMany] ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
+	}
 
-	$CurrentPlanet["metal"]     = $CurrentPlanet["metal"] - $TransMetal;
-	$CurrentPlanet["crystal"]   = $CurrentPlanet["crystal"] - $TransCrystal;
-	$CurrentPlanet["deuterium"] = $CurrentPlanet["deuterium"] - $TransDeuterium;
-	$CurrentPlanet["deuterium"] = $CurrentPlanet["deuterium"] - $consumption;
-
-	$QryUpdatePlanet  = "UPDATE {{table}} SET ";
-	$QryUpdatePlanet .= $FleetSubQRY;
-	$QryUpdatePlanet .= "`metal` = '". $CurrentPlanet["metal"] ."', ";
-	$QryUpdatePlanet .= "`crystal` = '". $CurrentPlanet["crystal"] ."', ";
-	$QryUpdatePlanet .= "`deuterium` = '". $CurrentPlanet["deuterium"] ."' ";
-	$QryUpdatePlanet .= "WHERE ";
-	$QryUpdatePlanet .= "`id` = '". $CurrentPlanet['id'] ."'";
-
-	// Mise a jours de l'enregistrement de la planete de depart (a partir de là, y a quelque chose qui vole et ce n'est plus sur la planete de depart)
-	doquery("LOCK TABLE {{table}} WRITE", 'planets');
-	doquery ($QryUpdatePlanet, "planets");
-	doquery("UNLOCK TABLES", '');
-//	doquery("FLUSH TABLES", '');
+	// Attaque groupee plus lente que le groupe : tout le groupe est retarde (les autres flottes seulement)
+	if (isset($GroupDelay)) {
+		doquery("UPDATE {{table}} SET `fleet_start_time` = '". $fleet['start_time'] ."', `fleet_end_time` = `fleet_end_time` + ". $GroupDelay ." WHERE `fleet_group` = '". intval($AcsGroup['id']) ."' AND `fleet_id` <> '". $NewFleetId ."';", 'fleets');
+		doquery("UPDATE {{table}} SET `ankunft` = '". $fleet['start_time'] ."' WHERE `id` = '". intval($AcsGroup['id']) ."';", 'aks');
+	}
 
 	// Un peu de blabla pour l'utilisateur, affichage d'un joli tableau de la flotte expédiée
 	$page  = "<br><div><center>";

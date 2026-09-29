@@ -38,52 +38,63 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$UsedPlanet = false;
 	$TargetOwner = 0;
 	$TargetPlanetId = 0;
-	$select       = doquery("SELECT * FROM {{table}}", "planets");
-
-	while ($row = mysqli_fetch_array($select)) {
-		if ($galaxy     == $row['galaxy'] &&
-			$system     == $row['system'] &&
-			$planet     == $row['planet'] &&
-			$planettype == $row['planet_type']) {
-			if ($row['id_owner'] == $user['id']) {
-				$YourPlanet = true;
-				$UsedPlanet = true;
-			} else {
-				$UsedPlanet = true;
-			}
-			$TargetOwner = $row['id_owner'];
-			$TargetPlanetId = $row['id'];
-			break;
+	// Seulement la planete visee (avant : toute la table des planetes lue a chaque affichage)
+	$row          = doquery("SELECT `id`, `id_owner` FROM {{table}} WHERE `galaxy` = '". $galaxy ."' AND `system` = '". $system ."' AND `planet` = '". $planet ."' AND `planet_type` = '". $planettype ."' LIMIT 1;", "planets", true);
+	if ($row) {
+		if ($row['id_owner'] == $user['id']) {
+			$YourPlanet = true;
+			$UsedPlanet = true;
+		} else {
+			$UsedPlanet = true;
 		}
+		$TargetOwner = $row['id_owner'];
+		$TargetPlanetId = $row['id'];
 	}
 
+	// Flotte choisie a l'etape precedente : vaisseaux existants en quantites positives, comme a l'envoi (floten3.php)
+	$fleetarray    = unserialize(base64_decode(str_rot13((string) ($_POST["usedfleet"] ?? ''))), array('allowed_classes' => false));
+	$CleanFleet    = array();
+	if (is_array($fleetarray)) {
+		foreach ($fleetarray as $Ship => $Count) {
+			$Ship  = intval($Ship);
+			$Count = intval($Count);
+			if ($Ship > 200 && $Ship < 300 && isset($resource[$Ship]) && $Count > 0) {
+				$CleanFleet[$Ship] = $Count;
+			}
+		}
+	}
+	$fleetarray    = $CleanFleet;
+
 	// Determinons les type de missions possibles par rapport a la planete cible
+	// D'apres la flotte choisie ($fleetarray, 0.9k), avec les memes regles que l'envoi (floten3.php)
 	if (($_POST['planettype'] ?? null) == "2") {
-		if (($_POST['ship209'] ?? null) >= 1) {
+		if (($fleetarray[209] ?? 0) >= 1) {
 			$missiontype = array(8 => $lang['type_mission'][8]);
 		} else {
 			$missiontype = array();
 		}
 	} elseif (($_POST['planettype'] ?? null) == "1" || ($_POST['planettype'] ?? null) == "3") {
-		if (($_POST['ship208'] ?? null) >= 1 && !$UsedPlanet) {
+		// Colonisation : jamais en position 16, reservee aux expeditions (0.9k)
+		if (($fleetarray[208] ?? 0) >= 1 && !$UsedPlanet && $planet <= MAX_PLANET_IN_SYSTEM) {
 			$missiontype = array(7 => $lang['type_mission'][7]);
-		} elseif (($_POST['ship210'] ?? null) >= 1 && !$YourPlanet) {
+		} elseif (($fleetarray[210] ?? 0) >= 1 && count($fleetarray) == 1 && !$YourPlanet) {
+			// Espionnage avec des sondes seulement, comme dans OGame (0.9k)
 			$missiontype = array(6 => $lang['type_mission'][6]);
 		}
 
-		if (($_POST['ship202'] ?? null) >= 1 ||
-			($_POST['ship203'] ?? null) >= 1 ||
-			($_POST['ship204'] ?? null) >= 1 ||
-			($_POST['ship205'] ?? null) >= 1 ||
-			($_POST['ship206'] ?? null) >= 1 ||
-			($_POST['ship207'] ?? null) >= 1 ||
-			($_POST['ship210'] ?? null) >= 1 ||
-			($_POST['ship211'] ?? null) >= 1 ||
-			($_POST['ship213'] ?? null) >= 1 ||
-			($_POST['ship214'] ?? null) >= 1 ||
-			($_POST['ship215'] ?? null) >= 1 ||
-			($_POST['ship216'] ?? null) >= 1 ||
-			($_POST['ship217'] ?? null) >= 1) {
+		if (($fleetarray[202] ?? 0) >= 1 ||
+			($fleetarray[203] ?? 0) >= 1 ||
+			($fleetarray[204] ?? 0) >= 1 ||
+			($fleetarray[205] ?? 0) >= 1 ||
+			($fleetarray[206] ?? 0) >= 1 ||
+			($fleetarray[207] ?? 0) >= 1 ||
+			($fleetarray[210] ?? 0) >= 1 ||
+			($fleetarray[211] ?? 0) >= 1 ||
+			($fleetarray[213] ?? 0) >= 1 ||
+			($fleetarray[214] ?? 0) >= 1 ||
+			($fleetarray[215] ?? 0) >= 1 ||
+			($fleetarray[216] ?? 0) >= 1 ||
+			($fleetarray[217] ?? 0) >= 1) {
 			if (!$YourPlanet) {
 				$missiontype[1] = $lang['type_mission'][1];
 			}
@@ -95,7 +106,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			}
 		}
 		// Recycleurs et vaisseaux de colonisation peuvent aussi transporter (regle d'origine jamais atteinte : elle etait hors de ce bloc)
-		if (($_POST['ship208'] ?? null) >= 1 || ($_POST['ship209'] ?? null) >= 1) {
+		if (($fleetarray[208] ?? 0) >= 1 || ($fleetarray[209] ?? 0) >= 1) {
 			$missiontype[3] = $lang['type_mission'][3];
 		}
 	}
@@ -118,18 +129,17 @@ include($xnova_root_path . 'common.' . $phpEx);
 	}
 
 	if ( ($_POST['planettype'] ?? null) == 3 &&
-	     ($_POST['ship214'] ?? null) >= 1    &&
+	     ($fleetarray[214] ?? 0) >= 1    &&
            !$YourPlanet            &&
            $UsedPlanet) {
           $missiontype[9] = $lang['type_mission'][9];
    }
 	// Destruction d'une colonie par le Destructeur planetaire (0.9j) : jamais la planete mere d'un joueur
-	if ($planettype == 1 && ($_POST['ship217'] ?? null) >= 1 && !$YourPlanet && $UsedPlanet && !PlanetIsHome($TargetPlanetId, $TargetOwner)) {
+	if ($planettype == 1 && ($fleetarray[217] ?? 0) >= 1 && !$YourPlanet && $UsedPlanet && !PlanetIsHome($TargetPlanetId, $TargetOwner)) {
 		$missiontype[9] = $lang['type_mission'][9];
 	}
 
-	$fleetarray    = unserialize(base64_decode(str_rot13((string) ($_POST["usedfleet"] ?? ''))), array('allowed_classes' => false));
-	if (!is_array($fleetarray) || !$fleetarray) {
+	if (!$fleetarray) {
 		// Pas de flotte transmise (acces direct) : retour a la page flotte
 		header("Location: fleet.php");
 		exit();

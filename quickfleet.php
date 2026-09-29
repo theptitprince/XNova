@@ -150,6 +150,24 @@ check_urlaubmodus($user);
 	$page .= "		</tr>";
 	$page .= "	</table>";
 
+	// Recycleurs et carburant debites d'un coup et sous condition, avant l'enregistrement de la flotte (0.9k) : des
+	// envois simultanes passaient les controles sur la meme lecture de la planete (recycleurs negatifs)
+	$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+	$QryUpdatePlanet .= $FleetSubQRY;
+	$QryUpdatePlanet .= "`deuterium` = `deuterium` - '". floatval($consumption) ."' ";
+	$QryUpdatePlanet .= "WHERE ";
+	$QryUpdatePlanet .= "`id` = '". intval($planetrow['id']) ."' AND ";
+	foreach ($FleetArray as $Ship => $Count) {
+		$QryUpdatePlanet .= "`". $resource[$Ship] ."` >= '". intval($Count) ."' AND ";
+	}
+	$QryUpdatePlanet .= "`deuterium` >= '". floatval($consumption) ."';";
+	doquery ($QryUpdatePlanet, "planets");
+	if (mysqli_affected_rows(DbConnect()) != 1) {
+		// Une autre requete est passee avant : planete relue (la barre du haut reecrit ses ressources)
+		$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($planetrow['id']) ."';", 'planets', true);
+		message ("<font color=\"red\"><b>". $lang['fl_noenought'] ."</b></font>", $lang['fl_error'], "overview.php", 2);
+	}
+
 	$QryInsertFleet  = "INSERT INTO {{table}} SET ";
 	$QryInsertFleet .= "`fleet_owner` = '". $user['id'] ."', ";
 	$QryInsertFleet .= "`fleet_mission` = '". $Mode ."', ";
@@ -167,19 +185,24 @@ check_urlaubmodus($user);
 	$QryInsertFleet .= "`fleet_end_type` = '". $TypePl ."', ";
 	$QryInsertFleet .= "`start_time` = '". time() ."';";
 	doquery( $QryInsertFleet, 'fleets');
+	$NewFleetId = intval(mysqli_insert_id(DbConnect()));
 
-	$QryUpdatePlanet  = "UPDATE {{table}} SET ";
-	$QryUpdatePlanet .= $FleetSubQRY;
-	$QryUpdatePlanet .= "`deuterium` = `deuterium` - '". floatval($consumption) ."', ";
-	$QryUpdatePlanet .= "`planet_type` = '".$planetrow['planet_type']."' ";
-	$QryUpdatePlanet .= "WHERE ";
-	$QryUpdatePlanet .= "`id` = '". $planetrow['id'] ."'";
-	doquery ($QryUpdatePlanet, "planets");
-	// Meme chose en memoire : la barre du haut reenregistre les ressources de $planetrow (comme floten3.php)
-	$planetrow['deuterium'] -= $consumption;
-	foreach ($FleetArray as $Ship => $Count) {
-		$planetrow[$resource[$Ship]] -= $Count;
+	// Emplacements recomptes une fois la flotte enregistree (0.9k, envois simultanes) : en trop, flotte retiree et
+	// recycleurs et carburant rendus
+	$FlyingFleets = doquery("SELECT COUNT(`fleet_id`) AS `Nbre` FROM {{table}} WHERE `fleet_owner` = '". intval($user['id']) ."';", 'fleets', true);
+	if ($FlyingFleets['Nbre'] > $MaxFlottes) {
+		doquery("DELETE FROM {{table}} WHERE `fleet_id` = '". $NewFleetId ."';", 'fleets');
+		$QryUpdatePlanet  = "UPDATE {{table}} SET ";
+		$QryUpdatePlanet .= str_replace("` - ", "` + ", $FleetSubQRY);
+		$QryUpdatePlanet .= "`deuterium` = `deuterium` + '". floatval($consumption) ."' ";
+		$QryUpdatePlanet .= "WHERE ";
+		$QryUpdatePlanet .= "`id` = '". intval($planetrow['id']) ."';";
+		doquery ($QryUpdatePlanet, "planets");
+		$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($planetrow['id']) ."';", 'planets', true);
+		message ("<font color=\"red\"><b>". $lang['fl_noslotfree'] ."</b></font>", $lang['fl_error'], "overview.php", 2);
 	}
+	// Planete relue apres le depart (comme floten3.php) : la barre du haut reenregistre les ressources de $planetrow
+	$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($planetrow['id']) ."';", 'planets', true);
 
 
 
