@@ -25,8 +25,8 @@ include($xnova_root_path . 'common.' . $phpEx);
 	includeLang('login');
 
 	// Essais de mot de passe limites (decide par theptitprince) : apres 5 essais rates pour un meme pseudo depuis
-	// une meme adresse IP, la connexion a ce pseudo depuis cette adresse est refusee pendant 15 minutes. Compte aussi
-	// pour un pseudo qui n'existe pas : le refus ne revele pas si le compte existe.
+	// une meme adresse IP (IPv6 : un meme /64), la connexion a ce pseudo depuis cette adresse est refusee pendant
+	// 15 minutes. Compte aussi pour un pseudo qui n'existe pas : le refus ne revele pas si le compte existe.
 	define('LOGIN_MAX_FAILURES', 5);
 	define('LOGIN_BLOCK_TIME', 900);
 
@@ -41,15 +41,35 @@ include($xnova_root_path . 'common.' . $phpEx);
 		return intval($Count['count']);
 	}
 
+	// Adresse comptee pour la limite : IPv4 telle quelle, IPv6 regroupee par /64 (un abonne ou un serveur dispose
+	// en general d'un /64 entier : en changeant d'adresse a chaque essai, il echappait a la limite). Adresse IPv4
+	// vue en IPv6 (::ffff:a.b.c.d, serveur double pile) : l'adresse IPv4 elle-meme, pas le /64 commun a toutes.
+	// Derriere un proxy inverse, REMOTE_ADDR est l'adresse du proxy : le serveur web doit la remplacer par celle du
+	// visiteur (mod_remoteip d'Apache, real_ip de nginx) ; X-Forwarded-For n'est pas lu, le visiteur le choisit.
+	function LoginAttemptIp ( $Ip ) {
+		$Ip = (string) $Ip;
+		if (filter_var($Ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6) !== false) {
+			$Bin = inet_pton($Ip);
+			if (substr($Bin, 0, 12) == str_repeat(chr(0), 10) . chr(255) . chr(255)) {
+				return inet_ntop(substr($Bin, 12));
+			}
+			return inet_ntop(substr($Bin, 0, 8) . str_repeat(chr(0), 8)) . '/64';
+		}
+		return substr($Ip, 0, 45);
+	}
+
 	// Erreur de connexion : affichee sur la page de connexion elle-meme (avant : page d'erreur sans habillage),
 	// avec un message unique qui ne revele pas si le pseudo existe
 	$LoginError = '';
 	// Champs recus en texte seulement (un tableau faisait une erreur fatale dans password_verify)
 	$LoginName  = is_string($_POST['username'] ?? null) ? $_POST['username'] : '';
 	$LoginPass  = is_string($_POST['password'] ?? null) ? $_POST['password'] : '';
-	if ($_POST) {
+	// Table des essais absente (fichiers de la 0.9k deja copies, base pas encore mise a jour) : pas de limite plutot
+	// qu'une erreur SQL, la connexion reste possible jusqu'a la mise a jour
+	$AttemptsTable = ($_POST && mysqli_num_rows(doquery("SHOW TABLES LIKE '{{table}}';", 'login_attempts')) == 1);
+	if ($AttemptsTable) {
 		$AttemptName = mb_substr($LoginName, 0, USERNAME_MAX_LENGTH, 'UTF-8');
-		$AttemptIp   = substr((string) ($_SERVER['REMOTE_ADDR'] ?? ''), 0, 45);
+		$AttemptIp   = LoginAttemptIp($_SERVER['REMOTE_ADDR'] ?? '');
 		if (LoginFailures($AttemptName, $AttemptIp) >= LOGIN_MAX_FAILURES) {
 			$LoginError = $lang['login_blocked'];
 		} else {
@@ -69,7 +89,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 		if ($login) {
 			if (PasswordCheck($LoginPass, $login)) {
 				// Connexion reussie : les essais rates de ce pseudo depuis cette adresse sont oublies
-				doquery("DELETE FROM {{table}} WHERE `username` = '". SqlEscape($AttemptName) ."' AND `ip` = '". SqlEscape($AttemptIp) ."';", 'login_attempts');
+				if ($AttemptsTable) {
+					doquery("DELETE FROM {{table}} WHERE `username` = '". SqlEscape($AttemptName) ."' AND `ip` = '". SqlEscape($AttemptIp) ."';", 'login_attempts');
+				}
 				if (isset($_POST["rememberme"])) {
 					$expiretime = time() + AUTH_COOKIE_REMEMBER;
 					$rememberme = 1;
