@@ -516,7 +516,7 @@ function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
 		// de la page en cours tant que game_url est vide
 		$Notice("Adresse du jeu (game_url) non réglée : adresse de l'installation refusée (".
 		        htmlspecialchars(RequestGameUrl(2), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ."). Les liens des mails reprennent l'adresse de la page en cours : ".
-		        "indiquez l'adresse publique du jeu dans la ligne game_url de la table ". htmlspecialchars($Prefix) ."config.");
+		        "indiquez l'adresse publique du jeu dans l'administration, Paramètres du jeu, « Adresse du jeu ».");
 	}
 }
 

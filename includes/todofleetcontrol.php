@@ -70,7 +70,6 @@ include($xnova_root_path . 'includes/functions/InsertBuildListScript.'.$phpEx);
 include($xnova_root_path . 'includes/functions/AddBuildingToQueue.'.$phpEx);
 include($xnova_root_path . 'includes/functions/ShowBuildingQueue.'.$phpEx);
 include($xnova_root_path . 'includes/functions/HandleTechnologieBuild.'.$phpEx);
-include($xnova_root_path . 'includes/functions/BuildingSavePlanetRecord.'.$phpEx);
 include($xnova_root_path . 'includes/functions/BuildingSaveUserRecord.'.$phpEx);
 include($xnova_root_path . 'includes/functions/RemoveBuildingFromQueue.'.$phpEx);
 include($xnova_root_path . 'includes/functions/CancelBuildingFromQueue.'.$phpEx);

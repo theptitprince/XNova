@@ -101,8 +101,9 @@
        }
        // Nombre de usuario
        if (isset($_POST["db_character"]) && ($_POST["db_character"] ?? null) != '') {
-          // Meme regle qu'a l'inscription : lettres, chiffres, _ et - uniquement
-          $username = (preg_match("/[^A-Za-z0-9_\-]/", $_POST['db_character']) == 1) ? $user['username'] : $_POST['db_character'];
+          // Meme regle qu'a l'inscription : lettres, chiffres, _ et - uniquement, longueur maximale de la colonne (au-dela,
+          // MySQL tronquait le pseudo et le cookie ne correspondait plus au compte)
+          $username = (!is_string($_POST['db_character']) || preg_match("/[^A-Za-z0-9_\-]/", $_POST['db_character']) == 1 || strlen($_POST['db_character']) > USERNAME_MAX_LENGTH) ? $user['username'] : $_POST['db_character'];
        } else {
           $username = $user['username'];
        }

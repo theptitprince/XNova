@@ -212,6 +212,9 @@ Son état (mémoire utilisée, taux de réussite) est affiché dans l'administra
 - **Dossier `install/`** : supprimez-le, ou limitez son accès à votre adresse IP, une fois l'installation terminée ;
   remettez-le seulement le temps d'une mise à jour. La page « Informations du serveur » de l'administration signale
   un `config.php` modifiable et un dossier `install/` encore présent.
+- **Adresse du jeu** (administration, « Paramètres du jeu ») : les liens des mails (mot de passe oublié, bienvenue)
+  sont construits avec elle, jamais avec l'adresse envoyée par le visiteur. Elle est remplie à l'installation et à la
+  mise à jour ; changez-la après un changement de domaine ou le passage en HTTPS.
 - **Base de données** : un utilisateur MySQL limité à la base du jeu, sans le privilège `FILE`.
 - **PHP** : `display_errors = Off` (les erreurs vont dans le journal du serveur) et `expose_php = Off` ; HTTPS
   conseillé (le cookie de connexion est alors réservé aux pages chiffrées). Le dossier `tools/` ne sert qu'en ligne de

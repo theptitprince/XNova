@@ -191,18 +191,48 @@ if (INSTALL != true) {
 		if (!empty($user['id'])) {
 			SetSelectedPlanet ( $user );
 
-			$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '".$user['current_planet']."';", 'planets', true);
+			$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($user['current_planet']) ."';", 'planets', true);
+			// Planete courante qui n'est pas (ou plus) au joueur : retour sur sa planete mere (la porte de saut permettait
+			// de se placer sur la lune d'un autre joueur ; toutes les pages agissaient ensuite sur elle)
+			if (!$planetrow || intval($planetrow['id_owner']) != intval($user['id'])) {
+				$user['current_planet'] = intval($user['id_planet']);
+				doquery("UPDATE {{table}} SET `current_planet` = '". intval($user['id_planet']) ."' WHERE `id` = '". intval($user['id']) ."' LIMIT 1;", 'users');
+				$planetrow = doquery("SELECT * FROM {{table}} WHERE `id` = '". intval($user['id_planet']) ."';", 'planets', true);
+			}
 			// Ligne de galaxie par coordonnees : fonctionne aussi pour une lune (avant : par id de planete, rien pour une lune)
 			$galaxyrow = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '". intval($planetrow['galaxy'] ?? 0) ."' AND `system` = '". intval($planetrow['system'] ?? 0) ."' AND `planet` = '". intval($planetrow['planet'] ?? 0) ."';", 'galaxy', true);
 
 			CheckPlanetUsedFields($planetrow);
 
 			// Statistiques recalculees au passage d'un joueur quand le dernier calcul date de plus de N heures (reglages
-			// stat_auto et stat_auto_hours de l'administration) ; verrou et date relue dans BuildStatistics
+			// stat_auto et stat_auto_hours de l'administration) ; verrou et date relue dans BuildStatistics. Calcul fait
+			// apres la page, verrou du joueur rendu d'abord : ses autres pages n'attendent pas la fin du calcul (et avec
+			// PHP-FPM, la page lui est envoyee avant le calcul)
 			$StatAge = 3600 * max(1, intval($game_config['stat_auto_hours'] ?? 6));
 			if (!empty($game_config['stat_auto']) && time() - intval($game_config['stat_last'] ?? 0) >= $StatAge) {
-				include_once($xnova_root_path . 'admin/statfunctions.' . $phpEx);
-				BuildStatistics($StatAge);
+				// Dossier courant retenu : a la fin du script, il n'est plus forcement celui de la page (serveur integre de
+				// PHP, Apache), et doquery lit config.php par un chemin relatif
+				$StatCwd = getcwd();
+				register_shutdown_function(function () use ($StatAge, $StatCwd) {
+					global $link;
+					if ($StatCwd !== false) {
+						chdir($StatCwd);
+					}
+					// Connexion de la page fermee (display() la ferme deja ; sinon ici) : le verrou du joueur est rendu avec
+					// elle ; le calcul ouvre sa propre connexion
+					try {
+						if ($link instanceof mysqli) {
+							mysqli_close($link);
+						}
+					} catch (Throwable $e) {
+					}
+					$link = false;
+					if (function_exists('fastcgi_finish_request')) {
+						fastcgi_finish_request();
+					}
+					include_once(__DIR__ . '/admin/statfunctions.php');
+					BuildStatistics($StatAge);
+				});
 			}
 		} else {
 			$planetrow = null;

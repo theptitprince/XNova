@@ -90,6 +90,15 @@ function DisplayGameSettingsPage ( $CurrentUser ) {
 				$game_config['forum_url'] = ($_POST['forum_url'] ?? null);
 			}
 
+			// Adresse du jeu (0.9k) : liens des mails (mot de passe oublie, bienvenue), jamais construits avec l'en-tete
+			// Host du visiteur ; vide = adresse de la page en cours. Adresse refusee par SafeUrl : valeur inchangee
+			if (isset($_POST['game_url']) && is_string($_POST['game_url'])) {
+				$GameUrl = trim($_POST['game_url']);
+				if ($GameUrl == '' || SafeUrl($GameUrl) != '') {
+					$game_config['game_url'] = ($GameUrl == '') ? '' : SafeUrl($GameUrl);
+				}
+			}
+
 			// Vitesse du Jeu
 			// (strictement positive : 0 faisait planter tous les calculs de duree, division par zero)
 			if (isset($_POST['game_speed']) && is_numeric($_POST['game_speed']) && $_POST['game_speed'] > 0) {
@@ -198,6 +207,7 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			
 				// Configuration du Jeu
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['forum_url'])              ."' WHERE `config_name` = 'forum_url';", 'config');
+			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['game_url'] ?? '')         ."' WHERE `config_name` = 'game_url';", 'config');
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['game_speed'])             ."' WHERE `config_name` = 'game_speed';", 'config');
 			doquery("UPDATE {{table}} SET `config_value` = '". SqlEscape($game_config['fleet_speed'])            ."' WHERE `config_name` = 'fleet_speed';", 'config');
 			doquery("UPDATE {{table}} SET `config_value` = '". BuildingQueueSize() ."' WHERE `config_name` = 'max_building_queue';", 'config');
@@ -273,6 +283,7 @@ $game_config['banner_source_post'] = ($_POST['banner_source_post'] ?? null);
 			$parse['noobprotectionmulti']    = intval($game_config['noobprotectionmulti'] ?? 5);
 			$parse['resource_multiplier']    = $game_config['resource_multiplier'];
 			$parse['forum_url']              = $Esc($game_config['forum_url']);
+			$parse['game_url']               = $Esc($game_config['game_url'] ?? '');
 			$parse['initial_fields']         = $game_config['initial_fields'];
 			$parse['metal_basic_income']     = $game_config['metal_basic_income'];
 			$parse['crystal_basic_income']   = $game_config['crystal_basic_income'];

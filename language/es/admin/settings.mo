@@ -65,4 +65,7 @@ $lang['adm_opt_recalc'] = 'Velocidades cambiadas, lo que está en curso se ha re
 $lang['adm_opt_building_queue'] = 'Tamaño de la cola de construcción<br>(edificios, de 1 a 99)';
 $lang['adm_opt_order_units'] = 'Unidades por pedido<br>(hangar y defensa, de 1 a 1 000 000)';
 
+// 0.9k (fusion)
+$lang['adm_opt_game_url'] = 'Direcci&oacute;n del juego (enlaces de los correos, p. ej. https://ejemplo.es/xnova/)';
+
 ?>
