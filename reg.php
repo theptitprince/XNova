@@ -95,8 +95,9 @@ if ($_POST) {
         $errors++;
     }
     // Deux inscriptions simultanees du meme pseudo : verrou nomme (propre a cette base) du controle jusqu'a la
-    // creation du compte, libere a la fin de la page ; l'index unique de la 0.9k protege aussi la table
-    doquery("SELECT GET_LOCK(CONCAT(DATABASE(), '.{{table}}.reg'), 10);", 'users');
+    // creation du compte, libere a la fin de la page ; l'index unique de la 0.9k protege aussi la table. Nom hache
+    // (SHA1) : MySQL refuse un nom de verrou de plus de 64 caracteres (nom de base long chez un hebergeur)
+    doquery("SELECT GET_LOCK(SHA1(CONCAT(DATABASE(), '.{{table}}.reg')), 10);", 'users');
     // Le meilleur moyen de voir si un nom d'utilisateur est pris c'est d'essayer de l'appeler !!
     $ExistUser = doquery("SELECT `username` FROM {{table}} WHERE `username` = '" . SqlEscape(($_POST['character'] ?? null)) . "' LIMIT 1;", 'users', true);
     if ($ExistUser) {
@@ -146,7 +147,7 @@ if ($_POST) {
         // pseudo avait ete tronque, et la planete etait creee sans proprietaire)
         $NewUser = array('id' => mysqli_insert_id(DbConnect()));
         $iduser = $NewUser['id'];
-        doquery("SELECT RELEASE_LOCK(CONCAT(DATABASE(), '.{{table}}.reg'));", 'users');
+        doquery("SELECT RELEASE_LOCK(SHA1(CONCAT(DATABASE(), '.{{table}}.reg')));", 'users');
         // Recherche d'une place libre !
         $LastSettedGalaxyPos = $game_config['LastSettedGalaxyPos'];
         $LastSettedSystemPos = $game_config['LastSettedSystemPos'];
