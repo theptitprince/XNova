@@ -168,25 +168,31 @@ switch ($mode) {
             $LvlUpRaid = $user['lvl_raid'] + 1;
 
             if (($LvlUpMinier + $LvlUpRaid) <= 100) {
+                // Niveau et point ecrits ensemble, seulement si le niveau n'a pas deja change : plusieurs vues
+                // generales ouvertes en meme temps donnaient un point chacune pour un seul niveau
                 if ($XpMinier >= $XpMinierUp) {
                     $QryUpdateUser = "UPDATE {{table}} SET ";
-                    $QryUpdateUser .= "`lvl_minier` = '" . $LvlUpMinier . "', ";
+                    $QryUpdateUser .= "`lvl_minier` = `lvl_minier` + 1, ";
                     $QryUpdateUser .= "`rpg_points` = `rpg_points` + 1 ";
                     $QryUpdateUser .= "WHERE ";
-                    $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
+                    $QryUpdateUser .= "`id` = '" . intval($user['id']) . "' AND `lvl_minier` = '" . intval($user['lvl_minier']) . "';";
                     doquery($QryUpdateUser, 'users');
-                    $HaveNewLevelMineur = "<tr>";
-                    $HaveNewLevelMineur .= "<th colspan=4><a href=officier.$phpEx>" . $lang['have_new_level_mineur'] . "</a></th></tr>";
+                    if (mysqli_affected_rows(DbConnect()) == 1) {
+                        $HaveNewLevelMineur = "<tr>";
+                        $HaveNewLevelMineur .= "<th colspan=4><a href=officier.$phpEx>" . $lang['have_new_level_mineur'] . "</a></th></tr>";
+                    }
                 }
                 if ($XPRaid >= $XpRaidUp) {
                     $QryUpdateUser = "UPDATE {{table}} SET ";
-                    $QryUpdateUser .= "`lvl_raid` = '" . $LvlUpRaid . "', ";
+                    $QryUpdateUser .= "`lvl_raid` = `lvl_raid` + 1, ";
                     $QryUpdateUser .= "`rpg_points` = `rpg_points` + 1 ";
                     $QryUpdateUser .= "WHERE ";
-                    $QryUpdateUser .= "`id` = '" . $user['id'] . "';";
+                    $QryUpdateUser .= "`id` = '" . intval($user['id']) . "' AND `lvl_raid` = '" . intval($user['lvl_raid']) . "';";
                     doquery($QryUpdateUser, 'users');
-                    $HaveNewLevelRaid = "<tr>";
-                    $HaveNewLevelRaid .= "<th colspan=4><a href=officier.$phpEx>" . $lang['have_new_level_raid'] . "</a></th></tr>";
+                    if (mysqli_affected_rows(DbConnect()) == 1) {
+                        $HaveNewLevelRaid = "<tr>";
+                        $HaveNewLevelRaid .= "<th colspan=4><a href=officier.$phpEx>" . $lang['have_new_level_raid'] . "</a></th></tr>";
+                    }
                 }
             }
             // -----------------------------------------------------------------------------------------------
@@ -262,6 +268,9 @@ switch ($mode) {
                 $QryPlanets .= "`galaxy`, `system`, `planet`, `planet_type` " . $Order;
             } elseif ($Sort == 2) {
                 $QryPlanets .= "`name` " . $Order;
+            } else {
+                // Tri inconnu (valeur enregistree avant la 0.9k) : ordre de colonisation, sans erreur SQL
+                $QryPlanets .= "`id` " . $Order;
             }
             $planets_query = doquery ($QryPlanets, 'planets');
             // Autres planetes : disposition d'OGame classique (et de la 0.8e d'origine), a droite de la planete,
@@ -357,7 +366,8 @@ switch ($mode) {
             }
             if ($game_config['ForumBannerFrame'] == '1') {
 
-                $BannerURL = "".dirname($_SERVER["HTTP_REFERER"])."/scripts/createbanner.php?id=".$user['id']."";
+                // En-tete Referer envoye par le visiteur : echappe avant d'etre place dans l'attribut value (XSS)
+                $BannerURL = htmlspecialchars(dirname((string) ($_SERVER["HTTP_REFERER"] ?? ''))."/scripts/createbanner.php?id=".intval($user['id']), ENT_QUOTES, 'UTF-8');
 
                 $parse['bannerframe'] = "<th colspan=\"4\"><img src=\"scripts/createbanner.php?id=".$user['id']."\"><br>".$lang['info_banner']."<br><input name=\"bannerlink\" type=\"text\" id=\"bannerlink\" value=\"[img]".$BannerURL."[/img]\" size=\"62\"></th></tr>";
             }
