@@ -553,6 +553,26 @@ function RenaissanceMigration09kFlottes ( $Connection, $Prefix ) {
 
 // Performances : index
 function RenaissanceMigration09kPerformances ( $Connection, $Prefix ) {
+	// Index des recherches refaites a chaque page (planetes d'un joueur, par coordonnees, joueurs d'une alliance...),
+	// qui parcouraient toute la table. Aucun resultat ne change : un index cherche par egalite sur toutes ses colonnes
+	// rend les lignes dans l'ordre de la table, comme le parcours complet (ex aequo des tris compris) ; d'ou les
+	// coordonnees sans le type (planete et lune ensemble). Pas d'index sur onlinetime et register_time (ordre des ex
+	// aequo des joueurs en ligne, du dernier inscrit). Les requetes dont un intervalle changerait l'ordre gardent le
+	// parcours complet (USE INDEX ()).
+	// Seulement planets et users : ajouter un index a une table MyISAM la recopie sans ses trous (lignes supprimees),
+	// et les lignes inserees ensuite ne reprennent plus les memes places (ordre de traitement des flottes, ex aequo des
+	// statistiques et des messages). La mise a jour 0.9k recopie deja ces deux tables (colonnes ajoutees plus haut) :
+	// leurs index n'y changent rien (test_09k_pflottes, section 9).
+	RenaissanceAddIndexes($Connection, $Prefix, 'planets', array(
+		'id_owner' => "KEY `id_owner` (`id_owner`)",
+		'coords'   => "KEY `coords` (`galaxy`, `system`, `planet`)",
+	));
+	RenaissanceAddIndexes($Connection, $Prefix, 'users', array(
+		'db_deaktjava' => "KEY `db_deaktjava` (`db_deaktjava`)",
+		'ally_id'      => "KEY `ally_id` (`ally_id`)",
+		'ally_request' => "KEY `ally_request` (`ally_request`)",
+		'email'        => "KEY `email` (`email`)",
+	));
 }
 
 ?>

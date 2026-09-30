@@ -14,6 +14,9 @@
 
 define('INSIDE' , true);
 define('INSTALL' , false);
+// Verification pendant la saisie : ni flottes ni missiles traites ici, la page suivante du jeu s'en charge (0.9k,
+// performances)
+define('NO_FLEET_PASS', true);
 
 $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
