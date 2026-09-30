@@ -14,7 +14,8 @@
 
 define('INSIDE'  , true);
 define('INSTALL' , false);
-// Menu : ni flottes ni missiles traites ici, la vue generale chargee a cote s'en charge (0.9k, performances)
+// Menu : ni flottes ni missiles traites ici (voir common.php), frames.php charge juste avant s'en est charge (0.9k,
+// performances)
 define('NO_FLEET_PASS', true);
 
 $xnova_root_path = './';
