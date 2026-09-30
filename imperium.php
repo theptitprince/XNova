@@ -52,6 +52,11 @@ $row  = gettemplate('imperium_row');
 $row2 = gettemplate('imperium_row2');
 
 foreach ($planet as $p) {
+	// Construction terminee traitee avant la mise a jour a l'heure actuelle (comme buildings.php). Pas la planete
+	// courante : la barre du haut la traite sur $planetrow (deux copies traitees = ecriture d'une copie perimee)
+	if ($p['id'] != $user['current_planet']) {
+		UpdatePlanetBatimentQueueList ( $p, $user );
+	}
 	PlanetResourceUpdate ( $user, $p, time() );
 
 	// {file_images}

@@ -133,7 +133,9 @@ include($xnova_root_path . 'common.' . $phpEx);
 			return array(array('id_owner' => 0, 'current' => 0), array('username' => '', 'current' => 0));
 		}
 		if ($Best[1] > 1 || !ctype_digit((string) $Best[2])) {
-			$PlanetRow          = doquery ("SELECT `id_owner`, `". $Column ."` AS `current` FROM {{table}} WHERE `". $Column. "` = (SELECT MAX(`". $Column ."`) FROM {{table}}". $RecConditionP .")". $RecAndP ." LIMIT 1;", 'planets', true);
+			// Parcours complet (USE INDEX ()) : a egalite, la premiere planete dans l'ordre de la table, comme avant les index
+			// de la 0.9k (l'index id_owner changeait le detenteur d'un record a egalite)
+			$PlanetRow          = doquery ("SELECT `id_owner`, `". $Column ."` AS `current` FROM {{table}} USE INDEX () WHERE `". $Column. "` = (SELECT MAX(`". $Column ."`) FROM {{table}}". $RecConditionP .")". $RecAndP ." LIMIT 1;", 'planets', true);
 			$PlanetRow          = $PlanetRow ?: array('id_owner' => 0, 'current' => 0); // aucun detenteur
 			$UserRow            = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '".$PlanetRow['id_owner']."';", 'users', true);
 		} else {

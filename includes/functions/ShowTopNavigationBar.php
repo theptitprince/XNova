@@ -20,6 +20,10 @@ function ShowTopNavigationBar ( $CurrentUser, $CurrentPlanet ) {
 			$CurrentPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '". $CurrentUser['current_planet'] ."';", 'planets', true);
 		}
 
+		// Construction terminee traitee avant la mise a jour a l'heure actuelle (comme buildings.php) : sinon la page
+		// Batiments ou la vue generale la traitait ensuite avec une duree de production negative (hangar plein :
+		// ressources sous-estimees, element suivant refuse, production perdue)
+		UpdatePlanetBatimentQueueList ( $CurrentPlanet, $CurrentUser );
 		// Actualisation des ressources de la planete
 		PlanetResourceUpdate ( $CurrentUser, $CurrentPlanet, time() );
 
