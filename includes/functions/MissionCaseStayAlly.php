@@ -34,18 +34,19 @@ function MissionCaseStayAlly ( $FleetRow ) {
 	$StartName        = $StartPlanet['name'] ?? ''; // planete disparue (colonie abandonnee, compte supprime) : vide
 	$StartOwner       = $StartPlanet['id_owner'] ?? 0;
 
-	$QryTargetPlanet  = "SELECT * FROM {{table}} ";
-	$QryTargetPlanet .= "WHERE ";
-	$QryTargetPlanet .= "`galaxy` = '". $FleetRow['fleet_end_galaxy'] ."' AND ";
-	$QryTargetPlanet .= "`system` = '". $FleetRow['fleet_end_system'] ."' AND ";
-	$QryTargetPlanet .= "`planet` = '". $FleetRow['fleet_end_planet'] ."' AND ";
-	$QryTargetPlanet .= "`planet_type` = '". $FleetRow['fleet_end_type'] ."';";
-	$TargetPlanet     = doquery( $QryTargetPlanet, 'planets', true);
-	$TargetName       = $TargetPlanet['name'] ?? ''; // planete disparue (colonie abandonnee, compte supprime) : vide
-	$TargetOwner      = $TargetPlanet['id_owner'] ?? 0;
-
 	$State = intval($FleetRow['fleet_mess']);
 	if ($State == 0 && $FleetRow['fleet_start_time'] <= time()) {
+		// Planete cible lue seulement a l'arrivee, ou elle sert (0.9k, performances)
+		$QryTargetPlanet  = "SELECT * FROM {{table}} ";
+		$QryTargetPlanet .= "WHERE ";
+		$QryTargetPlanet .= "`galaxy` = '". $FleetRow['fleet_end_galaxy'] ."' AND ";
+		$QryTargetPlanet .= "`system` = '". $FleetRow['fleet_end_system'] ."' AND ";
+		$QryTargetPlanet .= "`planet` = '". $FleetRow['fleet_end_planet'] ."' AND ";
+		$QryTargetPlanet .= "`planet_type` = '". $FleetRow['fleet_end_type'] ."';";
+		$TargetPlanet     = doquery( $QryTargetPlanet, 'planets', true);
+		$TargetName       = $TargetPlanet['name'] ?? ''; // planete disparue (colonie abandonnee, compte supprime) : vide
+		$TargetOwner      = $TargetPlanet['id_owner'] ?? 0;
+
 		// Arrivee : livraison et messages, une seule fois. Cible disparue : pas de livraison, la flotte rentre
 		// avec son chargement.
 		if ($TargetPlanet) {
