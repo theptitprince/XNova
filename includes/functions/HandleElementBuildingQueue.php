@@ -122,11 +122,18 @@ function ShipyardQueueAdd ( &$CurrentPlanet, $Element, $Count, $Ressource ) {
 // qu'une autre requete est passee avant : la barre du haut reecrivait sinon l'ancien stock et l'ancienne file (valeurs
 // absolues), ce qui annulait le debit et la commande de l'autre requete
 function ShipyardQueueReload ( &$CurrentPlanet ) {
-	$Fresh = doquery("SELECT `metal`, `crystal`, `deuterium`, `b_hangar_id`, `b_hangar` FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+	// Compteurs des flottes (*_fleets) relus avec les ressources (voir PlanetResourceUpdate)
+	$Fields = array('metal', 'crystal', 'deuterium', 'b_hangar_id', 'b_hangar');
+	foreach (array('metal_fleets', 'crystal_fleets', 'deuterium_fleets') as $Field) {
+		if (isset($CurrentPlanet[$Field])) {
+			$Fields[] = $Field;
+		}
+	}
+	$Fresh = doquery("SELECT `". implode("`, `", $Fields) ."` FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
 	if (!$Fresh) {
 		return false;
 	}
-	foreach (array('metal', 'crystal', 'deuterium', 'b_hangar_id', 'b_hangar') as $Field) {
+	foreach ($Fields as $Field) {
 		$CurrentPlanet[$Field] = $Fresh[$Field];
 	}
 	return true;

@@ -165,7 +165,7 @@ while ( $b = mysqli_fetch_array( $buddyrow ) ) {
 	$i++;
 	$uid = ( $b["owner"] == $user["id"] ) ? $b["sender"] : $b["owner"];
 	// query del user
-	$u = doquery( "SELECT id,username,galaxy,system,planet,onlinetime,ally_id,ally_name FROM {{table}} WHERE id=" . intval($uid), "users", true );
+	$u = doquery( "SELECT `id`, `username`, `galaxy`, `system`, `planet`, `onlinetime`, `ally_id`, `ally_name` FROM {{table}} WHERE `id` = " . intval($uid), "users", true );
 	if ( !$u ) {
 		$i--;
 		continue;

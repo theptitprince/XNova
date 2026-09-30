@@ -233,6 +233,10 @@ function InstallAdminLogin () {
 	$Stored  = (string) ($UserRow['password'] ?? '');
 	if (preg_match('/^[a-f0-9]{32}$/i', $Stored)) {
 		$Valid = hash_equals(strtolower($Stored), md5($Password));
+		// Meme temps qu'un essai sur un mot de passe moderne (compte en md5 non reperable, comme PasswordCheck)
+		if (!$Valid) {
+			PasswordHash($Password);
+		}
 	} elseif ($Stored != '') {
 		$Valid = password_verify($Password, $Stored);
 	} else {

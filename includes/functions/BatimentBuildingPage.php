@@ -81,7 +81,13 @@ function BatimentBuildingPage (&$CurrentPlanet, $CurrentUser) {
 				case 'remove':
 					// Supprimer un element de la queue (mais pas le premier)
 					// $RemID -> element de la liste a supprimer
-					RemoveBuildingFromQueue ( $CurrentPlanet, $CurrentUser, $ListID );
+					// (0.9k : numero entier entre 2 et la longueur de la file ; avant, n'importe quelle valeur arrivait
+					// jusqu'a la file)
+					$ListID    = intval($ListID);
+					$QueueSize = ($CurrentPlanet['b_building_id'] != '' && $CurrentPlanet['b_building_id'] != '0') ? count(explode(';', $CurrentPlanet['b_building_id'])) : 0;
+					if ($ListID >= 2 && $ListID <= $QueueSize) {
+						RemoveBuildingFromQueue ( $CurrentPlanet, $CurrentUser, $ListID );
+					}
 					break;
 				case 'insert':
 					// Insere un element dans la queue

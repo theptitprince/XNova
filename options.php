@@ -223,7 +223,7 @@
        $SetSort  = in_array($SetSort, array(0, 1, 2), true) ? $SetSort : 0;
        $SetOrder = (intval(($_POST['settings_order'] ?? null)) == 1) ? 1 : 0;
        // Langue : uniquement une langue installee (le code sert de nom de dossier)
-       $UserLang = array_key_exists(($_POST['lang'] ?? ''), OptionsLanguages()) ? $_POST['lang'] : $user['lang'];
+       $UserLang = (is_string($_POST['lang'] ?? null) && array_key_exists($_POST['lang'], OptionsLanguages())) ? $_POST['lang'] : $user['lang'];
        $UserLang = SqlEscape($UserLang);
        // Couleurs : pas de champ dans le formulaire, on conserve les valeurs existantes (elles etaient effacees)
        $kolorminus  = SqlEscape($user['kolorminus']);
@@ -259,7 +259,13 @@
        // La page de confirmation doit garder une skin, meme si le champ skin a ete vide
        $dpath = ($dpath == '') ? DEFAULT_SKINPATH : $dpath;
 
-       if (isset($_POST["db_password"]) && ($_POST["db_password"] ?? null) != '' && PasswordCheck($_POST["db_password"], $user)) {
+       // (champs recus en tableau : ignores, ils provoquaient une erreur fatale)
+       foreach (array('newpass1', 'newpass2') as $Field) {
+          if (isset($_POST[$Field]) && !is_string($_POST[$Field])) {
+             $_POST[$Field] = '';
+          }
+       }
+       if (is_string($_POST["db_password"] ?? null) && $_POST["db_password"] != '' && PasswordCheck($_POST["db_password"], $user)) {
           // Nouveau mot de passe : 8 caracteres au moins (comme a l'inscription ; la page l'annoncait sans le verifier)
           if (($_POST["newpass1"] ?? null) != '' && mb_strlen($_POST["newpass1"]) < 8) {
              message($lang['opt_password_short'], $lang['changue_pass'], "options.php", 3);

@@ -137,6 +137,10 @@ if(isset($searchtext) && isset($type)){
 				$pquery = doquery("SELECT * FROM {{table}} WHERE id = {$s['id_owner']}","users",true);
 			}
 /*			$farray = mysqli_fetch_array($pquery);*/
+			// Planete sans proprietaire (planete detruite) : valeurs vides au lieu d'avertissements PHP
+			if (!is_array($pquery)) {
+				$pquery = array('id' => 0, 'username' => '', 'ally_id' => 0, 'ally_name' => '');
+			}
 			$s['planet_name'] = $s['name'];
 			$s['username'] = $pquery['username'];
 			$s['id'] = intval($pquery['id']);

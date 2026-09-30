@@ -267,6 +267,12 @@ if (INSTALL != true) {
 					$link = false;
 					if (function_exists('fastcgi_finish_request')) {
 						fastcgi_finish_request();
+					} else {
+						// Sans PHP-FPM : page deja produite envoyee au navigateur avant le calcul
+						while (ob_get_level() > 0) {
+							@ob_end_flush();
+						}
+						flush();
 					}
 					include_once(__DIR__ . '/admin/statfunctions.php');
 					BuildStatistics($StatAge);

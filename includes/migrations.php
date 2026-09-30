@@ -474,7 +474,7 @@ function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
 		or die("MySQL Error (login_attempts): <b>". mysqli_error($Connection) ."</b>");
 
 	// Avertissement pour l'administrateur (Administration > Erreurs), ecrit une seule fois. Texte UTF-8 sans entites
-	// HTML (lisible que la page l'echappe ou non) ; pseudos et adresse echappes, la page l'affiche aujourd'hui tel quel
+	// HTML ; pseudos ecrits bruts, la page Erreurs de l'administration echappe l'affichage (0.9k)
 	$Notice = function ($Text) use ($Connection, $Prefix) {
 		$Text = mysqli_real_escape_string($Connection, $Text);
 		$Seen = mysqli_query($Connection, "SELECT 1 FROM `". $Prefix ."errors` WHERE `error_type` = 'Mise a jour 0.9k' AND `error_text` = '". $Text ."' LIMIT 1;");
@@ -492,10 +492,10 @@ function RenaissanceMigration09kSecurite ( $Connection, $Prefix ) {
 	} elseif ($Double) {
 		$Names = array();
 		while ($Row = mysqli_fetch_assoc($Double)) {
-			$Names[] = htmlspecialchars($Row['username'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+			$Names[] = $Row['username'];
 		}
 		$Notice("Pseudo unique : index non créé, plusieurs comptes portent le même pseudo (majuscules et accents confondus) : ".
-		        implode(', ', $Names) .". Renommez-les, puis ajoutez l'index : ALTER TABLE `". htmlspecialchars($Prefix) ."users` ADD UNIQUE KEY `username` (`username`);");
+		        implode(', ', $Names) .". Renommez-les, puis ajoutez l'index : ALTER TABLE `". $Prefix ."users` ADD UNIQUE KEY `username` (`username`);");
 	}
 
 	// Messages de joueurs pieges avant la 0.9k (gestionnaire d'evenement glisse dans une balise par le BBCode, voir
