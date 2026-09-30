@@ -47,8 +47,9 @@ function MissionCaseSpy ( $FleetRow ) {
 			$QryGetTargetPlanet .= "`planet_type` = '". $FleetRow['fleet_end_type'] ."';";
 			$TargetPlanet        = doquery( $QryGetTargetPlanet, 'planets', true);
 			$TargetUserID        = $TargetPlanet['id_owner'];
-			// Sans le type : planete ou lune, la premiere dans l'ordre de la table (USE INDEX () : pas l'ordre de l'index)
-			$CurrentPlanet       = doquery("SELECT * FROM {{table}} USE INDEX () WHERE `galaxy` = '".$FleetRow['fleet_start_galaxy']."' AND `system` = '".$FleetRow['fleet_start_system']."' AND `planet` = '".$FleetRow['fleet_start_planet']."';", 'planets', true);
+			// Sans le type : planete ou lune, la premiere dans l'ordre de la table (l'index des coordonnees, sans le type,
+			// rend ses lignes dans cet ordre)
+			$CurrentPlanet       = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '".$FleetRow['fleet_start_galaxy']."' AND `system` = '".$FleetRow['fleet_start_system']."' AND `planet` = '".$FleetRow['fleet_start_planet']."';", 'planets', true);
 			$CurrentSpyLvl       = $CurrentUser['spy_tech'];
 			$TargetUser          = doquery("SELECT * FROM {{table}} WHERE `id` = '".$TargetUserID."';", 'users', true);
 			$TargetSpyLvl        = $TargetUser['spy_tech'];
