@@ -134,43 +134,80 @@ if (INSTALL != true) {
 	}
 
 	if ( isset ($user) ) {
-		$_fleets = doquery("SELECT * FROM {{table}} WHERE `fleet_start_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
-		while ($row = mysqli_fetch_array($_fleets)) {
-			$array                = array();
-			$array['galaxy']      = $row['fleet_start_galaxy'];
-			$array['system']      = $row['fleet_start_system'];
-			$array['planet']      = $row['fleet_start_planet'];
-			$array['planet_type'] = $row['fleet_start_type'];
-
-			$temp = FlyingFleetHandler ($array);
+		// Pages de sondage (chat, captcha, verification de l'inscription) et menu : ni flottes, ni comptes a supprimer,
+		// ni missiles, ni statistiques automatiques, laisses a la page suivante (0.9k, performances). Sauf si un compte
+		// est a supprimer ou si les statistiques sont a recalculer : la page fait alors tout, comme les autres (flottes
+		// d'abord). Ces pages n'affichent rien de ce que changent flottes et missiles.
+		$FleetPassSkip = false;
+		if (defined('NO_FLEET_PASS')) {
+			// Premiere echeance de suppression (index), comparee a l'heure prise apres la lecture
+			$FleetPassNext = doquery("SELECT MIN(`db_deaktjava`) AS `next` FROM {{table}} WHERE `db_deaktjava` > 0;", 'users', true);
+			$FleetPassNow  = time();
+			$FleetPassSkip = (empty($FleetPassNext['next']) || $FleetPassNext['next'] > $FleetPassNow);
+			if (!empty($user['id']) && !empty($game_config['stat_auto']) &&
+			    $FleetPassNow - intval($game_config['stat_last'] ?? 0) >= 3600 * max(1, intval($game_config['stat_auto_hours'] ?? 6))) {
+				$FleetPassSkip = false;
+			}
+			unset($FleetPassNext, $FleetPassNow);
 		}
+		if (!$FleetPassSkip) {
+			// Une seule lecture legere quand aucune flotte n'a rien a faire (0.9k, performances) : les boucles appelaient
+			// le gestionnaire pour chaque flotte arrivee, retours et stationnements compris. Sinon, boucles d'origine
+			// (parcours de toute la table dans son ordre physique, qui decide de l'ordre de traitement). Heure prise apres
+			// la lecture, qui a pu attendre le verrou d'une autre page ; flotte a traiter : condition d'heure de la liste
+			// du gestionnaire, puis celle de sa mission.
+			$FleetPassDue = false;
+			$_fleets = doquery("SELECT `fleet_mission`, `fleet_mess`, `fleet_start_time`, `fleet_end_stay`, `fleet_end_time` FROM {{table}};", 'fleets');
+			$FleetPassNow = time();
+			while (!$FleetPassDue && ($FleetPassRow = mysqli_fetch_assoc($_fleets))) {
+				$FleetPassDue = ($FleetPassRow['fleet_start_time'] < $FleetPassNow || $FleetPassRow['fleet_end_time'] < $FleetPassNow) && FleetRowIsDue($FleetPassRow, $FleetPassNow);
+			}
+			unset($FleetPassNow, $FleetPassRow);
 
-		$_fleets = doquery("SELECT * FROM {{table}} WHERE `fleet_end_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
-		while ($row = mysqli_fetch_array($_fleets)) {
-			$array                = array();
-			$array['galaxy']      = $row['fleet_end_galaxy'];
-			$array['system']      = $row['fleet_end_system'];
-			$array['planet']      = $row['fleet_end_planet'];
-			$array['planet_type'] = $row['fleet_end_type'];
+			if ($FleetPassDue) {
+				$_fleets = doquery("SELECT `fleet_start_galaxy`, `fleet_start_system`, `fleet_start_planet`, `fleet_start_type` FROM {{table}} USE INDEX () WHERE `fleet_start_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
+				while ($row = mysqli_fetch_array($_fleets)) {
+					$array                = array();
+					$array['galaxy']      = $row['fleet_start_galaxy'];
+					$array['system']      = $row['fleet_start_system'];
+					$array['planet']      = $row['fleet_start_planet'];
+					$array['planet_type'] = $row['fleet_start_type'];
 
-			$temp = FlyingFleetHandler ($array);
+					$temp = FlyingFleetHandler ($array);
+				}
+
+				$_fleets = doquery("SELECT `fleet_end_galaxy`, `fleet_end_system`, `fleet_end_planet`, `fleet_end_type` FROM {{table}} USE INDEX () WHERE `fleet_end_time` <= '".time()."';", 'fleets'); //  OR fleet_end_time <= ".time()
+				while ($row = mysqli_fetch_array($_fleets)) {
+					$array                = array();
+					$array['galaxy']      = $row['fleet_end_galaxy'];
+					$array['system']      = $row['fleet_end_system'];
+					$array['planet']      = $row['fleet_end_planet'];
+					$array['planet_type'] = $row['fleet_end_type'];
+
+					$temp = FlyingFleetHandler ($array);
+				}
+			}
+			unset($_fleets, $FleetPassDue);
+
+			// Comptes dont la suppression demandee dans les Options arrive a echeance (ACCOUNT_DELETE_DELAY apres la demande)
+			// Recherche par l'index d'abord (0.9k, performances) ; s'il y a un compte a supprimer, requete d'origine, qui
+			// parcourt toute la table dans son ordre physique (ordre des suppressions)
+			$Expired = doquery("SELECT `id` FROM {{table}} WHERE `db_deaktjava` > 0 AND `db_deaktjava` <= '". time() ."' LIMIT 1;", 'users');
+			if (mysqli_num_rows($Expired) > 0) {
+				$Expired = doquery("SELECT `id` FROM {{table}} USE INDEX () WHERE `db_deaktjava` > 0 AND `db_deaktjava` <= '". time() ."' LIMIT 10;", 'users');
+			}
+			$SelfDeleted = false;
+			while ($ExpiredRow = mysqli_fetch_assoc($Expired)) {
+				DeleteSelectedUser(intval($ExpiredRow['id']));
+				$SelfDeleted = $SelfDeleted || (!empty($user['id']) && $ExpiredRow['id'] == $user['id']);
+			}
+			if ($SelfDeleted) {
+				SetAuthCookie("", time() - 100000);
+				message($lang['sys_account_deleted'], $lang['sys_account_deleted_title'], 'login.php', 5);
+			}
+
+			include($xnova_root_path . 'rak.'.$phpEx);
 		}
-
-		unset($_fleets);
-
-		// Comptes dont la suppression demandee dans les Options arrive a echeance (ACCOUNT_DELETE_DELAY apres la demande)
-		$Expired = doquery("SELECT `id` FROM {{table}} WHERE `db_deaktjava` > 0 AND `db_deaktjava` <= '". time() ."' LIMIT 10;", 'users');
-		$SelfDeleted = false;
-		while ($ExpiredRow = mysqli_fetch_assoc($Expired)) {
-			DeleteSelectedUser(intval($ExpiredRow['id']));
-			$SelfDeleted = $SelfDeleted || (!empty($user['id']) && $ExpiredRow['id'] == $user['id']);
-		}
-		if ($SelfDeleted) {
-			SetAuthCookie("", time() - 100000);
-			message($lang['sys_account_deleted'], $lang['sys_account_deleted_title'], 'login.php', 5);
-		}
-
-		include($xnova_root_path . 'rak.'.$phpEx);
 		if ( defined('IN_ADMIN') ) {
 			$UserSkin  = $user['dpath'] ?? '';
 			$local     = stristr ( $UserSkin, "http:");
@@ -207,9 +244,10 @@ if (INSTALL != true) {
 			// Statistiques recalculees au passage d'un joueur quand le dernier calcul date de plus de N heures (reglages
 			// stat_auto et stat_auto_hours de l'administration) ; verrou et date relue dans BuildStatistics. Calcul fait
 			// apres la page, verrou du joueur rendu d'abord : ses autres pages n'attendent pas la fin du calcul (et avec
-			// PHP-FPM, la page lui est envoyee avant le calcul)
+			// PHP-FPM, la page lui est envoyee avant le calcul). Jamais sur une page de sondage qui a saute les flottes
+			// (0.9k, performances) : les statistiques n'etaient pas dues au debut de la page, voir plus haut
 			$StatAge = 3600 * max(1, intval($game_config['stat_auto_hours'] ?? 6));
-			if (!empty($game_config['stat_auto']) && time() - intval($game_config['stat_last'] ?? 0) >= $StatAge) {
+			if (!$FleetPassSkip && !empty($game_config['stat_auto']) && time() - intval($game_config['stat_last'] ?? 0) >= $StatAge) {
 				// Dossier courant retenu : a la fin du script, il n'est plus forcement celui de la page (serveur integre de
 				// PHP, Apache), et doquery lit config.php par un chemin relatif
 				$StatCwd = getcwd();

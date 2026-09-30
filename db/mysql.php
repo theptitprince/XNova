@@ -39,21 +39,29 @@ function SqlEscape($string) {
 }
 
 function doquery($query, $table, $fetch = false){
-	global $link, $debug, $xnova_root_path;
+	global $link, $debug, $xnova_root_path, $game_config;
+	// Prefixe des tables lu une seule fois par page (0.9k, performances) : config.php etait relu a chaque requete
+	static $Prefix = null;
 
 	DbConnect();
-	require($xnova_root_path.'config.php');
+	if ($Prefix === null) {
+		require($xnova_root_path.'config.php');
+		$Prefix = $dbsettings["prefix"];
+		unset($dbsettings);//se borra la array para liberar algo de memoria
+	}
 
-	$sql = str_replace("{{table}}", $dbsettings["prefix"].$table, $query);
+	$sql = str_replace("{{table}}", $Prefix.$table, $query);
 
 	$sqlquery = mysqli_query($link, $sql) or
 				$debug->error(mysqli_error($link)."<br />$sql<br />","SQL Error");
 
-	unset($dbsettings);//se borra la array para liberar algo de memoria
-
 	global $numqueries,$debug;
 	$numqueries++;
-	$debug->add("<tr><th>Query $numqueries: </th><th>$query</th><th>$table</th><th>$fetch</th></tr>");
+	// Journal des requetes rempli seulement quand il peut etre affiche (0.9k, performances) : mode debug, avant la
+	// lecture des reglages, et dans l'administration (le mode debug s'y active en cours de page, admin/settings.php)
+	if (!isset($game_config['debug']) || !empty($game_config['debug']) || defined('IN_ADMIN')) {
+		$debug->add("<tr><th>Query $numqueries: </th><th>$query</th><th>$table</th><th>$fetch</th></tr>");
+	}
 
 	if($fetch)
 	{ //hace el fetch y regresa $sqlrow

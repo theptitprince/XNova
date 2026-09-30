@@ -14,6 +14,9 @@
 
 define('INSIDE'  , true);
 define('INSTALL' , false);
+// Ni flottes ni missiles traites par cette page, appelee toutes les 3 secondes par chaque chat ouvert : la page
+// suivante du jeu s'en charge (0.9k, performances)
+define('NO_FLEET_PASS', true);
 
 $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');

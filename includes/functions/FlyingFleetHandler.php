@@ -12,8 +12,90 @@
  * @license GNU AGPL v3 ou ultérieure (voir NOTICE)
  */
 
+// XNova Renaissance (0.9k, performances) : vrai si la mission de cette flotte ferait quelque chose a l'heure $Now
+// (ecriture ou tirage au sort), faux si elle passerait sans rien changer (retour ou stationnement en cours...).
+// Memes conditions que chaque MissionCase*, dans le meme ordre ; a tenir a jour avec elles (verifie par le banc,
+// test_09k_pflottes).
+function FleetRowIsDue ( $FleetRow, $Now ) {
+	switch ($FleetRow["fleet_mission"]) {
+		case 1:
+		case 2:
+			// Attaquer, attaque groupee : arrivee, puis retour
+			return ($FleetRow['fleet_start_time'] <= $Now && ($FleetRow['fleet_mess'] == 0 || $FleetRow['fleet_end_time'] <= $Now));
+
+		case 3:
+			// Transporter
+			return ($FleetRow['fleet_mess'] == 0) ? ($FleetRow['fleet_start_time'] < $Now) : ($FleetRow['fleet_end_time'] < $Now);
+
+		case 4:
+			// Stationner
+			return ($FleetRow['fleet_mess'] == 0) ? ($FleetRow['fleet_start_time'] <= $Now) : ($FleetRow['fleet_end_time'] <= $Now);
+
+		case 5:
+			// Stationner chez un allie : arrivee, fin du stationnement, retour
+			$State = intval($FleetRow['fleet_mess']);
+			return (($State == 0 && $FleetRow['fleet_start_time'] <= $Now) || ($State == 2 && $FleetRow['fleet_end_stay'] <= $Now) ||
+			        ($State == 1 && $FleetRow['fleet_end_time'] <= $Now));
+
+		case 6:
+			// Espionner
+			return ($FleetRow['fleet_start_time'] <= $Now && ($FleetRow["fleet_mess"] != "1" || $FleetRow['fleet_end_time'] <= $Now));
+
+		case 7:
+			// Coloniser
+			return ($FleetRow['fleet_mess'] == 0 || $FleetRow['fleet_end_time'] <= $Now);
+
+		case 8:
+			// Recyclage
+			return ($FleetRow["fleet_mess"] == "0") ? ($FleetRow['fleet_start_time'] <= $Now) : ($FleetRow['fleet_end_time'] <= $Now);
+
+		case 9:
+			// Detruire
+			return ($FleetRow['fleet_start_time'] <= $Now && ($FleetRow['fleet_mess'] == 0 || $FleetRow['fleet_end_time'] <= $Now));
+
+		case 10:
+			// Missiles : rien
+			return false;
+
+		case 15:
+			// Expeditions
+			return ($FleetRow['fleet_mess'] == 0) ? ($FleetRow['fleet_end_stay'] < $Now) : ($FleetRow['fleet_end_time'] < $Now);
+
+		default:
+			// Mission inconnue : supprimee
+			return true;
+	}
+}
+
 function FlyingFleetHandler (&$planet) {
 	global $resource, $FleetHandlerLocked;
+
+	$QryWhere   = "WHERE (";
+	$QryWhere  .= "( ";
+	$QryWhere  .= "`fleet_start_galaxy` = ". $planet['galaxy']      ." AND ";
+	$QryWhere  .= "`fleet_start_system` = ". $planet['system']      ." AND ";
+	$QryWhere  .= "`fleet_start_planet` = ". $planet['planet']      ." AND ";
+	$QryWhere  .= "`fleet_start_type` = ".   $planet['planet_type'] ." ";
+	$QryWhere  .= ") OR ( ";
+	$QryWhere  .= "`fleet_end_galaxy` = ".   $planet['galaxy']      ." AND ";
+	$QryWhere  .= "`fleet_end_system` = ".   $planet['system']      ." AND ";
+	$QryWhere  .= "`fleet_end_planet` = ".   $planet['planet']      ." ) AND ";
+	$QryWhere  .= "`fleet_end_type`= ".      $planet['planet_type'] ." )";
+
+	// XNova Renaissance (0.9k, performances) : flottes de la position lues d'abord sans verrou (colonnes du test
+	// seulement). Aucune n'a rien a faire : ni verrou des 9 tables ni traitement, qui n'auraient rien change. Sinon,
+	// traitement d'origine, avec la liste relue sous verrou. Heure prise apres la lecture, qui a pu attendre le verrou
+	// d'une autre page (comme l'heure de la liste, prise apres le verrou).
+	$DueQuery   = doquery("SELECT `fleet_mission`, `fleet_mess`, `fleet_start_time`, `fleet_end_stay`, `fleet_end_time` FROM {{table}} ". $QryWhere .";", 'fleets');
+	$Now        = time();
+	$Due        = false;
+	while (!$Due && ($DueRow = mysqli_fetch_assoc($DueQuery))) {
+		// Condition d'heure de la liste relue sous verrou, puis celle de la mission
+		$Due = ($DueRow['fleet_start_time'] < $Now || $DueRow['fleet_end_time'] < $Now) && FleetRowIsDue($DueRow, $Now);
+	}
+	if (!$Due) {
+		return;
+	}
 
 	// (aks : attaques groupees, 0.9i)
 	doquery("LOCK TABLE {{table}}lunas WRITE, {{table}}rw WRITE, {{table}}errors WRITE, {{table}}messages WRITE, {{table}}fleets WRITE, {{table}}planets WRITE, {{table}}galaxy WRITE ,{{table}}users WRITE, {{table}}aks WRITE", "");
@@ -21,18 +103,8 @@ function FlyingFleetHandler (&$planet) {
 	// (voir PlanetResourceUpdate)
 	$FleetHandlerLocked = true;
 
-	$QryFleet   = "SELECT * FROM {{table}} ";
-	$QryFleet  .= "WHERE (";
-	$QryFleet  .= "( ";
-	$QryFleet  .= "`fleet_start_galaxy` = ". $planet['galaxy']      ." AND ";
-	$QryFleet  .= "`fleet_start_system` = ". $planet['system']      ." AND ";
-	$QryFleet  .= "`fleet_start_planet` = ". $planet['planet']      ." AND ";
-	$QryFleet  .= "`fleet_start_type` = ".   $planet['planet_type'] ." ";
-	$QryFleet  .= ") OR ( ";
-	$QryFleet  .= "`fleet_end_galaxy` = ".   $planet['galaxy']      ." AND ";
-	$QryFleet  .= "`fleet_end_system` = ".   $planet['system']      ." AND ";
-	$QryFleet  .= "`fleet_end_planet` = ".   $planet['planet']      ." ) AND ";
-	$QryFleet  .= "`fleet_end_type`= ".      $planet['planet_type'] ." ) AND ";
+	// Parcours de toute la table (USE INDEX ()) : lignes dans l'ordre physique, qui decide de l'ordre de traitement
+	$QryFleet   = "SELECT * FROM {{table}} USE INDEX () ". $QryWhere ." AND ";
 	$QryFleet  .= "( `fleet_start_time` < '". time() ."' OR `fleet_end_time` < '". time() ."' );";
 	$fleetquery = doquery( $QryFleet, 'fleets' );
 
@@ -53,6 +125,10 @@ function FlyingFleetHandler (&$planet) {
 				// Supprimee entre-temps (combat, defense groupee, retour deja traite)
 				continue;
 			}
+		}
+		// Rien a faire pour cette flotte maintenant : sa mission ne ferait que lire la base (0.9k, performances)
+		if (!FleetRowIsDue($CurrentFleet, time())) {
+			continue;
 		}
 		switch ($CurrentFleet["fleet_mission"]) {
 			case 1:
