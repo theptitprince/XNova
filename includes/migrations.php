@@ -373,13 +373,19 @@ function RenaissanceAddColumns ( $Connection, $Prefix, $Table, $Columns ) {
 // Index ajoutes a une table s'ils manquent : array('nom' => "KEY `nom` (`col1`, `col2`)") ; tout index portant deja ce
 // nom est garde tel quel
 function RenaissanceAddIndexes ( $Connection, $Prefix, $Table, $Indexes ) {
+	// Tous les index manquants d'une table en un seul ALTER : MyISAM recopie la table a chaque ALTER (5 recopies de
+	// fleets sinon, longues sur une grosse base)
+	$Missing = array();
 	foreach ($Indexes as $Name => $Definition) {
 		$Exists = mysqli_query($Connection, "SHOW INDEX FROM `". $Prefix . $Table ."` WHERE `Key_name` = '". $Name ."';");
 		if ($Exists && mysqli_num_rows($Exists) > 0) {
 			continue;
 		}
-		mysqli_query($Connection, "ALTER TABLE `". $Prefix . $Table ."` ADD ". $Definition .";")
-			or die("MySQL Error (". $Table .", index ". $Name ."): <b>". mysqli_error($Connection) ."</b>");
+		$Missing[$Name] = "ADD ". $Definition;
+	}
+	if ($Missing) {
+		mysqli_query($Connection, "ALTER TABLE `". $Prefix . $Table ."` ". implode(", ", $Missing) .";")
+			or die("MySQL Error (". $Table .", index ". implode(", ", array_keys($Missing)) ."): <b>". mysqli_error($Connection) ."</b>");
 	}
 }
 
@@ -559,6 +565,10 @@ function RenaissanceMigration09kPerformances ( $Connection, $Prefix ) {
 	// coordonnees sans le type (planete et lune ensemble). Pas d'index sur les heures des flottes et des missiles
 	// (ordre de traitement), ni sur onlinetime et register_time (ordre des ex aequo des joueurs en ligne, du dernier
 	// inscrit). Les requetes dont un intervalle changerait l'ordre gardent le parcours complet (USE INDEX ()).
+	// Ajouter un index recopie une table MyISAM sans ses trous (lignes supprimees), comme une sauvegarde puis une
+	// restauration : les lignes inserees ensuite ne reprennent plus les memes places. Aucune regle du jeu n'en depend
+	// (seul l'ordre de lignes a egalite parfaite, deja change par toute sauvegarde) : index gardes sur toutes les
+	// tables (30/09/2026, test_09k_pflottes section 9)
 	RenaissanceAddIndexes($Connection, $Prefix, 'planets', array(
 		'id_owner' => "KEY `id_owner` (`id_owner`)",
 		'coords'   => "KEY `coords` (`galaxy`, `system`, `planet`)",

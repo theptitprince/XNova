@@ -278,12 +278,20 @@ switch ($mode) {
             // deux par ligne : nom, image, construction en cours. Largeurs figees (voir overview_body.tpl).
             $ColoCells = array();
             while ($UserPlanet = mysqli_fetch_array($planets_query)) {
+                // Construction terminee d'une autre planete : file traitee AVANT la mise a jour a l'heure actuelle, comme
+                // dans buildings.php. Dans l'autre ordre, UpdatePlanetBatimentQueueList revenait a l'heure de fin avec une
+                // duree de production negative : hangar plein, ressources sous-estimees (negatives parfois), element
+                // suivant de la file refuse, production perdue
+                $OtherPlanet = ($UserPlanet["id"] != $user["current_planet"] && $UserPlanet['planet_type'] != 3);
+                $HadBuilding = ($OtherPlanet && $UserPlanet['b_building'] != 0);
+                if ($HadBuilding) {
+                    UpdatePlanetBatimentQueueList ($UserPlanet, $user);
+                }
                 PlanetResourceUpdate ($user, $UserPlanet, time());
-                if ($UserPlanet["id"] != $user["current_planet"] && $UserPlanet['planet_type'] != 3) {
+                if ($OtherPlanet) {
                     $PlanetState = $lang['free'];
                     $PlanetStateTitle = $lang['free'];
-                    if ($UserPlanet['b_building'] != 0) {
-                        UpdatePlanetBatimentQueueList ($UserPlanet, $user);
+                    if ($HadBuilding) {
                         if ($UserPlanet['b_building'] != 0) {
                             $QueueArray = explode (";", $UserPlanet['b_building_id']);
                             $CurrentBuild = explode (",", $QueueArray[0]);
