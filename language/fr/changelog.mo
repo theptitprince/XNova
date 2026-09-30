@@ -4,6 +4,12 @@ $lang['description_label'] = 'Description';
 $lang['changelog']   = array(
 
 
+'0.9k Renaissance' => 'Performances et s&eacute;curit&eacute; (theptitprince)
+- NEW : Administration : chat d&eacute;sactivable, informations du serveur, statistiques automatiques
+- MOD : Pages bien plus rapides (index de la base, flottes trait&eacute;es seulement si besoin, statistiques)
+- FIX : S&eacute;curit&eacute; : nombreuses failles corrig&eacute;es (injections, triches, acc&egrave;s, installeur)
+- FIX : Attaque group&eacute;e jou&eacute;e deux fois, colonisation rat&eacute;e, b&acirc;timent termin&eacute; sur une autre plan&egrave;te',
+
 '0.9j Renaissance' => 'Derniers officiers (theptitprince)
 - NEW : Protecteur plan&eacute;taire, SuperNova, Destructeur plan&eacute;taire (officiers Bunker, Raideur, Empereur)
 - NEW : Destruction de colonies par le Destructeur plan&eacute;taire
