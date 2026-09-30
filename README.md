@@ -1,10 +1,10 @@
 <div align="center">
 
-# XNova — 0.9j Renaissance
+# XNova — 0.9k Renaissance
 
 **Le jeu de stratégie spatiale XNova, repris là où l'équipe d'origine s'était arrêtée.**
 
-![Version](https://img.shields.io/badge/version-0.9j%20Renaissance-2ea44f)
+![Version](https://img.shields.io/badge/version-0.9k%20Renaissance-2ea44f)
 ![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-10.6%2B-003545?logo=mariadb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8%2B-4479A1?logo=mysql&logoColor=white)
@@ -124,7 +124,7 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 | **0.9h** | Fonctions laissées inachevées dans l'original : « Supprimer un joueur » et liste des multi-comptes, suppression de compte demandée par le joueur, officiers sans effet, heures d'arrivée des flottes, négociant, signalement ; compteur de ressources en direct, boutons « Max », captcha ; protection des débutants complétée, débris des combats corrigés ; partie complète retestée sur une installation neuve | ✅ Terminée |
 | **0.9i** | Attaque groupée : prévue dans la 0.8e mais jamais programmée (groupe, invitations, flottes synchronisées) ; défense groupée par les flottes alliées en stationnement ; nouveau moteur de combat à plusieurs participants, mêmes résultats que l'original (prouvé sur 40 000 combats), tout le jeu sous AGPL ; Protection des vaisseaux enfin prise en compte ; partie complète retestée dans le navigateur | ✅ Terminée |
 | **0.9j** | Derniers officiers (Bunker, Raideur, Empereur) enfin utiles et leurs unités : Protecteur planétaire, SuperNova, Destructeur planétaire, avec la destruction de colonies ; dépôt de ravitaillement terminé comme dans OGame ; expéditions complètes (pirates, aliens, retours retardés ou anticipés) ; valeurs d'OGame (Grand bouclier, petit transporteur, satellite solaire) ; technologies Bouclier et Protection remises à leur place au combat | ✅ Terminée |
-| **0.9k** | Performances (index de la base, traitement des flottes allégé, requêtes en double) et audit de sécurité complet ; chat désactivable, informations du serveur dans l'administration, statistiques recalculées automatiquement | 🔜 Prochaine |
+| **0.9k** | Audit de sécurité complet (injections, triches, requêtes simultanées, accès, installeur réservé à l'administrateur) ; performances : index de la base, flottes traitées seulement quand il le faut, requêtes en double supprimées, statistiques en quelques secondes, résultats du jeu prouvés identiques ; chat désactivable, informations du serveur et statistiques automatiques dans l'administration | ✅ Terminée |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 
 ## Installation
