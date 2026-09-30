@@ -95,16 +95,23 @@ function GetFleetPoints ( $CurrentPlanet ) {
 define('STAT_LOT', 200);
 
 // Classement de chaque categorie pour un type de statistiques (1 : joueurs, 2 : alliances). Meme lecture triee que
-// l'original (memes ex aequo) ; les rangs sont ecrits par lots : un UPDATE par joueur relisait toute la table
-function StatComputeRanks ( $StatType ) {
+// l'original (memes ex aequo) ; avec $Grouped (lignes qui ne changent ni de place ni de taille, voir StatTableFormat),
+// les rangs sont ecrits par lots : un UPDATE par joueur relisait toute la table
+function StatComputeRanks ( $StatType, $Grouped ) {
 	$Cats  = array('tech', 'build', 'defs', 'fleet', 'total');
 	$Ranks = array();
 	foreach ($Cats as $Cat) {
 		$Rank    = 1;
 		$RankQry = doquery("SELECT `id_owner` FROM {{table}} WHERE `stat_type` = '". $StatType ."' AND `stat_code` = '1' ORDER BY `". $Cat ."_points` DESC;", 'statpoints');
 		while ($TheRank = mysqli_fetch_assoc($RankQry)) {
-			// Proprietaire present deux fois : le dernier rang l'emporte, comme avec les UPDATE successifs
-			$Ranks[$TheRank['id_owner']][$Cat] = $Rank;
+			if ($Grouped) {
+				// Proprietaire present deux fois : le dernier rang l'emporte, comme avec les UPDATE successifs
+				$Ranks[$TheRank['id_owner']][$Cat] = $Rank;
+			} else {
+				// Lignes qui peuvent grandir (MyISAM a lignes dynamiques, autre moteur) : l'ordre des ecritures decide de la
+				// place des morceaux de ligne, donc un UPDATE par rang comme a l'origine
+				doquery("UPDATE {{table}} SET `". $Cat ."_rank` = '". $Rank ."' WHERE `stat_type` = '". $StatType ."' AND `stat_code` = '1' AND `id_owner` = '". $TheRank['id_owner'] ."';", 'statpoints');
+			}
 			$Rank++;
 		}
 	}
@@ -157,18 +164,24 @@ function StatReadOld ( $StatType, &$OldCount ) {
 	return $OldStats;
 }
 
-// Table statpoints MyISAM a lignes fixes, avec les colonnes creees par le jeu : une ligne supprimee puis inseree
-// aussitot reprend la meme place. La reecrire sur place donne alors la meme table (memes lignes, meme ordre)
-function StatRowsInPlace () {
-	$Table = doquery("SELECT `ENGINE` AS `engine`, `ROW_FORMAT` AS `row_format`, (SELECT GROUP_CONCAT(`COLUMN_NAME` ORDER BY `ORDINAL_POSITION`) FROM information_schema.COLUMNS WHERE `TABLE_SCHEMA` = DATABASE() AND `TABLE_NAME` = '{{table}}') AS `cols` FROM information_schema.TABLES WHERE `TABLE_SCHEMA` = DATABASE() AND `TABLE_NAME` = '{{table}}';", 'statpoints', true);
+// Moteur et format de la table statpoints :
+//  - 'fixed'   : lignes qui ne changent jamais de place ni de taille (MyISAM a lignes fixes, InnoDB rangee par sa cle) :
+//                des rangs ecrits dans un autre ordre donnent la meme table ;
+//  - 'inplace' : MyISAM a lignes fixes avec les colonnes creees par le jeu (entiers NOT NULL, rangs a 0 quand l'INSERT
+//                ne les donne pas) : une ligne supprimee puis inseree aussitot reprend la meme place. La reecrire sur
+//                place donne alors la meme table (memes lignes, meme ordre)
+function StatTableFormat () {
+	$Table = doquery("SELECT `ENGINE` AS `engine`, `ROW_FORMAT` AS `row_format`, (SELECT GROUP_CONCAT(`COLUMN_NAME`, IF(`IS_NULLABLE` = 'NO' AND `DATA_TYPE` LIKE '%int' AND IFNULL(`COLUMN_DEFAULT`, '0') IN ('0', '''0'''), '', '?') ORDER BY `ORDINAL_POSITION`) FROM information_schema.COLUMNS WHERE `TABLE_SCHEMA` = DATABASE() AND `TABLE_NAME` = '{{table}}') AS `cols` FROM information_schema.TABLES WHERE `TABLE_SCHEMA` = DATABASE() AND `TABLE_NAME` = '{{table}}';", 'statpoints', true);
 	$Cols  = 'id_owner,id_ally,stat_type,stat_code,tech_rank,tech_old_rank,tech_points,tech_count,build_rank,build_old_rank,build_points,build_count,'
 	       . 'defs_rank,defs_old_rank,defs_points,defs_count,fleet_rank,fleet_old_rank,fleet_points,fleet_count,total_rank,total_old_rank,total_points,total_count,stat_date';
-	return ($Table && strtolower($Table['engine']) == 'myisam' && strtolower($Table['row_format']) == 'fixed' && strtolower($Table['cols']) == $Cols);
+	$Fixed = ($Table && strtolower($Table['engine']) == 'myisam' && strtolower($Table['row_format']) == 'fixed');
+	return array('fixed'   => ($Fixed || ($Table && strtolower($Table['engine']) == 'innodb')),
+	             'inplace' => ($Fixed && strtolower($Table['cols']) == $Cols));
 }
 
 // Nouvelles lignes d'un type de statistiques, ecrites dans l'ordre d'origine (suppression de l'ancienne ligne puis
 // insertion, proprietaire par proprietaire) avec le meme resultat :
-//  - une seule ancienne ligne et $InPlace : reecrite sur place, par lots (voir StatRowsInPlace) ;
+//  - une seule ancienne ligne et $InPlace : reecrite sur place, par lots (voir StatTableFormat) ;
 //  - sinon (nouveau proprietaire, lignes en double, autre moteur) : memes DELETE et INSERT, dans le meme ordre
 //    (insertions qui se suivent groupees)
 function StatWriteRows ( $StatType, $Rows, $OldCount, $InPlace ) {
@@ -297,8 +310,10 @@ function BuildStatistics ( $IfOlderThan = 0 ) {
 	doquery ( "DELETE FROM {{table}} WHERE `stat_code` = '2';" , 'statpoints');
 	doquery ( "UPDATE {{table}} SET `stat_code` = `stat_code` + '1';" , 'statpoints');
 
-	// Ecriture sur place possible (voir StatRowsInPlace), anciennes statistiques des joueurs lues en une fois
-	$InPlace    = StatRowsInPlace();
+	// Rangs par lots et ecriture sur place possibles (voir StatTableFormat), anciennes statistiques des joueurs lues en
+	// une fois
+	$Format     = StatTableFormat();
+	$InPlace    = $Format['inplace'];
 	$OldStats   = StatReadOld(1, $OldCount);
 
 	// Recherches de chaque joueur (joueurs dans l'ordre de la table, comme a l'origine)
@@ -411,7 +426,7 @@ function BuildStatistics ( $IfOlderThan = 0 ) {
 	StatWriteRows(1, $StatRows, $OldCount, $InPlace);
 	unset($StatRows);
 
-	StatComputeRanks(1);
+	StatComputeRanks(1, $Format['fixed']);
 
 	// Statistiques des alliances ...
 	$OldStats   = StatReadOld(2, $OldCount);
@@ -489,7 +504,7 @@ function BuildStatistics ( $IfOlderThan = 0 ) {
 	StatWriteRows(2, $StatRows, $OldCount, $InPlace);
 
 	// Classement des alliances : il n'etait jamais calcule (rangs toujours a 0)
-	StatComputeRanks(2);
+	StatComputeRanks(2, $Format['fixed']);
 
 	doquery("DO RELEASE_LOCK(LEFT(CONCAT(DATABASE(), '.{{table}}'), 64));", 'statistics');
 	return array('users' => $UserCount, 'allys' => $AllyCount, 'date' => $StatDate);
