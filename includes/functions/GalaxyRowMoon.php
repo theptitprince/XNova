@@ -35,7 +35,7 @@ function GalaxyRowMoon ( $GalaxyRow, $GalaxyRowPlanet, $GalaxyRowUser, $Galaxy, 
 	}
 
 	// Stationner chez un allie : amis et membres de son alliance seulement (0.9i)
-	if ($GalaxyRowUser['id'] != $user['id'] && IsBuddyOrAllyMember($user['id'], $GalaxyRowUser['id'])) {
+	if ($GalaxyRowUser['id'] != $user['id'] && GalaxyIsBuddyOrAllyMember($user['id'], $GalaxyRowUser['id'])) {
 		$MissionType5Link = "<a href=fleet.php?galaxy=".$Galaxy."&system=".$System."&planet=".$Planet."&planettype=".$PlanetType."&target_mission=5>". $lang['type_mission'][5] ."</a><br />";
 	} else {
 		$MissionType5Link = "";

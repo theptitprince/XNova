@@ -20,7 +20,8 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-$lunarow = doquery("SELECT * FROM {{table}} WHERE `id_owner` = '" . $planetrow['id_owner'] . "' AND `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `lunapos` = '" . $planetrow['planet'] . "';", 'lunas', true);
+// (seul l'id de la lune sert, plus bas)
+$lunarow = doquery("SELECT `id` FROM {{table}} WHERE `id_owner` = '" . $planetrow['id_owner'] . "' AND `galaxy` = '" . $planetrow['galaxy'] . "' AND `system` = '" . $planetrow['system'] . "' AND `lunapos` = '" . $planetrow['planet'] . "';", 'lunas', true);
 
 // (CheckPlanetUsedFields($lunarow) retire : $lunarow vient de la table des lunes, sans batiments ni cases)
 
@@ -40,7 +41,7 @@ $time = time();
 $duree = $time + (intval($game_config['ban_duration']) * 86400);
 $op = stripslashes($game_config['bot_name']);
 $mail = stripslashes($game_config['bot_adress']);
-$sql = doquery("SELECT * FROM {{table}} WHERE `user_lastip`='{$ip}'", 'users');
+$sql = doquery("SELECT `username` FROM {{table}} WHERE `user_lastip`='{$ip}'", 'users');
 $boucle = 0;
 $Names = array();
    while($m = mysqli_fetch_array($sql)){
@@ -325,13 +326,14 @@ switch ($mode) {
 
                     $fpage[$Key] .= InsertJavaScriptChronoApplet ("fm", $Record, $time, true);
 
-                    $planet_start = doquery("SELECT * FROM {{table}} WHERE
+                    // (seul le nom sert)
+                    $planet_start = doquery("SELECT `name` FROM {{table}} WHERE
 						galaxy = '" . $irak['galaxy'] . "' AND
 						system = '" . $irak['system'] . "' AND
 						planet = '" . $irak['planet'] . "' AND
 						planet_type = '1'", 'planets');
 
-                    $user_planet = doquery("SELECT * FROM {{table}} WHERE
+                    $user_planet = doquery("SELECT `name` FROM {{table}} WHERE
 						galaxy = '" . $irak['galaxy_angreifer'] . "' AND
 						system = '" . $irak['system_angreifer'] . "' AND
 						planet = '" . $irak['planet_angreifer'] . "' AND
@@ -475,10 +477,8 @@ switch ($mode) {
             } else {
                 $parse['building'] = $lang['free'];
             }
-            $query = doquery('SELECT username FROM {{table}} ORDER BY register_time DESC', 'users', true);
-            $parse['last_user'] = $query['username'];
-            $query = doquery("SELECT COUNT(DISTINCT(id)) FROM {{table}} WHERE onlinetime>" . (time()-900), 'users', true);
-            $parse['online_users'] = $query[0];
+            // (dernier inscrit et joueurs en ligne plus lus ici en 0.9k : overview_body.tpl ne les affiche pas, depuis
+            // la 0.8e ; tous les joueurs etaient tries et transferes pour rien. Membres en ligne : plus bas)
             // $count = doquery(","users",true);
             $parse['users_amount'] = $game_config['users_amount'];
             // Rajout d'une barre pourcentage

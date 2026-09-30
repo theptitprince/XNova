@@ -19,17 +19,25 @@ $xnova_root_path = './';
 include($xnova_root_path . 'extension.inc');
 include($xnova_root_path . 'common.' . $phpEx);
 
-	$maxfleet  = doquery("SELECT COUNT(fleet_owner) AS `actcnt` FROM {{table}} WHERE `fleet_owner` = '".$user['id']."';", 'fleets', true);
+	// Flottes du joueur lues une seule fois (0.9k ; avant : deux comptages puis la liste, trois lectures de fleets)
+	$FleetRows = array();
+	$fq = doquery("SELECT * FROM {{table}} WHERE fleet_owner={$user['id']}", "fleets");
+	while ($f = mysqli_fetch_array($fq)) {
+		$FleetRows[] = $f;
+	}
 
-	$MaxFlyingFleets     = $maxfleet['actcnt'];
+	$MaxFlyingFleets     = count($FleetRows);
 
     //Compteur de flotte en expéditions et nombre d'expédition maximum
     $MaxExpedition      = $user[$resource[124]];
     $ExpeditionEnCours  = 0;
     $EnvoiMaxExpedition = 0;
     if ($MaxExpedition >= 1) {
-		$maxexpde  = doquery("SELECT COUNT(fleet_owner) AS `expedi` FROM {{table}} WHERE `fleet_owner` = '".$user['id']."' AND `fleet_mission` = '15';", 'fleets', true);
-	    $ExpeditionEnCours  = $maxexpde['expedi'];
+		foreach ($FleetRows as $f) {
+			if ($f['fleet_mission'] == 15) {
+				$ExpeditionEnCours++;
+			}
+		}
 		$EnvoiMaxExpedition = 1 + floor( $MaxExpedition / 3 );
     }
 
@@ -100,12 +108,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 	$page .= "<th>".$lang['fl_order']."</th>";
 	$page .= "</tr>";
 
-	// Gestion des flottes du joueur actif
-	$fq = doquery("SELECT * FROM {{table}} WHERE fleet_owner={$user['id']}", "fleets");
+	// Gestion des flottes du joueur actif (lues plus haut)
 	$i  = 0;
 
 
-	while ($f = mysqli_fetch_array($fq)) {
+	foreach ($FleetRows as $f) {
 		$i++;
 		$page .= "<tr height=20>";
 		// (01) Fleet ID

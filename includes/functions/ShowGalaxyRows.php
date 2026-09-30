@@ -15,6 +15,16 @@
 function ShowGalaxyRows ($Galaxy, $System) {
 	global $lang, $planetcount, $CurrentRC, $dpath, $user;
 
+	// Lignes de galaxie du systeme lues en une seule fois (0.9k ; avant : une requete par position). Relues position
+	// par position comme avant quand une position a plusieurs lignes (la premiere depend alors de l'ordre de lecture
+	// de MySQL) et apres CheckAbandonPlanetState, qui modifie la table galaxy
+	$SystemRows  = array();
+	$SystemQuery = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '".$Galaxy."' AND `system` = '".$System."';", 'galaxy');
+	while ($SystemRow = mysqli_fetch_array($SystemQuery)) {
+		$SystemRows[intval($SystemRow['planet'])][] = $SystemRow;
+	}
+	$SystemRowsValid = true;
+
 	$Result = "";
 	for ($Planet = 1; $Planet < 16; $Planet++) {
 		$GalaxyRowPlanet = null;
@@ -22,7 +32,11 @@ function ShowGalaxyRows ($Galaxy, $System) {
 		$GalaxyRowPlayer = null;
 		$GalaxyRowAlly   = null;
 
-		$GalaxyRow = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '".$Galaxy."' AND `system` = '".$System."' AND `planet` = '".$Planet."';", 'galaxy', true);
+		if ($SystemRowsValid && count($SystemRows[$Planet] ?? array()) <= 1) {
+			$GalaxyRow = $SystemRows[$Planet][0] ?? null;
+		} else {
+			$GalaxyRow = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '".$Galaxy."' AND `system` = '".$System."' AND `planet` = '".$Planet."';", 'galaxy', true);
+		}
 
 		$Result .= "\n";
 		$Result .= "<tr>"; // Depart de ligne
@@ -31,10 +45,13 @@ function ShowGalaxyRows ($Galaxy, $System) {
 			if ($GalaxyRow["id_planet"] != 0) {
 				$GalaxyRowPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '". $GalaxyRow["id_planet"] ."';", 'planets', true);
 
+				$PlanetChecked = false;
 				if ($GalaxyRowPlanet['destruyed'] != 0 AND
 					$GalaxyRowPlanet['id_owner'] != '' AND
 					$GalaxyRow["id_planet"] != '') {
 					CheckAbandonPlanetState ($GalaxyRowPlanet);
+					$PlanetChecked   = true;
+					$SystemRowsValid = false;
 				} else {
 					$planetcount++;
 					$GalaxyRowPlayer = doquery("SELECT * FROM {{table}} WHERE `id` = '". $GalaxyRowPlanet["id_owner"] ."';", 'users', true);
@@ -46,11 +63,10 @@ function ShowGalaxyRows ($Galaxy, $System) {
 						CheckAbandonMoonState ($GalaxyRowMoon);
 					}
 				}
-				$GalaxyRowPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '". $GalaxyRow["id_planet"] ."';", 'planets', true);
-				if ($GalaxyRowPlanet['id_owner'] <> 0) {
-					$GalaxyRowUser     = doquery("SELECT * FROM {{table}} WHERE `id` = '". $GalaxyRowPlanet['id_owner'] ."';", 'users', true);
-				} else {
-					$GalaxyRowUser     = array();
+				// Planete relue seulement si CheckAbandonPlanetState a pu la supprimer : sinon, c'est la meme ligne
+				// (le joueur, relu ensuite dans $GalaxyRowUser, ne servait a rien)
+				if ($PlanetChecked) {
+					$GalaxyRowPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '". $GalaxyRow["id_planet"] ."';", 'planets', true);
 				}
 			}
 		}
@@ -75,6 +91,18 @@ function ShowGalaxyRows ($Galaxy, $System) {
 	}
 
 	return $Result;
+}
+
+// Amis et membres de son alliance (lien « Stationner » de la planete et de la lune) : resultat garde pour toute la
+// page (0.9k), la meme paire de joueurs etait verifiee pour la planete, pour la lune et pour chaque position
+function GalaxyIsBuddyOrAllyMember ( $UserId, $OtherId ) {
+	static $Pairs = array();
+
+	$Key = intval($UserId) .':'. intval($OtherId);
+	if (!isset($Pairs[$Key])) {
+		$Pairs[$Key] = IsBuddyOrAllyMember($UserId, $OtherId);
+	}
+	return $Pairs[$Key];
 }
 
 ?>

@@ -21,6 +21,49 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	includeLang('stat');
 
+	// Classement (0.9k ; avant : pour chaque ligne, une lecture du joueur ou de l'alliance et une ecriture du rang).
+	// Lignes de la page lues d'abord, puis leurs joueurs ou alliances en une seule requete (cle primaire : memes
+	// lignes). $Table : users ou alliance
+	function StatReadRows ( $Query, $Table ) {
+		$Rows = array();
+		$Ids  = array();
+		while ($StatRow = mysqli_fetch_assoc($Query)) {
+			$Rows[] = $StatRow;
+			$Ids[]  = $StatRow['id_owner'];
+		}
+		$Owners = array();
+		if (count($Ids) > 0) {
+			$Found = doquery("SELECT * FROM {{table}} WHERE `id` IN ('". implode("','", $Ids) ."');", $Table);
+			while ($Row = mysqli_fetch_array($Found)) {
+				$Owners[$Row['id']] = $Row;
+			}
+		}
+		return array($Rows, $Owners);
+	}
+
+	// Rangs de la page enregistres en une seule requete, avec les valeurs finales des ecritures d'une ligne a la fois
+	// d'avant : pour chaque id_owner, le dernier rang ecrit, et le dernier ancien rang ecrit s'il y en a eu un (toutes
+	// les lignes de ce joueur ou de cette alliance, comme avant)
+	function StatSaveRanks ( $StatType, $Rank, $OldRank, $RankOf, $OldOf ) {
+		if (count($RankOf) == 0) {
+			return;
+		}
+		$QryUpdRank  = "UPDATE {{table}} SET `".$Rank."` = CASE `id_owner`";
+		foreach ($RankOf as $Owner => $Start) {
+			$QryUpdRank .= " WHEN '". $Owner ."' THEN '". $Start ."'";
+		}
+		$QryUpdRank .= " END";
+		if (count($OldOf) > 0) {
+			$QryUpdRank .= ", `".$OldRank."` = CASE `id_owner`";
+			foreach ($OldOf as $Owner => $Start) {
+				$QryUpdRank .= " WHEN '". $Owner ."' THEN '". $Start ."'";
+			}
+			$QryUpdRank .= " ELSE `".$OldRank."` END";
+		}
+		$QryUpdRank .= " WHERE `stat_type` = '". intval($StatType) ."' AND `stat_code` = '1' AND `id_owner` IN ('". implode("','", array_keys($RankOf)) ."');";
+		doquery($QryUpdRank, "statpoints");
+	}
+
 	$parse = $lang;
 	$who   = intval((isset($_POST['who']))   ? ($_POST['who'] ?? null)   : ($_GET['who'] ?? null));
 	if ($who < 1 || $who > 2) {
@@ -100,21 +143,23 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$start++;
 		$parse['stat_date']   = $game_config['stats'] ?? '';
 		$parse['stat_values'] = "";
-		while ($StatRow = mysqli_fetch_assoc($query)) {
+		list($StatRows, $Owners) = StatReadRows($query, 'alliance');
+		$RankOf = array();
+		$OldOf  = array();
+		foreach ($StatRows as $StatRow) {
 			// Date du calcul, comme dans le classement des joueurs (l'original lisait un reglage inexistant : titre vide)
 			$parse['stat_date']       = date("d/m/Y - H:i:s", $StatRow['stat_date']);
 			$parse['ally_rank']       = $start;
 
-			$AllyRow                  = doquery("SELECT * FROM {{table}} WHERE `id` = '". $StatRow['id_owner'] ."';", 'alliance',true);
+			$AllyRow                  = $Owners[$StatRow['id_owner']] ?? null;
 			if (!$AllyRow) { continue; } // alliance dissoute depuis le dernier calcul des statistiques
 
 			$rank_old                 = $StatRow[ $OldRank ];
 			if ( $rank_old == 0) {
 				$rank_old             = $start;
-				$QryUpdRank           = doquery("UPDATE {{table}} SET `".$Rank."` = '".$start."', `".$OldRank."` = '".$start."' WHERE `stat_type` = '2' AND `stat_code` = '1' AND `id_owner` = '". $StatRow['id_owner'] ."';" , "statpoints");
-			} else {
-				$QryUpdRank           = doquery("UPDATE {{table}} SET `".$Rank."` = '".$start."' WHERE `stat_type` = '2' AND `stat_code` = '1' AND `id_owner` = '". $StatRow['id_owner'] ."';" , "statpoints");
+				$OldOf[$StatRow['id_owner']] = $start;
 			}
+			$RankOf[$StatRow['id_owner']] = $start;
 			$rank_new                 = $start;
 			$ranking                  = $rank_old - $rank_new;
 			if ($ranking == "0") {
@@ -137,6 +182,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$parse['stat_values']    .= parsetemplate(gettemplate('stat_alliancetable'), $parse);
 			$start++;
 		}
+		StatSaveRanks(2, $Rank, $OldRank, $RankOf, $OldOf);
 	} else {
 		$MaxUsers = doquery ("SELECT COUNT(*) AS `count` FROM {{table}} WHERE `db_deaktjava` = '0';", 'users', true);
 		$LastPage = 0;
@@ -158,21 +204,23 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$start++;
 		$parse['stat_date']   = $game_config['stats'] ?? '';
 		$parse['stat_values'] = "";
-		while ($StatRow = mysqli_fetch_assoc($query)) {
+		list($StatRows, $Owners) = StatReadRows($query, 'users');
+		$RankOf = array();
+		$OldOf  = array();
+		foreach ($StatRows as $StatRow) {
 			$parse['stat_date']       = date("d/m/Y - H:i:s", $StatRow['stat_date']);
 			$parse['player_rank']     = $start;
 
-			$UsrRow                   = doquery("SELECT * FROM {{table}} WHERE `id` = '". $StatRow['id_owner'] ."';", 'users',true);
+			$UsrRow                   = $Owners[$StatRow['id_owner']] ?? null;
 			if (!$UsrRow) { continue; } // joueur supprime depuis le dernier calcul des statistiques
 
 
 			$rank_old                 = $StatRow[ $OldRank ];
 			if ( $rank_old == 0) {
 				$rank_old             = $start;
-				$QryUpdRank           = doquery("UPDATE {{table}} SET `".$Rank."` = '".$start."', `".$OldRank."` = '".$start."' WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $StatRow['id_owner'] ."';" , "statpoints");
-			} else {
-				$QryUpdRank           = doquery("UPDATE {{table}} SET `".$Rank."` = '".$start."' WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $StatRow['id_owner'] ."';" , "statpoints");
+				$OldOf[$StatRow['id_owner']] = $start;
 			}
+			$RankOf[$StatRow['id_owner']] = $start;
 			$rank_new                 = $start;
 			$ranking                  = $rank_old - $rank_new;
 			if ($ranking == "0") {
@@ -203,6 +251,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 			$parse['stat_values']    .= parsetemplate(gettemplate('stat_playertable'), $parse);
 			$start++;
 		}
+		StatSaveRanks(1, $Rank, $OldRank, $RankOf, $OldOf);
 	}
 
 	$page = parsetemplate( gettemplate('stat_body'), $parse );
