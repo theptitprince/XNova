@@ -80,20 +80,13 @@ function FlyingFleetHandler (&$planet) {
 	$QryWhere  .= "`fleet_end_galaxy` = ".   $planet['galaxy']      ." AND ";
 	$QryWhere  .= "`fleet_end_system` = ".   $planet['system']      ." AND ";
 	$QryWhere  .= "`fleet_end_planet` = ".   $planet['planet']      ." ) AND ";
-	$QryWhere  .= "`fleet_end_type`= ".      $planet['planet_type'] ." ) AND ";
+	$QryWhere  .= "`fleet_end_type`= ".      $planet['planet_type'] ." )";
 
-	// XNova Renaissance (0.9k, performances) : flottes de la position lues d'abord sans verrou, par les index des
-	// coordonnees de depart puis d'arrivee (deux recherches : la fusion d'index du OR coutait plus qu'un parcours
-	// complet apres chaque ecriture dans la table). Aucune n'a rien a faire : ni verrou des 9 tables ni traitement,
-	// qui n'auraient rien change. Sinon, traitement d'origine, avec la liste relue sous verrou. Heure prise apres la
-	// lecture, qui a pu attendre le verrou d'une autre page (comme l'heure de la liste, prise apres le verrou).
-	$QryDue     = "SELECT `fleet_mission`, `fleet_mess`, `fleet_start_time`, `fleet_end_stay`, `fleet_end_time` FROM {{table}} WHERE ";
-	$QryDue    .= "`fleet_start_galaxy` = ". $planet['galaxy'] ." AND `fleet_start_system` = ". $planet['system'] ." AND ";
-	$QryDue    .= "`fleet_start_planet` = ". $planet['planet'] ." AND `fleet_start_type` = ". $planet['planet_type'] ." UNION ALL ";
-	$QryDue    .= "SELECT `fleet_mission`, `fleet_mess`, `fleet_start_time`, `fleet_end_stay`, `fleet_end_time` FROM {{table}} WHERE ";
-	$QryDue    .= "`fleet_end_galaxy` = ". $planet['galaxy'] ." AND `fleet_end_system` = ". $planet['system'] ." AND ";
-	$QryDue    .= "`fleet_end_planet` = ". $planet['planet'] ." AND `fleet_end_type` = ". $planet['planet_type'] .";";
-	$DueQuery   = doquery($QryDue, 'fleets');
+	// XNova Renaissance (0.9k, performances) : flottes de la position lues d'abord sans verrou (colonnes du test
+	// seulement). Aucune n'a rien a faire : ni verrou des 9 tables ni traitement, qui n'auraient rien change. Sinon,
+	// traitement d'origine, avec la liste relue sous verrou. Heure prise apres la lecture, qui a pu attendre le verrou
+	// d'une autre page (comme l'heure de la liste, prise apres le verrou).
+	$DueQuery   = doquery("SELECT `fleet_mission`, `fleet_mess`, `fleet_start_time`, `fleet_end_stay`, `fleet_end_time` FROM {{table}} ". $QryWhere .";", 'fleets');
 	$Now        = time();
 	$Due        = false;
 	while (!$Due && ($DueRow = mysqli_fetch_assoc($DueQuery))) {
@@ -111,7 +104,7 @@ function FlyingFleetHandler (&$planet) {
 	$FleetHandlerLocked = true;
 
 	// Parcours de toute la table (USE INDEX ()) : lignes dans l'ordre physique, qui decide de l'ordre de traitement
-	$QryFleet   = "SELECT * FROM {{table}} USE INDEX () ". $QryWhere;
+	$QryFleet   = "SELECT * FROM {{table}} USE INDEX () ". $QryWhere ." AND ";
 	$QryFleet  .= "( `fleet_start_time` < '". time() ."' OR `fleet_end_time` < '". time() ."' );";
 	$fleetquery = doquery( $QryFleet, 'fleets' );
 
