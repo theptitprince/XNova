@@ -50,12 +50,16 @@ function HandleElementBuildingQueue ( $CurrentUser, &$CurrentPlanet, $Production
 			$Count     = $Item[1];
 			$BuildTime = $Item[2];
 			if (!$UnFinished) {
-				while ( $Count > 0 && $CurrentPlanet['b_hangar'] >= $BuildTime ) {
-					$CurrentPlanet['b_hangar'] -= $BuildTime;
+				// Unites terminees comptees d'un coup (0.9k) : l'original retirait le temps d'une unite a la fois
+				// (jusqu'a 1 000 000 de tours). Memes nombres : temps entiers, soustraction exacte ; un temps nul ou
+				// negatif termine toute la ligne, comme la boucle
+				if ( $Count > 0 && $CurrentPlanet['b_hangar'] >= $BuildTime ) {
+					$Done = ($BuildTime <= 0) ? $Count : min($Count, intdiv((int) $CurrentPlanet['b_hangar'], (int) $BuildTime));
+					$CurrentPlanet['b_hangar'] -= $Done * $BuildTime;
 					$Made = ($Element == 214 && $Destroyer) ? 2 : 1;
-					$Builded[$Element] = ($Builded[$Element] ?? 0) + $Made;
-					$CurrentPlanet[$resource[$Element]] += $Made;
-					$Count--;
+					$Builded[$Element] = ($Builded[$Element] ?? 0) + $Made * $Done;
+					$CurrentPlanet[$resource[$Element]] += $Made * $Done;
+					$Count -= $Done;
 				}
 				if ( $Count > 0 ) {
 					$UnFinished = true;

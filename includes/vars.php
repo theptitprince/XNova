@@ -304,6 +304,9 @@ if ( defined('INSIDE')) {
 		503 => array ( 'shield' =>     1, 'attack' =>  12000 )
 	);
 
+	// Formules de production : chacune ne lit que $BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet,
+	// $game_config, $resource et $ProdGrid, et ne modifie aucune variable (0.9k : formules compilees une fois par requete,
+	// voir ProdGridFormula dans includes/functions/PlanetResourceUpdate.php)
 	$ProdGrid = array(
 		// Mine de Métal
 		1   => array( 'metal' =>   40, 'crystal' =>   10, 'deuterium' =>    0, 'energy' => 0, 'factor' => 3/2,
