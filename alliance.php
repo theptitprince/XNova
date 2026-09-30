@@ -101,9 +101,29 @@ function AllyMembersSorted ( $AllyId, $Sort1, $Sort2 ) {
 	$Members = array();
 	$Query   = doquery("SELECT * FROM {{table}} WHERE `ally_id`='" . intval($AllyId) . "'", 'users');
 	while ($Row = mysqli_fetch_assoc($Query)) {
-		$Points = doquery("SELECT `total_points` FROM {{table}} WHERE `stat_type`='1' AND `stat_code`='1' AND `id_owner`='" . intval($Row['id']) . "'", 'statpoints', true);
-		$Row['total_points'] = $Points ? $Points['total_points'] : 0;
 		$Members[] = $Row;
+	}
+	// Points de tous les membres en une seule requete (0.9k ; avant : une par membre). Un membre qui a plusieurs
+	// lignes de points est relu seul comme avant (la premiere ligne depend alors de l'ordre de lecture de MySQL)
+	$PointsOf = array();
+	if (count($Members) > 0) {
+		$Ids = array();
+		foreach ($Members as $Row) {
+			$Ids[] = intval($Row['id']);
+		}
+		$PointsQry = doquery("SELECT `id_owner`, `total_points` FROM {{table}} WHERE `stat_type`='1' AND `stat_code`='1' AND `id_owner` IN ('" . implode("','", $Ids) . "')", 'statpoints');
+		while ($Points = mysqli_fetch_assoc($PointsQry)) {
+			$PointsOf[intval($Points['id_owner'])][] = $Points['total_points'];
+		}
+	}
+	foreach ($Members as $Key => $Row) {
+		$Found = $PointsOf[intval($Row['id'])] ?? array();
+		if (count($Found) > 1) {
+			$Points = doquery("SELECT `total_points` FROM {{table}} WHERE `stat_type`='1' AND `stat_code`='1' AND `id_owner`='" . intval($Row['id']) . "'", 'statpoints', true);
+			$Members[$Key]['total_points'] = $Points ? $Points['total_points'] : 0;
+		} else {
+			$Members[$Key]['total_points'] = (count($Found) == 1) ? $Found[0] : 0;
+		}
 	}
 	$Fields = array(1 => 'username', 2 => 'ally_rank_id', 3 => 'total_points', 4 => 'ally_register_time', 5 => 'onlinetime');
 	$Field  = $Fields[$Sort1] ?? 'id';

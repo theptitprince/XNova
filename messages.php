@@ -45,7 +45,8 @@ function MessageReportLink ( $Message, $UserId, $Reported ) {
 		$MessPageMode = "delete";
 	}
 
-	$UsrMess       = doquery("SELECT * FROM {{table}} WHERE `message_owner` = '".$user['id']."' ORDER BY `message_time` DESC;", 'messages');
+	// Messages comptes par type par MySQL (0.9k ; avant : tous les messages du joueur lus avec leur texte pour les compter)
+	$UsrMess       = doquery("SELECT `message_type`, COUNT(*) FROM {{table}} WHERE `message_owner` = '".$user['id']."' GROUP BY `message_type`;", 'messages');
 	$UnRead        = doquery("SELECT * FROM {{table}} WHERE `id` = '". $user['id'] ."';", 'users', true);
 
 	// 97 : messages generaux de l'administration (message a tous les joueurs), compteur mnl_general
@@ -62,8 +63,8 @@ function MessageReportLink ( $Message, $UserId, $Reported ) {
 
 	while ($CurMess = mysqli_fetch_array($UsrMess)) {
 		$MessType              = $CurMess['message_type'];
-		$TotalMess[$MessType] += 1;
-		$TotalMess[100]       += 1;
+		$TotalMess[$MessType] += $CurMess[1];
+		$TotalMess[100]       += $CurMess[1];
 	}
 
 	switch ($MessPageMode) {

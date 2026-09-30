@@ -63,33 +63,107 @@ switch($type){
 if(isset($searchtext) && isset($type)){
 
 	$result_list = '';
+	// Resultats lus d'abord, puis les joueurs, planetes, alliances et rangs de tous les resultats en une requete de
+	// chaque sorte (0.9k ; avant : 2 a 3 requetes par resultat). Lectures par identifiant (cle primaire) : memes
+	// lignes. Relus un par un comme avant : un identifiant qui n'est pas un entier (meme erreur SQL qu'avant) et un
+	// joueur ou une alliance qui a plusieurs lignes de points (la premiere depend alors de l'ordre de lecture de MySQL)
+	$SearchRows = array();
 	while($r = mysqli_fetch_array($search, MYSQLI_BOTH)){
+		$SearchRows[] = $r;
+	}
+	$WantOwners  = array();
+	$WantPlanets = array();
+	$WantAllys   = array();
+	$WantStats   = array();
+	foreach ($SearchRows as $r) {
+		if ($type == 'planetname') {
+			if (ctype_digit((string) $r['id_owner'])) {
+				$WantOwners[] = $r['id_owner'];
+			}
+			$WantStats[] = intval($r['id_owner']);
+		} elseif ($type == 'playername') {
+			if (ctype_digit((string) $r['id_planet'])) {
+				$WantPlanets[] = $r['id_planet'];
+			}
+			if(($r['ally_id'] ?? 0)!=0&&($r['ally_request'] ?? 0)==0){
+				$WantAllys[] = intval($r['ally_id']);
+			}
+			$WantStats[] = intval($r['id']);
+		} elseif ($type == 'allytag' || $type == 'allyname') {
+			$WantStats[] = intval($r['id']);
+		}
+	}
+	$OwnerRows  = array();
+	$PlanetRows = array();
+	$AllyRows   = array();
+	$StatRows   = array();
+	if (count($WantOwners) > 0) {
+		$Found = doquery("SELECT * FROM {{table}} WHERE id IN (". implode(',', $WantOwners) .")", "users");
+		while ($FoundRow = mysqli_fetch_array($Found)) {
+			$OwnerRows[$FoundRow['id']] = $FoundRow;
+		}
+	}
+	if (count($WantPlanets) > 0) {
+		$Found = doquery("SELECT id, name FROM {{table}} WHERE id IN (". implode(',', $WantPlanets) .")", "planets");
+		while ($FoundRow = mysqli_fetch_array($Found)) {
+			$PlanetRows[$FoundRow['id']] = $FoundRow;
+		}
+	}
+	if (count($WantAllys) > 0) {
+		$Found = doquery("SELECT id, ally_name FROM {{table}} WHERE id IN (". implode(',', $WantAllys) .")", "alliance");
+		while ($FoundRow = mysqli_fetch_array($Found)) {
+			$AllyRows[$FoundRow['id']] = $FoundRow;
+		}
+	}
+	if (count($WantStats) > 0) {
+		$StatType  = ($type == 'allytag' || $type == 'allyname') ? 2 : 1;
+		$StatField = ($StatType == 2) ? 'total_points' : 'total_rank';
+		$Found = doquery("SELECT `id_owner`, `". $StatField ."` FROM {{table}} WHERE `stat_type` = '". $StatType ."' AND `stat_code` = '1' AND `id_owner` IN ('". implode("','", $WantStats) ."');", 'statpoints');
+		while ($FoundRow = mysqli_fetch_array($Found)) {
+			$StatRows[intval($FoundRow['id_owner'])][] = $FoundRow[$StatField];
+		}
+	}
+
+	foreach ($SearchRows as $r) {
 
 		if($type=='playername'||$type=='planetname'){
 			$s=$r;
 			//para obtener el nombre del planeta
 			if ($type == "planetname")
 			{
-			$pquery = doquery("SELECT * FROM {{table}} WHERE id = {$s['id_owner']}","users",true);
+			if (ctype_digit((string) $s['id_owner'])) {
+				$pquery = $OwnerRows[$s['id_owner']] ?? null;
+			} else {
+				$pquery = doquery("SELECT * FROM {{table}} WHERE id = {$s['id_owner']}","users",true);
+			}
 /*			$farray = mysqli_fetch_array($pquery);*/
 			$s['planet_name'] = $s['name'];
 			$s['username'] = $pquery['username'];
 			$s['id'] = intval($pquery['id']);
 			$s['ally_name'] = (($pquery['ally_id'] ?? 0) > 0 && $pquery['ally_name'] != '') ? "<a href=\"alliance.php?mode=ainfo&amp;a=". intval($pquery['ally_id']) ."\">". htmlspecialchars($pquery['ally_name'], ENT_QUOTES, 'UTF-8') ."</a>" : '';
 			}else{
-			$pquery = doquery("SELECT name FROM {{table}} WHERE id = {$s['id_planet']}","planets",true);
+			if (ctype_digit((string) $s['id_planet'])) {
+				$pquery = $PlanetRows[$s['id_planet']] ?? null;
+			} else {
+				$pquery = doquery("SELECT name FROM {{table}} WHERE id = {$s['id_planet']}","planets",true);
+			}
 			$s['planet_name'] = $pquery['name'] ?? '';
 			// Alliance du joueur : lue avant d'etre affichee (l'original affichait celle du joueur precedent)
 			$aquery = array();
 			if(($s['ally_id'] ?? 0)!=0&&($s['ally_request'] ?? 0)==0){
-				$aquery = doquery("SELECT ally_name FROM {{table}} WHERE id = ". intval($s['ally_id']),"alliance",true);
+				$aquery = $AllyRows[intval($s['ally_id'])] ?? null;
 			}
 			$s['ally_name'] = (($aquery['ally_name'] ?? '')!='') ? "<a href=\"alliance.php?mode=ainfo&amp;a=". intval($s['ally_id']) ."\">". htmlspecialchars($aquery['ally_name'], ENT_QUOTES, 'UTF-8') ."</a>" : '';
 			}
 
 			// Rang au classement general (la table des joueurs n'a pas de colonne rank : la position etait vide)
 			$OwnerId  = ($type == "planetname") ? intval($s['id_owner']) : intval($s['id']);
-			$RankRow  = doquery("SELECT `total_rank` FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $OwnerId ."';", 'statpoints', true);
+			$Found    = $StatRows[$OwnerId] ?? array();
+			if (count($Found) > 1) {
+				$RankRow  = doquery("SELECT `total_rank` FROM {{table}} WHERE `stat_type` = '1' AND `stat_code` = '1' AND `id_owner` = '". $OwnerId ."';", 'statpoints', true);
+			} else {
+				$RankRow  = (count($Found) == 1) ? array('total_rank' => $Found[0]) : null;
+			}
 			$s['rank'] = $RankRow['total_rank'] ?? '';
 
 			$s['position'] = "<a href=\"stat.php?range=".$s['rank']."\">".$s['rank']."</a>";
@@ -102,7 +176,12 @@ if(isset($searchtext) && isset($type)){
 			$s=$r;
 
 			// Points de l'alliance : classement (statpoints, type 2) ; la table alliance n'a pas de colonne ally_points
-			$PointsRow = doquery("SELECT `total_points` FROM {{table}} WHERE `stat_type` = '2' AND `stat_code` = '1' AND `id_owner` = '". intval($s['id']) ."';", 'statpoints', true);
+			$Found = $StatRows[intval($s['id'])] ?? array();
+			if (count($Found) > 1) {
+				$PointsRow = doquery("SELECT `total_points` FROM {{table}} WHERE `stat_type` = '2' AND `stat_code` = '1' AND `id_owner` = '". intval($s['id']) ."';", 'statpoints', true);
+			} else {
+				$PointsRow = (count($Found) == 1) ? array('total_points' => $Found[0]) : null;
+			}
 			$s['ally_points'] = pretty_number($PointsRow['total_points'] ?? 0);
 
 			$s['ally_tag'] = "<a href=\"alliance.php?mode=ainfo&amp;a=". intval($s['id']) ."\">". htmlspecialchars($s['ally_tag'], ENT_QUOTES, 'UTF-8') ."</a>";

@@ -222,10 +222,16 @@ function parsetemplate ($template, $array) {
 
 function gettemplate ($templatename) {
 	global $xnova_root_path;
+	// Gabarit lu une seule fois par page (0.9k) : les .tpl ne changent pas pendant une page, certains etaient relus a
+	// chaque ligne (classement, evenements de flotte)
+	static $Templates = array();
 
 	$filename = $xnova_root_path . TEMPLATE_DIR . TEMPLATE_NAME . '/' . $templatename . ".tpl";
 
-	return ReadFromFile($filename);
+	if (!array_key_exists($filename, $Templates)) {
+		$Templates[$filename] = ReadFromFile($filename);
+	}
+	return $Templates[$filename];
 }
 
 // ----------------------------------------------------------------------------------------------------------------
@@ -270,8 +276,14 @@ function BuildPlanetAdressLink ( $CurrentPlanet ) {
 // Création d'un lien pour le joueur hostile
 function BuildHostileFleetPlayerLink ( $FleetRow ) {
 	global $lang, $dpath;
+	// Pseudo lu une seule fois par joueur et par page (0.9k) : une ligne par evenement de flotte avant
+	static $PlayerNames = array();
 
-	$PlayerName = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '". $FleetRow['fleet_owner']."';", 'users', true);
+	$Key = (string) $FleetRow['fleet_owner'];
+	if (!array_key_exists($Key, $PlayerNames)) {
+		$PlayerNames[$Key] = doquery ("SELECT `username` FROM {{table}} WHERE `id` = '". $FleetRow['fleet_owner']."';", 'users', true);
+	}
+	$PlayerName = $PlayerNames[$Key];
 	$Link  = $PlayerName['username']. " ";
 	$Link .= "<a href=\"messages.php?mode=write&id=".$FleetRow['fleet_owner']."\">";
 	$Link .= "<img src=\"".$dpath."/img/m.gif\" alt=\"". $lang['ov_message']."\" title=\"". $lang['ov_message']."\" border=\"0\"></a>";

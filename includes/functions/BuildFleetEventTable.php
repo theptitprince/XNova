@@ -61,9 +61,20 @@ function BuildFleetEventTable ( $FleetRow, $Status, $Owner, $Label, $Record ) {
 	$FleetContent   = CreateFleetPopupedFleetLink ( $FleetRow, $lang['ov_fleet'], $FleetPrefix . $FleetStyle[ $MissionType ] );
 	$FleetCapacity  = CreateFleetPopupedMissionLink ( $FleetRow, $lang['type_mission'][ $MissionType ], $FleetPrefix . $FleetStyle[ $MissionType ] );
 
-	$StartPlanet    = doquery("SELECT `name` FROM {{table}} WHERE `galaxy` = '".$FleetRow['fleet_start_galaxy']."' AND `system` = '".$FleetRow['fleet_start_system']."' AND `planet` = '".$FleetRow['fleet_start_planet']."' AND `planet_type` = '".$FleetRow['fleet_start_type']."';", 'planets', true);
+	// Nom de chaque planete lu une seule fois par page (0.9k) : meme requete, meme premiere ligne ; avant, deux
+	// lectures completes de planets a chaque evenement, les memes pour l'aller, le stationnement et le retour
+	static $PlanetNames = array();
+	$StartKey = $FleetRow['fleet_start_galaxy'] .':'. $FleetRow['fleet_start_system'] .':'. $FleetRow['fleet_start_planet'] .':'. $FleetRow['fleet_start_type'];
+	if (!array_key_exists($StartKey, $PlanetNames)) {
+		$PlanetNames[$StartKey] = doquery("SELECT `name` FROM {{table}} WHERE `galaxy` = '".$FleetRow['fleet_start_galaxy']."' AND `system` = '".$FleetRow['fleet_start_system']."' AND `planet` = '".$FleetRow['fleet_start_planet']."' AND `planet_type` = '".$FleetRow['fleet_start_type']."';", 'planets', true);
+	}
+	$StartPlanet    = $PlanetNames[$StartKey];
 	$StartType      = $FleetRow['fleet_start_type'];
-	$TargetPlanet   = doquery("SELECT `name` FROM {{table}} WHERE `galaxy` = '".$FleetRow['fleet_end_galaxy']."' AND `system` = '".$FleetRow['fleet_end_system']."' AND `planet` = '".$FleetRow['fleet_end_planet']."' AND `planet_type` = '".$FleetRow['fleet_end_type']."';", 'planets', true);
+	$TargetKey = $FleetRow['fleet_end_galaxy'] .':'. $FleetRow['fleet_end_system'] .':'. $FleetRow['fleet_end_planet'] .':'. $FleetRow['fleet_end_type'];
+	if (!array_key_exists($TargetKey, $PlanetNames)) {
+		$PlanetNames[$TargetKey] = doquery("SELECT `name` FROM {{table}} WHERE `galaxy` = '".$FleetRow['fleet_end_galaxy']."' AND `system` = '".$FleetRow['fleet_end_system']."' AND `planet` = '".$FleetRow['fleet_end_planet']."' AND `planet_type` = '".$FleetRow['fleet_end_type']."';", 'planets', true);
+	}
+	$TargetPlanet   = $PlanetNames[$TargetKey];
 	$TargetType     = $FleetRow['fleet_end_type'];
 	// XNova Renaissance : champ de debris, expedition, position vide ou lune detruite : pas de planete, nom vide
 	if (!$StartPlanet)  { $StartPlanet  = array('name' => ''); }

@@ -25,8 +25,7 @@ SanitizeNumericInput ( array('galaxy', 'system', 'planet', 'planettype', 'curren
 	includeLang('galaxy');
 
 	$CurrentPlanet = doquery("SELECT * FROM {{table}} WHERE `id` = '". $user['current_planet'] ."';", 'planets', true);
-	$lunarow       = doquery("SELECT * FROM {{table}} WHERE `id` = '". $user['current_luna'] ."';", 'lunas', true);
-	$galaxyrow     = doquery("SELECT * FROM {{table}} WHERE `id_planet` = '". $CurrentPlanet['id'] ."';", 'galaxy', true);
+	// (lune et ligne de galaxie de la planete courante n'etaient plus lues nulle part : lectures retirees en 0.9k)
 
 	$dpath         = (!$user["dpath"]) ? DEFAULT_SKINPATH : $user["dpath"];
 	$fleetmax      = $user['computer_tech'] + 1;
@@ -39,8 +38,9 @@ SanitizeNumericInput ( array('galaxy', 'system', 'planet', 'planettype', 'curren
 	$CurrentGalaxy = $CurrentPlanet['galaxy'];
 	$CanDestroy    = $CurrentPlanet[$resource[213]] + $CurrentPlanet[$resource[214]];
 
-	$maxfleet       = doquery("SELECT * FROM {{table}} WHERE `fleet_owner` = '". $user['id'] ."';", 'fleets');
-	$maxfleet_count = mysqli_num_rows($maxfleet);
+	// Nombre de flottes compte par MySQL (avant : toutes les lignes transferees pour les compter)
+	$maxfleet       = doquery("SELECT COUNT(*) FROM {{table}} WHERE `fleet_owner` = '". $user['id'] ."';", 'fleets', true);
+	$maxfleet_count = intval($maxfleet[0]);
 
 	CheckPlanetUsedFields($CurrentPlanet);
 	// (CheckPlanetUsedFields($lunarow) retire : $lunarow vient de la table des lunes, sans batiments ni cases)
