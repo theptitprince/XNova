@@ -91,8 +91,12 @@ function GetFleetPoints ( $CurrentPlanet ) {
 	return $RetValue;
 }
 
-// Lignes par requete groupee (UPDATE ... CASE, INSERT de plusieurs lignes)
+// Lignes par requete groupee (UPDATE ... CASE)
 define('STAT_LOT', 200);
+// Lignes par INSERT de plusieurs lignes : moins de 100, MyISAM ecrit alors les cles une par une, comme les INSERT d'une
+// ligne de l'original (a partir de 100 : index d'une table vide eteints puis refaits par tri, qui enregistre leur
+// cardinalite, ou cles d'une table remplie groupees puis triees)
+define('STAT_LOT_INSERT', 99);
 
 // Classement de chaque categorie pour un type de statistiques (1 : joueurs, 2 : alliances). Meme lecture triee que
 // l'original (memes ex aequo) ; avec $Grouped (lignes qui ne changent ni de place ni de taille, voir StatTableFormat),
@@ -171,7 +175,13 @@ function StatReadOld ( $StatType, &$OldCount ) {
 //                ne les donne pas) : une ligne supprimee puis inseree aussitot reprend la meme place. La reecrire sur
 //                place donne alors la meme table (memes lignes, meme ordre)
 function StatTableFormat () {
-	$Table = doquery("SELECT `ENGINE` AS `engine`, `ROW_FORMAT` AS `row_format`, (SELECT GROUP_CONCAT(`COLUMN_NAME`, IF(`IS_NULLABLE` = 'NO' AND `DATA_TYPE` LIKE '%int' AND IFNULL(`COLUMN_DEFAULT`, '0') IN ('0', '''0'''), '', '?') ORDER BY `ORDINAL_POSITION`) FROM information_schema.COLUMNS WHERE `TABLE_SCHEMA` = DATABASE() AND `TABLE_NAME` = '{{table}}') AS `cols` FROM information_schema.TABLES WHERE `TABLE_SCHEMA` = DATABASE() AND `TABLE_NAME` = '{{table}}';", 'statpoints', true);
+	$QryFormat  = "SELECT `ENGINE` AS `engine`, `ROW_FORMAT` AS `row_format`, ";
+	$QryFormat .= "(SELECT GROUP_CONCAT(`COLUMN_NAME`, ";
+	$QryFormat .= "IF(`IS_NULLABLE` = 'NO' AND `DATA_TYPE` LIKE '%int' AND IFNULL(`COLUMN_DEFAULT`, '0') IN ('0', '''0'''), '', '?') ";
+	$QryFormat .= "ORDER BY `ORDINAL_POSITION`) ";
+	$QryFormat .= "FROM information_schema.COLUMNS WHERE `TABLE_SCHEMA` = DATABASE() AND `TABLE_NAME` = '{{table}}') AS `cols` ";
+	$QryFormat .= "FROM information_schema.TABLES WHERE `TABLE_SCHEMA` = DATABASE() AND `TABLE_NAME` = '{{table}}';";
+	$Table = doquery($QryFormat, 'statpoints', true);
 	$Cols  = 'id_owner,id_ally,stat_type,stat_code,tech_rank,tech_old_rank,tech_points,tech_count,build_rank,build_old_rank,build_points,build_count,'
 	       . 'defs_rank,defs_old_rank,defs_points,defs_count,fleet_rank,fleet_old_rank,fleet_points,fleet_count,total_rank,total_old_rank,total_points,total_count,stat_date';
 	$Fixed = ($Table && strtolower($Table['engine']) == 'myisam' && strtolower($Table['row_format']) == 'fixed');
@@ -202,7 +212,7 @@ function StatWriteRows ( $StatType, $Rows, $OldCount, $InPlace ) {
 				doquery ("DELETE FROM {{table}} WHERE `stat_type` = '". $StatType ."' AND `id_owner` = '". $Row['id_owner'] ."';",'statpoints');
 			}
 			$Insert[] = $Row;
-			if (count($Insert) >= STAT_LOT) {
+			if (count($Insert) >= STAT_LOT_INSERT) {
 				StatInsertRows($Insert);
 				$Insert = array();
 			}
