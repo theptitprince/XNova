@@ -85,19 +85,20 @@ function FlyingFleetHandler (&$planet) {
 	// XNova Renaissance (0.9k, performances) : flottes de la position lues d'abord sans verrou, par les index des
 	// coordonnees de depart puis d'arrivee (deux recherches : la fusion d'index du OR coutait plus qu'un parcours
 	// complet apres chaque ecriture dans la table). Aucune n'a rien a faire : ni verrou des 9 tables ni traitement,
-	// qui n'auraient rien change. Sinon, traitement d'origine, avec la liste relue sous verrou.
-	$Now        = time();
-	$QryTime    = "( `fleet_start_time` < '". $Now ."' OR `fleet_end_time` < '". $Now ."' )";
+	// qui n'auraient rien change. Sinon, traitement d'origine, avec la liste relue sous verrou. Heure prise apres la
+	// lecture, qui a pu attendre le verrou d'une autre page (comme l'heure de la liste, prise apres le verrou).
 	$QryDue     = "SELECT `fleet_mission`, `fleet_mess`, `fleet_start_time`, `fleet_end_stay`, `fleet_end_time` FROM {{table}} WHERE ";
 	$QryDue    .= "`fleet_start_galaxy` = ". $planet['galaxy'] ." AND `fleet_start_system` = ". $planet['system'] ." AND ";
-	$QryDue    .= "`fleet_start_planet` = ". $planet['planet'] ." AND `fleet_start_type` = ". $planet['planet_type'] ." AND ". $QryTime ." UNION ALL ";
+	$QryDue    .= "`fleet_start_planet` = ". $planet['planet'] ." AND `fleet_start_type` = ". $planet['planet_type'] ." UNION ALL ";
 	$QryDue    .= "SELECT `fleet_mission`, `fleet_mess`, `fleet_start_time`, `fleet_end_stay`, `fleet_end_time` FROM {{table}} WHERE ";
 	$QryDue    .= "`fleet_end_galaxy` = ". $planet['galaxy'] ." AND `fleet_end_system` = ". $planet['system'] ." AND ";
-	$QryDue    .= "`fleet_end_planet` = ". $planet['planet'] ." AND `fleet_end_type` = ". $planet['planet_type'] ." AND ". $QryTime .";";
+	$QryDue    .= "`fleet_end_planet` = ". $planet['planet'] ." AND `fleet_end_type` = ". $planet['planet_type'] .";";
 	$DueQuery   = doquery($QryDue, 'fleets');
+	$Now        = time();
 	$Due        = false;
 	while (!$Due && ($DueRow = mysqli_fetch_assoc($DueQuery))) {
-		$Due = FleetRowIsDue($DueRow, $Now);
+		// Condition d'heure de la liste relue sous verrou, puis celle de la mission
+		$Due = ($DueRow['fleet_start_time'] < $Now || $DueRow['fleet_end_time'] < $Now) && FleetRowIsDue($DueRow, $Now);
 	}
 	if (!$Due) {
 		return;
