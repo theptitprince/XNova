@@ -477,23 +477,8 @@ switch ($mode) {
             } else {
                 $parse['building'] = $lang['free'];
             }
-            // Dernier inscrit : les deux plus recents suffisent (avant : tous les joueurs tries et transferes pour en
-            // lire un). Deux inscrits dans la meme seconde : la requete d'origine decide, pour garder le meme joueur
-            $LastUsers = array();
-            $query = doquery('SELECT username, register_time FROM {{table}} ORDER BY register_time DESC LIMIT 2', 'users');
-            while ($LastUser = mysqli_fetch_assoc($query)) {
-                $LastUsers[] = $LastUser;
-            }
-            if (count($LastUsers) == 2 && $LastUsers[0]['register_time'] == $LastUsers[1]['register_time']) {
-                $query = doquery('SELECT username FROM {{table}} ORDER BY register_time DESC', 'users', true);
-                $parse['last_user'] = $query['username'];
-            } else {
-                $parse['last_user'] = $LastUsers[0]['username'] ?? null;
-            }
-            // Joueurs en ligne : les deux compteurs de la page (plus bas : >= il y a 15 minutes) en une seule lecture
-            $OnlineTime  = time() - 900;
-            $OnlineCount = doquery("SELECT COALESCE(SUM(onlinetime>" . $OnlineTime . "), 0), COUNT(*) FROM {{table}} WHERE onlinetime>='" . $OnlineTime . "'", 'users', true);
-            $parse['online_users'] = $OnlineCount[0];
+            // (dernier inscrit et joueurs en ligne plus lus ici en 0.9k : overview_body.tpl ne les affiche pas, depuis
+            // la 0.8e ; tous les joueurs etaient tries et transferes pour rien. Membres en ligne : plus bas)
             // $count = doquery(","users",true);
             $parse['users_amount'] = $game_config['users_amount'];
             // Rajout d'une barre pourcentage
@@ -531,7 +516,8 @@ switch ($mode) {
             $parse['raidswin'] = intval($user['raidswin']);
             $parse['raidsloose'] = intval($user['raidsloose']); // NULL tant qu'aucun raid n'est perdu
             // Compteur de Membres en ligne
-            $parse['number_members_online'] = $OnlineCount[1];
+            $OnlineUsers = doquery("SELECT COUNT(*) FROM {{table}} WHERE onlinetime>='" . (time()-15 * 60) . "'", 'users', 'true');
+            $parse['number_members_online'] = $OnlineUsers[0];
 
             $page = parsetemplate(gettemplate('overview_body'), $parse);
 
