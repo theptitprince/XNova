@@ -79,11 +79,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 	if ($fleetmission == 8) {
 		$YourPlanet = false;
 		$UsedPlanet = false;
-		$select     = doquery("SELECT * FROM {{table}} WHERE galaxy = '". $galaxy ."' AND system = '". $system ."' AND planet = '". $planet ."'", "planets");
+		$select     = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '". $galaxy ."' AND `system` = '". $system ."' AND `planet` = '". $planet ."'", "planets");
 	} else {
 		$YourPlanet = false;
 		$UsedPlanet = false;
-		$select     = doquery("SELECT * FROM {{table}} WHERE galaxy = '". $galaxy ."' AND system = '". $system ."' AND planet = '". $planet ."' AND planet_type = '". $planettype ."'", "planets");
+		$select     = doquery("SELECT * FROM {{table}} WHERE `galaxy` = '". $galaxy ."' AND `system` = '". $system ."' AND `planet` = '". $planet ."' AND `planet_type` = '". $planettype ."'", "planets");
 	}
 
 	if ($CurrentPlanet['galaxy'] == $galaxy &&
@@ -244,10 +244,11 @@ include($xnova_root_path . 'common.' . $phpEx);
 		message("<font color=\"lime\"><b>".$lang['fl_noenoughtgoods']."</b></font>", $lang['type_mission'][3], "fleet." . $phpEx, 1);
 	}
 	if (($_POST['mission'] ?? null) != 15) {
-		if ($TargetPlanet['id_owner'] == '' AND ($_POST['mission'] ?? null) < 7) {
+		// (empty : une planete detruite a id_owner = '0', que == '' ne voyait pas)
+		if (empty($TargetPlanet['id_owner']) AND ($_POST['mission'] ?? null) < 7) {
 			message ("<font color=\"red\"><b>". $lang['fl_bad_planet01'] ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
 		}
-		if ($TargetPlanet['id_owner'] != '' AND ($_POST['mission'] ?? null) == 7) {
+		if (!empty($TargetPlanet['id_owner']) AND ($_POST['mission'] ?? null) == 7) {
 			message ("<font color=\"red\"><b>". $lang['fl_bad_planet02'] ."</b></font>", $lang['fl_error'], "fleet." . $phpEx, 2);
 		}
 		if ($HeDBRec['ally_id'] != $MyDBRec['ally_id'] AND ($_POST['mission'] ?? null) == 4) {

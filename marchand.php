@@ -35,9 +35,17 @@ function MarchandAmount ( $Value, &$CheatTry ) {
 
 // Ressources de la planete relues apres l'echange (la barre du haut les enregistre ensuite)
 function MarchandReloadPlanet ( &$CurrentPlanet ) {
-	$Fresh = doquery("SELECT `metal`, `crystal`, `deuterium`, `last_update` FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+	// Compteurs des flottes (*_fleets) relus avec les ressources : PlanetResourceUpdate ajoute leur difference aux
+	// ressources ; relus a part, une livraison traitee entre-temps aurait ete comptee deux fois
+	$Fields = array('metal', 'crystal', 'deuterium', 'last_update');
+	foreach (array('metal_fleets', 'crystal_fleets', 'deuterium_fleets') as $Field) {
+		if (isset($CurrentPlanet[$Field])) {
+			$Fields[] = $Field;
+		}
+	}
+	$Fresh = doquery("SELECT `". implode("`, `", $Fields) ."` FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
 	if ($Fresh) {
-		foreach (array('metal', 'crystal', 'deuterium', 'last_update') as $Field) {
+		foreach ($Fields as $Field) {
 			$CurrentPlanet[$Field] = $Fresh[$Field];
 		}
 	}

@@ -136,11 +136,18 @@ function SetNextQueueElementOnTop ( &$CurrentPlanet, $CurrentUser ) {
 // Relit dans la base les ressources et la file de construction de la planete (0.9k), apres un debit ou un
 // remboursement refuse parce qu'une autre requete est passee avant. Retourne faux si la planete n'existe plus.
 function BuildingQueueReload ( &$CurrentPlanet ) {
-	$Fresh = doquery("SELECT `metal`, `crystal`, `deuterium`, `b_building`, `b_building_id` FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
+	// Compteurs des flottes (*_fleets) relus avec les ressources (voir PlanetResourceUpdate)
+	$Fields = array('metal', 'crystal', 'deuterium', 'b_building', 'b_building_id');
+	foreach (array('metal_fleets', 'crystal_fleets', 'deuterium_fleets') as $Field) {
+		if (isset($CurrentPlanet[$Field])) {
+			$Fields[] = $Field;
+		}
+	}
+	$Fresh = doquery("SELECT `". implode("`, `", $Fields) ."` FROM {{table}} WHERE `id` = '". intval($CurrentPlanet['id']) ."';", 'planets', true);
 	if (!$Fresh) {
 		return false;
 	}
-	foreach (array('metal', 'crystal', 'deuterium', 'b_building', 'b_building_id') as $Field) {
+	foreach ($Fields as $Field) {
 		$CurrentPlanet[$Field] = $Fresh[$Field];
 	}
 	return true;

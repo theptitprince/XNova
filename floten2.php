@@ -67,6 +67,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	// Determinons les type de missions possibles par rapport a la planete cible
 	// D'apres la flotte choisie ($fleetarray, 0.9k), avec les memes regles que l'envoi (floten3.php)
+	$missiontype = array();
 	if (($_POST['planettype'] ?? null) == "2") {
 		if (($fleetarray[209] ?? 0) >= 1) {
 			$missiontype = array(8 => $lang['type_mission'][8]);

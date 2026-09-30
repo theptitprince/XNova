@@ -161,7 +161,7 @@ SanitizeNumericInput ( array('mission', 'galaxy', 'system', 'planet', 'planettyp
 		}
 	}
 
-	if ($TargetRow['id_owner'] == '' AND
+	if (empty($TargetRow['id_owner']) AND
 		($_POST['mission'] ?? null)      != 8 ) {
 		$ResultMessage = "601;".$lang['gs_c601']."|".$CurrentFlyingFleets." ".$UserSpyProbes." ".$UserRecycles." ".$UserMissiles;
 		die ( $ResultMessage );
