@@ -260,14 +260,18 @@ function PlanetResourceUpdate ( $CurrentUser, &$CurrentPlanet, $UpdateTime, $Sim
 // Formules de production de $ProdGrid (includes/vars.php) d'un element, compilees une seule fois par requete (0.9k) :
 // eval() recompilait le texte de chaque formule a chaque appel (24 par planete mise a jour, 44 par fiche de mine).
 // Le texte de vars.php reste la seule source. La formule garde les variables communes aux trois appels d'origine
-// (PlanetResourceUpdate, resources.php, infos.php) : niveau, pourcentage, temperature, joueur, planete, $game_config,
-// $resource et $ProdGrid. Resultat identique au bit pres.
+// (PlanetResourceUpdate, resources.php, infos.php) : $BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser,
+// $CurrentPlanet, $game_config, $resource et $ProdGrid. Regle des formules (rappelee dans vars.php) : elles ne lisent que
+// ces variables et n'en modifient aucune ; une autre variable de l'appelant n'est plus visible, et ce qu'une formule
+// affecterait ne passe plus a la suivante. Avec cette regle, resultat identique au bit pres.
 function ProdGridFormula ( $ProdID ) {
 	global $ProdGrid;
 	static $Compiled = array();
 
 	$Formula = array();
-	foreach ( $ProdGrid[$ProdID]['formule'] as $Res => $Code ) {
+	foreach ( array('metal', 'crystal', 'deuterium', 'energy') as $Res ) {
+		// Formule absente (vars.php abime) : meme avertissement qu'avant et production nulle, comme eval() d'un texte vide
+		$Code = (string) $ProdGrid[$ProdID]['formule'][$Res];
 		if (!isset($Compiled[$Code])) {
 			// (retour a la ligne avant la fin : une formule terminee par un commentaire // reste valide)
 			$Compiled[$Code] = eval('return function ($BuildLevel, $BuildLevelFactor, $BuildTemp, $CurrentUser, $CurrentPlanet) { global $ProdGrid, $resource, $game_config; '. $Code ."\n};");
