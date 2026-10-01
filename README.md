@@ -18,10 +18,13 @@
 ---
 
 > [!NOTE]
-> **Sécurisée, mais encore en développement.** Depuis la 0.9f, les failles connues du code de 2008 sont corrigées :
-> injections SQL, mots de passe, cookies, privilèges, injection de code dans les pages (XSS), formulaires piégés (CSRF),
-> pages accessibles sans connexion et triches par formulaire falsifié (flottes).
-> Un serveur public est envisageable, en gardant en tête que le jeu reste une version de développement avant la 1.0.
+> **Sécurisée et allégée, mais encore en développement avant la 1.0.** Les failles connues du code de 2008 sont
+> corrigées depuis la 0.9f, et la 0.9k a ajouté un audit de sécurité complet du code : injections SQL, triches par
+> formulaire falsifié ou par clics simultanés, accès aux données d'autres joueurs, jetons des formulaires, installeur
+> réservé à l'administrateur. Toutes les failles trouvées sont corrigées et couvertes par des tests automatiques ; les
+> pages restent rapides sur un gros univers (milliers de joueurs et de flottes en vol).
+> Un serveur public est envisageable : suivez la partie [Mise en production](#mise-en-production), et gardez en tête
+> que le jeu reste une version de développement. Tests faits sous MariaDB ; MySQL 8 est pris en charge mais pas testé.
 
 ## Sommaire
 - [Le jeu](#le-jeu)
