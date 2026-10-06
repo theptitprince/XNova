@@ -26,7 +26,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 	includeLang('rules');
 
 	$parse = $lang;
-	$parse['servername']   = $game_config['game_name'];
+	$parse['servername']   = htmlspecialchars($game_config['game_name'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 
 	$PageTPL  = gettemplate('rules_body');
 	$page     = parsetemplate( $PageTPL, $parse);

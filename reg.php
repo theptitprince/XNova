@@ -243,7 +243,7 @@ if ($_POST) {
 } else {
     // Afficher le formulaire d'enregistrement
     $parse = $lang;
-    $parse['servername'] = $game_config['game_name'];
+    $parse['servername'] = htmlspecialchars($game_config['game_name'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
     // Captcha (mod de theptitprince) : image tiree a chaque affichage
     $parse['captcha_row'] = '';
     if (CaptchaEnabled()) {

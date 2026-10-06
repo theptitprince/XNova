@@ -1,6 +1,5 @@
-// Définition du pseudo
-var nick="<?php print $nick; ?>";
-var nick=nick.replace(/\+/,"plus");
+// Pseudo : chat_add.php reprend celui du compte connecte et ignore cette valeur (fichier servi en statique)
+var nick="";
 
 // Scrolling automatique
 function descendreTchat(){

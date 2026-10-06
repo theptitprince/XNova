@@ -109,7 +109,7 @@ if (INSTALL != true) {
 	// Dans l'original, ce test etait dans une branche jamais atteinte : le jeu restait toujours ouvert.
 	if (!empty($game_config['game_disable']) && empty($InLogin) && is_array($user) && !empty($user['id']) &&
 	    $user['authlevel'] < 1 && basename($_SERVER['SCRIPT_NAME']) != 'logout.php') {
-		message ( stripslashes ( $game_config['close_reason'] ), $game_config['game_name'] );
+		message ( htmlspecialchars(stripslashes ( $game_config['close_reason'] ), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'), htmlspecialchars($game_config['game_name'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') );
 	}
 
 	// Visiteur non connecte : seules les pages publiques s'affichent, les autres renvoient vers la connexion.
