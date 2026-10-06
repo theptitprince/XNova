@@ -35,7 +35,7 @@ include($xnova_root_path . 'common.'.$phpEx);
 	$page .= "<head>";
 	$page .= "<meta http-equiv=\"Content-Type\" content=\"text/html;charset=". $langInfos['encoding']."\">";
 	$page .= "<link rel=\"shortcut icon\" href=\"favicon.ico\">";
-	$page .= "<title>". $game_config['game_name'] ."</title>";
+	$page .= "<title>". htmlspecialchars($game_config['game_name'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') ."</title>";
 	$page .= "</head>";
 
 	$page .= "<frameset framespacing=\"0\" border=\"0\" cols=\"190,*\" frameborder=\"0\">";

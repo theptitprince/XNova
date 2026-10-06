@@ -34,7 +34,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 
 	if ($action != 1 || empty($_POST['email'])) {
 		$parse               = $lang;
-		$parse['servername'] = $game_config['game_name'];
+		$parse['servername'] = htmlspecialchars($game_config['game_name'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 		$page = parsetemplate(gettemplate('lostpassword'), $parse);
 		display($page, $lang['reset_pass'], false);
 	}

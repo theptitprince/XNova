@@ -133,7 +133,7 @@ include($xnova_root_path . 'common.' . $phpEx);
 		$PlayersOnline         = doquery("SELECT COUNT(DISTINCT(id)) as `onlinenow` FROM {{table}} WHERE `onlinetime` > '" . (time()-900) ."';", 'users', true);
 		$parse['online_users'] = $PlayersOnline['onlinenow'];
 		$parse['users_amount'] = $Count['players'];
-		$parse['servername']   = $game_config['game_name'];
+		$parse['servername']   = htmlspecialchars($game_config['game_name'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 		$parse['forum_link']   = (!empty($game_config['forum_url'])) ? "<a href=\"". htmlspecialchars($game_config['forum_url'], ENT_QUOTES) ."\">Forum</a>" : '';
 		$parse['password_lost'] = $lang['password_lost'];
 

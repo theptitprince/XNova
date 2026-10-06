@@ -101,7 +101,7 @@ function ShowLeftMenu ( $Level , $Template = 'left_menu') {
 	} else {
 		$parse['chat_link']  = "";
 	}
-	$parse['servername']   = $game_config['game_name'];
+	$parse['servername']   = htmlspecialchars($game_config['game_name'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
 	$Menu                  = parsetemplate( $MenuTPL, $parse);
 
 	return $Menu;
