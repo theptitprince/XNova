@@ -5,11 +5,11 @@
 **Le jeu de stratégie spatiale XNova, repris là où l'équipe d'origine s'était arrêtée.**
 
 ![Version](https://img.shields.io/badge/version-0.9k%20Renaissance-2ea44f)
-![PHP](https://img.shields.io/badge/PHP-8.4-777BB4?logo=php&logoColor=white)
+![PHP](https://img.shields.io/badge/PHP-8.1%2B-777BB4?logo=php&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-10.6%2B-003545?logo=mariadb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8%2B-4479A1?logo=mysql&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES5-F7DF1E?logo=javascript&logoColor=black)
-![HTML5](https://img.shields.io/badge/HTML-templates-E34F26?logo=html5&logoColor=white)
+![Plateforme](https://img.shields.io/badge/plateforme-web-0078D6)
 ![Licence](https://img.shields.io/badge/licence-AGPL--3.0--or--later-blue)
 ![Statut](https://img.shields.io/badge/statut-en%20d%C3%A9veloppement-orange)
 
@@ -26,20 +26,29 @@
 > Un serveur public est envisageable : suivez la partie [Mise en production](#mise-en-production), et gardez en tête
 > que le jeu reste une version de développement. Tests faits sous MariaDB ; MySQL 8 est pris en charge mais pas testé.
 
+XNova Renaissance reprend **XNova 0.8e**, la dernière version de l'équipe française d'origine, pour la faire tourner
+sur un serveur d'aujourd'hui (PHP 8, MariaDB ou MySQL) sans la réécrire : la structure du code et le gameplay
+restent ceux d'origine, le code est modernisé et sécurisé pas à pas. Il s'adresse à ceux qui veulent héberger leur
+propre univers XNova, en local ou sur un serveur en ligne ; les joueurs, eux, n'ont besoin que d'un navigateur web.
+
+Version actuelle : 0.9k Renaissance — l'historique des livraisons est dans les
+[notes de version du dépôt](https://github.com/theptitprince/XNova/releases). Dans le jeu, le numéro de version
+affiché dans le menu de gauche ouvre le journal des modifications (`changelog.php`).
+
 ## Sommaire
-- [Le jeu](#le-jeu)
-- [Histoire du projet](#histoire-du-projet)
-- [Pourquoi « Renaissance »](#pourquoi--renaissance-)
-- [Feuille de route](#feuille-de-route)
-- [Installation](#installation)
-- [Organisation du code](#organisation-du-code)
-- [Crédits](#crédits)
-- [Licence](#licence)
-- [Sources](#sources)
+- [1. Le jeu](#1-le-jeu)
+- [2. Histoire du projet](#2-histoire-du-projet)
+- [3. Pourquoi « Renaissance »](#3-pourquoi--renaissance-)
+- [4. Feuille de route](#4-feuille-de-route)
+- [5. Installation](#5-installation)
+- [6. Organisation du code](#6-organisation-du-code)
+- [7. Crédits](#7-crédits)
+- [8. Licence](#8-licence)
+- [9. Sources](#9-sources)
 
 ---
 
-## Le jeu
+## 1. Le jeu
 
 XNova est un jeu de stratégie spatiale massivement multijoueur qui se joue dans un simple navigateur web.
 Chaque joueur reçoit une planète à l'inscription. Il y développe une base (mines, centrales, usines, laboratoire),
@@ -48,7 +57,9 @@ s'allie avec d'autres joueurs… ou les attaque pour piller leurs ressources.
 
 Son gameplay s'inspire ouvertement d'OGame (Gameforge), mais XNova est écrit avec **son propre code**, publié en logiciel libre.
 
-## Histoire du projet
+---
+
+## 2. Histoire du projet
 
 ### UGamela, le point de départ (2006)
 Le **26 juin 2006**, un étudiant argentin connu sous le pseudo **Perberos** lance **UGamela**, son projet de fin d'études :
@@ -99,7 +110,9 @@ communautaires, au lieu de les écraser.
 Le reste des contributions de cette époque a disparu avec le forum. XNova Renaissance est aussi une façon de rendre
 à ce projet ce qui a été perdu.
 
-## Pourquoi « Renaissance »
+---
+
+## 3. Pourquoi « Renaissance »
 
 Les dérivés d'XNova ont presque tous suivi l'un de ces deux chemins : l'empilement de modifications jusqu'à
 l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissance fait le choix inverse :**
@@ -116,7 +129,9 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 
 « Renaissance » n'est pas un nouveau jeu : c'est le **nom de la version** qui suit la 0.8e. Le jeu, lui, s'appelle toujours XNova.
 
-## Feuille de route
+---
+
+## 4. Feuille de route
 
 | Version | Contenu | État |
 |---|---|---|
@@ -130,7 +145,11 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 | **0.9k** | Audit de sécurité complet (injections, triches, requêtes simultanées, accès, installeur réservé à l'administrateur) ; performances : index de la base, flottes traitées seulement quand il le faut, requêtes en double supprimées, statistiques en quelques secondes, résultats du jeu prouvés identiques ; chat désactivable, informations du serveur et statistiques automatiques dans l'administration | ✅ Terminée |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 
-## Installation
+---
+
+<a id="installation"></a>
+
+## 5. Installation
 
 ### Prérequis
 - **PHP 8.4** (8.1 minimum), avec les extensions `mysqli`, `gd` et `mbstring` ;
@@ -154,8 +173,9 @@ php -S 127.0.0.1:8080
 ```
 
 ### Statistiques automatiques
-Le classement des joueurs et des alliances se recalcule depuis l'administration (« Statistiques »), ou
-automatiquement par une tâche planifiée qui lance `php tools/stats.php` depuis la racine du jeu :
+Le classement des joueurs et des alliances se recalcule depuis l'administration (page « Statistiques », lien
+« Actualiser points » du menu), ou automatiquement par une tâche planifiée qui lance `php tools/stats.php` depuis la
+racine du jeu :
 - Linux (cron, toutes les heures) : `0 * * * * cd /chemin/du/jeu && php tools/stats.php >> /var/log/xnova-stats.log`
   (journal hors de la racine du site) ;
 - Windows (Planificateur de tâches) : programme `php.exe`, argument `tools\stats.php`, dossier de démarrage
@@ -167,7 +187,7 @@ des administrateurs, désactivé par défaut). Un seul calcul tourne à la fois.
 se termine : sur un gros univers, préférez la tâche planifiée.
 
 ### Mise à jour et transfert
-Les modes « Mise à jour » et « Transfère » de l'installeur prennent en charge :
+Les modes « Mise à jour » et « Transfert » de l'installeur prennent en charge :
 - **la XNova 0.8e d'origine** (même structure de base que la 0.9d) : les mots de passe md5 sont convertis à la première
   connexion de chaque joueur, et les textes enregistrés à l'époque (noms, messages, textes d'alliance…) sont nettoyés ;
 - **toutes les versions de XNova Renaissance** (0.9d et suivantes).
@@ -205,8 +225,8 @@ OPcache n'accélère que la compilation : le nombre de requêtes SQL et le trait
 Son état (mémoire utilisée, taux de réussite) est affiché dans l'administration, page « Informations du serveur ».
 
 ### Mise en production
-- **Ne publiez que le jeu** : ni `.git/`, ni `TRAVAUX.md`, ni sauvegardes (`*.sql`, `*.bak`, `config.php~`…) dans
-  la racine du site. Un site installé par `git clone` doit interdire l'accès à `.git/` (Apache :
+- **Ne publiez que le jeu** : ni `.git/`, ni vos notes de travail, ni sauvegardes (`*.sql`, `*.bak`, `config.php~`…)
+  dans la racine du site. Un site installé par `git clone` doit interdire l'accès à `.git/` (Apache :
   `RedirectMatch 404 /\.git`, Nginx : `location ~ /\.git { deny all; }`).
 - **`config.php`** (connexion à la base et mot secret) : modifiable par le serveur web seulement pendant
   l'installation, puis en lecture seule (par exemple `chmod 440`, lisible par le groupe du serveur web). Rendez-le
@@ -215,15 +235,17 @@ Son état (mémoire utilisée, taux de réussite) est affiché dans l'administra
 - **Dossier `install/`** : supprimez-le, ou limitez son accès à votre adresse IP, une fois l'installation terminée ;
   remettez-le seulement le temps d'une mise à jour. La page « Informations du serveur » de l'administration signale
   un `config.php` modifiable et un dossier `install/` encore présent.
-- **Adresse du jeu** (administration, « Paramètres du jeu ») : les liens des mails (mot de passe oublié, bienvenue)
-  sont construits avec elle, jamais avec l'adresse envoyée par le visiteur. Elle est remplie à l'installation et à la
-  mise à jour ; changez-la après un changement de domaine ou le passage en HTTPS.
+- **Adresse du jeu** (administration, page « Configuration », partie « Paramètre du jeu ») : les liens des mails
+  (mot de passe oublié, bienvenue) sont construits avec elle, jamais avec l'adresse envoyée par le visiteur. Elle est
+  remplie à l'installation et à la mise à jour ; changez-la après un changement de domaine ou le passage en HTTPS.
 - **Base de données** : un utilisateur MySQL limité à la base du jeu, sans le privilège `FILE`.
 - **PHP** : `display_errors = Off` (les erreurs vont dans le journal du serveur) et `expose_php = Off` ; HTTPS
   conseillé (le cookie de connexion est alors réservé aux pages chiffrées). Le dossier `tools/` ne sert qu'en ligne de
   commande (il refuse les visites).
 
-## Organisation du code
+---
+
+## 6. Organisation du code
 
 | Dossier | Contenu |
 |---|---|
@@ -235,11 +257,14 @@ Son état (mémoire utilisée, taux de réussite) est affiché dans l'administra
 | `templates/` | gabarits HTML (`.tpl`) |
 | `skins/`, `images/`, `css/`, `scripts/` | graphismes, styles et JavaScript |
 | `install/` | installeur |
+| `tools/` | outils en ligne de commande (`stats.php`, `check_lang.php`) |
 
 Le tag `v0.8e` marque le code d'origine de l'équipe XNova, tel qu'il a été récupéré ; chaque version de
 Renaissance a ensuite son propre tag (`v0.9d`, `v0.9e`…).
 
-## Crédits
+---
+
+## 7. Crédits
 
 **XNova — équipe d'origine (2007-2008)**
 - Raito : fondateur, programmeur
@@ -250,23 +275,30 @@ Renaissance a ensuite son propre tag (`v0.9d`, `v0.9e`…).
 
 **Bases et code tiers**
 - UGamela, par Perberos : base d'XNova
-- Moteur de combat (`includes/ataki.php`) par jacekowski
+- Moteur de combat d'origine (`includes/ataki.php`, utilisé jusqu'à la 0.9h) par jacekowski
 - Code issu de la communauté UGamela allemande (MoF) et de prethOgame (Aleksandar Spasojevic / KGsystem)
 - Forum Britania, pour avoir accueilli XNova à ses débuts
 
 **XNova Renaissance** (depuis la 0.9d)
 - theptitprince : reprise, modernisation et maintenance (depuis 2026)
 
-## Licence
+---
 
-XNova Renaissance est distribué sous licence **GNU Affero General Public License v3.0 ou ultérieure**
-(AGPL-3.0-or-later). Le texte complet est dans le fichier [`LICENSE`](LICENSE) et les conditions d'attribution dans [`NOTICE`](NOTICE).
+## 8. Licence
+
+XNova Renaissance est un **logiciel libre**, distribué sous licence **GNU Affero General Public License v3.0 ou
+ultérieure** (AGPL-3.0-or-later). Le texte complet est dans le fichier [`LICENSE`](LICENSE) et sur
+<https://www.gnu.org/licenses/agpl-3.0.html> ; les conditions d'attribution sont dans [`NOTICE`](NOTICE).
+
+Copyright © 2026 ETDEL pour XNova Renaissance. Travail original : XNova Team (Raito, Chlorel, e-Zobar, Flousedid et
+contributeurs), 2007-2008, d'après UGamela (Perberos).
 
 En résumé :
 - vous pouvez utiliser, étudier, modifier et redistribuer le jeu librement ;
 - si vous faites tourner une version modifiée sur un serveur accessible à d'autres, vous devez **publier votre code source** ;
 - conformément à la section 7(b) de la licence, vous devez **conserver les mentions d'auteur** : les en-têtes des fichiers
-  et la page de crédits du jeu, qui citent l'équipe XNova d'origine et theptitprince (XNova Renaissance).
+  et la page de crédits du jeu, qui citent l'équipe XNova d'origine et theptitprince (XNova Renaissance) ;
+- le jeu est fourni **sans aucune garantie**.
 
 Jusqu'à la 0.9h, le moteur de combat `includes/ataki.php` (jacekowski) était sous licence **Creative Commons
 BY-NC-SA 2.5**, qui interdit tout usage commercial. Depuis la 0.9i, il est remplacé par un moteur écrit pour
@@ -277,7 +309,9 @@ XNova 0.8e était distribué sous GNU GPL sans numéro de version précis. La se
 n'importe quelle version publiée par la Free Software Foundation. Le texte de la GPL v2 fourni à l'origine est conservé
 dans [`LICENCE.txt`](LICENCE.txt).
 
-## Sources
+---
+
+## 9. Sources
 
 - [Ugamela — perberos.me](https://perberos.me/ugamela/about.php) · [Ugamela — blog d'Emilio Márquez (2007)](https://emiliomarquez.com/2007/07/14/ugamela/)
 - [XNova News (de+fr), octobre 2008 — UGamela Blog](http://ugamela-blog.pheelgood.net/2008/10/01/xnova-news-defr-tratsch/)
@@ -293,3 +327,7 @@ dans [`LICENCE.txt`](LICENCE.txt).
 - [Code source XNova 0.8 et Legacies 2009.x — GitHub](https://github.com/xnova-legacies)
 - [CVE-2008-6022](https://cyberstrike.io/cve/CVE-2008-6022/) : faille d'inclusion de fichier de la 0.8 SP1, **absente de cette version**
   (le code vulnérable n'existe plus dans la 0.8e et PHP 8 ne connaît plus `register_globals`)
+
+---
+
+*XNova Renaissance — ETDEL 2026 — AGPL-3.0-or-later*
