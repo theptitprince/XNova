@@ -96,7 +96,7 @@ parent.frames['Hauptframe'].location.replace("overview.php");
 </tr><tr>
 	<td background="{dpath}img/bg1.gif"><center>{infog}</center></td>
 </tr><tr>
-	<td><div><center><a href="../credit.php" accesskey="T" target="{mf}">XNova Team</a><br>&copy; Copyright 2008</center></div></td>
+	<td><div><center><a href="../credit.php" accesskey="T" target="{mf}">XNova Team</a><br>&copy; Copyright 2008<br><a href="../credit.php" target="{mf}">XNova Renaissance<br>par ETDEL</a></center></div></td>
 </tr>
 </table>
 </div>

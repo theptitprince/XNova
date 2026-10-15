@@ -26,4 +26,11 @@ $lang['cred_done'] = 'Copyright modificati correttamente!';
 // XNova Renaissance 0.9g : credits
 $lang['cred_renaissance'] = 'Ripresa del progetto (seguito di XNova 0.8e)';
 
+// XNova Renaissance 0.9l : licence (la mention XNova Renaissance, par ETDEL reste en francais, dans le gabarit)
+$lang['cred_licence'] = 'Licenza';
+$lang['cred_licence_txt'] = 'Copyright © 2026 ETDEL (XNova Renaissance); © 2007-2008 XNova Team, basato su UGamela (Perberos).<br>Questo gioco è software libero, distribuito con licenza GNU Affero General Public License, versione 3 o qualsiasi versione successiva, con condizioni aggiuntive (sezione 7). È fornito SENZA ALCUNA GARANZIA.<br>Una versione modificata deve dichiararlo e non presentarsi come l\'originale.';
+$lang['cred_licence_gnu'] = 'Testo della licenza';
+$lang['cred_licence_notice'] = 'Condizioni aggiuntive (sezione 7)';
+$lang['cred_licence_source'] = 'Codice sorgente';
+
 ?>

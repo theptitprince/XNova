@@ -1,3 +1,4 @@
+// XNova Renaissance, par ETDEL — https://github.com/theptitprince/XNova — licence GNU AGPL v3 ou ultérieure, avec conditions additionnelles (article 7) : voir NOTICE
 // XNova Renaissance : verification en direct du pseudo et de l'adresse e-mail pendant l'inscription.
 // Le script d'origine (repris d'OGame) visait un autre formulaire et appelait check_registration.php, jamais ecrit.
 // Les messages s'affichent sous chaque champ ; reg.php refait toutes les verifications a l'envoi.

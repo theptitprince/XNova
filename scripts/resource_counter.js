@@ -1,3 +1,4 @@
+// XNova Renaissance, par ETDEL -- https://github.com/theptitprince/XNova -- licence GNU AGPL v3 ou ulterieure, avec conditions additionnelles (article 7) : voir NOTICE
 // XNova Renaissance : compteur de ressources en direct dans la barre du haut (meme calcul que PlanetResourceUpdate).
 // Pour chaque ressource : [quantite, production par seconde, plafond de production, capacite du hangar].
 // Au-dela du plafond (hangar + debordement autorise), plus de production ; au-dela du hangar, chiffre en rouge.

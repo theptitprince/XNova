@@ -1,25 +1,114 @@
 XNova Renaissance
-Copyright (C) 2026 theptitprince — reprise, modernisation et maintenance
+Copyright (C) 2026 ETDEL — https://github.com/theptitprince/XNova
+theptitprince, le nom qui figure dans les en-têtes des fichiers source et dans le journal des
+modifications du jeu, est le compte GitHub d'ETDEL.
 Travail original : XNova Team (Raito, Chlorel, e-Zobar, Flousedid et contributeurs), 2007-2008,
 d'après UGamela (Perberos).
 
-Ce programme est distribué sous licence GNU Affero General Public License, version 3 ou
-(à votre choix) toute version ultérieure. Voir le fichier LICENSE.
+Ce programme est un logiciel libre : vous pouvez le redistribuer et le modifier selon les
+termes de la GNU Affero General Public License publiée par la Free Software Foundation,
+version 3 de la licence ou (à votre choix) toute version ultérieure (AGPL-3.0-or-later).
+Il est fourni SANS AUCUNE GARANTIE. Le texte de la licence est dans le fichier LICENSE.
 
-Conditions additionnelles (section 7(b) de l'AGPL-3.0) : attribution
----------------------------------------------------------------------
-Toute copie, modification ou version dérivée de ce programme doit conserver, de façon intacte :
-  1. les mentions d'auteur présentes dans l'en-tête de chaque fichier source
-     (« XNova Renaissance / Reprise et modernisation : theptitprince » et la mention
-     « Travail original » qui cite les auteurs d'origine) ;
-  2. dans la page de crédits du jeu (credit.php), visible par les joueurs, la mention de l'équipe
-     XNova d'origine et la mention « XNova Renaissance — theptitprince ».
-Les versions modifiées peuvent ajouter leurs propres crédits, mais pas retirer ceux-ci.
+Conditions additionnelles (article 7 de l'AGPL v3)
+--------------------------------------------------
+Ces conditions s'appliquent au travail d'ETDEL contenu dans ce dépôt, à l'exception des
+éléments tiers listés plus bas.
+
+1. Attribution (article 7 b). Toute copie et toute version modifiée, en tout ou en partie,
+   doit conserver, intacte et visible, la mention :
+
+       XNova Renaissance, par ETDEL — https://github.com/theptitprince/XNova
+
+   a) dans les mentions légales qu'elle affiche à l'utilisateur (fenêtre « À propos » ou
+      écran équivalent ; dans XNova Renaissance : la page des crédits du jeu (credit.php),
+      ouverte depuis la page de connexion et le menu de gauche) ;
+   b) dans sa documentation (README ou équivalent).
+   Elle doit aussi conserver les mentions d'auteur placées en tête des fichiers source.
+   Une version modifiée peut faire précéder la mention de « D'après » et ajouter ses propres
+   crédits, mais ne peut ni la retirer ni la masquer.
+
+2. Origine (article 7 c). Une version modifiée doit indiquer clairement qu'elle est modifiée.
+   Elle ne doit se présenter ni comme la version originale, ni comme approuvée par ETDEL.
+
+Éléments tiers
+--------------
+Le travail d'ETDEL est tout ce que XNova Renaissance a ajouté ou modifié depuis le tag v0.8e,
+qui marque le code d'origine de l'équipe XNova tel qu'il a été récupéré. Les conditions
+additionnelles ci-dessus ne s'appliquent pas :
+- au code de l'équipe XNova (XNova Team), d'UGamela (Perberos) et des autres auteurs
+  d'origine cités dans les en-têtes des fichiers (MoF, prethOgame / KGsystem, mapomme…) ;
+- aux scripts tiers overLIB (scripts/overlib.js, Erik Bosrup, licence propre à overLIB),
+  wz_tooltip (scripts/wz_tooltip.js, Walter Zorn, LGPL 2.1 ou ultérieure) et SACK
+  (scripts/tw-sack.js, Gregory Wild-Smith, licence X11 modifiée) ;
+- aux graphismes hérités de XNova 0.8e (skins/, images/, favicon.ico), y compris les images
+  recolorées à partir de ceux-ci.
+Ces éléments gardent leurs propres licences et leurs propres mentions. La licence elle-même
+exige déjà de conserver ces mentions intactes (articles 4 et 5).
 
 Ancienne exception (jusqu'à la 0.9h) : moteur de combat sous une autre licence
--------------------------------------------------------------------------------
+------------------------------------------------------------------------------
 includes/ataki.php (moteur de combat), par jacekowski, était sous licence Creative Commons
 Attribution - Pas d'Utilisation Commerciale - Partage dans les Mêmes Conditions 2.5
 (CC BY-NC-SA 2.5) — http://creativecommons.org/licenses/by-nc-sa/2.5/
 Depuis la 0.9i, il est remplacé par un moteur écrit pour XNova Renaissance
 (includes/functions/CombatEngine.php), sous la même licence que le reste du jeu.
+
+English translation (the French text above prevails)
+====================================================
+
+XNova Renaissance
+Copyright (C) 2026 ETDEL — https://github.com/theptitprince/XNova
+theptitprince, the name that appears in the source file headers and in the game's change log,
+is ETDEL's GitHub account.
+Original work: XNova Team (Raito, Chlorel, e-Zobar, Flousedid and contributors), 2007-2008,
+based on UGamela (Perberos).
+
+This program is free software: you can redistribute it and/or modify it under the terms of
+the GNU Affero General Public License as published by the Free Software Foundation, either
+version 3 of the License, or (at your option) any later version (AGPL-3.0-or-later). It comes
+WITHOUT ANY WARRANTY. The license text is in the LICENSE file.
+
+Additional terms (section 7 of the AGPL v3)
+-------------------------------------------
+These terms apply to ETDEL's work contained in this repository, except the third-party
+material listed below.
+
+1. Attribution (section 7 b). Every copy and every modified version, in whole or in part,
+   must keep, intact and visible, the notice:
+
+       XNova Renaissance, par ETDEL — https://github.com/theptitprince/XNova
+
+   a) in the legal notices it displays to the user (an "About" window or equivalent screen;
+      in XNova Renaissance: the game's credits page (credit.php), opened from the login page
+      and the left-hand menu);
+   b) in its documentation (README or equivalent).
+   It must also keep the author notices at the top of the source files.
+   A modified version may prefix the notice with "D'après" (or "Based on") and add its own
+   credits, but may neither remove nor hide it.
+
+2. Origin (section 7 c). A modified version must state clearly that it has been modified.
+   It must not present itself as the original version, nor as endorsed by ETDEL.
+
+Third-party material
+--------------------
+ETDEL's work is everything that XNova Renaissance has added or changed since the v0.8e tag,
+which marks the XNova team's original code as it was recovered. The additional terms above
+do not apply:
+- to the code of the XNova team (XNova Team), of UGamela (Perberos) and of the other original
+  authors named in the file headers (MoF, prethOgame / KGsystem, mapomme…);
+- to the third-party scripts overLIB (scripts/overlib.js, Erik Bosrup, overLIB's own license),
+  wz_tooltip (scripts/wz_tooltip.js, Walter Zorn, LGPL 2.1 or later) and SACK
+  (scripts/tw-sack.js, Gregory Wild-Smith, modified X11 license);
+- to the graphics inherited from XNova 0.8e (skins/, images/, favicon.ico), including the
+  images recolored from them.
+This material keeps its own licenses and its own notices. The license itself already requires
+keeping these notices intact (sections 4 and 5).
+
+Former exception (up to 0.9h): combat engine under another license
+------------------------------------------------------------------
+includes/ataki.php (combat engine), by jacekowski, was under the Creative Commons
+Attribution-NonCommercial-ShareAlike 2.5 license
+(CC BY-NC-SA 2.5) — http://creativecommons.org/licenses/by-nc-sa/2.5/
+Since 0.9i, it has been replaced by an engine written for XNova Renaissance
+(includes/functions/CombatEngine.php), under the same license as the rest of the game.

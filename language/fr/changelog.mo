@@ -4,6 +4,13 @@ $lang['description_label'] = 'Description';
 $lang['changelog']   = array(
 
 
+'0.9l Renaissance' => 'Licence et cr&eacute;dits (theptitprince)
+- NEW : Cr&eacute;dits : mention &laquo; XNova Renaissance, par ETDEL &raquo;, licence AGPL sans aucune garantie, liens vers la licence et le code source
+- NEW : Menu de gauche : lien &laquo; XNova Renaissance par ETDEL &raquo; vers les cr&eacute;dits
+- NEW : README en anglais
+- MOD : Conditions additionnelles de la licence (NOTICE), en fran&ccedil;ais et en anglais
+- DIV : En-t&ecirc;te de licence dans les scripts JavaScript de Renaissance',
+
 '0.9k Renaissance' => 'Performances et s&eacute;curit&eacute; (theptitprince)
 - NEW : Administration : chat d&eacute;sactivable, informations du serveur, statistiques automatiques
 - MOD : Pages bien plus rapides (index de la base, flottes trait&eacute;es seulement si besoin, statistiques)

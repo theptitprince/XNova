@@ -22,7 +22,7 @@ if (!defined('INSIDE')) {
 ini_set('display_errors', '0');
 ini_set('log_errors', '1');
 
-define('VERSION'     ,'0.9k');        // Version d'XNova utilisée...
+define('VERSION'     ,'0.9l');        // Version d'XNova utilisée...
 define('VERSION_NAME','Renaissance'); // Nom de la version (0.9 et suivantes)
 
 $phpEx = "php";

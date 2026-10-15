@@ -1,10 +1,10 @@
 <div align="center">
 
-# XNova — 0.9k Renaissance
+# XNova — 0.9l Renaissance
 
 **Le jeu de stratégie spatiale XNova, repris là où l'équipe d'origine s'était arrêtée.**
 
-![Version](https://img.shields.io/badge/version-0.9k%20Renaissance-2ea44f)
+![Version](https://img.shields.io/badge/version-0.9l%20Renaissance-2ea44f)
 ![PHP](https://img.shields.io/badge/PHP-8.1%2B-777BB4?logo=php&logoColor=white)
 ![MariaDB](https://img.shields.io/badge/MariaDB-10.6%2B-003545?logo=mariadb&logoColor=white)
 ![MySQL](https://img.shields.io/badge/MySQL-8%2B-4479A1?logo=mysql&logoColor=white)
@@ -33,7 +33,7 @@ sur un serveur d'aujourd'hui (PHP 8, MariaDB ou MySQL) sans la réécrire : la s
 restent ceux d'origine, le code est modernisé et sécurisé pas à pas. Il s'adresse à ceux qui veulent héberger leur
 propre univers XNova, en local ou sur un serveur en ligne ; les joueurs, eux, n'ont besoin que d'un navigateur web.
 
-Version actuelle : 0.9k Renaissance — l'historique des livraisons est dans les
+Version actuelle : 0.9l Renaissance — l'historique des livraisons est dans les
 [notes de version du dépôt](https://github.com/theptitprince/XNova/releases). Dans le jeu, le numéro de version
 affiché dans le menu de gauche ouvre le journal des modifications (`changelog.php`).
 
@@ -145,6 +145,7 @@ l'illisible, ou la réécriture complète… jamais achevée. **XNova Renaissanc
 | **0.9i** | Attaque groupée : prévue dans la 0.8e mais jamais programmée (groupe, invitations, flottes synchronisées) ; défense groupée par les flottes alliées en stationnement ; nouveau moteur de combat à plusieurs participants, mêmes résultats que l'original (prouvé sur 40 000 combats), tout le jeu sous AGPL ; Protection des vaisseaux enfin prise en compte ; partie complète retestée dans le navigateur | ✅ Terminée |
 | **0.9j** | Derniers officiers (Bunker, Raideur, Empereur) enfin utiles et leurs unités : Protecteur planétaire, SuperNova, Destructeur planétaire, avec la destruction de colonies ; dépôt de ravitaillement terminé comme dans OGame ; expéditions complètes (pirates, aliens, retours retardés ou anticipés) ; valeurs d'OGame (Grand bouclier, petit transporteur, satellite solaire) ; technologies Bouclier et Protection remises à leur place au combat | ✅ Terminée |
 | **0.9k** | Audit de sécurité complet (injections, triches, requêtes simultanées, accès, installeur réservé à l'administrateur) ; performances : index de la base, flottes traitées seulement quand il le faut, requêtes en double supprimées, statistiques en quelques secondes, résultats du jeu prouvés identiques ; chat désactivable, informations du serveur et statistiques automatiques dans l'administration | ✅ Terminée |
+| **0.9l** | Licence et crédits : conditions additionnelles de l'AGPL (article 7) dans `NOTICE`, en français et en anglais ; page des crédits avec la mention « XNova Renaissance, par ETDEL », la licence et l'absence de garantie ; lien « XNova Renaissance par ETDEL » vers les crédits dans le menu de gauche ; README en anglais | ✅ Terminée |
 | **1.0** | Tout propre, sécurisé et testé en jouant | 🎯 |
 
 ---
@@ -249,7 +250,7 @@ Son état (mémoire utilisée, taux de réussite) est affiché dans l'administra
 
 ## 6. Organisation du code
 
-| Dossier | Contenu |
+| Dossier ou fichier | Contenu |
 |---|---|
 | racine | pages du jeu côté joueur (`overview.php`, `buildings.php`, `fleet.php`…) |
 | `admin/` | panneau d'administration |
@@ -260,6 +261,9 @@ Son état (mémoire utilisée, taux de réussite) est affiché dans l'administra
 | `skins/`, `images/`, `css/`, `scripts/` | graphismes, styles et JavaScript |
 | `install/` | installeur |
 | `tools/` | outils en ligne de commande (`stats.php`, `check_lang.php`) |
+| `LICENSE` | le texte de la licence (GNU AGPL v3) |
+| `NOTICE` | les conditions additionnelles de la licence (article 7) : la mention à conserver |
+| `LICENCE.txt` | la GPL v2 fournie avec la 0.8e d'origine |
 
 Le tag `v0.8e` marque le code d'origine de l'équipe XNova, tel qu'il a été récupéré ; chaque version de
 Renaissance a ensuite son propre tag (`v0.9d`, `v0.9e`…).
@@ -282,7 +286,7 @@ Renaissance a ensuite son propre tag (`v0.9d`, `v0.9e`…).
 - Forum Britania, pour avoir accueilli XNova à ses débuts
 
 **XNova Renaissance** (depuis la 0.9d)
-- theptitprince : reprise, modernisation et maintenance (depuis 2026)
+- ETDEL (theptitprince) : reprise, modernisation et maintenance (depuis 2026)
 
 ---
 
@@ -290,7 +294,7 @@ Renaissance a ensuite son propre tag (`v0.9d`, `v0.9e`…).
 
 XNova Renaissance est un **logiciel libre**, distribué sous licence **GNU Affero General Public License v3.0 ou
 ultérieure** (AGPL-3.0-or-later). Le texte complet est dans le fichier [`LICENSE`](LICENSE) et sur
-<https://www.gnu.org/licenses/agpl-3.0.html> ; les conditions d'attribution sont dans [`NOTICE`](NOTICE).
+<https://www.gnu.org/licenses/agpl-3.0.html> ; les conditions additionnelles (article 7) sont dans [`NOTICE`](NOTICE).
 
 Copyright © 2026 ETDEL pour XNova Renaissance. Travail original : XNova Team (Raito, Chlorel, e-Zobar, Flousedid et
 contributeurs), 2007-2008, d'après UGamela (Perberos).
@@ -298,9 +302,38 @@ contributeurs), 2007-2008, d'après UGamela (Perberos).
 En résumé :
 - vous pouvez utiliser, étudier, modifier et redistribuer le jeu librement ;
 - si vous faites tourner une version modifiée sur un serveur accessible à d'autres, vous devez **publier votre code source** ;
-- conformément à la section 7(b) de la licence, vous devez **conserver les mentions d'auteur** : les en-têtes des fichiers
-  et la page de crédits du jeu, qui citent l'équipe XNova d'origine et theptitprince (XNova Renaissance) ;
+- vous devez **conserver les mentions d'auteur** : celles de l'équipe XNova d'origine et des autres auteurs (en-têtes
+  des fichiers, page de crédits du jeu), comme l'exige la licence, et celle de XNova Renaissance, selon les
+  conditions additionnelles ci-dessous ;
 - le jeu est fourni **sans aucune garantie**.
+
+### Conditions additionnelles (article 7)
+
+L'AGPL v3 permet à l'auteur d'ajouter quelques conditions (article 7). Celles de XNova Renaissance sont dans
+le fichier [`NOTICE`](NOTICE), en français et en anglais :
+
+- **Attribution** : toute copie ou version modifiée doit garder, visible pour l'utilisateur
+  (fenêtre « À propos » ou équivalent) et dans sa documentation, la mention :
+
+  > XNova Renaissance, par ETDEL — https://github.com/theptitprince/XNova
+
+  Une version modifiée peut la faire précéder de « D'après » et ajouter ses propres crédits,
+  sans la retirer ni la masquer.
+- **Origine** : une version modifiée doit dire clairement qu'elle est modifiée, et ne doit se
+  présenter ni comme l'original, ni comme approuvée par ETDEL.
+
+Dans XNova Renaissance, cette mention s'affiche sur la page des crédits du jeu (`credit.php`), ouverte depuis la page
+de connexion et le menu de gauche.
+
+Ces conditions ne portent que sur le travail d'ETDEL : tout ce que XNova Renaissance a ajouté ou modifié depuis le
+tag `v0.8e`. Le code de l'équipe XNova, d'UGamela et des autres auteurs d'origine, les scripts tiers (overLIB,
+wz_tooltip, SACK) et les graphismes hérités de la 0.8e gardent leurs propres licences et mentions, que la licence
+impose déjà de conserver.
+
+Les fichiers PHP du jeu et les scripts JavaScript écrits pour Renaissance portent un en-tête qui renvoie à `NOTICE`.
+theptitprince, le nom qui figure dans ces en-têtes et dans le journal des modifications, est le compte GitHub d'ETDEL.
+
+### Historique de la licence
 
 Jusqu'à la 0.9h, le moteur de combat `includes/ataki.php` (jacekowski) était sous licence **Creative Commons
 BY-NC-SA 2.5**, qui interdit tout usage commercial. Depuis la 0.9i, il est remplacé par un moteur écrit pour

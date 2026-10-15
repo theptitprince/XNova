@@ -88,7 +88,7 @@ function f(target_url,win_name,win_w,win_h) {
 </tr>
 	{server_info}
 <tr>
-	<td colspan="2"><div><center><a href="credit.php" accesskey="T" target="{mf}">XNova Team</a><br>&copy; Copyright 2008</center></div></td>
+	<td colspan="2"><div><center><a href="credit.php" accesskey="T" target="{mf}">XNova Team</a><br>&copy; Copyright 2008<br><a href="credit.php" target="{mf}">XNova Renaissance<br>par ETDEL</a></center></div></td>
 </tr>
 </table>
 </div>
